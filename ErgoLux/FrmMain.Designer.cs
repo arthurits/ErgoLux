@@ -33,6 +33,7 @@ namespace ErgoL
             this.formsPlot1 = new ScottPlot.FormsPlot();
             this.formsPlot2 = new ScottPlot.FormsPlot();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.BtnConnect = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // formsPlot1
@@ -59,15 +60,26 @@ namespace ErgoL
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
-            // Form1
+            // BtnConnect
+            // 
+            this.BtnConnect.Location = new System.Drawing.Point(573, 444);
+            this.BtnConnect.Name = "BtnConnect";
+            this.BtnConnect.Size = new System.Drawing.Size(108, 31);
+            this.BtnConnect.TabIndex = 3;
+            this.BtnConnect.Text = "Connect";
+            this.BtnConnect.UseVisualStyleBackColor = true;
+            this.BtnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
+            // 
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 483);
+            this.Controls.Add(this.BtnConnect);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.formsPlot2);
             this.Controls.Add(this.formsPlot1);
-            this.Name = "Form1";
+            this.Name = "FrmMain";
             this.Text = "Form1";
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
@@ -79,6 +91,7 @@ namespace ErgoL
         private ScottPlot.FormsPlot formsPlot1;
         private ScottPlot.FormsPlot formsPlot2;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button BtnConnect;
     }
 }
 

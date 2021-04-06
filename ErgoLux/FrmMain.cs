@@ -26,7 +26,10 @@ namespace ErgoL
             {
                 closeSplashEvent.Set();
             }
+        }
 
+        private void BtnConnect_Click(object sender, EventArgs e)
+        {
             // FTDI connection code
             UInt32 ftdiDeviceCount = 0;
             FTDI.FT_STATUS ftStatus = FTDI.FT_STATUS.FT_OK;
@@ -83,7 +86,6 @@ namespace ErgoL
 
 
             FTDISample control = new FTDISample(ftdiDeviceList[0].SerialNumber.ToString());
-
         }
     }
 }
