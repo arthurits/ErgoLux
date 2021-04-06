@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlcancesMesa
+namespace ErgoLux
 {
-    class Konica
+    public class Konica
     {
         string strSndCommand;   //command
         string strRcvCommand;
@@ -28,13 +28,13 @@ namespace AlcancesMesa
         Int32 i;     //for LOOP
 
 
-        private void StartMeasurement()
+        public void StartMeasurement()
         {
             Int32 rng;
             intErrflg = 0;
 
             // Step 2 PC MODE
-            strSndCommand = "00541 ";
+            strSndCommand = "00541   ";
             this.CmdSend(1);
             this.ErrCheck();
             if (intErrflg == 1)
@@ -89,28 +89,97 @@ namespace AlcancesMesa
             //Insert code to handle data receiving within timeout limit here
 
             // BCC Check
-            strSTX_Command = strReceiveStr.Left(strReceiveStr, (InStr(1, strReceiveStr, Char.ConvertFromUtf32(3)) - 1));
+            //strSTX_Command = strReceiveStr.Left(strReceiveStr, (InStr(1, strReceiveStr, Char.ConvertFromUtf32(3)) - 1));
+            strSTX_Command = strReceiveStr.Substring(0, strReceiveStr.IndexOf(Char.ConvertFromUtf32(3)) - 1);
+
+            strRcvCommand = strSTX_Command.Substring(0, 2);
+            BCC_Append(strRcvCommand);
+
+            if (strReceiveStr != Char.ConvertFromUtf32(2) + strCommand_ETX_BCC + "\r\n")
+                intErrNO = 9;
+            else
+                intErrNO = 0;
 
         }
 
         private void BCC_Append(string Command)
         {
-            Int64 intBCC;
+            Int64 intBCC = 0;
             string strBCC;
 
             strCommand_ETX = Command + Char.ConvertFromUtf32(3);
 
-            intBCC = 0;
-            for (int i = 1; i <= strCommand_ETX.Length; i++)
+            for (int i = 1; i < strCommand_ETX.Length; i++)
             {
                 //intBCC = intBCC Xor Asc(Mid(strCommand_ETX, i, 1));
+                intBCC = intBCC ^ (int)strCommand_ETX.Substring(i, 1)[0];
             }
+
+            strBCC = Convert.ToString(intBCC, 16);
+            if (strBCC.Length == 1)
+                strBCC = 0 + strBCC;
+
+            strCommand_ETX_BCC = strCommand_ETX + strBCC;
 
             return;
         }
 
         private void ErrCheck()
         {
+            if (strRcvCommand.Substring(8, 1) == "1")
+            {
+                intErrNO = 11;
+                return;
+            }
+            
+            if (intErrNO ==0)
+            {
+                if (strRcvCommand.Substring(6, 1) == " ")
+                    intErrNO = 0;
+                else
+                    intErrNO = (int)strRcvCommand.Substring(6, 1)[0];
+            }
+
+            string strMsgBox = string.Empty;
+            switch (intErrNO)
+            {
+                case 0:
+                    return;
+                    
+                case 1:
+                    strMsgBox = "Power of sensor is off";
+                    break;
+                case 2:
+                    strMsgBox = "EE-Prom error";
+                    break;
+                case 3:
+                    strMsgBox = "EE-Prom error";
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    strMsgBox = "Time out";
+                    break;
+                case 9:
+                    strMsgBox = "BBC error";
+                    break;
+                case 10:
+                    break;
+                case 11:
+                    strMsgBox = "Battery out";
+                    break;
+            }
+
+            if (strMsgBox != string.Empty)
+                System.Windows.Forms.MessageBox.Show(strMsgBox, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
+
             return;
         }
 
@@ -121,6 +190,12 @@ namespace AlcancesMesa
 
 public static class Utils
 {
+    /// <summary>
+    /// Retrieves the left part of the string
+    /// </summary>
+    /// <param name="str">Original string</param>
+    /// <param name="length">Number of characters to retrieve starting from the left</param>
+    /// <returns>The left substring</returns>
     public static string Left(this string str, int length)
     {
         return str.Substring(0, Math.Min(length, str.Length));

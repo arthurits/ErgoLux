@@ -1,5 +1,5 @@
 ﻿
-namespace ErgoL
+namespace ErgoLux
 {
     partial class FrmMain
     {
@@ -80,6 +80,7 @@ namespace ErgoL
             this.Controls.Add(this.formsPlot2);
             this.Controls.Add(this.formsPlot1);
             this.Name = "FrmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);

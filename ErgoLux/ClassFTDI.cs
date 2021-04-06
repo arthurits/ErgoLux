@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using FTD2XX_NET;
 
-namespace ErgoL
+namespace ErgoLux
 {
     public class FTDISample
     {
@@ -23,6 +23,7 @@ namespace ErgoL
             ftdi = new FTDI();
             //FTDI.FT_STATUS status = ftdi.OpenBySerialNumber(serialNumber);
             FTDI.FT_STATUS status = ftdi.OpenByIndex(0);
+
             receivedDataEvent = new AutoResetEvent(false);
             //status = mFTDI.SetEventNotification(FTDI.FT_EVENTS.FT_EVENT_RXCHAR, receivedDataEvent);
             status = ftdi.SetEventNotification(FTDI.FT_EVENTS.FT_EVENT_RXCHAR, receivedDataEvent);
@@ -78,6 +79,7 @@ namespace ErgoL
                             " written " + numBytesWritten);
                 return false;
             }
+            this.receivedDataEvent.Set();
             return true;
         }
     }

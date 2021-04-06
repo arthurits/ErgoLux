@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 using FTD2XX_NET;
 
-namespace ErgoL
+namespace ErgoLux
 {
     public partial class FrmMain : Form
     {
@@ -85,7 +85,24 @@ namespace ErgoL
             }
 
 
+
+            Konica Test = new Konica();
+            Test.StartMeasurement();
+
             FTDISample control = new FTDISample(ftdiDeviceList[0].SerialNumber.ToString());
+            System.Threading.Thread.Sleep(1000);
+
+            string strConn = Char.ConvertFromUtf32((Convert.ToInt32("02", 16))) +
+                "00541   " +
+                Char.ConvertFromUtf32((Convert.ToInt32("03", 16))) +
+                Char.ConvertFromUtf32((Convert.ToInt32("10", 16))) +
+                "\r\n";
+
+            var result = control.Write("00541   ");     // switch connection mode
+            result = control.Write("00100200");         // set measuremente conditions
+            System.Threading.Thread.Sleep(3000);
+            result = control.Write("00100200");         // set measuremente conditions
+
         }
     }
 }
