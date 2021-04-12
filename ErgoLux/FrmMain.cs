@@ -87,22 +87,37 @@ namespace ErgoLux
 
 
             Konica Test = new Konica();
-            Test.StartMeasurement();
+            //Test.StartMeasurement();
+            Test.CmdSend("00541   ");
 
             FTDISample control = new FTDISample(ftdiDeviceList[0].SerialNumber.ToString());
-            System.Threading.Thread.Sleep(1000);
+            control.DataReceived += OnDataReceived;
 
-            string strConn = Char.ConvertFromUtf32((Convert.ToInt32("02", 16))) +
-                "00541   " +
-                Char.ConvertFromUtf32((Convert.ToInt32("03", 16))) +
-                Char.ConvertFromUtf32((Convert.ToInt32("10", 16))) +
-                "\r\n";
+            //System.Threading.Thread.Sleep(1000);
 
-            var result = control.Write("00541   ");     // switch connection mode
-            result = control.Write("00100200");         // set measuremente conditions
+            //string strConn = Char.ConvertFromUtf32((Convert.ToInt32("02", 16))) +
+            //    "00541   " +
+            //    Char.ConvertFromUtf32((Convert.ToInt32("03", 16))) +
+            //    Char.ConvertFromUtf32((Convert.ToInt32("10", 16))) +
+            //    "\r\n";
+
+            var result = control.Write(Test.CmdSend("00541   "));
+            result = control.Write(Test.CmdSend("00100200"));
             System.Threading.Thread.Sleep(3000);
-            result = control.Write("00100200");         // set measuremente conditions
+            result = control.Write(Test.CmdSend("00100200"));
 
+
+
+            //result = control.Write("00541   ");     // switch connection mode
+            //result = control.Write("00100200");         // set measuremente conditions
+            //System.Threading.Thread.Sleep(3000);
+            //result = control.Write("00100200");         // set measuremente conditions
+
+        }
+
+        private void OnDataReceived (object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.Print("Data received");
         }
     }
 }

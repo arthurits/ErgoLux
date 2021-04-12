@@ -18,6 +18,8 @@ namespace ErgoLux
         private FTDI ftdi;
         //private FTDI mFTDI;
 
+        public event EventHandler DataReceived;
+
         public FTDISample(string serialNumber)
         {
             ftdi = new FTDI();
@@ -35,16 +37,29 @@ namespace ErgoLux
             }
         }
 
+        ~FTDISample()
+        {
+            ftdi.Close();
+        }
+
+        protected virtual void OnDataReceived(EventArgs e)
+        {
+            EventHandler handler = DataReceived;
+            handler?.Invoke(this, e);
+        }
+
         private void ReadData(object pSender, DoWorkEventArgs pEventArgs)
         {
             UInt32 nrOfBytesAvailable = 0;
             while (true)
             {
+                System.Diagnostics.Debug.WriteLine("ReadData event");
                 // wait until event is fired
                 this.receivedDataEvent.WaitOne();
 
                 // try to recieve data now
                 FTDI.FT_STATUS status = ftdi.GetRxBytesAvailable(ref nrOfBytesAvailable);
+                System.Diagnostics.Debug.WriteLine("Bytes read: " + nrOfBytesAvailable.ToString());
                 if (status != FTDI.FT_STATUS.FT_OK)
                 {
                     break;
@@ -57,7 +72,7 @@ namespace ErgoLux
                     status = ftdi.Read(readData, nrOfBytesAvailable, ref numBytesRead);
 
                     // invoke your own event handler for data received...
-                    //InvokeCharacterReceivedEvent(fParsedData);
+                    OnDataReceived(new EventArgs());
                 }
             }
         }

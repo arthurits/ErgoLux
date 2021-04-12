@@ -70,6 +70,13 @@ namespace ErgoLux
             return;
         }
 
+        public string CmdSend(string strCommand)
+        {
+            strSndCommand = strCommand;
+            CmdSend(1);
+            return strSendStr;
+        }
+
         private void CmdSend(int FlgTimeoutCheck)
         {
             float sngStartTime;
@@ -90,16 +97,18 @@ namespace ErgoLux
 
             // BCC Check
             //strSTX_Command = strReceiveStr.Left(strReceiveStr, (InStr(1, strReceiveStr, Char.ConvertFromUtf32(3)) - 1));
-            strSTX_Command = strReceiveStr.Substring(0, strReceiveStr.IndexOf(Char.ConvertFromUtf32(3)) - 1);
+            if (strReceiveStr != string.Empty)
+            {
+                strSTX_Command = strReceiveStr.Substring(0, strReceiveStr.IndexOf(Char.ConvertFromUtf32(3)) - 1);
 
-            strRcvCommand = strSTX_Command.Substring(0, 2);
-            BCC_Append(strRcvCommand);
+                strRcvCommand = strSTX_Command.Substring(0, 2);
+                BCC_Append(strRcvCommand);
 
-            if (strReceiveStr != Char.ConvertFromUtf32(2) + strCommand_ETX_BCC + "\r\n")
-                intErrNO = 9;
-            else
-                intErrNO = 0;
-
+                if (strReceiveStr != Char.ConvertFromUtf32(2) + strCommand_ETX_BCC + "\r\n")
+                    intErrNO = 9;
+                else
+                    intErrNO = 0;
+            }
         }
 
         private void BCC_Append(string Command)
@@ -109,10 +118,11 @@ namespace ErgoLux
 
             strCommand_ETX = Command + Char.ConvertFromUtf32(3);
 
-            for (int i = 1; i < strCommand_ETX.Length; i++)
+            for (int i = 0; i < strCommand_ETX.Length; i++)
             {
                 //intBCC = intBCC Xor Asc(Mid(strCommand_ETX, i, 1));
-                intBCC = intBCC ^ (int)strCommand_ETX.Substring(i, 1)[0];
+                //intBCC ^= strCommand_ETX.ToCharArray(i, 1)[0];
+                intBCC = intBCC ^ strCommand_ETX.Substring(i, 1)[0];
             }
 
             strBCC = Convert.ToString(intBCC, 16);

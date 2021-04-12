@@ -9,7 +9,7 @@ namespace LoopBack
 {
     class Program
     {
-        static void Main(string[] args)
+        static void MainA(string[] args)
         {
             UInt32 ftdiDeviceCount = 0;
             FTDI.FT_STATUS ftStatus = FTDI.FT_STATUS.FT_OK;
