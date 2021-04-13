@@ -17,6 +17,36 @@ namespace ErgoLux
         public FrmMain()
         {
             InitializeComponent();
+
+            var algo = new ClassT10("00541   ");
+            var strEncoded = algo.EncodeCommand();
+            
+            //strEncoded = algo.EncodeCommand("00541   ");
+            //strEncoded = algo.EncodeCommand("00100200");
+            //strEncoded = algo.EncodeCommand("01100200");
+            //strEncoded = algo.EncodeCommand("02100200");
+            //strEncoded = algo.EncodeCommand("03100200");
+            //strEncoded = algo.EncodeCommand("04100200");
+            //strEncoded = algo.EncodeCommand("05100200");
+            //strEncoded = algo.EncodeCommand("06100200");
+            //strEncoded = algo.EncodeCommand("07100200");
+            //strEncoded = algo.EncodeCommand("08100200");
+            //strEncoded = algo.EncodeCommand("09100200");
+            //strEncoded = algo.EncodeCommand("10100200");
+            //strEncoded = algo.EncodeCommand("11100200");
+            //strEncoded = algo.EncodeCommand("12100200");
+            //strEncoded = algo.EncodeCommand("13100200");
+            //strEncoded = algo.EncodeCommand("14100200");
+            //strEncoded = algo.EncodeCommand("15100200");
+            //strEncoded = algo.EncodeCommand("16100200");
+            //strEncoded = algo.EncodeCommand("17100200");
+            //strEncoded = algo.EncodeCommand("18100200");
+            //strEncoded = algo.EncodeCommand("19100200");
+            //strEncoded = algo.EncodeCommand("20100200");
+            //strEncoded = algo.EncodeCommand("21100200");
+            //strEncoded = algo.EncodeCommand("22100200");
+            //strEncoded = algo.EncodeCommand("23100200");
+            //strEncoded = algo.EncodeCommand("24100200");
         }
 
         private void Form1_Shown(object sender, EventArgs e)
