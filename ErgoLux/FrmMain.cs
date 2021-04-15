@@ -14,39 +14,44 @@ namespace ErgoLux
 {
     public partial class FrmMain : Form
     {
+        ClassT10 cT10;
+
         public FrmMain()
         {
             InitializeComponent();
+            cT10 = new ClassT10();
 
-            var algo = new ClassT10("00541   ");
-            var strEncoded = algo.EncodeCommand();
-            
+            //var algo = new ClassT10("00541   ");
+            //var strEncoded = algo.EncodeCommand();
+
             //strEncoded = algo.EncodeCommand("00541   ");
-            //strEncoded = algo.EncodeCommand("00100200");
-            //strEncoded = algo.EncodeCommand("01100200");
-            //strEncoded = algo.EncodeCommand("02100200");
-            //strEncoded = algo.EncodeCommand("03100200");
-            //strEncoded = algo.EncodeCommand("04100200");
-            //strEncoded = algo.EncodeCommand("05100200");
-            //strEncoded = algo.EncodeCommand("06100200");
-            //strEncoded = algo.EncodeCommand("07100200");
-            //strEncoded = algo.EncodeCommand("08100200");
-            //strEncoded = algo.EncodeCommand("09100200");
-            //strEncoded = algo.EncodeCommand("10100200");
-            //strEncoded = algo.EncodeCommand("11100200");
-            //strEncoded = algo.EncodeCommand("12100200");
-            //strEncoded = algo.EncodeCommand("13100200");
-            //strEncoded = algo.EncodeCommand("14100200");
-            //strEncoded = algo.EncodeCommand("15100200");
-            //strEncoded = algo.EncodeCommand("16100200");
-            //strEncoded = algo.EncodeCommand("17100200");
-            //strEncoded = algo.EncodeCommand("18100200");
-            //strEncoded = algo.EncodeCommand("19100200");
-            //strEncoded = algo.EncodeCommand("20100200");
-            //strEncoded = algo.EncodeCommand("21100200");
-            //strEncoded = algo.EncodeCommand("22100200");
-            //strEncoded = algo.EncodeCommand("23100200");
-            //strEncoded = algo.EncodeCommand("24100200");
+            //strEncoded = algo.EncodeCommand("00110200");
+            //System.Diagnostics.Debug.Print(strEncoded);
+            //System.Diagnostics.Debug.Print(strEncoded.ToCharArray().ToString());
+            //strEncoded = algo.EncodeCommand("01110200");
+            //strEncoded = algo.EncodeCommand("02110200");
+            //strEncoded = algo.EncodeCommand("03110200");
+            //strEncoded = algo.EncodeCommand("04110200");
+            //strEncoded = algo.EncodeCommand("05110200");
+            //strEncoded = algo.EncodeCommand("06110200");
+            //strEncoded = algo.EncodeCommand("07110200");
+            //strEncoded = algo.EncodeCommand("08110200");
+            //strEncoded = algo.EncodeCommand("09110200");
+            //strEncoded = algo.EncodeCommand("10110200");
+            //strEncoded = algo.EncodeCommand("11110200");
+            //strEncoded = algo.EncodeCommand("12110200");
+            //strEncoded = algo.EncodeCommand("13110200");
+            //strEncoded = algo.EncodeCommand("14110200");
+            //strEncoded = algo.EncodeCommand("15110200");
+            //strEncoded = algo.EncodeCommand("16110200");
+            //strEncoded = algo.EncodeCommand("17110200");
+            //strEncoded = algo.EncodeCommand("18110200");
+            //strEncoded = algo.EncodeCommand("19110200");
+            //strEncoded = algo.EncodeCommand("20110200");
+            //strEncoded = algo.EncodeCommand("21110200");
+            //strEncoded = algo.EncodeCommand("22110200");
+            //strEncoded = algo.EncodeCommand("23110200");
+            //strEncoded = algo.EncodeCommand("24110200");
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -114,6 +119,51 @@ namespace ErgoLux
                 }
             }
 
+            // Set up device data parameters
+            // Set Baud rate to 9600
+            ftStatus = myFtdiDevice.SetBaudRate(9600);
+            if (ftStatus != FTDI.FT_STATUS.FT_OK)
+            {
+                // Wait for a key press
+                Console.WriteLine("Failed to set Baud rate (error " + ftStatus.ToString() + ")");
+                Console.ReadKey();
+                return;
+            }
+
+            // Set data characteristics - Data bits, Stop bits, Parity
+            ftStatus = myFtdiDevice.SetDataCharacteristics(FTDI.FT_DATA_BITS.FT_BITS_7, FTDI.FT_STOP_BITS.FT_STOP_BITS_1, FTDI.FT_PARITY.FT_PARITY_EVEN);
+            if (ftStatus != FTDI.FT_STATUS.FT_OK)
+            {
+                // Wait for a key press
+                Console.WriteLine("Failed to set data characteristics (error " + ftStatus.ToString() + ")");
+                Console.ReadKey();
+                return;
+            }
+
+            // Set flow control - set RTS/CTS flow control
+            ftStatus = myFtdiDevice.SetFlowControl(FTDI.FT_FLOW_CONTROL.FT_FLOW_XON_XOFF, 0x11, 0x13);
+            if (ftStatus != FTDI.FT_STATUS.FT_OK)
+            {
+                // Wait for a key press
+                Console.WriteLine("Failed to set flow control (error " + ftStatus.ToString() + ")");
+                Console.ReadKey();
+                return;
+            }
+
+            // Set read timeout to 5 seconds, write timeout to infinite
+            ftStatus = myFtdiDevice.SetTimeouts(500, 0);
+            if (ftStatus != FTDI.FT_STATUS.FT_OK)
+            {
+                // Wait for a key press
+                Console.WriteLine("Failed to set timeouts (error " + ftStatus.ToString() + ")");
+                Console.ReadKey();
+                return;
+            }
+
+
+
+            // Close our device
+            ftStatus = myFtdiDevice.Close();
 
 
             Konica Test = new Konica();
