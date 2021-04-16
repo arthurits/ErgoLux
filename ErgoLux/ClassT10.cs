@@ -98,7 +98,7 @@ namespace ErgoLux
         {
             string strSTX = Char.ConvertFromUtf32(2);
             string strETX = Char.ConvertFromUtf32(3);
-            string strBCC;
+            string strBCC = BCC(strCommand ?? _strCommand) + strETX;
             string strDelimiter = Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10);   // \r\n
             string temp = (strCommand ?? _strCommand) + strETX;
 
