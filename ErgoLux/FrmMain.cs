@@ -119,51 +119,11 @@ namespace ErgoLux
                 }
             }
 
-            // Set up device data parameters
-            // Set Baud rate to 9600
-            ftStatus = myFtdiDevice.SetBaudRate(9600);
-            if (ftStatus != FTDI.FT_STATUS.FT_OK)
-            {
-                // Wait for a key press
-                Console.WriteLine("Failed to set Baud rate (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
-                return;
-            }
-
-            // Set data characteristics - Data bits, Stop bits, Parity
-            ftStatus = myFtdiDevice.SetDataCharacteristics(FTDI.FT_DATA_BITS.FT_BITS_7, FTDI.FT_STOP_BITS.FT_STOP_BITS_1, FTDI.FT_PARITY.FT_PARITY_EVEN);
-            if (ftStatus != FTDI.FT_STATUS.FT_OK)
-            {
-                // Wait for a key press
-                Console.WriteLine("Failed to set data characteristics (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
-                return;
-            }
-
-            // Set flow control - set RTS/CTS flow control
-            ftStatus = myFtdiDevice.SetFlowControl(FTDI.FT_FLOW_CONTROL.FT_FLOW_XON_XOFF, 0x11, 0x13);
-            if (ftStatus != FTDI.FT_STATUS.FT_OK)
-            {
-                // Wait for a key press
-                Console.WriteLine("Failed to set flow control (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
-                return;
-            }
-
-            // Set read timeout to 5 seconds, write timeout to infinite
-            ftStatus = myFtdiDevice.SetTimeouts(500, 0);
-            if (ftStatus != FTDI.FT_STATUS.FT_OK)
-            {
-                // Wait for a key press
-                Console.WriteLine("Failed to set timeouts (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
-                return;
-            }
+            
 
 
 
-            // Close our device
-            ftStatus = myFtdiDevice.Close();
+            
 
 
             Konica Test = new Konica();
@@ -182,9 +142,21 @@ namespace ErgoLux
             //    "\r\n";
 
             var result = control.Write(Test.CmdSend("00541   "));
-            result = control.Write(Test.CmdSend("00100200"));
+            result = control.Write(cT10.Commands[0]);
             System.Threading.Thread.Sleep(3000);
-            result = control.Write(Test.CmdSend("00100200"));
+            result = control.Write(cT10.ReceptorsSingle[0]);
+
+            System.Threading.Thread.Sleep(3000);
+            result = control.Write(cT10.ReceptorsSingle[0]);
+            System.Threading.Thread.Sleep(3000);
+            result = control.Write(cT10.ReceptorsSingle[0]);
+            System.Threading.Thread.Sleep(3000);
+            result = control.Write(cT10.ReceptorsSingle[0]);
+
+
+            //result = control.Write(Test.CmdSend("00100200"));
+            //System.Threading.Thread.Sleep(3000);
+            //result = control.Write(Test.CmdSend("00100200"));
 
 
 
@@ -193,11 +165,23 @@ namespace ErgoLux
             //System.Threading.Thread.Sleep(3000);
             //result = control.Write("00100200");         // set measuremente conditions
 
+
+            // Close our device
+            ftStatus = myFtdiDevice.Close();
+
         }
 
-        private void OnDataReceived (object sender, EventArgs e)
+        private void OnDataReceived (object sender, DataReceivedEventArgs e)
         {
+            string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
+            if (e.StrDataReceived.Length > 14)
+            {
+                var result = cT10.DecodeCommand(e.StrDataReceived);
+            }
+
             System.Diagnostics.Debug.Print("Data received");
+
+            // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91
         }
     }
 }

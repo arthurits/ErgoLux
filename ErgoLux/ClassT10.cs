@@ -121,16 +121,16 @@ namespace ErgoLux
 
         public (int nIluminance, int nIncrement, int nPercent) DecodeCommand(string strCommand = null)
         {
-            string strTemp = strCommand.Substring(strCommand.Length - 18, 18);
+            string strTemp = strCommand.Substring(strCommand.Length - (18 + 5), 18);
             string strTemp1 = strTemp.Substring(0, 6);
-            string strTemp2 = strTemp.Substring(5, 6);
-            string strTemp3 = strTemp.Substring(11, 6);
+            string strTemp2 = strTemp.Substring(6, 6);
+            string strTemp3 = strTemp.Substring(12, 6);
 
-            var nIluminance = Convert.ToInt32(strTemp.Substring(0, 5)) * 10 ^ (Convert.ToInt32(strTemp.Substring(4, 1)) - 4);
-            var nIncrement = Convert.ToInt32(strTemp.Substring(0, 5)) * 10 ^ (Convert.ToInt32(strTemp.Substring(4, 1)) - 4);
-            var nPercent = Convert.ToInt32(strTemp.Substring(0, 5)) * 10 ^ (Convert.ToInt32(strTemp.Substring(4, 1)) - 4);
+            var nIluminance = Convert.ToInt32(strTemp1.Substring(1, 4)) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp1.Substring(5, 1)) - 4);
+            //var nIncrement = Convert.ToInt32(strTemp2.Substring(1, 4)) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp2.Substring(5, 1)) - 4);
+            //var nPercent = Convert.ToInt32(strTemp3.Substring(1, 4)) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp3.Substring(5, 1)) - 4);
 
-            return (nIluminance, nIncrement, nPercent);
+            return (nIluminance, 0, 0);
         }
 
 
