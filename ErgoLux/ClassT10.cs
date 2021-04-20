@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ErgoLux
 {
+    //https://stackoverflow.com/questions/630803/associating-enums-with-strings-in-c-sharp
     public class ClassT10
     {
         private string _strCommand;

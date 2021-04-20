@@ -34,6 +34,9 @@ namespace ErgoLux
             this.formsPlot2 = new ScottPlot.FormsPlot();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.BtnConnect = new System.Windows.Forms.Button();
+            this.BtnStop = new System.Windows.Forms.Button();
+            this.NumSensors = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSensors)).BeginInit();
             this.SuspendLayout();
             // 
             // formsPlot1
@@ -70,11 +73,45 @@ namespace ErgoLux
             this.BtnConnect.UseVisualStyleBackColor = true;
             this.BtnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
             // 
+            // BtnStop
+            // 
+            this.BtnStop.Location = new System.Drawing.Point(703, 444);
+            this.BtnStop.Name = "BtnStop";
+            this.BtnStop.Size = new System.Drawing.Size(83, 30);
+            this.BtnStop.TabIndex = 4;
+            this.BtnStop.Text = "Stop";
+            this.BtnStop.UseVisualStyleBackColor = true;
+            this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
+            // 
+            // NumSensors
+            // 
+            this.NumSensors.Location = new System.Drawing.Point(390, 449);
+            this.NumSensors.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.NumSensors.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumSensors.Name = "NumSensors";
+            this.NumSensors.Size = new System.Drawing.Size(47, 23);
+            this.NumSensors.TabIndex = 5;
+            this.NumSensors.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 483);
+            this.Controls.Add(this.NumSensors);
+            this.Controls.Add(this.BtnStop);
             this.Controls.Add(this.BtnConnect);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.formsPlot2);
@@ -82,7 +119,9 @@ namespace ErgoLux
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Shown += new System.EventHandler(this.Form1_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.NumSensors)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -93,6 +132,8 @@ namespace ErgoLux
         private ScottPlot.FormsPlot formsPlot2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button BtnConnect;
+        private System.Windows.Forms.Button BtnStop;
+        private System.Windows.Forms.NumericUpDown NumSensors;
     }
 }
 

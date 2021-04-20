@@ -14,12 +14,19 @@ namespace ErgoLux
 {
     public partial class FrmMain : Form
     {
-        ClassT10 cT10;
+        private Timer m_timer;
+        private ClassT10 cT10;
+        private FTDISample myFtdiDevice;
 
         public FrmMain()
         {
             InitializeComponent();
             cT10 = new ClassT10();
+
+            m_timer = new Timer { Interval = 1000 };
+            m_timer.Tick += timer_Tick;
+            m_timer.Enabled = false;
+
 
             //var algo = new ClassT10("00541   ");
             //var strEncoded = algo.EncodeCommand();
@@ -63,6 +70,27 @@ namespace ErgoLux
             }
         }
 
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            string readData;
+            UInt32 numBytesRead = 0;
+
+            var result = false;
+            for (int i = 0; i < NumSensors.Value; i++)
+            {
+                while (!result)
+                    result = myFtdiDevice.Write(cT10.ReceptorsSingle[i]);
+                
+                result = false;
+            }
+
+            // Note that the Read method is overloaded, so can read string or byte array data
+            //ftStatus = myFtdiDevice.Read(out readData, numBytesAvailable, ref numBytesRead);
+
+            // add the condition checking here to validate that the readData in not empty.
+            //OnReadingAvailable(readData);
+        }
+
         private void BtnConnect_Click(object sender, EventArgs e)
         {
             // FTDI connection code
@@ -70,32 +98,10 @@ namespace ErgoLux
             FTDI.FT_STATUS ftStatus = FTDI.FT_STATUS.FT_OK;
 
             // Create new instance of the FTDI device class
-            FTDI myFtdiDevice = new FTDI();
+            FTDISample myFtdiDevice = new FTDISample();
 
             // Determine the number of FTDI devices connected to the machine
             ftStatus = myFtdiDevice.GetNumberOfDevices(ref ftdiDeviceCount);
-            // Check status
-            if (ftStatus == FTDI.FT_STATUS.FT_OK)
-            {
-                richTextBox1.AppendText(System.Environment.NewLine + "Number of FTDI devices: " + ftdiDeviceCount.ToString());
-                richTextBox1.AppendText(System.Environment.NewLine);
-            }
-            else
-            {
-                // Wait for a key press
-                richTextBox1.AppendText(System.Environment.NewLine + "Failed to get number of devices (error " + ftStatus.ToString() + ")");
-                //Console.ReadKey();
-                return;
-            }
-
-            // If no devices available, return
-            if (ftdiDeviceCount == 0)
-            {
-                // Wait for a key press
-                richTextBox1.AppendText(System.Environment.NewLine + "Failed to get number of devices (error " + ftStatus.ToString() + ")");
-                //Console.ReadKey();
-                return;
-            }
 
             // Allocate storage for device info list
             FTDI.FT_DEVICE_INFO_NODE[] ftdiDeviceList = new FTDI.FT_DEVICE_INFO_NODE[ftdiDeviceCount];
@@ -119,20 +125,16 @@ namespace ErgoLux
                 }
             }
 
-            
-
-
-
-            
-
 
             Konica Test = new Konica();
             //Test.StartMeasurement();
             Test.CmdSend("00541   ");
 
-            FTDISample control = new FTDISample(ftdiDeviceList[0].SerialNumber.ToString());
-            control.DataReceived += OnDataReceived;
-
+            myFtdiDevice = new FTDISample();
+            myFtdiDevice.OpenDevice(location: ftdiDeviceList[0].LocId);
+            myFtdiDevice.SetKonicaT10();
+            myFtdiDevice.DataReceived += OnDataReceived;
+            
             //System.Threading.Thread.Sleep(1000);
 
             //string strConn = Char.ConvertFromUtf32((Convert.ToInt32("02", 16))) +
@@ -141,34 +143,13 @@ namespace ErgoLux
             //    Char.ConvertFromUtf32((Convert.ToInt32("10", 16))) +
             //    "\r\n";
 
-            var result = control.Write(Test.CmdSend("00541   "));
-            result = control.Write(cT10.Commands[0]);
-            System.Threading.Thread.Sleep(3000);
-            result = control.Write(cT10.ReceptorsSingle[0]);
+            if (myFtdiDevice.Write(cT10.Commands[0]))
+                m_timer.Start();
 
-            System.Threading.Thread.Sleep(3000);
-            result = control.Write(cT10.ReceptorsSingle[0]);
-            System.Threading.Thread.Sleep(3000);
-            result = control.Write(cT10.ReceptorsSingle[0]);
-            System.Threading.Thread.Sleep(3000);
-            result = control.Write(cT10.ReceptorsSingle[0]);
-
-
-            //result = control.Write(Test.CmdSend("00100200"));
-            //System.Threading.Thread.Sleep(3000);
-            //result = control.Write(Test.CmdSend("00100200"));
-
-
-
-            //result = control.Write("00541   ");     // switch connection mode
-            //result = control.Write("00100200");         // set measuremente conditions
-            //System.Threading.Thread.Sleep(3000);
-            //result = control.Write("00100200");         // set measuremente conditions
-
-
-            // Close our device
-            ftStatus = myFtdiDevice.Close();
-
+        }
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+            m_timer.Stop();
         }
 
         private void OnDataReceived (object sender, DataReceivedEventArgs e)
@@ -183,5 +164,14 @@ namespace ErgoLux
 
             // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91
         }
+
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Close the device if it's still open
+            if (myFtdiDevice.IsOpen)
+                myFtdiDevice.Close();
+        }
+
+        
     }
 }
