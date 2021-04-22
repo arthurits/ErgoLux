@@ -120,18 +120,19 @@ namespace ErgoLux
             return strSTX + (strCommand ?? _strCommand) + strETX + strBCC + strDelimiter;
         }
 
-        public (int nIluminance, int nIncrement, int nPercent) DecodeCommand(string strCommand = null)
+        public (int Sensor, int nIluminance, int nIncrement, int nPercent) DecodeCommand(string strCommand = null)
         {
             string strTemp = strCommand.Substring(strCommand.Length - (18 + 5), 18);
             string strTemp1 = strTemp.Substring(0, 6);
             string strTemp2 = strTemp.Substring(6, 6);
             string strTemp3 = strTemp.Substring(12, 6);
 
+            var Sensor = Convert.ToInt32(strCommand.Substring(1, 2));
             var nIluminance = Convert.ToInt32(strTemp1.Substring(1, 4)) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp1.Substring(5, 1)) - 4);
             //var nIncrement = Convert.ToInt32(strTemp2.Substring(1, 4)) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp2.Substring(5, 1)) - 4);
             //var nPercent = Convert.ToInt32(strTemp3.Substring(1, 4)) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp3.Substring(5, 1)) - 4);
 
-            return (nIluminance, 0, 0);
+            return (Sensor, nIluminance, 0, 0);
         }
 
 
