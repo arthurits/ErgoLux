@@ -59,6 +59,12 @@ namespace ErgoLux
             //strEncoded = algo.EncodeCommand("22110200");
             //strEncoded = algo.EncodeCommand("23110200");
             //strEncoded = algo.EncodeCommand("24110200");
+            //strEncoded = algo.EncodeCommand("25110200");
+            //strEncoded = algo.EncodeCommand("26110200");
+            //strEncoded = algo.EncodeCommand("27110200");
+            //strEncoded = algo.EncodeCommand("28110200");
+            //strEncoded = algo.EncodeCommand("29110200");
+            //strEncoded = algo.EncodeCommand("30110200");
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -126,9 +132,9 @@ namespace ErgoLux
             }
 
 
-            Konica Test = new Konica();
+            //Konica Test = new Konica();
             //Test.StartMeasurement();
-            Test.CmdSend("00541   ");
+            //Test.CmdSend("00541   ");
 
             myFtdiDevice = new FTDISample();
             myFtdiDevice.OpenDevice(location: ftdiDeviceList[0].LocId);
@@ -167,6 +173,9 @@ namespace ErgoLux
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // Stop the time it it's still running
+            if (m_timer.Enabled) m_timer.Stop();
+
             // Close the device if it's still open
             if (myFtdiDevice.IsOpen)
                 myFtdiDevice.Close();

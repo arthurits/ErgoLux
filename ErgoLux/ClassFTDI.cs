@@ -37,6 +37,14 @@ namespace ErgoLux
                 base.Close();
         }
 
+        /// <summary>
+        /// Custom-generalized function to initialize the device
+        /// </summary>
+        /// <param name="description">Description of the device to open.</param>
+        /// <param name="index">Index of the device to open. Note that this cannot be guaranteed to open a specific device.</param>
+        /// <param name="location">Location of the device to open.</param>
+        /// <param name="serialNumber">Serial number of the device to open.</param>
+        /// <returns>True if successful, false otherwise</returns>
         public bool OpenDevice(string description = null, uint? index = null, uint? location = null, string serialNumber = null)
         {
             // FTDI connection code
@@ -49,8 +57,12 @@ namespace ErgoLux
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
-                Console.WriteLine("Failed to open device (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
+                System.Windows.Forms.MessageBox.Show("Failed to open device\nError: " + ftStatus.ToString(),
+                    "Error",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+                //Console.WriteLine("Failed to open device (error " + ftStatus.ToString() + ")");
+                //Console.ReadKey();
                 return false;
             }
 
@@ -58,26 +70,46 @@ namespace ErgoLux
             if (ftdiDeviceCount == 0)
             {
                 // Wait for a key press
-                Console.WriteLine("Failed to open device (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
+                System.Windows.Forms.MessageBox.Show("Failed to open device\nError: " + ftStatus.ToString(),
+                    "Error",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+                //Console.WriteLine("Failed to open device (error " + ftStatus.ToString() + ")");
+                //Console.ReadKey();
                 return false;
             }
 
-            // The, try to open the device
-            if (!string.IsNullOrEmpty(description))
-                ftStatus = base.OpenByDescription(description);
-            else if (index.HasValue)
-                ftStatus = base.OpenByIndex(index.Value);
-            else if (location.HasValue)
-                ftStatus = base.OpenByLocation(location.Value);
-            else if (!string.IsNullOrEmpty(serialNumber))
-                ftStatus = base.OpenBySerialNumber(serialNumber);
+            // Set the T10 device paramters
+            SetKonicaT10();
+
+            // Open the device
+            ftStatus = FT_STATUS.FT_OTHER_ERROR;
+            for (int i = 0; i < 4; i++)
+            {
+                if (base.IsOpen) break;
+
+                // The, try to open the device
+                if (i == 0 && !string.IsNullOrEmpty(description))
+                    ftStatus = base.OpenByDescription(description);
+                else if (i == 1 && index.HasValue)
+                    ftStatus = base.OpenByIndex(index.Value);
+                else if (i == 2 && location.HasValue)
+                    ftStatus = base.OpenByLocation(location.Value);
+                else if (i == 3 && !string.IsNullOrEmpty(serialNumber))
+                    ftStatus = base.OpenBySerialNumber(serialNumber);
+
+                if (ftStatus == FTDI.FT_STATUS.FT_OK) break;
+            }
 
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
-                Console.WriteLine("Failed to open device (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
+                System.Windows.Forms.MessageBox.Show("Failed to open device\nError: " + ftStatus.ToString(),
+                    "Error",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+                //Console.WriteLine("Failed to open device (error " + ftStatus.ToString() + ")");
+                //Console.ReadKey();
                 return false;
             }
 
@@ -86,6 +118,7 @@ namespace ErgoLux
 
         /// <summary>
         /// Sets the FTDI configuration values in order to read data from illuminance meter Konica T10-A
+        /// 7 data bits, 1 stop bit, even parity, on off flow control, and 9600 Baud rate
         /// </summary>
         /// <returns>True if all parameters could be set, false otherwise</returns>
         public bool SetKonicaT10()
@@ -98,8 +131,12 @@ namespace ErgoLux
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
-                Console.WriteLine("Failed to set Baud rate (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
+                System.Windows.Forms.MessageBox.Show("Failed to set Baud rate\nError: " + ftStatus.ToString(),
+                    "Error",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+                //Console.WriteLine("Failed to set Baud rate (error " + ftStatus.ToString() + ")");
+                //Console.ReadKey();
                 return false;
             }
 
@@ -108,8 +145,12 @@ namespace ErgoLux
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
-                Console.WriteLine("Failed to set data characteristics (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
+                System.Windows.Forms.MessageBox.Show("Failed to set data characteristics\nError: " + ftStatus.ToString(),
+                    "Error",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+                //Console.WriteLine("Failed to set data characteristics (error " + ftStatus.ToString() + ")");
+                //Console.ReadKey();
                 return false;
             }
 
@@ -118,8 +159,12 @@ namespace ErgoLux
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
-                Console.WriteLine("Failed to set flow control (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
+                System.Windows.Forms.MessageBox.Show("Failed to set flow control\nError: " + ftStatus.ToString(),
+                    "Error",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+                //Console.WriteLine("Failed to set flow control (error " + ftStatus.ToString() + ")");
+                //Console.ReadKey();
                 return false;
             }
 
@@ -128,8 +173,12 @@ namespace ErgoLux
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
-                Console.WriteLine("Failed to set timeouts (error " + ftStatus.ToString() + ")");
-                Console.ReadKey();
+                System.Windows.Forms.MessageBox.Show("Failed to set timeouts\nError: " + ftStatus.ToString(),
+                    "Error",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+                //Console.WriteLine("Failed to set timeouts (error " + ftStatus.ToString() + ")");
+                //Console.ReadKey();
                 return false;
             }
 

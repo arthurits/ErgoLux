@@ -24,6 +24,13 @@ namespace ErgoLux
             set => _strCommand = value;
         }
 
+        private ClassT10(string value) { Value = value; }
+
+        public string Value { get; set; }
+
+        public static ClassT10 Command54 { get { return new ClassT10(Char.ConvertFromUtf32(2) + "00541   " + Char.ConvertFromUtf32(3) + "13" + Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10)); } }
+
+
         public ClassT10()
         {
             string strSTX = Char.ConvertFromUtf32(2);
@@ -34,7 +41,7 @@ namespace ErgoLux
             _commands[0] = strSTX + "00541   " + strETX + "13" + strDelimiter;
             _commands[1] = strSTX + "00541   " + strETX + "13" + strDelimiter;
 
-            _receptors = new string[25];
+            _receptors = new string[31];
             _receptors[0] = strSTX + "00100200" + strETX + "00" + strDelimiter;
             _receptors[1] = strSTX + "01100200" + strETX + "01" + strDelimiter;
             _receptors[2] = strSTX + "02100200" + strETX + "02" + strDelimiter;
@@ -60,8 +67,14 @@ namespace ErgoLux
             _receptors[22] = strSTX + "22100200" + strETX + "00" + strDelimiter;
             _receptors[23] = strSTX + "23100200" + strETX + "01" + strDelimiter;
             _receptors[24] = strSTX + "24100200" + strETX + "06" + strDelimiter;
+            _receptors[25] = strSTX + "25100200" + strETX + "07" + strDelimiter;
+            _receptors[26] = strSTX + "26100200" + strETX + "04" + strDelimiter;
+            _receptors[27] = strSTX + "27100200" + strETX + "05" + strDelimiter;
+            _receptors[28] = strSTX + "28100200" + strETX + "0a" + strDelimiter;
+            _receptors[29] = strSTX + "29100200" + strETX + "0b" + strDelimiter;
+            _receptors[30] = strSTX + "30100200" + strETX + "03" + strDelimiter;
 
-            _integrated = new string[25];
+            _integrated = new string[31];
             _integrated[0] = strSTX + "00110200" + strETX + "01" + strDelimiter;
             _integrated[1] = strSTX + "01110200" + strETX + "00" + strDelimiter;
             _integrated[2] = strSTX + "02110200" + strETX + "03" + strDelimiter;
@@ -87,13 +100,19 @@ namespace ErgoLux
             _integrated[22] = strSTX + "22110200" + strETX + "01" + strDelimiter;
             _integrated[23] = strSTX + "23110200" + strETX + "00" + strDelimiter;
             _integrated[24] = strSTX + "24110200" + strETX + "07" + strDelimiter;
+            _integrated[25] = strSTX + "25110200" + strETX + "06" + strDelimiter;
+            _integrated[26] = strSTX + "26110200" + strETX + "05" + strDelimiter;
+            _integrated[27] = strSTX + "27110200" + strETX + "04" + strDelimiter;
+            _integrated[28] = strSTX + "28110200" + strETX + "0b" + strDelimiter;
+            _integrated[29] = strSTX + "29110200" + strETX + "0a" + strDelimiter;
+            _integrated[30] = strSTX + "30110200" + strETX + "02" + strDelimiter;
         }
 
-        public ClassT10(string str)
-            :this()
-        {
-            _strCommand = str;
-        }
+        //public ClassT10(string str)
+        //    :this()
+        //{
+        //    _strCommand = str;
+        //}
 
         public string EncodeCommand(string strCommand = null)
         {
@@ -116,6 +135,9 @@ namespace ErgoLux
             // Add a 0 digit if necessary
             if (strBCC.Length == 1)
                 strBCC = 0 + strBCC;
+
+            var algo = strSTX + (strCommand ?? _strCommand) + strETX + strBCC + strDelimiter;
+          
 
             return strSTX + (strCommand ?? _strCommand) + strETX + strBCC + strDelimiter;
         }
