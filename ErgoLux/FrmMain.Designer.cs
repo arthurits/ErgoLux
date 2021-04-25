@@ -36,6 +36,7 @@ namespace ErgoLux
             this.BtnConnect = new System.Windows.Forms.Button();
             this.BtnStop = new System.Windows.Forms.Button();
             this.NumSensors = new System.Windows.Forms.NumericUpDown();
+            this.BtnSettings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.NumSensors)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +86,7 @@ namespace ErgoLux
             // 
             // NumSensors
             // 
-            this.NumSensors.Location = new System.Drawing.Point(390, 449);
+            this.NumSensors.Location = new System.Drawing.Point(261, 450);
             this.NumSensors.Maximum = new decimal(new int[] {
             30,
             0,
@@ -105,11 +106,22 @@ namespace ErgoLux
             0,
             0});
             // 
+            // BtnSettings
+            // 
+            this.BtnSettings.Location = new System.Drawing.Point(422, 444);
+            this.BtnSettings.Name = "BtnSettings";
+            this.BtnSettings.Size = new System.Drawing.Size(104, 31);
+            this.BtnSettings.TabIndex = 6;
+            this.BtnSettings.Text = "Settings";
+            this.BtnSettings.UseVisualStyleBackColor = true;
+            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 483);
+            this.Controls.Add(this.BtnSettings);
             this.Controls.Add(this.NumSensors);
             this.Controls.Add(this.BtnStop);
             this.Controls.Add(this.BtnConnect);
@@ -134,6 +146,7 @@ namespace ErgoLux
         private System.Windows.Forms.Button BtnConnect;
         private System.Windows.Forms.Button BtnStop;
         private System.Windows.Forms.NumericUpDown NumSensors;
+        private System.Windows.Forms.Button BtnSettings;
     }
 }
 

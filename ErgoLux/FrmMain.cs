@@ -15,24 +15,41 @@ namespace ErgoLux
     public partial class FrmMain : Form
     {
         private Timer m_timer;
-        private ClassT10 cT10;
+        //private ClassT10 cT10;
         private FTDISample myFtdiDevice;
+        private double[] _plotData = new double[7200];
+        private int _dataN = 0;
+        Random rand = new Random(0);
+        ScottPlot.PlottableSignal sigPlot;
 
         public FrmMain()
         {
             InitializeComponent();
-            cT10 = new ClassT10();
+            //cT10 = new ClassT10();
 
-            m_timer = new Timer { Interval = 1000 };
+            m_timer = new Timer { Interval = 500 };
             m_timer.Tick += timer_Tick;
-            m_timer.Enabled = false;
+            m_timer.Enabled = true;
+
+            // plot the data array only once and we can updates its values later
+            sigPlot = formsPlot1.plt.PlotSignal(_plotData, 2);
+            formsPlot1.plt.AxisAutoX(margin: 0);
+            formsPlot1.plt.Axis(y1: 0);
+
+            // customize styling
+            formsPlot1.plt.Title("Illuminance");
+            formsPlot1.plt.YLabel("Lux");
+            formsPlot1.plt.XLabel("Time (seconds)");
+            formsPlot1.plt.Grid(false);
 
 
             //var algo = new ClassT10("00541   ");
             //var strEncoded = algo.EncodeCommand();
 
-            //strEncoded = algo.EncodeCommand("00541   ");
-            //strEncoded = algo.EncodeCommand("00110200");
+            var strEncoded = ClassT10.EncodeCommand("00541   ");
+            //string test = new string(new char[] { (char)2, '0', '0', '5', '4', '1', ' ', ' ', ' ', (char)3, '1', '3', (char)13, (char)10 });
+            strEncoded = ClassT10.EncodeCommand("00110200");
+
             //System.Diagnostics.Debug.Print(strEncoded);
             //System.Diagnostics.Debug.Print(strEncoded.ToCharArray().ToString());
             //strEncoded = algo.EncodeCommand("01110200");
@@ -81,20 +98,29 @@ namespace ErgoLux
             string readData;
             UInt32 numBytesRead = 0;
 
-            var result = false;
-            for (int i = 0; i < NumSensors.Value; i++)
-            {
-                while (!result)
-                    result = myFtdiDevice.Write(cT10.ReceptorsSingle[i]);
-                
-                result = false;
-            }
+            //var result = false;
+            //for (int i = 0; i < NumSensors.Value; i++)
+            //{
+            //    while (!result)
+            //        result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[i]);
+
+            //    result = false;
+            //}
 
             // Note that the Read method is overloaded, so can read string or byte array data
             //ftStatus = myFtdiDevice.Read(out readData, numBytesAvailable, ref numBytesRead);
 
             // add the condition checking here to validate that the readData in not empty.
             //OnReadingAvailable(readData);
+
+
+            _plotData[_dataN] = rand.NextDouble();
+            
+            sigPlot.maxRenderIndex = _dataN;
+            //sigPlot.minRenderIndex = _dataN > 20 ? _dataN - 20 : 0;
+            ++_dataN;
+            formsPlot1.plt.AxisAuto();
+            formsPlot1.Render(skipIfCurrentlyRendering: true);
         }
 
         private void BtnConnect_Click(object sender, EventArgs e)
@@ -119,13 +145,13 @@ namespace ErgoLux
             {
                 for (UInt32 i = 0; i < ftdiDeviceCount; i++)
                 {
-                    richTextBox1.AppendText(System.Environment.NewLine + "Device Index: " + i.ToString());
+                    richTextBox1.AppendText(System.Environment.NewLine + "Device index: " + i.ToString());
 
                     richTextBox1.AppendText(System.Environment.NewLine + "Flags: " + String.Format("{0:x}", ftdiDeviceList[i].Flags));
                     richTextBox1.AppendText(System.Environment.NewLine + "Type: " + ftdiDeviceList[i].Type.ToString());
                     richTextBox1.AppendText(System.Environment.NewLine + "ID: " + String.Format("{0:x}", ftdiDeviceList[i].ID));
                     richTextBox1.AppendText(System.Environment.NewLine + "Location ID: " + String.Format("{0:x}", ftdiDeviceList[i].LocId));
-                    richTextBox1.AppendText(System.Environment.NewLine + "Serial Number: " + ftdiDeviceList[i].SerialNumber.ToString());
+                    richTextBox1.AppendText(System.Environment.NewLine + "Serial number: " + ftdiDeviceList[i].SerialNumber.ToString());
                     richTextBox1.AppendText(System.Environment.NewLine + "Description: " + ftdiDeviceList[i].Description.ToString());
                     richTextBox1.AppendText(System.Environment.NewLine);
                 }
@@ -138,7 +164,7 @@ namespace ErgoLux
 
             myFtdiDevice = new FTDISample();
             myFtdiDevice.OpenDevice(location: ftdiDeviceList[0].LocId);
-            myFtdiDevice.SetKonicaT10();
+            //myFtdiDevice.SetKonicaT10();
             myFtdiDevice.DataReceived += OnDataReceived;
             
             //System.Threading.Thread.Sleep(1000);
@@ -149,7 +175,7 @@ namespace ErgoLux
             //    Char.ConvertFromUtf32((Convert.ToInt32("10", 16))) +
             //    "\r\n";
 
-            if (myFtdiDevice.Write(cT10.Commands[0]))
+            if (myFtdiDevice.Write(ClassT10.Command54.Value))
                 m_timer.Start();
 
         }
@@ -163,7 +189,7 @@ namespace ErgoLux
             string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
             if (e.StrDataReceived.Length > 14)
             {
-                var result = cT10.DecodeCommand(e.StrDataReceived);
+                var result = ClassT10.DecodeCommand(e.StrDataReceived);
             }
 
             System.Diagnostics.Debug.Print("Data received");
@@ -177,10 +203,16 @@ namespace ErgoLux
             if (m_timer.Enabled) m_timer.Stop();
 
             // Close the device if it's still open
-            if (myFtdiDevice.IsOpen)
+            if (myFtdiDevice!=null && myFtdiDevice.IsOpen)
                 myFtdiDevice.Close();
         }
 
-        
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmSettings();
+            frm.ShowDialog();
+            if (frm.DialogResult == DialogResult.OK)
+                BtnConnect.Enabled = true;
+        }
     }
 }

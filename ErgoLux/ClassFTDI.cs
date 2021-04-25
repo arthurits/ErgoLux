@@ -45,7 +45,7 @@ namespace ErgoLux
         /// <param name="location">Location of the device to open.</param>
         /// <param name="serialNumber">Serial number of the device to open.</param>
         /// <returns>True if successful, false otherwise</returns>
-        public bool OpenDevice(string description = null, uint? index = null, uint? location = null, string serialNumber = null)
+        public bool OpenDevice(string description = null, uint? index = null, uint? location = null, string serialNumber = null, int? baud = 9600, int? dataBits = 7, int? stopBits = 1, int? parity = 2, int? flowControl = 400, int? xOn = 10, int? xOff = 13)
         {
             // FTDI connection code
             UInt32 ftdiDeviceCount = 0;
@@ -80,26 +80,20 @@ namespace ErgoLux
             }
 
             // Set the T10 device paramters
-            SetKonicaT10();
+            SetKonicaT10((uint)baud, (byte)dataBits, (byte)stopBits, (byte)parity, (ushort)flowControl, (byte)xOn, (byte)xOff);
 
             // Open the device
-            ftStatus = FT_STATUS.FT_OTHER_ERROR;
-            for (int i = 0; i < 4; i++)
-            {
-                if (base.IsOpen) break;
 
-                // The, try to open the device
-                if (i == 0 && !string.IsNullOrEmpty(description))
-                    ftStatus = base.OpenByDescription(description);
-                else if (i == 1 && index.HasValue)
-                    ftStatus = base.OpenByIndex(index.Value);
-                else if (i == 2 && location.HasValue)
-                    ftStatus = base.OpenByLocation(location.Value);
-                else if (i == 3 && !string.IsNullOrEmpty(serialNumber))
-                    ftStatus = base.OpenBySerialNumber(serialNumber);
+            if (!string.IsNullOrEmpty(description) && !base.IsOpen)
+                ftStatus = base.OpenByDescription(description);
+            if (index.HasValue && !base.IsOpen)
+                ftStatus = base.OpenByIndex(index.Value);
+            if (location.HasValue && !base.IsOpen)
+                ftStatus = base.OpenByLocation(location.Value);
+            if (!string.IsNullOrEmpty(serialNumber) && !base.IsOpen)
+                ftStatus = base.OpenBySerialNumber(serialNumber);
 
-                if (ftStatus == FTDI.FT_STATUS.FT_OK) break;
-            }
+
 
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
@@ -118,16 +112,24 @@ namespace ErgoLux
 
         /// <summary>
         /// Sets the FTDI configuration values in order to read data from illuminance meter Konica T10-A
-        /// 7 data bits, 1 stop bit, even parity, on off flow control, and 9600 Baud rate
+        /// 9600 baud rate, 7 data bits, 1 stop bit, even parity (2) and on/off flow control (400)
         /// </summary>
+        /// <param name="baud">Baud rate (typically 9600)</param>
+        /// <param name="dataBits">7 bits (7) or 8 bits (8)</param>
+        /// <param name="stopBits">1 bit (0) or 2 bits (2)</param>
+        /// <param name="parity">None(0), odd(1), even(2), mark(3), space (4)</param>
+        /// <param name="flow">None (0), RTS/CTS (100), DTR/DSR (200), Xon/Xoff (400)</param>
+        /// <param name="xOn">On Ascii char value</param>
+        /// <param name="xOff">Off char value</param>
         /// <returns>True if all parameters could be set, false otherwise</returns>
-        public bool SetKonicaT10()
+        public bool SetKonicaT10(uint baud, byte dataBits, byte stopBits, byte parity, ushort flow, byte xOn, byte xOff)
         {
             FTDI.FT_STATUS ftStatus;
 
             // Set up device data parameters
             // Set Baud rate to 9600
-            ftStatus = base.SetBaudRate(9600);
+            //ftStatus = base.SetBaudRate(9600);
+            ftStatus = base.SetBaudRate(baud);
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
@@ -142,6 +144,7 @@ namespace ErgoLux
 
             // Set data characteristics - Data bits, Stop bits, Parity
             ftStatus = base.SetDataCharacteristics(FTDI.FT_DATA_BITS.FT_BITS_7, FTDI.FT_STOP_BITS.FT_STOP_BITS_1, FTDI.FT_PARITY.FT_PARITY_EVEN);
+            ftStatus = base.SetDataCharacteristics(dataBits, stopBits, parity);
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
@@ -155,7 +158,8 @@ namespace ErgoLux
             }
 
             // Set flow control - set RTS/CTS flow control
-            ftStatus = base.SetFlowControl(FTDI.FT_FLOW_CONTROL.FT_FLOW_XON_XOFF, 0x10, 0x13);
+            //ftStatus = base.SetFlowControl(FTDI.FT_FLOW_CONTROL.FT_FLOW_XON_XOFF, 0x10, 0x13);
+            ftStatus = base.SetFlowControl(flow, xOn, xOff);
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
