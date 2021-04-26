@@ -18,6 +18,7 @@ namespace ErgoLux
         //private ClassT10 cT10;
         private FTDISample myFtdiDevice;
         private double[] _plotData = new double[7200];
+        private int[] _settings;
         private int _dataN = 0;
         Random rand = new Random(0);
         ScottPlot.PlottableSignal sigPlot;
@@ -29,7 +30,7 @@ namespace ErgoLux
 
             m_timer = new Timer { Interval = 500 };
             m_timer.Tick += timer_Tick;
-            m_timer.Enabled = true;
+            m_timer.Enabled = false;
 
             // plot the data array only once and we can updates its values later
             sigPlot = formsPlot1.plt.PlotSignal(_plotData, 2);
@@ -98,14 +99,14 @@ namespace ErgoLux
             string readData;
             UInt32 numBytesRead = 0;
 
-            //var result = false;
-            //for (int i = 0; i < NumSensors.Value; i++)
-            //{
-            //    while (!result)
-            //        result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[i]);
+            var result = false;
+            for (int i = 0; i < _settings[1]; i++)
+            {
+                while (!result)
+                    result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[i]);
 
-            //    result = false;
-            //}
+                result = false;
+            }
 
             // Note that the Read method is overloaded, so can read string or byte array data
             //ftStatus = myFtdiDevice.Read(out readData, numBytesAvailable, ref numBytesRead);
@@ -114,67 +115,19 @@ namespace ErgoLux
             //OnReadingAvailable(readData);
 
 
-            _plotData[_dataN] = rand.NextDouble();
-            
-            sigPlot.maxRenderIndex = _dataN;
-            //sigPlot.minRenderIndex = _dataN > 20 ? _dataN - 20 : 0;
-            ++_dataN;
-            formsPlot1.plt.AxisAuto();
-            formsPlot1.Render(skipIfCurrentlyRendering: true);
+            //_plotData[_dataN] = rand.NextDouble();
+
+            //sigPlot.maxRenderIndex = _dataN;
+            ////sigPlot.minRenderIndex = _dataN > 20 ? _dataN - 20 : 0;
+            //++_dataN;
+            //formsPlot1.plt.AxisAuto();
+            //formsPlot1.Render(skipIfCurrentlyRendering: true);
         }
 
         private void BtnConnect_Click(object sender, EventArgs e)
         {
-            // FTDI connection code
-            UInt32 ftdiDeviceCount = 0;
-            FTDI.FT_STATUS ftStatus = FTDI.FT_STATUS.FT_OK;
-
-            // Create new instance of the FTDI device class
-            FTDISample myFtdiDevice = new FTDISample();
-
-            // Determine the number of FTDI devices connected to the machine
-            ftStatus = myFtdiDevice.GetNumberOfDevices(ref ftdiDeviceCount);
-
-            // Allocate storage for device info list
-            FTDI.FT_DEVICE_INFO_NODE[] ftdiDeviceList = new FTDI.FT_DEVICE_INFO_NODE[ftdiDeviceCount];
-
-            // Populate our device list
-            ftStatus = myFtdiDevice.GetDeviceList(ftdiDeviceList);
-
-            if (ftStatus == FTDI.FT_STATUS.FT_OK)
-            {
-                for (UInt32 i = 0; i < ftdiDeviceCount; i++)
-                {
-                    richTextBox1.AppendText(System.Environment.NewLine + "Device index: " + i.ToString());
-
-                    richTextBox1.AppendText(System.Environment.NewLine + "Flags: " + String.Format("{0:x}", ftdiDeviceList[i].Flags));
-                    richTextBox1.AppendText(System.Environment.NewLine + "Type: " + ftdiDeviceList[i].Type.ToString());
-                    richTextBox1.AppendText(System.Environment.NewLine + "ID: " + String.Format("{0:x}", ftdiDeviceList[i].ID));
-                    richTextBox1.AppendText(System.Environment.NewLine + "Location ID: " + String.Format("{0:x}", ftdiDeviceList[i].LocId));
-                    richTextBox1.AppendText(System.Environment.NewLine + "Serial number: " + ftdiDeviceList[i].SerialNumber.ToString());
-                    richTextBox1.AppendText(System.Environment.NewLine + "Description: " + ftdiDeviceList[i].Description.ToString());
-                    richTextBox1.AppendText(System.Environment.NewLine);
-                }
-            }
-
-
-            //Konica Test = new Konica();
-            //Test.StartMeasurement();
-            //Test.CmdSend("00541   ");
-
-            myFtdiDevice = new FTDISample();
-            myFtdiDevice.OpenDevice(location: ftdiDeviceList[0].LocId);
-            //myFtdiDevice.SetKonicaT10();
-            myFtdiDevice.DataReceived += OnDataReceived;
             
-            //System.Threading.Thread.Sleep(1000);
-
-            //string strConn = Char.ConvertFromUtf32((Convert.ToInt32("02", 16))) +
-            //    "00541   " +
-            //    Char.ConvertFromUtf32((Convert.ToInt32("03", 16))) +
-            //    Char.ConvertFromUtf32((Convert.ToInt32("10", 16))) +
-            //    "\r\n";
-
+            myFtdiDevice.DataReceived += OnDataReceived;
             if (myFtdiDevice.Write(ClassT10.Command54.Value))
                 m_timer.Start();
 
@@ -182,17 +135,29 @@ namespace ErgoLux
         private void BtnStop_Click(object sender, EventArgs e)
         {
             m_timer.Stop();
+            myFtdiDevice.DataReceived -= OnDataReceived;
         }
 
         private void OnDataReceived (object sender, DataReceivedEventArgs e)
         {
+            (int Sensor, double Iluminance, int Increment, int Percent) result = (0, 0, 0, 0);
+
             string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
             if (e.StrDataReceived.Length > 14)
             {
-                var result = ClassT10.DecodeCommand(e.StrDataReceived);
+                result = ClassT10.DecodeCommand(e.StrDataReceived);
+                System.Diagnostics.Debug.Print(result.ToString());
             }
 
-            System.Diagnostics.Debug.Print("Data received");
+
+            // Plot data
+            _plotData[_dataN] = result.Iluminance;
+
+            sigPlot.maxRenderIndex = _dataN;
+            ////sigPlot.minRenderIndex = _dataN > 20 ? _dataN - 20 : 0;
+            if (result.Sensor == 0) ++_dataN;
+            formsPlot1.plt.AxisAuto();
+            formsPlot1.Render(skipIfCurrentlyRendering: true);
 
             // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91
         }
@@ -212,7 +177,22 @@ namespace ErgoLux
             var frm = new FrmSettings();
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
+            {
                 BtnConnect.Enabled = true;
+                _settings = frm.GetData;
+
+                myFtdiDevice = new FTDISample();
+                myFtdiDevice.OpenDevice(location: (uint)_settings[0],
+                    baud: 9600,
+                    dataBits: _settings[3],
+                    stopBits: _settings[4],
+                    parity: _settings[5],
+                    flowControl: _settings[6],
+                    xOn: _settings[7],
+                    xOff: _settings[8]);
+
+
+            }
         }
     }
 }

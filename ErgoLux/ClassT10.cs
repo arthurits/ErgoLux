@@ -14,22 +14,7 @@ namespace ErgoLux
         private static readonly string strDelimiter = Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10);
         //private string _strCommand;
         //private string[] _commands;
-        //private static string[] _receptors;
-        //private static string[] _integrated;
-
-        //public string[] Commands { get => _commands; }
-        //public string StrCommand
-        //{
-        //    get => _strCommand;
-        //    set => _strCommand = value;
-        //}
-        
-        //public static string[] ReceptorsSingle { get => _receptors; }
-        public static string[] ReceptorsSingle
-        {
-            get
-            {
-                return new string[]
+        private static readonly string[] _receptors = new string[]
                 {
                     strSTX + "00100200" + strETX + "00" + strDelimiter,
                     strSTX + "01100200" + strETX + "01" + strDelimiter,
@@ -63,14 +48,7 @@ namespace ErgoLux
                     strSTX + "29100200" + strETX + "0b" + strDelimiter,
                     strSTX + "30100200" + strETX + "03" + strDelimiter
                 };
-            }
-        }
-        //public static string[] ReceptorsIntegrated { get => _integrated; }
-        public static string[] ReceptorsIntegrated
-        {
-            get
-            {
-                return new string[]
+        private static readonly string[] _integrated = new string[]
                 {
                     strSTX + "00110200" + strETX + "01" + strDelimiter,
                     strSTX + "01110200" + strETX + "00" + strDelimiter,
@@ -104,14 +82,53 @@ namespace ErgoLux
                     strSTX + "29110200" + strETX + "0a" + strDelimiter,
                     strSTX + "30110200" + strETX + "02" + strDelimiter
                 };
-            }
+
+        //public string[] Commands { get => _commands; }
+        //public string StrCommand
+        //{
+        //    get => _strCommand;
+        //    set => _strCommand = value;
+        //}
+
+        //public static string[] ReceptorsSingle { get => _receptors; }
+        /// <summary>
+        /// Get 11-code list for measurements
+        /// </summary>
+        public static string[] ReceptorsSingle
+        {
+            get { return _receptors; }
+        }
+
+        //public static string[] ReceptorsIntegrated { get => _integrated; }
+        /// <summary>
+        /// Get 11-code list for the integration measurements
+        /// </summary>
+        public static string[] ReceptorsIntegrated
+        {
+            get { return _integrated; }
         }
 
         
         public string Value { get; set; }
 
+        //public static ClassT10 Command11 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter); } }
+        /// <summary>
+        /// Clear integrated data
+        /// </summary>
+        public static ClassT10 Command28 { get { return new ClassT10(strSTX + "0028    " + strETX + "13" + strDelimiter); } }
+        /// <summary>
+        /// Set PC connection mode
+        /// </summary>
         public static ClassT10 Command54 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter); } }
-        public static ClassT10 Command11 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter); } }
+        /// <summary>
+        /// Start integration mode
+        /// </summary>
+        public static ClassT10 Command550 { get { return new ClassT10(strSTX + "99550  0" + strETX + "13" + strDelimiter); } }
+        /// <summary>
+        /// End integration mode
+        /// </summary>
+        public static ClassT10 Command551 { get { return new ClassT10(strSTX + "99551  0" + strETX + "13" + strDelimiter); } }
+        
 
 
         // This sould be set private
@@ -227,15 +244,19 @@ namespace ErgoLux
             return strSTX + strCommand + strETX + strBCC + strDelimiter;
         }
 
-        public static (int Sensor, int nIluminance, int nIncrement, int nPercent) DecodeCommand(string strCommand = null)
+        public static (int Sensor, double nIluminance, int nIncrement, int nPercent) DecodeCommand(string strCommand = null)
         {
+            if (strCommand.Length != 32) return (0, 0, 0, 0);
+
+            //if (strCommand.Length != 14) return (0, 0, 0, 0);
+
             string strTemp = strCommand.Substring(strCommand.Length - (18 + 5), 18);
             string strTemp1 = strTemp.Substring(0, 6);
             string strTemp2 = strTemp.Substring(6, 6);
             string strTemp3 = strTemp.Substring(12, 6);
 
             var Sensor = Convert.ToInt32(strCommand.Substring(1, 2));
-            var nIluminance = Convert.ToInt32(strTemp1.Substring(1, 4)) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp1.Substring(5, 1)) - 4);
+            var nIluminance = Convert.ToDouble(strTemp1.Substring(1, 4)) * Math.Pow(10.0, Convert.ToInt32(strTemp1.Substring(5, 1)) - 4);
             //var nIncrement = Convert.ToInt32(strTemp2.Substring(1, 4)) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp2.Substring(5, 1)) - 4);
             //var nPercent = Convert.ToInt32(strTemp3.Substring(1, 4)) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp3.Substring(5, 1)) - 4);
 

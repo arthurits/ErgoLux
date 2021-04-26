@@ -60,10 +60,11 @@ namespace ErgoLux
 
             // Populate cboParity
             cboList.Clear();
-            cboList.Add("None", 0);
-            cboList.Add("Odd", 1);
-            cboList.Add("Even", 2);
-            cboList.Add("Mark", 3);
+            cboList.Add("None", FTDI.FT_PARITY.FT_PARITY_NONE);
+            cboList.Add("Odd", FTDI.FT_PARITY.FT_PARITY_ODD);
+            cboList.Add("Even", FTDI.FT_PARITY.FT_PARITY_EVEN);
+            cboList.Add("Mark", FTDI.FT_PARITY.FT_PARITY_MARK);
+            cboList.Add("Space", FTDI.FT_PARITY.FT_PARITY_SPACE);
 
             cboParity.DataSource = new BindingSource(cboList, null);
             cboParity.DisplayMember = "Key";
@@ -72,15 +73,15 @@ namespace ErgoLux
 
             // Populate cboFlowControl
             cboList.Clear();
-            cboList.Add("None", 0);
-            cboList.Add("RTS / CTS", 100);
-            cboList.Add("DTR / DSR", 200);
-            cboList.Add("Xon / Xoff", 400);
+            cboList.Add("None", FTDI.FT_FLOW_CONTROL.FT_FLOW_NONE);
+            cboList.Add("RTS / CTS", FTDI.FT_FLOW_CONTROL.FT_FLOW_RTS_CTS);
+            cboList.Add("DTR / DSR", FTDI.FT_FLOW_CONTROL.FT_FLOW_DTR_DSR);
+            cboList.Add("Xon / Xoff", FTDI.FT_FLOW_CONTROL.FT_FLOW_XON_XOFF);
 
             cboFlowControl.DataSource = new BindingSource(cboList, null);
             cboFlowControl.DisplayMember = "Key";
             cboFlowControl.ValueMember = "Value";
-            cboFlowControl.SelectedIndex = 3;
+            cboFlowControl.SelectedIndex = 0;
 
             txtBaudRate.Text = "9600";
             txtOn.Text = "10";
@@ -161,7 +162,7 @@ namespace ErgoLux
                 return;
             }
             else
-                _data[0] = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text);  //Location ID
+                _data[0] = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);  //Location ID
 
             _data[1] = (int)updSensors.Value;
             _data[2] = Convert.ToInt32(txtBaudRate.Text);

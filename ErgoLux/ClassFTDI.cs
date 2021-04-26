@@ -79,11 +79,8 @@ namespace ErgoLux
                 return false;
             }
 
-            // Set the T10 device paramters
-            SetKonicaT10((uint)baud, (byte)dataBits, (byte)stopBits, (byte)parity, (ushort)flowControl, (byte)xOn, (byte)xOff);
 
             // Open the device
-
             if (!string.IsNullOrEmpty(description) && !base.IsOpen)
                 ftStatus = base.OpenByDescription(description);
             if (index.HasValue && !base.IsOpen)
@@ -93,7 +90,8 @@ namespace ErgoLux
             if (!string.IsNullOrEmpty(serialNumber) && !base.IsOpen)
                 ftStatus = base.OpenBySerialNumber(serialNumber);
 
-
+            // Set the T10 device paramters
+            SetKonicaT10((uint)baud, (byte)dataBits, (byte)stopBits, (byte)parity, (ushort)flowControl, (byte)xOn, (byte)xOff);
 
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
@@ -158,8 +156,8 @@ namespace ErgoLux
             }
 
             // Set flow control - set RTS/CTS flow control
-            //ftStatus = base.SetFlowControl(FTDI.FT_FLOW_CONTROL.FT_FLOW_XON_XOFF, 0x10, 0x13);
-            ftStatus = base.SetFlowControl(flow, xOn, xOff);
+            ftStatus = base.SetFlowControl(FTDI.FT_FLOW_CONTROL.FT_FLOW_XON_XOFF, 0x10, 0x13);
+            ftStatus = base.SetFlowControl(flow, 0x10, 0x13);
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
