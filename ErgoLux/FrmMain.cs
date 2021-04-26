@@ -32,7 +32,7 @@ namespace ErgoLux
             m_timer.Tick += timer_Tick;
             m_timer.Enabled = false;
 
-            // plot the data array only once and we can updates its values later
+            // plot the data array only once and we can updates its value later
             sigPlot = formsPlot1.plt.PlotSignal(_plotData, 2);
             formsPlot1.plt.AxisAutoX(margin: 0);
             formsPlot1.plt.Axis(y1: 0);
