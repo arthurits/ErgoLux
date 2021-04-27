@@ -49,6 +49,8 @@ namespace ErgoLux
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblDevices = new System.Windows.Forms.Label();
+            this.txtHz = new System.Windows.Forms.TextBox();
+            this.lblHz = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.updSensors)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +63,7 @@ namespace ErgoLux
             this.viewDevices.MultiSelect = false;
             this.viewDevices.Name = "viewDevices";
             this.viewDevices.ShowGroups = false;
-            this.viewDevices.Size = new System.Drawing.Size(449, 176);
+            this.viewDevices.Size = new System.Drawing.Size(449, 143);
             this.viewDevices.TabIndex = 0;
             this.viewDevices.UseCompatibleStateImageBehavior = false;
             this.viewDevices.View = System.Windows.Forms.View.Details;
@@ -69,7 +71,7 @@ namespace ErgoLux
             // cboDataBits
             // 
             this.cboDataBits.FormattingEnabled = true;
-            this.cboDataBits.Location = new System.Drawing.Point(109, 258);
+            this.cboDataBits.Location = new System.Drawing.Point(109, 228);
             this.cboDataBits.Name = "cboDataBits";
             this.cboDataBits.Size = new System.Drawing.Size(137, 23);
             this.cboDataBits.TabIndex = 1;
@@ -77,14 +79,14 @@ namespace ErgoLux
             // cboStopBits
             // 
             this.cboStopBits.FormattingEnabled = true;
-            this.cboStopBits.Location = new System.Drawing.Point(109, 294);
+            this.cboStopBits.Location = new System.Drawing.Point(109, 264);
             this.cboStopBits.Name = "cboStopBits";
             this.cboStopBits.Size = new System.Drawing.Size(137, 23);
             this.cboStopBits.TabIndex = 2;
             // 
             // txtBaudRate
             // 
-            this.txtBaudRate.Location = new System.Drawing.Point(109, 222);
+            this.txtBaudRate.Location = new System.Drawing.Point(109, 192);
             this.txtBaudRate.Name = "txtBaudRate";
             this.txtBaudRate.ShortcutsEnabled = false;
             this.txtBaudRate.Size = new System.Drawing.Size(137, 23);
@@ -115,7 +117,7 @@ namespace ErgoLux
             // lblDataBits
             // 
             this.lblDataBits.AutoSize = true;
-            this.lblDataBits.Location = new System.Drawing.Point(30, 261);
+            this.lblDataBits.Location = new System.Drawing.Point(30, 231);
             this.lblDataBits.Name = "lblDataBits";
             this.lblDataBits.Size = new System.Drawing.Size(50, 15);
             this.lblDataBits.TabIndex = 5;
@@ -124,7 +126,7 @@ namespace ErgoLux
             // lblStopBits
             // 
             this.lblStopBits.AutoSize = true;
-            this.lblStopBits.Location = new System.Drawing.Point(30, 297);
+            this.lblStopBits.Location = new System.Drawing.Point(30, 267);
             this.lblStopBits.Name = "lblStopBits";
             this.lblStopBits.Size = new System.Drawing.Size(53, 15);
             this.lblStopBits.TabIndex = 6;
@@ -133,7 +135,7 @@ namespace ErgoLux
             // lblBaudRate
             // 
             this.lblBaudRate.AutoSize = true;
-            this.lblBaudRate.Location = new System.Drawing.Point(30, 225);
+            this.lblBaudRate.Location = new System.Drawing.Point(30, 195);
             this.lblBaudRate.Name = "lblBaudRate";
             this.lblBaudRate.Size = new System.Drawing.Size(57, 15);
             this.lblBaudRate.TabIndex = 7;
@@ -151,7 +153,7 @@ namespace ErgoLux
             // cboParity
             // 
             this.cboParity.FormattingEnabled = true;
-            this.cboParity.Location = new System.Drawing.Point(109, 330);
+            this.cboParity.Location = new System.Drawing.Point(109, 300);
             this.cboParity.Name = "cboParity";
             this.cboParity.Size = new System.Drawing.Size(137, 23);
             this.cboParity.TabIndex = 9;
@@ -159,7 +161,7 @@ namespace ErgoLux
             // cboFlowControl
             // 
             this.cboFlowControl.FormattingEnabled = true;
-            this.cboFlowControl.Location = new System.Drawing.Point(109, 366);
+            this.cboFlowControl.Location = new System.Drawing.Point(109, 336);
             this.cboFlowControl.Name = "cboFlowControl";
             this.cboFlowControl.Size = new System.Drawing.Size(137, 23);
             this.cboFlowControl.TabIndex = 10;
@@ -168,7 +170,7 @@ namespace ErgoLux
             // lblFlowControl
             // 
             this.lblFlowControl.AutoSize = true;
-            this.lblFlowControl.Location = new System.Drawing.Point(30, 369);
+            this.lblFlowControl.Location = new System.Drawing.Point(30, 339);
             this.lblFlowControl.Name = "lblFlowControl";
             this.lblFlowControl.Size = new System.Drawing.Size(73, 15);
             this.lblFlowControl.TabIndex = 11;
@@ -177,7 +179,7 @@ namespace ErgoLux
             // lblParity
             // 
             this.lblParity.AutoSize = true;
-            this.lblParity.Location = new System.Drawing.Point(30, 333);
+            this.lblParity.Location = new System.Drawing.Point(30, 303);
             this.lblParity.Name = "lblParity";
             this.lblParity.Size = new System.Drawing.Size(37, 15);
             this.lblParity.TabIndex = 12;
@@ -185,14 +187,14 @@ namespace ErgoLux
             // 
             // txtOn
             // 
-            this.txtOn.Location = new System.Drawing.Point(323, 366);
+            this.txtOn.Location = new System.Drawing.Point(323, 336);
             this.txtOn.Name = "txtOn";
             this.txtOn.Size = new System.Drawing.Size(40, 23);
             this.txtOn.TabIndex = 13;
             // 
             // txtOff
             // 
-            this.txtOff.Location = new System.Drawing.Point(402, 366);
+            this.txtOff.Location = new System.Drawing.Point(402, 336);
             this.txtOff.Name = "txtOff";
             this.txtOff.Size = new System.Drawing.Size(40, 23);
             this.txtOff.TabIndex = 14;
@@ -200,7 +202,7 @@ namespace ErgoLux
             // lblOn
             // 
             this.lblOn.AutoSize = true;
-            this.lblOn.Location = new System.Drawing.Point(297, 369);
+            this.lblOn.Location = new System.Drawing.Point(297, 339);
             this.lblOn.Name = "lblOn";
             this.lblOn.Size = new System.Drawing.Size(23, 15);
             this.lblOn.TabIndex = 15;
@@ -209,7 +211,7 @@ namespace ErgoLux
             // lblOff
             // 
             this.lblOff.AutoSize = true;
-            this.lblOff.Location = new System.Drawing.Point(375, 369);
+            this.lblOff.Location = new System.Drawing.Point(375, 339);
             this.lblOff.Name = "lblOff";
             this.lblOff.Size = new System.Drawing.Size(24, 15);
             this.lblOff.TabIndex = 16;
@@ -246,6 +248,22 @@ namespace ErgoLux
             this.lblDevices.TabIndex = 19;
             this.lblDevices.Text = "FTDI device list";
             // 
+            // txtHz
+            // 
+            this.txtHz.Location = new System.Drawing.Point(109, 372);
+            this.txtHz.Name = "txtHz";
+            this.txtHz.Size = new System.Drawing.Size(32, 23);
+            this.txtHz.TabIndex = 20;
+            // 
+            // lblHz
+            // 
+            this.lblHz.AutoSize = true;
+            this.lblHz.Location = new System.Drawing.Point(30, 375);
+            this.lblHz.Name = "lblHz";
+            this.lblHz.Size = new System.Drawing.Size(58, 15);
+            this.lblHz.TabIndex = 21;
+            this.lblHz.Text = "Freq. (Hz)";
+            // 
             // FrmSettings
             // 
             this.AcceptButton = this.btnOK;
@@ -253,6 +271,8 @@ namespace ErgoLux
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(487, 450);
+            this.Controls.Add(this.lblHz);
+            this.Controls.Add(this.txtHz);
             this.Controls.Add(this.lblDevices);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -306,5 +326,7 @@ namespace ErgoLux
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblDevices;
+        private System.Windows.Forms.TextBox txtHz;
+        private System.Windows.Forms.Label lblHz;
     }
 }

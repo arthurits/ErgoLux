@@ -14,10 +14,10 @@ namespace ErgoLux
 {
     public partial class FrmMain : Form
     {
-        private Timer m_timer;
+        private System.Timers.Timer m_timer;
         //private ClassT10 cT10;
         private FTDISample myFtdiDevice;
-        private double[] _plotData = new double[7200];
+        private double[][] _plotData;
         private int[] _settings;
         private int _dataN = 0;
         Random rand = new Random(0);
@@ -28,14 +28,17 @@ namespace ErgoLux
             InitializeComponent();
             //cT10 = new ClassT10();
 
-            m_timer = new Timer { Interval = 500 };
-            m_timer.Tick += timer_Tick;
-            m_timer.Enabled = false;
-
+            m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
+            m_timer.Elapsed += OnTimedEvent;
+            m_timer.Enabled = true;
+            
             // plot the data array only once and we can updates its value later
-            sigPlot = formsPlot1.plt.PlotSignal(_plotData, 2);
+            _plotData = new double[1][];
+            _plotData[0] = new double[7200];
+            sigPlot = formsPlot1.plt.PlotSignal(_plotData[0], sampleRate: 2);
+            //sigPlot = formsPlot1.plt.PlotSignal(_plotData, 2);
             formsPlot1.plt.AxisAutoX(margin: 0);
-            formsPlot1.plt.Axis(y1: 0);
+            formsPlot1.plt.Axis(x1: 0, x2: 20, y1: 0);
 
             // customize styling
             formsPlot1.plt.Title("Illuminance");
@@ -54,35 +57,7 @@ namespace ErgoLux
             //System.Diagnostics.Debug.Print(strEncoded);
             //System.Diagnostics.Debug.Print(strEncoded.ToCharArray().ToString());
             //strEncoded = algo.EncodeCommand("01110200");
-            //strEncoded = algo.EncodeCommand("02110200");
-            //strEncoded = algo.EncodeCommand("03110200");
-            //strEncoded = algo.EncodeCommand("04110200");
-            //strEncoded = algo.EncodeCommand("05110200");
-            //strEncoded = algo.EncodeCommand("06110200");
-            //strEncoded = algo.EncodeCommand("07110200");
-            //strEncoded = algo.EncodeCommand("08110200");
-            //strEncoded = algo.EncodeCommand("09110200");
-            //strEncoded = algo.EncodeCommand("10110200");
-            //strEncoded = algo.EncodeCommand("11110200");
-            //strEncoded = algo.EncodeCommand("12110200");
-            //strEncoded = algo.EncodeCommand("13110200");
-            //strEncoded = algo.EncodeCommand("14110200");
-            //strEncoded = algo.EncodeCommand("15110200");
-            //strEncoded = algo.EncodeCommand("16110200");
-            //strEncoded = algo.EncodeCommand("17110200");
-            //strEncoded = algo.EncodeCommand("18110200");
-            //strEncoded = algo.EncodeCommand("19110200");
-            //strEncoded = algo.EncodeCommand("20110200");
-            //strEncoded = algo.EncodeCommand("21110200");
-            //strEncoded = algo.EncodeCommand("22110200");
-            //strEncoded = algo.EncodeCommand("23110200");
-            //strEncoded = algo.EncodeCommand("24110200");
-            //strEncoded = algo.EncodeCommand("25110200");
-            //strEncoded = algo.EncodeCommand("26110200");
-            //strEncoded = algo.EncodeCommand("27110200");
-            //strEncoded = algo.EncodeCommand("28110200");
-            //strEncoded = algo.EncodeCommand("29110200");
-            //strEncoded = algo.EncodeCommand("30110200");
+            
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -94,19 +69,19 @@ namespace ErgoLux
             }
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void OnTimedEvent(object sender, EventArgs e)
         {
             string readData;
             UInt32 numBytesRead = 0;
 
-            var result = false;
-            for (int i = 0; i < _settings[1]; i++)
-            {
-                while (!result)
-                    result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[i]);
+            //var result = false;
+            //for (int i = 0; i < _settings[1]; i++)
+            //{
+            //    while (!result)
+            //        result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[i]);
 
-                result = false;
-            }
+            //    result = false;
+            //}
 
             // Note that the Read method is overloaded, so can read string or byte array data
             //ftStatus = myFtdiDevice.Read(out readData, numBytesAvailable, ref numBytesRead);
@@ -115,13 +90,15 @@ namespace ErgoLux
             //OnReadingAvailable(readData);
 
 
-            //_plotData[_dataN] = rand.NextDouble();
+            _plotData[0][_dataN] = rand.NextDouble();
 
-            //sigPlot.maxRenderIndex = _dataN;
-            ////sigPlot.minRenderIndex = _dataN > 20 ? _dataN - 20 : 0;
-            //++_dataN;
-            //formsPlot1.plt.AxisAuto();
-            //formsPlot1.Render(skipIfCurrentlyRendering: true);
+            sigPlot.maxRenderIndex = _dataN;
+            sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+            
+            if (_dataN / 2 >= formsPlot1.plt.Axis()[1])
+                formsPlot1.plt.Axis(x1: _dataN / 2 - 10, x2: _dataN / 2 + 10);
+            ++_dataN;
+            formsPlot1.Render(skipIfCurrentlyRendering: true);
         }
 
         private void BtnConnect_Click(object sender, EventArgs e)
@@ -135,7 +112,13 @@ namespace ErgoLux
         private void BtnStop_Click(object sender, EventArgs e)
         {
             m_timer.Stop();
-            myFtdiDevice.DataReceived -= OnDataReceived;
+            //myFtdiDevice.DataReceived -= OnDataReceived;
+
+
+            sigPlot.minRenderIndex = 0;
+            //formsPlot1.plt.Axis(x1: 0);
+            formsPlot1.plt.AxisAuto(horizontalMargin: 0.05);
+            formsPlot1.Render();
         }
 
         private void OnDataReceived (object sender, DataReceivedEventArgs e)
@@ -151,7 +134,7 @@ namespace ErgoLux
 
 
             // Plot data
-            _plotData[_dataN] = result.Iluminance;
+            _plotData[result.Sensor][_dataN] = result.Iluminance;
 
             sigPlot.maxRenderIndex = _dataN;
             ////sigPlot.minRenderIndex = _dataN > 20 ? _dataN - 20 : 0;
@@ -166,7 +149,9 @@ namespace ErgoLux
         {
             // Stop the time it it's still running
             if (m_timer.Enabled) m_timer.Stop();
-
+            
+            m_timer.Dispose();
+            
             // Close the device if it's still open
             if (myFtdiDevice!=null && myFtdiDevice.IsOpen)
                 myFtdiDevice.Close();
@@ -183,7 +168,7 @@ namespace ErgoLux
 
                 myFtdiDevice = new FTDISample();
                 myFtdiDevice.OpenDevice(location: (uint)_settings[0],
-                    baud: 9600,
+                    baud: _settings[2],
                     dataBits: _settings[3],
                     stopBits: _settings[4],
                     parity: _settings[5],
@@ -191,6 +176,11 @@ namespace ErgoLux
                     xOn: _settings[7],
                     xOff: _settings[8]);
 
+                _plotData = new double[_settings[1]][];
+                for (int i = 0; i < _settings[1]; i++)
+                    _plotData[i] = new double[7200];
+
+                sigPlot = formsPlot1.plt.PlotSignal(_plotData[0], sampleRate: _settings[9]);
 
             }
         }

@@ -14,7 +14,7 @@ namespace ErgoLux
 {
     public partial class FrmSettings : Form
     {
-        private int[] _data = new int[9];
+        private int[] _data = new int[10];
 
         public int[] GetData { get => _data; }
 
@@ -40,8 +40,8 @@ namespace ErgoLux
 
             // Populate cboDataBits
             Dictionary<string, int> cboList = new Dictionary<string, int>();
-            cboList.Add("7 bits", 7);
-            cboList.Add("8 bits", 8);
+            cboList.Add("7 bits", FTDI.FT_DATA_BITS.FT_BITS_7);
+            cboList.Add("8 bits", FTDI.FT_DATA_BITS.FT_BITS_8);
 
             cboDataBits.DataSource = new BindingSource(cboList, null);
             cboDataBits.DisplayMember = "Key";
@@ -50,8 +50,8 @@ namespace ErgoLux
 
             // Populate cboStop
             cboList.Clear();
-            cboList.Add("1 stop bit", 0);
-            cboList.Add("2 stop bits", 2);
+            cboList.Add("1 stop bit", FTDI.FT_STOP_BITS.FT_STOP_BITS_1);
+            cboList.Add("2 stop bits", FTDI.FT_STOP_BITS.FT_STOP_BITS_2);
 
             cboStopBits.DataSource = new BindingSource(cboList, null);
             cboStopBits.DisplayMember = "Key";
@@ -84,9 +84,9 @@ namespace ErgoLux
             cboFlowControl.SelectedIndex = 0;
 
             txtBaudRate.Text = "9600";
-            txtOn.Text = "10";
+            txtOn.Text = "11";
             txtOff.Text = "13";
-
+            txtHz.Text = "2";
         }
 
         /// <summary>
@@ -172,6 +172,7 @@ namespace ErgoLux
             _data[6] = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
             _data[7] = Convert.ToInt32(txtOn.Text);
             _data[8] = Convert.ToInt32(txtOff.Text);
+            _data[9] = Convert.ToInt32(txtHz.Text);   // Sample rate
 
             this.DialogResult = DialogResult.OK;
         }
