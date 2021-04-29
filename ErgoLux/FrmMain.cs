@@ -23,6 +23,9 @@ namespace ErgoLux
         Random rand = new Random(0);
         ScottPlot.PlottableSignal sigPlot;
 
+        private const int ArraySize = 7200;
+        private const int PlotRangeX = 20;
+
         public FrmMain()
         {
             InitializeComponent();
@@ -33,12 +36,14 @@ namespace ErgoLux
             m_timer.Enabled = true;
             
             // plot the data array only once and we can updates its value later
-            _plotData = new double[1][];
-            _plotData[0] = new double[7200];
+            _plotData = new double[2][];
+            _plotData[0] = new double[ArraySize];
+            _plotData[1] = new double[ArraySize];
             sigPlot = formsPlot1.plt.PlotSignal(_plotData[0], sampleRate: 2);
+            formsPlot1.plt.PlotSignal(_plotData[1], sampleRate: 2);
             //sigPlot = formsPlot1.plt.PlotSignal(_plotData, 2);
             formsPlot1.plt.AxisAutoX(margin: 0);
-            formsPlot1.plt.Axis(x1: 0, x2: 20, y1: 0);
+            formsPlot1.plt.Axis(x1: 0, x2: PlotRangeX, y1: 0);
 
             // customize styling
             formsPlot1.plt.Title("Illuminance");
@@ -89,12 +94,25 @@ namespace ErgoLux
             // add the condition checking here to validate that the readData in not empty.
             //OnReadingAvailable(readData);
 
-
-            _plotData[0][_dataN] = rand.NextDouble();
-
-            sigPlot.maxRenderIndex = _dataN;
-            sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+            int factor = ArraySize * (_dataN + 10) / ArraySize;
+            if (factor > _plotData[0].Length)
+            {
+                for (int i = 0; i < _plotData.Length; i++)
+                    Array.Resize<double>(ref _plotData[i], factor * ArraySize);
+                //Array.Copy(_plotData[0], 1, _plotData[0], 0, _plotData[0].Length - 1);
+            }
             
+            _plotData[0][_dataN] = rand.NextDouble();
+            _plotData[1][_dataN] = rand.NextDouble();
+
+            foreach (var plot in formsPlot1.plt.GetPlottables())
+            {
+                ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _dataN;
+                //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+                //sigPlot.maxRenderIndex = _dataN;
+                //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+            }
+
             if (_dataN / 2 >= formsPlot1.plt.Axis()[1])
                 formsPlot1.plt.Axis(x1: _dataN / 2 - 10, x2: _dataN / 2 + 10);
             ++_dataN;
@@ -114,8 +132,12 @@ namespace ErgoLux
             m_timer.Stop();
             //myFtdiDevice.DataReceived -= OnDataReceived;
 
+            //foreach (var plot in formsPlot1.plt.GetPlottables())
+            //{
+            //    ((ScottPlot.PlottableSignal)plot).minRenderIndex = 0;
+            //}
 
-            sigPlot.minRenderIndex = 0;
+            //sigPlot.minRenderIndex = 0;
             //formsPlot1.plt.Axis(x1: 0);
             formsPlot1.plt.AxisAuto(horizontalMargin: 0.05);
             formsPlot1.Render();
@@ -178,7 +200,7 @@ namespace ErgoLux
 
                 _plotData = new double[_settings[1]][];
                 for (int i = 0; i < _settings[1]; i++)
-                    _plotData[i] = new double[7200];
+                    _plotData[i] = new double[ArraySize];
 
                 sigPlot = formsPlot1.plt.PlotSignal(_plotData[0], sampleRate: _settings[9]);
 
