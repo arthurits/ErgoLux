@@ -18,7 +18,19 @@ namespace ErgoLux
         //private ClassT10 cT10;
         private FTDISample myFtdiDevice;
         private double[][] _plotData;
-        private int[] _settings;
+        private int[] _settings = new int[]
+        {
+            0,                                  // Location ID
+            1,                                  // Number of sensors
+            9600,                               // Baud rate
+            FTDI.FT_DATA_BITS.FT_BITS_7,        // Data bits
+            FTDI.FT_STOP_BITS.FT_STOP_BITS_1,   // Stop bits
+            FTDI.FT_PARITY.FT_PARITY_EVEN,      // Parity
+            FTDI.FT_FLOW_CONTROL.FT_FLOW_NONE,  // Flow
+            11,                                 // On char
+            13,                                 // Off char
+            2                                   // Frequency (Herz)
+        };
         private int _dataN = 0;
         Random rand = new Random(0);
         ScottPlot.PlottableSignal sigPlot;
@@ -123,7 +135,7 @@ namespace ErgoLux
         {
             
             myFtdiDevice.DataReceived += OnDataReceived;
-            if (myFtdiDevice.Write(ClassT10.Command54.Value))
+            if (myFtdiDevice.Write(ClassT10.Command54))
                 m_timer.Start();
 
         }
@@ -145,7 +157,7 @@ namespace ErgoLux
 
         private void OnDataReceived (object sender, DataReceivedEventArgs e)
         {
-            (int Sensor, double Iluminance, int Increment, int Percent) result = (0, 0, 0, 0);
+            (int Sensor, double Iluminance, double Increment, double Percent) result = (0, 0, 0, 0);
 
             string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
             if (e.StrDataReceived.Length > 14)
@@ -181,7 +193,7 @@ namespace ErgoLux
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-            var frm = new FrmSettings();
+            var frm = new FrmSettings(_settings);
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
             {

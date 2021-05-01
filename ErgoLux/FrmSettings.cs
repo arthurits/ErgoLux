@@ -50,8 +50,8 @@ namespace ErgoLux
 
             // Populate cboStop
             cboList.Clear();
-            cboList.Add("1 stop bit", FTDI.FT_STOP_BITS.FT_STOP_BITS_1);
-            cboList.Add("2 stop bits", FTDI.FT_STOP_BITS.FT_STOP_BITS_2);
+            cboList.Add("1 bit", FTDI.FT_STOP_BITS.FT_STOP_BITS_1);
+            cboList.Add("2 bits", FTDI.FT_STOP_BITS.FT_STOP_BITS_2);
 
             cboStopBits.DataSource = new BindingSource(cboList, null);
             cboStopBits.DisplayMember = "Key";
@@ -89,9 +89,23 @@ namespace ErgoLux
             txtHz.Text = "2";
         }
 
+        public FrmSettings(int[] _settings)
+            :this()
+        {
+            updSensors.Value = _settings[1];
+            txtBaudRate.Text = _settings[2].ToString();
+            cboDataBits.SelectedValue = _settings[3];
+            cboStopBits.SelectedValue = _settings[4];
+            cboParity.SelectedValue = _settings[5];
+            cboFlowControl.SelectedValue = _settings[6];
+            txtOn.Text = _settings[7].ToString();
+            txtOff.Text = _settings[8].ToString();
+            txtHz.Text = _settings[9].ToString();
+        }
+
         /// <summary>
         /// Populates ListView control with data from the FTDI devices connected
-        /// </summary>
+        /// </summary<
         private void PopulateDevices()
         {
             // FTDI connection code

@@ -37,23 +37,25 @@ namespace ErgoLux
             this.BtnStop = new System.Windows.Forms.Button();
             this.NumSensors = new System.Windows.Forms.NumericUpDown();
             this.BtnSettings = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.NumSensors)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // formsPlot1
             // 
-            this.formsPlot1.Location = new System.Drawing.Point(13, 12);
+            this.formsPlot1.Location = new System.Drawing.Point(4, 3);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(380, 209);
+            this.formsPlot1.Size = new System.Drawing.Size(298, 198);
             this.formsPlot1.TabIndex = 0;
             // 
             // formsPlot2
             // 
-            this.formsPlot2.Location = new System.Drawing.Point(401, 14);
+            this.formsPlot2.Location = new System.Drawing.Point(390, 3);
             this.formsPlot2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot2.Name = "formsPlot2";
-            this.formsPlot2.Size = new System.Drawing.Size(386, 207);
+            this.formsPlot2.Size = new System.Drawing.Size(298, 198);
             this.formsPlot2.TabIndex = 1;
             // 
             // richTextBox1
@@ -116,24 +118,40 @@ namespace ErgoLux
             this.BtnSettings.UseVisualStyleBackColor = true;
             this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Controls.Add(this.formsPlot1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.formsPlot2, 2, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 12);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 204);
+            this.tableLayoutPanel1.TabIndex = 7;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 483);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.BtnSettings);
             this.Controls.Add(this.NumSensors);
             this.Controls.Add(this.BtnStop);
             this.Controls.Add(this.BtnConnect);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.formsPlot2);
-            this.Controls.Add(this.formsPlot1);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.NumSensors)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -147,6 +165,7 @@ namespace ErgoLux
         private System.Windows.Forms.Button BtnStop;
         private System.Windows.Forms.NumericUpDown NumSensors;
         private System.Windows.Forms.Button BtnSettings;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 
