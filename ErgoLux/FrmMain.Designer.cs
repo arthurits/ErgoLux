@@ -61,17 +61,20 @@ namespace ErgoLux
             this.toolStripMain_About = new System.Windows.Forms.ToolStripButton();
             this.formsPlot1 = new ScottPlot.FormsPlot();
             this.formsPlot2 = new ScottPlot.FormsPlot();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.BtnConnect = new System.Windows.Forms.Button();
             this.BtnStop = new System.Windows.Forms.Button();
             this.NumSensors = new System.Windows.Forms.NumericUpDown();
             this.BtnSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSensors)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tspTop
@@ -81,16 +84,16 @@ namespace ErgoLux
             this.tspTop.Name = "tspTop";
             this.tspTop.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.tspTop.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.tspTop.Size = new System.Drawing.Size(800, 0);
+            this.tspTop.Size = new System.Drawing.Size(933, 0);
             // 
             // tspBottom
             // 
             this.tspBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tspBottom.Location = new System.Drawing.Point(0, 483);
+            this.tspBottom.Location = new System.Drawing.Point(0, 603);
             this.tspBottom.Name = "tspBottom";
             this.tspBottom.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.tspBottom.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.tspBottom.Size = new System.Drawing.Size(800, 0);
+            this.tspBottom.Size = new System.Drawing.Size(933, 0);
             // 
             // mnuMainFrm
             // 
@@ -98,7 +101,7 @@ namespace ErgoLux
             this.fileToolStripMenuItem});
             this.mnuMainFrm.Location = new System.Drawing.Point(0, 0);
             this.mnuMainFrm.Name = "mnuMainFrm";
-            this.mnuMainFrm.Size = new System.Drawing.Size(1291, 24);
+            this.mnuMainFrm.Size = new System.Drawing.Size(933, 24);
             this.mnuMainFrm.TabIndex = 5;
             this.mnuMainFrm.Text = "menuStrip1";
             // 
@@ -150,12 +153,12 @@ namespace ErgoLux
             this.statusStripLabelSkeleton,
             this.statusStripLabelJoint,
             this.statusStripLabelAngle});
-            this.statusStrip.Location = new System.Drawing.Point(0, 455);
+            this.statusStrip.Location = new System.Drawing.Point(0, 575);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.statusStrip.ShowItemToolTips = true;
-            this.statusStrip.Size = new System.Drawing.Size(800, 28);
+            this.statusStrip.Size = new System.Drawing.Size(933, 28);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -184,7 +187,7 @@ namespace ErgoLux
             // 
             this.statusStripLabelXtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelXtras.Name = "statusStripLabelXtras";
-            this.statusStripLabelXtras.Size = new System.Drawing.Size(355, 23);
+            this.statusStripLabelXtras.Size = new System.Drawing.Size(488, 23);
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -286,10 +289,10 @@ namespace ErgoLux
             this.toolStripMain_Settings,
             this.toolStripSeparator3,
             this.toolStripMain_About});
-            this.toolStripMain.Location = new System.Drawing.Point(0, 0);
+            this.toolStripMain.Location = new System.Drawing.Point(0, 24);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStripMain.Size = new System.Drawing.Size(800, 55);
+            this.toolStripMain.Size = new System.Drawing.Size(933, 72);
             this.toolStripMain.TabIndex = 2;
             this.toolStripMain.Text = "Main toolbar";
             // 
@@ -297,7 +300,7 @@ namespace ErgoLux
             // 
             this.toolStripMain_Exit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripMain_Exit.Name = "toolStripMain_Exit";
-            this.toolStripMain_Exit.Size = new System.Drawing.Size(32, 52);
+            this.toolStripMain_Exit.Size = new System.Drawing.Size(32, 69);
             this.toolStripMain_Exit.Text = "Exit";
             this.toolStripMain_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Exit.ToolTipText = "Exit application";
@@ -306,14 +309,14 @@ namespace ErgoLux
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 72);
             // 
             // toolStripMain_Connect
             // 
             this.toolStripMain_Connect.CheckOnClick = true;
             this.toolStripMain_Connect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripMain_Connect.Name = "toolStripMain_Connect";
-            this.toolStripMain_Connect.Size = new System.Drawing.Size(59, 52);
+            this.toolStripMain_Connect.Size = new System.Drawing.Size(59, 69);
             this.toolStripMain_Connect.Text = "Connect";
             this.toolStripMain_Connect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Connect.ToolTipText = "Connect Kinnect";
@@ -323,7 +326,7 @@ namespace ErgoLux
             // 
             this.toolStripMain_Disconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripMain_Disconnect.Name = "toolStripMain_Disconnect";
-            this.toolStripMain_Disconnect.Size = new System.Drawing.Size(75, 52);
+            this.toolStripMain_Disconnect.Size = new System.Drawing.Size(75, 69);
             this.toolStripMain_Disconnect.Text = "Disconnect";
             this.toolStripMain_Disconnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Disconnect.ToolTipText = "Disconnect Kinnect";
@@ -332,15 +335,14 @@ namespace ErgoLux
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 72);
             // 
             // toolStripMain_Settings
             // 
-            this.toolStripMain_Settings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripMain_Settings.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMain_Settings.Image")));
             this.toolStripMain_Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripMain_Settings.Name = "toolStripMain_Settings";
-            this.toolStripMain_Settings.Size = new System.Drawing.Size(52, 52);
+            this.toolStripMain_Settings.Size = new System.Drawing.Size(58, 69);
             this.toolStripMain_Settings.Text = "Settings";
             this.toolStripMain_Settings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Settings.ToolTipText = "T-10A settings";
@@ -349,15 +351,14 @@ namespace ErgoLux
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 55);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 72);
             // 
             // toolStripMain_About
             // 
-            this.toolStripMain_About.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripMain_About.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMain_About.Image")));
             this.toolStripMain_About.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripMain_About.Name = "toolStripMain_About";
-            this.toolStripMain_About.Size = new System.Drawing.Size(52, 52);
+            this.toolStripMain_About.Size = new System.Drawing.Size(52, 69);
             this.toolStripMain_About.Text = "About";
             this.toolStripMain_About.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_About.ToolTipText = "About this software";
@@ -365,31 +366,25 @@ namespace ErgoLux
             // 
             // formsPlot1
             // 
-            this.formsPlot1.Location = new System.Drawing.Point(4, 3);
-            this.formsPlot1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlot1.Location = new System.Drawing.Point(0, 0);
+            this.formsPlot1.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(298, 198);
+            this.formsPlot1.Size = new System.Drawing.Size(366, 214);
             this.formsPlot1.TabIndex = 0;
             // 
             // formsPlot2
             // 
-            this.formsPlot2.Location = new System.Drawing.Point(390, 3);
-            this.formsPlot2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.formsPlot2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlot2.Location = new System.Drawing.Point(456, 0);
+            this.formsPlot2.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot2.Name = "formsPlot2";
-            this.formsPlot2.Size = new System.Drawing.Size(298, 198);
+            this.formsPlot2.Size = new System.Drawing.Size(366, 214);
             this.formsPlot2.TabIndex = 1;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(13, 380);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(774, 33);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
             // 
             // BtnConnect
             // 
-            this.BtnConnect.Location = new System.Drawing.Point(575, 421);
+            this.BtnConnect.Location = new System.Drawing.Point(710, 532);
             this.BtnConnect.Name = "BtnConnect";
             this.BtnConnect.Size = new System.Drawing.Size(108, 31);
             this.BtnConnect.TabIndex = 3;
@@ -399,7 +394,7 @@ namespace ErgoLux
             // 
             // BtnStop
             // 
-            this.BtnStop.Location = new System.Drawing.Point(703, 421);
+            this.BtnStop.Location = new System.Drawing.Point(838, 532);
             this.BtnStop.Name = "BtnStop";
             this.BtnStop.Size = new System.Drawing.Size(83, 30);
             this.BtnStop.TabIndex = 4;
@@ -409,7 +404,7 @@ namespace ErgoLux
             // 
             // NumSensors
             // 
-            this.NumSensors.Location = new System.Drawing.Point(261, 424);
+            this.NumSensors.Location = new System.Drawing.Point(396, 535);
             this.NumSensors.Maximum = new decimal(new int[] {
             30,
             0,
@@ -431,7 +426,7 @@ namespace ErgoLux
             // 
             // BtnSettings
             // 
-            this.BtnSettings.Location = new System.Drawing.Point(422, 421);
+            this.BtnSettings.Location = new System.Drawing.Point(557, 532);
             this.BtnSettings.Name = "BtnSettings";
             this.BtnSettings.Size = new System.Drawing.Size(104, 31);
             this.BtnSettings.TabIndex = 6;
@@ -441,33 +436,62 @@ namespace ErgoLux
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel1.Controls.Add(this.formsPlot1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.formsPlot2, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 95);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 3, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 96);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 279);
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(912, 429);
             this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(366, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 214);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox2.Location = new System.Drawing.Point(822, 0);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(90, 214);
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 483);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(933, 603);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.BtnSettings);
             this.Controls.Add(this.NumSensors);
             this.Controls.Add(this.BtnStop);
             this.Controls.Add(this.BtnConnect);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStripMain);
+            this.Controls.Add(this.mnuMainFrm);
             this.Controls.Add(this.tspBottom);
             this.Controls.Add(this.tspTop);
             this.Name = "FrmMain";
@@ -483,6 +507,8 @@ namespace ErgoLux
             this.toolStripMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumSensors)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -518,7 +544,6 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelVideo;
         private ScottPlot.FormsPlot formsPlot1;
         private ScottPlot.FormsPlot formsPlot2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button BtnConnect;
         private System.Windows.Forms.Button BtnStop;
         private System.Windows.Forms.NumericUpDown NumSensors;
@@ -527,6 +552,8 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripAbout;
         private System.Windows.Forms.ToolStripButton toolStripMain_About;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
