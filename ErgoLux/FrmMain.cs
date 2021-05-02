@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,12 @@ namespace ErgoLux
         public FrmMain()
         {
             InitializeComponent();
-            //cT10 = new ClassT10();
+
+            // Custom initialization routines
+            InitializeToolStripPanel();
+            InitializeToolStrip();
+            InitializeStatusStrip();
+            InitializeMenuStrip();
 
             m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
             m_timer.Elapsed += OnTimedEvent;
@@ -76,6 +82,79 @@ namespace ErgoLux
             //strEncoded = algo.EncodeCommand("01110200");
             
         }
+
+        #region Initialization routines
+
+        /// <summary>
+        /// Initialize the ToolStripPanel component: add the child components to it
+        /// </summary>
+        private void InitializeToolStripPanel()
+        {
+            //tspTop = new ToolStripPanel();
+            //tspBottom = new ToolStripPanel();
+            tspTop.Join(toolStripMain);
+            tspTop.Join(mnuMainFrm);
+            tspBottom.Join(this.statusStrip);
+
+            // Exit the method
+            return;
+        }
+
+        /// <summary>
+        /// Initialize the ToolStrip component
+        /// </summary>
+        private void InitializeToolStrip()
+        {
+
+            //ToolStripNumericUpDown c = new ToolStripNumericUpDown();
+            //this.toolStripMain.Items.Add((ToolStripItem)c);
+
+            toolStripMain.Renderer = new customRenderer(Brushes.SteelBlue, Brushes.LightSkyBlue);
+
+            var path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            if (File.Exists(path + @"\images\exit.ico")) this.toolStripMain_Exit.Image = new Icon(path + @"\images\exit.ico", 48, 48).ToBitmap();
+            if (File.Exists(path + @"\images\connect.ico")) this.toolStripMain_Connect.Image = new Icon(path + @"\images\connect.ico", 48, 48).ToBitmap();
+            if (File.Exists(path + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new Icon(path + @"\images\disconnect.ico", 48, 48).ToBitmap();
+            //if (File.Exists(path + @"\images\cinema.ico")) this.toolStripMain_Video.Image = new Icon(path + @"\images\cinema.ico", 48, 48).ToBitmap();
+            //if (File.Exists(path + @"\images\save.ico")) this.toolStripMain_Data.Image = new Icon(path + @"\images\save.ico", 48, 48).ToBitmap();
+            //if (File.Exists(path + @"\images\picture.ico")) this.toolStripMain_Picture.Image = new Icon(path + @"\images\picture.ico", 48, 48).ToBitmap();
+            //if (File.Exists(path + @"\images\reflect-horizontal.ico")) this.toolStripMain_Mirror.Image = new Icon(path + @"\images\reflect-horizontal.ico", 48, 48).ToBitmap();
+            //if (File.Exists(path + @"\images\plot.ico")) this.toolStripMain_Plots.Image = new Icon(path + @"\images\plot.ico", 48, 48).ToBitmap();
+            if (File.Exists(path + @"\images\settings.ico")) this.toolStripMain_Settings.Image = new Icon(path + @"\images\settings.ico", 48, 48).ToBitmap();
+            if (File.Exists(path + @"\images\about.ico")) this.toolStripMain_About.Image = new Icon(path + @"\images\about.ico", 48, 48).ToBitmap();
+
+            /*
+            using (Graphics g = Graphics.FromImage(this.toolStripMain_Skeleton.Image))
+            {
+                g.Clear(Color.PowderBlue);
+            }
+            */
+
+            //this.toolStripMain_Disconnect.Enabled = false;
+            //this.toolStripMain_SkeletonWidth.NumericUpDownControl.Maximum = 20;
+            //this.toolStripMain_SkeletonWidth.NumericUpDownControl.Minimum = 1;
+
+            // Exit the method
+            return;
+        }
+
+        /// <summary>
+        /// Initialize the MenuStrip component
+        /// </summary>
+        private void InitializeMenuStrip()
+        {
+            return;
+        }
+
+        /// <summary>
+        /// Initialize the StatusStrip component
+        /// </summary>
+        private void InitializeStatusStrip()
+        {
+            return;
+        }
+
+        #endregion Initialization routines 
 
         private void Form1_Shown(object sender, EventArgs e)
         {
@@ -193,6 +272,50 @@ namespace ErgoLux
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        #region toolStripMain events
+        private void toolStripMain_Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void toolStripMain_Connect_CheckedChanged(object sender, EventArgs e)
+        {
+            if (toolStripMain_Connect.Checked == true)
+            {
+                toolStripMain_Disconnect.Enabled = true;
+                //ConnectKinect();
+                myFtdiDevice.DataReceived += OnDataReceived;
+                if (myFtdiDevice.Write(ClassT10.Command54))
+                    m_timer.Start();
+            }
+            else
+            {
+                toolStripMain_Disconnect.Enabled = false;
+                //toolStripMain_Data.Checked = false;
+                //DisconnectKinect();
+            }
+        }
+
+        private void toolStripMain_Disconnect_Click(object sender, EventArgs e)
+        {
+            m_timer.Stop();
+            //myFtdiDevice.DataReceived -= OnDataReceived;
+
+            //foreach (var plot in formsPlot1.plt.GetPlottables())
+            //{
+            //    ((ScottPlot.PlottableSignal)plot).minRenderIndex = 0;
+            //}
+
+            //sigPlot.minRenderIndex = 0;
+            //formsPlot1.plt.Axis(x1: 0);
+            formsPlot1.plt.AxisAuto(horizontalMargin: 0.05);
+            formsPlot1.Render();
+        }
+        private void toolStripMain_Settings_Click(object sender, EventArgs e)
+        {
             var frm = new FrmSettings(_settings);
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
@@ -218,5 +341,13 @@ namespace ErgoLux
 
             }
         }
+        private void toolStripMain_About_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmAbout();
+            frm.ShowDialog();
+        }
+        #endregion toolStripMain events
+
+        
     }
 }

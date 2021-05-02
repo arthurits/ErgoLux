@@ -101,19 +101,19 @@ namespace ErgoLux
         /// <summary>
         /// Clear integrated data
         /// </summary>
-        public static string Command28 { get { return (new ClassT10(strSTX + "0028    " + strETX + "13" + strDelimiter)).Value; } }
+        public static string Command28 { get { return new ClassT10(strSTX + "0028    " + strETX + "13" + strDelimiter).Value; } }
         /// <summary>
         /// Set PC connection mode
         /// </summary>
-        public static string Command54 { get { return (new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter)).Value; } }
+        public static string Command54 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter).Value; } }
         /// <summary>
         /// Start integration mode
         /// </summary>
-        public static ClassT10 Command550 { get { return new ClassT10(strSTX + "99550  0" + strETX + "13" + strDelimiter); } }
+        public static string Command550 { get { return new ClassT10(strSTX + "99550  0" + strETX + "13" + strDelimiter).Value; } }
         /// <summary>
         /// End integration mode
         /// </summary>
-        public static ClassT10 Command551 { get { return new ClassT10(strSTX + "99551  0" + strETX + "13" + strDelimiter); } }
+        public static string Command551 { get { return new ClassT10(strSTX + "99551  0" + strETX + "13" + strDelimiter).Value; } }
         
 
         private ClassT10(string value) { Value = value; }
