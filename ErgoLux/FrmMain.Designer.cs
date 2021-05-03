@@ -370,16 +370,16 @@ namespace ErgoLux
             this.formsPlot1.Location = new System.Drawing.Point(0, 0);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(366, 214);
+            this.formsPlot1.Size = new System.Drawing.Size(376, 214);
             this.formsPlot1.TabIndex = 0;
             // 
             // formsPlot2
             // 
             this.formsPlot2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot2.Location = new System.Drawing.Point(456, 0);
+            this.formsPlot2.Location = new System.Drawing.Point(526, 0);
             this.formsPlot2.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot2.Name = "formsPlot2";
-            this.formsPlot2.Size = new System.Drawing.Size(366, 214);
+            this.formsPlot2.Size = new System.Drawing.Size(376, 214);
             this.formsPlot2.TabIndex = 1;
             // 
             // BtnConnect
@@ -442,9 +442,9 @@ namespace ErgoLux
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel1.Controls.Add(this.formsPlot1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.formsPlot2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 0);
@@ -461,20 +461,20 @@ namespace ErgoLux
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(366, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(376, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 214);
+            this.pictureBox1.Size = new System.Drawing.Size(150, 214);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Location = new System.Drawing.Point(822, 0);
+            this.pictureBox2.Location = new System.Drawing.Point(902, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(90, 214);
+            this.pictureBox2.Size = new System.Drawing.Size(10, 214);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 

@@ -200,10 +200,19 @@ namespace ErgoLux
             string strTemp3 = strTemp.Substring(12, 6);
 
             var Sensor = Convert.ToInt32(strCommand.Substring(1, 2));
+            
             var nIluminance = Convert.ToDouble(Convert.ToInt32(strTemp1.Substring(1, 4))) * Math.Pow(10.0, Convert.ToInt32(strTemp1.Substring(5, 1)) - 4);
-            var nIncrement = Convert.ToDouble(Convert.ToInt32(strTemp2.Substring(1, 4))) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp2.Substring(5, 1)) - 4);
-            if (strTemp2.Substring(0, 1) == "-") nIncrement = -nIncrement;
-            var nPercent = Convert.ToDouble(Convert.ToInt32(strTemp3.Substring(1, 4))) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp3.Substring(5, 1)) - 4);
+            
+            var nIncrement = 0.0;
+            if (strTemp2.Trim().Length != 0)
+            {
+                nIncrement = Convert.ToDouble(Convert.ToInt32(strTemp2.Substring(1, 4))) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp2.Substring(5, 1)) - 4);
+                if (strTemp2.Substring(0, 1) == "-") nIncrement = -nIncrement;
+            }
+
+            var nPercent = 0.0;
+            if (strTemp3.Trim().Length != 0)
+                nPercent = Convert.ToDouble(Convert.ToInt32(strTemp3.Substring(1, 4))) * (int)Math.Pow(10.0, Convert.ToInt32(strTemp3.Substring(5, 1)) - 4);
 
             return (Sensor, nIluminance, nIncrement, nPercent);
         }
