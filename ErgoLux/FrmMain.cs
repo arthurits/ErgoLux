@@ -167,64 +167,16 @@ namespace ErgoLux
             }
         }
 
-        private void OnTimedEvent(object sender, EventArgs e)
-        {
-            //string readData;
-            //UInt32 numBytesRead = 0;
-            //m_timer.Stop();
-            var result = false;
-            for (int i = 0; i < _settings[1]; i++)
-            {
-                while (!result)
-                {
-                    if (_data)
-                    {
-                        result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[i]);
-                        //_data = false;
-                    }
-                }
-
-                result = false;
-            }
-            
-
-            // Note that the Read method is overloaded, so can read string or byte array data
-            //ftStatus = myFtdiDevice.Read(out readData, numBytesAvailable, ref numBytesRead);
-
-            // add the condition checking here to validate that the readData in not empty.
-            //OnReadingAvailable(readData);
-
-            //int factor = ArraySize * (_dataN + 10) / ArraySize;
-            //if (factor > _plotData[0].Length)
-            //{
-            //    for (int i = 0; i < _plotData.Length; i++)
-            //        Array.Resize<double>(ref _plotData[i], factor * ArraySize);
-            //    //Array.Copy(_plotData[0], 1, _plotData[0], 0, _plotData[0].Length - 1);
-            //}
-            
-            //_plotData[0][_dataN] = rand.NextDouble();
-            //_plotData[1][_dataN] = rand.NextDouble();
-
-            //foreach (var plot in formsPlot1.plt.GetPlottables())
-            //{
-            //    ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _dataN;
-            //    //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
-            //    //sigPlot.maxRenderIndex = _dataN;
-            //    //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
-            //}
-
-            //if (_dataN / 2 >= formsPlot1.plt.Axis()[1])
-            //    formsPlot1.plt.Axis(x1: _dataN / 2 - 10, x2: _dataN / 2 + 10);
-            //++_dataN;
-            //formsPlot1.Render(skipIfCurrentlyRendering: true);
-        }
-
         private void BtnConnect_Click(object sender, EventArgs e)
         {
-            
+
             myFtdiDevice.DataReceived += OnDataReceived;
             if (myFtdiDevice.Write(ClassT10.Command54))
+            {
+                System.Threading.Thread.Sleep(500);
+                myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
                 m_timer.Start();
+            }
 
         }
         private void BtnStop_Click(object sender, EventArgs e)
@@ -243,16 +195,74 @@ namespace ErgoLux
             formsPlot1.Render();
         }
 
+        private void OnTimedEvent(object sender, EventArgs e)
+        {
+            //string readData;
+            //UInt32 numBytesRead = 0;
+            m_timer.Stop();
+            var result = false;
+            //for (int i = 0; i < _settings[1]; i++)
+            //{
+            //    while (!result)
+            //    {
+            //        if (_data)
+            //        {
+            //            result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[i]);
+            //            //_data = false;
+            //        }
+            //    }
+
+            //    result = false;
+            //}
+            //while (!result)
+            //{
+            //    result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+            //}
+            result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+
+            // Note that the Read method is overloaded, so can read string or byte array data
+            //ftStatus = myFtdiDevice.Read(out readData, numBytesAvailable, ref numBytesRead);
+
+            // add the condition checking here to validate that the readData in not empty.
+            //OnReadingAvailable(readData);
+
+            //int factor = ArraySize * (_dataN + 10) / ArraySize;
+            //if (factor > _plotData[0].Length)
+            //{
+            //    for (int i = 0; i < _plotData.Length; i++)
+            //        Array.Resize<double>(ref _plotData[i], factor * ArraySize);
+            //    //Array.Copy(_plotData[0], 1, _plotData[0], 0, _plotData[0].Length - 1);
+            //}
+
+            //_plotData[0][_dataN] = rand.NextDouble();
+            //_plotData[1][_dataN] = rand.NextDouble();
+
+            //foreach (var plot in formsPlot1.plt.GetPlottables())
+            //{
+            //    ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _dataN;
+            //    //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+            //    //sigPlot.maxRenderIndex = _dataN;
+            //    //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+            //}
+
+            //if (_dataN / 2 >= formsPlot1.plt.Axis()[1])
+            //    formsPlot1.plt.Axis(x1: _dataN / 2 - 10, x2: _dataN / 2 + 10);
+            //++_dataN;
+            //formsPlot1.Render(skipIfCurrentlyRendering: true);
+        }
+
         private void OnDataReceived (object sender, DataReceivedEventArgs e)
         {
             _data = true;
             (int Sensor, double Iluminance, double Increment, double Percent) result = (0, 0, 0, 0);
-
-            string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
+            //string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
+            
             if (e.StrDataReceived.Length > 14)
             {
                 result = ClassT10.DecodeCommand(e.StrDataReceived);
                 System.Diagnostics.Debug.Print(result.ToString());
+                if (result.Sensor < _settings[1] - 1)
+                    myFtdiDevice.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
             }
             else
             {
@@ -287,7 +297,7 @@ namespace ErgoLux
             
             formsPlot1.Render(skipIfCurrentlyRendering: true);
 
-            if (result.Sensor == 0) ++_nPoints;
+            if (result.Sensor == _settings[1] - 1) ++_nPoints;
 
             //// Plot data
             //_plotData[result.Sensor][_dataN] = result.Iluminance;

@@ -12,6 +12,7 @@ namespace ErgoLux
 {
     public class FTDISample : FTDI
     {
+        private bool _receivedBuffer = false;
         private AutoResetEvent receivedDataEvent;
         private BackgroundWorker dataReceivedHandler;
 
@@ -203,6 +204,10 @@ namespace ErgoLux
                 this.receivedDataEvent.WaitOne();
 
                 // try to recieve data now
+                //FTDI.FT_STATUS status = FTDI.FT_STATUS.FT_IO_ERROR;
+                //while (status != FTDI.FT_STATUS.FT_OK)
+                //    status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
+
                 FTDI.FT_STATUS status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
                 System.Diagnostics.Debug.WriteLine("Bytes read: " + nrOfBytesAvailable.ToString());
                 if (status != FTDI.FT_STATUS.FT_OK)
@@ -218,6 +223,7 @@ namespace ErgoLux
 
                     // invoke your own event handler for data received...
                     OnDataReceived(new DataReceivedEventArgs(readData));
+                    _receivedBuffer = true;
                 }
             }
         }
@@ -240,7 +246,17 @@ namespace ErgoLux
                 return false;
             }
             this.receivedDataEvent.Set();
+            //GetReceiveBuffer();
             return true;
+        }
+
+
+        public void GetReceiveBuffer()
+        {
+            _receivedBuffer = false;
+            while (!_receivedBuffer)
+                this.receivedDataEvent.Set();
+            return;
         }
     }
 
