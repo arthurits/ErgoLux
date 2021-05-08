@@ -16,6 +16,7 @@ namespace ErgoLux
     public partial class FrmMain : Form
     {
         private System.Timers.Timer m_timer;
+        private string _path;
         //private ClassT10 cT10;
         private FTDISample myFtdiDevice;
         private double[][] _plotData;
@@ -43,6 +44,8 @@ namespace ErgoLux
 
         public FrmMain()
         {
+            _path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            
             InitializeComponent();
 
             // Custom initialization routines
@@ -54,7 +57,7 @@ namespace ErgoLux
             m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
             m_timer.Elapsed += OnTimedEvent;
             m_timer.Enabled = false;
-            
+
             // plot the data array only once and we can updates its value later
             _plotData = new double[2][];
             _plotData[0] = new double[ArraySize];
@@ -82,7 +85,7 @@ namespace ErgoLux
             //System.Diagnostics.Debug.Print(strEncoded);
             //System.Diagnostics.Debug.Print(strEncoded.ToCharArray().ToString());
             //strEncoded = algo.EncodeCommand("01110200");
-            
+
         }
 
         #region Initialization routines
@@ -113,17 +116,17 @@ namespace ErgoLux
 
             toolStripMain.Renderer = new customRenderer(Brushes.SteelBlue, Brushes.LightSkyBlue);
 
-            var path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            if (File.Exists(path + @"\images\exit.ico")) this.toolStripMain_Exit.Image = new Icon(path + @"\images\exit.ico", 48, 48).ToBitmap();
-            if (File.Exists(path + @"\images\connect.ico")) this.toolStripMain_Connect.Image = new Icon(path + @"\images\connect.ico", 48, 48).ToBitmap();
-            if (File.Exists(path + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new Icon(path + @"\images\disconnect.ico", 48, 48).ToBitmap();
+            //var path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            if (File.Exists(_path + @"\images\exit.ico")) this.toolStripMain_Exit.Image = new Icon(_path + @"\images\exit.ico", 48, 48).ToBitmap();
+            if (File.Exists(_path + @"\images\connect.ico")) this.toolStripMain_Connect.Image = new Icon(_path + @"\images\connect.ico", 48, 48).ToBitmap();
+            if (File.Exists(_path + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new Icon(_path + @"\images\disconnect.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\cinema.ico")) this.toolStripMain_Video.Image = new Icon(path + @"\images\cinema.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\save.ico")) this.toolStripMain_Data.Image = new Icon(path + @"\images\save.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\picture.ico")) this.toolStripMain_Picture.Image = new Icon(path + @"\images\picture.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\reflect-horizontal.ico")) this.toolStripMain_Mirror.Image = new Icon(path + @"\images\reflect-horizontal.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\plot.ico")) this.toolStripMain_Plots.Image = new Icon(path + @"\images\plot.ico", 48, 48).ToBitmap();
-            if (File.Exists(path + @"\images\settings.ico")) this.toolStripMain_Settings.Image = new Icon(path + @"\images\settings.ico", 48, 48).ToBitmap();
-            if (File.Exists(path + @"\images\about.ico")) this.toolStripMain_About.Image = new Icon(path + @"\images\about.ico", 48, 48).ToBitmap();
+            if (File.Exists(_path + @"\images\settings.ico")) this.toolStripMain_Settings.Image = new Icon(_path + @"\images\settings.ico", 48, 48).ToBitmap();
+            if (File.Exists(_path + @"\images\about.ico")) this.toolStripMain_About.Image = new Icon(_path + @"\images\about.ico", 48, 48).ToBitmap();
 
             /*
             using (Graphics g = Graphics.FromImage(this.toolStripMain_Skeleton.Image))
@@ -153,6 +156,7 @@ namespace ErgoLux
         /// </summary>
         private void InitializeStatusStrip()
         {
+            if (File.Exists(_path + @"\images\close.ico")) this.statusStripIconOpen.Image = new Icon(_path + @"\images\close.ico", 16, 16).ToBitmap();
             return;
         }
 
@@ -394,6 +398,10 @@ namespace ErgoLux
 
                 if (result == true)
                 {
+                    this.statusStripLabelID.Text = "Location ID: " + String.Format("{0:x}", _settings[0]);
+                    this.statusStripLabelType.Text = frm.GetDeviceType;
+                    if (File.Exists(_path + @"\images\open.ico")) this.statusStripIconOpen.Image = new Icon(_path + @"\images\open.ico", 16, 16).ToBitmap();
+
                     _plotData = new double[_settings[1]][];
                     for (int i = 0; i < _settings[1]; i++)
                     {
@@ -409,6 +417,7 @@ namespace ErgoLux
                 }
                 else
                 {
+                    if (File.Exists(_path + @"\images\close.ico")) this.statusStripIconOpen.Image = new Icon(_path + @"\images\close.ico", 16, 16).ToBitmap();
                     MessageBox.Show("Could not open the device", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 

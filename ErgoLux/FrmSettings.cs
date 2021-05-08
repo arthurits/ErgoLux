@@ -15,8 +15,12 @@ namespace ErgoLux
     public partial class FrmSettings : Form
     {
         private int[] _data = new int[10];
+        private string _deviceType;
+        private string _deviceLocID;
 
         public int[] GetData { get => _data; }
+        public string GetLocationID { get => _deviceLocID; }
+        public string GetDeviceType { get => _deviceType; }
 
         public FrmSettings()
         {
@@ -175,9 +179,8 @@ namespace ErgoLux
                     System.Windows.Forms.MessageBoxIcon.Error);
                 return;
             }
-            else
-                _data[0] = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);  //Location ID
 
+            _data[0] = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);  //Location ID
             _data[1] = (int)updSensors.Value;
             _data[2] = Convert.ToInt32(txtBaudRate.Text);
             _data[3] = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
@@ -187,6 +190,9 @@ namespace ErgoLux
             _data[7] = Convert.ToInt32(txtOn.Text);
             _data[8] = Convert.ToInt32(txtOff.Text);
             _data[9] = Convert.ToInt32(txtHz.Text);   // Sample rate
+
+            _deviceLocID = String.Format("{0:x}", viewDevices.SelectedItems[0].SubItems[4].Text);  //Location ID
+            _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
 
             this.DialogResult = DialogResult.OK;
         }
