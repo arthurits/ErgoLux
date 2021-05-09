@@ -394,7 +394,9 @@ namespace ErgoLux
                     parity: _settings[5],
                     flowControl: _settings[6],
                     xOn: _settings[7],
-                    xOff: _settings[8]);
+                    xOff: _settings[8],
+                    readTimeOut: 0,
+                    writeTimeOut: 0);
 
                 if (result == true)
                 {
@@ -431,13 +433,17 @@ namespace ErgoLux
 
         #endregion toolStripMain events
 
+        #region statusSrip events
+        
         private void statusStripLabelAngle_Click(object sender, EventArgs e)
         {
             if (statusStripLabelAngle.ForeColor == Color.Green)
                 statusStripLabelAngle.ForeColor = Color.LightGray;
             else
                 statusStripLabelAngle.ForeColor = Color.Green;
-
+            
         }
+
+        #endregion statusSrip events
     }
 }
