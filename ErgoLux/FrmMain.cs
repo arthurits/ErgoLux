@@ -428,8 +428,16 @@ namespace ErgoLux
             var frm = new FrmAbout();
             frm.ShowDialog();
         }
+
         #endregion toolStripMain events
 
-        
+        private void statusStripLabelAngle_Click(object sender, EventArgs e)
+        {
+            if (statusStripLabelAngle.ForeColor == Color.Green)
+                statusStripLabelAngle.ForeColor = Color.LightGray;
+            else
+                statusStripLabelAngle.ForeColor = Color.Green;
+
+        }
     }
 }

@@ -40,8 +40,10 @@ namespace ErgoLux
             this.toolStripMenuSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusStripLabelType = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelID = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripIconOpen = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripIconExchange = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelXtras = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelVideo = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelData = new System.Windows.Forms.ToolStripStatusLabel();
@@ -68,8 +70,6 @@ namespace ErgoLux
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.statusStripIconExchange = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelType = new System.Windows.Forms.ToolStripStatusLabel();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -166,6 +166,16 @@ namespace ErgoLux
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
+            // statusStripLabelType
+            // 
+            this.statusStripLabelType.AutoSize = false;
+            this.statusStripLabelType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusStripLabelType.Name = "statusStripLabelType";
+            this.statusStripLabelType.Size = new System.Drawing.Size(150, 23);
+            this.statusStripLabelType.Text = "Device type";
+            this.statusStripLabelType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.statusStripLabelType.ToolTipText = "Device type";
+            // 
             // statusStripLabelID
             // 
             this.statusStripLabelID.AutoSize = false;
@@ -186,6 +196,17 @@ namespace ErgoLux
             this.statusStripIconOpen.Text = "Disconnected";
             this.statusStripIconOpen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.statusStripIconOpen.ToolTipText = "Connection status";
+            // 
+            // statusStripIconExchange
+            // 
+            this.statusStripIconExchange.AutoSize = false;
+            this.statusStripIconExchange.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.statusStripIconExchange.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.statusStripIconExchange.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.statusStripIconExchange.Name = "statusStripIconExchange";
+            this.statusStripIconExchange.Size = new System.Drawing.Size(30, 23);
+            this.statusStripIconExchange.Text = "Exchanging data";
+            this.statusStripIconExchange.ToolTipText = "Receiving data";
             // 
             // statusStripLabelXtras
             // 
@@ -273,12 +294,12 @@ namespace ErgoLux
             this.statusStripLabelAngle.AutoSize = false;
             this.statusStripLabelAngle.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.statusStripLabelAngle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelAngle.Enabled = false;
             this.statusStripLabelAngle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.statusStripLabelAngle.Name = "statusStripLabelAngle";
             this.statusStripLabelAngle.Size = new System.Drawing.Size(26, 23);
             this.statusStripLabelAngle.Text = "A";
             this.statusStripLabelAngle.ToolTipText = "Drawing angles";
+            this.statusStripLabelAngle.Click += new System.EventHandler(this.statusStripLabelAngle_Click);
             // 
             // toolStripMain
             // 
@@ -343,7 +364,6 @@ namespace ErgoLux
             // 
             // toolStripMain_Settings
             // 
-            this.toolStripMain_Settings.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMain_Settings.Image")));
             this.toolStripMain_Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripMain_Settings.Name = "toolStripMain_Settings";
             this.toolStripMain_Settings.Size = new System.Drawing.Size(58, 69);
@@ -469,6 +489,7 @@ namespace ErgoLux
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(150, 214);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
@@ -481,27 +502,6 @@ namespace ErgoLux
             this.pictureBox2.Size = new System.Drawing.Size(10, 214);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
-            // 
-            // statusStripIconExchange
-            // 
-            this.statusStripIconExchange.AutoSize = false;
-            this.statusStripIconExchange.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.statusStripIconExchange.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.statusStripIconExchange.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.statusStripIconExchange.Name = "statusStripIconExchange";
-            this.statusStripIconExchange.Size = new System.Drawing.Size(30, 23);
-            this.statusStripIconExchange.Text = "Exchanging data";
-            this.statusStripIconExchange.ToolTipText = "Receiving data";
-            // 
-            // statusStripLabelType
-            // 
-            this.statusStripLabelType.AutoSize = false;
-            this.statusStripLabelType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelType.Name = "statusStripLabelType";
-            this.statusStripLabelType.Size = new System.Drawing.Size(150, 23);
-            this.statusStripLabelType.Text = "Device type";
-            this.statusStripLabelType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.statusStripLabelType.ToolTipText = "Device type";
             // 
             // FrmMain
             // 

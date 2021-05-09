@@ -37,6 +37,12 @@ namespace ErgoLux
             if (base.IsOpen)
                 base.Close();
         }
+        
+        protected virtual void OnDataReceived(DataReceivedEventArgs e)
+        {
+            EventHandler<DataReceivedEventArgs> handler = DataReceived;
+            handler?.Invoke(this, e);
+        }
 
         /// <summary>
         /// Custom-generalized function to initialize the device
@@ -45,8 +51,17 @@ namespace ErgoLux
         /// <param name="index">Index of the device to open. Note that this cannot be guaranteed to open a specific device.</param>
         /// <param name="location">Location of the device to open.</param>
         /// <param name="serialNumber">Serial number of the device to open.</param>
+        /// <param name="baud">Baud rate (typically 9600)</param>
+        /// <param name="dataBits">7 bits (7) or 8 bits (8)</param>
+        /// <param name="stopBits">1 bit (0) or 2 bits (2)</param>
+        /// <param name="parity">None(0), odd(1), even(2), mark(3), space (4)</param>
+        /// <param name="flowControl">None (0), RTS/CTS (100), DTR/DSR (200), Xon/Xoff (400)</param>
+        /// <param name="xOn">On Ascii char value</param>
+        /// <param name="xOff">Off Ascii char value</param>
+        /// <param name="readTimeOut">Read timeout value in ms. A value of 0 indicates an infinite timeout.</param>
+        /// <param name="writeTimeOut">Write timeout value in ms. A value of 0 indicates an infinite timeout.</param>
         /// <returns>True if successful, false otherwise</returns>
-        public bool OpenDevice(string description = null, uint? index = null, uint? location = null, string serialNumber = null, int? baud = 9600, int? dataBits = 7, int? stopBits = 1, int? parity = 2, int? flowControl = 400, int? xOn = 10, int? xOff = 13)
+        public bool OpenDevice(string description = null, uint? index = null, uint? location = null, string serialNumber = null, int? baud = 9600, int? dataBits = 7, int? stopBits = 1, int? parity = 2, int? flowControl = 400, int? xOn = 10, int? xOff = 13, uint readTimeOut = 0, uint writeTimeOut = 0)
         {
             // FTDI connection code
             UInt32 ftdiDeviceCount = 0;
@@ -92,7 +107,7 @@ namespace ErgoLux
                 ftStatus = base.OpenBySerialNumber(serialNumber);
 
             // Set the T10 device paramters
-            SetKonicaT10((uint)baud, (byte)dataBits, (byte)stopBits, (byte)parity, (ushort)flowControl, (byte)xOn, (byte)xOff);
+            SetKonicaT10((uint)baud, (byte)dataBits, (byte)stopBits, (byte)parity, (ushort)flowControl, (byte)xOn, (byte)xOff, readTimeOut, writeTimeOut);
 
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
@@ -119,9 +134,11 @@ namespace ErgoLux
         /// <param name="parity">None(0), odd(1), even(2), mark(3), space (4)</param>
         /// <param name="flow">None (0), RTS/CTS (100), DTR/DSR (200), Xon/Xoff (400)</param>
         /// <param name="xOn">On Ascii char value</param>
-        /// <param name="xOff">Off char value</param>
-        /// <returns>True if all parameters could be set, false otherwise</returns>
-        public bool SetKonicaT10(uint baud, byte dataBits, byte stopBits, byte parity, ushort flow, byte xOn, byte xOff)
+        /// <param name="xOff">Off Ascii char value</param>
+        /// <param name="readTimeOut">Read timeout value in ms. A value of 0 indicates an infinite timeout.</param>
+        /// <param name="writeTimeOut">Write timeout value in ms. A value of 0 indicates an infinite timeout.</param>
+        /// <returns>True if all parameters could be set, false otherwise. FT_STATUS value from FT_SetTimeouts in FTD2XX.DLL</returns>
+        public bool SetKonicaT10(uint baud, byte dataBits, byte stopBits, byte parity, ushort flow, byte xOn, byte xOff, uint readTimeOut, uint writeTimeOut)
         {
             FTDI.FT_STATUS ftStatus;
 
@@ -142,7 +159,7 @@ namespace ErgoLux
             }
 
             // Set data characteristics - Data bits, Stop bits, Parity
-            ftStatus = base.SetDataCharacteristics(FTDI.FT_DATA_BITS.FT_BITS_7, FTDI.FT_STOP_BITS.FT_STOP_BITS_1, FTDI.FT_PARITY.FT_PARITY_EVEN);
+            //ftStatus = base.SetDataCharacteristics(FTDI.FT_DATA_BITS.FT_BITS_7, FTDI.FT_STOP_BITS.FT_STOP_BITS_1, FTDI.FT_PARITY.FT_PARITY_EVEN);
             ftStatus = base.SetDataCharacteristics(dataBits, stopBits, parity);
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
@@ -157,7 +174,7 @@ namespace ErgoLux
             }
 
             // Set flow control - set RTS/CTS flow control
-            ftStatus = base.SetFlowControl(FTDI.FT_FLOW_CONTROL.FT_FLOW_XON_XOFF, 0x10, 0x13);
+            //ftStatus = base.SetFlowControl(FTDI.FT_FLOW_CONTROL.FT_FLOW_XON_XOFF, 0x10, 0x13);
             ftStatus = base.SetFlowControl(flow, 0x10, 0x13);
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
@@ -171,8 +188,8 @@ namespace ErgoLux
                 return false;
             }
 
-            // Set read timeout to 0.5 seconds, write timeout to infinite
-            ftStatus = base.SetTimeouts(500, 0);
+            // Set read and write timeouts
+            ftStatus = base.SetTimeouts(readTimeOut, writeTimeOut);
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
                 // Wait for a key press
@@ -188,14 +205,9 @@ namespace ErgoLux
             return true;
         }
 
-        protected virtual void OnDataReceived(DataReceivedEventArgs e)
-        {
-            EventHandler<DataReceivedEventArgs> handler = DataReceived;
-            handler?.Invoke(this, e);
-        }
-
         private void ReadData(object pSender, DoWorkEventArgs pEventArgs)
         {
+            FTDI.FT_STATUS status;
             UInt32 nrOfBytesAvailable = 0;
             while (true)
             {
@@ -203,12 +215,12 @@ namespace ErgoLux
                 // wait until event is fired
                 this.receivedDataEvent.WaitOne();
 
-                // try to recieve data now
                 //FTDI.FT_STATUS status = FTDI.FT_STATUS.FT_IO_ERROR;
                 //while (status != FTDI.FT_STATUS.FT_OK)
                 //    status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
 
-                FTDI.FT_STATUS status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
+                // try to recieve data now
+                status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
                 System.Diagnostics.Debug.WriteLine("Bytes read: " + nrOfBytesAvailable.ToString());
                 if (status != FTDI.FT_STATUS.FT_OK)
                 {
@@ -222,7 +234,7 @@ namespace ErgoLux
                     status = base.Read(readData, nrOfBytesAvailable, ref numBytesRead);
 
                     // invoke your own event handler for data received...
-                    OnDataReceived(new DataReceivedEventArgs(readData));
+                    OnDataReceived(new DataReceivedEventArgs(readData, numBytesRead, nrOfBytesAvailable));
                     _receivedBuffer = true;
                 }
             }
@@ -250,7 +262,28 @@ namespace ErgoLux
             return true;
         }
 
+        public bool Write (params string[] list)
+        {
+            for (int i = 0; i < list.Length; i++)
+            {
+                if (!Write(list[i])) return false;
+            }
+            return true;
+        }
 
+
+        /// <summary>
+        /// For testing purposes. It tries to clear the reading buffer.
+        /// </summary>
+        public void ClearBuffer()
+        {
+            this.receivedDataEvent.Set();
+        }
+
+
+        /// <summary>
+        /// For testing purposes
+        /// </summary>
         public void GetReceiveBuffer()
         {
             _receivedBuffer = false;
@@ -262,7 +295,7 @@ namespace ErgoLux
 
     public class DataReceivedEventArgs : EventArgs
     {
-        public DataReceivedEventArgs(byte[] data)
+        public DataReceivedEventArgs(byte[] data, uint bytesRead, uint bytesAvailable)
         {
             DataReceived = data;
 
@@ -279,9 +312,15 @@ namespace ErgoLux
 
             //// From byte array to string
             StrDataReceived = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
+
+            BytesRead = bytesRead;
+
+            BytesAvailable = BytesAvailable;
         }
 
         public byte[] DataReceived { get; }
+        public uint BytesRead { get; }
+        public uint BytesAvailable { get; }
         public string StrDataReceived { get; }
     }
 }
