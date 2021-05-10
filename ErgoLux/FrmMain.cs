@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
 
 using FTD2XX_NET;
 
@@ -15,6 +16,7 @@ namespace ErgoLux
 {
     public partial class FrmMain : Form
     {
+        private SerialPort _serialPort;
         private System.Timers.Timer m_timer;
         private string _path;
         //private ClassT10 cT10;
@@ -173,14 +175,27 @@ namespace ErgoLux
 
         private void BtnConnect_Click(object sender, EventArgs e)
         {
+            _serialPort = new SerialPort("COM5", 9600, Parity.Even, 7, StopBits.One);
+            _serialPort.Handshake = Handshake.None;
+            _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
+            //_serialPort.ReadTimeout = 500;
+            //_serialPort.NewLine = string.Empty;
+            // Opens serial port   
+            _serialPort.Open();
+            //_serialPort.WriteLine(ClassT10.Command54.TrimEnd( (char)10, (char)13));
+            //_serialPort.WriteLine(ClassT10.ReceptorsSingle[0].TrimEnd((char)10, (char)13));
+            _serialPort.Write(ClassT10.Command54);
+            System.Threading.Thread.Sleep(500);
+            _serialPort.Write(ClassT10.ReceptorsSingle[0]);
+            _serialPort.Write(ClassT10.ReceptorsSingle[1]);
 
-            myFtdiDevice.DataReceived += OnDataReceived;
-            if (myFtdiDevice.Write(ClassT10.Command54))
-            {
-                System.Threading.Thread.Sleep(500);
-                myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
-                m_timer.Start();
-            }
+            //myFtdiDevice.DataReceived += OnDataReceived;
+            //if (myFtdiDevice.Write(ClassT10.Command54))
+            //{
+            //    System.Threading.Thread.Sleep(500);
+            //    myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+            //    m_timer.Start();
+            //}
 
         }
         private void BtnStop_Click(object sender, EventArgs e)
@@ -203,7 +218,7 @@ namespace ErgoLux
         {
             //string readData;
             //UInt32 numBytesRead = 0;
-            m_timer.Stop();
+            //m_timer.Stop();
             var result = false;
             //for (int i = 0; i < _settings[1]; i++)
             //{
@@ -222,37 +237,12 @@ namespace ErgoLux
             //{
             //    result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
             //}
+
             result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+            //System.Threading.Thread.Sleep(65);
+            //myFtdiDevice.ClearBuffer();
+            
 
-            // Note that the Read method is overloaded, so can read string or byte array data
-            //ftStatus = myFtdiDevice.Read(out readData, numBytesAvailable, ref numBytesRead);
-
-            // add the condition checking here to validate that the readData in not empty.
-            //OnReadingAvailable(readData);
-
-            //int factor = ArraySize * (_dataN + 10) / ArraySize;
-            //if (factor > _plotData[0].Length)
-            //{
-            //    for (int i = 0; i < _plotData.Length; i++)
-            //        Array.Resize<double>(ref _plotData[i], factor * ArraySize);
-            //    //Array.Copy(_plotData[0], 1, _plotData[0], 0, _plotData[0].Length - 1);
-            //}
-
-            //_plotData[0][_dataN] = rand.NextDouble();
-            //_plotData[1][_dataN] = rand.NextDouble();
-
-            //foreach (var plot in formsPlot1.plt.GetPlottables())
-            //{
-            //    ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _dataN;
-            //    //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
-            //    //sigPlot.maxRenderIndex = _dataN;
-            //    //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
-            //}
-
-            //if (_dataN / 2 >= formsPlot1.plt.Axis()[1])
-            //    formsPlot1.plt.Axis(x1: _dataN / 2 - 10, x2: _dataN / 2 + 10);
-            //++_dataN;
-            //formsPlot1.Render(skipIfCurrentlyRendering: true);
         }
 
         private void OnDataReceived (object sender, DataReceivedEventArgs e)
@@ -260,18 +250,28 @@ namespace ErgoLux
             _data = true;
             (int Sensor, double Iluminance, double Increment, double Percent) result = (0, 0, 0, 0);
             //string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
-            
-            if (e.StrDataReceived.Length > 14)
+
+            if (e.StrDataReceived.Length == 32)
             {
                 result = ClassT10.DecodeCommand(e.StrDataReceived);
                 System.Diagnostics.Debug.Print(result.ToString());
                 if (result.Sensor < _settings[1] - 1)
+                {
                     myFtdiDevice.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
+                    //System.Threading.Thread.Sleep(65);
+                    //myFtdiDevice.ClearBuffer();
+                }
             }
-            else
+            else if (e.StrDataReceived.Length == 14)
             {
+                
+                //myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+                //System.Threading.Thread.Sleep(70);
+                //myFtdiDevice.ClearBuffer();
+                
                 return;
             }
+            
 
             // Resize arrays if necessary
             int factor = ArraySize * (_nPoints + 10) / ArraySize;
@@ -297,7 +297,7 @@ namespace ErgoLux
             //formsPlot1.plt.AxisAutoX(margin: 0);
             formsPlot1.plt.AxisAutoY();
             if (_nPoints / 2 >= formsPlot1.plt.Axis()[1])
-                formsPlot1.plt.Axis(x1: _nPoints / 2 - 10, x2: _nPoints / 2 + 10);
+                formsPlot1.plt.Axis(x1: _nPoints / 2 - 10, x2: _nPoints / 2 + 10, y1: 0);
             
             formsPlot1.Render(skipIfCurrentlyRendering: true);
 
@@ -313,6 +313,20 @@ namespace ErgoLux
             //formsPlot1.Render(skipIfCurrentlyRendering: true);
 
             // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91
+        }
+
+        private void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string data = _serialPort.ReadLine();
+            System.Diagnostics.Debug.Print("Received data is {0} and length is {1}", data, data.Length);
+            if(data.Length==13)
+            {
+                _serialPort.Write(ClassT10.ReceptorsSingle[0]);
+            }
+            else if (data.Length==31)
+            {
+                _serialPort.Write(ClassT10.ReceptorsSingle[1]);
+            }
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -346,7 +360,11 @@ namespace ErgoLux
                 //ConnectKinect();
                 myFtdiDevice.DataReceived += OnDataReceived;
                 if (myFtdiDevice.Write(ClassT10.Command54))
+                {
+                    System.Threading.Thread.Sleep(500);
+                    myFtdiDevice.ClearBuffer();
                     m_timer.Start();
+                }
             }
             else
             {
@@ -397,7 +415,7 @@ namespace ErgoLux
                     xOff: _settings[8],
                     readTimeOut: 0,
                     writeTimeOut: 0);
-
+                
                 if (result == true)
                 {
                     this.statusStripLabelID.Text = "Location ID: " + String.Format("{0:x}", _settings[0]);

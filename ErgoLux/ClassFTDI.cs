@@ -25,7 +25,7 @@ namespace ErgoLux
             FTDI.FT_STATUS ftStatus = base.SetEventNotification(FTDI.FT_EVENTS.FT_EVENT_RXCHAR, receivedDataEvent);
             
             dataReceivedHandler = new BackgroundWorker();
-            dataReceivedHandler.DoWork += ReadData;
+            dataReceivedHandler.DoWork += ReadData2;
             if (!dataReceivedHandler.IsBusy)
             {
                 dataReceivedHandler.RunWorkerAsync();
@@ -232,12 +232,46 @@ namespace ErgoLux
                     UInt32 numBytesRead = 0;
                     //status = mFTDI.Read(readData, nrOfBytesAvailable, ref numBytesRead);
                     status = base.Read(readData, nrOfBytesAvailable, ref numBytesRead);
-
+                    
                     // invoke your own event handler for data received...
                     OnDataReceived(new DataReceivedEventArgs(readData, numBytesRead, nrOfBytesAvailable));
                     _receivedBuffer = true;
                 }
             }
+        }
+
+        private void ReadData2(object pSender, DoWorkEventArgs pEventArgs)
+        {
+            FTDI.FT_STATUS status;
+            UInt32 nrOfBytesAvailable = 0;
+            UInt32 numBytesRead = 0;
+            string strReadData = string.Empty;
+            
+            this.receivedDataEvent.WaitOne();
+            
+            while (true)
+            {
+                status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
+                if (status != FTDI.FT_STATUS.FT_OK)
+                {
+                    return;
+                }
+                if (nrOfBytesAvailable > 0)
+                {
+                    byte[] readData = new byte[nrOfBytesAvailable];
+                    numBytesRead = 0;
+                    status = base.Read(readData, nrOfBytesAvailable, ref numBytesRead);
+                    strReadData += System.Text.Encoding.UTF8.GetString(readData);
+                    if (readData[readData.Length - 1] == 10)
+                    {
+                        // invoke your own event handler for data received...
+                        OnDataReceived(new DataReceivedEventArgs(Encoding.ASCII.GetBytes(strReadData), numBytesRead, nrOfBytesAvailable));
+                        strReadData = string.Empty;
+                    }
+                }
+            }
+
+            
         }
 
         public bool Write(string data)
@@ -257,8 +291,7 @@ namespace ErgoLux
                             " written " + numBytesWritten);
                 return false;
             }
-            this.receivedDataEvent.Set();
-            //GetReceiveBuffer();
+            //this.receivedDataEvent.Set();
             return true;
         }
 
