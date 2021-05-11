@@ -9,6 +9,9 @@ Sponsor this project!
 
 Download latest release: ![GitHub release (latest by date)](https://img.shields.io/github/v/release/arthurits/ErgoLux?include_prereleases)
 
+![Screenshot](/ErgoLux/images/screenshot.png?raw=true "ErgoLux GUI")
+
 ## External dependencies
 This project uses controls and routines from the following Gits:
 * [ScottPlot](https://github.com/ScottPlot/ScottPlot)
+* FTDI .NET wrapper from [FTDI website](https://ftdichip.com/wp-content/uploads/2020/07/FTD2XX_NET.zip)
