@@ -22,6 +22,9 @@ namespace ErgoLux
         //private ClassT10 cT10;
         private FTDISample myFtdiDevice;
         private double[][] _plotData;
+        private double[,] _plotRadar;
+        private double[][] _plotAverage;
+        private double[][] _plotRatio;
         private int[] _settings = new int[]
         {
             0,                                  // Location ID
@@ -76,6 +79,28 @@ namespace ErgoLux
             formsPlot1.plt.XLabel("Time (seconds)");
             formsPlot1.plt.Grid(false);
 
+            // Customize the Radar plot
+            formsPlot2.plt.Grid(false);
+            formsPlot2.plt.Frame(false);
+            formsPlot2.plt.Ticks(false, false);
+
+            // Customize the Average plot
+            formsPlot3.plt.AxisAutoX(margin: 0);
+            formsPlot3.plt.Axis(x1: 0, x2: PlotRangeX, y1: 0);
+
+            formsPlot3.plt.Title("Average, max, min");
+            formsPlot3.plt.YLabel("Lux");
+            formsPlot3.plt.XLabel("Time (seconds)");
+            formsPlot3.plt.Grid(false);
+
+            // Customize the Ratio plot
+            formsPlot4.plt.AxisAutoX(margin: 0);
+            formsPlot4.plt.Axis(x1: 0, x2: PlotRangeX, y1: 0);
+
+            formsPlot4.plt.Title("Illuminance ratios");
+            formsPlot4.plt.YLabel("Ratio");
+            formsPlot4.plt.XLabel("Time (seconds)");
+            formsPlot4.plt.Grid(false);
 
             //var algo = new ClassT10("00541   ");
             //var strEncoded = algo.EncodeCommand();
@@ -189,13 +214,6 @@ namespace ErgoLux
             _serialPort.Write(ClassT10.ReceptorsSingle[0]);
             _serialPort.Write(ClassT10.ReceptorsSingle[1]);
 
-            //myFtdiDevice.DataReceived += OnDataReceived;
-            //if (myFtdiDevice.Write(ClassT10.Command54))
-            //{
-            //    System.Threading.Thread.Sleep(500);
-            //    myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
-            //    m_timer.Start();
-            //}
 
         }
         private void BtnStop_Click(object sender, EventArgs e)
@@ -216,33 +234,9 @@ namespace ErgoLux
 
         private void OnTimedEvent(object sender, EventArgs e)
         {
-            //string readData;
-            //UInt32 numBytesRead = 0;
             //m_timer.Stop();
             var result = false;
-            //for (int i = 0; i < _settings[1]; i++)
-            //{
-            //    while (!result)
-            //    {
-            //        if (_data)
-            //        {
-            //            result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[i]);
-            //            //_data = false;
-            //        }
-            //    }
-
-            //    result = false;
-            //}
-            //while (!result)
-            //{
-            //    result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
-            //}
-
             result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
-            //System.Threading.Thread.Sleep(65);
-            //myFtdiDevice.ClearBuffer();
-            
-
         }
 
         private void OnDataReceived (object sender, DataReceivedEventArgs e)
@@ -271,48 +265,9 @@ namespace ErgoLux
                 
                 return;
             }
+
+            Plots_Update(result.Sensor, result.Iluminance);
             
-
-            // Resize arrays if necessary
-            int factor = ArraySize * (_nPoints + 10) / ArraySize;
-            if (factor > _plotData[0].Length)
-            {
-                for (int i = 0; i < _plotData.Length; i++)
-                    Array.Resize<double>(ref _plotData[i], factor * ArraySize);
-                //Array.Copy(_plotData[0], 1, _plotData[0], 0, _plotData[0].Length - 1);
-            }
-            
-            _plotData[result.Sensor][_nPoints] = result.Iluminance;
-            //_plotData[0][_nPoints] = result.Iluminance;
-
-            foreach (var plot in formsPlot1.plt.GetPlottables())
-            {
-                ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
-                //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
-                //sigPlot.maxRenderIndex = _dataN;
-                //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
-            }
-
-            //formsPlot1.plt.AxisAuto(horizontalMargin: 0, tightenLayout: true);
-            //formsPlot1.plt.AxisAutoX(margin: 0);
-            formsPlot1.plt.AxisAutoY();
-            if (_nPoints / 2 >= formsPlot1.plt.Axis()[1])
-                formsPlot1.plt.Axis(x1: _nPoints / 2 - 10, x2: _nPoints / 2 + 10, y1: 0);
-            
-            formsPlot1.Render(skipIfCurrentlyRendering: true);
-
-            if (result.Sensor == _settings[1] - 1) ++_nPoints;
-
-            //// Plot data
-            //_plotData[result.Sensor][_dataN] = result.Iluminance;
-
-            //sigPlot.maxRenderIndex = _dataN;
-            //////sigPlot.minRenderIndex = _dataN > 20 ? _dataN - 20 : 0;
-            //if (result.Sensor == 0) ++_dataN;
-            //formsPlot1.plt.AxisAuto();
-            //formsPlot1.Render(skipIfCurrentlyRendering: true);
-
-            // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91
         }
 
         private void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -380,15 +335,24 @@ namespace ErgoLux
             toolStripMain_Connect.Checked = false;
             myFtdiDevice.DataReceived -= OnDataReceived;
 
+
             //foreach (var plot in formsPlot1.plt.GetPlottables())
             //{
             //    ((ScottPlot.PlottableSignal)plot).minRenderIndex = 0;
             //}
 
             //sigPlot.minRenderIndex = 0;
-            //formsPlot1.plt.Axis(x1: 0);
             formsPlot1.plt.AxisAuto(horizontalMargin: 0.05);
+            formsPlot1.plt.Axis(x1: 0, y1: 0);
             formsPlot1.Render();
+
+            formsPlot3.plt.AxisAuto(horizontalMargin: 0.05);
+            formsPlot3.plt.Axis(x1: 0, y1: 0);
+            formsPlot3.Render();
+
+            formsPlot4.plt.AxisAuto(horizontalMargin: 0.05);
+            formsPlot4.plt.Axis(x1: 0, y1: 0);
+            formsPlot4.Render();
         }
         private void toolStripMain_Settings_Click(object sender, EventArgs e)
         {
@@ -418,7 +382,7 @@ namespace ErgoLux
                 
                 if (result == true)
                 {
-                    this.statusStripLabelID.Text = "Location ID: " + String.Format("{0:x}", _settings[0]);
+                    this.statusStripLabelID.Text = "Location ID: " + String.Format("{0:X}", _settings[0]);
                     this.statusStripLabelType.Text = frm.GetDeviceType;
                     if (File.Exists(_path + @"\images\open.ico")) this.statusStripIconOpen.Image = new Icon(_path + @"\images\open.ico", 16, 16).ToBitmap();
 
@@ -426,14 +390,44 @@ namespace ErgoLux
                     for (int i = 0; i < _settings[1]; i++)
                     {
                         _plotData[i] = new double[ArraySize];
-                        formsPlot1.plt.PlotSignal(_plotData[i], sampleRate: _settings[9], label: "Sensor #" + i.ToString("00"));
+                        formsPlot1.plt.PlotSignal(_plotData[i], sampleRate: _settings[9], label: "Sensor #" + i.ToString("#0"));
                     }
 
                     formsPlot1.plt.AxisAuto(horizontalMargin: 0);
                     formsPlot1.plt.Axis(x1: 0, x2: PlotRangeX, y1: 0);
 
                     pictureBox1.Image = formsPlot1.plt.GetLegendBitmap();
-                    //sigPlot = formsPlot1.plt.PlotSignal(_plotData[0], sampleRate: _settings[9]);
+
+                    // Radar plot
+                    _plotRadar = new double[2, _settings[1]];
+                    string[] labels = new string[_settings[1]];
+                    for (int i = 0; i < _settings[1]; i++)
+                    {
+                        labels[i] = "Sensor #" + i.ToString("#0");
+                    }
+                    formsPlot2.plt.PlotRadar(_plotRadar, categoryNames: labels, groupNames: new string[] { "Illuminance", "Average" });
+
+                    // Average plot
+                    _plotAverage = new double[3][];
+                    for (int i = 0; i < 3; i++)
+                    {
+                        _plotAverage[i] = new double[ArraySize];
+                        formsPlot3.plt.PlotSignal(_plotAverage[i], sampleRate: _settings[9], label: "Sensor #" + i.ToString("00"));
+                    }
+
+                    formsPlot3.plt.AxisAuto(horizontalMargin: 0);
+                    formsPlot3.plt.Axis(x1: 0, x2: PlotRangeX, y1: 0);
+
+                    // Ratio plot
+                    _plotRatio = new double[2][];
+                    for (int i = 0; i < 2; i++)
+                    {
+                        _plotRatio[i] = new double[ArraySize];
+                        formsPlot4.plt.PlotSignal(_plotRatio[i], sampleRate: _settings[9], label: "Sensor #" + i.ToString("00"));
+                    }
+
+                    formsPlot4.plt.AxisAuto(horizontalMargin: 0);
+                    formsPlot4.plt.Axis(x1: 0, x2: PlotRangeX, y1: 0);
                 }
                 else
                 {
@@ -463,5 +457,103 @@ namespace ErgoLux
         }
 
         #endregion statusSrip events
+
+        private void Plots_Update(int sensor, double value)
+        {
+            // Resize arrays if necessary
+            int factor = ArraySize * (_nPoints + 10) / ArraySize;
+            if (factor > _plotData[0].Length)
+            {
+                for (int i = 0; i < _plotData.Length; i++)
+                    Array.Resize<double>(ref _plotData[i], factor * ArraySize);
+                //Array.Copy(_plotData[0], 1, _plotData[0], 0, _plotData[0].Length - 1);
+            }
+
+            _plotData[sensor][_nPoints] = value;
+            _plotRadar[0, sensor] = value;
+
+
+            // Only render when the last sensor value is received
+            if (sensor == _settings[1] - 1)
+            {
+                foreach (var plot in formsPlot1.plt.GetPlottables())
+                {
+                    ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
+                    //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+                    //sigPlot.maxRenderIndex = _dataN;
+                    //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+                }
+
+                foreach (var plot in formsPlot3.plt.GetPlottables())
+                {
+                    ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
+                }
+
+                foreach (var plot in formsPlot4.plt.GetPlottables())
+                {
+                    ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
+                }
+
+                //formsPlot1.plt.AxisAuto(horizontalMargin: 0, tightenLayout: true);
+                //formsPlot1.plt.AxisAutoX(margin: 0);
+                formsPlot1.plt.AxisAutoY();
+                formsPlot3.plt.AxisAutoY();
+                formsPlot4.plt.AxisAutoY();
+                formsPlot1.plt.Axis(y1: 0);
+                formsPlot3.plt.Axis(y1: 0);
+                formsPlot4.plt.Axis(y1: 0);
+                if (_nPoints / 2 >= formsPlot1.plt.Axis()[1])
+                {
+                    formsPlot1.plt.Axis(x1: _nPoints / 2 - 10, x2: _nPoints / 2 + 10, y1: 0);
+                    formsPlot3.plt.Axis(x1: _nPoints / 2 - 10, x2: _nPoints / 2 + 10, y1: 0);
+                    formsPlot4.plt.Axis(x1: _nPoints / 2 - 10, x2: _nPoints / 2 + 10, y1: 0);
+                }
+
+
+
+                formsPlot1.Render(skipIfCurrentlyRendering: true);
+
+                var average = _plotData[0][_nPoints];
+                var min = _plotData[0][_nPoints];
+                var max = _plotData[0][_nPoints];
+
+                for (int i = 1; i < _settings[1]; i++)
+                {
+                    min = _plotData[i][_nPoints] < min ? _plotData[i][_nPoints] : min;
+                    max = _plotData[i][_nPoints] > max ? _plotData[i][_nPoints] : max;
+                    average += _plotData[i][_nPoints];
+                }
+                average /= _settings[1];
+                for (int i = 0; i < _settings[1]; i++)
+                {
+                    _plotRadar[1, i] = average;
+                }
+                formsPlot2.plt.Clear();
+                formsPlot2.plt.PlotRadar(_plotRadar);
+                formsPlot2.Render(skipIfCurrentlyRendering: true);
+
+                _plotAverage[0][_nPoints] = min;
+                _plotAverage[1][_nPoints] = average;
+                _plotAverage[2][_nPoints] = max;
+                formsPlot3.Render(skipIfCurrentlyRendering: true);
+
+                _plotRatio[0][_nPoints] = max / min;
+                _plotRatio[1][_nPoints] = max / average;
+                formsPlot4.Render(skipIfCurrentlyRendering: true);
+
+                ++_nPoints;
+            }
+
+            //// Plot data
+            //_plotData[result.Sensor][_dataN] = result.Iluminance;
+
+            //sigPlot.maxRenderIndex = _dataN;
+            //////sigPlot.minRenderIndex = _dataN > 20 ? _dataN - 20 : 0;
+            //if (result.Sensor == 0) ++_dataN;
+            //formsPlot1.plt.AxisAuto();
+            //formsPlot1.Render(skipIfCurrentlyRendering: true);
+
+            // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91
+        }
     }
 }

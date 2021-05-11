@@ -137,10 +137,10 @@ namespace ErgoLux
                     new string[]
                     {
                             i.ToString(),
-                            String.Format("{0:x}", ftdiDeviceList[i].Flags),
+                            String.Format("{0:X}", ftdiDeviceList[i].Flags),
                             ftdiDeviceList[i].Type.ToString(),
-                            String.Format("{0:x}", ftdiDeviceList[i].ID),
-                            String.Format("{0:x}", ftdiDeviceList[i].LocId),
+                            String.Format("{0:X}", ftdiDeviceList[i].ID),
+                            String.Format("{0:X}", ftdiDeviceList[i].LocId),
                             ftdiDeviceList[i].SerialNumber.ToString(),
                             ftdiDeviceList[i].Description.ToString()
                     });

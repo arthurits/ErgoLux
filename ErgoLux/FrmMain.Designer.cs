@@ -65,15 +65,14 @@ namespace ErgoLux
             this.formsPlot2 = new ScottPlot.FormsPlot();
             this.BtnConnect = new System.Windows.Forms.Button();
             this.BtnStop = new System.Windows.Forms.Button();
-            this.NumSensors = new System.Windows.Forms.NumericUpDown();
-            this.BtnSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.formsPlot3 = new ScottPlot.FormsPlot();
+            this.formsPlot4 = new ScottPlot.FormsPlot();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSensors)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -408,6 +407,7 @@ namespace ErgoLux
             // 
             // BtnConnect
             // 
+            this.BtnConnect.Enabled = false;
             this.BtnConnect.Location = new System.Drawing.Point(710, 532);
             this.BtnConnect.Name = "BtnConnect";
             this.BtnConnect.Size = new System.Drawing.Size(108, 31);
@@ -418,6 +418,7 @@ namespace ErgoLux
             // 
             // BtnStop
             // 
+            this.BtnStop.Enabled = false;
             this.BtnStop.Location = new System.Drawing.Point(838, 532);
             this.BtnStop.Name = "BtnStop";
             this.BtnStop.Size = new System.Drawing.Size(83, 30);
@@ -425,38 +426,6 @@ namespace ErgoLux
             this.BtnStop.Text = "Stop";
             this.BtnStop.UseVisualStyleBackColor = true;
             this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
-            // 
-            // NumSensors
-            // 
-            this.NumSensors.Location = new System.Drawing.Point(396, 535);
-            this.NumSensors.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.NumSensors.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumSensors.Name = "NumSensors";
-            this.NumSensors.Size = new System.Drawing.Size(47, 23);
-            this.NumSensors.TabIndex = 5;
-            this.NumSensors.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // BtnSettings
-            // 
-            this.BtnSettings.Location = new System.Drawing.Point(557, 532);
-            this.BtnSettings.Name = "BtnSettings";
-            this.BtnSettings.Size = new System.Drawing.Size(104, 31);
-            this.BtnSettings.TabIndex = 6;
-            this.BtnSettings.Text = "Settings";
-            this.BtnSettings.UseVisualStyleBackColor = true;
-            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -473,6 +442,8 @@ namespace ErgoLux
             this.tableLayoutPanel1.Controls.Add(this.formsPlot2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.formsPlot3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.formsPlot4, 2, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 96);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -503,6 +474,24 @@ namespace ErgoLux
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
+            // formsPlot3
+            // 
+            this.formsPlot3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlot3.Location = new System.Drawing.Point(4, 217);
+            this.formsPlot3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.formsPlot3.Name = "formsPlot3";
+            this.formsPlot3.Size = new System.Drawing.Size(368, 209);
+            this.formsPlot3.TabIndex = 4;
+            // 
+            // formsPlot4
+            // 
+            this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlot4.Location = new System.Drawing.Point(530, 217);
+            this.formsPlot4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.formsPlot4.Name = "formsPlot4";
+            this.formsPlot4.Size = new System.Drawing.Size(368, 209);
+            this.formsPlot4.TabIndex = 5;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -510,8 +499,6 @@ namespace ErgoLux
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(933, 603);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.BtnSettings);
-            this.Controls.Add(this.NumSensors);
             this.Controls.Add(this.BtnStop);
             this.Controls.Add(this.BtnConnect);
             this.Controls.Add(this.statusStrip);
@@ -530,7 +517,6 @@ namespace ErgoLux
             this.statusStrip.PerformLayout();
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumSensors)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -571,8 +557,6 @@ namespace ErgoLux
         private ScottPlot.FormsPlot formsPlot2;
         private System.Windows.Forms.Button BtnConnect;
         private System.Windows.Forms.Button BtnStop;
-        private System.Windows.Forms.NumericUpDown NumSensors;
-        private System.Windows.Forms.Button BtnSettings;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripAbout;
@@ -581,6 +565,8 @@ namespace ErgoLux
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelType;
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconExchange;
+        private ScottPlot.FormsPlot formsPlot3;
+        private ScottPlot.FormsPlot formsPlot4;
     }
 }
 

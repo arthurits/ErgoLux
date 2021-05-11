@@ -267,6 +267,7 @@ namespace ErgoLux
                         // invoke your own event handler for data received...
                         OnDataReceived(new DataReceivedEventArgs(Encoding.ASCII.GetBytes(strReadData), numBytesRead, nrOfBytesAvailable));
                         strReadData = string.Empty;
+                        this.receivedDataEvent.WaitOne();
                     }
                 }
             }
@@ -291,7 +292,7 @@ namespace ErgoLux
                             " written " + numBytesWritten);
                 return false;
             }
-            //this.receivedDataEvent.Set();
+            this.receivedDataEvent.Set();
             return true;
         }
 
