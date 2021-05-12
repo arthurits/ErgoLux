@@ -312,7 +312,6 @@ namespace ErgoLux
             if (toolStripMain_Connect.Checked == true)
             {
                 toolStripMain_Disconnect.Enabled = true;
-                //ConnectKinect();
                 myFtdiDevice.DataReceived += OnDataReceived;
                 if (myFtdiDevice.Write(ClassT10.Command54))
                 {
@@ -335,13 +334,7 @@ namespace ErgoLux
             toolStripMain_Connect.Checked = false;
             myFtdiDevice.DataReceived -= OnDataReceived;
 
-
-            //foreach (var plot in formsPlot1.plt.GetPlottables())
-            //{
-            //    ((ScottPlot.PlottableSignal)plot).minRenderIndex = 0;
-            //}
-
-            //sigPlot.minRenderIndex = 0;
+            // Shows plots full data
             formsPlot1.plt.AxisAuto(horizontalMargin: 0.05);
             formsPlot1.plt.Axis(x1: 0, y1: 0);
             formsPlot1.Render();
