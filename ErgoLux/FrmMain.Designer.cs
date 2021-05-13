@@ -170,7 +170,7 @@ namespace ErgoLux
             this.statusStripLabelType.AutoSize = false;
             this.statusStripLabelType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelType.Name = "statusStripLabelType";
-            this.statusStripLabelType.Size = new System.Drawing.Size(150, 23);
+            this.statusStripLabelType.Size = new System.Drawing.Size(200, 23);
             this.statusStripLabelType.Text = "Device type";
             this.statusStripLabelType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.statusStripLabelType.ToolTipText = "Device type";
@@ -506,6 +506,7 @@ namespace ErgoLux
             this.Controls.Add(this.mnuMainFrm);
             this.Controls.Add(this.tspBottom);
             this.Controls.Add(this.tspTop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ErgoLux";

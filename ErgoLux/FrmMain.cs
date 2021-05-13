@@ -209,7 +209,7 @@ namespace ErgoLux
             _serialPort.Open();
             //_serialPort.WriteLine(ClassT10.Command54.TrimEnd( (char)10, (char)13));
             //_serialPort.WriteLine(ClassT10.ReceptorsSingle[0].TrimEnd((char)10, (char)13));
-            _serialPort.Write(ClassT10.Command54);
+            _serialPort.Write(ClassT10.Command_54);
             System.Threading.Thread.Sleep(500);
             _serialPort.Write(ClassT10.ReceptorsSingle[0]);
             _serialPort.Write(ClassT10.ReceptorsSingle[1]);
@@ -245,24 +245,17 @@ namespace ErgoLux
             (int Sensor, double Iluminance, double Increment, double Percent) result = (0, 0, 0, 0);
             //string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
 
-            if (e.StrDataReceived.Length == 32)
+            if (e.StrDataReceived.Length == ClassT10.LongBytesLength)
             {
                 result = ClassT10.DecodeCommand(e.StrDataReceived);
-                System.Diagnostics.Debug.Print(result.ToString());
+                //System.Diagnostics.Debug.Print(result.ToString());
                 if (result.Sensor < _settings[1] - 1)
                 {
                     myFtdiDevice.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
-                    //System.Threading.Thread.Sleep(65);
-                    //myFtdiDevice.ClearBuffer();
                 }
             }
-            else if (e.StrDataReceived.Length == 14)
-            {
-                
-                //myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
-                //System.Threading.Thread.Sleep(70);
-                //myFtdiDevice.ClearBuffer();
-                
+            else if (e.StrDataReceived.Length == ClassT10.ShortBytesLength)
+            {   
                 return;
             }
 
@@ -286,20 +279,16 @@ namespace ErgoLux
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Stop the time it it's still running
+            // Stop the time if it's still running
             if (m_timer.Enabled) m_timer.Stop();
             
             m_timer.Dispose();
-            
+
             // Close the device if it's still open
-            if (myFtdiDevice!=null && myFtdiDevice.IsOpen)
+            if (myFtdiDevice != null && myFtdiDevice.IsOpen)
                 myFtdiDevice.Close();
         }
 
-        private void BtnSettings_Click(object sender, EventArgs e)
-        {
-            
-        }
 
         #region toolStripMain events
         private void toolStripMain_Exit_Click(object sender, EventArgs e)
@@ -313,7 +302,7 @@ namespace ErgoLux
             {
                 toolStripMain_Disconnect.Enabled = true;
                 myFtdiDevice.DataReceived += OnDataReceived;
-                if (myFtdiDevice.Write(ClassT10.Command54))
+                if (myFtdiDevice.Write(ClassT10.Command_54))
                 {
                     System.Threading.Thread.Sleep(500);
                     myFtdiDevice.ClearBuffer();
@@ -376,7 +365,7 @@ namespace ErgoLux
                 if (result == true)
                 {
                     this.statusStripLabelID.Text = "Location ID: " + String.Format("{0:X}", _settings[0]);
-                    this.statusStripLabelType.Text = frm.GetDeviceType;
+                    this.statusStripLabelType.Text = "Device type: " + frm.GetDeviceType;
                     if (File.Exists(_path + @"\images\open.ico")) this.statusStripIconOpen.Image = new Icon(_path + @"\images\open.ico", 16, 16).ToBitmap();
 
                     _plotData = new double[_settings[1]][];

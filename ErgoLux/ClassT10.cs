@@ -9,157 +9,109 @@ namespace ErgoLux
     //https://stackoverflow.com/questions/630803/associating-enums-with-strings-in-c-sharp
     public class ClassT10
     {
-        private static readonly string strSTX = Char.ConvertFromUtf32(2);
-        private static readonly string strETX = Char.ConvertFromUtf32(3);
-        private static readonly string strDelimiter = Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10);
-        //private string _strCommand;
-        //private string[] _commands;
-        private static readonly string[] _receptors = new string[]
-                {
-                    strSTX + "00100200" + strETX + "00" + strDelimiter,
-                    strSTX + "01100200" + strETX + "01" + strDelimiter,
-                    strSTX + "02100200" + strETX + "02" + strDelimiter,
-                    strSTX + "03100200" + strETX + "03" + strDelimiter,
-                    strSTX + "04100200" + strETX + "04" + strDelimiter,
-                    strSTX + "05100200" + strETX + "05" + strDelimiter,
-                    strSTX + "06100200" + strETX + "06" + strDelimiter,
-                    strSTX + "07100200" + strETX + "07" + strDelimiter,
-                    strSTX + "08100200" + strETX + "08" + strDelimiter,
-                    strSTX + "09100200" + strETX + "09" + strDelimiter,
-                    strSTX + "10100200" + strETX + "01" + strDelimiter,
-                    strSTX + "11100200" + strETX + "00" + strDelimiter,
-                    strSTX + "12100200" + strETX + "03" + strDelimiter,
-                    strSTX + "13100200" + strETX + "02" + strDelimiter,
-                    strSTX + "14100200" + strETX + "05" + strDelimiter,
-                    strSTX + "15100200" + strETX + "04" + strDelimiter,
-                    strSTX + "16100200" + strETX + "07" + strDelimiter,
-                    strSTX + "17100200" + strETX + "06" + strDelimiter,
-                    strSTX + "18100200" + strETX + "09" + strDelimiter,
-                    strSTX + "19100200" + strETX + "08" + strDelimiter,
-                    strSTX + "20100200" + strETX + "02" + strDelimiter,
-                    strSTX + "21100200" + strETX + "03" + strDelimiter,
-                    strSTX + "22100200" + strETX + "00" + strDelimiter,
-                    strSTX + "23100200" + strETX + "01" + strDelimiter,
-                    strSTX + "24100200" + strETX + "06" + strDelimiter,
-                    strSTX + "25100200" + strETX + "07" + strDelimiter,
-                    strSTX + "26100200" + strETX + "04" + strDelimiter,
-                    strSTX + "27100200" + strETX + "05" + strDelimiter,
-                    strSTX + "28100200" + strETX + "0a" + strDelimiter,
-                    strSTX + "29100200" + strETX + "0b" + strDelimiter,
-                    strSTX + "30100200" + strETX + "03" + strDelimiter
-                };
-        private static readonly string[] _integrated = new string[]
-                {
-                    strSTX + "00110200" + strETX + "01" + strDelimiter,
-                    strSTX + "01110200" + strETX + "00" + strDelimiter,
-                    strSTX + "02110200" + strETX + "03" + strDelimiter,
-                    strSTX + "03110200" + strETX + "02" + strDelimiter,
-                    strSTX + "04110200" + strETX + "05" + strDelimiter,
-                    strSTX + "05110200" + strETX + "04" + strDelimiter,
-                    strSTX + "06110200" + strETX + "07" + strDelimiter,
-                    strSTX + "07110200" + strETX + "06" + strDelimiter,
-                    strSTX + "08110200" + strETX + "09" + strDelimiter,
-                    strSTX + "09110200" + strETX + "08" + strDelimiter,
-                    strSTX + "10110200" + strETX + "00" + strDelimiter,
-                    strSTX + "11110200" + strETX + "01" + strDelimiter,
-                    strSTX + "12110200" + strETX + "02" + strDelimiter,
-                    strSTX + "13110200" + strETX + "03" + strDelimiter,
-                    strSTX + "14110200" + strETX + "04" + strDelimiter,
-                    strSTX + "15110200" + strETX + "05" + strDelimiter,
-                    strSTX + "16110200" + strETX + "06" + strDelimiter,
-                    strSTX + "17110200" + strETX + "07" + strDelimiter,
-                    strSTX + "18110200" + strETX + "08" + strDelimiter,
-                    strSTX + "19110200" + strETX + "09" + strDelimiter,
-                    strSTX + "20110200" + strETX + "03" + strDelimiter,
-                    strSTX + "21110200" + strETX + "02" + strDelimiter,
-                    strSTX + "22110200" + strETX + "01" + strDelimiter,
-                    strSTX + "23110200" + strETX + "00" + strDelimiter,
-                    strSTX + "24110200" + strETX + "07" + strDelimiter,
-                    strSTX + "25110200" + strETX + "06" + strDelimiter,
-                    strSTX + "26110200" + strETX + "05" + strDelimiter,
-                    strSTX + "27110200" + strETX + "04" + strDelimiter,
-                    strSTX + "28110200" + strETX + "0b" + strDelimiter,
-                    strSTX + "29110200" + strETX + "0a" + strDelimiter,
-                    strSTX + "30110200" + strETX + "02" + strDelimiter
-                };
-
+        private static readonly int _nLengthShortFormat;
+        private static readonly int _nLengthLongFormat;
+        private static readonly int _nMaxSensors;
+        private static readonly string strSTX;
+        private static readonly string strETX;
+        private static readonly string strDelimiter;
+        private static readonly string[] _receptors;
+        private static readonly string[] _integrated;
 
         /// <summary>
-        /// Get 11-code list for measurements
+        /// Gets the response length for commands 28, 54 and 55
+        /// </summary>
+        public static int ShortBytesLength => _nLengthShortFormat;
+
+        /// <summary>
+        /// Gets the response length for commands 10 and 11
+        /// </summary>
+        public static int LongBytesLength => _nLengthLongFormat;
+
+        /// <summary>
+        /// Gets the maximum numbers of multipoint T-10A sensors
+        /// </summary>
+        public static int MaximumSensors => _nMaxSensors;
+
+        /// <summary>
+        /// Gets the single-measurements code list
         /// </summary>
         public static string[] ReceptorsSingle { get => _receptors; }
 
         /// <summary>
-        /// Get 11-code list for the integration measurements
+        /// Gets the integrated-measurements code list
         /// </summary>
         public static string[] ReceptorsIntegrated { get => _integrated; }
 
-        
-        public string Value { get; set; }
+        //public static ClassT10 Command11 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter).Value; } }
+        /// <summary>
+        /// Command to clear integrated data
+        /// </summary>
+        public static string Command_28 { get; set; }
 
-        //public static ClassT10 Command11 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter); } }
         /// <summary>
-        /// Clear integrated data
+        /// Command to set the PC connection mode
         /// </summary>
-        public static string Command28 { get { return new ClassT10(strSTX + "0028    " + strETX + "13" + strDelimiter).Value; } }
-        /// <summary>
-        /// Set PC connection mode
-        /// </summary>
-        public static string Command54 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter).Value; } }
-        /// <summary>
-        /// Start integration mode
-        /// </summary>
-        public static string Command550 { get { return new ClassT10(strSTX + "99550  0" + strETX + "13" + strDelimiter).Value; } }
-        /// <summary>
-        /// End integration mode
-        /// </summary>
-        public static string Command551 { get { return new ClassT10(strSTX + "99551  0" + strETX + "13" + strDelimiter).Value; } }
-        
+        public static string Command_54 { get; set; }
 
-        private ClassT10(string value) { Value = value; }
+        /// <summary>
+        /// Command to start integration mode
+        /// </summary>
+        public static string Command_55_0 { get; set; }
+
+        /// <summary>
+        /// Command to end integration mode
+        /// </summary>
+        public static string Command_55_1 { get; set; }
+
+        
 
         public ClassT10()
         {
         }
 
+        static ClassT10()
+        {
+            _nLengthLongFormat = 32;
+            _nLengthShortFormat = 14;
+            _nMaxSensors = 30;
+
+            strSTX = Char.ConvertFromUtf32(2);
+            strETX = Char.ConvertFromUtf32(3);
+            strDelimiter = Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10);
+
+            // Command 10 (single measurements) and command 11 (integrated measurements) initialization
+            _receptors = new string[_nMaxSensors];
+            _integrated = new string[_nMaxSensors];
+            for (int i=0; i<_nMaxSensors;i++)
+            {
+                _receptors[i] = EncodeCommand(i.ToString("00") + "100200");
+                _integrated[i] = EncodeCommand(i.ToString("00") + "110200");
+            }
+
+            // Commands initialization
+            Command_28 = EncodeCommand("0028    ");
+            Command_54 = EncodeCommand("00541   ");
+            Command_55_0 = EncodeCommand("99550  0");
+            Command_55_1 = EncodeCommand("99551  0");
+        }
+
         /// <summary>
-        /// Encodes a Command into the T-10A format
+        /// Encodes a string command into the T-10A format
         /// </summary>
-        /// <param name="strCommand">String to encode</param>
+        /// <param name="strCommand">String command to encode</param>
         /// <returns>The full command ready to send to the T-10A</returns>
         public static string EncodeCommand(string strCommand)
         {
-            //string strSTX = Char.ConvertFromUtf32(2);
-            //string strETX = Char.ConvertFromUtf32(3);
-            //string strBCC = BCC(strCommand, strETX);
-            //string strDelimiter = Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10);   // \r\n
-            //string temp = strCommand + strETX;
-
-            //// Xor the digits of strCommand + strETX
-            //int xor = temp.Substring(0, 1)[0];
-            //for (int i = 1; i < temp.Length; i++)
-            //{
-            //    xor ^= temp.Substring(i, 1)[0];
-            //}
-
-            //// Convert to string
-            //strBCC = Convert.ToString(xor, 16);
-            
-            //// Add a 0 digit if necessary
-            //if (strBCC.Length == 1)
-            //    strBCC = 0 + strBCC;
-
-            //var algo = strSTX + strCommand + strETX + strBCC + strDelimiter;
-
             return strSTX + strCommand + strETX + BCC(strCommand, strETX) + strDelimiter;
         }
 
         /// <summary>
-        /// Calculates the BCC code for a string
+        /// Calculates the Block Check Character code (2 bytes) for a given string
         /// </summary>
-        /// <param name="strCommand"></param>
-        /// <param name="strETX"></param>
-        /// <returns>The BCC code</returns>
+        /// <param name="strCommand">String whose BBC code need to be computed</param>
+        /// <param name="strETX">Option string suffix to be appended to the first parameter string</param>
+        /// <returns>The 2-bytes BCC code as a 2-character string</returns>
         private static string BCC(string strCommand, string strETX = null)
         {
             string strResult;
@@ -184,9 +136,9 @@ namespace ErgoLux
 
 
         /// <summary>
-        /// Decodes the value returned by the T-10A
+        /// Decodes the value returned by the T-10A illuminancemeter
         /// </summary>
-        /// <param name="strCommand">String returned by the T-10A</param>
+        /// <param name="strCommand">String returned by the T-10A device</param>
         /// <returns>The sensor index (0-based), illuminance, increment, and percent</returns>
         public static (int Sensor, double nIluminance, double nIncrement, double nPercent) DecodeCommand(string strCommand = null)
         {
