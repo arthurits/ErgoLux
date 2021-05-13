@@ -36,12 +36,12 @@ namespace ErgoLux
         /// <summary>
         /// Gets the single-measurements code list
         /// </summary>
-        public static string[] ReceptorsSingle { get => _receptors; }
+        public static string[] ReceptorsSingle => _receptors;
 
         /// <summary>
         /// Gets the integrated-measurements code list
         /// </summary>
-        public static string[] ReceptorsIntegrated { get => _integrated; }
+        public static string[] ReceptorsIntegrated => _integrated;
 
         //public static ClassT10 Command11 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter).Value; } }
         /// <summary>
