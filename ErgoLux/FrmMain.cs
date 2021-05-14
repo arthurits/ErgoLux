@@ -58,7 +58,7 @@ namespace ErgoLux
             InitializeToolStrip();
             InitializeStatusStrip();
             InitializeMenuStrip();
-
+            
             m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
             m_timer.Elapsed += OnTimedEvent;
             m_timer.Enabled = false;
@@ -394,22 +394,24 @@ namespace ErgoLux
                     for (int i = 0; i < 3; i++)
                     {
                         _plotAverage[i] = new double[ArraySize];
-                        formsPlot3.plt.PlotSignal(_plotAverage[i], sampleRate: _settings[9], label: "Sensor #" + i.ToString("00"));
+                        formsPlot3.plt.PlotSignal(_plotAverage[i], sampleRate: _settings[9], label: (i==0 ? "Max" : (i==1 ? "Average" : "Min")));
                     }
 
                     formsPlot3.plt.AxisAuto(horizontalMargin: 0);
                     formsPlot3.plt.Axis(x1: 0, x2: PlotRangeX, y1: 0);
+                    formsPlot3.plt.Colorset(ScottPlot.Drawing.Colorset.Nord);
 
-                    // Ratio plot
-                    _plotRatio = new double[2][];
+                    // Ratios plot
+                    _plotRatio = new double[3][];
                     for (int i = 0; i < 2; i++)
                     {
                         _plotRatio[i] = new double[ArraySize];
-                        formsPlot4.plt.PlotSignal(_plotRatio[i], sampleRate: _settings[9], label: "Sensor #" + i.ToString("00"));
+                        formsPlot4.plt.PlotSignal(_plotRatio[i], sampleRate: _settings[9], label: (i == 0 ? "Max/Min" : (i == 1 ? "Max/Average" : "Min/Average")));
                     }
 
                     formsPlot4.plt.AxisAuto(horizontalMargin: 0);
                     formsPlot4.plt.Axis(x1: 0, x2: PlotRangeX, y1: 0);
+                    formsPlot3.plt.Colorset(ScottPlot.Drawing.Colorset.Aurora);
                 }
                 else
                 {
@@ -484,11 +486,11 @@ namespace ErgoLux
                 formsPlot1.plt.Axis(y1: 0);
                 formsPlot3.plt.Axis(y1: 0);
                 formsPlot4.plt.Axis(y1: 0);
-                if (_nPoints / 2 >= formsPlot1.plt.Axis()[1])
+                if (_nPoints / _settings[9] >= PlotRangeX)
                 {
-                    formsPlot1.plt.Axis(x1: _nPoints / 2 - 10, x2: _nPoints / 2 + 10, y1: 0);
-                    formsPlot3.plt.Axis(x1: _nPoints / 2 - 10, x2: _nPoints / 2 + 10, y1: 0);
-                    formsPlot4.plt.Axis(x1: _nPoints / 2 - 10, x2: _nPoints / 2 + 10, y1: 0);
+                    formsPlot1.plt.Axis(x1: (_nPoints - PlotRangeX) / 2, x2: (_nPoints + PlotRangeX) / 2, y1: 0);
+                    formsPlot3.plt.Axis(x1: (_nPoints - PlotRangeX) / 2, x2: (_nPoints + PlotRangeX) / 2, y1: 0);
+                    formsPlot4.plt.Axis(x1: (_nPoints - PlotRangeX) / 2, x2: (_nPoints + PlotRangeX) / 2, y1: 0);
                 }
 
 
@@ -514,13 +516,14 @@ namespace ErgoLux
                 formsPlot2.plt.PlotRadar(_plotRadar);
                 formsPlot2.Render(skipIfCurrentlyRendering: true);
 
-                _plotAverage[0][_nPoints] = min;
+                _plotAverage[0][_nPoints] = max;
                 _plotAverage[1][_nPoints] = average;
-                _plotAverage[2][_nPoints] = max;
+                _plotAverage[2][_nPoints] = min;
                 formsPlot3.Render(skipIfCurrentlyRendering: true);
 
                 _plotRatio[0][_nPoints] = max / min;
                 _plotRatio[1][_nPoints] = max / average;
+                _plotRatio[2][_nPoints] = min / average;
                 formsPlot4.Render(skipIfCurrentlyRendering: true);
 
                 ++_nPoints;

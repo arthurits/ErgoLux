@@ -70,31 +70,35 @@ namespace ErgoLux
             // 
             // cboDataBits
             // 
+            this.cboDataBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cboDataBits.FormattingEnabled = true;
-            this.cboDataBits.Location = new System.Drawing.Point(109, 228);
+            this.cboDataBits.Location = new System.Drawing.Point(115, 228);
             this.cboDataBits.Name = "cboDataBits";
-            this.cboDataBits.Size = new System.Drawing.Size(137, 23);
+            this.cboDataBits.Size = new System.Drawing.Size(137, 25);
             this.cboDataBits.TabIndex = 1;
             // 
             // cboStopBits
             // 
+            this.cboStopBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cboStopBits.FormattingEnabled = true;
-            this.cboStopBits.Location = new System.Drawing.Point(109, 264);
+            this.cboStopBits.Location = new System.Drawing.Point(115, 264);
             this.cboStopBits.Name = "cboStopBits";
-            this.cboStopBits.Size = new System.Drawing.Size(137, 23);
+            this.cboStopBits.Size = new System.Drawing.Size(137, 25);
             this.cboStopBits.TabIndex = 2;
             // 
             // txtBaudRate
             // 
-            this.txtBaudRate.Location = new System.Drawing.Point(109, 192);
+            this.txtBaudRate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtBaudRate.Location = new System.Drawing.Point(115, 192);
             this.txtBaudRate.Name = "txtBaudRate";
             this.txtBaudRate.ShortcutsEnabled = false;
-            this.txtBaudRate.Size = new System.Drawing.Size(137, 23);
+            this.txtBaudRate.Size = new System.Drawing.Size(137, 25);
             this.txtBaudRate.TabIndex = 3;
             // 
             // updSensors
             // 
-            this.updSensors.Location = new System.Drawing.Point(139, 414);
+            this.updSensors.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.updSensors.Location = new System.Drawing.Point(154, 414);
             this.updSensors.Maximum = new decimal(new int[] {
             30,
             0,
@@ -106,7 +110,7 @@ namespace ErgoLux
             0,
             0});
             this.updSensors.Name = "updSensors";
-            this.updSensors.Size = new System.Drawing.Size(49, 23);
+            this.updSensors.Size = new System.Drawing.Size(49, 25);
             this.updSensors.TabIndex = 4;
             this.updSensors.Value = new decimal(new int[] {
             1,
@@ -117,112 +121,125 @@ namespace ErgoLux
             // lblDataBits
             // 
             this.lblDataBits.AutoSize = true;
+            this.lblDataBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblDataBits.Location = new System.Drawing.Point(30, 231);
             this.lblDataBits.Name = "lblDataBits";
-            this.lblDataBits.Size = new System.Drawing.Size(50, 15);
+            this.lblDataBits.Size = new System.Drawing.Size(60, 19);
             this.lblDataBits.TabIndex = 5;
             this.lblDataBits.Text = "Databits";
             // 
             // lblStopBits
             // 
             this.lblStopBits.AutoSize = true;
+            this.lblStopBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblStopBits.Location = new System.Drawing.Point(30, 267);
             this.lblStopBits.Name = "lblStopBits";
-            this.lblStopBits.Size = new System.Drawing.Size(53, 15);
+            this.lblStopBits.Size = new System.Drawing.Size(63, 19);
             this.lblStopBits.TabIndex = 6;
             this.lblStopBits.Text = "Stop bits";
             // 
             // lblBaudRate
             // 
             this.lblBaudRate.AutoSize = true;
+            this.lblBaudRate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblBaudRate.Location = new System.Drawing.Point(30, 195);
             this.lblBaudRate.Name = "lblBaudRate";
-            this.lblBaudRate.Size = new System.Drawing.Size(57, 15);
+            this.lblBaudRate.Size = new System.Drawing.Size(68, 19);
             this.lblBaudRate.TabIndex = 7;
             this.lblBaudRate.Text = "Baud rate";
             // 
             // lblSensors
             // 
             this.lblSensors.AutoSize = true;
+            this.lblSensors.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblSensors.Location = new System.Drawing.Point(26, 416);
             this.lblSensors.Name = "lblSensors";
-            this.lblSensors.Size = new System.Drawing.Size(107, 15);
+            this.lblSensors.Size = new System.Drawing.Size(125, 19);
             this.lblSensors.TabIndex = 8;
             this.lblSensors.Text = "Number of sensors";
             // 
             // cboParity
             // 
+            this.cboParity.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cboParity.FormattingEnabled = true;
-            this.cboParity.Location = new System.Drawing.Point(109, 300);
+            this.cboParity.Location = new System.Drawing.Point(115, 300);
             this.cboParity.Name = "cboParity";
-            this.cboParity.Size = new System.Drawing.Size(137, 23);
+            this.cboParity.Size = new System.Drawing.Size(137, 25);
             this.cboParity.TabIndex = 9;
             // 
             // cboFlowControl
             // 
+            this.cboFlowControl.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cboFlowControl.FormattingEnabled = true;
-            this.cboFlowControl.Location = new System.Drawing.Point(109, 336);
+            this.cboFlowControl.Location = new System.Drawing.Point(115, 336);
             this.cboFlowControl.Name = "cboFlowControl";
-            this.cboFlowControl.Size = new System.Drawing.Size(137, 23);
+            this.cboFlowControl.Size = new System.Drawing.Size(137, 25);
             this.cboFlowControl.TabIndex = 10;
             this.cboFlowControl.SelectedIndexChanged += new System.EventHandler(this.cboFlowControl_SelectedIndexChanged);
             // 
             // lblFlowControl
             // 
             this.lblFlowControl.AutoSize = true;
+            this.lblFlowControl.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblFlowControl.Location = new System.Drawing.Point(30, 339);
             this.lblFlowControl.Name = "lblFlowControl";
-            this.lblFlowControl.Size = new System.Drawing.Size(73, 15);
+            this.lblFlowControl.Size = new System.Drawing.Size(84, 19);
             this.lblFlowControl.TabIndex = 11;
             this.lblFlowControl.Text = "Flow control";
             // 
             // lblParity
             // 
             this.lblParity.AutoSize = true;
+            this.lblParity.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblParity.Location = new System.Drawing.Point(30, 303);
             this.lblParity.Name = "lblParity";
-            this.lblParity.Size = new System.Drawing.Size(37, 15);
+            this.lblParity.Size = new System.Drawing.Size(44, 19);
             this.lblParity.TabIndex = 12;
             this.lblParity.Text = "Parity";
             // 
             // txtOn
             // 
+            this.txtOn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtOn.Location = new System.Drawing.Point(323, 336);
             this.txtOn.Name = "txtOn";
-            this.txtOn.Size = new System.Drawing.Size(40, 23);
+            this.txtOn.Size = new System.Drawing.Size(40, 25);
             this.txtOn.TabIndex = 13;
             // 
             // txtOff
             // 
+            this.txtOff.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtOff.Location = new System.Drawing.Point(402, 336);
             this.txtOff.Name = "txtOff";
-            this.txtOff.Size = new System.Drawing.Size(40, 23);
+            this.txtOff.Size = new System.Drawing.Size(40, 25);
             this.txtOff.TabIndex = 14;
             // 
             // lblOn
             // 
             this.lblOn.AutoSize = true;
-            this.lblOn.Location = new System.Drawing.Point(297, 339);
+            this.lblOn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblOn.Location = new System.Drawing.Point(295, 339);
             this.lblOn.Name = "lblOn";
-            this.lblOn.Size = new System.Drawing.Size(23, 15);
+            this.lblOn.Size = new System.Drawing.Size(28, 19);
             this.lblOn.TabIndex = 15;
             this.lblOn.Text = "On";
             // 
             // lblOff
             // 
             this.lblOff.AutoSize = true;
-            this.lblOff.Location = new System.Drawing.Point(375, 339);
+            this.lblOff.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblOff.Location = new System.Drawing.Point(373, 339);
             this.lblOff.Name = "lblOff";
-            this.lblOff.Size = new System.Drawing.Size(24, 15);
+            this.lblOff.Size = new System.Drawing.Size(28, 19);
             this.lblOff.TabIndex = 16;
             this.lblOff.Text = "Off";
             // 
             // btnOK
             // 
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(297, 410);
+            this.btnOK.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnOK.Location = new System.Drawing.Point(285, 405);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(80, 27);
+            this.btnOK.Size = new System.Drawing.Size(90, 30);
             this.btnOK.TabIndex = 17;
             this.btnOK.Text = "&Accept";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -231,9 +248,10 @@ namespace ErgoLux
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(395, 410);
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnCancel.Location = new System.Drawing.Point(385, 405);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(80, 27);
+            this.btnCancel.Size = new System.Drawing.Size(90, 30);
             this.btnCancel.TabIndex = 18;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -242,25 +260,29 @@ namespace ErgoLux
             // lblDevices
             // 
             this.lblDevices.AutoSize = true;
-            this.lblDevices.Location = new System.Drawing.Point(26, 14);
+            this.lblDevices.BackColor = System.Drawing.Color.Transparent;
+            this.lblDevices.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDevices.Location = new System.Drawing.Point(26, 13);
             this.lblDevices.Name = "lblDevices";
-            this.lblDevices.Size = new System.Drawing.Size(85, 15);
+            this.lblDevices.Size = new System.Drawing.Size(100, 19);
             this.lblDevices.TabIndex = 19;
             this.lblDevices.Text = "FTDI device list";
             // 
             // txtHz
             // 
-            this.txtHz.Location = new System.Drawing.Point(109, 372);
+            this.txtHz.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtHz.Location = new System.Drawing.Point(115, 372);
             this.txtHz.Name = "txtHz";
-            this.txtHz.Size = new System.Drawing.Size(32, 23);
+            this.txtHz.Size = new System.Drawing.Size(32, 25);
             this.txtHz.TabIndex = 20;
             // 
             // lblHz
             // 
             this.lblHz.AutoSize = true;
+            this.lblHz.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblHz.Location = new System.Drawing.Point(30, 375);
             this.lblHz.Name = "lblHz";
-            this.lblHz.Size = new System.Drawing.Size(58, 15);
+            this.lblHz.Size = new System.Drawing.Size(67, 19);
             this.lblHz.TabIndex = 21;
             this.lblHz.Text = "Freq. (Hz)";
             // 

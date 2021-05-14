@@ -16,10 +16,8 @@ namespace ErgoLux
     {
         private int[] _data = new int[10];
         private string _deviceType;
-        private string _deviceLocID;
 
         public int[] GetData { get => _data; }
-        public string GetLocationID { get => _deviceLocID; }
         public string GetDeviceType { get => _deviceType; }
 
         public FrmSettings()
@@ -191,7 +189,6 @@ namespace ErgoLux
             _data[8] = Convert.ToInt32(txtOff.Text);
             _data[9] = Convert.ToInt32(txtHz.Text);   // Sample rate
 
-            _deviceLocID = String.Format("{0:x}", viewDevices.SelectedItems[0].SubItems[4].Text);  //Location ID
             _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
 
             this.DialogResult = DialogResult.OK;

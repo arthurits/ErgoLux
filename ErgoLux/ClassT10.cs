@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 namespace ErgoLux
 {
     //https://stackoverflow.com/questions/630803/associating-enums-with-strings-in-c-sharp
+    
+    /// <summary>
+    /// Low level parameters and commands for T-10A as well as functions to encode and decode information to and from T-10A
+    /// </summary>
     public class ClassT10
     {
         private static readonly int _nLengthShortFormat;
@@ -17,6 +21,10 @@ namespace ErgoLux
         private static readonly string strDelimiter;
         private static readonly string[] _receptors;
         private static readonly string[] _integrated;
+        private static readonly string _strCommand28;
+        private static readonly string _strCommand54;
+        private static readonly string _strCommand55_0;
+        private static readonly string _strCommand55_1;
 
         /// <summary>
         /// Gets the response length for commands 28, 54 and 55
@@ -47,24 +55,24 @@ namespace ErgoLux
         /// <summary>
         /// Command to clear integrated data
         /// </summary>
-        public static string Command_28 { get; set; }
+        public static string Command_28 => _strCommand28;
 
         /// <summary>
         /// Command to set the PC connection mode
         /// </summary>
-        public static string Command_54 { get; set; }
+        public static string Command_54 => _strCommand54;
 
         /// <summary>
         /// Command to start integration mode
         /// </summary>
-        public static string Command_55_0 { get; set; }
+        public static string Command_55_0 => _strCommand55_0;
 
         /// <summary>
         /// Command to end integration mode
         /// </summary>
-        public static string Command_55_1 { get; set; }
+        public static string Command_55_1 => _strCommand55_1;
 
-        
+
 
         public ClassT10()
         {
@@ -90,10 +98,10 @@ namespace ErgoLux
             }
 
             // Commands initialization
-            Command_28 = EncodeCommand("0028    ");
-            Command_54 = EncodeCommand("00541   ");
-            Command_55_0 = EncodeCommand("99550  0");
-            Command_55_1 = EncodeCommand("99551  0");
+            _strCommand28 = EncodeCommand("0028    ");
+            _strCommand54 = EncodeCommand("00541   ");
+            _strCommand55_0 = EncodeCommand("99550  0");
+            _strCommand55_1 = EncodeCommand("99551  0");
         }
 
         /// <summary>
