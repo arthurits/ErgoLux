@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace ErgoLux
 {
-    //https://stackoverflow.com/questions/630803/associating-enums-with-strings-in-c-sharp
+    // Optional approach to to handle a class as an enum https://stackoverflow.com/questions/630803/associating-enums-with-strings-in-c-sharp
     
     /// <summary>
     /// Low level parameters and commands for T-10A as well as functions to encode and decode information to and from T-10A
