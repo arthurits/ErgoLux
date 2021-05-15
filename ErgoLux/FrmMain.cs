@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 
 using FTD2XX_NET;
+using System.Text.Json;
 
 namespace ErgoLux
 {
@@ -19,7 +20,7 @@ namespace ErgoLux
         private SerialPort _serialPort;
         private System.Timers.Timer m_timer;
         private string _path;
-        //private ClassT10 cT10;
+        private ClassSettings _sett;
         private FTDISample myFtdiDevice;
         private double[][] _plotData;
         private double[,] _plotRadar;
@@ -40,9 +41,6 @@ namespace ErgoLux
         };
         private int _nPoints = 0;
         Random rand = new Random(0);
-        ScottPlot.PlottableSignal sigPlot;
-
-        private bool _data = true;
 
         private const int ArraySize = 7200;
         private const int PlotRangeX = 20;
@@ -102,16 +100,9 @@ namespace ErgoLux
             formsPlot4.plt.XLabel("Time (seconds)");
             formsPlot4.plt.Grid(false);
 
-            //var algo = new ClassT10("00541   ");
-            //var strEncoded = algo.EncodeCommand();
-
-            var strEncoded = ClassT10.EncodeCommand("00541   ");
-            //string test = new string(new char[] { (char)2, '0', '0', '5', '4', '1', ' ', ' ', ' ', (char)3, '1', '3', (char)13, (char)10 });
-            strEncoded = ClassT10.EncodeCommand("00110200");
-
-            //System.Diagnostics.Debug.Print(strEncoded);
-            //System.Diagnostics.Debug.Print(strEncoded.ToCharArray().ToString());
-            //strEncoded = algo.EncodeCommand("01110200");
+            // Load settings
+            _sett = new ClassSettings();
+            LoadProgramSettingsJSON();
 
         }
 
@@ -241,7 +232,7 @@ namespace ErgoLux
 
         private void OnDataReceived (object sender, DataReceivedEventArgs e)
         {
-            _data = true;
+            //_data = true;
             (int Sensor, double Iluminance, double Increment, double Percent) result = (0, 0, 0, 0);
             //string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
 
@@ -279,6 +270,20 @@ namespace ErgoLux
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            using (new CenterWinDialog(this))
+            {
+                if (DialogResult.No == MessageBox.Show(this,
+                                                        "Are you sure you want to exit\nthe application?",
+                                                        "Exit?",
+                                                        MessageBoxButtons.YesNo,
+                                                        MessageBoxIcon.Question,
+                                                        MessageBoxDefaultButton.Button2))
+                {
+                    // Cancel
+                    e.Cancel = true;
+                }
+            }
+
             // Stop the time if it's still running
             if (m_timer.Enabled) m_timer.Stop();
             
@@ -287,6 +292,9 @@ namespace ErgoLux
             // Close the device if it's still open
             if (myFtdiDevice != null && myFtdiDevice.IsOpen)
                 myFtdiDevice.Close();
+
+            // Save settings data
+            SaveProgramSettingsJSON();
         }
 
 
@@ -540,5 +548,51 @@ namespace ErgoLux
 
             // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91
         }
+
+        #region Program settings
+
+        private void LoadProgramSettingsJSON()
+        {
+            try
+            {
+                var jsonString = File.ReadAllText(_sett.FileName);
+                _sett = JsonSerializer.Deserialize<ClassSettings>(jsonString);
+
+                this.StartPosition = FormStartPosition.Manual;
+                this.DesktopLocation = new Point(_sett.Wnd_Left, _sett.Wnd_Top);
+                this.ClientSize = new Size(_sett.Wnd_Width, _sett.Wnd_Height);
+            }
+            catch (FileNotFoundException)
+            {
+            }
+            catch (Exception ex)
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show(this,
+                        "Error loading settings file\n\n" + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void SaveProgramSettingsJSON()
+        {
+            _sett.Wnd_Left = DesktopLocation.X;
+            _sett.Wnd_Top = DesktopLocation.Y;
+            _sett.Wnd_Width = ClientSize.Width;
+            _sett.Wnd_Height = ClientSize.Height;
+
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+            var jsonString = JsonSerializer.Serialize(_settings, options);
+            File.WriteAllText(_sett.FileName, jsonString);
+        }
+
+        #endregion Program settings
     }
 }

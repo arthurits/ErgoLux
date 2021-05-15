@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClassKonica.cs" />
+    <Compile Remove="Example program 01.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ScottPlot.WinForms" Version="4.0.48" />
     <PackageReference Include="System.IO.Ports" Version="5.0.1" />
   </ItemGroup>

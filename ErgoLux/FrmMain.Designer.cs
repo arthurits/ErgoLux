@@ -85,16 +85,16 @@ namespace ErgoLux
             this.tspTop.Name = "tspTop";
             this.tspTop.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.tspTop.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.tspTop.Size = new System.Drawing.Size(933, 0);
+            this.tspTop.Size = new System.Drawing.Size(934, 0);
             // 
             // tspBottom
             // 
             this.tspBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tspBottom.Location = new System.Drawing.Point(0, 603);
+            this.tspBottom.Location = new System.Drawing.Point(0, 611);
             this.tspBottom.Name = "tspBottom";
             this.tspBottom.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.tspBottom.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.tspBottom.Size = new System.Drawing.Size(933, 0);
+            this.tspBottom.Size = new System.Drawing.Size(934, 0);
             // 
             // mnuMainFrm
             // 
@@ -102,7 +102,7 @@ namespace ErgoLux
             this.fileToolStripMenuItem});
             this.mnuMainFrm.Location = new System.Drawing.Point(0, 0);
             this.mnuMainFrm.Name = "mnuMainFrm";
-            this.mnuMainFrm.Size = new System.Drawing.Size(933, 24);
+            this.mnuMainFrm.Size = new System.Drawing.Size(934, 24);
             this.mnuMainFrm.TabIndex = 5;
             this.mnuMainFrm.Text = "menuStrip1";
             // 
@@ -156,12 +156,12 @@ namespace ErgoLux
             this.statusStripLabelSkeleton,
             this.statusStripLabelJoint,
             this.statusStripLabelAngle});
-            this.statusStrip.Location = new System.Drawing.Point(0, 575);
+            this.statusStrip.Location = new System.Drawing.Point(0, 583);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.statusStrip.ShowItemToolTips = true;
-            this.statusStrip.Size = new System.Drawing.Size(933, 28);
+            this.statusStrip.Size = new System.Drawing.Size(934, 28);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -211,7 +211,7 @@ namespace ErgoLux
             // 
             this.statusStripLabelXtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelXtras.Name = "statusStripLabelXtras";
-            this.statusStripLabelXtras.Size = new System.Drawing.Size(378, 23);
+            this.statusStripLabelXtras.Size = new System.Drawing.Size(329, 23);
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -316,7 +316,7 @@ namespace ErgoLux
             this.toolStripMain.Location = new System.Drawing.Point(0, 24);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStripMain.Size = new System.Drawing.Size(933, 72);
+            this.toolStripMain.Size = new System.Drawing.Size(934, 72);
             this.toolStripMain.TabIndex = 2;
             this.toolStripMain.Text = "Main toolbar";
             // 
@@ -393,7 +393,7 @@ namespace ErgoLux
             this.formsPlot1.Location = new System.Drawing.Point(0, 0);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(376, 214);
+            this.formsPlot1.Size = new System.Drawing.Size(376, 218);
             this.formsPlot1.TabIndex = 0;
             // 
             // formsPlot2
@@ -402,13 +402,13 @@ namespace ErgoLux
             this.formsPlot2.Location = new System.Drawing.Point(526, 0);
             this.formsPlot2.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot2.Name = "formsPlot2";
-            this.formsPlot2.Size = new System.Drawing.Size(376, 214);
+            this.formsPlot2.Size = new System.Drawing.Size(376, 218);
             this.formsPlot2.TabIndex = 1;
             // 
             // BtnConnect
             // 
             this.BtnConnect.Enabled = false;
-            this.BtnConnect.Location = new System.Drawing.Point(710, 532);
+            this.BtnConnect.Location = new System.Drawing.Point(710, 540);
             this.BtnConnect.Name = "BtnConnect";
             this.BtnConnect.Size = new System.Drawing.Size(108, 31);
             this.BtnConnect.TabIndex = 3;
@@ -419,7 +419,7 @@ namespace ErgoLux
             // BtnStop
             // 
             this.BtnStop.Enabled = false;
-            this.BtnStop.Location = new System.Drawing.Point(838, 532);
+            this.BtnStop.Location = new System.Drawing.Point(838, 540);
             this.BtnStop.Name = "BtnStop";
             this.BtnStop.Size = new System.Drawing.Size(83, 30);
             this.BtnStop.TabIndex = 4;
@@ -450,7 +450,7 @@ namespace ErgoLux
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(912, 429);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(913, 437);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // pictureBox1
@@ -459,7 +459,7 @@ namespace ErgoLux
             this.pictureBox1.Location = new System.Drawing.Point(376, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 214);
+            this.pictureBox1.Size = new System.Drawing.Size(150, 218);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -470,26 +470,26 @@ namespace ErgoLux
             this.pictureBox2.Location = new System.Drawing.Point(902, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(10, 214);
+            this.pictureBox2.Size = new System.Drawing.Size(11, 218);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
             // formsPlot3
             // 
             this.formsPlot3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot3.Location = new System.Drawing.Point(4, 217);
+            this.formsPlot3.Location = new System.Drawing.Point(4, 221);
             this.formsPlot3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot3.Name = "formsPlot3";
-            this.formsPlot3.Size = new System.Drawing.Size(368, 209);
+            this.formsPlot3.Size = new System.Drawing.Size(368, 213);
             this.formsPlot3.TabIndex = 4;
             // 
             // formsPlot4
             // 
             this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot4.Location = new System.Drawing.Point(530, 217);
+            this.formsPlot4.Location = new System.Drawing.Point(530, 221);
             this.formsPlot4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot4.Name = "formsPlot4";
-            this.formsPlot4.Size = new System.Drawing.Size(368, 209);
+            this.formsPlot4.Size = new System.Drawing.Size(368, 213);
             this.formsPlot4.TabIndex = 5;
             // 
             // FrmMain
@@ -497,7 +497,7 @@ namespace ErgoLux
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(933, 603);
+            this.ClientSize = new System.Drawing.Size(934, 611);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.BtnStop);
             this.Controls.Add(this.BtnConnect);
