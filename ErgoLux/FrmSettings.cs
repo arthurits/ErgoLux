@@ -16,6 +16,7 @@ namespace ErgoLux
     {
         private int[] _data = new int[10];
         private string _deviceType;
+        private ClassSettings _settings;
 
         public int[] GetData { get => _data; }
         public string GetDeviceType { get => _deviceType; }
@@ -105,6 +106,31 @@ namespace ErgoLux
             txtHz.Text = _settings[9].ToString();
         }
 
+        public FrmSettings(ClassSettings settings)
+            :this()
+        {
+            _settings = settings;
+
+            // Update tabDevice
+            updSensors.Value = settings.T10_NumberOfSensors;
+            txtBaudRate.Text = settings.T10_BaudRate.ToString();
+            cboDataBits.SelectedValue = settings.T10_DataBits;
+            cboStopBits.SelectedValue = settings.T10_StopBits;
+            cboParity.SelectedValue = settings.T10_Parity;
+            cboFlowControl.SelectedValue = settings.T10_FlowControl;
+            txtOn.Text = settings.T10_CharOn.ToString();
+            txtOff.Text = settings.T10_CharOff.ToString();
+            txtHz.Text = settings.T10_Frequency.ToString();
+
+            // Update tabPlots
+            txtArrayPoints.Text = settings.Plot_ArrayPoints.ToString();
+            txtPlotWindow.Text = settings.Plot_WindowPoints.ToString();
+            chkShowRaw.Checked = settings.Plot_ShowRawData;
+            chkShowRadar.Checked = settings.Plot_ShowRadar;
+            chkShowAverage.Checked = settings.Plot_ShowAverage;
+            chkShowRatio.Checked = settings.Plot_ShowRatios;
+        }
+
         /// <summary>
         /// Populates ListView control with data from the FTDI devices connected
         /// </summary<
@@ -153,7 +179,7 @@ namespace ErgoLux
 
         private void cboFlowControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cboFlowControl.SelectedIndex==3)
+            if (cboFlowControl.SelectedIndex == 3)
             {
                 txtOn.Enabled = true;
                 txtOff.Enabled = true;
@@ -178,18 +204,37 @@ namespace ErgoLux
                 return;
             }
 
-            _data[0] = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);  //Location ID
-            _data[1] = (int)updSensors.Value;
-            _data[2] = Convert.ToInt32(txtBaudRate.Text);
-            _data[3] = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
-            _data[4] = ((KeyValuePair<string, int>)cboStopBits.SelectedItem).Value;
-            _data[5] = ((KeyValuePair<string, int>)cboParity.SelectedItem).Value;
-            _data[6] = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
-            _data[7] = Convert.ToInt32(txtOn.Text);
-            _data[8] = Convert.ToInt32(txtOff.Text);
-            _data[9] = Convert.ToInt32(txtHz.Text);   // Sample rate
+            //_data[0] = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);  //Location ID
+            //_data[1] = (int)updSensors.Value;
+            //_data[2] = Convert.ToInt32(txtBaudRate.Text);
+            //_data[3] = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
+            //_data[4] = ((KeyValuePair<string, int>)cboStopBits.SelectedItem).Value;
+            //_data[5] = ((KeyValuePair<string, int>)cboParity.SelectedItem).Value;
+            //_data[6] = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
+            //_data[7] = Convert.ToInt32(txtOn.Text);
+            //_data[8] = Convert.ToInt32(txtOff.Text);
+            //_data[9] = Convert.ToInt32(txtHz.Text);   // Sample rate
 
             _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
+
+            // Save to class settings
+            _settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
+            _settings.T10_NumberOfSensors = (int)updSensors.Value;
+            _settings.T10_BaudRate = Convert.ToInt32(txtBaudRate.Text);
+            _settings.T10_DataBits = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
+            _settings.T10_StopBits = ((KeyValuePair<string, int>)cboStopBits.SelectedItem).Value;
+            _settings.T10_Parity = ((KeyValuePair<string, int>)cboParity.SelectedItem).Value;
+            _settings.T10_FlowControl = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
+            _settings.T10_CharOn = Convert.ToInt32(txtOn.Text);
+            _settings.T10_CharOff = Convert.ToInt32(txtOff.Text);
+            _settings.T10_Frequency = Convert.ToInt32(txtHz.Text);
+
+            _settings.Plot_ArrayPoints = Convert.ToInt32(txtArrayPoints.Text);
+            _settings.Plot_WindowPoints = Convert.ToInt32(txtPlotWindow.Text);
+            _settings.Plot_ShowRawData = chkShowRaw.Checked;
+            _settings.Plot_ShowRadar = chkShowRadar.Checked;
+            _settings.Plot_ShowAverage = chkShowAverage.Checked;
+            _settings.Plot_ShowRatios = chkShowRatio.Checked;
 
             this.DialogResult = DialogResult.OK;
         }

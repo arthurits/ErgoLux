@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="strCommands.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ScottPlot.WinForms" Version="4.0.48" />
     <PackageReference Include="System.IO.Ports" Version="5.0.1" />
   </ItemGroup>
@@ -39,6 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="FTD2XX_NET.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="images\about.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

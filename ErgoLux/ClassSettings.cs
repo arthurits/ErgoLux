@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace ErgoLux
 {
-    class ClassSettings
+    /// <summary>
+    /// Keeps the settings for the T-10 device, plottting options and app window properties
+    /// </summary>
+    public class ClassSettings
     {
         [JsonPropertyName("Window top")]
         public int Wnd_Top { get; set; }
@@ -62,6 +65,9 @@ namespace ErgoLux
         [JsonIgnore]
         public string FileName { get; set; }
 
+        [JsonIgnore]
+        public string Path { get; set; }
+
         public ClassSettings()
         {
             Wnd_Top = 0;
@@ -88,6 +94,15 @@ namespace ErgoLux
             Plot_ShowRatios = true;
 
             FileName = "configuration.json";
+        }
+
+        public ClassSettings(string path)
+            :this()
+        {
+            Path = path;
+            if (System.IO.File.Exists(path + @"\images\close.ico")) Icon_Close = new System.Drawing.Icon(path + @"\images\close.ico", 16, 16).ToBitmap();
+            if (System.IO.File.Exists(path + @"\images\open.ico")) Icon_Open = new System.Drawing.Icon(path + @"\images\open.ico", 16, 16).ToBitmap();
+            if (System.IO.File.Exists(path + @"\images\exchange.ico")) Icon_Data = new System.Drawing.Icon(path + @"\images\exchange.ico", 16, 16).ToBitmap();
         }
 
         ~ClassSettings()

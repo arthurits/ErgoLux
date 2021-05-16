@@ -25,7 +25,7 @@ namespace ErgoLux
             FTDI.FT_STATUS ftStatus = base.SetEventNotification(FTDI.FT_EVENTS.FT_EVENT_RXCHAR, receivedDataEvent);
             
             dataReceivedHandler = new BackgroundWorker();
-            dataReceivedHandler.DoWork += ReadData2;
+            dataReceivedHandler.DoWork += ReadData_KonicaT10;
             if (!dataReceivedHandler.IsBusy)
             {
                 dataReceivedHandler.RunWorkerAsync();
@@ -240,7 +240,7 @@ namespace ErgoLux
             }
         }
 
-        private void ReadData2(object pSender, DoWorkEventArgs pEventArgs)
+        private void ReadData_KonicaT10(object pSender, DoWorkEventArgs pEventArgs)
         {
             FTDI.FT_STATUS status;
             UInt32 nrOfBytesAvailable = 0;
@@ -327,6 +327,9 @@ namespace ErgoLux
         }
     }
 
+    /// <summary>
+    /// Custom event for the FTDI device
+    /// </summary>
     public class DataReceivedEventArgs : EventArgs
     {
         public DataReceivedEventArgs(byte[] data, uint bytesRead, uint bytesAvailable)
@@ -344,17 +347,29 @@ namespace ErgoLux
             //// From string to byte array
             //byte[] buffer = System.Text.Encoding.UTF8.GetBytes(convert);
 
-            //// From byte array to string
+            // From byte array to string
             StrDataReceived = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
 
             BytesRead = bytesRead;
 
-            BytesAvailable = BytesAvailable;
+            BytesAvailable = bytesAvailable;
         }
 
+        /// <summary>
+        /// Data received as an array of bytes. It's recommended to use the string version of this field
+        /// </summary>
         public byte[] DataReceived { get; }
+        /// <summary>
+        /// Number of bytes read from the FTDI device. For sensor T10 this includes the sum of all bytes including "\r\n"
+        /// </summary>
         public uint BytesRead { get; }
+        /// <summary>
+        /// Number of bytes available
+        /// </summary>
         public uint BytesAvailable { get; }
+        /// <summary>
+        /// Data received as a string. This is the recommended option
+        /// </summary>
         public string StrDataReceived { get; }
     }
 }
