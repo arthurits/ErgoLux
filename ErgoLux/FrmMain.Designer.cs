@@ -70,6 +70,7 @@ namespace ErgoLux
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.formsPlot3 = new ScottPlot.FormsPlot();
             this.formsPlot4 = new ScottPlot.FormsPlot();
+            this.toolStripMain_Save = new System.Windows.Forms.ToolStripButton();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -306,6 +307,7 @@ namespace ErgoLux
             this.toolStripMain.ImageScalingSize = new System.Drawing.Size(48, 48);
             this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMain_Exit,
+            this.toolStripMain_Save,
             this.toolStripSeparator1,
             this.toolStripMain_Connect,
             this.toolStripMain_Disconnect,
@@ -492,6 +494,16 @@ namespace ErgoLux
             this.formsPlot4.Size = new System.Drawing.Size(368, 213);
             this.formsPlot4.TabIndex = 5;
             // 
+            // toolStripMain_Save
+            // 
+            this.toolStripMain_Save.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripMain_Save.Name = "toolStripMain_Save";
+            this.toolStripMain_Save.Size = new System.Drawing.Size(39, 69);
+            this.toolStripMain_Save.Text = "Save";
+            this.toolStripMain_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripMain_Save.ToolTipText = "Save data";
+            this.toolStripMain_Save.Click += new System.EventHandler(this.toolStripMain_Save_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -568,6 +580,7 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconExchange;
         private ScottPlot.FormsPlot formsPlot3;
         private ScottPlot.FormsPlot formsPlot4;
+        private System.Windows.Forms.ToolStripButton toolStripMain_Save;
     }
 }
 

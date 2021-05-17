@@ -100,12 +100,14 @@ namespace ErgoLux
             if (File.Exists(_path + @"\images\connect.ico")) this.toolStripMain_Connect.Image = new Icon(_path + @"\images\connect.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new Icon(_path + @"\images\disconnect.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\cinema.ico")) this.toolStripMain_Video.Image = new Icon(path + @"\images\cinema.ico", 48, 48).ToBitmap();
-            //if (File.Exists(path + @"\images\save.ico")) this.toolStripMain_Data.Image = new Icon(path + @"\images\save.ico", 48, 48).ToBitmap();
+            if (File.Exists(_path + @"\images\save.ico")) this.toolStripMain_Save.Image = new Icon(_path + @"\images\save.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\picture.ico")) this.toolStripMain_Picture.Image = new Icon(path + @"\images\picture.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\reflect-horizontal.ico")) this.toolStripMain_Mirror.Image = new Icon(path + @"\images\reflect-horizontal.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\plot.ico")) this.toolStripMain_Plots.Image = new Icon(path + @"\images\plot.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\settings.ico")) this.toolStripMain_Settings.Image = new Icon(_path + @"\images\settings.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\about.ico")) this.toolStripMain_About.Image = new Icon(_path + @"\images\about.ico", 48, 48).ToBitmap();
+
+            this.toolStripMain_Disconnect.Enabled = false;
 
             /*
             using (Graphics g = Graphics.FromImage(this.toolStripMain_Skeleton.Image))
@@ -136,7 +138,7 @@ namespace ErgoLux
         private void InitializeStatusStrip()
         {
             //if (File.Exists(_path + @"\images\close.ico")) this.statusStripIconOpen.Image = new Icon(_path + @"\images\close.ico", 16, 16).ToBitmap();
-            this.statusStripIconOpen.Image = _sett.Icon_Open;
+            this.statusStripIconOpen.Image = _sett.Icon_Close;
             return;
         }
 
@@ -308,6 +310,46 @@ namespace ErgoLux
             this.Close();
         }
 
+        private void toolStripMain_Save_Click(object sender, EventArgs e)
+        {
+            // Displays a SaveFileDialog so the user can save the Image  
+            SaveFileDialog SaveDlg = new SaveFileDialog
+            {
+                DefaultExt = "*.csv",
+                Filter = "ERGO file (*.ergo)|*.ergo|RTF file (*.rtf)|*.rtf|Text file (*.txt)|*.txt|All files (*.*)|*.*",
+                FilterIndex = 1,
+                Title = "Save thermal comfort data",
+                OverwritePrompt = true,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+
+            DialogResult result;
+            using (new CenterWinDialog(this))
+            {
+                result = SaveDlg.ShowDialog(this.Parent);
+            }
+
+            // If the file name is not an empty string open it for saving.  
+            if (result == DialogResult.OK && SaveDlg.FileName != "")
+            {
+                using var fs = SaveDlg.OpenFile();
+                // Convert array data into CSV format.
+                using StreamWriter outfile = new StreamWriter(@"D:\output.csv");
+                for (int i = 0; i < _plotData.Length; i++)
+                {
+                    string content = "";
+                    for (int j = 0; j < _plotData[i].Length; j++)
+                    {
+                        content += _plotData[i][j].ToString("#.00") + "\t";
+                    }
+                    //trying to write data to csv
+                    outfile.WriteLine(content);
+                    
+                }
+            }
+
+        }
+
         private void toolStripMain_Connect_CheckedChanged(object sender, EventArgs e)
         {
             if (toolStripMain_Connect.Checked == true)
@@ -316,18 +358,16 @@ namespace ErgoLux
                 myFtdiDevice.DataReceived += OnDataReceived;
                 if (myFtdiDevice.Write(ClassT10.Command_54))
                 {
-                    System.Threading.Thread.Sleep(500);
+                    //System.Threading.Thread.Sleep(500);
                     //myFtdiDevice.ClearBuffer();
                     this.statusStripIconExchange.Image = _sett.Icon_Data;
                     m_timer.Start();
                 }
             }
-            else
+            else if (toolStripMain_Connect.Checked == false)
             {
                 toolStripMain_Disconnect.Enabled = false;
-                this.statusStripIconExchange.Image.Dispose();
-                //toolStripMain_Data.Checked = false;
-                //DisconnectKinect();
+                this.statusStripIconExchange.Image = null;
             }
         }
 
@@ -335,7 +375,6 @@ namespace ErgoLux
         {
             m_timer.Stop();
             toolStripMain_Connect.Checked = false;
-            this.statusStripIconExchange.Image.Dispose();
             myFtdiDevice.DataReceived -= OnDataReceived;
 
             // Shows plots full data
@@ -419,7 +458,7 @@ namespace ErgoLux
 
                     // Ratios plot
                     _plotRatio = new double[3][];
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         _plotRatio[i] = new double[_sett.Plot_ArrayPoints];
                         formsPlot4.plt.PlotSignal(_plotRatio[i], sampleRate: _sett.T10_Frequency, label: (i == 0 ? "Max/Min" : (i == 1 ? "Max/Average" : "Min/Average")));
@@ -427,7 +466,7 @@ namespace ErgoLux
 
                     formsPlot4.plt.AxisAuto(horizontalMargin: 0);
                     formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
-                    formsPlot3.plt.Colorset(ScottPlot.Drawing.Colorset.Aurora);
+                    formsPlot4.plt.Colorset(ScottPlot.Drawing.Colorset.Aurora);
                 }
                 else
                 {
@@ -461,11 +500,21 @@ namespace ErgoLux
         private void Plots_Update(int sensor, double value)
         {
             // Resize arrays if necessary
-            int factor = _sett.Plot_ArrayPoints * (_nPoints + 10) / _sett.Plot_ArrayPoints;
-            if (factor > _plotData[0].Length)
+            int factor = (_nPoints + 10) / _sett.Plot_ArrayPoints;
+            factor *= _sett.Plot_ArrayPoints;
+            if (factor > _plotData[0].Length-1)
             {
+                System.Diagnostics.Debug.Print("The current factor is: {0}", factor);
+                System.Diagnostics.Debug.Print("The new factor is: {0}", factor + _sett.Plot_ArrayPoints);
                 for (int i = 0; i < _plotData.Length; i++)
-                    Array.Resize<double>(ref _plotData[i], factor * _sett.Plot_ArrayPoints);
+                {
+                    Array.Resize<double>(ref _plotData[i], factor + _sett.Plot_ArrayPoints);
+                }
+                for (int i = 0; i < _plotAverage.Length; i++)
+                {
+                    Array.Resize<double>(ref _plotAverage[i], factor + _sett.Plot_ArrayPoints);
+                    Array.Resize<double>(ref _plotRatio[i], factor + _sett.Plot_ArrayPoints);
+                }
                 //Array.Copy(_plotData[0], 1, _plotData[0], 0, _plotData[0].Length - 1);
                 _sett.Plot_ArrayPoints *= factor;
             }
@@ -503,7 +552,7 @@ namespace ErgoLux
                 formsPlot1.plt.Axis(y1: 0);
                 formsPlot3.plt.Axis(y1: 0);
                 formsPlot4.plt.Axis(y1: 0);
-                if (_nPoints / _sett.T10_Frequency >= _sett.Plot_WindowPoints)
+                if (_nPoints / _sett.T10_Frequency >= formsPlot1.plt.Axis()[1])
                 {
                     formsPlot1.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2, y1: 0);
                     formsPlot3.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2, y1: 0);
@@ -565,7 +614,13 @@ namespace ErgoLux
             try
             {
                 var jsonString = File.ReadAllText(_sett.FileName);
-                _sett = JsonSerializer.Deserialize<ClassSettings>(jsonString);
+                var settings = JsonSerializer.Deserialize<ClassSettings>(jsonString);
+                settings.Icon_Close = _sett.Icon_Close;
+                settings.Icon_Data = _sett.Icon_Data;
+                settings.Icon_Open = _sett.Icon_Open;
+                settings.FileName = _sett.FileName;
+                settings.Path = _sett.Path;
+                _sett = settings;
 
                 this.StartPosition = FormStartPosition.Manual;
                 this.DesktopLocation = new Point(_sett.Wnd_Left, _sett.Wnd_Top);
@@ -603,5 +658,7 @@ namespace ErgoLux
         }
 
         #endregion Program settings
+
+        
     }
 }
