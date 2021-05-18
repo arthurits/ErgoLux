@@ -23,7 +23,9 @@ namespace ErgoLux
         {
             receivedDataEvent = new AutoResetEvent(false);
             FTDI.FT_STATUS ftStatus = base.SetEventNotification(FTDI.FT_EVENTS.FT_EVENT_RXCHAR, receivedDataEvent);
-            
+
+            // Try to replace with Task approach
+            // https://blog.lextudio.com/how-to-replace-backgroundworker-with-async-await-and-tasks-80d7c8ed89dc
             dataReceivedHandler = new BackgroundWorker();
             dataReceivedHandler.DoWork += ReadData_KonicaT10;
             if (!dataReceivedHandler.IsBusy)
@@ -60,7 +62,7 @@ namespace ErgoLux
         /// <param name="xOff">Off Ascii char value</param>
         /// <param name="readTimeOut">Read timeout value in ms. A value of 0 indicates an infinite timeout.</param>
         /// <param name="writeTimeOut">Write timeout value in ms. A value of 0 indicates an infinite timeout.</param>
-        /// <returns>True if successful, false otherwise</returns>
+        /// <returns><see langword="True"/> if successful, false otherwise</returns>
         public bool OpenDevice(string description = null, uint? index = null, uint? location = null, string serialNumber = null, int? baud = 9600, int? dataBits = 7, int? stopBits = 1, int? parity = 2, int? flowControl = 400, int? xOn = 10, int? xOff = 13, uint readTimeOut = 0, uint writeTimeOut = 0)
         {
             // FTDI connection code

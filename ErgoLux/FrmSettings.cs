@@ -16,10 +16,11 @@ namespace ErgoLux
     {
         private int[] _data = new int[10];
         private string _deviceType;
+        private string _deviceID;
         private ClassSettings _settings;
 
-        public int[] GetData { get => _data; }
         public string GetDeviceType { get => _deviceType; }
+        public string GetDeviceID { get => _deviceID; }
 
         public FrmSettings()
         {
@@ -216,6 +217,7 @@ namespace ErgoLux
             //_data[9] = Convert.ToInt32(txtHz.Text);   // Sample rate
 
             _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
+            _deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
 
             // Save to class settings
             _settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);

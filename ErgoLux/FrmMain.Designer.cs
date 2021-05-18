@@ -42,6 +42,7 @@ namespace ErgoLux
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusStripLabelType = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelID = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripLabelLocation = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripIconOpen = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripIconExchange = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelXtras = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,6 +55,7 @@ namespace ErgoLux
             this.statusStripLabelAngle = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.toolStripMain_Exit = new System.Windows.Forms.ToolStripButton();
+            this.toolStripMain_Save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMain_Connect = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain_Disconnect = new System.Windows.Forms.ToolStripButton();
@@ -70,13 +72,14 @@ namespace ErgoLux
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.formsPlot3 = new ScottPlot.FormsPlot();
             this.formsPlot4 = new ScottPlot.FormsPlot();
-            this.toolStripMain_Save = new System.Windows.Forms.ToolStripButton();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // tspTop
@@ -147,6 +150,7 @@ namespace ErgoLux
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusStripLabelType,
             this.statusStripLabelID,
+            this.statusStripLabelLocation,
             this.statusStripIconOpen,
             this.statusStripIconExchange,
             this.statusStripLabelXtras,
@@ -179,13 +183,23 @@ namespace ErgoLux
             // statusStripLabelID
             // 
             this.statusStripLabelID.AutoSize = false;
-            this.statusStripLabelID.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelID.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelID.Name = "statusStripLabelID";
             this.statusStripLabelID.Size = new System.Drawing.Size(150, 23);
-            this.statusStripLabelID.Text = "Location ID";
+            this.statusStripLabelID.Text = "Device ID";
             this.statusStripLabelID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.statusStripLabelID.ToolTipText = "T-10A location ID";
+            this.statusStripLabelID.ToolTipText = "Device ID";
+            // 
+            // statusStripLabelLocation
+            // 
+            this.statusStripLabelLocation.AutoSize = false;
+            this.statusStripLabelLocation.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.statusStripLabelLocation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusStripLabelLocation.Name = "statusStripLabelLocation";
+            this.statusStripLabelLocation.Size = new System.Drawing.Size(150, 23);
+            this.statusStripLabelLocation.Text = "Location ID";
+            this.statusStripLabelLocation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.statusStripLabelLocation.ToolTipText = "T-10A location ID";
             // 
             // statusStripIconOpen
             // 
@@ -212,7 +226,7 @@ namespace ErgoLux
             // 
             this.statusStripLabelXtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelXtras.Name = "statusStripLabelXtras";
-            this.statusStripLabelXtras.Size = new System.Drawing.Size(329, 23);
+            this.statusStripLabelXtras.Size = new System.Drawing.Size(179, 23);
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -332,6 +346,16 @@ namespace ErgoLux
             this.toolStripMain_Exit.ToolTipText = "Exit application";
             this.toolStripMain_Exit.Click += new System.EventHandler(this.toolStripMain_Exit_Click);
             // 
+            // toolStripMain_Save
+            // 
+            this.toolStripMain_Save.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripMain_Save.Name = "toolStripMain_Save";
+            this.toolStripMain_Save.Size = new System.Drawing.Size(39, 69);
+            this.toolStripMain_Save.Text = "Save";
+            this.toolStripMain_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripMain_Save.ToolTipText = "Save data";
+            this.toolStripMain_Save.Click += new System.EventHandler(this.toolStripMain_Save_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -446,6 +470,7 @@ namespace ErgoLux
             this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.formsPlot3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.formsPlot4, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox3, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 96);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -494,15 +519,16 @@ namespace ErgoLux
             this.formsPlot4.Size = new System.Drawing.Size(368, 213);
             this.formsPlot4.TabIndex = 5;
             // 
-            // toolStripMain_Save
+            // pictureBox3
             // 
-            this.toolStripMain_Save.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripMain_Save.Name = "toolStripMain_Save";
-            this.toolStripMain_Save.Size = new System.Drawing.Size(39, 69);
-            this.toolStripMain_Save.Text = "Save";
-            this.toolStripMain_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripMain_Save.ToolTipText = "Save data";
-            this.toolStripMain_Save.Click += new System.EventHandler(this.toolStripMain_Save_Click);
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox3.Location = new System.Drawing.Point(376, 218);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(150, 219);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox3.TabIndex = 6;
+            this.pictureBox3.TabStop = false;
             // 
             // FrmMain
             // 
@@ -533,6 +559,7 @@ namespace ErgoLux
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -556,7 +583,7 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripMain_Settings;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelID;
+        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelLocation;
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconOpen;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelData;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelMirror;
@@ -581,6 +608,8 @@ namespace ErgoLux
         private ScottPlot.FormsPlot formsPlot3;
         private ScottPlot.FormsPlot formsPlot4;
         private System.Windows.Forms.ToolStripButton toolStripMain_Save;
+        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelID;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
 

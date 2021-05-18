@@ -42,8 +42,15 @@ namespace ErgoLux
         [JsonPropertyName("Sample frequency")]
         public int T10_Frequency { get; set; }
 
+        /// <summary>
+        /// Number of points the array can store
+        /// </summary>
         [JsonPropertyName("Array points")]
         public int Plot_ArrayPoints { get; set; }
+        
+        /// <summary>
+        /// Number of points to be shown in the plots
+        /// </summary>
         [JsonPropertyName("Plots moving window points")]
         public int Plot_WindowPoints { get; set; }
         [JsonPropertyName("Show illuminance plot")]
@@ -55,18 +62,37 @@ namespace ErgoLux
         [JsonPropertyName("Show ratios plot")]
         public bool Plot_ShowRatios { get; set; }
 
+        /// <summary>
+        /// Icon indicating the T-10 is opened and ready to be sent commands
+        /// </summary>
         [JsonIgnore]
         public System.Drawing.Bitmap Icon_Open { get; set; }
+        /// <summary>
+        /// Icon indicating the T-10 is closed
+        /// </summary>
         [JsonIgnore]
         public System.Drawing.Bitmap Icon_Close { get; set; }
+        /// <summary>
+        /// Icon indicating the T-10 receiving and sending data
+        /// </summary>
         [JsonIgnore]
         public System.Drawing.Bitmap Icon_Data { get; set; }
-
+        
+        /// <summary>
+        /// Stores the settings file name
+        /// </summary>
         [JsonIgnore]
         public string FileName { get; set; }
-
+        /// <summary>
+        /// Absolute path of the executable
+        /// </summary>
         [JsonIgnore]
         public string Path { get; set; }
+        /// <summary>
+        /// Number of columns reserved for computed (not measured) values
+        /// </summary>
+        [JsonIgnore]
+        public int ArrayFixedColumns { get; set; }
 
         public ClassSettings()
         {
@@ -94,6 +120,8 @@ namespace ErgoLux
             Plot_ShowRatios = true;
 
             FileName = "configuration.json";
+            Path = string.Empty;
+            ArrayFixedColumns = 6;
         }
 
         public ClassSettings(string path)
