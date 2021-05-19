@@ -66,11 +66,11 @@ namespace System.Windows.Forms
         }
 
         /// <summary>
-		/// Paint Function
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
-		{
+	/// Paint function
+	/// </summary>
+	/// <param name="e"></param>
+	protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
+	{
             // Only render if the state is checked
             if (_checked)
             {
@@ -80,7 +80,7 @@ namespace System.Windows.Forms
 
                 // fill the entire button offset by 1,1 and height/width subtracted by 2 used as the fill color
                 int backgroundHeight = Size.Height - 2;
-                int backgroundWidth = Size.Width - 6;
+                int backgroundWidth = Size.Width - 6;	// Check the label's borders to set up this substraction
                 System.Drawing.Rectangle rectBackground = new System.Drawing.Rectangle(3, 1, backgroundWidth, backgroundHeight);
                 e.Graphics.FillRectangle(_checkedBackground, rectBackground);
             }
