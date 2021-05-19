@@ -139,5 +139,22 @@ namespace ErgoLux
             if (Icon_Close != null) Icon_Close.Dispose();
             if (Icon_Data != null) Icon_Data.Dispose();
         }
+
+        /// <summary>
+        /// Initializes all the fields that are JsonIgnored
+        /// </summary>
+        public void InitializeJsonIgnore(string path = null)
+        {
+            FileName = "configuration.json";
+            Path = path ?? string.Empty;
+            ArrayFixedColumns = 6;
+
+            if(Path != string.Empty)
+            {
+                if (System.IO.File.Exists(Path + @"\images\close.ico")) Icon_Close = new System.Drawing.Icon(Path + @"\images\close.ico", 16, 16).ToBitmap();
+                if (System.IO.File.Exists(Path + @"\images\open.ico")) Icon_Open = new System.Drawing.Icon(Path + @"\images\open.ico", 16, 16).ToBitmap();
+                if (System.IO.File.Exists(Path + @"\images\exchange.ico")) Icon_Data = new System.Drawing.Icon(Path + @"\images\exchange.ico", 16, 16).ToBitmap();
+            }
+        }
     }
 }

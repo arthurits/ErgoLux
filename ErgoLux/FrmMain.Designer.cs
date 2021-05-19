@@ -52,7 +52,7 @@ namespace ErgoLux
             this.statusStripLabelPlots = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelSkeleton = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelJoint = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelAngle = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripLabelAngle = new System.Windows.Forms.ToolStripStatusLabelEx();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.toolStripMain_Exit = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain_Save = new System.Windows.Forms.ToolStripButton();
@@ -167,6 +167,7 @@ namespace ErgoLux
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.statusStrip.ShowItemToolTips = true;
             this.statusStrip.Size = new System.Drawing.Size(934, 28);
+            this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -590,7 +591,7 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelPlots;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelSkeleton;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelJoint;
-        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelAngle;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelAngle;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelXtras;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelVideo;
         private ScottPlot.FormsPlot formsPlot1;

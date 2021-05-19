@@ -115,6 +115,7 @@ namespace ErgoLux
         {
             //if (File.Exists(_path + @"\images\close.ico")) this.statusStripIconOpen.Image = new Icon(_path + @"\images\close.ico", 16, 16).ToBitmap();
             this.statusStripIconOpen.Image = _sett.Icon_Close;
+            this.statusStrip.Renderer = new customRenderer(Brushes.SteelBlue, Brushes.LightSkyBlue);
             return;
         }
 
@@ -288,6 +289,8 @@ namespace ErgoLux
 
         private void toolStripMain_Save_Click(object sender, EventArgs e)
         {
+            if (_nPoints == 0 || _plotData == null) return;
+
             // Displays a SaveFileDialog so the user can save the Image  
             SaveFileDialog SaveDlg = new SaveFileDialog
             {
@@ -419,20 +422,30 @@ namespace ErgoLux
                     Plots_DataBinding();
                     
                     // Show the legends into the picture boxes
-                    pictureBox1.Image = formsPlot1.plt.GetLegendBitmap();
-                    var legend3 = formsPlot3.plt.GetLegendBitmap();
-                    var legend4 = formsPlot4.plt.GetLegendBitmap();
+                    //pictureBox1.Image = formsPlot1.plt.GetLegendBitmap();
+                    var legendA = formsPlot1.plt.GetLegendBitmap();
+                    var legendB = formsPlot2.plt.GetLegendBitmap();
+                    var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + 10);
+                    using Graphics GraphicsA = Graphics.FromImage(bitmap);
+                    GraphicsA.DrawImage(legendA, 0, 0);
+                    GraphicsA.DrawImage(legendB, 0, legendA.Height + 10);
+                    pictureBox1.Image = bitmap;
 
-                    var bitmap = new Bitmap(Math.Max(legend3.Width, legend4.Width), legend3.Height + legend4.Height);
-                    using Graphics g = Graphics.FromImage(bitmap);
-                    g.DrawImage(legend3, 0, 0);
-                    g.DrawImage(legend4, 0, legend3.Height);
+                    legendA = formsPlot3.plt.GetLegendBitmap();
+                    legendB = formsPlot4.plt.GetLegendBitmap();
+                    bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + 10);
+                    using Graphics GraphicsB = Graphics.FromImage(bitmap);
+                    GraphicsB.DrawImage(legendA, 0, 0);
+                    GraphicsB.DrawImage(legendB, 0, legendA.Height + 10);
                     pictureBox3.Image = bitmap;
                 }
                 else
                 {
                     this.statusStripIconOpen.Image = _sett.Icon_Close;
-                    MessageBox.Show("Could not open the device", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show("Could not open the device", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
 
             }
@@ -503,15 +516,23 @@ namespace ErgoLux
             formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0, y2: 1);
         }
 
-        // Clears all data in the plots
+        /// <summary>
+        /// Clears all data in the plots and sets the private variable _nPoints to 0
+        /// </summary>
         private void Plots_Clear()
         {
+            _nPoints = 0;
             formsPlot1.plt.Clear();
             formsPlot2.plt.Clear();
             formsPlot3.plt.Clear();
             formsPlot4.plt.Clear();
         }
 
+        /// <summary>
+        /// Updates the plots with a new value
+        /// </summary>
+        /// <param name="sensor">Sensor number</param>
+        /// <param name="value">New illuminance value</param>
         private void Plots_Update(int sensor, double value)
         {
             // Resize arrays if necessary
