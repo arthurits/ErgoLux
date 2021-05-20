@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace System.Windows.Forms
 {
+    /// <summary>
+    /// <cref>ToolStripStatusLabel</cref> extension implmenting cheched status
+    /// </summary>
     class ToolStripStatusLabelEx : System.Windows.Forms.ToolStripStatusLabel
     {
         // Another example could be
@@ -25,7 +28,7 @@ namespace System.Windows.Forms
             _checkedBackground = System.Drawing.Brushes.LightSkyBlue;
             BackColor = System.Drawing.Color.Transparent;
         }
-
+        
         /// <summary>
         /// Class constructor
         /// </summary>
@@ -61,16 +64,16 @@ namespace System.Windows.Forms
             set
             {
                 _checked = value;
-                Invalidate();       // Force repainting the client area
+                Invalidate();       // Force repainting of the client area
             }
         }
 
         /// <summary>
-	/// Paint function
-	/// </summary>
-	/// <param name="e"></param>
-	protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
-	{
+		/// Paint function
+		/// </summary>
+		/// <param name="e"></param>
+		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
+		{
             // Only render if the state is checked
             if (_checked)
             {
@@ -80,13 +83,22 @@ namespace System.Windows.Forms
 
                 // fill the entire button offset by 1,1 and height/width subtracted by 2 used as the fill color
                 int backgroundHeight = Size.Height - 2;
-                int backgroundWidth = Size.Width - 6;	// Check the label's borders to set up this substraction
+                int backgroundWidth = Size.Width - 6;   // Check the label's borders to set up this substraction
                 System.Drawing.Rectangle rectBackground = new System.Drawing.Rectangle(3, 1, backgroundWidth, backgroundHeight);
                 e.Graphics.FillRectangle(_checkedBackground, rectBackground);
             }
 
             base.OnPaint(e);    
 		}
+
+        /// <summary>
+        /// Implement hover renderin? Or use a CustomRender?
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseHover(EventArgs e)
+        {
+            base.OnMouseHover(e);
+        }
 
         protected override void OnClick(EventArgs e)
         {
