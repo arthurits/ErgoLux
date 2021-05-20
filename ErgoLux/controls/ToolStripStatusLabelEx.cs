@@ -19,6 +19,8 @@ namespace System.Windows.Forms
         private System.Drawing.Brush _border;
         private System.Drawing.Brush _checkedBackground;
 
+        public event EventHandler CheckedChanged;
+
         /// <summary>
         /// Class constructor. Sets SteelBlue and LightSkyBlue as defaults colors
         /// </summary>
@@ -65,7 +67,14 @@ namespace System.Windows.Forms
             {
                 _checked = value;
                 Invalidate();       // Force repainting of the client area
+                OnCheckedChanged(new EventArgs());
             }
+        }
+
+        protected virtual void OnCheckedChanged(EventArgs e)
+        {
+            EventHandler handler = CheckedChanged;
+            handler?.Invoke(this, e);
         }
 
         /// <summary>
@@ -78,13 +87,13 @@ namespace System.Windows.Forms
             if (_checked)
             {
                 // fill the entire button with a color (will be used as a border)
-                System.Drawing.Rectangle rectButtonFill = new System.Drawing.Rectangle(System.Drawing.Point.Empty, new System.Drawing.Size(Size.Width, Size.Height));
+                System.Drawing.Rectangle rectButtonFill = new System.Drawing.Rectangle(System.Drawing.Point.Empty, new System.Drawing.Size(ContentRectangle.Size.Width, ContentRectangle.Size.Height));
                 e.Graphics.FillRectangle(_border, rectButtonFill);
 
                 // fill the entire button offset by 1,1 and height/width subtracted by 2 used as the fill color
-                int backgroundHeight = Size.Height - 2;
-                int backgroundWidth = Size.Width - 6;   // Check the label's borders to set up this substraction
-                System.Drawing.Rectangle rectBackground = new System.Drawing.Rectangle(3, 1, backgroundWidth, backgroundHeight);
+                int backgroundHeight = ContentRectangle.Size.Height - 2;
+                int backgroundWidth = ContentRectangle.Size.Width - 2;   // Check the label's borders to set up this substraction
+                System.Drawing.Rectangle rectBackground = new System.Drawing.Rectangle(1, 1, backgroundWidth, backgroundHeight);
                 e.Graphics.FillRectangle(_checkedBackground, rectBackground);
             }
 
@@ -92,7 +101,7 @@ namespace System.Windows.Forms
 		}
 
         /// <summary>
-        /// Implement hover renderin? Or use a CustomRender?
+        /// Implement hover rendering? Or use a CustomRender?
         /// </summary>
         /// <param name="e"></param>
         protected override void OnMouseHover(EventArgs e)
@@ -102,9 +111,9 @@ namespace System.Windows.Forms
 
         protected override void OnClick(EventArgs e)
         {
-            _checked = !_checked;
+            //_checked = !_checked;
             base.OnClick(e);
         }
-
+        
     }
 }

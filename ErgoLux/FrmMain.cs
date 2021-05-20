@@ -114,8 +114,21 @@ namespace ErgoLux
         private void InitializeStatusStrip()
         {
             //if (File.Exists(_path + @"\images\close.ico")) this.statusStripIconOpen.Image = new Icon(_path + @"\images\close.ico", 16, 16).ToBitmap();
-            this.statusStripIconOpen.Image = _sett.Icon_Close;
-            this.statusStrip.Renderer = new customRenderer(Brushes.SteelBlue, Brushes.LightSkyBlue);
+            statusStripIconOpen.Image = _sett.Icon_Close;
+            
+            statusStripLabelRaw.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
+            statusStripLabelRaw.Checked = _sett.Plot_ShowRawData;
+
+            statusStripLabelRadar.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
+            statusStripLabelRadar.Checked = _sett.Plot_ShowRadar;
+            
+            statusStripLabelMax.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
+            statusStripLabelMax.Checked = _sett.Plot_ShowAverage;
+            
+            statusStripLabelRatio.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
+            statusStripLabelRatio.Checked = _sett.Plot_ShowRatios;
+            
+            statusStrip.Renderer = new customRenderer(Brushes.SteelBlue, Brushes.LightSkyBlue);
             return;
         }
 
@@ -289,7 +302,15 @@ namespace ErgoLux
 
         private void toolStripMain_Save_Click(object sender, EventArgs e)
         {
-            if (_nPoints == 0 || _plotData == null) return;
+            // Exit if no data has been received or the matrix is still un-initialized
+            if (_nPoints == 0 || _plotData == null)
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("There was no data available to be saved.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                return;
+            }
 
             // Displays a SaveFileDialog so the user can save the Image  
             SaveFileDialog SaveDlg = new SaveFileDialog
@@ -313,6 +334,8 @@ namespace ErgoLux
             {
                 // Convert array data into CSV format.
                 using var outfile = new StreamWriter(SaveDlg.OpenFile());
+                
+                // Save the header text into the file
                 string content = string.Empty;
                 outfile.WriteLine("ErgoLux data");
                 outfile.WriteLine("Data exported on: {0}", DateTime.Now.ToString("F"));
@@ -324,6 +347,7 @@ namespace ErgoLux
                 content += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
                 outfile.WriteLine(content);
 
+                // Save the numerical values
                 for (int j = 0; j < _nPoints; j++)
                 {
                     content = string.Empty;
@@ -460,13 +484,44 @@ namespace ErgoLux
 
         #region statusSrip events
         
-        private void statusStripLabelAngle_Click(object sender, EventArgs e)
+        private void statusStripLabelPlots_CheckedChanged (object sender, EventArgs e)
         {
-            if (statusStripLabelAngle.ForeColor == Color.Green)
-                statusStripLabelAngle.ForeColor = Color.LightGray;
-            else
-                statusStripLabelAngle.ForeColor = Color.Green;
-            
+            if (sender is ToolStripStatusLabelEx)
+            {
+                var label = sender as ToolStripStatusLabelEx;
+
+                // Change the text color
+                if (label.Checked)
+                    label.ForeColor = Color.Black;
+                else
+                    label.ForeColor = Color.LightGray;
+            }
+        }
+
+        private void statusStripLabelPlots_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripStatusLabelEx)
+            {
+                var label = sender as ToolStripStatusLabelEx;
+                label.Checked = !label.Checked;
+
+                // Update the settings
+                switch (label.Text)
+                {
+                    case "W":
+                        _sett.Plot_ShowRawData = label.Checked;
+                        break;
+                    case "D":
+                        _sett.Plot_ShowRadar = label.Checked;
+                        break;
+                    case "A":
+                        _sett.Plot_ShowAverage = label.Checked;
+                        break;
+                    case "R":
+                        _sett.Plot_ShowRatios = label.Checked;
+                        break;
+                }
+            }
         }
 
         #endregion statusSrip events

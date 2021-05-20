@@ -46,13 +46,10 @@ namespace ErgoLux
             this.statusStripIconOpen = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripIconExchange = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelXtras = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelVideo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelData = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelMirror = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelPlots = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelSkeleton = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelJoint = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelAngle = new System.Windows.Forms.ToolStripStatusLabelEx();
+            this.statusStripLabelRaw = new System.Windows.Forms.ToolStripStatusLabelEx();
+            this.statusStripLabelRadar = new System.Windows.Forms.ToolStripStatusLabelEx();
+            this.statusStripLabelMax = new System.Windows.Forms.ToolStripStatusLabelEx();
+            this.statusStripLabelRatio = new System.Windows.Forms.ToolStripStatusLabelEx();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.toolStripMain_Exit = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain_Save = new System.Windows.Forms.ToolStripButton();
@@ -154,13 +151,10 @@ namespace ErgoLux
             this.statusStripIconOpen,
             this.statusStripIconExchange,
             this.statusStripLabelXtras,
-            this.statusStripLabelVideo,
-            this.statusStripLabelData,
-            this.statusStripLabelMirror,
-            this.statusStripLabelPlots,
-            this.statusStripLabelSkeleton,
-            this.statusStripLabelJoint,
-            this.statusStripLabelAngle});
+            this.statusStripLabelRaw,
+            this.statusStripLabelRadar,
+            this.statusStripLabelMax,
+            this.statusStripLabelRatio});
             this.statusStrip.Location = new System.Drawing.Point(0, 583);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
@@ -225,96 +219,70 @@ namespace ErgoLux
             // 
             // statusStripLabelXtras
             // 
+            this.statusStripLabelXtras.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelXtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelXtras.Name = "statusStripLabelXtras";
-            this.statusStripLabelXtras.Size = new System.Drawing.Size(179, 23);
+            this.statusStripLabelXtras.Size = new System.Drawing.Size(234, 23);
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // statusStripLabelVideo
+            // statusStripLabelRaw
             // 
-            this.statusStripLabelVideo.AutoSize = false;
-            this.statusStripLabelVideo.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.statusStripLabelVideo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelVideo.Enabled = false;
-            this.statusStripLabelVideo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelVideo.Name = "statusStripLabelVideo";
-            this.statusStripLabelVideo.Size = new System.Drawing.Size(22, 23);
-            this.statusStripLabelVideo.Text = "V";
-            this.statusStripLabelVideo.ToolTipText = "Video stream";
+            this.statusStripLabelRaw.AutoSize = false;
+            this.statusStripLabelRaw.BackColor = System.Drawing.Color.Transparent;
+            this.statusStripLabelRaw.Checked = false;
+            this.statusStripLabelRaw.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusStripLabelRaw.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelRaw.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelRaw.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
+            this.statusStripLabelRaw.Name = "statusStripLabelRaw";
+            this.statusStripLabelRaw.Size = new System.Drawing.Size(28, 23);
+            this.statusStripLabelRaw.Text = "W";
+            this.statusStripLabelRaw.ToolTipText = "Raw data";
+            this.statusStripLabelRaw.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
-            // statusStripLabelData
+            // statusStripLabelRadar
             // 
-            this.statusStripLabelData.AutoSize = false;
-            this.statusStripLabelData.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.statusStripLabelData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelData.Enabled = false;
-            this.statusStripLabelData.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelData.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.statusStripLabelData.Name = "statusStripLabelData";
-            this.statusStripLabelData.Size = new System.Drawing.Size(23, 23);
-            this.statusStripLabelData.Text = "D";
-            this.statusStripLabelData.ToolTipText = "Saving data";
+            this.statusStripLabelRadar.AutoSize = false;
+            this.statusStripLabelRadar.BackColor = System.Drawing.Color.Transparent;
+            this.statusStripLabelRadar.Checked = false;
+            this.statusStripLabelRadar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusStripLabelRadar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelRadar.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelRadar.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
+            this.statusStripLabelRadar.Name = "statusStripLabelRadar";
+            this.statusStripLabelRadar.Size = new System.Drawing.Size(28, 23);
+            this.statusStripLabelRadar.Text = "D";
+            this.statusStripLabelRadar.ToolTipText = "Saving data";
+            this.statusStripLabelRadar.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
-            // statusStripLabelMirror
+            // statusStripLabelMax
             // 
-            this.statusStripLabelMirror.AutoSize = false;
-            this.statusStripLabelMirror.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.statusStripLabelMirror.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelMirror.Enabled = false;
-            this.statusStripLabelMirror.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelMirror.Name = "statusStripLabelMirror";
-            this.statusStripLabelMirror.Size = new System.Drawing.Size(26, 23);
-            this.statusStripLabelMirror.Text = "M";
-            this.statusStripLabelMirror.ToolTipText = "Mirror Kinect video";
+            this.statusStripLabelMax.AutoSize = false;
+            this.statusStripLabelMax.BackColor = System.Drawing.Color.Transparent;
+            this.statusStripLabelMax.Checked = false;
+            this.statusStripLabelMax.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusStripLabelMax.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelMax.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
+            this.statusStripLabelMax.Name = "statusStripLabelMax";
+            this.statusStripLabelMax.Size = new System.Drawing.Size(28, 23);
+            this.statusStripLabelMax.Text = "A";
+            this.statusStripLabelMax.ToolTipText = "Max, average and min";
+            this.statusStripLabelMax.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
-            // statusStripLabelPlots
+            // statusStripLabelRatio
             // 
-            this.statusStripLabelPlots.AutoSize = false;
-            this.statusStripLabelPlots.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.statusStripLabelPlots.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelPlots.Enabled = false;
-            this.statusStripLabelPlots.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelPlots.Name = "statusStripLabelPlots";
-            this.statusStripLabelPlots.Size = new System.Drawing.Size(26, 23);
-            this.statusStripLabelPlots.Text = "P";
-            this.statusStripLabelPlots.ToolTipText = "Plotting data";
-            // 
-            // statusStripLabelSkeleton
-            // 
-            this.statusStripLabelSkeleton.AutoSize = false;
-            this.statusStripLabelSkeleton.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.statusStripLabelSkeleton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelSkeleton.Enabled = false;
-            this.statusStripLabelSkeleton.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelSkeleton.Name = "statusStripLabelSkeleton";
-            this.statusStripLabelSkeleton.Size = new System.Drawing.Size(26, 23);
-            this.statusStripLabelSkeleton.Text = "S";
-            this.statusStripLabelSkeleton.ToolTipText = "Drawing skeleton";
-            // 
-            // statusStripLabelJoint
-            // 
-            this.statusStripLabelJoint.AutoSize = false;
-            this.statusStripLabelJoint.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
-            this.statusStripLabelJoint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelJoint.Enabled = false;
-            this.statusStripLabelJoint.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelJoint.Name = "statusStripLabelJoint";
-            this.statusStripLabelJoint.Size = new System.Drawing.Size(26, 23);
-            this.statusStripLabelJoint.Text = "J";
-            this.statusStripLabelJoint.ToolTipText = "Drawing joints";
-            // 
-            // statusStripLabelAngle
-            // 
-            this.statusStripLabelAngle.AutoSize = false;
-            this.statusStripLabelAngle.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
-            this.statusStripLabelAngle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelAngle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelAngle.Name = "statusStripLabelAngle";
-            this.statusStripLabelAngle.Size = new System.Drawing.Size(26, 23);
-            this.statusStripLabelAngle.Text = "A";
-            this.statusStripLabelAngle.ToolTipText = "Drawing angles";
-            this.statusStripLabelAngle.Click += new System.EventHandler(this.statusStripLabelAngle_Click);
+            this.statusStripLabelRatio.AutoSize = false;
+            this.statusStripLabelRatio.BackColor = System.Drawing.Color.Transparent;
+            this.statusStripLabelRatio.Checked = false;
+            this.statusStripLabelRatio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusStripLabelRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelRatio.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
+            this.statusStripLabelRatio.Name = "statusStripLabelRatio";
+            this.statusStripLabelRatio.Size = new System.Drawing.Size(28, 23);
+            this.statusStripLabelRatio.Text = "R";
+            this.statusStripLabelRatio.ToolTipText = "Illuminance ratios";
+            this.statusStripLabelRatio.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
             // toolStripMain
             // 
@@ -588,12 +556,9 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconOpen;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelData;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelMirror;
-        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelPlots;
-        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelSkeleton;
-        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelJoint;
-        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelAngle;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRatio;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelXtras;
-        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelVideo;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRaw;
         private ScottPlot.FormsPlot formsPlot1;
         private ScottPlot.FormsPlot formsPlot2;
         private System.Windows.Forms.Button BtnConnect;
@@ -611,6 +576,8 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripButton toolStripMain_Save;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelID;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelMax;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRadar;
     }
 }
 
