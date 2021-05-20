@@ -122,7 +122,7 @@ namespace ErgoLux
             string strBBC = strCommand + (strETX ?? string.Empty);
 
             // Xor the digits of strCommand + strETX
-            int nBBC = strBBC.Substring(0, 1)[0];
+            int nBBC = strBBC.Substring(0, 1)[0];   // Better? int nBBC = strBBC[0];
             for (int i = 1; i < strBBC.Length; i++)
             {
                 nBBC ^= strBBC.Substring(i, 1)[0];
