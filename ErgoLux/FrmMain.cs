@@ -23,6 +23,9 @@ namespace ErgoLux
         private ClassSettings _sett;
         private FTDISample myFtdiDevice;
         private double[][] _plotData;
+        private double _max = 0;
+        private double _min = 0;
+        private double _average = 0;
         private double[,] _plotRadar;
         private int _nPoints = 0;
 
@@ -74,7 +77,7 @@ namespace ErgoLux
             //ToolStripNumericUpDown c = new ToolStripNumericUpDown();
             //this.toolStripMain.Items.Add((ToolStripItem)c);
 
-            toolStripMain.Renderer = new customRenderer(Brushes.SteelBlue, Brushes.LightSkyBlue);
+            toolStripMain.Renderer = new customRenderer<ToolStripButton>(Brushes.SteelBlue, Brushes.LightSkyBlue);
 
             //var path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             if (File.Exists(_path + @"\images\exit.ico")) this.toolStripMain_Exit.Image = new Icon(_path + @"\images\exit.ico", 48, 48).ToBitmap();
@@ -128,7 +131,7 @@ namespace ErgoLux
             statusStripLabelRatio.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
             statusStripLabelRatio.Checked = _sett.Plot_ShowRatios;
             
-            statusStrip.Renderer = new customRenderer(Brushes.SteelBlue, Brushes.LightSkyBlue);
+            statusStrip.Renderer = new customRenderer<ToolStripLabel>(Brushes.SteelBlue, Brushes.LightSkyBlue);
             return;
         }
 
@@ -607,7 +610,9 @@ namespace ErgoLux
 
             _plotData[sensor][_nPoints] = value;
             _plotRadar[1, sensor] = value;
-
+            _max = value > _max ? value : _max;
+            _min = value < _min ? value : _min;
+            _average += value;
 
             // Only render when the last sensor value is received
             if (sensor == _sett.T10_NumberOfSensors - 1)
@@ -648,36 +653,42 @@ namespace ErgoLux
 
                 formsPlot1.Render(skipIfCurrentlyRendering: true);
 
-                var average = _plotData[0][_nPoints];
-                var min = _plotData[0][_nPoints];
-                var max = _plotData[0][_nPoints];
+                //var average = _plotData[0][_nPoints];
+                //var min = _plotData[0][_nPoints];
+                //var max = _plotData[0][_nPoints];
 
-                for (int i = 1; i < _sett.T10_NumberOfSensors; i++)
-                {
-                    min = _plotData[i][_nPoints] < min ? _plotData[i][_nPoints] : min;
-                    max = _plotData[i][_nPoints] > max ? _plotData[i][_nPoints] : max;
-                    average += _plotData[i][_nPoints];
-                }
-                average /= _sett.T10_NumberOfSensors;
+                //for (int i = 1; i < _sett.T10_NumberOfSensors; i++)
+                //{
+                //    min = _plotData[i][_nPoints] < min ? _plotData[i][_nPoints] : min;
+                //    max = _plotData[i][_nPoints] > max ? _plotData[i][_nPoints] : max;
+                //    average += _plotData[i][_nPoints];
+                //}
+                //average /= _sett.T10_NumberOfSensors;
+
+                _average /= _sett.T10_NumberOfSensors;
+
                 for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                 {
-                    _plotRadar[0, i] = average;
+                    _plotRadar[0, i] = _average;
                 }
                 formsPlot2.plt.Clear();
                 formsPlot2.plt.PlotRadar(_plotRadar, fillAlpha: 0.5);
                 formsPlot2.Render(skipIfCurrentlyRendering: true);
 
-                _plotData[_sett.T10_NumberOfSensors][_nPoints] = max;
-                _plotData[_sett.T10_NumberOfSensors + 1][_nPoints] = average;
-                _plotData[_sett.T10_NumberOfSensors + 2][_nPoints] = min;
+                _plotData[_sett.T10_NumberOfSensors][_nPoints] = _max;
+                _plotData[_sett.T10_NumberOfSensors + 1][_nPoints] = _average;
+                _plotData[_sett.T10_NumberOfSensors + 2][_nPoints] = _min;
                 formsPlot3.Render(skipIfCurrentlyRendering: true);
 
-                _plotData[_sett.T10_NumberOfSensors + 3][_nPoints] = min / average;
-                _plotData[_sett.T10_NumberOfSensors + 4][_nPoints] = min / max;
-                _plotData[_sett.T10_NumberOfSensors + 5][_nPoints] = average / max;
+                _plotData[_sett.T10_NumberOfSensors + 3][_nPoints] = _min / _average;
+                _plotData[_sett.T10_NumberOfSensors + 4][_nPoints] = _min / _max;
+                _plotData[_sett.T10_NumberOfSensors + 5][_nPoints] = _average / _max;
                 formsPlot4.Render(skipIfCurrentlyRendering: true);
 
                 ++_nPoints;
+                _max = 0.0;
+                _min = 0.0;
+                _average = 0.0;
             }
 
             // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91

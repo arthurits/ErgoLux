@@ -96,7 +96,7 @@ namespace System.Windows.Forms
                 System.Drawing.Rectangle rectBackground = new System.Drawing.Rectangle(1, 1, backgroundWidth, backgroundHeight);
                 e.Graphics.FillRectangle(_checkedBackground, rectBackground);
             }
-
+            
             base.OnPaint(e);    
 		}
 
