@@ -696,11 +696,17 @@ namespace ErgoLux
 
         #region Program settings
 
+        /// <summary>
+        /// Loads all settings from file _sett.FileName into class instance _sett
+        /// Shows MessageBox error if unsuccessful
+        /// </summary>
         private void LoadProgramSettingsJSON()
         {
             try
             {
                 var jsonString = File.ReadAllText(_sett.FileName);
+                //_sett = JsonSerializer.Deserialize<ClassSettings>(jsonString);
+                //_sett.InitializeJsonIgnore(_path);
                 var settings = JsonSerializer.Deserialize<ClassSettings>(jsonString);
                 settings.Icon_Close = _sett.Icon_Close;
                 settings.Icon_Data = _sett.Icon_Data;
@@ -730,6 +736,9 @@ namespace ErgoLux
             }
         }
 
+        /// <summary>
+        /// Saves data from class instance _sett into _sett.FileName
+        /// </summary>
         private void SaveProgramSettingsJSON()
         {
             _sett.Wnd_Left = DesktopLocation.X;
