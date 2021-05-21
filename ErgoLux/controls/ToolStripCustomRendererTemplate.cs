@@ -68,13 +68,13 @@ namespace System.Windows.Forms
                     // fill the entire button with a color (will be used as a border)
                     int buttonHeight = e.Item.Size.Height;
                     int buttonWidth = e.Item.Size.Width;
-                    System.Drawing.Rectangle rectButtonFill = new System.Drawing.Rectangle(System.Drawing.Point.Empty, new System.Drawing.Size(buttonWidth, buttonHeight));
+                    System.Drawing.Rectangle rectButtonFill = new(System.Drawing.Point.Empty, new System.Drawing.Size(buttonWidth, buttonHeight));
                     e.Graphics.FillRectangle(_border, rectButtonFill);
 
                     // fill the entire button offset by 1,1 and height/width subtracted by 2 used as the fill color
                     int backgroundHeight = e.Item.Size.Height - 2;
                     int backgroundWidth = e.Item.Size.Width - 2;
-                    System.Drawing.Rectangle rectBackground = new System.Drawing.Rectangle(1, 1, backgroundWidth, backgroundHeight);
+                    System.Drawing.Rectangle rectBackground = new(1, 1, backgroundWidth, backgroundHeight);
                     e.Graphics.FillRectangle(_checkedBackground, rectBackground);
                 }
                 // if this button is not checked, use the normal render event
