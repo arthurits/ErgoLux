@@ -50,7 +50,6 @@ namespace ErgoLux
             cboDataBits.DataSource = new BindingSource(cboList, null);
             cboDataBits.DisplayMember = "Key";
             cboDataBits.ValueMember = "Value";
-            cboDataBits.SelectedIndex = 0;
 
             // Populate cboStop
             cboList.Clear();
@@ -60,8 +59,7 @@ namespace ErgoLux
             cboStopBits.DataSource = new BindingSource(cboList, null);
             cboStopBits.DisplayMember = "Key";
             cboStopBits.ValueMember = "Value";
-            cboStopBits.SelectedIndex = 0;
-
+            
             // Populate cboParity
             cboList.Clear();
             cboList.Add("None", FTDI.FT_PARITY.FT_PARITY_NONE);
@@ -73,7 +71,6 @@ namespace ErgoLux
             cboParity.DataSource = new BindingSource(cboList, null);
             cboParity.DisplayMember = "Key";
             cboParity.ValueMember = "Value";
-            cboParity.SelectedIndex = 2;
 
             // Populate cboFlowControl
             cboList.Clear();
@@ -85,26 +82,9 @@ namespace ErgoLux
             cboFlowControl.DataSource = new BindingSource(cboList, null);
             cboFlowControl.DisplayMember = "Key";
             cboFlowControl.ValueMember = "Value";
-            cboFlowControl.SelectedIndex = 0;
-
-            txtBaudRate.Text = "9600";
-            txtOn.Text = "11";
-            txtOff.Text = "13";
-            txtHz.Text = "2";
-        }
-
-        public FrmSettings(int[] _settings)
-            :this()
-        {
-            updSensors.Value = _settings[1];
-            txtBaudRate.Text = _settings[2].ToString();
-            cboDataBits.SelectedValue = _settings[3];
-            cboStopBits.SelectedValue = _settings[4];
-            cboParity.SelectedValue = _settings[5];
-            cboFlowControl.SelectedValue = _settings[6];
-            txtOn.Text = _settings[7].ToString();
-            txtOff.Text = _settings[8].ToString();
-            txtHz.Text = _settings[9].ToString();
+            
+            // Set control's default input-values
+            SetDefaultValues();
         }
 
         public FrmSettings(ClassSettings settings)
@@ -196,6 +176,7 @@ namespace ErgoLux
         {
             this.DialogResult = DialogResult.None;
 
+            // Check that a device has been selected from the list
             if (viewDevices.SelectedIndices.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Please select one of the devices from the list.",
@@ -204,20 +185,16 @@ namespace ErgoLux
                     System.Windows.Forms.MessageBoxIcon.Error);
                 return;
             }
-
-            //_data[0] = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);  //Location ID
-            //_data[1] = (int)updSensors.Value;
-            //_data[2] = Convert.ToInt32(txtBaudRate.Text);
-            //_data[3] = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
-            //_data[4] = ((KeyValuePair<string, int>)cboStopBits.SelectedItem).Value;
-            //_data[5] = ((KeyValuePair<string, int>)cboParity.SelectedItem).Value;
-            //_data[6] = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
-            //_data[7] = Convert.ToInt32(txtOn.Text);
-            //_data[8] = Convert.ToInt32(txtOff.Text);
-            //_data[9] = Convert.ToInt32(txtHz.Text);   // Sample rate
-
             _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
             _deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
+
+            // Check that all texboxes have valid values
+            if (!Validation.IsValidRange<int>(txtBaudRate.Text, 0, 9600, true, this)) { txtBaudRate.Focus(); txtBaudRate.SelectAll(); return; }
+            if (!Validation.IsValidRange<int>(txtOn.Text, 0, 255, true, this)) { txtOn.Focus(); txtOn.SelectAll(); return; }
+            if (!Validation.IsValidRange<int>(txtOff.Text, 0, 255, true, this)) { txtOff.Focus(); txtOff.SelectAll(); return; }
+            if (!Validation.IsValidRange<int>(txtHz.Text, 1, 1000, true, this)) { txtHz.Focus(); txtHz.SelectAll(); return; }
+            if (!Validation.IsValidRange<int>(txtArrayPoints.Text, 1, Int32.MaxValue, true, this)) { txtArrayPoints.Focus(); txtArrayPoints.SelectAll(); return; }
+            if (!Validation.IsValidRange<int>(txtPlotWindow.Text, 20, Int32.MaxValue, true, this)) { txtPlotWindow.Focus(); txtPlotWindow.SelectAll(); return; }
 
             // Save to class settings
             _settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
@@ -240,10 +217,54 @@ namespace ErgoLux
 
             this.DialogResult = DialogResult.OK;
         }
+        
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            DialogResult result;
+            using (new CenterWinDialog(this))
+            {
+                result = MessageBox.Show("Do you want to reset all fields\nto their default values?",
+                    "Reset?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+            }
+
+            if (result == DialogResult.Yes)
+            {
+                SetDefaultValues();
+            }
+        }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Sets default input-values for all controls
+        /// </summary>
+        private void SetDefaultValues()
+        {
+            cboDataBits.SelectedIndex = 0;
+            cboStopBits.SelectedIndex = 0;
+            cboParity.SelectedIndex = 2;
+            cboFlowControl.SelectedIndex = 0;
+
+            txtBaudRate.Text = "9600";
+            txtOn.Text = "11";
+            txtOff.Text = "13";
+            txtHz.Text = "2";
+
+            updSensors.Value = 1;
+
+            txtArrayPoints.Text = "7200";
+            txtPlotWindow.Text = "20";
+            
+            chkShowRaw.Checked = true;
+            chkShowRadar.Checked = true;
+            chkShowAverage.Checked = true;
+            chkShowRatio.Checked = true;
         }
     }
 }

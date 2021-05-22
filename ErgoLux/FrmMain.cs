@@ -92,6 +92,7 @@ namespace ErgoLux
             if (File.Exists(_path + @"\images\about.ico")) this.toolStripMain_About.Image = new Icon(_path + @"\images\about.ico", 48, 48).ToBitmap();
 
             this.toolStripMain_Disconnect.Enabled = false;
+            this.toolStripMain_Connect.Enabled = false;
 
             /*
             using (Graphics g = Graphics.FromImage(this.toolStripMain_Skeleton.Image))
@@ -310,7 +311,7 @@ namespace ErgoLux
             {
                 using (new CenterWinDialog(this))
                 {
-                    MessageBox.Show("There was no data available to be saved.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("There is no data available to be saved.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 return;
             }
@@ -342,6 +343,8 @@ namespace ErgoLux
                 string content = string.Empty;
                 outfile.WriteLine("ErgoLux data");
                 outfile.WriteLine("Data exported on: {0}", DateTime.Now.ToString("F"));
+                outfile.WriteLine("Number of sensors: {0}", _sett.T10_NumberOfSensors.ToString());
+                outfile.WriteLine("Number of data points: {0}", _nPoints.ToString("F"));
                 outfile.WriteLine();
                 for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                 {
@@ -369,6 +372,17 @@ namespace ErgoLux
         {
             if (toolStripMain_Connect.Checked == true)
             {
+                // Although unnecessary because the ToolStripButton should be disabled, make sure the device is already open
+                if (myFtdiDevice == null || myFtdiDevice.IsOpen == false)
+                {
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show("The device is closed. Please, go to\n'Settings' to open the device. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    toolStripMain_Connect.Checked = false;
+                    return;
+                }
+
                 toolStripMain_Disconnect.Enabled = true;
                 myFtdiDevice.DataReceived += OnDataReceived;
                 if (myFtdiDevice.Write(ClassT10.Command_54))
@@ -447,24 +461,9 @@ namespace ErgoLux
 
                     // Bind the arrays into the plots
                     Plots_DataBinding();
-                    
-                    // Show the legends into the picture boxes
-                    //pictureBox1.Image = formsPlot1.plt.GetLegendBitmap();
-                    var legendA = formsPlot1.plt.GetLegendBitmap();
-                    var legendB = formsPlot2.plt.GetLegendBitmap();
-                    var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + 10);
-                    using Graphics GraphicsA = Graphics.FromImage(bitmap);
-                    GraphicsA.DrawImage(legendA, 0, 0);
-                    GraphicsA.DrawImage(legendB, 0, legendA.Height + 10);
-                    pictureBox1.Image = bitmap;
 
-                    legendA = formsPlot3.plt.GetLegendBitmap();
-                    legendB = formsPlot4.plt.GetLegendBitmap();
-                    bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + 10);
-                    using Graphics GraphicsB = Graphics.FromImage(bitmap);
-                    GraphicsB.DrawImage(legendA, 0, 0);
-                    GraphicsB.DrawImage(legendB, 0, legendA.Height + 10);
-                    pictureBox3.Image = bitmap;
+                    // Show the legends into the picture boxes
+                    Plots_ShowLegends();
                 }
                 else
                 {
@@ -529,6 +528,8 @@ namespace ErgoLux
 
         #endregion statusSrip events
 
+        #region Plot custom methods
+
         /// <summary>
         /// Binds the data arrays to the plots
         /// </summary>
@@ -572,6 +573,32 @@ namespace ErgoLux
             }
             formsPlot4.plt.AxisAuto(horizontalMargin: 0);
             formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0, y2: 1);
+        }
+
+        /// <summary>
+        /// Show plots legends in picture boxes
+        /// </summary>
+        private void Plots_ShowLegends()
+        {
+            int nVertDist = 10;
+
+            // Combine legends from Plot1 and Plot2
+            var legendA = formsPlot1.plt.GetLegendBitmap();
+            var legendB = formsPlot2.plt.GetLegendBitmap();
+            var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + nVertDist);
+            using Graphics GraphicsA = Graphics.FromImage(bitmap);
+            GraphicsA.DrawImage(legendA, 0, 0);
+            GraphicsA.DrawImage(legendB, 0, legendA.Height + nVertDist);
+            pictureBox1.Image = bitmap;
+
+            // Combine legends from Plot3 and Plot4
+            legendA = formsPlot3.plt.GetLegendBitmap();
+            legendB = formsPlot4.plt.GetLegendBitmap();
+            bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + nVertDist);
+            using Graphics GraphicsB = Graphics.FromImage(bitmap);
+            GraphicsB.DrawImage(legendA, 0, 0);
+            GraphicsB.DrawImage(legendB, 0, legendA.Height + nVertDist);
+            pictureBox3.Image = bitmap;
         }
 
         /// <summary>
@@ -693,6 +720,8 @@ namespace ErgoLux
 
             // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91
         }
+
+        #endregion Plots functions
 
         #region Program settings
 

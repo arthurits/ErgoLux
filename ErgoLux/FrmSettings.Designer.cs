@@ -62,6 +62,7 @@ namespace ErgoLux
             this.chkShowAverage = new System.Windows.Forms.CheckBox();
             this.chkShowRadar = new System.Windows.Forms.CheckBox();
             this.chkShowRaw = new System.Windows.Forms.CheckBox();
+            this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.updSensors)).BeginInit();
             this.tabSettings.SuspendLayout();
             this.tabDevice.SuspendLayout();
@@ -129,6 +130,7 @@ namespace ErgoLux
             // 
             this.tabSettings.Controls.Add(this.tabDevice);
             this.tabSettings.Controls.Add(this.tabPlots);
+            this.tabSettings.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabSettings.Location = new System.Drawing.Point(12, 12);
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.SelectedIndex = 0;
@@ -157,10 +159,11 @@ namespace ErgoLux
             this.tabDevice.Controls.Add(this.cboDataBits);
             this.tabDevice.Controls.Add(this.lblDevices);
             this.tabDevice.Controls.Add(this.viewDevices);
-            this.tabDevice.Location = new System.Drawing.Point(4, 24);
+            this.tabDevice.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tabDevice.Location = new System.Drawing.Point(4, 26);
             this.tabDevice.Name = "tabDevice";
             this.tabDevice.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDevice.Size = new System.Drawing.Size(472, 305);
+            this.tabDevice.Size = new System.Drawing.Size(472, 303);
             this.tabDevice.TabIndex = 0;
             this.tabDevice.Text = "T-10A";
             this.tabDevice.UseVisualStyleBackColor = true;
@@ -350,10 +353,10 @@ namespace ErgoLux
             this.tabPlots.Controls.Add(this.chkShowAverage);
             this.tabPlots.Controls.Add(this.chkShowRadar);
             this.tabPlots.Controls.Add(this.chkShowRaw);
-            this.tabPlots.Location = new System.Drawing.Point(4, 24);
+            this.tabPlots.Location = new System.Drawing.Point(4, 26);
             this.tabPlots.Name = "tabPlots";
             this.tabPlots.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlots.Size = new System.Drawing.Size(472, 305);
+            this.tabPlots.Size = new System.Drawing.Size(472, 303);
             this.tabPlots.TabIndex = 1;
             this.tabPlots.Text = "Plots";
             this.tabPlots.UseVisualStyleBackColor = true;
@@ -380,9 +383,9 @@ namespace ErgoLux
             this.lblPlotWindow.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblPlotWindow.Location = new System.Drawing.Point(31, 129);
             this.lblPlotWindow.Name = "lblPlotWindow";
-            this.lblPlotWindow.Size = new System.Drawing.Size(126, 19);
+            this.lblPlotWindow.Size = new System.Drawing.Size(145, 19);
             this.lblPlotWindow.TabIndex = 5;
-            this.lblPlotWindow.Text = "Plot window points";
+            this.lblPlotWindow.Text = "Plot window (seconds)";
             // 
             // lblArrayPoints
             // 
@@ -442,6 +445,17 @@ namespace ErgoLux
             this.chkShowRaw.Text = "Plot raw data";
             this.chkShowRaw.UseVisualStyleBackColor = true;
             // 
+            // btnReset
+            // 
+            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnReset.Location = new System.Drawing.Point(12, 355);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(90, 30);
+            this.btnReset.TabIndex = 23;
+            this.btnReset.Text = "&Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // FrmSettings
             // 
             this.AcceptButton = this.btnOK;
@@ -449,6 +463,7 @@ namespace ErgoLux
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(504, 396);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.tabSettings);
@@ -501,5 +516,6 @@ namespace ErgoLux
         private System.Windows.Forms.CheckBox chkShowRaw;
         private System.Windows.Forms.TextBox txtPlotWindow;
         private System.Windows.Forms.TextBox txtArrayPoints;
+        private System.Windows.Forms.Button btnReset;
     }
 }
