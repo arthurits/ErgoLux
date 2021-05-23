@@ -49,6 +49,8 @@ namespace ErgoLux
             m_timer.Elapsed += OnTimedEvent;
             m_timer.Enabled = false;
 
+            // Set form icon
+            if (File.Exists(_path + @"\images\logo.ico")) this.Icon = new Icon(_path + @"\images\logo.ico");
         }
 
         #region Initialization routines
@@ -85,6 +87,7 @@ namespace ErgoLux
             if (File.Exists(_path + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new Icon(_path + @"\images\disconnect.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\cinema.ico")) this.toolStripMain_Video.Image = new Icon(path + @"\images\cinema.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\save.ico")) this.toolStripMain_Save.Image = new Icon(_path + @"\images\save.ico", 48, 48).ToBitmap();
+            if (File.Exists(_path + @"\images\openfolder.ico")) this.toolStripMain_Open.Image = new Icon(_path + @"\images\openfolder.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\picture.ico")) this.toolStripMain_Picture.Image = new Icon(path + @"\images\picture.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\reflect-horizontal.ico")) this.toolStripMain_Mirror.Image = new Icon(path + @"\images\reflect-horizontal.ico", 48, 48).ToBitmap();
             //if (File.Exists(path + @"\images\plot.ico")) this.toolStripMain_Plots.Image = new Icon(path + @"\images\plot.ico", 48, 48).ToBitmap();
@@ -93,6 +96,7 @@ namespace ErgoLux
 
             this.toolStripMain_Disconnect.Enabled = false;
             this.toolStripMain_Connect.Enabled = false;
+            this.toolStripMain_Open.Enabled = false;
 
             /*
             using (Graphics g = Graphics.FromImage(this.toolStripMain_Skeleton.Image))
@@ -121,19 +125,25 @@ namespace ErgoLux
             statusStripIconOpen.Image = _sett.Icon_Close;
             
             statusStripLabelRaw.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
-            statusStripLabelRaw.Checked = _sett.Plot_ShowRawData;
-
             statusStripLabelRadar.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
-            statusStripLabelRadar.Checked = _sett.Plot_ShowRadar;
-            
-            statusStripLabelMax.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
-            statusStripLabelMax.Checked = _sett.Plot_ShowAverage;
-            
+            statusStripLabelMax.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);            
             statusStripLabelRatio.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
-            statusStripLabelRatio.Checked = _sett.Plot_ShowRatios;
-            
+
+            InitializeStatusStripLabelsStatus();
+
             statusStrip.Renderer = new customRenderer<ToolStripLabel>(Brushes.SteelBlue, Brushes.LightSkyBlue);
             return;
+        }
+
+        /// <summary>
+        /// Sets the labels checked status based on the values stored in <see cref="ClassSettings"/>.
+        /// </summary>
+        private void InitializeStatusStripLabelsStatus()
+        {
+            statusStripLabelRaw.Checked = _sett.Plot_ShowRawData;
+            statusStripLabelRadar.Checked = _sett.Plot_ShowRadar;
+            statusStripLabelMax.Checked = _sett.Plot_ShowAverage;
+            statusStripLabelRatio.Checked = _sett.Plot_ShowRatios;
         }
 
         private void InitializePlots()
@@ -336,6 +346,19 @@ namespace ErgoLux
             // If the file name is not an empty string open it for saving.  
             if (result == DialogResult.OK && SaveDlg.FileName != "")
             {
+                //object writer;
+
+                //switch(Path.GetExtension(SaveDlg.FileName).ToLower())
+                //{
+                //    case ".elux":
+                //        writer = new BinaryWriter(SaveDlg.OpenFile());
+                //        break;
+                //    case ".txt":
+                //    default:
+                //        writer = new StreamWriter(SaveDlg.OpenFile());
+                //        break;
+                //}
+
                 // Convert array data into CSV format.
                 using var outfile = new StreamWriter(SaveDlg.OpenFile());
                 
@@ -344,14 +367,14 @@ namespace ErgoLux
                 outfile.WriteLine("ErgoLux data");
                 outfile.WriteLine("Data exported on: {0}", DateTime.Now.ToString("F"));
                 outfile.WriteLine("Number of sensors: {0}", _sett.T10_NumberOfSensors.ToString());
-                outfile.WriteLine("Number of data points: {0}", _nPoints.ToString("F"));
+                outfile.WriteLine("Number of data points: {0}", _nPoints.ToString());
                 outfile.WriteLine();
                 for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                 {
                     content += "Sensor #" + i.ToString("00") + "\t";
                 }
                 content += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
-                outfile.WriteLine(content);
+                outfile.WriteLineAsync(content);
 
                 // Save the numerical values
                 for (int j = 0; j < _nPoints; j++)
@@ -362,7 +385,7 @@ namespace ErgoLux
                         content += _plotData[i][j].ToString(i < _sett.T10_NumberOfSensors + 3 ? "#0.0" : "0.000") + "\t";
                     }
                     //trying to write data to csv
-                    outfile.WriteLine(content);   
+                    outfile.WriteLineAsync(content);   
                 }
             }
 
@@ -424,6 +447,8 @@ namespace ErgoLux
             bool result;
             
             var frm = new FrmSettings(_sett);
+            // Set form icon
+            if (File.Exists(_path + @"\images\logo.ico")) frm.Icon = new Icon(_path + @"\images\logo.ico");
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
             {
@@ -451,7 +476,9 @@ namespace ErgoLux
                     this.statusStripLabelType.Text = "Device type: " + frm.GetDeviceType;
                     this.statusStripLabelID.Text = "Device ID: " + frm.GetDeviceID;
                     this.statusStripIconOpen.Image = _sett.Icon_Open;
-                    
+
+                    InitializeStatusStripLabelsStatus();
+
                     // Initialize the arrays containing the data
                     _plotData = new double[_sett.T10_NumberOfSensors + _sett.ArrayFixedColumns][];
                     _plotRadar = new double[2, _sett.T10_NumberOfSensors];
@@ -598,7 +625,7 @@ namespace ErgoLux
             using Graphics GraphicsB = Graphics.FromImage(bitmap);
             GraphicsB.DrawImage(legendA, 0, 0);
             GraphicsB.DrawImage(legendB, 0, legendA.Height + nVertDist);
-            pictureBox3.Image = bitmap;
+            pictureBox2.Image = bitmap;
         }
 
         /// <summary>
@@ -635,6 +662,7 @@ namespace ErgoLux
                 _sett.Plot_ArrayPoints *= factor;
             }
 
+            // Data computation
             _plotData[sensor][_nPoints] = value;
             _plotRadar[1, sensor] = value;
             _max = value > _max ? value : _max;
@@ -644,26 +672,19 @@ namespace ErgoLux
             // Only render when the last sensor value is received
             if (sensor == _sett.T10_NumberOfSensors - 1)
             {
-                foreach (var plot in formsPlot1.plt.GetPlottables())
-                {
-                    ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
-                    //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
-                    //sigPlot.maxRenderIndex = _dataN;
-                    //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
-                }
+                // Compute data
+                _average /= _sett.T10_NumberOfSensors;
+                
+                _plotData[_sett.T10_NumberOfSensors][_nPoints] = _max;
+                _plotData[_sett.T10_NumberOfSensors + 1][_nPoints] = _average;
+                _plotData[_sett.T10_NumberOfSensors + 2][_nPoints] = _min;
+                
+                _plotData[_sett.T10_NumberOfSensors + 3][_nPoints] = _min / _average;
+                _plotData[_sett.T10_NumberOfSensors + 4][_nPoints] = _min / _max;
+                _plotData[_sett.T10_NumberOfSensors + 5][_nPoints] = _average / _max;
 
-                foreach (var plot in formsPlot3.plt.GetPlottables())
-                {
-                    ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
-                }
 
-                foreach (var plot in formsPlot4.plt.GetPlottables())
-                {
-                    ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
-                }
 
-                //formsPlot1.plt.AxisAuto(horizontalMargin: 0, tightenLayout: true);
-                //formsPlot1.plt.AxisAutoX(margin: 0);
                 formsPlot1.plt.AxisAutoY();
                 formsPlot3.plt.AxisAutoY();
                 formsPlot4.plt.AxisAutoY();
@@ -677,8 +698,17 @@ namespace ErgoLux
                     formsPlot4.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2, y1: 0);
                 }
 
-
-                formsPlot1.Render(skipIfCurrentlyRendering: true);
+                if (_sett.Plot_ShowRawData)
+                {
+                    foreach (var plot in formsPlot1.plt.GetPlottables())
+                    {
+                        ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
+                        //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+                        //sigPlot.maxRenderIndex = _dataN;
+                        //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
+                    }
+                    formsPlot1.Render(skipIfCurrentlyRendering: true);
+                }
 
                 //var average = _plotData[0][_nPoints];
                 //var min = _plotData[0][_nPoints];
@@ -692,26 +722,40 @@ namespace ErgoLux
                 //}
                 //average /= _sett.T10_NumberOfSensors;
 
-                _average /= _sett.T10_NumberOfSensors;
+                
 
-                for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+                if (_sett.Plot_ShowRadar)
                 {
-                    _plotRadar[0, i] = _average;
+                    for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+                    {
+                        _plotRadar[0, i] = _average;
+                    }
+                    formsPlot2.plt.Clear();
+                    formsPlot2.plt.PlotRadar(_plotRadar, fillAlpha: 0.5);
+                    formsPlot2.Render(skipIfCurrentlyRendering: true);
                 }
-                formsPlot2.plt.Clear();
-                formsPlot2.plt.PlotRadar(_plotRadar, fillAlpha: 0.5);
-                formsPlot2.Render(skipIfCurrentlyRendering: true);
 
-                _plotData[_sett.T10_NumberOfSensors][_nPoints] = _max;
-                _plotData[_sett.T10_NumberOfSensors + 1][_nPoints] = _average;
-                _plotData[_sett.T10_NumberOfSensors + 2][_nPoints] = _min;
-                formsPlot3.Render(skipIfCurrentlyRendering: true);
+                
+                if (_sett.Plot_ShowAverage)
+                {
+                    foreach (var plot in formsPlot3.plt.GetPlottables())
+                    {
+                        ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
+                    }
+                    formsPlot3.Render(skipIfCurrentlyRendering: true);
+                }
 
-                _plotData[_sett.T10_NumberOfSensors + 3][_nPoints] = _min / _average;
-                _plotData[_sett.T10_NumberOfSensors + 4][_nPoints] = _min / _max;
-                _plotData[_sett.T10_NumberOfSensors + 5][_nPoints] = _average / _max;
-                formsPlot4.Render(skipIfCurrentlyRendering: true);
 
+                if (_sett.Plot_ShowRatios)
+                {
+                    foreach (var plot in formsPlot4.plt.GetPlottables())
+                    {
+                        ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
+                    }
+                    formsPlot4.Render(skipIfCurrentlyRendering: true);
+                }
+
+                // Modify internal numeric variables
                 ++_nPoints;
                 _max = 0.0;
                 _min = 0.0;

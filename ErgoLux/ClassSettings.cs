@@ -42,23 +42,25 @@ namespace ErgoLux
         [JsonPropertyName("Sample frequency")]
         public int T10_Frequency { get; set; }
 
-        /// <summary>
-        /// Number of points the array can store
-        /// </summary>
+
+        /// <value>Number of points the array can store</value>
         [JsonPropertyName("Array points")]
         public int Plot_ArrayPoints { get; set; }
-        
-        /// <summary>
-        /// Number of points to be shown in the plots
-        /// </summary>
+
+        /// <value>Seconds to show in the abscissa axis</value>
         [JsonPropertyName("Plots moving window points")]
         public int Plot_WindowPoints { get; set; }
+
+        /// <value><see langword="True" /> if the plot gets updated, <see langword="false" /> otherwise</value>
         [JsonPropertyName("Show illuminance plot")]
         public bool Plot_ShowRawData { get; set; }
+        
         [JsonPropertyName("Show radar plot")]
         public bool Plot_ShowRadar { get; set; }
+        
         [JsonPropertyName("Show average plot")]
         public bool Plot_ShowAverage { get; set; }
+        
         [JsonPropertyName("Show ratios plot")]
         public bool Plot_ShowRatios { get; set; }
 

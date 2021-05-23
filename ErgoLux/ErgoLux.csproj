@@ -7,6 +7,10 @@
     <UseWPF>true</UseWPF>
 <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
+    <Authors>Arthurits</Authors>
+    <Company>Arthurits Ltd.</Company>
+    <Copyright>Copyright © 2021</Copyright>
+    <Description>Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A.</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -64,7 +68,16 @@
     <None Update="images\exit.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="images\logo%40256.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="images\logo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="images\open.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="images\openfolder.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="images\save.ico">

@@ -53,6 +53,7 @@ namespace ErgoLux
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.toolStripMain_Exit = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain_Save = new System.Windows.Forms.ToolStripButton();
+            this.toolStripMain_Open = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMain_Connect = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain_Disconnect = new System.Windows.Forms.ToolStripButton();
@@ -66,17 +67,15 @@ namespace ErgoLux
             this.BtnStop = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.formsPlot3 = new ScottPlot.FormsPlot();
             this.formsPlot4 = new ScottPlot.FormsPlot();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // tspTop
@@ -291,6 +290,7 @@ namespace ErgoLux
             this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMain_Exit,
             this.toolStripMain_Save,
+            this.toolStripMain_Open,
             this.toolStripSeparator1,
             this.toolStripMain_Connect,
             this.toolStripMain_Disconnect,
@@ -324,6 +324,14 @@ namespace ErgoLux
             this.toolStripMain_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Save.ToolTipText = "Save data";
             this.toolStripMain_Save.Click += new System.EventHandler(this.toolStripMain_Save_Click);
+            // 
+            // toolStripMain_Open
+            // 
+            this.toolStripMain_Open.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripMain_Open.Name = "toolStripMain_Open";
+            this.toolStripMain_Open.Size = new System.Drawing.Size(44, 69);
+            this.toolStripMain_Open.Text = "Open";
+            this.toolStripMain_Open.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // toolStripSeparator1
             // 
@@ -388,16 +396,16 @@ namespace ErgoLux
             this.formsPlot1.Location = new System.Drawing.Point(0, 0);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(376, 218);
+            this.formsPlot1.Size = new System.Drawing.Size(381, 218);
             this.formsPlot1.TabIndex = 0;
             // 
             // formsPlot2
             // 
             this.formsPlot2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot2.Location = new System.Drawing.Point(526, 0);
+            this.formsPlot2.Location = new System.Drawing.Point(531, 0);
             this.formsPlot2.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot2.Name = "formsPlot2";
-            this.formsPlot2.Size = new System.Drawing.Size(376, 218);
+            this.formsPlot2.Size = new System.Drawing.Size(382, 218);
             this.formsPlot2.TabIndex = 1;
             // 
             // BtnConnect
@@ -428,18 +436,17 @@ namespace ErgoLux
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
-            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.formsPlot1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.formsPlot2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.formsPlot3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.formsPlot4, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox3, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 96);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -452,7 +459,7 @@ namespace ErgoLux
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(376, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(381, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(150, 218);
@@ -460,44 +467,34 @@ namespace ErgoLux
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Location = new System.Drawing.Point(902, 0);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(11, 218);
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            // 
             // formsPlot3
             // 
             this.formsPlot3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot3.Location = new System.Drawing.Point(4, 221);
             this.formsPlot3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot3.Name = "formsPlot3";
-            this.formsPlot3.Size = new System.Drawing.Size(368, 213);
+            this.formsPlot3.Size = new System.Drawing.Size(373, 213);
             this.formsPlot3.TabIndex = 4;
             // 
             // formsPlot4
             // 
             this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot4.Location = new System.Drawing.Point(530, 221);
+            this.formsPlot4.Location = new System.Drawing.Point(535, 221);
             this.formsPlot4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot4.Name = "formsPlot4";
-            this.formsPlot4.Size = new System.Drawing.Size(368, 213);
+            this.formsPlot4.Size = new System.Drawing.Size(374, 213);
             this.formsPlot4.TabIndex = 5;
             // 
-            // pictureBox3
+            // pictureBox2
             // 
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Location = new System.Drawing.Point(376, 218);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(150, 219);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox3.TabIndex = 6;
-            this.pictureBox3.TabStop = false;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox2.Location = new System.Drawing.Point(381, 218);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(150, 219);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
             // 
             // FrmMain
             // 
@@ -528,7 +525,6 @@ namespace ErgoLux
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -568,16 +564,16 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripButton toolStripAbout;
         private System.Windows.Forms.ToolStripButton toolStripMain_About;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelType;
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconExchange;
         private ScottPlot.FormsPlot formsPlot3;
         private ScottPlot.FormsPlot formsPlot4;
         private System.Windows.Forms.ToolStripButton toolStripMain_Save;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelID;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelMax;
         private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRadar;
+        private System.Windows.Forms.ToolStripButton toolStripMain_Open;
     }
 }
 
