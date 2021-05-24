@@ -59,6 +59,8 @@ namespace FTD2XX_NET
                     MessageBox.Show("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location));
 #endif
                     hFTD2XXDLL = LoadLibrary(@Path.GetDirectoryName(GetType().Assembly.Location) + "\\FTD2XX.DLL");
+                    //if (hFTD2XXDLL == IntPtr.Zero)
+                    //    hFTD2XXDLL = LoadLibrary(@Path.GetDirectoryName(GetType().Assembly.Location) + "\\FTD2XX_NET.DLL");
                 }
             }
 

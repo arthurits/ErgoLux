@@ -332,6 +332,7 @@ namespace ErgoLux
             this.toolStripMain_Open.Size = new System.Drawing.Size(44, 69);
             this.toolStripMain_Open.Text = "Open";
             this.toolStripMain_Open.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripMain_Open.Click += new System.EventHandler(this.toolStripMain_Open_Click);
             // 
             // toolStripSeparator1
             // 

@@ -11,6 +11,7 @@
     <Company>Arthurits Ltd.</Company>
     <Copyright>Copyright © 2021</Copyright>
     <Description>Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A.</Description>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -48,7 +49,7 @@
 
   <ItemGroup>
     <None Update="FTD2XX_NET.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="images\about.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

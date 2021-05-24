@@ -25,7 +25,7 @@ namespace ErgoLux
             FTDI.FT_STATUS ftStatus = base.SetEventNotification(FTDI.FT_EVENTS.FT_EVENT_RXCHAR, receivedDataEvent);
 
             // Try to replace with Task approach
-            // https://blog.lextudio.com/how-to-replace-backgroundworker-with-async-await-and-tasks-80d7c8ed89dc
+            // See this: https://blog.lextudio.com/how-to-replace-backgroundworker-with-async-await-and-tasks-80d7c8ed89dc
             dataReceivedHandler = new BackgroundWorker();
             dataReceivedHandler.DoWork += ReadData_KonicaT10;
             if (!dataReceivedHandler.IsBusy)
@@ -40,6 +40,10 @@ namespace ErgoLux
                 base.Close();
         }
         
+        /// <summary>
+        /// Event firing
+        /// </summary>
+        /// <param name="e"></param>
         protected virtual void OnDataReceived(DataReceivedEventArgs e)
         {
             EventHandler<DataReceivedEventArgs> handler = DataReceived;
@@ -62,8 +66,8 @@ namespace ErgoLux
         /// <param name="xOff">Off Ascii char value</param>
         /// <param name="readTimeOut">Read timeout value in ms. A value of 0 indicates an infinite timeout.</param>
         /// <param name="writeTimeOut">Write timeout value in ms. A value of 0 indicates an infinite timeout.</param>
-        /// <returns><see langword="True"/> if successful, false otherwise</returns>
-        public bool OpenDevice(string description = null, uint? index = null, uint? location = null, string serialNumber = null, int? baud = 9600, int? dataBits = 7, int? stopBits = 1, int? parity = 2, int? flowControl = 400, int? xOn = 10, int? xOff = 13, uint readTimeOut = 0, uint writeTimeOut = 0)
+        /// <returns><see cref="FTDI.FT_STATUS.FT_OK"/> if all parameters could be set, <see cref="FTDI.FT_STATUS"/> error otherwise.</returns>
+        public FTDI.FT_STATUS OpenDevice(string description = null, uint? index = null, uint? location = null, string serialNumber = null, int? baud = 9600, int? dataBits = 7, int? stopBits = 1, int? parity = 2, int? flowControl = 400, int? xOn = 10, int? xOff = 13, uint readTimeOut = 0, uint writeTimeOut = 0)
         {
             // FTDI connection code
             UInt32 ftdiDeviceCount = 0;
@@ -81,7 +85,7 @@ namespace ErgoLux
                     System.Windows.Forms.MessageBoxIcon.Error);
                 //Console.WriteLine("Failed to open device (error " + ftStatus.ToString() + ")");
                 //Console.ReadKey();
-                return false;
+                return ftStatus;
             }
 
             // If no devices available, return
@@ -94,11 +98,11 @@ namespace ErgoLux
                     System.Windows.Forms.MessageBoxIcon.Error);
                 //Console.WriteLine("Failed to open device (error " + ftStatus.ToString() + ")");
                 //Console.ReadKey();
-                return false;
+                return ftStatus;
             }
 
-
-            // Open the device
+            // Try to open the device in one of the 4 possible ways (4 functions in FTD2.dll)
+            // and according to the information passed to the function.
             if (!string.IsNullOrEmpty(description) && !base.IsOpen)
                 ftStatus = base.OpenByDescription(description);
             if (index.HasValue && !base.IsOpen)
@@ -108,8 +112,8 @@ namespace ErgoLux
             if (!string.IsNullOrEmpty(serialNumber) && !base.IsOpen)
                 ftStatus = base.OpenBySerialNumber(serialNumber);
 
-            // Set the T10 device paramters
-            SetKonicaT10((uint)baud, (byte)dataBits, (byte)stopBits, (byte)parity, (ushort)flowControl, (byte)xOn, (byte)xOff, readTimeOut, writeTimeOut);
+            // Set the T-10A device paramters
+            ftStatus = SetKonicaT10((uint)baud, (byte)dataBits, (byte)stopBits, (byte)parity, (ushort)flowControl, (byte)xOn, (byte)xOff, readTimeOut, writeTimeOut);
 
             if (ftStatus != FTDI.FT_STATUS.FT_OK)
             {
@@ -120,10 +124,10 @@ namespace ErgoLux
                     System.Windows.Forms.MessageBoxIcon.Error);
                 //Console.WriteLine("Failed to open device (error " + ftStatus.ToString() + ")");
                 //Console.ReadKey();
-                return false;
+                return ftStatus;
             }
 
-            return true;
+            return ftStatus;
         }
 
         /// <summary>
@@ -139,8 +143,8 @@ namespace ErgoLux
         /// <param name="xOff">Off Ascii char value</param>
         /// <param name="readTimeOut">Read timeout value in ms. A value of 0 indicates an infinite timeout.</param>
         /// <param name="writeTimeOut">Write timeout value in ms. A value of 0 indicates an infinite timeout.</param>
-        /// <returns>True if all parameters could be set, false otherwise. FT_STATUS value from FT_SetTimeouts in FTD2XX.DLL</returns>
-        public bool SetKonicaT10(uint baud, byte dataBits, byte stopBits, byte parity, ushort flow, byte xOn, byte xOff, uint readTimeOut, uint writeTimeOut)
+        /// <returns><see cref="FTDI.FT_STATUS.FT_OK"/> if all parameters could be set, <see cref="FTDI.FT_STATUS"/> error otherwise.</returns>
+        public FTDI.FT_STATUS SetKonicaT10(uint baud, byte dataBits, byte stopBits, byte parity, ushort flow, byte xOn, byte xOff, uint readTimeOut, uint writeTimeOut)
         {
             FTDI.FT_STATUS ftStatus;
 
@@ -157,7 +161,7 @@ namespace ErgoLux
                     System.Windows.Forms.MessageBoxIcon.Error);
                 //Console.WriteLine("Failed to set Baud rate (error " + ftStatus.ToString() + ")");
                 //Console.ReadKey();
-                return false;
+                return ftStatus;
             }
 
             // Set data characteristics - Data bits, Stop bits, Parity
@@ -172,7 +176,7 @@ namespace ErgoLux
                     System.Windows.Forms.MessageBoxIcon.Error);
                 //Console.WriteLine("Failed to set data characteristics (error " + ftStatus.ToString() + ")");
                 //Console.ReadKey();
-                return false;
+                return ftStatus;
             }
 
             // Set flow control - set RTS/CTS flow control
@@ -187,7 +191,7 @@ namespace ErgoLux
                     System.Windows.Forms.MessageBoxIcon.Error);
                 //Console.WriteLine("Failed to set flow control (error " + ftStatus.ToString() + ")");
                 //Console.ReadKey();
-                return false;
+                return ftStatus;
             }
 
             // Set read and write timeouts
@@ -201,12 +205,18 @@ namespace ErgoLux
                     System.Windows.Forms.MessageBoxIcon.Error);
                 //Console.WriteLine("Failed to set timeouts (error " + ftStatus.ToString() + ")");
                 //Console.ReadKey();
-                return false;
+                return ftStatus;
             }
 
-            return true;
+            return FTDI.FT_STATUS.FT_OK;
         }
 
+        /// <summary>
+        /// Generic function to read data from a FTDI device.
+        /// Source: https://stackoverflow.com/questions/2439122/problem-with-two-net-threads-and-hardware-access
+        /// </summary>
+        /// <param name="pSender"></param>
+        /// <param name="pEventArgs"></param>
         private void ReadData(object pSender, DoWorkEventArgs pEventArgs)
         {
             FTDI.FT_STATUS status;
@@ -216,10 +226,6 @@ namespace ErgoLux
                 System.Diagnostics.Debug.WriteLine("ReadData event");
                 // wait until event is fired
                 this.receivedDataEvent.WaitOne();
-
-                //FTDI.FT_STATUS status = FTDI.FT_STATUS.FT_IO_ERROR;
-                //while (status != FTDI.FT_STATUS.FT_OK)
-                //    status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
 
                 // try to recieve data now
                 status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
@@ -242,6 +248,11 @@ namespace ErgoLux
             }
         }
 
+        /// <summary>
+        /// Private customized function to read data from Konica T-10A. For other devices try the function <see cref="ReadData(object, DoWorkEventArgs)"/ which offers a more universal approach>
+        /// </summary>
+        /// <param name="pSender">Object sending the event</param>
+        /// <param name="pEventArgs">Event arguments</param>
         private void ReadData_KonicaT10(object pSender, DoWorkEventArgs pEventArgs)
         {
             FTDI.FT_STATUS status;
@@ -277,6 +288,12 @@ namespace ErgoLux
             
         }
 
+        /// <summary>
+        /// Generic writing function to a FTDI device
+        /// Source: https://stackoverflow.com/questions/2439122/problem-with-two-net-threads-and-hardware-access
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
         public bool Write(string data)
         {
             UInt32 numBytesWritten = 0;
@@ -298,6 +315,9 @@ namespace ErgoLux
             return true;
         }
 
+        /// <summary>
+        /// For testing purposes.
+        /// </summary>
         public bool Write (params string[] list)
         {
             for (int i = 0; i < list.Length; i++)

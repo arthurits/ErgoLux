@@ -391,6 +391,74 @@ namespace ErgoLux
 
         }
 
+        private void toolStripMain_Open_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openDlg = new OpenFileDialog
+            {
+                DefaultExt = "*.elux",
+                Filter = "ELUX file (*.elux)|*.elux|All files (*.*)|*.*",
+                FilterIndex = 1,
+                Title = "Open ErgoLux file",
+                InitialDirectory = _path + @"\Examples"
+            };
+
+            DialogResult result;
+            using (new CenterWinDialog(this))
+            {
+                result = openDlg.ShowDialog(this);
+            }
+
+            // If the file name is not an empty string open it for saving.  
+            if (result == DialogResult.OK && openDlg.FileName != "")
+            {
+                // https://stackoverflow.com/questions/897796/how-do-i-open-an-already-opened-file-with-a-net-streamreader
+                using var fs = File.Open(openDlg.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                using var sr = new StreamReader(fs, Encoding.UTF8);
+
+                int nSensors = 0;
+                int nPoints = 0;
+
+                string strLine = sr.ReadLine();
+                if (strLine != "ErgoLux data") return;
+
+                strLine = sr.ReadLine();
+                if (strLine != "Data exported on: ") return;
+
+                strLine = sr.ReadLine();
+                if (strLine != "Number of sensors: ") return;
+                int.TryParse(strLine.Substring(strLine.IndexOf(":"), strLine.Length - strLine.IndexOf(":")), out nSensors);
+                if (nSensors == 0) return;
+                _sett.T10_NumberOfSensors = nSensors;
+
+                strLine = sr.ReadLine();
+                if (strLine != "Number of data points: ") return;
+                int.TryParse(strLine.Substring(strLine.IndexOf(":"), strLine.Length - strLine.IndexOf(":")), out nPoints);
+                if (nPoints == 0) return;
+                _sett.Plot_ArrayPoints = nPoints;
+
+                strLine = sr.ReadLine();    // Empty line
+                strLine = sr.ReadLine();    // Column header lines
+
+                // Read data into _plotData
+                _plotData = new double[_sett.T10_NumberOfSensors + _sett.ArrayFixedColumns][];
+                for (int i = 0; i < _plotData.Length; i++)
+                {
+                    _plotData[i] = new double[_sett.Plot_ArrayPoints];
+                }
+                string[] data;
+                int row = 0, col = 0;
+                while ((strLine = sr.ReadLine()) != null)
+                {
+                    data = strLine.Split("\t");
+                    col++;
+                    for (row = 0; row < data.Length; row++)
+                    {
+                        double.TryParse(data[row], out _plotData[row][col]);
+                    }
+                }
+            }
+        }
+
         private void toolStripMain_Connect_CheckedChanged(object sender, EventArgs e)
         {
             if (toolStripMain_Connect.Checked == true)
@@ -407,6 +475,7 @@ namespace ErgoLux
                 }
 
                 toolStripMain_Disconnect.Enabled = true;
+                toolStripMain_Open.Enabled = false;
                 myFtdiDevice.DataReceived += OnDataReceived;
                 if (myFtdiDevice.Write(ClassT10.Command_54))
                 {
@@ -419,6 +488,7 @@ namespace ErgoLux
             else if (toolStripMain_Connect.Checked == false)
             {
                 toolStripMain_Disconnect.Enabled = false;
+                toolStripMain_Open.Enabled = true;
                 this.statusStripIconExchange.Image = null;
             }
         }
@@ -444,7 +514,7 @@ namespace ErgoLux
         }
         private void toolStripMain_Settings_Click(object sender, EventArgs e)
         {
-            bool result;
+            FTDI.FT_STATUS result;
             
             var frm = new FrmSettings(_sett);
             // Set form icon
@@ -469,7 +539,7 @@ namespace ErgoLux
                     readTimeOut: 0,
                     writeTimeOut: 0);
                 
-                if (result == true)
+                if (result == FTDI.FT_STATUS.FT_OK)
                 {
                     // Update the status strip with information
                     this.statusStripLabelLocation.Text = "Location ID: " + String.Format("{0:X}", _sett.T10_LocationID);
@@ -829,5 +899,6 @@ namespace ErgoLux
 
         #endregion Program settings
 
+        
     }
 }
