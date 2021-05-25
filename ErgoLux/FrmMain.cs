@@ -98,7 +98,7 @@ namespace ErgoLux
 
             this.toolStripMain_Disconnect.Enabled = false;
             this.toolStripMain_Connect.Enabled = false;
-            this.toolStripMain_Open.Enabled = true;
+            this.toolStripMain_Open.Enabled = true; // maybe set as default in the WinForms designer
 
             /*
             using (Graphics g = Graphics.FromImage(this.toolStripMain_Skeleton.Image))
