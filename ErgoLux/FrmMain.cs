@@ -28,6 +28,8 @@ namespace ErgoLux
         private double _average = 0;
         private double[,] _plotRadar;
         private int _nPoints = 0;
+        private DateTime _timeStart;
+        private DateTime _timeEnd;
 
         public FrmMain()
         {
@@ -43,7 +45,7 @@ namespace ErgoLux
             InitializeStatusStrip();
             InitializeMenuStrip();
             InitializePlots();
-            
+
             // Initialize the internal timer
             m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
             m_timer.Elapsed += OnTimedEvent;
@@ -96,7 +98,7 @@ namespace ErgoLux
 
             this.toolStripMain_Disconnect.Enabled = false;
             this.toolStripMain_Connect.Enabled = false;
-            this.toolStripMain_Open.Enabled = false;
+            this.toolStripMain_Open.Enabled = true;
 
             /*
             using (Graphics g = Graphics.FromImage(this.toolStripMain_Skeleton.Image))
@@ -146,6 +148,10 @@ namespace ErgoLux
             statusStripLabelRatio.Checked = _sett.Plot_ShowRatios;
         }
 
+        /// <summary>
+        /// Initialize plots: titles, labels, grids, colors, and other visual stuff.
+        /// It does not modify axes. That's done elsewhere (when updating the charts with values).
+        /// </summary>
         private void InitializePlots()
         {
             
@@ -160,7 +166,7 @@ namespace ErgoLux
 
             // Customize the Radar plot
             formsPlot2.plt.Grid(false);
-            formsPlot2.plt.Frame(false);
+            formsPlot2.plt.Frame(true);
             formsPlot2.plt.Ticks(false, false);
             //formsPlot2.plt.Colorset(ScottPlot.Drawing.Colorset.OneHalf);
 
@@ -168,21 +174,23 @@ namespace ErgoLux
             //formsPlot3.plt.AxisAuto(horizontalMargin: 0);
             //formsPlot3.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
 
+            formsPlot3.plt.Colorset(ScottPlot.Drawing.Colorset.Nord);
             formsPlot3.plt.Title("Average, max, min");
             formsPlot3.plt.YLabel("Lux");
             formsPlot3.plt.XLabel("Time (seconds)");
             formsPlot3.plt.Grid(false);
-            formsPlot3.plt.Colorset(ScottPlot.Drawing.Colorset.Nord);
+
 
             // Customize the Ratio plot
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
             //formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
 
+            formsPlot4.plt.Colorset(ScottPlot.Drawing.Colorset.OneHalf);
             formsPlot4.plt.Title("Illuminance ratios");
             formsPlot4.plt.YLabel("Ratio");
             formsPlot4.plt.XLabel("Time (seconds)");
             formsPlot4.plt.Grid(false);
-            formsPlot4.plt.Colorset(ScottPlot.Drawing.Colorset.OneHalf);
+            
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
             //formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
             //formsPlot4.plt.Colorset(ScottPlot.Drawing.Colorset.Aurora);
@@ -359,13 +367,21 @@ namespace ErgoLux
                 //        break;
                 //}
 
+                // Append millisecond pattern to current culture's full date time pattern
+                string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
+                fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", "$1.fff");
+                TimeSpan nTime = _timeEnd - _timeStart;
+
                 // Convert array data into CSV format.
                 using var outfile = new StreamWriter(SaveDlg.OpenFile());
                 
                 // Save the header text into the file
                 string content = string.Empty;
                 outfile.WriteLine("ErgoLux data");
-                outfile.WriteLine("Data exported on: {0}", DateTime.Now.ToString("F"));
+                outfile.WriteLine("Start time: {0}", _timeStart.ToString(fullPattern));
+                outfile.WriteLine("End time: {0}", _timeEnd.ToString(fullPattern));
+                //outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
+                outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
                 outfile.WriteLine("Number of sensors: {0}", _sett.T10_NumberOfSensors.ToString());
                 outfile.WriteLine("Number of data points: {0}", _nPoints.ToString());
                 outfile.WriteLine();
@@ -385,7 +401,7 @@ namespace ErgoLux
                         content += _plotData[i][j].ToString(i < _sett.T10_NumberOfSensors + 3 ? "#0.0" : "0.000") + "\t";
                     }
                     //trying to write data to csv
-                    outfile.WriteLineAsync(content);   
+                    outfile.WriteLineAsync(content.TrimEnd('\t'));
                 }
             }
 
@@ -422,25 +438,33 @@ namespace ErgoLux
                 if (strLine != "ErgoLux data") return;
 
                 strLine = sr.ReadLine();
-                if (strLine != "Data exported on: ") return;
+                if (!strLine.Contains("Start time: ", StringComparison.Ordinal)) return;
 
                 strLine = sr.ReadLine();
-                if (strLine != "Number of sensors: ") return;
-                int.TryParse(strLine.Substring(strLine.IndexOf(":"), strLine.Length - strLine.IndexOf(":")), out nSensors);
+                if (!strLine.Contains("End time: ", StringComparison.Ordinal)) return;
+
+                strLine = sr.ReadLine();
+                if (!strLine.Contains("Total measuring time: ", StringComparison.Ordinal)) return;
+
+                strLine = sr.ReadLine();
+                if (!strLine.Contains("Number of sensors: ", StringComparison.Ordinal)) return;
+                int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSensors);
                 if (nSensors == 0) return;
                 _sett.T10_NumberOfSensors = nSensors;
 
                 strLine = sr.ReadLine();
-                if (strLine != "Number of data points: ") return;
-                int.TryParse(strLine.Substring(strLine.IndexOf(":"), strLine.Length - strLine.IndexOf(":")), out nPoints);
+                if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal)) return;
+                int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints);
                 if (nPoints == 0) return;
                 _sett.Plot_ArrayPoints = nPoints;
 
                 strLine = sr.ReadLine();    // Empty line
                 strLine = sr.ReadLine();    // Column header lines
 
+                // Initialize data arrays
+                InitializeArrays();
+
                 // Read data into _plotData
-                _plotData = new double[_sett.T10_NumberOfSensors + _sett.ArrayFixedColumns][];
                 for (int i = 0; i < _plotData.Length; i++)
                 {
                     _plotData[i] = new double[_sett.Plot_ArrayPoints];
@@ -450,12 +474,18 @@ namespace ErgoLux
                 while ((strLine = sr.ReadLine()) != null)
                 {
                     data = strLine.Split("\t");
-                    col++;
                     for (row = 0; row < data.Length; row++)
                     {
                         double.TryParse(data[row], out _plotData[row][col]);
                     }
+                    col++;
                 }
+
+                // Show data into plots
+                Plots_Clear();
+                Plots_DataBinding();
+                Plots_ShowLegends();
+                Plots_ShowFull();
             }
         }
 
@@ -476,12 +506,13 @@ namespace ErgoLux
 
                 toolStripMain_Disconnect.Enabled = true;
                 toolStripMain_Open.Enabled = false;
+                toolStripMain_Save.Enabled = false;
+                toolStripMain_Settings.Enabled = false;
+                toolStripMain_About.Enabled = false;
                 myFtdiDevice.DataReceived += OnDataReceived;
                 if (myFtdiDevice.Write(ClassT10.Command_54))
                 {
-                    //System.Threading.Thread.Sleep(500);
-                    //myFtdiDevice.ClearBuffer();
-                    //this.statusStripIconExchange.Image = _sett.Icon_Data;
+                    _timeStart = DateTime.Now;
                     m_timer.Start();
                 }
             }
@@ -489,29 +520,24 @@ namespace ErgoLux
             {
                 toolStripMain_Disconnect.Enabled = false;
                 toolStripMain_Open.Enabled = true;
+                toolStripMain_Save.Enabled = true;
+                toolStripMain_Settings.Enabled = true;
+                toolStripMain_About.Enabled = true;
                 this.statusStripIconExchange.Image = null;
             }
         }
 
         private void toolStripMain_Disconnect_Click(object sender, EventArgs e)
         {
+            _timeEnd = DateTime.Now;
             m_timer.Stop();
             toolStripMain_Connect.Checked = false;
             myFtdiDevice.DataReceived -= OnDataReceived;
 
             // Shows plots full data
-            formsPlot1.plt.AxisAuto(horizontalMargin: 0.05);
-            formsPlot1.plt.Axis(x1: 0, y1: 0);
-            formsPlot1.Render();
-
-            formsPlot3.plt.AxisAuto(horizontalMargin: 0.05);
-            formsPlot3.plt.Axis(x1: 0, y1: 0);
-            formsPlot3.Render();
-
-            formsPlot4.plt.AxisAuto(horizontalMargin: 0.05);
-            formsPlot4.plt.Axis(x1: 0, y1: 0, y2: 1);
-            formsPlot4.Render();
+            Plots_ShowFull();
         }
+
         private void toolStripMain_Settings_Click(object sender, EventArgs e)
         {
             FTDI.FT_STATUS result;
@@ -541,6 +567,9 @@ namespace ErgoLux
                 
                 if (result == FTDI.FT_STATUS.FT_OK)
                 {
+                    // Set the timer interval according to the sampling frecuency
+                    //m_timer.Interval = 1000 / _sett.T10_Frequency;
+
                     // Update the status strip with information
                     this.statusStripLabelLocation.Text = "Location ID: " + String.Format("{0:X}", _sett.T10_LocationID);
                     this.statusStripLabelType.Text = "Device type: " + frm.GetDeviceType;
@@ -550,16 +579,15 @@ namespace ErgoLux
                     InitializeStatusStripLabelsStatus();
 
                     // Initialize the arrays containing the data
-                    _plotData = new double[_sett.T10_NumberOfSensors + _sett.ArrayFixedColumns][];
-                    _plotRadar = new double[2, _sett.T10_NumberOfSensors];
+                    InitializeArrays();
 
                     // First, clear all data (if any) in the plots
                     Plots_Clear();
 
-                    // Bind the arrays into the plots
+                    // Bind the arrays to the plots
                     Plots_DataBinding();
 
-                    // Show the legends into the picture boxes
+                    // Show the legends in the picture boxes
                     Plots_ShowLegends();
                 }
                 else
@@ -628,17 +656,17 @@ namespace ErgoLux
         #region Plot custom methods
 
         /// <summary>
-        /// Binds the data arrays to the plots
+        /// Binds the data arrays to the plots. Both _plotData and _plotRadar should be initilized, otherwise this function will throw an error.
         /// </summary>
         private void Plots_DataBinding()
         {
             // Binding for Plot Raw Data
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
             {
-                _plotData[i] = new double[_sett.Plot_ArrayPoints];
+                //_plotData[i] = new double[_sett.Plot_ArrayPoints];
                 formsPlot1.plt.PlotSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
             }
-            formsPlot1.plt.AxisAutoX(margin: 0);
+            //formsPlot1.plt.AxisAutoX(margin: 0);
             formsPlot1.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
 
             // Binding for Plot Radar
@@ -653,23 +681,41 @@ namespace ErgoLux
             //_plotAverage = new double[3][];
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
             {
-                //_plotAverage[i] = new double[_sett.Plot_ArrayPoints];
-                _plotData[i] = new double[_sett.Plot_ArrayPoints];
+                //_plotData[i] = new double[_sett.Plot_ArrayPoints];
                 formsPlot3.plt.PlotSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
             }
-            formsPlot3.plt.AxisAuto(horizontalMargin: 0);
+            //formsPlot3.plt.AxisAuto(horizontalMargin: 0);
             formsPlot3.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
 
             // Binding for Plot Ratio
             //_plotRatio = new double[3][];
             for (int i = _sett.T10_NumberOfSensors + 3; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
             {
-                //_plotRatio[i] = new double[_sett.Plot_ArrayPoints];
-                _plotData[i] = new double[_sett.Plot_ArrayPoints];
+                //_plotData[i] = new double[_sett.Plot_ArrayPoints];
                 formsPlot4.plt.PlotSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
             }
-            formsPlot4.plt.AxisAuto(horizontalMargin: 0);
+            //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
             formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0, y2: 1);
+        }
+
+        /// <summary>
+        /// Shows plots full data
+        /// </summary>
+        private void Plots_ShowFull()
+        {
+            formsPlot1.plt.AxisAuto(horizontalMargin: 0.05);
+            formsPlot1.plt.Axis(x1: 0, y1: 0);
+            formsPlot1.Render();
+
+            formsPlot2.Render();
+
+            formsPlot3.plt.AxisAuto(horizontalMargin: 0.05);
+            formsPlot3.plt.Axis(x1: 0, y1: 0);
+            formsPlot3.Render();
+
+            formsPlot4.plt.AxisAuto(horizontalMargin: 0.05);
+            formsPlot4.plt.Axis(x1: 0, y1: 0, y2: 1);
+            formsPlot4.Render();
         }
 
         /// <summary>
@@ -735,10 +781,11 @@ namespace ErgoLux
             // Data computation
             _plotData[sensor][_nPoints] = value;
             _plotRadar[1, sensor] = value;
-            _max = value > _max ? value : _max;
-            _min = value < _min ? value : _min;
+            
+            _max = sensor == 0 ? value : (value > _max ? value : _max);
+            _min = sensor == 0 ? value : (value < _min ? value : _min);
             _average += value;
-
+            
             // Only render when the last sensor value is received
             if (sensor == _sett.T10_NumberOfSensors - 1)
             {
@@ -757,15 +804,13 @@ namespace ErgoLux
 
                 formsPlot1.plt.AxisAutoY();
                 formsPlot3.plt.AxisAutoY();
-                formsPlot4.plt.AxisAutoY();
                 formsPlot1.plt.Axis(y1: 0);
                 formsPlot3.plt.Axis(y1: 0);
-                formsPlot4.plt.Axis(y1: 0);
                 if (_nPoints / _sett.T10_Frequency >= formsPlot1.plt.Axis()[1])
                 {
-                    formsPlot1.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2, y1: 0);
-                    formsPlot3.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2, y1: 0);
-                    formsPlot4.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2, y1: 0);
+                    formsPlot1.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2);
+                    formsPlot3.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2);
+                    formsPlot4.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2);
                 }
 
                 if (_sett.Plot_ShowRawData)
@@ -805,7 +850,7 @@ namespace ErgoLux
                     formsPlot2.Render(skipIfCurrentlyRendering: true);
                 }
 
-                
+
                 if (_sett.Plot_ShowAverage)
                 {
                     foreach (var plot in formsPlot3.plt.GetPlottables())
@@ -814,7 +859,6 @@ namespace ErgoLux
                     }
                     formsPlot3.Render(skipIfCurrentlyRendering: true);
                 }
-
 
                 if (_sett.Plot_ShowRatios)
                 {
@@ -836,6 +880,17 @@ namespace ErgoLux
         }
 
         #endregion Plots functions
+
+        /// <summary>
+        /// Initializes the data arrays using <see cref="ClassSettings"/> properties T10_NumberOfPoints and ArrayFixedColumns
+        /// </summary>
+        private void InitializeArrays()
+        {
+            _plotRadar = new double[2, _sett.T10_NumberOfSensors];
+            _plotData = new double[_sett.T10_NumberOfSensors + _sett.ArrayFixedColumns][];
+            for (int i = 0; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
+                _plotData[i] = new double[_sett.Plot_ArrayPoints];
+        }
 
         #region Program settings
 
