@@ -441,7 +441,8 @@ namespace ErgoLux
 
                 string strLine = sr.ReadLine();
                 if (strLine != "ErgoLux data") return;
-
+                
+                // Better implement a try parse block. Each read line should throw an exception instead of "return"
                 strLine = sr.ReadLine();
                 if (!strLine.Contains("Start time: ", StringComparison.Ordinal)) return;
 
@@ -745,6 +746,7 @@ namespace ErgoLux
             int nVertDist = 10;
 
             // Combine legends from Plot1 and Plot2
+            // To do: add 2 pixels in height and width and paint it black. Above it, draw the legend
             var legendA = formsPlot1.Plot.RenderLegend();
             var legendB = formsPlot2.Plot.RenderLegend();
             var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + nVertDist);
@@ -777,6 +779,7 @@ namespace ErgoLux
             formsPlot3.Plot.Clear();
             formsPlot4.Plot.Clear();
 
+            // to do: this is unnecessary. Verify it in order to delete it.
             InitializePlots();
         }
 
@@ -829,7 +832,7 @@ namespace ErgoLux
                 _plotData[_sett.T10_NumberOfSensors + 5][_nPoints] = _min > 0 ? _average / _max : 0;
 
 
-
+                // not working right. Needs attention
                 formsPlot1.Plot.AxisAutoY();
                 formsPlot3.Plot.AxisAutoY();
                 formsPlot1.Plot.SetAxisLimits(yMin: 0);
@@ -874,6 +877,7 @@ namespace ErgoLux
                     {
                         _plotRadar[0, i] = _average;
                     }
+                    // See if just a re-render is enough to update the plot
                     formsPlot2.Plot.Clear(typeof(ScottPlot.Plottable.RadarPlot));
                     var plt = formsPlot2.Plot.AddRadar(_plotRadar);
                     formsPlot2.Plot.Grid(enable: false);
