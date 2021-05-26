@@ -125,7 +125,7 @@ namespace ErgoLux
         {
             //if (File.Exists(_path + @"\images\close.ico")) this.statusStripIconOpen.Image = new Icon(_path + @"\images\close.ico", 16, 16).ToBitmap();
             statusStripIconOpen.Image = _sett.Icon_Close;
-            
+
             statusStripLabelRaw.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
             statusStripLabelRadar.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
             statusStripLabelMax.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);            
@@ -133,7 +133,7 @@ namespace ErgoLux
 
             InitializeStatusStripLabelsStatus();
 
-            statusStrip.Renderer = new customRenderer<ToolStripLabel>(Brushes.SteelBlue, Brushes.LightSkyBlue);
+            //statusStrip.Renderer = new customRenderer<ToolStripLabel>(Brushes.SteelBlue, Brushes.LightSkyBlue);
             return;
         }
 
@@ -154,42 +154,47 @@ namespace ErgoLux
         /// </summary>
         private void InitializePlots()
         {
-            
+
             //formsPlot1.plt.AxisAutoX(margin: 0);
-            //formsPlot1.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
+            formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
             // customize styling
-            formsPlot1.plt.Title("Illuminance");
-            formsPlot1.plt.YLabel("Lux");
-            formsPlot1.plt.XLabel("Time (seconds)");
-            formsPlot1.plt.Grid(false);
+            formsPlot1.Plot.Title("Illuminance");
+            formsPlot1.Plot.YLabel("Lux");
+            formsPlot1.Plot.XLabel("Time (seconds)");
+            formsPlot1.Plot.Grid(enable: false);
 
             // Customize the Radar plot
-            formsPlot2.plt.Grid(false);
-            formsPlot2.plt.Frame(true);
-            formsPlot2.plt.Ticks(false, false);
+            //formsPlot2.plt.Grid(false);
+            formsPlot2.Plot.Grid(enable: false);
+            formsPlot2.Plot.Frame(visible: true);
+            formsPlot2.Plot.XAxis.Ticks(false);
+            formsPlot2.Plot.YAxis.Ticks(false);
+            //formsPlot2.plt.Ticks(false, false);
             //formsPlot2.plt.Colorset(ScottPlot.Drawing.Colorset.OneHalf);
 
             // Customize the Average plot
             //formsPlot3.plt.AxisAuto(horizontalMargin: 0);
-            //formsPlot3.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
+            formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
-            formsPlot3.plt.Colorset(ScottPlot.Drawing.Colorset.Nord);
-            formsPlot3.plt.Title("Average, max, min");
-            formsPlot3.plt.YLabel("Lux");
-            formsPlot3.plt.XLabel("Time (seconds)");
-            formsPlot3.plt.Grid(false);
+            //formsPlot3.plt.Colorset(ScottPlot.Drawing.Colorset.Nord);
+            formsPlot3.Plot.Palette(ScottPlot.Drawing.Palette.Nord);
+            formsPlot3.Plot.Title("Average, max, min");
+            formsPlot3.Plot.YLabel("Lux");
+            formsPlot3.Plot.XLabel("Time (seconds)");
+            formsPlot3.Plot.Grid(enable: false);
 
 
             // Customize the Ratio plot
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
-            //formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
+            formsPlot4.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
-            formsPlot4.plt.Colorset(ScottPlot.Drawing.Colorset.OneHalf);
-            formsPlot4.plt.Title("Illuminance ratios");
-            formsPlot4.plt.YLabel("Ratio");
-            formsPlot4.plt.XLabel("Time (seconds)");
-            formsPlot4.plt.Grid(false);
+            //formsPlot4.plt.Colorset(ScottPlot.Drawing.Colorset.OneHalf);
+            formsPlot4.Plot.Palette(ScottPlot.Drawing.Palette.OneHalf);
+            formsPlot4.Plot.Title("Illuminance ratios");
+            formsPlot4.Plot.YLabel("Ratio");
+            formsPlot4.Plot.XLabel("Time (seconds)");
+            formsPlot4.Plot.Grid(enable: false);
             
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
             //formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
@@ -237,7 +242,7 @@ namespace ErgoLux
 
             //sigPlot.minRenderIndex = 0;
             //formsPlot1.plt.Axis(x1: 0);
-            formsPlot1.plt.AxisAuto(horizontalMargin: 0.05);
+            formsPlot1.Plot.AxisAuto(horizontalMargin: 0.05);
             formsPlot1.Render();
         }
 
@@ -586,7 +591,7 @@ namespace ErgoLux
 
                     // Bind the arrays to the plots
                     Plots_DataBinding();
-
+                    formsPlot1.Plot.Palette(ScottPlot.Drawing.Palette.OneHalf);
                     // Show the legends in the picture boxes
                     Plots_ShowLegends();
                 }
@@ -664,10 +669,11 @@ namespace ErgoLux
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
             {
                 //_plotData[i] = new double[_sett.Plot_ArrayPoints];
-                formsPlot1.plt.PlotSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
+                formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
             }
             //formsPlot1.plt.AxisAutoX(margin: 0);
-            formsPlot1.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
+            //formsPlot1.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
+            formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
             // Binding for Plot Radar
             string[] labels = new string[_sett.T10_NumberOfSensors];
@@ -675,27 +681,31 @@ namespace ErgoLux
             {
                 labels[i] = "Sensor #" + i.ToString("#0");
             }
-            formsPlot2.plt.PlotRadar(_plotRadar, categoryNames: labels, groupNames: new string[] { "Average", "Illuminance" });
+            var plt = formsPlot2.Plot.AddRadar(_plotRadar);
+            plt.CategoryLabels = labels;
+            plt.GroupLabels = new string[] { "Average", "Illuminance" };
 
             // Binding for Plot Average
             //_plotAverage = new double[3][];
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
             {
                 //_plotData[i] = new double[_sett.Plot_ArrayPoints];
-                formsPlot3.plt.PlotSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
+                formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
             }
             //formsPlot3.plt.AxisAuto(horizontalMargin: 0);
-            formsPlot3.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
+            //formsPlot3.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
+            formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
             // Binding for Plot Ratio
             //_plotRatio = new double[3][];
             for (int i = _sett.T10_NumberOfSensors + 3; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
             {
                 //_plotData[i] = new double[_sett.Plot_ArrayPoints];
-                formsPlot4.plt.PlotSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
+                formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
             }
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
-            formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0, y2: 1);
+            //formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0, y2: 1);
+            formsPlot4.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
         }
 
         /// <summary>
@@ -703,19 +713,28 @@ namespace ErgoLux
         /// </summary>
         private void Plots_ShowFull()
         {
-            formsPlot1.plt.AxisAuto(horizontalMargin: 0.05);
-            formsPlot1.plt.Axis(x1: 0, y1: 0);
-            formsPlot1.Render();
+            if (_sett.Plot_ShowRawData)
+            {
+                formsPlot1.Plot.AxisAuto(horizontalMargin: 0.05);
+                formsPlot1.Plot.SetAxisLimits(xMin: 0, yMin: 0);
+                formsPlot1.Render();
+            }
 
             formsPlot2.Render();
 
-            formsPlot3.plt.AxisAuto(horizontalMargin: 0.05);
-            formsPlot3.plt.Axis(x1: 0, y1: 0);
-            formsPlot3.Render();
+            if (_sett.Plot_ShowAverage)
+            {
+                formsPlot3.Plot.AxisAuto(horizontalMargin: 0.05);
+                formsPlot3.Plot.SetAxisLimits(xMin: 0, yMin: 0);
+                formsPlot3.Render();
+            }
 
-            formsPlot4.plt.AxisAuto(horizontalMargin: 0.05);
-            formsPlot4.plt.Axis(x1: 0, y1: 0, y2: 1);
-            formsPlot4.Render();
+            if (_sett.Plot_ShowRadar)
+            {
+                formsPlot4.Plot.AxisAuto(horizontalMargin: 0.05);
+                formsPlot4.Plot.SetAxisLimits(xMin: 0, yMin: 0, yMax: 1);
+                formsPlot4.Render();
+            }
         }
 
         /// <summary>
@@ -726,8 +745,8 @@ namespace ErgoLux
             int nVertDist = 10;
 
             // Combine legends from Plot1 and Plot2
-            var legendA = formsPlot1.plt.GetLegendBitmap();
-            var legendB = formsPlot2.plt.GetLegendBitmap();
+            var legendA = formsPlot1.Plot.RenderLegend();
+            var legendB = formsPlot2.Plot.RenderLegend();
             var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + nVertDist);
             using Graphics GraphicsA = Graphics.FromImage(bitmap);
             GraphicsA.DrawImage(legendA, 0, 0);
@@ -735,8 +754,8 @@ namespace ErgoLux
             pictureBox1.Image = bitmap;
 
             // Combine legends from Plot3 and Plot4
-            legendA = formsPlot3.plt.GetLegendBitmap();
-            legendB = formsPlot4.plt.GetLegendBitmap();
+            legendA = formsPlot3.Plot.RenderLegend();
+            legendB = formsPlot4.Plot.RenderLegend();
             bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + nVertDist);
             using Graphics GraphicsB = Graphics.FromImage(bitmap);
             GraphicsB.DrawImage(legendA, 0, 0);
@@ -750,10 +769,15 @@ namespace ErgoLux
         private void Plots_Clear()
         {
             _nPoints = 0;
-            formsPlot1.plt.Clear();
-            formsPlot2.plt.Clear();
-            formsPlot3.plt.Clear();
-            formsPlot4.plt.Clear();
+            _max = 0;
+            _min = 0;
+
+            formsPlot1.Plot.Clear();
+            formsPlot2.Plot.Clear();
+            formsPlot3.Plot.Clear();
+            formsPlot4.Plot.Clear();
+
+            InitializePlots();
         }
 
         /// <summary>
@@ -776,6 +800,10 @@ namespace ErgoLux
                 }
                 //Array.Copy(_plotData[0], 1, _plotData[0], 0, _plotData[0].Length - 1);
                 _sett.Plot_ArrayPoints *= factor;
+
+                // https://github.com/ScottPlot/ScottPlot/discussions/1042
+                // https://swharden.com/scottplot/faq/version-4.1/
+                //formsPlot1.Update();
             }
 
             // Data computation
@@ -796,28 +824,29 @@ namespace ErgoLux
                 _plotData[_sett.T10_NumberOfSensors + 1][_nPoints] = _average;
                 _plotData[_sett.T10_NumberOfSensors + 2][_nPoints] = _min;
                 
-                _plotData[_sett.T10_NumberOfSensors + 3][_nPoints] = _min / _average;
-                _plotData[_sett.T10_NumberOfSensors + 4][_nPoints] = _min / _max;
-                _plotData[_sett.T10_NumberOfSensors + 5][_nPoints] = _average / _max;
+                _plotData[_sett.T10_NumberOfSensors + 3][_nPoints] = _average > 0 ? _min / _average : 0;
+                _plotData[_sett.T10_NumberOfSensors + 4][_nPoints] = _max > 0 ?_min / _max : 0;
+                _plotData[_sett.T10_NumberOfSensors + 5][_nPoints] = _min > 0 ? _average / _max : 0;
 
 
 
-                formsPlot1.plt.AxisAutoY();
-                formsPlot3.plt.AxisAutoY();
-                formsPlot1.plt.Axis(y1: 0);
-                formsPlot3.plt.Axis(y1: 0);
-                if (_nPoints / _sett.T10_Frequency >= formsPlot1.plt.Axis()[1])
+                formsPlot1.Plot.AxisAutoY();
+                formsPlot3.Plot.AxisAutoY();
+                formsPlot1.Plot.SetAxisLimits(yMin: 0);
+                formsPlot3.Plot.SetAxisLimits(yMin: 0);
+                if (_nPoints / _sett.T10_Frequency >= (formsPlot1.Plot.GetAxisLimits()).XMax)
                 {
-                    formsPlot1.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2);
-                    formsPlot3.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2);
-                    formsPlot4.plt.Axis(x1: (_nPoints - _sett.Plot_WindowPoints) / 2, x2: (_nPoints + _sett.Plot_WindowPoints) / 2);
+                    System.Diagnostics.Debug.Print("Redim axis {0}", (formsPlot1.Plot.GetAxisLimits()).XMax.ToString());
+                    formsPlot1.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / 2, xMax: (_nPoints + _sett.Plot_WindowPoints) / 2);
+                    formsPlot3.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / 2, xMax: (_nPoints + _sett.Plot_WindowPoints) / 2);
+                    formsPlot4.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / 2, xMax: (_nPoints + _sett.Plot_WindowPoints) / 2);
                 }
 
                 if (_sett.Plot_ShowRawData)
                 {
-                    foreach (var plot in formsPlot1.plt.GetPlottables())
+                    foreach (var plot in formsPlot1.Plot.GetPlottables())
                     {
-                        ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
+                        ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                         //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
                         //sigPlot.maxRenderIndex = _dataN;
                         //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
@@ -845,26 +874,30 @@ namespace ErgoLux
                     {
                         _plotRadar[0, i] = _average;
                     }
-                    formsPlot2.plt.Clear();
-                    formsPlot2.plt.PlotRadar(_plotRadar, fillAlpha: 0.5);
+                    formsPlot2.Plot.Clear(typeof(ScottPlot.Plottable.RadarPlot));
+                    var plt = formsPlot2.Plot.AddRadar(_plotRadar);
+                    formsPlot2.Plot.Grid(enable: false);
+                    formsPlot2.Plot.Frame(visible: true);
+                    formsPlot2.Plot.XAxis.Ticks(false);
+                    formsPlot2.Plot.YAxis.Ticks(false);
                     formsPlot2.Render(skipIfCurrentlyRendering: true);
                 }
 
 
                 if (_sett.Plot_ShowAverage)
                 {
-                    foreach (var plot in formsPlot3.plt.GetPlottables())
+                    foreach (var plot in formsPlot3.Plot.GetPlottables())
                     {
-                        ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
+                        ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                     }
                     formsPlot3.Render(skipIfCurrentlyRendering: true);
                 }
 
                 if (_sett.Plot_ShowRatios)
                 {
-                    foreach (var plot in formsPlot4.plt.GetPlottables())
+                    foreach (var plot in formsPlot4.Plot.GetPlottables())
                     {
-                        ((ScottPlot.PlottableSignal)plot).maxRenderIndex = _nPoints;
+                        ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                     }
                     formsPlot4.Render(skipIfCurrentlyRendering: true);
                 }
@@ -903,16 +936,11 @@ namespace ErgoLux
             try
             {
                 var jsonString = File.ReadAllText(_sett.FileName);
-                //_sett = JsonSerializer.Deserialize<ClassSettings>(jsonString);
-                //_sett.InitializeJsonIgnore(_path);
-                var settings = JsonSerializer.Deserialize<ClassSettings>(jsonString);
-                settings.Icon_Close = _sett.Icon_Close;
-                settings.Icon_Data = _sett.Icon_Data;
-                settings.Icon_Open = _sett.Icon_Open;
-                settings.FileName = _sett.FileName;
-                settings.Path = _sett.Path;
-                settings.ArrayFixedColumns = _sett.ArrayFixedColumns;
-                _sett = settings;
+                _sett = JsonSerializer.Deserialize<ClassSettings>(jsonString);
+                _sett.InitializeJsonIgnore(_path);
+                //var settings = JsonSerializer.Deserialize<ClassSettings>(jsonString);
+                //settings.InitializeJsonIgnore(_path);
+                //_sett = settings;
 
                 this.StartPosition = FormStartPosition.Manual;
                 this.DesktopLocation = new Point(_sett.Wnd_Left, _sett.Wnd_Top);
