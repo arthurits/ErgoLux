@@ -745,23 +745,26 @@ namespace ErgoLux
         {
             int nVertDist = 10;
 
-            // Combine legends from Plot1 and Plot2
-            // To do: add 2 pixels in height and width and paint it black. Above it, draw the legend
+            // Combine legends from Plot1 and Plot2 and draw a black border around each legend
             var legendA = formsPlot1.Plot.RenderLegend();
             var legendB = formsPlot2.Plot.RenderLegend();
-            var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + nVertDist);
+            var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + nVertDist + 4);
             using Graphics GraphicsA = Graphics.FromImage(bitmap);
-            GraphicsA.DrawImage(legendA, 0, 0);
-            GraphicsA.DrawImage(legendB, 0, legendA.Height + nVertDist);
+            GraphicsA.DrawRectangle(new Pen(Color.Black), 0, 0, legendA.Width + 2, legendA.Height + 2);
+            GraphicsA.DrawImage(legendA, 1, 1);
+            GraphicsA.DrawRectangle(new Pen(Color.Black), 0, legendA.Height + nVertDist + 2, legendB.Width + 2, legendB.Height + 2);
+            GraphicsA.DrawImage(legendB, 1, legendA.Height + nVertDist + 3);
             pictureBox1.Image = bitmap;
 
-            // Combine legends from Plot3 and Plot4
+            // Combine legends from Plot3 and Plot4 and draw a black border around each legend
             legendA = formsPlot3.Plot.RenderLegend();
             legendB = formsPlot4.Plot.RenderLegend();
-            bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width), legendA.Height + legendB.Height + nVertDist);
+            bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + nVertDist + 4);
             using Graphics GraphicsB = Graphics.FromImage(bitmap);
-            GraphicsB.DrawImage(legendA, 0, 0);
-            GraphicsB.DrawImage(legendB, 0, legendA.Height + nVertDist);
+            GraphicsB.DrawRectangle(new Pen(Color.Black), 0, 0, legendA.Width + 2, legendA.Height + 2);
+            GraphicsB.DrawImage(legendA, 1, 1);
+            GraphicsB.DrawRectangle(new Pen(Color.Black), 0, legendA.Height + nVertDist + 2, legendB.Width + 2, legendB.Height + 2);
+            GraphicsB.DrawImage(legendB, 1, legendA.Height + nVertDist + 3);
             pictureBox2.Image = bitmap;
         }
 
