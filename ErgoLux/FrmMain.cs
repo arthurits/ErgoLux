@@ -591,8 +591,9 @@ namespace ErgoLux
                     Plots_Clear();
 
                     // Bind the arrays to the plots
-                    Plots_DataBinding();
                     formsPlot1.Plot.Palette(ScottPlot.Drawing.Palette.OneHalf);
+                    Plots_DataBinding();
+                    
                     // Show the legends in the picture boxes
                     Plots_ShowLegends();
                 }
