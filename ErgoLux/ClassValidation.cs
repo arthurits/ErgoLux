@@ -29,7 +29,11 @@ namespace System
                 if (!IsValidDouble(obj)) return lowerBound.HasValue ? lowerBound.Value : 0.0;
             }
 
-            double value = Convert.ToDouble(obj.ToString());
+            //double value = Convert.ToDouble(obj.ToString());
+            double value;
+            if (!double.TryParse(obj.ToString(), out value))
+                return 0.0;
+
             //double value = double.TryParse(obj.ToString());
             if (lowerBound.HasValue && value < lowerBound.Value) return lowerBound.Value;
             if (upperBound.HasValue && value > upperBound.Value) return upperBound.Value;
@@ -47,8 +51,8 @@ namespace System
         /// <returns><see langword="True"/> if obj is within the bound limits, <see langword="false"/> otherwise</returns>
         public static bool IsValidRange<T>(object obj, double? lowerBound = null, double? upperBound = null, bool? showMsgBox = false, System.Windows.Forms.Form parent = null)
         {
-
             bool IsValid;
+
             if (typeof(T) == typeof(int))
                 IsValid = IsValidInteger(obj);
             else
@@ -71,6 +75,10 @@ namespace System
             }
 
             double value = Convert.ToDouble(obj.ToString());
+            //double value;
+            //if (!double.TryParse(obj.ToString(), out value))
+            //    return false;
+
             if (lowerBound.HasValue && value < lowerBound.Value)
             {
                 if (showMsgBox.HasValue && showMsgBox.Value)
@@ -113,21 +121,35 @@ namespace System
             if (str == null) return false;
 
             var m = System.Text.RegularExpressions.Regex.Match(str.ToString(), @"^-?\+?[0-9]*\.?\,?[0-9]+$");
-            return m.Success && m.Value != "";
+
+            double value;
+            var result = double.TryParse(Convert.ToString(str, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out value);
+
+            return m.Success && m.Value != "" && result;
         }
 
         /// <summary>
         /// Check if the string format corresponds to a non-decimal number
         /// </summary>
-        /// <param name="str">Object (property) constaining the value to check</param>
+        /// <param name="str">Object (property) containing the value to check</param>
         /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
         public static bool IsValidInteger(object str)
         {
             if (str == null) return false;
 
             var m = System.Text.RegularExpressions.Regex.Match(str.ToString(), @"^-?\+?[0-9]+$");
-            return m.Success && m.Value != "";
-        }
 
+            int value;
+            var result = int.TryParse(Convert.ToString(str, Globalization.CultureInfo.InvariantCulture),
+                                    System.Globalization.NumberStyles.Any,
+                                    Globalization.NumberFormatInfo.InvariantInfo,
+                                    out value);
+
+            return m.Success && m.Value != "" && result;
+        }
+        // See this: https://stackoverflow.com/questions/1130698/checking-if-an-object-is-a-number-in-c-sharp/1130748
     }
 }

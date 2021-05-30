@@ -9,64 +9,64 @@ namespace ErgoLux
     /// </summary>
     public class ClassT10
     {
-        private static readonly int _nLengthShortFormat;
-        private static readonly int _nLengthLongFormat;
-        private static readonly int _nMaxSensors;
+        //private static readonly int _nLengthShortFormat;
+        //private static readonly int _nLengthLongFormat;
+        //private static readonly int _nMaxSensors;
         private static readonly string strSTX;
         private static readonly string strETX;
         private static readonly string strDelimiter;
-        private static readonly string[] _receptors;
-        private static readonly string[] _integrated;
-        private static readonly string _strCommand28;
-        private static readonly string _strCommand54;
-        private static readonly string _strCommand55_0;
-        private static readonly string _strCommand55_1;
+        //private static readonly string[] _receptors;
+        //private static readonly string[] _integrated;
+        //private static readonly string _strCommand28;
+        //private static readonly string _strCommand54;
+        //private static readonly string _strCommand55_0;
+        //private static readonly string _strCommand55_1;
 
         /// <summary>
         /// Gets the response length for commands 28, 54 and 55
         /// </summary>
-        public static int ShortBytesLength => _nLengthShortFormat;
+        public static int ShortBytesLength { get; private set; }
 
         /// <summary>
         /// Gets the response length for commands 10 and 11
         /// </summary>
-        public static int LongBytesLength => _nLengthLongFormat;
+        public static int LongBytesLength { get; private set; }
 
         /// <summary>
         /// Gets the maximum numbers of multipoint T-10A sensors
         /// </summary>
-        public static int MaximumSensors => _nMaxSensors;
+        public static int MaximumSensors { get; private set; }
 
         /// <summary>
         /// Gets the single-measurements code list
         /// </summary>
-        public static string[] ReceptorsSingle => _receptors;
+        public static string[] ReceptorsSingle { get; private set; }
 
         /// <summary>
         /// Gets the integrated-measurements code list
         /// </summary>
-        public static string[] ReceptorsIntegrated => _integrated;
+        public static string[] ReceptorsIntegrated { get; private set; }
 
         //public static ClassT10 Command11 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter).Value; } }
         /// <summary>
         /// Command to clear integrated data
         /// </summary>
-        public static string Command_28 => _strCommand28;
+        public static string Command_28 { get; private set; }
 
         /// <summary>
         /// Command to set the PC connection mode
         /// </summary>
-        public static string Command_54 => _strCommand54;
+        public static string Command_54 { get; private set; }
 
         /// <summary>
         /// Command to start integration mode
         /// </summary>
-        public static string Command_55_0 => _strCommand55_0;
+        public static string Command_55_0 { get; private set; }
 
         /// <summary>
         /// Command to end integration mode
         /// </summary>
-        public static string Command_55_1 => _strCommand55_1;
+        public static string Command_55_1 { get; private set; }
 
 
 
@@ -76,28 +76,28 @@ namespace ErgoLux
 
         static ClassT10()
         {
-            _nLengthLongFormat = 32;
-            _nLengthShortFormat = 14;
-            _nMaxSensors = 30;
+            LongBytesLength = 32;
+            ShortBytesLength = 14;
+            MaximumSensors = 30;
 
             strSTX = Char.ConvertFromUtf32(2);
             strETX = Char.ConvertFromUtf32(3);
             strDelimiter = Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10);
 
             // Command 10 (single measurements) and command 11 (integrated measurements) initialization
-            _receptors = new string[_nMaxSensors];
-            _integrated = new string[_nMaxSensors];
-            for (int i=0; i<_nMaxSensors;i++)
+            ReceptorsSingle = new string[MaximumSensors];
+            ReceptorsIntegrated = new string[MaximumSensors];
+            for (int i=0; i< MaximumSensors; i++)
             {
-                _receptors[i] = EncodeCommand(i.ToString("00") + "100200");
-                _integrated[i] = EncodeCommand(i.ToString("00") + "110200");
+                ReceptorsSingle[i] = EncodeCommand(i.ToString("00") + "100200");
+                ReceptorsIntegrated[i] = EncodeCommand(i.ToString("00") + "110200");
             }
 
             // Commands initialization
-            _strCommand28 = EncodeCommand("0028    ");
-            _strCommand54 = EncodeCommand("00541   ");
-            _strCommand55_0 = EncodeCommand("99550  0");
-            _strCommand55_1 = EncodeCommand("99551  0");
+            Command_28 = EncodeCommand("0028    ");
+            Command_54 = EncodeCommand("00541   ");
+            Command_55_0 = EncodeCommand("99550  0");
+            Command_55_1 = EncodeCommand("99551  0");
         }
 
         /// <summary>

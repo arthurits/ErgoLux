@@ -178,7 +178,7 @@ namespace ErgoLux
             formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
             //formsPlot3.plt.Colorset(ScottPlot.Drawing.Colorset.Nord);
-            formsPlot3.Plot.Palette(ScottPlot.Drawing.Palette.Nord);
+            formsPlot3.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
             formsPlot3.Plot.Title("Average, max, min");
             formsPlot3.Plot.YLabel("Lux");
             formsPlot3.Plot.XLabel("Time (seconds)");
@@ -190,7 +190,7 @@ namespace ErgoLux
             formsPlot4.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
             //formsPlot4.plt.Colorset(ScottPlot.Drawing.Colorset.OneHalf);
-            formsPlot4.Plot.Palette(ScottPlot.Drawing.Palette.OneHalf);
+            formsPlot4.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
             formsPlot4.Plot.Title("Illuminance ratios");
             formsPlot4.Plot.YLabel("Ratio");
             formsPlot4.Plot.XLabel("Time (seconds)");
@@ -591,7 +591,7 @@ namespace ErgoLux
                     Plots_Clear();
 
                     // Bind the arrays to the plots
-                    formsPlot1.Plot.Palette(ScottPlot.Drawing.Palette.OneHalf);
+                    formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
                     Plots_DataBinding();
                     
                     // Show the legends in the picture boxes
