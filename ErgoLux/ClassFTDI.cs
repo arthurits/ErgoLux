@@ -223,13 +223,13 @@ namespace ErgoLux
             UInt32 nrOfBytesAvailable = 0;
             while (true)
             {
-                System.Diagnostics.Debug.WriteLine("ReadData event");
+                //System.Diagnostics.Debug.WriteLine("ReadData event");
                 // wait until event is fired
                 this.receivedDataEvent.WaitOne();
 
                 // try to recieve data now
                 status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
-                System.Diagnostics.Debug.WriteLine("Bytes read: " + nrOfBytesAvailable.ToString());
+                //System.Diagnostics.Debug.WriteLine("Bytes read: " + nrOfBytesAvailable.ToString());
                 if (status != FTDI.FT_STATUS.FT_OK)
                 {
                     break;
