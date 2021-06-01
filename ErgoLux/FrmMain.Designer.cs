@@ -29,7 +29,6 @@ namespace ErgoLux
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.tspTop = new System.Windows.Forms.ToolStripPanel();
             this.tspBottom = new System.Windows.Forms.ToolStripPanel();
@@ -63,8 +62,6 @@ namespace ErgoLux
             this.toolStripMain_About = new System.Windows.Forms.ToolStripButton();
             this.formsPlot1 = new ScottPlot.FormsPlot();
             this.formsPlot2 = new ScottPlot.FormsPlot();
-            this.BtnConnect = new System.Windows.Forms.Button();
-            this.BtnStop = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.formsPlot3 = new ScottPlot.FormsPlot();
@@ -231,13 +228,13 @@ namespace ErgoLux
             this.statusStripLabelRaw.BackColor = System.Drawing.Color.Transparent;
             this.statusStripLabelRaw.Checked = false;
             this.statusStripLabelRaw.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelRaw.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelRaw.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelRaw.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelRaw.ForeColor = System.Drawing.SystemColors.ControlText;
             this.statusStripLabelRaw.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelRaw.Name = "statusStripLabelRaw";
             this.statusStripLabelRaw.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelRaw.Text = "W";
-            this.statusStripLabelRaw.ToolTipText = "Raw data";
+            this.statusStripLabelRaw.ToolTipText = "Plot raw data";
             this.statusStripLabelRaw.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
             // statusStripLabelRadar
@@ -246,13 +243,13 @@ namespace ErgoLux
             this.statusStripLabelRadar.BackColor = System.Drawing.Color.Transparent;
             this.statusStripLabelRadar.Checked = false;
             this.statusStripLabelRadar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelRadar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelRadar.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelRadar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelRadar.ForeColor = System.Drawing.SystemColors.ControlText;
             this.statusStripLabelRadar.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelRadar.Name = "statusStripLabelRadar";
             this.statusStripLabelRadar.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelRadar.Text = "D";
-            this.statusStripLabelRadar.ToolTipText = "Saving data";
+            this.statusStripLabelRadar.ToolTipText = "Plot distribution";
             this.statusStripLabelRadar.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
             // statusStripLabelMax
@@ -261,12 +258,12 @@ namespace ErgoLux
             this.statusStripLabelMax.BackColor = System.Drawing.Color.Transparent;
             this.statusStripLabelMax.Checked = false;
             this.statusStripLabelMax.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelMax.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelMax.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.statusStripLabelMax.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelMax.Name = "statusStripLabelMax";
             this.statusStripLabelMax.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelMax.Text = "A";
-            this.statusStripLabelMax.ToolTipText = "Max, average and min";
+            this.statusStripLabelMax.ToolTipText = "Plot max, average and min";
             this.statusStripLabelMax.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
             // statusStripLabelRatio
@@ -275,12 +272,12 @@ namespace ErgoLux
             this.statusStripLabelRatio.BackColor = System.Drawing.Color.Transparent;
             this.statusStripLabelRatio.Checked = false;
             this.statusStripLabelRatio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.statusStripLabelRatio.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelRatio.Name = "statusStripLabelRatio";
             this.statusStripLabelRatio.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelRatio.Text = "R";
-            this.statusStripLabelRatio.ToolTipText = "Illuminance ratios";
+            this.statusStripLabelRatio.ToolTipText = "Plot ratios";
             this.statusStripLabelRatio.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
             // toolStripMain
@@ -393,43 +390,23 @@ namespace ErgoLux
             // 
             // formsPlot1
             // 
+            this.formsPlot1.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot1.Location = new System.Drawing.Point(0, 0);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(381, 218);
+            this.formsPlot1.Size = new System.Drawing.Size(381, 243);
             this.formsPlot1.TabIndex = 0;
             // 
             // formsPlot2
             // 
+            this.formsPlot2.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot2.Location = new System.Drawing.Point(531, 0);
             this.formsPlot2.Margin = new System.Windows.Forms.Padding(0);
             this.formsPlot2.Name = "formsPlot2";
-            this.formsPlot2.Size = new System.Drawing.Size(382, 218);
+            this.formsPlot2.Size = new System.Drawing.Size(382, 243);
             this.formsPlot2.TabIndex = 1;
-            // 
-            // BtnConnect
-            // 
-            this.BtnConnect.Enabled = false;
-            this.BtnConnect.Location = new System.Drawing.Point(710, 540);
-            this.BtnConnect.Name = "BtnConnect";
-            this.BtnConnect.Size = new System.Drawing.Size(108, 31);
-            this.BtnConnect.TabIndex = 3;
-            this.BtnConnect.Text = "Connect";
-            this.BtnConnect.UseVisualStyleBackColor = true;
-            this.BtnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
-            // 
-            // BtnStop
-            // 
-            this.BtnStop.Enabled = false;
-            this.BtnStop.Location = new System.Drawing.Point(838, 540);
-            this.BtnStop.Name = "BtnStop";
-            this.BtnStop.Size = new System.Drawing.Size(83, 30);
-            this.BtnStop.TabIndex = 4;
-            this.BtnStop.Text = "Stop";
-            this.BtnStop.UseVisualStyleBackColor = true;
-            this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -454,7 +431,7 @@ namespace ErgoLux
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(913, 437);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(913, 487);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // pictureBox1
@@ -463,36 +440,38 @@ namespace ErgoLux
             this.pictureBox1.Location = new System.Drawing.Point(381, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 218);
+            this.pictureBox1.Size = new System.Drawing.Size(150, 243);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
             // formsPlot3
             // 
+            this.formsPlot3.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot3.Location = new System.Drawing.Point(4, 221);
+            this.formsPlot3.Location = new System.Drawing.Point(4, 246);
             this.formsPlot3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot3.Name = "formsPlot3";
-            this.formsPlot3.Size = new System.Drawing.Size(373, 213);
+            this.formsPlot3.Size = new System.Drawing.Size(373, 238);
             this.formsPlot3.TabIndex = 4;
             // 
             // formsPlot4
             // 
+            this.formsPlot4.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot4.Location = new System.Drawing.Point(535, 221);
+            this.formsPlot4.Location = new System.Drawing.Point(535, 246);
             this.formsPlot4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot4.Name = "formsPlot4";
-            this.formsPlot4.Size = new System.Drawing.Size(374, 213);
+            this.formsPlot4.Size = new System.Drawing.Size(374, 238);
             this.formsPlot4.TabIndex = 5;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Location = new System.Drawing.Point(381, 218);
+            this.pictureBox2.Location = new System.Drawing.Point(381, 243);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(150, 219);
+            this.pictureBox2.Size = new System.Drawing.Size(150, 244);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
@@ -504,8 +483,6 @@ namespace ErgoLux
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(934, 611);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.BtnStop);
-            this.Controls.Add(this.BtnConnect);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.mnuMainFrm);
@@ -551,18 +528,13 @@ namespace ErgoLux
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelLocation;
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconOpen;
-        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelData;
-        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelMirror;
         private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRatio;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelXtras;
         private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRaw;
         private ScottPlot.FormsPlot formsPlot1;
         private ScottPlot.FormsPlot formsPlot2;
-        private System.Windows.Forms.Button BtnConnect;
-        private System.Windows.Forms.Button BtnStop;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton toolStripAbout;
         private System.Windows.Forms.ToolStripButton toolStripMain_About;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelType;

@@ -17,7 +17,6 @@ namespace ErgoLux
 {
     public partial class FrmMain : Form
     {
-        private SerialPort _serialPort;
         private readonly System.Timers.Timer m_timer;
         private readonly string _path;
         private ClassSettings _sett;
@@ -99,6 +98,7 @@ namespace ErgoLux
             this.toolStripMain_Disconnect.Enabled = false;
             this.toolStripMain_Connect.Enabled = false;
             this.toolStripMain_Open.Enabled = true; // maybe set as default in the WinForms designer
+            this.toolStripMain_Save.Enabled = false;
 
             /*
             using (Graphics g = Graphics.FromImage(this.toolStripMain_Skeleton.Image))
@@ -202,49 +202,12 @@ namespace ErgoLux
         private void Form1_Shown(object sender, EventArgs e)
         {
             // signal the native process (that launched us) to close the splash screen
-            using (var closeSplashEvent = new System.Threading.EventWaitHandle(false, System.Threading.EventResetMode.ManualReset, "CloseSplashScreenEvent"))
-            {
-                closeSplashEvent.Set();
-            }
-        }
-
-        private void BtnConnect_Click(object sender, EventArgs e)
-        {
-            _serialPort = new SerialPort("COM5", 9600, Parity.Even, 7, StopBits.One);
-            _serialPort.Handshake = Handshake.None;
-            _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
-            //_serialPort.ReadTimeout = 500;
-            //_serialPort.NewLine = string.Empty;
-            // Opens serial port   
-            _serialPort.Open();
-            //_serialPort.WriteLine(ClassT10.Command54.TrimEnd( (char)10, (char)13));
-            //_serialPort.WriteLine(ClassT10.ReceptorsSingle[0].TrimEnd((char)10, (char)13));
-            _serialPort.Write(ClassT10.Command_54);
-            System.Threading.Thread.Sleep(500);
-            _serialPort.Write(ClassT10.ReceptorsSingle[0]);
-            _serialPort.Write(ClassT10.ReceptorsSingle[1]);
-
-
-        }
-        private void BtnStop_Click(object sender, EventArgs e)
-        {
-            m_timer.Stop();
-            myFtdiDevice.DataReceived -= OnDataReceived;
-
-            //foreach (var plot in formsPlot1.plt.GetPlottables())
-            //{
-            //    ((ScottPlot.PlottableSignal)plot).minRenderIndex = 0;
-            //}
-
-            //sigPlot.minRenderIndex = 0;
-            //formsPlot1.plt.Axis(x1: 0);
-            formsPlot1.Plot.AxisAuto(horizontalMargin: 0.05);
-            formsPlot1.Render();
+            using var closeSplashEvent = new System.Threading.EventWaitHandle(false, System.Threading.EventResetMode.ManualReset, "CloseSplashScreenEvent");
+            closeSplashEvent.Set();
         }
 
         private void OnTimedEvent(object sender, EventArgs e)
         {
-            //m_timer.Stop();
             var result = false;
             result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
         }
@@ -271,20 +234,6 @@ namespace ErgoLux
 
             Plots_Update(result.Sensor, result.Iluminance);
             
-        }
-
-        private void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            string data = _serialPort.ReadLine();
-            System.Diagnostics.Debug.Print("Received data is {0} and length is {1}", data, data.Length);
-            if(data.Length==13)
-            {
-                _serialPort.Write(ClassT10.ReceptorsSingle[0]);
-            }
-            else if (data.Length==31)
-            {
-                _serialPort.Write(ClassT10.ReceptorsSingle[1]);
-            }
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -511,6 +460,7 @@ namespace ErgoLux
                 toolStripMain_Save.Enabled = false;
                 toolStripMain_Settings.Enabled = false;
                 toolStripMain_About.Enabled = false;
+                this.statusStripIconExchange.Image = _sett.Icon_Data;
                 myFtdiDevice.DataReceived += OnDataReceived;
                 if (myFtdiDevice.Write(ClassT10.Command_54))
                 {
@@ -531,12 +481,13 @@ namespace ErgoLux
 
         private void toolStripMain_Disconnect_Click(object sender, EventArgs e)
         {
-            _timeEnd = DateTime.Now;
+            // Stop receiving data
             m_timer.Stop();
-            toolStripMain_Connect.Checked = false;
+            _timeEnd = DateTime.Now;
             myFtdiDevice.DataReceived -= OnDataReceived;
 
-            // Shows plots full data
+            // Update GUI
+            toolStripMain_Connect.Checked = false;
             Plots_ShowFull();
         }
 
@@ -566,11 +517,11 @@ namespace ErgoLux
                     xOff: _sett.T10_CharOff,
                     readTimeOut: 0,
                     writeTimeOut: 0);
-                
+
                 if (result == FTDI.FT_STATUS.FT_OK)
                 {
                     // Set the timer interval according to the sampling frecuency
-                    //m_timer.Interval = 1000 / _sett.T10_Frequency;
+                    m_timer.Interval = 1000 / _sett.T10_Frequency;
 
                     // Update the status strip with information
                     this.statusStripLabelLocation.Text = "Location ID: " + String.Format("{0:X}", _sett.T10_LocationID);
@@ -665,59 +616,56 @@ namespace ErgoLux
             // Binding for Plot Raw Data
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
             {
-                //_plotData[i] = new double[_sett.Plot_ArrayPoints];
-                formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
+                var plot = formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
+                plot.MinRenderIndex = 0;
+                plot.MaxRenderIndex = 0;
             }
-            //formsPlot1.plt.AxisAutoX(margin: 0);
-            //formsPlot1.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
             formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
             // Binding for Plot Radar
             string[] labels = new string[_sett.T10_NumberOfSensors];
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-            {
                 labels[i] = "#" + i.ToString("#0");
-            }
+
             var plt = formsPlot2.Plot.AddRadar(_plotRadar, disableFrameAndGrid: false);
             plt.FillColors[0] = Color.FromArgb(100, plt.LineColors[0]);
             plt.FillColors[1] = Color.FromArgb(150, plt.LineColors[1]);
-            formsPlot2.Plot.Grid(enable: false);
+            //formsPlot2.Plot.Grid(enable: false);
+            
             plt.AxisType = ScottPlot.RadarAxis.Polygon;
             plt.ShowAxisValues = false;
             plt.CategoryLabels = labels;
             plt.GroupLabels = new string[] { "Average", "Illuminance" };
 
             // Binding for Plot Average
-            //_plotAverage = new double[3][];
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
             {
                 //_plotData[i] = new double[_sett.Plot_ArrayPoints];
-                formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
+                var plot = formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
+                plot.MinRenderIndex = 0;
+                plot.MaxRenderIndex = 0;
             }
-            //formsPlot3.plt.AxisAuto(horizontalMargin: 0);
-            //formsPlot3.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0);
             formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
             // Binding for Plot Ratio
-            //_plotRatio = new double[3][];
             for (int i = _sett.T10_NumberOfSensors + 3; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
             {
                 //_plotData[i] = new double[_sett.Plot_ArrayPoints];
-                formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
+                var plot = formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
+                plot.MinRenderIndex = 0;
+                plot.MaxRenderIndex = 0;
             }
-            //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
-            //formsPlot4.plt.Axis(x1: 0, x2: _sett.Plot_WindowPoints, y1: 0, y2: 1);
             formsPlot4.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
         }
 
         /// <summary>
-        /// Shows plots full data
+        /// Shows plots's full range data
         /// </summary>
         private void Plots_ShowFull()
         {
             if (_sett.Plot_ShowRawData)
             {
-                formsPlot1.Plot.AxisAuto(horizontalMargin: 0.05);
+                formsPlot1.Plot.AxisAuto();
                 formsPlot1.Plot.SetAxisLimits(xMin: 0, yMin: 0);
                 formsPlot1.Render();
             }
@@ -726,14 +674,14 @@ namespace ErgoLux
 
             if (_sett.Plot_ShowAverage)
             {
-                formsPlot3.Plot.AxisAuto(horizontalMargin: 0.05);
+                formsPlot3.Plot.AxisAuto();
                 formsPlot3.Plot.SetAxisLimits(xMin: 0, yMin: 0);
                 formsPlot3.Render();
             }
 
             if (_sett.Plot_ShowRadar)
             {
-                formsPlot4.Plot.AxisAuto(horizontalMargin: 0.05);
+                formsPlot4.Plot.AxisAuto();
                 formsPlot4.Plot.SetAxisLimits(xMin: 0, yMin: 0, yMax: 1);
                 formsPlot4.Render();
             }
@@ -749,23 +697,39 @@ namespace ErgoLux
             // Combine legends from Plot1 and Plot2 and draw a black border around each legend
             var legendA = formsPlot1.Plot.RenderLegend();
             var legendB = formsPlot2.Plot.RenderLegend();
-            var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 4, legendA.Height + legendB.Height + nVertDist + 5);
+            var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + nVertDist + 4);
             using Graphics GraphicsA = Graphics.FromImage(bitmap);
-            GraphicsA.DrawRectangle(new Pen(Color.Black), 0, 0, legendA.Width + 2, legendA.Height + 2);
-            GraphicsA.DrawImage(legendA, 1, 1);
-            GraphicsA.DrawRectangle(new Pen(Color.Black), 0, legendA.Height + nVertDist + 1, legendB.Width + 2, legendB.Height + 3);
-            GraphicsA.DrawImage(legendB, 1, legendA.Height + nVertDist + 3);
+            GraphicsA.DrawRectangle(new Pen(Color.Black),
+                                    (bitmap.Width - legendA.Width - 2) / 2,
+                                    0,
+                                    legendA.Width + 1,
+                                    legendA.Height + 1);
+            GraphicsA.DrawImage(legendA, (bitmap.Width - legendA.Width - 2) / 2 + 1, 1);
+            GraphicsA.DrawRectangle(new Pen(Color.Black),
+                                    (bitmap.Width - legendB.Width - 2) / 2,
+                                    legendA.Height + nVertDist + 1,
+                                    legendB.Width + 1,
+                                    legendB.Height + 2);
+            GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + nVertDist + 2);
             pictureBox1.Image = bitmap;
 
             // Combine legends from Plot3 and Plot4 and draw a black border around each legend
             legendA = formsPlot3.Plot.RenderLegend();
             legendB = formsPlot4.Plot.RenderLegend();
-            bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 4, legendA.Height + legendB.Height + nVertDist + 5);
+            bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + nVertDist + 4);
             using Graphics GraphicsB = Graphics.FromImage(bitmap);
-            GraphicsB.DrawRectangle(new Pen(Color.Black), 0, 0, legendA.Width + 2, legendA.Height + 2);
-            GraphicsB.DrawImage(legendA, 1, 1);
-            GraphicsB.DrawRectangle(new Pen(Color.Black), 0, legendA.Height + nVertDist + 1, legendB.Width + 2, legendB.Height + 3);
-            GraphicsB.DrawImage(legendB, 1, legendA.Height + nVertDist + 3);
+            GraphicsB.DrawRectangle(new Pen(Color.Black),
+                                    (bitmap.Width - legendA.Width - 2) / 2,
+                                    0,
+                                    legendA.Width + 1,
+                                    legendA.Height + 1);
+            GraphicsB.DrawImage(legendA, (bitmap.Width - legendA.Width - 2) / 2 + 1, 1);
+            GraphicsB.DrawRectangle(new Pen(Color.Black),
+                                    (bitmap.Width - legendB.Width - 2) / 2,
+                                    legendA.Height + nVertDist + 1,
+                                    legendB.Width + 1,
+                                    legendB.Height + 2);
+            GraphicsB.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + nVertDist + 2);
             pictureBox2.Image = bitmap;
         }
 
@@ -784,7 +748,7 @@ namespace ErgoLux
             formsPlot4.Plot.Clear();
 
             // to do: this is unnecessary. Verify it in order to delete it.
-            InitializePlots();
+            //InitializePlots();
         }
 
         /// <summary>
@@ -799,36 +763,31 @@ namespace ErgoLux
             factor *= _sett.Plot_ArrayPoints;
             if (factor > _plotData[0].Length-1)
             {
-                System.Diagnostics.Debug.Print("The current factor is: {0}", factor);
-                System.Diagnostics.Debug.Print("The new factor is: {0}", factor + _sett.Plot_ArrayPoints);
                 _sett.Plot_ArrayPoints += factor;
                 for (int i = 0; i < _plotData.Length; i++)
                 {
                     Array.Resize<double>(ref _plotData[i], _sett.Plot_ArrayPoints);
                 }
-                //Array.Copy(_plotData[0], 1, _plotData[0], 0, _plotData[0].Length - 1);
-                
+
                 // https://github.com/ScottPlot/ScottPlot/discussions/1042
                 // https://swharden.com/scottplot/faq/version-4.1/
-                //formsPlot1.Update();
-
-                // Update array reference in the plots. The Update method doesn't allow a bigger array
-                //int j = 0;
-                //foreach (var plot in  formsPlot1.Plot.GetPlottables())
-                //{
-                //    ((ScottPlot.Plottable.SignalPlot)plot).Update(_plotData[j]);
-                //    j++;
-                //}
-                //foreach (var plot in formsPlot3.Plot.GetPlottables())
-                //{
-                //    ((ScottPlot.Plottable.SignalPlot)plot).Update(_plotData[j]);
-                //    j++;
-                //}
-                //foreach (var plot in formsPlot4.Plot.GetPlottables())
-                //{
-                //    ((ScottPlot.Plottable.SignalPlot)plot).Update(_plotData[j]);
-                //    j++;
-                //}
+                // Update array reference in the plots. The Update() method doesn't allow a bigger array, so we need to modify Ys property
+                int j = 0;
+                foreach (var plot in formsPlot1.Plot.GetPlottables())
+                {
+                    ((ScottPlot.Plottable.SignalPlot)plot).Ys = _plotData[j];
+                    j++;
+                }
+                foreach (var plot in formsPlot3.Plot.GetPlottables())
+                {
+                    ((ScottPlot.Plottable.SignalPlot)plot).Ys = _plotData[j];
+                    j++;
+                }
+                foreach (var plot in formsPlot4.Plot.GetPlottables())
+                {
+                    ((ScottPlot.Plottable.SignalPlot)plot).Ys = _plotData[j];
+                    j++;
+                }
             }
 
             // Data computation
@@ -990,3 +949,64 @@ namespace ErgoLux
         
     }
 }
+
+/* Alternative and easier connection method using System.IO.Ports.SerialPort (.NET Platform Extensions 5) instead of FTD2.dll and ClassFTDI
+ * The only disadvantage is that we need to know the port name the deviced is connected into.
+ *
+    private void BtnConnect_Click(object sender, EventArgs e)
+        {
+            // Sets the serial port parameters and opens it
+            _serialPort = new SerialPort("COM5", 9600, Parity.Even, 7, StopBits.One);
+            _serialPort.Handshake = Handshake.None;
+            _serialPort.DataReceived += new SerialDataReceivedEventHandler(sp_DataReceived);
+            //_serialPort.ReadTimeout = 500;
+            //_serialPort.NewLine = "\n";
+            _serialPort.Open();
+
+            if (_serialPort.IsOpen)
+            {
+                // Initialize the arrays containing the data
+                InitializeArrays();
+
+                // First, clear all data (if any) in the plots
+                Plots_Clear();
+
+                // Bind the arrays to the plots
+                Plots_DataBinding();
+
+                // Show the legends in the picture boxes
+                Plots_ShowLegends();
+
+                _serialPort.Write(ClassT10.Command_54);
+
+                m_timer.Start();
+            }
+        }
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+            m_timer.Stop();
+            _serialPort.DataReceived -= sp_DataReceived;
+
+            // Shows plots's full data
+            Plots_ShowFull();
+        }
+
+        private void OnTimedEvent(object sender, EventArgs e)
+        {
+            _serialPort.Write(ClassT10.ReceptorsSingle[0]);
+        }
+
+        private void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            (int Sensor, double Iluminance, double Increment, double Percent) result;
+            string data = _serialPort.ReadLine() + _serialPort.NewLine;     //ReadLine deletes the string defined in _serialPort.NewLine
+            if (data.Length == ClassT10.LongBytesLength)
+            {
+                result = ClassT10.DecodeCommand(data);
+                if (result.Sensor < _sett.T10_NumberOfSensors - 1)
+                    _serialPort.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
+                Plots_Update(result.Sensor, result.Iluminance);
+            }
+        }
+ * 
+ */

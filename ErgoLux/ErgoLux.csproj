@@ -25,11 +25,11 @@
 
   <ItemGroup>
     <PackageReference Include="ScottPlot.WinForms" Version="4.1.16" />
-    <PackageReference Include="System.IO.Ports" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="images\" />
+    <Folder Include="examples\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +48,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="examples\1 hour test.elux">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="examples\Artificial light test.elux">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="FTD2XX_NET.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
