@@ -2,25 +2,27 @@ using System;
 
 namespace ErgoLux
 {
-    // Optional approach to to handle a class as an enum https://stackoverflow.com/questions/630803/associating-enums-with-strings-in-c-sharp
+    // Optional approach to to handle a class as an Enum https://stackoverflow.com/questions/630803/associating-enums-with-strings-in-c-sharp
     
     /// <summary>
-    /// Low level parameters and commands for T-10A as well as functions to encode and decode information to and from T-10A
+    /// Low-level parameters and commands for T-10A,as well as functions to encode and decode information to and from T-10A
     /// </summary>
     public class ClassT10
     {
-        //private static readonly int _nLengthShortFormat;
-        //private static readonly int _nLengthLongFormat;
-        //private static readonly int _nMaxSensors;
+        /// <summary>
+        /// Start of text constant (1 byte)
+        /// </summary>
         private static readonly string strSTX;
+        
+        /// <summary>
+        /// End of text constant (1 byte)
+        /// </summary>
         private static readonly string strETX;
+        
+        /// <summary>
+        /// Delimier constant (2 bytes)
+        /// </summary>
         private static readonly string strDelimiter;
-        //private static readonly string[] _receptors;
-        //private static readonly string[] _integrated;
-        //private static readonly string _strCommand28;
-        //private static readonly string _strCommand54;
-        //private static readonly string _strCommand55_0;
-        //private static readonly string _strCommand55_1;
 
         /// <summary>
         /// Gets the response length for commands 28, 54 and 55
@@ -38,20 +40,19 @@ namespace ErgoLux
         public static int MaximumSensors { get; private set; }
 
         /// <summary>
-        /// Gets the single-measurements code list
+        /// Gets the single-measurements code list (Command 10)
         /// </summary>
         public static string[] ReceptorsSingle { get; private set; }
 
         /// <summary>
-        /// Gets the integrated-measurements code list
+        /// Gets the integrated-measurements code list (Command 11)
         /// </summary>
         public static string[] ReceptorsIntegrated { get; private set; }
 
-        //public static ClassT10 Command11 { get { return new ClassT10(strSTX + "00541   " + strETX + "13" + strDelimiter).Value; } }
         /// <summary>
         /// Command to clear integrated data
         /// </summary>
-        public static string Command_28 { get; private set; }
+        public static string[] Command_28 { get; private set; }
 
         /// <summary>
         /// Command to set the PC connection mode
@@ -59,15 +60,14 @@ namespace ErgoLux
         public static string Command_54 { get; private set; }
 
         /// <summary>
-        /// Command to start integration mode
+        /// Command to start integration mode (set Hold status)
         /// </summary>
-        public static string Command_55_0 { get; private set; }
+        public static string Command_55_Set { get; private set; }
 
         /// <summary>
-        /// Command to end integration mode
+        /// Command to end integration mode (release Hold status)
         /// </summary>
-        public static string Command_55_1 { get; private set; }
-
+        public static string Command_55_Release { get; private set; }
 
 
         public ClassT10()
@@ -87,17 +87,18 @@ namespace ErgoLux
             // Command 10 (single measurements) and command 11 (integrated measurements) initialization
             ReceptorsSingle = new string[MaximumSensors];
             ReceptorsIntegrated = new string[MaximumSensors];
+            Command_28 = new string[MaximumSensors];
             for (int i=0; i< MaximumSensors; i++)
             {
                 ReceptorsSingle[i] = EncodeCommand(i.ToString("00") + "100200");
                 ReceptorsIntegrated[i] = EncodeCommand(i.ToString("00") + "110200");
+                Command_28 [i] = EncodeCommand(i.ToString("00") + "28    ");
             }
 
             // Commands initialization
-            Command_28 = EncodeCommand("0028    ");
             Command_54 = EncodeCommand("00541   ");
-            Command_55_0 = EncodeCommand("99550  0");
-            Command_55_1 = EncodeCommand("99551  0");
+            Command_55_Set = EncodeCommand("99550  0");
+            Command_55_Release = EncodeCommand("99551  0");
         }
 
         /// <summary>
@@ -137,7 +138,6 @@ namespace ErgoLux
 
             return strResult;
         }
-
 
         /// <summary>
         /// Decodes the value returned by the T-10A illuminancemeter

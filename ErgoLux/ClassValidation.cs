@@ -47,16 +47,91 @@ namespace System
         /// <param name="obj">Object cointaining a double value</param>
         /// <param name="lowerBound">Lower limit to check</param>
         /// <param name="upperBound">Upper limit to check</param>
-        /// <param name="showMsgBox">True if a MessageBox is to be shown</param>
+        /// <param name="showMsgBox"><see langword="True"/> if a MessageBox is to be shown</param>
+        /// <param name="parent">Parent <see cref="Form"/></param>
         /// <returns><see langword="True"/> if obj is within the bound limits, <see langword="false"/> otherwise</returns>
         public static bool IsValidRange<T>(object obj, double? lowerBound = null, double? upperBound = null, bool? showMsgBox = false, System.Windows.Forms.Form parent = null)
         {
             bool IsValid;
 
-            if (typeof(T) == typeof(int))
-                IsValid = IsValidInteger(obj);
-            else
-                IsValid = IsValidDouble(obj);
+            switch (typeof(T))
+            {
+                case Type sbyteType when sbyteType == typeof(sbyte):
+                    IsValid = sbyte.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out sbyte dummySByte);
+                    break;
+                case Type byteType when byteType == typeof(byte):
+                    IsValid = byte.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out byte dummyByte);
+                    break;
+                case Type shortType when shortType == typeof(short):
+                    IsValid = short.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out short dummyShort);
+                    break;
+                case Type ushortType when ushortType == typeof(ushort):
+                    IsValid = ushort.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out ushort dummyUShort);
+                    break;
+                case Type intType when intType == typeof(int):
+                    IsValid = int.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out int dummyInt);
+                    break;
+                case Type uintType when uintType == typeof(uint):
+                    IsValid = uint.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out uint dummyUInt);
+                    break;
+                case Type longType when longType == typeof(long):
+                    IsValid = long.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out long dummyLong);
+                    break;
+                case Type ulongType when ulongType == typeof(ulong):
+                    IsValid = ulong.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out ulong dummyULong);
+                    break;
+                case Type floatType when floatType == typeof(float):
+                    IsValid = float.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out float dummyFloat);
+                    break;
+                case Type doubleType when doubleType == typeof(double):
+                    IsValid = double.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out double dummyDouble);
+                    break;
+                case Type decimalType when decimalType == typeof(decimal):
+                    IsValid = decimal.TryParse(Convert.ToString(obj, Globalization.CultureInfo.InvariantCulture),
+                                        System.Globalization.NumberStyles.Any,
+                                        Globalization.NumberFormatInfo.InvariantInfo,
+                                        out decimal dummyDecimal);
+                    break;
+                default:
+                    IsValid = IsValidDouble(obj);
+                    break;
+            }
+
+            
+            //if (typeof(T) == typeof(int))
+            //    IsValid = IsValidInteger(obj);
+            //else
+            //    IsValid = IsValidDouble(obj);
 
             if (!IsValid)
             {

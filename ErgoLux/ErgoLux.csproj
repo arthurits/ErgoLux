@@ -51,6 +51,9 @@
     <None Update="examples\1 hour test.elux">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="examples\Artificial light test 2.elux">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="examples\Artificial light test.elux">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -168,11 +168,9 @@ namespace ErgoLux
             // Customize the Radar plot
             formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
             formsPlot2.Plot.Grid(enable: false);
-            formsPlot2.Plot.Frame(visible: true);
             formsPlot2.Plot.Title("Illuminance distribution");
             formsPlot2.Plot.XAxis.Ticks(false);
             formsPlot2.Plot.YAxis.Ticks(false);
-            //formsPlot2.plt.Colorset(ScottPlot.Drawing.Colorset.OneHalf);
 
             // Customize the Average plot
             formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
@@ -617,8 +615,8 @@ namespace ErgoLux
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
             {
                 var plot = formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
-                plot.MinRenderIndex = 0;
-                plot.MaxRenderIndex = 0;
+                //plot.MinRenderIndex = 0;
+                //plot.MaxRenderIndex = 0;
             }
             formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
@@ -640,20 +638,18 @@ namespace ErgoLux
             // Binding for Plot Average
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
             {
-                //_plotData[i] = new double[_sett.Plot_ArrayPoints];
                 var plot = formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
-                plot.MinRenderIndex = 0;
-                plot.MaxRenderIndex = 0;
+                //plot.MinRenderIndex = 0;
+                //plot.MaxRenderIndex = 0;
             }
             formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
             // Binding for Plot Ratio
             for (int i = _sett.T10_NumberOfSensors + 3; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
             {
-                //_plotData[i] = new double[_sett.Plot_ArrayPoints];
                 var plot = formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
-                plot.MinRenderIndex = 0;
-                plot.MaxRenderIndex = 0;
+                //plot.MinRenderIndex = 0;
+                //plot.MaxRenderIndex = 0;
             }
             formsPlot4.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
         }
@@ -667,6 +663,8 @@ namespace ErgoLux
             {
                 formsPlot1.Plot.AxisAuto();
                 formsPlot1.Plot.SetAxisLimits(xMin: 0, yMin: 0);
+                //foreach (var plot in formsPlot1.Plot.GetPlottables())
+                //    ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _sett.Plot_ArrayPoints - 1;
                 formsPlot1.Render();
             }
 
