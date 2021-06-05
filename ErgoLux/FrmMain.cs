@@ -29,6 +29,7 @@ namespace ErgoLux
         private int _nPoints = 0;
         private DateTime _timeStart;
         private DateTime _timeEnd;
+        private bool _reading = false;   // this controls whether clicking the plots is allowed
 
         public FrmMain()
         {
@@ -165,6 +166,11 @@ namespace ErgoLux
             formsPlot1.Plot.XLabel("Time (seconds)");
             formsPlot1.Plot.Grid(enable: false);
 
+            formsPlot1.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
+            formsPlot1.MouseClick += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
+            formsPlot1.Click += new EventHandler(formsPlot_Click);
+            
+
             // Customize the Radar plot
             formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
             formsPlot2.Plot.Grid(enable: false);
@@ -181,6 +187,7 @@ namespace ErgoLux
             formsPlot3.Plot.XLabel("Time (seconds)");
             formsPlot3.Plot.Grid(enable: false);
 
+            formsPlot3.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
 
             // Customize the Ratio plot
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
@@ -191,7 +198,9 @@ namespace ErgoLux
             formsPlot4.Plot.YLabel("Ratio");
             formsPlot4.Plot.XLabel("Time (seconds)");
             formsPlot4.Plot.Grid(enable: false);
-            
+
+            formsPlot4.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
+
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
         }
 
@@ -459,6 +468,8 @@ namespace ErgoLux
                 toolStripMain_Settings.Enabled = false;
                 toolStripMain_About.Enabled = false;
                 this.statusStripIconExchange.Image = _sett.Icon_Data;
+                _reading = true;
+
                 myFtdiDevice.DataReceived += OnDataReceived;
                 if (myFtdiDevice.Write(ClassT10.Command_54))
                 {
@@ -474,6 +485,7 @@ namespace ErgoLux
                 toolStripMain_Settings.Enabled = true;
                 toolStripMain_About.Enabled = true;
                 this.statusStripIconExchange.Image = null;
+                _reading = false;
             }
         }
 
@@ -942,9 +954,57 @@ namespace ErgoLux
             File.WriteAllText(_sett.FileName, jsonString);
         }
 
+
         #endregion Program settings
 
-        
+        private void formsPlot_Click(object sender, EventArgs e)
+        {
+            Text = sender.ToString();
+            (double mouseCoordX, double mouseCoordY) = formsPlot1.GetMouseCoordinates();
+            double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
+            //(double pointX, double pointY, int pointIndex) = MyScatterPlot.GetPointNearest(mouseCoordX, mouseCoordY, xyRatio);
+            //Text = $"Point index {pointIndex} at ({pointX}, {pointY})";
+        }
+
+        private void formsPlot_Click(object sender, MouseEventArgs e)
+        {
+            
+            // If we are reading from the sensor, then exit
+            if (_reading) return;
+
+            if (e.Button != MouseButtons.Left) return;
+            
+            var MyPlot = ((ScottPlot.FormsPlot)sender);
+            (double mouseCoordX, double mouseCoordY) = MyPlot.GetMouseCoordinates();
+            //double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
+            (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(MyPlot.Plot.GetPlottables()[0])).GetPointNearestX(mouseCoordX);
+            //Text = $"Point index {pointIndex} at ({pointX}, {pointY})";
+            
+            
+            for (int i=0; i< _sett.T10_NumberOfSensors; i++)
+            {
+                _plotRadar[1, i] = _plotData[i][pointIndex];
+                _plotRadar[0, i] = _plotData[_sett.T10_NumberOfSensors + 1][pointIndex];
+            }
+
+            ((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+            formsPlot2.Render(skipIfCurrentlyRendering: true);
+
+            if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors)
+            {
+                var VLine = MyPlot.Plot.AddVerticalLine(pointX, color: Color.Red);
+                VLine.DragEnabled = true;
+                VLine.LineWidth = 3;
+            }
+
+            // Some information:
+            // https://swharden.com/scottplot/faq/mouse-position/#highlight-the-data-point-near-the-cursor
+            // https://github.com/ScottPlot/ScottPlot/discussions/862
+            // https://github.com/ScottPlot/ScottPlot/discussions/645
+            // https://github.com/ScottPlot/ScottPlot/issues/1090
+            // frmWRmodel.cs chart_MouseClicked
+
+        }
     }
 }
 
