@@ -397,6 +397,7 @@ namespace ErgoLux
             this.formsPlot1.Name = "formsPlot1";
             this.formsPlot1.Size = new System.Drawing.Size(381, 243);
             this.formsPlot1.TabIndex = 0;
+            this.formsPlot1.PlottableDragged += new System.EventHandler(this.formsPlot_PlottableDragged);
             // 
             // formsPlot2
             // 

@@ -973,28 +973,20 @@ namespace ErgoLux
             if (_reading) return;
 
             if (e.Button != MouseButtons.Left) return;
-            
+
             var MyPlot = ((ScottPlot.FormsPlot)sender);
+            if (MyPlot.Plot.GetPlottables().Length == 0) return;
             (double mouseCoordX, double mouseCoordY) = MyPlot.GetMouseCoordinates();
-            //double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
             (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(MyPlot.Plot.GetPlottables()[0])).GetPointNearestX(mouseCoordX);
-            //Text = $"Point index {pointIndex} at ({pointX}, {pointY})";
-            
-            
-            for (int i=0; i< _sett.T10_NumberOfSensors; i++)
-            {
-                _plotRadar[1, i] = _plotData[i][pointIndex];
-                _plotRadar[0, i] = _plotData[_sett.T10_NumberOfSensors + 1][pointIndex];
-            }
-
-            ((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
-            formsPlot2.Render(skipIfCurrentlyRendering: true);
-
             if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors)
             {
                 var VLine = MyPlot.Plot.AddVerticalLine(pointX, color: Color.Red);
                 VLine.DragEnabled = true;
                 VLine.LineWidth = 3;
+            }
+            else if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors + 1)
+            {
+                ((ScottPlot.Plottable.VLine)MyPlot.Plot.GetPlottables().Last()).X = pointX;
             }
 
             // Some information:
@@ -1003,6 +995,33 @@ namespace ErgoLux
             // https://github.com/ScottPlot/ScottPlot/discussions/645
             // https://github.com/ScottPlot/ScottPlot/issues/1090
             // frmWRmodel.cs chart_MouseClicked
+
+        }
+
+        private void formsPlot_PlottableDragged(object sender, EventArgs e)
+        {
+            // If we are reading from the sensor, then exit
+            if (_reading) return;
+            
+            //var MyPlot = ((ScottPlot.FormsPlot)sender);
+            if (sender.GetType() != typeof(ScottPlot.Plottable.VLine)) return;
+
+            var MyPlot = ((ScottPlot.Plottable.VLine)sender);
+
+            //(double mouseCoordX, double mouseCoordY) = formsPlot1.GetMouseCoordinates();
+            ////double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
+            (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(formsPlot1.Plot.GetPlottables()[0])).GetPointNearestX(MyPlot.X);
+            ////Text = $"Point index {pointIndex} at ({pointX}, {pointY})";
+
+
+            for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+            {
+                _plotRadar[1, i] = _plotData[i][pointIndex];
+                _plotRadar[0, i] = _plotData[_sett.T10_NumberOfSensors + 1][pointIndex];
+            }
+
+            ((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+            formsPlot2.Render(skipIfCurrentlyRendering: true);
 
         }
     }
