@@ -192,7 +192,7 @@ namespace ErgoLux
             if (!Validation.IsValidRange<int>(txtBaudRate.Text, 0, 9600, true, this)) { txtBaudRate.Focus(); txtBaudRate.SelectAll(); return; }
             if (!Validation.IsValidRange<int>(txtOn.Text, 0, 255, true, this)) { txtOn.Focus(); txtOn.SelectAll(); return; }
             if (!Validation.IsValidRange<int>(txtOff.Text, 0, 255, true, this)) { txtOff.Focus(); txtOff.SelectAll(); return; }
-            if (!Validation.IsValidRange<int>(txtHz.Text, 1, 1000, true, this)) { txtHz.Focus(); txtHz.SelectAll(); return; }
+            if (!Validation.IsValidRange<double>(txtHz.Text, 0, 1000, true, this)) { txtHz.Focus(); txtHz.SelectAll(); return; }
             if (!Validation.IsValidRange<int>(txtArrayPoints.Text, 1, Int32.MaxValue, true, this)) { txtArrayPoints.Focus(); txtArrayPoints.SelectAll(); return; }
             if (!Validation.IsValidRange<int>(txtPlotWindow.Text, 20, Int32.MaxValue, true, this)) { txtPlotWindow.Focus(); txtPlotWindow.SelectAll(); return; }
 
@@ -206,7 +206,7 @@ namespace ErgoLux
             _settings.T10_FlowControl = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
             _settings.T10_CharOn = Convert.ToInt32(txtOn.Text);
             _settings.T10_CharOff = Convert.ToInt32(txtOff.Text);
-            _settings.T10_Frequency = Convert.ToInt32(txtHz.Text);
+            _settings.T10_Frequency = Convert.ToDouble(txtHz.Text);
 
             _settings.Plot_ArrayPoints = Convert.ToInt32(txtArrayPoints.Text);
             _settings.Plot_WindowPoints = Convert.ToInt32(txtPlotWindow.Text);

@@ -235,7 +235,7 @@ namespace ErgoLux
                 }
             }
             else if (e.StrDataReceived.Length == ClassT10.ShortBytesLength)
-            {   
+            {
                 return;
             }
 
@@ -292,7 +292,7 @@ namespace ErgoLux
             }
 
             // Displays a SaveFileDialog so the user can save the Image  
-            SaveFileDialog SaveDlg = new SaveFileDialog
+            SaveFileDialog SaveDlg = new()
             {
                 DefaultExt = "*.elux",
                 Filter = "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|All files (*.*)|*.*",
@@ -341,6 +341,7 @@ namespace ErgoLux
                 outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
                 outfile.WriteLine("Number of sensors: {0}", _sett.T10_NumberOfSensors.ToString());
                 outfile.WriteLine("Number of data points: {0}", _nPoints.ToString());
+                outfile.WriteLine("Sampling frequency: {0}", _sett.T10_Frequency.ToString());
                 outfile.WriteLine();
                 for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                 {
@@ -366,7 +367,7 @@ namespace ErgoLux
 
         private void toolStripMain_Open_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openDlg = new OpenFileDialog
+            OpenFileDialog openDlg = new()
             {
                 DefaultExt = "*.elux",
                 Filter = "ELUX file (*.elux)|*.elux|All files (*.*)|*.*",
@@ -388,33 +389,86 @@ namespace ErgoLux
                 using var fs = File.Open(openDlg.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 using var sr = new StreamReader(fs, Encoding.UTF8);
 
-                int nSensors = 0;
-                int nPoints = 0;
+                int nSensors = 0, nPoints = 0, nFreq = 0;
 
                 string strLine = sr.ReadLine();
-                if (strLine != "ErgoLux data") return;
-                
+                if (strLine != "ErgoLux data")
+                {
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
+
                 // Better implement a try parse block. Each read line should throw an exception instead of "return"
                 strLine = sr.ReadLine();
-                if (!strLine.Contains("Start time: ", StringComparison.Ordinal)) return;
+                if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
+                {
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
 
                 strLine = sr.ReadLine();
-                if (!strLine.Contains("End time: ", StringComparison.Ordinal)) return;
+                if (!strLine.Contains("End time: ", StringComparison.Ordinal))
+                {
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
 
                 strLine = sr.ReadLine();
-                if (!strLine.Contains("Total measuring time: ", StringComparison.Ordinal)) return;
+                if (!strLine.Contains("Total measuring time: ", StringComparison.Ordinal))
+                {
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
 
                 strLine = sr.ReadLine();
-                if (!strLine.Contains("Number of sensors: ", StringComparison.Ordinal)) return;
-                int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSensors);
+                if (!strLine.Contains("Number of sensors: ", StringComparison.Ordinal))
+                {
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
+                if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSensors)) return;
                 if (nSensors == 0) return;
                 _sett.T10_NumberOfSensors = nSensors;
 
                 strLine = sr.ReadLine();
-                if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal)) return;
-                int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints);
+                if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal))
+                {
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
+                if(!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints)) return;
                 if (nPoints == 0) return;
                 _sett.Plot_ArrayPoints = nPoints;
+
+                strLine = sr.ReadLine();
+                if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
+                {
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    return;
+                }
+                if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nFreq)) return;
+                _sett.T10_Frequency = nFreq;
 
                 strLine = sr.ReadLine();    // Empty line
                 strLine = sr.ReadLine();    // Column header lines
@@ -456,7 +510,7 @@ namespace ErgoLux
                 {
                     using (new CenterWinDialog(this))
                     {
-                        MessageBox.Show("The device is closed. Please, go to\n'Settings' to open the device. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("The device is closed. Please, go to\n'Settings' to open the device.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     toolStripMain_Connect.Checked = false;
                     return;
@@ -827,9 +881,9 @@ namespace ErgoLux
                 formsPlot3.Plot.SetAxisLimits(yMin: 0);
                 if (_nPoints / _sett.T10_Frequency >= (formsPlot1.Plot.GetAxisLimits()).XMax)
                 {
-                    formsPlot1.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / 2, xMax: (_nPoints + _sett.Plot_WindowPoints) / 2);
-                    formsPlot3.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / 2, xMax: (_nPoints + _sett.Plot_WindowPoints) / 2);
-                    formsPlot4.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / 2, xMax: (_nPoints + _sett.Plot_WindowPoints) / 2);
+                    formsPlot1.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
+                    formsPlot3.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
+                    formsPlot4.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
                 }
 
                 // Update first plot

@@ -4,6 +4,7 @@ End time: lunes, 31 de mayo de 2021 13:51:37.883
 Total measuring time: 0 days, 1 hours, 5 minutes, 49 seconds, and 593 milliseconds
 Number of sensors: 5
 Number of data points: 7898
+Sampling frequency: 2
 
 Sensor #00	Sensor #01	Sensor #02	Sensor #03	Sensor #04	Maximum	Average	Minimum	Min/Average	Min/Max	Average/Max
 1037,0	901,0	792,0	757,0	686,0	1037,0	834,6	686,0	0,822	0,662	0,805

@@ -40,7 +40,7 @@ namespace ErgoLux
         [JsonPropertyName("Chareacter off")]
         public int T10_CharOff { get; set; }
         [JsonPropertyName("Sample frequency")]
-        public int T10_Frequency { get; set; }
+        public double T10_Frequency { get; set; }
 
 
         /// <value>Number of points the array can store</value>
