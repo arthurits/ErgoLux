@@ -497,7 +497,7 @@ namespace ErgoLux
                 }
 
                 // Show data into plots
-                Plots_Clear();
+                Plots_Clear();  // this also sets _nPoints = 0, so we need to reset it next
                 _nPoints = _sett.Plot_ArrayPoints;
                 Plots_DataBinding();
                 Plots_ShowLegends();
@@ -691,6 +691,7 @@ namespace ErgoLux
             formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
             // Binding for Plot Radar
+            // Control wether 2 or more sensors, otherwise don't
             string[] labels = new string[_sett.T10_NumberOfSensors];
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                 labels[i] = "#" + i.ToString("#0");
