@@ -228,7 +228,9 @@ namespace ErgoLux
             if (e.StrDataReceived.Length == ClassT10.LongBytesLength)
             {
                 result = ClassT10.DecodeCommand(e.StrDataReceived);
-                //System.Diagnostics.Debug.Print(result.ToString());
+                //System.Diagnostics.Debug.Print("Daata: {0} — TimeStamp: {1}",
+                //                            result.ToString(),
+                //                            DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
                 if (result.Sensor < _sett.T10_NumberOfSensors - 1)
                 {
                     myFtdiDevice.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
@@ -389,7 +391,8 @@ namespace ErgoLux
                 using var fs = File.Open(openDlg.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 using var sr = new StreamReader(fs, Encoding.UTF8);
 
-                int nSensors = 0, nPoints = 0, nFreq = 0;
+                int nSensors = 0, nPoints = 0;
+                double nFreq = 0.0;
 
                 string strLine = sr.ReadLine();
                 if (strLine != "ErgoLux data")
@@ -467,7 +470,7 @@ namespace ErgoLux
                     }
                     return;
                 }
-                if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nFreq)) return;
+                if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nFreq)) return;
                 _sett.T10_Frequency = nFreq;
 
                 strLine = sr.ReadLine();    // Empty line
@@ -495,6 +498,7 @@ namespace ErgoLux
 
                 // Show data into plots
                 Plots_Clear();
+                _nPoints = _sett.Plot_ArrayPoints;
                 Plots_DataBinding();
                 Plots_ShowLegends();
                 Plots_ShowFull();
@@ -681,8 +685,8 @@ namespace ErgoLux
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
             {
                 var plot = formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
-                //plot.MinRenderIndex = 0;
-                //plot.MaxRenderIndex = 0;
+                plot.MinRenderIndex = 0;
+                plot.MaxRenderIndex = 0;
             }
             formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
@@ -705,8 +709,8 @@ namespace ErgoLux
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
             {
                 var plot = formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
-                //plot.MinRenderIndex = 0;
-                //plot.MaxRenderIndex = 0;
+                plot.MinRenderIndex = 0;
+                plot.MaxRenderIndex = 0;
             }
             formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
@@ -714,8 +718,8 @@ namespace ErgoLux
             for (int i = _sett.T10_NumberOfSensors + 3; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
             {
                 var plot = formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
-                //plot.MinRenderIndex = 0;
-                //plot.MaxRenderIndex = 0;
+                plot.MinRenderIndex = 0;
+                plot.MaxRenderIndex = 0;
             }
             formsPlot4.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
         }
@@ -727,10 +731,10 @@ namespace ErgoLux
         {
             if (_sett.Plot_ShowRawData)
             {
+                foreach (var plot in formsPlot1.Plot.GetPlottables())
+                    ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
                 formsPlot1.Plot.AxisAuto();
                 formsPlot1.Plot.SetAxisLimits(xMin: 0, yMin: 0);
-                //foreach (var plot in formsPlot1.Plot.GetPlottables())
-                //    ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _sett.Plot_ArrayPoints - 1;
                 formsPlot1.Render();
             }
 
@@ -738,13 +742,17 @@ namespace ErgoLux
 
             if (_sett.Plot_ShowAverage)
             {
+                foreach (var plot in formsPlot3.Plot.GetPlottables())
+                    ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
                 formsPlot3.Plot.AxisAuto();
                 formsPlot3.Plot.SetAxisLimits(xMin: 0, yMin: 0);
                 formsPlot3.Render();
             }
 
-            if (_sett.Plot_ShowRadar)
+            if (_sett.Plot_ShowRatios)
             {
+                foreach (var plot in formsPlot4.Plot.GetPlottables())
+                    ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
                 formsPlot4.Plot.AxisAuto();
                 formsPlot4.Plot.SetAxisLimits(xMin: 0, yMin: 0, yMax: 1);
                 formsPlot4.Render();
@@ -760,7 +768,7 @@ namespace ErgoLux
 
             // Combine legends from Plot1 and Plot2 and draw a black border around each legend
             var legendA = formsPlot1.Plot.RenderLegend();
-            var legendB = formsPlot2.Plot.RenderLegend();
+            var legendB = _sett.T10_NumberOfSensors > 1 ? formsPlot2.Plot.RenderLegend() : new Bitmap(1, 1);
             var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + nVertDist + 4);
             using Graphics GraphicsA = Graphics.FromImage(bitmap);
             GraphicsA.DrawRectangle(new Pen(Color.Black),
