@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ScottPlot
 {
-    class FormsPlotEx : ScottPlot.FormsPlot
+    class FormsPlotCrossHair : ScottPlot.FormsPlot
     {
         public event EventHandler<VLineDragEventArgs> VLineDragged;
         private ScottPlot.Plottable.VLine vLine;
+        public ScottPlot.Plottable.VLine GetVLine { get; }
+
         //private bool ShowVLine;
         public bool ShowVLine
         {
@@ -21,10 +23,10 @@ namespace ScottPlot
             }
         }
         
-        FormsPlotEx()
+        FormsPlotCrossHair()
             :base()
         {
-            vLine = this.Plot.AddVerticalLine(0.0, color: System.Drawing.Color.Red, width: 3);
+            vLine = this.Plot.AddVerticalLine(0.0, color: System.Drawing.Color.Red, width: 3, style: ScottPlot.LineStyle.Dash);
             ShowVLine = false;
             //vLine.IsVisible = false;
             vLine.DragEnabled = true;
@@ -49,18 +51,24 @@ namespace ScottPlot
 
         }
 
-        public Plottable.IPlottable[] GetCurves()
+        /// <summary>
+        /// Gets the plottables that represent data. Therefore, no VLine nor other auxiliar plottables are returned
+        /// </summary>
+        /// <returns></returns>
+        public Plottable.IPlottable[] GetDataCurves()
         {
-            System.Collections.ObjectModel.ObservableCollection<ScottPlot.Plottable.IPlottable> plots = new();
-            foreach (var plot in this.Plot.GetPlottables())
-            {
-                if (plot.GetType() != typeof(Plottable.VLine))
-                {
-                    plots.Add(plot);
-                }
-            }
+            //System.Collections.ObjectModel.ObservableCollection<ScottPlot.Plottable.IPlottable> plots = new();
+            var algo = this.Plot.GetPlottables().Where(x => !(x is Plottable.VLine));
 
-            return plots.ToArray();
+            //foreach (var plot in this.Plot.GetPlottables())
+            //{
+            //    if (plot.GetType() != typeof(Plottable.VLine))
+            //    {
+            //        plots.Add(plot);
+            //    }
+            //}
+
+            return algo.ToArray();
         }
 
         // Wrap event invocations inside a protected virtual method to allow derived classes to override the event invocation behavior
@@ -86,6 +94,15 @@ namespace ScottPlot
         }
 
 
+        public void ClearPlottablesWithData()
+        {
+            for (int i = this.Plot.GetPlottables().Length - 1; i > 0; i--)
+            {
+                this.Plot.RemoveAt(i);
+            }
+        }
+
+        
     }
 
     public class VLineDragEventArgs : EventArgs
@@ -102,4 +119,5 @@ namespace ScottPlot
         public int pointIndex { get; set; }
 
     }
+
 }

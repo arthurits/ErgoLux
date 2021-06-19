@@ -1043,9 +1043,8 @@ namespace ErgoLux
             (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(MyPlot.Plot.GetPlottables()[0])).GetPointNearestX(mouseCoordX);
             if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors)
             {
-                var VLine = MyPlot.Plot.AddVerticalLine(pointX, color: Color.Red);
+                var VLine = MyPlot.Plot.AddVerticalLine(pointX, color: Color.Red, width: 3, style: ScottPlot.LineStyle.Dash);
                 VLine.DragEnabled = true;
-                VLine.LineWidth = 3;
             }
             else if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors + 1)
             {
