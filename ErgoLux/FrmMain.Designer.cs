@@ -33,11 +33,11 @@ namespace ErgoLux
             this.tspTop = new System.Windows.Forms.ToolStripPanel();
             this.tspBottom = new System.Windows.Forms.ToolStripPanel();
             this.mnuMainFrm = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.connectKinectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.disconectKinectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_File_Open = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_File_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_File_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusStripLabelType = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelID = new System.Windows.Forms.ToolStripStatusLabel();
@@ -67,6 +67,16 @@ namespace ErgoLux
             this.formsPlot3 = new ScottPlot.FormsPlot();
             this.formsPlot4 = new ScottPlot.FormsPlot();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.mnuMainFrm_View = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_Help = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_Help_About = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_View_Menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_View_Toolbar = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuMainFrm_View_Raw = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_View_Radial = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_View_Average = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMainFrm_View_Ratio = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -96,46 +106,49 @@ namespace ErgoLux
             // mnuMainFrm
             // 
             this.mnuMainFrm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.mnuMainFrm_File,
+            this.mnuMainFrm_View,
+            this.mnuMainFrm_Help});
             this.mnuMainFrm.Location = new System.Drawing.Point(0, 0);
             this.mnuMainFrm.Name = "mnuMainFrm";
             this.mnuMainFrm.Size = new System.Drawing.Size(934, 24);
             this.mnuMainFrm.TabIndex = 5;
             this.mnuMainFrm.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // mnuMainFrm_File
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectKinectToolStripMenuItem,
-            this.disconectKinectToolStripMenuItem,
+            this.mnuMainFrm_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuMainFrm_File_Open,
+            this.mnuMainFrm_File_Save,
             this.toolStripMenuSeparator1,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
+            this.mnuMainFrm_File_Exit});
+            this.mnuMainFrm_File.Name = "mnuMainFrm_File";
+            this.mnuMainFrm_File.Size = new System.Drawing.Size(37, 20);
+            this.mnuMainFrm_File.Text = "&File";
             // 
-            // connectKinectToolStripMenuItem
+            // mnuMainFrm_File_Open
             // 
-            this.connectKinectToolStripMenuItem.Name = "connectKinectToolStripMenuItem";
-            this.connectKinectToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.connectKinectToolStripMenuItem.Text = "&Connect Kinect";
+            this.mnuMainFrm_File_Open.Name = "mnuMainFrm_File_Open";
+            this.mnuMainFrm_File_Open.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_File_Open.Text = "&Open";
             // 
-            // disconectKinectToolStripMenuItem
+            // mnuMainFrm_File_Save
             // 
-            this.disconectKinectToolStripMenuItem.Name = "disconectKinectToolStripMenuItem";
-            this.disconectKinectToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.disconectKinectToolStripMenuItem.Text = "&Disconect Kinect";
+            this.mnuMainFrm_File_Save.Name = "mnuMainFrm_File_Save";
+            this.mnuMainFrm_File_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.mnuMainFrm_File_Save.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_File_Save.Text = "&Save";
             // 
             // toolStripMenuSeparator1
             // 
             this.toolStripMenuSeparator1.Name = "toolStripMenuSeparator1";
-            this.toolStripMenuSeparator1.Size = new System.Drawing.Size(159, 6);
+            this.toolStripMenuSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
-            // exitToolStripMenuItem
+            // mnuMainFrm_File_Exit
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.exitToolStripMenuItem.Text = "&Exit";
+            this.mnuMainFrm_File_Exit.Name = "mnuMainFrm_File_Exit";
+            this.mnuMainFrm_File_Exit.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_File_Exit.Text = "&Exit";
             // 
             // statusStrip
             // 
@@ -157,7 +170,6 @@ namespace ErgoLux
             this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.statusStrip.ShowItemToolTips = true;
             this.statusStrip.Size = new System.Drawing.Size(934, 28);
-            this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -477,6 +489,75 @@ namespace ErgoLux
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
+            // mnuMainFrm_View
+            // 
+            this.mnuMainFrm_View.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuMainFrm_View_Menu,
+            this.mnuMainFrm_View_Toolbar,
+            this.toolStripSeparator4,
+            this.mnuMainFrm_View_Raw,
+            this.mnuMainFrm_View_Radial,
+            this.mnuMainFrm_View_Average,
+            this.mnuMainFrm_View_Ratio});
+            this.mnuMainFrm_View.Name = "mnuMainFrm_View";
+            this.mnuMainFrm_View.Size = new System.Drawing.Size(44, 20);
+            this.mnuMainFrm_View.Text = "&View";
+            // 
+            // mnuMainFrm_Help
+            // 
+            this.mnuMainFrm_Help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuMainFrm_Help_About});
+            this.mnuMainFrm_Help.Name = "mnuMainFrm_Help";
+            this.mnuMainFrm_Help.Size = new System.Drawing.Size(44, 20);
+            this.mnuMainFrm_Help.Text = "&Help";
+            // 
+            // mnuMainFrm_Help_About
+            // 
+            this.mnuMainFrm_Help_About.Name = "mnuMainFrm_Help_About";
+            this.mnuMainFrm_Help_About.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_Help_About.Text = "&About...";
+            // 
+            // mnuMainFrm_View_Menu
+            // 
+            this.mnuMainFrm_View_Menu.Name = "mnuMainFrm_View_Menu";
+            this.mnuMainFrm_View_Menu.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_View_Menu.Text = "Show menu";
+            // 
+            // mnuMainFrm_View_Toolbar
+            // 
+            this.mnuMainFrm_View_Toolbar.Name = "mnuMainFrm_View_Toolbar";
+            this.mnuMainFrm_View_Toolbar.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_View_Toolbar.Text = "Show toolbar";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            // 
+            // mnuMainFrm_View_Raw
+            // 
+            this.mnuMainFrm_View_Raw.Name = "mnuMainFrm_View_Raw";
+            this.mnuMainFrm_View_Raw.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_View_Raw.Text = "Raw data";
+            // 
+            // mnuMainFrm_View_Radial
+            // 
+            this.mnuMainFrm_View_Radial.Name = "mnuMainFrm_View_Radial";
+            this.mnuMainFrm_View_Radial.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_View_Radial.Text = "Radial distribution";
+            // 
+            // mnuMainFrm_View_Average
+            // 
+            this.mnuMainFrm_View_Average.Name = "mnuMainFrm_View_Average";
+            this.mnuMainFrm_View_Average.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_View_Average.Text = "Averages";
+            // 
+            // mnuMainFrm_View_Ratio
+            // 
+            this.mnuMainFrm_View_Ratio.Name = "mnuMainFrm_View_Ratio";
+            this.mnuMainFrm_View_Ratio.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_View_Ratio.Text = "Ratios";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -489,7 +570,6 @@ namespace ErgoLux
             this.Controls.Add(this.mnuMainFrm);
             this.Controls.Add(this.tspBottom);
             this.Controls.Add(this.tspTop);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ErgoLux";
@@ -514,11 +594,11 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripPanel tspTop;
         private System.Windows.Forms.ToolStripPanel tspBottom;
         private System.Windows.Forms.MenuStrip mnuMainFrm;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem connectKinectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem disconectKinectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_File;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_File_Open;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_File_Save;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_File_Exit;
         private System.Windows.Forms.ToolStrip toolStripMain;
         private System.Windows.Forms.ToolStripButton toolStripMain_Exit;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuSeparator1;
@@ -548,6 +628,16 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelMax;
         private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRadar;
         private System.Windows.Forms.ToolStripButton toolStripMain_Open;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_View;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_View_Menu;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_View_Toolbar;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_View_Raw;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_View_Radial;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_View_Average;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_View_Ratio;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_Help;
+        private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_Help_About;
     }
 }
 

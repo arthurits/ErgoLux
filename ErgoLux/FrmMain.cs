@@ -116,6 +116,15 @@ namespace ErgoLux
         /// </summary>
         private void InitializeMenuStrip()
         {
+            if (File.Exists(_path + @"\images\openfolder.ico")) this.mnuMainFrm_File_Open.Image = new Icon(_path + @"\images\openfolder.ico", 16, 16).ToBitmap();
+            if (File.Exists(_path + @"\images\save.ico")) this.mnuMainFrm_File_Save.Image = new Icon(_path + @"\images\save.ico", 16, 16).ToBitmap();
+            if (File.Exists(_path + @"\images\exit.ico")) this.mnuMainFrm_File_Exit.Image = new Icon(_path + @"\images\exit.ico", 16, 16).ToBitmap();
+
+            if (File.Exists(_path + @"\images\about.ico")) this.mnuMainFrm_Help_About.Image = new Icon(_path + @"\images\about.ico", 16, 16).ToBitmap();
+
+            this.mnuMainFrm_View_Menu.Checked = true;
+            this.mnuMainFrm_View_Toolbar.Checked = true;
+
             return;
         }
 
@@ -643,6 +652,23 @@ namespace ErgoLux
                     label.ForeColor = Color.Black;
                 else
                     label.ForeColor = Color.LightGray;
+
+                // Update the View menu
+                switch (label.Text)
+                {
+                    case "W":
+                        mnuMainFrm_View_Raw.Checked = label.Checked;
+                        break;
+                    case "D":
+                        mnuMainFrm_View_Radial.Checked = label.Checked;
+                        break;
+                    case "A":
+                        mnuMainFrm_View_Average.Checked = label.Checked;
+                        break;
+                    case "R":
+                        mnuMainFrm_View_Ratio.Checked = label.Checked;
+                        break;
+                }
             }
         }
 
@@ -888,11 +914,15 @@ namespace ErgoLux
                 formsPlot3.Plot.AxisAutoY();
                 formsPlot1.Plot.SetAxisLimits(yMin: 0);
                 formsPlot3.Plot.SetAxisLimits(yMin: 0);
-                if (_nPoints / _sett.T10_Frequency >= (formsPlot1.Plot.GetAxisLimits()).XMax)
+                if (_nPoints / _sett.T10_Frequency >= formsPlot1.Plot.GetAxisLimits().XMax)
                 {
-                    formsPlot1.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
-                    formsPlot3.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
-                    formsPlot4.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
+                    int xMin = (int)((_nPoints / _sett.T10_Frequency) - _sett.Plot_WindowPoints * 1 / 5);
+                    int xMax = xMin + _sett.Plot_WindowPoints;
+                    formsPlot1.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
+                    formsPlot3.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
+                    formsPlot4.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
+                    //formsPlot3.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
+                    //formsPlot4.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
                 }
 
                 // Update first plot
