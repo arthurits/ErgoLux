@@ -7,7 +7,7 @@ Sponsor this project!
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme/ArthuritsLtd)
 
-Download latest release: ![GitHub release (latest by date)](https://img.shields.io/github/v/release/arthurits/ErgoLux?include_prereleases)
+Download latest release: [![GitHub release (latest by date)](https://img.shields.io/github/v/release/arthurits/ErgoLux?include_prereleases)](https://github.com/arthurits/ErgoLux/releases)
 
 ![Screenshot](/ErgoLux/images/screenshot05.png?raw=true "ErgoLux GUI")
 
