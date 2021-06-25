@@ -35,17 +35,18 @@ namespace ErgoLux
             // formsPlot1
             // 
             this.formsPlot1.BackColor = System.Drawing.Color.Transparent;
-            this.formsPlot1.Location = new System.Drawing.Point(345, 99);
+            this.formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlot1.Location = new System.Drawing.Point(0, 0);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(304, 223);
+            this.formsPlot1.Size = new System.Drawing.Size(370, 266);
             this.formsPlot1.TabIndex = 0;
             // 
             // FrmTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(370, 266);
             this.Controls.Add(this.formsPlot1);
             this.Name = "FrmTest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
