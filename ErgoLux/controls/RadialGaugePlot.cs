@@ -4,6 +4,20 @@ using System.Drawing;
 using System.Linq;
 using ScottPlot.Drawing;
 
+// Lighten or darken color
+// https://stackoverflow.com/questions/801406/c-create-a-lighter-darker-color-based-on-a-system-color
+// https://www.pvladov.com/2012/09/make-color-lighter-or-darker.html
+// https://gist.github.com/zihotki/09fc41d52981fb6f93a81ebf20b35cd5
+
+// Circular Segment
+// https://github.com/falahati/CircularProgressBar/blob/master/CircularProgressBar/CircularProgressBar.cs
+// https://github.com/aalitor/AltoControls/blob/on-development/AltoControls/Controls/Circular%20Progress%20Bar.cs
+
+// http://csharphelper.com/blog/2015/02/draw-lines-with-custom-end-caps-in-c/
+
+// Text on path
+// http://csharphelper.com/blog/2018/02/draw-text-on-a-circle-in-c/
+// http://csharphelper.com/blog/2016/01/draw-text-on-a-curve-in-c/
 
 namespace ScottPlot.Plottable
 {
