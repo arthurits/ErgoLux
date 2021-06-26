@@ -62,7 +62,7 @@ namespace ScottPlot.Plottable
         /// Colors (typically semi-transparent) to shade the inner area of each group.
         /// Length must be equal to the number of rows (groups) in the original data.
         /// </summary>
-        public Color[] FillColors;
+        //public Color[] FillColors;
 
         /// <summary>
         /// Colors to outline the shape for each group.
@@ -81,9 +81,24 @@ namespace ScottPlot.Plottable
         public float LineWidth = -1;
 
         /// <summary>
+        /// Dimmed percentage used to draw the background gauge.
+        /// </summary>
+        public float DimPercentage = 90f;
+
+        /// <summary>
         /// True if the gauges are to be drawn anti-clockwise (conter clockwise). False otherwise.
         /// </summary>
         public bool AntiClockWise = false;
+
+        /// <summary>
+        /// True if the gauge values are drawn stepped, one after the other.
+        /// </summary>
+        public bool SteppedCategories = false;
+
+        /// <summary>
+        /// True if the background gauge is also normalized as well as and according to the values.
+        /// </summary>
+        public bool NormBackGauge = false;
 
         /// <summary>
         /// Angle (in degrees) at which the gauges start: -90 for North, 0 for East, 90 for South, 180 for West, and so on
@@ -115,10 +130,9 @@ namespace ScottPlot.Plottable
         public int XAxisIndex { get; set; } = 0;
         public int YAxisIndex { get; set; } = 0;
 
-        public RadialGaugePlot(double[] values, Color[] lineColors, Color[] fillColors, bool independentAxes, double [] maxValues = null)
+        public RadialGaugePlot(double[] values, Color[] lineColors, bool independentAxes, double [] maxValues = null)
         {
             LineColors = lineColors;
-            FillColors = fillColors;
             IndependentAxes = independentAxes;
             Update(values, independentAxes, maxValues);
         }
@@ -138,6 +152,16 @@ namespace ScottPlot.Plottable
             Norm = new double[values.GetLength(0)];
             Array.Copy(values, 0, Norm, 0, values.Length);
 
+            if (SteppedCategories)
+            {
+                if (maxValues != null && maxValues.Length == 1)
+                {
+                    maxValues[0] += values.Sum();
+                }
+                else
+                    maxValues = new double[] { values.Sum() };
+            }
+
             if (IndependentAxes)
                 NormMax = NormalizeInPlace(Norm, maxValues);
             else
@@ -149,7 +173,7 @@ namespace ScottPlot.Plottable
             if (GroupLabels != null && GroupLabels.Length != Norm.GetLength(0))
                 throw new InvalidOperationException("group names must match size of values");
 
-            if (CategoryLabels != null && CategoryLabels.Length != Norm.GetLength(1))
+            if (CategoryLabels != null && CategoryLabels.Length != Norm.GetLength(0))
                 throw new InvalidOperationException("category names must match size of values");
         }
 
@@ -224,7 +248,7 @@ namespace ScottPlot.Plottable
                 var item = new LegendItem()
                 {
                     label = GroupLabels[i],
-                    color = FillColors[i],
+                    color = LineColors[i],
                     lineWidth = 10,
                     markerShape = MarkerShape.none
                 };
@@ -251,7 +275,7 @@ namespace ScottPlot.Plottable
             //int numCategories = Norm.GetUpperBound(1) + 1;
             //double sweepAngle = 2 * Math.PI / numCategories;
             float sweepAngle = 0;
-            double minScale = new double[] { dims.PxPerUnitX, dims.PxPerUnitX }.Min();
+            double minScale = new double[] { dims.GetPixelX(1), dims.GetPixelY(1) }.Min();
             PointF origin = new PointF(dims.GetPixelX(0), dims.GetPixelY(0));
             //double[] radii = new double[] { 0.25 * minScale, 0.5 * minScale, 1 * minScale };
             //double[] radii = new double[numCategories];
@@ -269,14 +293,15 @@ namespace ScottPlot.Plottable
             using StringFormat sf2 = new StringFormat();
             using System.Drawing.Font font = GDI.Font(Font);
             using Brush fontBrush = GDI.Brush(Font.Color);
-
+            
 
             lock (this)
             {
-                float lineWidth = (LineWidth < 0) ? (float)(minScale / ((numGroups) * 2)) : LineWidth;
-                float radiusSpace = lineWidth * 2;
-                float entryRadius = 0;
-                float maxAngle = (float)Norm.Max() * 360f;
+                float lineWidth = (LineWidth < 0) ? (float)(minScale / ((numGroups) * (SteppedCategories ? 1.2f : 2))) : LineWidth;
+                float radiusSpace = lineWidth * (SteppedCategories ? 1.2f : 2);
+                float gaugeRadius = 0;
+                float maxBackAngle = (AntiClockWise ? -1 : 1) * (NormBackGauge ? (float)Norm.Max() : 1) * 360f;
+                float gaugeStart = StartingAngle;
 
                 pen.Width = (float)lineWidth;
                 pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
@@ -285,112 +310,42 @@ namespace ScottPlot.Plottable
                 penCircle.StartCap = System.Drawing.Drawing2D.LineCap.Round;
                 penCircle.EndCap = System.Drawing.Drawing2D.LineCap.Round;
 
+                using System.Drawing.Font fontGauge = new(font.FontFamily, 0.8f * lineWidth);
+
                 for (int i = 0; i < numGroups; i++)
                 {
-                    sweepAngle = AntiClockWise ? -(float)(360f * Norm[i]) : (float)(360f * Norm[i]);
-                    entryRadius = (i + 1) * radiusSpace;
+                    sweepAngle = (AntiClockWise ? -1 : 1) * (float)(360f * Norm[i]);
+                    gaugeRadius = (i + 1) * radiusSpace;
 
                     pen.Color = LineColors[i];
-                    penCircle.Color = LightenBy(LineColors[i], 90);
+                    penCircle.Color = LightenBy(LineColors[i], DimPercentage);
 
-                    gfx.DrawArc(penCircle, (origin.X - entryRadius), (origin.Y - entryRadius), (entryRadius * 2), (entryRadius * 2), StartingAngle, maxAngle);
-                    gfx.DrawArc(pen, (origin.X - entryRadius), (origin.Y - entryRadius), (entryRadius * 2), (entryRadius * 2), StartingAngle, sweepAngle);
+                    // Draw gauge background
+                    gfx.DrawArc(penCircle, (origin.X - gaugeRadius), (origin.Y - gaugeRadius), (gaugeRadius * 2), (gaugeRadius * 2), StartingAngle, maxBackAngle);
+                    
+                    // Draw gauge
+                    gfx.DrawArc(pen, (origin.X - gaugeRadius), (origin.Y - gaugeRadius), (gaugeRadius * 2), (gaugeRadius * 2), gaugeStart, sweepAngle);
 
                     if (ShowAxisValues)
                     {
                         DrawTextOnCircle(gfx,
-                            font,
+                            fontGauge,
                             fontBrush,
                             new RectangleF(dims.DataOffsetX, dims.DataOffsetY, dims.DataWidth, dims.DataHeight),
-                            entryRadius,
-                            StartingAngle,
+                            gaugeRadius,
+                            gaugeStart + sweepAngle,
                             origin.X,
                             origin.Y,
-                            Norm[i].ToString("#.00"));
+                            Norm[i].ToString("0.00"));
                     }
 
+                    if (SteppedCategories)
+                        gaugeStart += sweepAngle;
+    
                 }
 
             }
 
-            
-
-                //for (int i = 0; i < radii.Length; i++)
-                //{
-                //    double hypotenuse = (radii[i] / radii[radii.Length - 1]);
-
-                //    if (AxisType == RadarAxis.Circle)
-                //    {
-                //        gfx.DrawEllipse(pen, (int)(origin.X - radii[i]), (int)(origin.Y - radii[i]), (int)(radii[i] * 2), (int)(radii[i] * 2));
-                //    }
-                //    else if (AxisType == RadarAxis.Polygon)
-                //    {
-                //        PointF[] points = new PointF[numCategories];
-                //        for (int j = 0; j < numCategories; j++)
-                //        {
-                //            float x = (float)(hypotenuse * Math.Cos(sweepAngle * j - Math.PI / 2) * minScale + origin.X);
-                //            float y = (float)(hypotenuse * Math.Sin(sweepAngle * j - Math.PI / 2) * minScale + origin.Y);
-
-                //            points[j] = new PointF(x, y);
-                //        }
-                //        gfx.DrawPolygon(pen, points);
-                //    }
-                //    if (ShowAxisValues)
-                //    {
-                //        if (IndependentAxes)
-                //        {
-                //            for (int j = 0; j < numCategories; j++)
-                //            {
-                //                float x = (float)(hypotenuse * Math.Cos(sweepAngle * j - Math.PI / 2) * minScale + origin.X);
-                //                float y = (float)(hypotenuse * Math.Sin(sweepAngle * j - Math.PI / 2) * minScale + origin.Y);
-
-                //                sf2.Alignment = x < origin.X ? StringAlignment.Far : StringAlignment.Near;
-                //                sf2.LineAlignment = y < origin.Y ? StringAlignment.Far : StringAlignment.Near;
-
-                //                double val = NormMaxes[j] * radii[i] / minScale;
-                //                gfx.DrawString($"{val:f1}", font, fontBrush, x, y, sf2);
-                //            }
-                //        }
-                //        else
-                //        {
-                //            double val = NormMax * radii[i] / minScale;
-                //            gfx.DrawString($"{val:f1}", font, fontBrush, origin.X, (float)(-radii[i] + origin.Y), sf2);
-                //        }
-                //    }
-                //}
-
-                //for (int i = 0; i < numCategories; i++)
-                //{
-                //    PointF destination = new PointF((float)(1.1 * Math.Cos(sweepAngle * i - Math.PI / 2) * minScale + origin.X), (float)(1.1 * Math.Sin(sweepAngle * i - Math.PI / 2) * minScale + origin.Y));
-                //    gfx.DrawLine(pen, origin, destination);
-
-                //    if (CategoryLabels != null)
-                //    {
-                //        PointF textDestination = new PointF(
-                //            (float)(1.3 * Math.Cos(sweepAngle * i - Math.PI / 2) * minScale + origin.X),
-                //            (float)(1.3 * Math.Sin(sweepAngle * i - Math.PI / 2) * minScale + origin.Y));
-
-                //        if (Math.Abs(textDestination.X - origin.X) < 0.1)
-                //            sf.Alignment = StringAlignment.Center;
-                //        else
-                //            sf.Alignment = dims.GetCoordinateX(textDestination.X) < 0 ? StringAlignment.Far : StringAlignment.Near;
-                //        gfx.DrawString(CategoryLabels[i], font, fontBrush, textDestination, sf);
-                //    }
-                //}
-
-                //for (int i = 0; i < numGroups; i++)
-                //{
-                //    PointF[] points = new PointF[numCategories];
-                //    for (int j = 0; j < numCategories; j++)
-                //        points[j] = new PointF(
-                //            (float)(Norm[i, j] * Math.Cos(sweepAngle * j - Math.PI / 2) * minScale + origin.X),
-                //            (float)(Norm[i, j] * Math.Sin(sweepAngle * j - Math.PI / 2) * minScale + origin.Y));
-
-                //    ((SolidBrush)brush).Color = FillColors[i];
-                //    pen.Color = LineColors[i];
-                //    gfx.FillPolygon(brush, points);
-                //    gfx.DrawPolygon(pen, points);
-                //}
         }
 
         /// <summary>Creates color with corrected brightness.</summary>
@@ -432,6 +387,7 @@ namespace ScottPlot.Plottable
             return ChangeColorBrightness(color, -1f * percent / 100f);
         }
 
+        #region DrawText routines
         /// <summary>
         /// Draw text centered on the top and bottom of the circle.
         /// </summary>
@@ -439,6 +395,7 @@ namespace ScottPlot.Plottable
         /// <param name="font"><see langword="keyword">Font</see> used to draw the text</param>
         /// <param name="brush"><see langword="keyword">Brush</see> used to draw the text</param>
         /// <param name="clientRectangle"><see langword="keyword">Rectangle</see> of the ScottPlot control</param>
+        /// <param name="anglePos">Angle (in degrees) where the text will be drawn</param>
         /// <param name="radius">Radius of the circle in pixels</param>
         /// <param name="cx">The x-coordinate of the circle centre</param>
         /// <param name="cy">The y-coordinate of the circle centre</param>
@@ -448,62 +405,76 @@ namespace ScottPlot.Plottable
             Brush brush, RectangleF clientRectangle, float radius, float anglePos, float cx, float cy,
             string text)
         {
-            // Use a StringFormat to draw the middle
-            // top of each character at (0, 0).
-            using (StringFormat string_format = new StringFormat())
+            // Modify anglePos to be in the range [0, 360]
+            if (anglePos >= 0)
+                anglePos -= 360f * (int)(anglePos / 360);
+            else
+                anglePos += 360f;
+
+            // Use a StringFormat to draw the middle top of each character at (0, 0).
+            using StringFormat string_format = new StringFormat();
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+
+            // Used to scale from radians to degrees.
+            double RadToDeg = 180.0 / Math.PI;
+
+            // Measure the characters.
+            List<RectangleF> rects = MeasureCharacters(gfx, font, clientRectangle, text);
+
+            // Use LINQ to add up the character widths.
+            var width_query = from RectangleF rect in rects select rect.Width;
+            float text_width = width_query.Sum();
+
+            // Find the starting angle.
+            double width_to_angle = 1 / radius;
+            //double start_angle = -Math.PI / 2 - text_width / 2 * width_to_angle;
+            //double theta = start_angle + (anglePos * Math.PI / 180);
+            double theta = anglePos * Math.PI / 180;
+            int charPos;
+
+            // Draw the characters.
+            for (int i = 0; i < text.Length; i++)
             {
-                string_format.Alignment = StringAlignment.Center;
-                string_format.LineAlignment = StringAlignment.Center;
+                // Increment theta half the angular width of the current character
+                if (anglePos > 180) // In the top half of the gauge, the text is drawn backwards
+                    theta -= (AntiClockWise ? -1 : 1) * rects[rects.Count - 1].Width / 2 * width_to_angle;
+                else
+                    theta -= (AntiClockWise ? -1 : 1) * rects[0].Width / 2 * width_to_angle;
 
-                // Used to scale from radians to degrees.
-                double radians_to_degrees = 180.0 / Math.PI;
+                // Calculate the position of the upper-left corner
+                double x = cx + radius * Math.Cos(theta);
+                double y = cy + radius * Math.Sin(theta);
 
-                // **********************
-                // * Draw the top text. *
-                // **********************
-                // Measure the characters.
-                List<RectangleF> rects =
-                    MeasureCharacters(gfx, font, clientRectangle, text);
+                // Transform to position the character.
+                if (anglePos > 180)
+                    gfx.RotateTransform((float)(RadToDeg * (theta + Math.PI / 2)));
+                else
+                    gfx.RotateTransform((float)(RadToDeg * (theta - Math.PI / 2)));
 
-                // Use LINQ to add up the character widths.
-                var width_query = from RectangleF rect in rects
-                                  select rect.Width;
-                float text_width = width_query.Sum();
+                gfx.TranslateTransform((float)x, (float)y, System.Drawing.Drawing2D.MatrixOrder.Append);
 
-                // Find the starting angle.
-                double width_to_angle = 1 / radius;
-                double start_angle = -Math.PI / 2 -
-                    text_width / 2 * width_to_angle;
-                double theta = start_angle + (anglePos * Math.PI / 180);
+                // Draw the character.
+                if (anglePos > 180)
+                    charPos = text.Length - 1 - i;
+                else
+                    charPos = i;
 
-                // Draw the characters.
-                for (int i = 0; i < text.Length; i++)
-                {
-                    // See where this character goes.
-                    if (anglePos > 180)
-                        theta += rects[i].Width / 2 * width_to_angle;
-                    else
-                        theta -= rects[i].Width / 2 * width_to_angle;
-                    double x = cx + radius * Math.Cos(theta);
-                    double y = cy + radius * Math.Sin(theta);
+                if (AntiClockWise)
+                    charPos = text.Length - 1 - charPos;
 
-                    // Transform to position the character.
-                    gfx.RotateTransform((float)(radians_to_degrees *
-                        (theta + Math.PI / 2)));
-                    gfx.TranslateTransform((float)x, (float)y,
-                        System.Drawing.Drawing2D.MatrixOrder.Append);
+                gfx.DrawString(text[charPos].ToString(), font, brush, 0, 0, string_format);
+                gfx.ResetTransform();
 
-                    // Draw the character.
-                    gfx.DrawString(text[i].ToString(), font, brush,
-                        0, 0, string_format);
-                    gfx.ResetTransform();
-
-                    // Increment theta.
-                    theta += rects[i].Width / 2 * width_to_angle;
-                }
+                // Increment theta the remaining half character.
+                if (anglePos > 180)
+                    theta -= (AntiClockWise ? -1 : 1) * rects[rects.Count -1 - i].Width / 2 * width_to_angle;
+                else
+                    theta -= (AntiClockWise ? -1 : 1) * rects[i].Width / 2 * width_to_angle;
+            }
 
                 
-            }
+            
         }
 
         /// <summary>
@@ -514,8 +485,7 @@ namespace ScottPlot.Plottable
         /// <param name="clientRectangle"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        private List<RectangleF> MeasureCharactersInWord(
-            Graphics gfx, System.Drawing.Font font, RectangleF clientRectangle, string text)
+        private List<RectangleF> MeasureCharactersInWord(Graphics gfx, System.Drawing.Font font, RectangleF clientRectangle, string text)
         {
             List<RectangleF> result = new List<RectangleF>();
 
@@ -557,8 +527,7 @@ namespace ScottPlot.Plottable
         /// <param name="clientRectangle"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        private List<RectangleF> MeasureCharacters(Graphics gfx,
-            System.Drawing.Font font, RectangleF clientRectangle, string text)
+        private List<RectangleF> MeasureCharacters(Graphics gfx, System.Drawing.Font font, RectangleF clientRectangle, string text)
         {
             List<RectangleF> results = new List<RectangleF>();
 
@@ -597,6 +566,7 @@ namespace ScottPlot.Plottable
             return results;
         }
 
+        #endregion DrawText routines
 
     }
 }
@@ -623,7 +593,7 @@ namespace ScottPlot
 
             Color[] fills = colors.Select(x => Color.FromArgb(50, x)).ToArray();
 
-            ScottPlot.Plottable.RadialGaugePlot plottable = new(values, colors, fills, independentAxes, maxValues);
+            ScottPlot.Plottable.RadialGaugePlot plottable = new(values, colors, independentAxes, maxValues);
             Add(plottable);
 
             if (disableFrameAndGrid)
