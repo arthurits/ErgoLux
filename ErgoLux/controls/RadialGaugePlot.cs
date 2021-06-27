@@ -19,6 +19,8 @@ using ScottPlot.Drawing;
 // http://csharphelper.com/blog/2018/02/draw-text-on-a-circle-in-c/
 // http://csharphelper.com/blog/2016/01/draw-text-on-a-curve-in-c/
 
+// https://github.com/ScottPlot/ScottPlot/tree/master/src/ScottPlot/Plottable
+// under RadialGaugePlot.cs
 namespace ScottPlot.Plottable
 {
     /// <summary>
@@ -86,14 +88,14 @@ namespace ScottPlot.Plottable
         public float DimPercentage = 90f;
 
         /// <summary>
-        /// True if the gauges are to be drawn anti-clockwise (conter clockwise). False otherwise.
+        /// True if the gauges are to be drawn anti-clockwise (counter clockwise). False otherwise.
         /// </summary>
-        public bool AntiClockWise = false;
+        public RadialGaugeDirection GaugeDirection = RadialGaugeDirection.Clockwise;
 
         /// <summary>
         /// True if the gauge values are drawn stepped, one after the other.
         /// </summary>
-        public bool SteppedCategories = false;
+        public RadialGaugeMode GaugeMode = RadialGaugeMode.Stacked;
 
         /// <summary>
         /// True if the background gauge is also normalized as well as and according to the values.
@@ -101,10 +103,24 @@ namespace ScottPlot.Plottable
         public bool NormBackGauge = false;
 
         /// <summary>
-        /// Angle (in degrees) at which the gauges start: -90 for North, 0 for East, 90 for South, 180 for West, and so on
+        /// Angle (in degrees) at which the gauges start: 270 for North, 0 for East, 90 for South, 180 for West, and so on
         /// </summary>
-        public float StartingAngle = -90f;
+        public float StartingAngle = 270f;
 
+        /// <summary>
+        /// The empty space between gauges as a percentage of the gauge width. Values in the range [0-100], default value is 50 [percent]. Other values might produce undesirable side-effects.
+        /// </summary>
+        public float GaugeSpacePercentage = 50f;
+
+        /// <summary>
+        /// Color of the value labels drawn inside the gauges.
+        /// </summary>
+        public Color GaugeLabelsColor = Color.White;
+
+        /// <summary>
+        /// Size of the gague label text as a percentage of the gauge width
+        /// </summary>
+        public float GaugeLabelsFontPct = 75f;
 
         /// <summary>
         /// Controls if values along each category axis are scaled independently or uniformly across all axes.
@@ -119,7 +135,7 @@ namespace ScottPlot.Plottable
         /// <summary>
         /// If true, each value will be written in text on the plot.
         /// </summary>
-        public bool ShowAxisValues { get; set; } = true;
+        public bool ShowGaugeValues = true;
 
         /// <summary>
         /// Controls rendering style of the concentric circles (ticks) of the web
@@ -152,7 +168,7 @@ namespace ScottPlot.Plottable
             Norm = new double[values.GetLength(0)];
             Array.Copy(values, 0, Norm, 0, values.Length);
 
-            if (SteppedCategories)
+            if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode == RadialGaugeMode.SingleGauge)
             {
                 if (maxValues != null && maxValues.Length == 1)
                 {
@@ -292,45 +308,52 @@ namespace ScottPlot.Plottable
             using StringFormat sf = new StringFormat() { LineAlignment = StringAlignment.Center };
             using StringFormat sf2 = new StringFormat();
             using System.Drawing.Font font = GDI.Font(Font);
-            using Brush fontBrush = GDI.Brush(Font.Color);
-            
+            using Brush labelBrush = GDI.Brush(GaugeLabelsColor);
+
+            float lineWidth = (LineWidth < 0) ? (float)(minScale / ((numGroups) * (GaugeSpacePercentage + 100) / 100)) : LineWidth;
+            float radiusSpace = lineWidth * (GaugeSpacePercentage + 100) / 100;
+            float gaugeRadius = 0;
+            float maxBackAngle = (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * (NormBackGauge ? (float)Norm.Max() : 1) * 360f;
+            float gaugeStart = StartingAngle;
+
+            pen.Width = (float)lineWidth;
+            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            pen.EndCap = System.Drawing.Drawing2D.LineCap.Triangle;
+            penCircle.Width = (float)lineWidth;
+            penCircle.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            penCircle.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+
+            using System.Drawing.Font fontGauge = new(font.FontFamily, 0.75f * lineWidth, FontStyle.Bold);
 
             lock (this)
             {
-                float lineWidth = (LineWidth < 0) ? (float)(minScale / ((numGroups) * (SteppedCategories ? 1.2f : 2))) : LineWidth;
-                float radiusSpace = lineWidth * (SteppedCategories ? 1.2f : 2);
-                float gaugeRadius = 0;
-                float maxBackAngle = (AntiClockWise ? -1 : 1) * (NormBackGauge ? (float)Norm.Max() : 1) * 360f;
-                float gaugeStart = StartingAngle;
 
-                pen.Width = (float)lineWidth;
-                pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-                pen.EndCap = System.Drawing.Drawing2D.LineCap.Triangle;
-                penCircle.Width = (float)lineWidth;
-                penCircle.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-                penCircle.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-
-                using System.Drawing.Font fontGauge = new(font.FontFamily, 0.8f * lineWidth);
-
+                int index;
                 for (int i = 0; i < numGroups; i++)
                 {
-                    sweepAngle = (AntiClockWise ? -1 : 1) * (float)(360f * Norm[i]);
-                    gaugeRadius = (i + 1) * radiusSpace;
+                    index = i; // Modify according to InsideToOutside
+                    
+                    sweepAngle = (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * (float)(360f * Norm[i]);
+                    if (GaugeMode == RadialGaugeMode.SingleGauge)
+                        gaugeRadius = (numGroups - 1) * radiusSpace;
+                    else
+                        gaugeRadius = (i + 1) * radiusSpace;
 
                     pen.Color = LineColors[i];
                     penCircle.Color = LightenBy(LineColors[i], DimPercentage);
 
                     // Draw gauge background
-                    gfx.DrawArc(penCircle, (origin.X - gaugeRadius), (origin.Y - gaugeRadius), (gaugeRadius * 2), (gaugeRadius * 2), StartingAngle, maxBackAngle);
+                    if (GaugeMode != RadialGaugeMode.SingleGauge)
+                        gfx.DrawArc(penCircle, (origin.X - gaugeRadius), (origin.Y - gaugeRadius), (gaugeRadius * 2), (gaugeRadius * 2), StartingAngle, maxBackAngle);
                     
                     // Draw gauge
                     gfx.DrawArc(pen, (origin.X - gaugeRadius), (origin.Y - gaugeRadius), (gaugeRadius * 2), (gaugeRadius * 2), gaugeStart, sweepAngle);
 
-                    if (ShowAxisValues)
+                    if (ShowGaugeValues)
                     {
                         DrawTextOnCircle(gfx,
                             fontGauge,
-                            fontBrush,
+                            labelBrush,
                             new RectangleF(dims.DataOffsetX, dims.DataOffsetY, dims.DataWidth, dims.DataHeight),
                             gaugeRadius,
                             gaugeStart + sweepAngle,
@@ -339,7 +362,7 @@ namespace ScottPlot.Plottable
                             Norm[i].ToString("0.00"));
                     }
 
-                    if (SteppedCategories)
+                    if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode==RadialGaugeMode.SingleGauge)
                         gaugeStart += sweepAngle;
     
                 }
@@ -401,7 +424,7 @@ namespace ScottPlot.Plottable
         /// <param name="cy">The y-coordinate of the circle centre</param>
         /// <param name="text">String to be drawn</param>
         /// <seealso cref="http://csharphelper.com/blog/2018/02/draw-text-on-a-circle-in-c/"/>
-        private void DrawTextOnCircle(Graphics gfx, System.Drawing.Font font,
+        protected virtual void DrawTextOnCircle(Graphics gfx, System.Drawing.Font font,
             Brush brush, RectangleF clientRectangle, float radius, float anglePos, float cx, float cy,
             string text)
         {
@@ -438,9 +461,9 @@ namespace ScottPlot.Plottable
             {
                 // Increment theta half the angular width of the current character
                 if (anglePos > 180) // In the top half of the gauge, the text is drawn backwards
-                    theta -= (AntiClockWise ? -1 : 1) * rects[rects.Count - 1].Width / 2 * width_to_angle;
+                    theta -= (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * rects[rects.Count - 1].Width / 2 * width_to_angle;
                 else
-                    theta -= (AntiClockWise ? -1 : 1) * rects[0].Width / 2 * width_to_angle;
+                    theta -= (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * rects[0].Width / 2 * width_to_angle;
 
                 // Calculate the position of the upper-left corner
                 double x = cx + radius * Math.Cos(theta);
@@ -460,7 +483,7 @@ namespace ScottPlot.Plottable
                 else
                     charPos = i;
 
-                if (AntiClockWise)
+                if (GaugeDirection == RadialGaugeDirection.AntiClockwise)
                     charPos = text.Length - 1 - charPos;
 
                 gfx.DrawString(text[charPos].ToString(), font, brush, 0, 0, string_format);
@@ -468,9 +491,9 @@ namespace ScottPlot.Plottable
 
                 // Increment theta the remaining half character.
                 if (anglePos > 180)
-                    theta -= (AntiClockWise ? -1 : 1) * rects[rects.Count -1 - i].Width / 2 * width_to_angle;
+                    theta -= (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * rects[rects.Count -1 - i].Width / 2 * width_to_angle;
                 else
-                    theta -= (AntiClockWise ? -1 : 1) * rects[i].Width / 2 * width_to_angle;
+                    theta -= (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * rects[i].Width / 2 * width_to_angle;
             }
 
                 
@@ -572,6 +595,32 @@ namespace ScottPlot.Plottable
 }
 
 
+// https://github.com/ScottPlot/ScottPlot/blob/master/src/ScottPlot/Enums/
+// under RadialGauge.cs
+namespace ScottPlot
+{
+    public enum RadialGaugeDirection
+    {
+        Clockwise,
+        AntiClockwise
+    }
+
+    public enum RadialGaugeStart
+    {
+        InsideToOutside,
+        OutsideToInside
+    }
+
+    public enum RadialGaugeMode
+    {
+        Stacked,
+        Sequential,
+        SingleGauge
+    }
+}
+
+
+// https://github.com/ScottPlot/ScottPlot/blob/c18fd8842a0551db462aaa4190d548a1e3965e48/src/ScottPlot/Plot/Plot.Add.cs
 namespace ScottPlot
 {
     public partial class PlotExt: ScottPlot.Plot
