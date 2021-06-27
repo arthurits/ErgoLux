@@ -32,7 +32,8 @@ namespace ErgoLux
             plottable.GroupLabels = new string[] { "G #1", "G #2", "G #3", "G #4", "G #5" };
             //plottable.StartingAngle = 150;
             //plottable.AntiClockWise = true;
-            //plottable.GaugeMode = ScottPlot.RadialGaugeMode.SingleGauge;
+            //plottable.GaugeMode = ScottPlot.RadialGaugeMode.Sequential;
+            plottable.GaugeStart = ScottPlot.RadialGaugeStart.OutsideToInside;
             formsPlot1.Plot.Add(plottable);
             formsPlot1.Plot.Frameless();
             formsPlot1.Plot.Grid(enable: false);

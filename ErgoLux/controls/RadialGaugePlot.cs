@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using ScottPlot.Drawing;
 
+// Inspired (and expanding) by https://github.com/dotnet-ad/Microcharts/blob/main/Sources/Microcharts/Charts/RadialGaugeChart.cs
+
 // Lighten or darken color
 // https://stackoverflow.com/questions/801406/c-create-a-lighter-darker-color-based-on-a-system-color
 // https://www.pvladov.com/2012/09/make-color-lighter-or-darker.html
@@ -88,14 +90,19 @@ namespace ScottPlot.Plottable
         public float DimPercentage = 90f;
 
         /// <summary>
-        /// True if the gauges are to be drawn anti-clockwise (counter clockwise). False otherwise.
+        /// Determines whether the gauges are drawn clockwise (default value) or anti-clockwise (counter clockwise).
         /// </summary>
         public RadialGaugeDirection GaugeDirection = RadialGaugeDirection.Clockwise;
 
         /// <summary>
-        /// True if the gauge values are drawn stepped, one after the other.
+        /// Determins whether the gauges are drawn stacked (dafault value), sequentially of as a single gauge (ressembling a pie plot).
         /// </summary>
         public RadialGaugeMode GaugeMode = RadialGaugeMode.Stacked;
+
+        /// <summary>
+        /// Determines whether the gauges are drawn starting from the inside (default value) or the outside
+        /// </summary>
+        public RadialGaugeStart GaugeStart = RadialGaugeStart.InsideToOutside;
 
         /// <summary>
         /// True if the background gauge is also normalized as well as and according to the values.
@@ -108,7 +115,7 @@ namespace ScottPlot.Plottable
         public float StartingAngle = 270f;
 
         /// <summary>
-        /// The empty space between gauges as a percentage of the gauge width. Values in the range [0-100], default value is 50 [percent]. Other values might produce undesirable side-effects.
+        /// The empty space between gauges as a percentage of the gauge width. Values in the range [0-100], default value is 50 [percent]. Other values might produce unexpected side-effects.
         /// </summary>
         public float GaugeSpacePercentage = 50f;
 
@@ -314,7 +321,7 @@ namespace ScottPlot.Plottable
             float radiusSpace = lineWidth * (GaugeSpacePercentage + 100) / 100;
             float gaugeRadius = 0;
             float maxBackAngle = (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * (NormBackGauge ? (float)Norm.Max() : 1) * 360f;
-            float gaugeStart = StartingAngle;
+            float gaugeAngleStart = StartingAngle;
 
             pen.Width = (float)lineWidth;
             pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
@@ -327,17 +334,13 @@ namespace ScottPlot.Plottable
 
             lock (this)
             {
-
-                int index;
                 for (int i = 0; i < numGroups; i++)
-                {
-                    index = i; // Modify according to InsideToOutside
-                    
+                {   
                     sweepAngle = (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * (float)(360f * Norm[i]);
                     if (GaugeMode == RadialGaugeMode.SingleGauge)
                         gaugeRadius = (numGroups - 1) * radiusSpace;
                     else
-                        gaugeRadius = (i + 1) * radiusSpace;
+                        gaugeRadius = (GaugeStart == RadialGaugeStart.InsideToOutside ? i : (numGroups - i)) * radiusSpace;
 
                     pen.Color = LineColors[i];
                     penCircle.Color = LightenBy(LineColors[i], DimPercentage);
@@ -347,7 +350,7 @@ namespace ScottPlot.Plottable
                         gfx.DrawArc(penCircle, (origin.X - gaugeRadius), (origin.Y - gaugeRadius), (gaugeRadius * 2), (gaugeRadius * 2), StartingAngle, maxBackAngle);
                     
                     // Draw gauge
-                    gfx.DrawArc(pen, (origin.X - gaugeRadius), (origin.Y - gaugeRadius), (gaugeRadius * 2), (gaugeRadius * 2), gaugeStart, sweepAngle);
+                    gfx.DrawArc(pen, (origin.X - gaugeRadius), (origin.Y - gaugeRadius), (gaugeRadius * 2), (gaugeRadius * 2), gaugeAngleStart, sweepAngle);
 
                     if (ShowGaugeValues)
                     {
@@ -356,14 +359,14 @@ namespace ScottPlot.Plottable
                             labelBrush,
                             new RectangleF(dims.DataOffsetX, dims.DataOffsetY, dims.DataWidth, dims.DataHeight),
                             gaugeRadius,
-                            gaugeStart + sweepAngle,
+                            gaugeAngleStart + sweepAngle,
                             origin.X,
                             origin.Y,
                             Norm[i].ToString("0.00"));
                     }
 
                     if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode==RadialGaugeMode.SingleGauge)
-                        gaugeStart += sweepAngle;
+                        gaugeAngleStart += sweepAngle;
     
                 }
 
