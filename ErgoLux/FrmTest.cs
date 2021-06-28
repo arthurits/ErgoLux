@@ -25,9 +25,25 @@ namespace ErgoLux
             Color[] colors = Enumerable.Range(0, values.Length)
                                        .Select(i => formsPlot1.Plot.GetSettings(false).PlottablePalette.GetColor(i))   // modify later
                                        .ToArray();
-;
-            //ScottPlot.Plottable.RadialGaugePlot plottable = new(values, colors, false, new double []{ values.Max() * 4 / 3 });
-            ScottPlot.Plottable.RadialGaugePlot plottable = new(values, colors, false);
+            colors = new Color[]
+            {
+                ColorTranslator.FromHtml("#266489"),
+                ColorTranslator.FromHtml("#68B9C0"),
+                ColorTranslator.FromHtml("#90D585"),
+                ColorTranslator.FromHtml("#F3C151"),
+                ColorTranslator.FromHtml("#F37F64"),
+                ColorTranslator.FromHtml("#424856"),
+                ColorTranslator.FromHtml("#8F97A4"),
+                ColorTranslator.FromHtml("#DAC096"),
+                ColorTranslator.FromHtml("#76846E"),
+                ColorTranslator.FromHtml("#DABFAF"),
+                ColorTranslator.FromHtml("#A65B69"),
+                ColorTranslator.FromHtml("#97A69D")
+            };
+
+
+        //ScottPlot.Plottable.RadialGaugePlot plottable = new(values, colors, false, new double []{ values.Max() * 4 / 3 });
+        ScottPlot.Plottable.RadialGaugePlot plottable = new(values, colors, false);
             plottable.CategoryLabels = new string [] { "C #1", "C #2", "C #3", "C #4", "C #5" };
             plottable.GroupLabels = new string[] { "G #1", "G #2", "G #3", "G #4", "G #5" };
             //plottable.StartingAngle = 150;

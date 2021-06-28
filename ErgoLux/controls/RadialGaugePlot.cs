@@ -35,6 +35,16 @@ namespace ScottPlot.Plottable
     public class RadialGaugePlot : IPlottable
     {
         /// <summary>
+        /// Data to be plotted. It's a copy of the data passed in the constructor or in the Update() method.
+        /// </summary>
+        private double[] Data;
+
+        /// <summary>
+        /// Tha maximum value for scaling the gauges. It represents the value of an hypothetical 360° gauge.
+        /// </summary>
+        private double ScaleMax;
+
+        /// <summary>
         /// Values for every group (rows) and category (columns) normalized from 0 to 1.
         /// </summary>
         private double[] Norm;
@@ -153,7 +163,7 @@ namespace ScottPlot.Plottable
         public int XAxisIndex { get; set; } = 0;
         public int YAxisIndex { get; set; } = 0;
 
-        public RadialGaugePlot(double[] values, Color[] lineColors, bool independentAxes, double [] maxValues = null)
+        public RadialGaugePlot(double[] values, Color[] lineColors, bool independentAxes, double? maxValues = null)
         {
             LineColors = lineColors;
             IndependentAxes = independentAxes;
@@ -169,26 +179,30 @@ namespace ScottPlot.Plottable
         /// <param name="values">2D array of groups (rows) of values for each category (columns)</param>
         /// <param name="independentAxes">Controls if values along each category axis are scaled independently or uniformly across all axes</param>
         /// <param name="maxValues">If provided, these values will be used to normalize each category (columns)</param>
-        public void Update(double[] values, bool independentAxes = false, double [] maxValues = null)
+        public void Update(double[] values, bool independentAxes = false, double? maxValues = null)
         {
             IndependentAxes = independentAxes;
             Norm = new double[values.GetLength(0)];
             Array.Copy(values, 0, Norm, 0, values.Length);
+            Data = new double[values.Length];
+            Array.Copy(values, 0, Data, 0, values.Length);
 
             if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode == RadialGaugeMode.SingleGauge)
             {
-                if (maxValues != null && maxValues.Length == 1)
+                if (maxValues != null)
                 {
-                    maxValues[0] += values.Sum();
+                    ScaleMax += values.Sum();
                 }
                 else
-                    maxValues = new double[] { values.Sum() };
+                    ScaleMax = values.Sum();
             }
-
-            if (IndependentAxes)
-                NormMax = NormalizeInPlace(Norm, maxValues);
             else
-                NormMax = NormalizeInPlace(Norm, maxValues);
+                ScaleMax = values.Max();
+
+            //if (IndependentAxes)
+            //    NormMax = NormalizeInPlace(Norm, maxValues);
+            //else
+            //    NormMax = NormalizeInPlace(Norm, maxValues);
         }
 
         public void ValidateData(bool deep = false)
@@ -320,7 +334,7 @@ namespace ScottPlot.Plottable
             float lineWidth = (LineWidth < 0) ? (float)(minScale / ((numGroups) * (GaugeSpacePercentage + 100) / 100)) : LineWidth;
             float radiusSpace = lineWidth * (GaugeSpacePercentage + 100) / 100;
             float gaugeRadius = 0;
-            float maxBackAngle = (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * (NormBackGauge ? (float)Norm.Max() : 1) * 360f;
+            float maxBackAngle = (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * (NormBackGauge ? (float)ScaleMax : 1) * 360f;
             float gaugeAngleStart = StartingAngle;
 
             pen.Width = (float)lineWidth;
@@ -335,8 +349,8 @@ namespace ScottPlot.Plottable
             lock (this)
             {
                 for (int i = 0; i < numGroups; i++)
-                {   
-                    sweepAngle = (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * (float)(360f * Norm[i]);
+                {
+                    sweepAngle = (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * (float)(360f * Data[i] / ScaleMax);
                     if (GaugeMode == RadialGaugeMode.SingleGauge)
                         gaugeRadius = (numGroups - 1) * radiusSpace;
                     else
@@ -362,7 +376,7 @@ namespace ScottPlot.Plottable
                             gaugeAngleStart + sweepAngle,
                             origin.X,
                             origin.Y,
-                            Norm[i].ToString("0.00"));
+                            Data[i].ToString("0.##"));
                     }
 
                     if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode==RadialGaugeMode.SingleGauge)
@@ -636,7 +650,7 @@ namespace ScottPlot
         /// <param name="maxValues">if provided, each category (column) is normalized to these values</param>
         /// <param name="disableFrameAndGrid">also make the plot frameless and disable its grid</param>
         /// <returns>the radar plot that was just created and added to the plot</returns>
-        public ScottPlot.Plottable.RadialGaugePlot AddRadialGauge(double[] values, bool independentAxes = false, double[] maxValues = null, bool disableFrameAndGrid = true)
+        public ScottPlot.Plottable.RadialGaugePlot AddRadialGauge(double[] values, bool independentAxes = false, double? maxValues = null, bool disableFrameAndGrid = true)
         {
 
             Color[] colors = Enumerable.Range(0, values.Length)
