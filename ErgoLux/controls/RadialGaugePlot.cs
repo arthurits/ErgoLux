@@ -391,8 +391,8 @@ namespace ScottPlot.Plottable
                             Data[i].ToString("0.##"));
                     }
 
-                    //if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode==RadialGaugeMode.SingleGauge)
-                    //    gaugeAngleStart += sweepAngle;
+                    if (GaugeMode == RadialGaugeMode.Sequential)
+                        gaugeAngleStart += sweepAngle;
     
                 }
 
