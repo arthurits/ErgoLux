@@ -12,11 +12,12 @@ namespace ErgoLux
 {
     public partial class FrmTest : Form
     {
+        private ScottPlot.Plottable.RadialGaugePlot plottable;
         public FrmTest()
         {
             InitializeComponent();
 
-            double[] values = {78, 83, 84, 76, 43 };
+            double[] values = {100, 80, 65, 42, 20 };
 
 
 
@@ -41,15 +42,11 @@ namespace ErgoLux
                 ColorTranslator.FromHtml("#97A69D")
             };
 
-
-        //ScottPlot.Plottable.RadialGaugePlot plottable = new(values, colors, false, new double []{ values.Max() * 4 / 3 });
-        ScottPlot.Plottable.RadialGaugePlot plottable = new(values, colors, false);
+            //ScottPlot.Plottable.RadialGaugePlot plottable = new(values, colors, false, new double []{ values.Max() * 4 / 3 });
+            plottable = new(values, colors, false);
             plottable.CategoryLabels = new string [] { "C #1", "C #2", "C #3", "C #4", "C #5" };
             plottable.GroupLabels = new string[] { "G #1", "G #2", "G #3", "G #4", "G #5" };
             //plottable.StartingAngle = 150;
-            //plottable.AntiClockWise = true;
-            //plottable.GaugeMode = ScottPlot.RadialGaugeMode.Sequential;
-            plottable.GaugeStart = ScottPlot.RadialGaugeStart.OutsideToInside;
             formsPlot1.Plot.Add(plottable);
             formsPlot1.Plot.Frameless();
             formsPlot1.Plot.Grid(enable: false);
@@ -57,6 +54,40 @@ namespace ErgoLux
             formsPlot1.Plot.Title("Radial gauge plot");
             formsPlot1.Plot.Legend(enable: true, ScottPlot.Alignment.LowerRight);
 
+            // Combo
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
+            comboBox3.SelectedIndex = 0;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            plottable.GaugeDirection = (ScottPlot.RadialGaugeDirection)comboBox1.SelectedIndex;
+            formsPlot1.Render();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            plottable.GaugeMode = (ScottPlot.RadialGaugeMode)comboBox2.SelectedIndex;
+            formsPlot1.Render();
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            plottable.GaugeStart = (ScottPlot.RadialGaugeStart)comboBox3.SelectedIndex;
+            formsPlot1.Render();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            plottable.ShowGaugeValues = checkBox1.Checked;
+            formsPlot1.Render();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            plottable.NormBackGauge = checkBox2.Checked;
+            formsPlot1.Render();
         }
     }
 }

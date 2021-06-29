@@ -44,21 +44,23 @@ namespace ScottPlot.Plottable
         /// </summary>
         private double ScaleMax;
 
-        /// <summary>
-        /// Values for every group (rows) and category (columns) normalized from 0 to 1.
-        /// </summary>
-        private double[] Norm;
+        //public int PointCount { get => Data.Length; }
 
-        /// <summary>
-        /// Single value to normalize all values against for all groups/categories.
-        /// </summary>
-        private double NormMax;
+        ///// <summary>
+        ///// Values for every group (rows) and category (columns) normalized from 0 to 1.
+        ///// </summary>
+        //private double[] Norm;
 
-        /// <summary>
-        /// Individual values (one per category) to use for normalization.
-        /// Length must be equal to the number of columns (categories) in the original data.
-        /// </summary>
-        private double[] NormMaxes;
+        ///// <summary>
+        ///// Single value to normalize all values against for all groups/categories.
+        ///// </summary>
+        //private double NormMax;
+
+        ///// <summary>
+        ///// Individual values (one per category) to use for normalization.
+        ///// Length must be equal to the number of columns (categories) in the original data.
+        ///// </summary>
+        //private double[] NormMaxes;
 
         /// <summary>
         /// Labels for each category.
@@ -107,7 +109,16 @@ namespace ScottPlot.Plottable
         /// <summary>
         /// Determins whether the gauges are drawn stacked (dafault value), sequentially of as a single gauge (ressembling a pie plot).
         /// </summary>
-        public RadialGaugeMode GaugeMode = RadialGaugeMode.Stacked;
+        public RadialGaugeMode GaugeMode
+        {
+            get => _GaugeMode;
+            set
+            {
+                _GaugeMode = value;
+                Compute_ScaleMax_Factor();
+            }
+        }
+        private RadialGaugeMode _GaugeMode;
 
         /// <summary>
         /// Determines whether the gauges are drawn starting from the inside (default value) or the outside
@@ -171,7 +182,10 @@ namespace ScottPlot.Plottable
         }
 
         public override string ToString() =>
-            $"PlottableRadialGauge with {PointCount} points and {Norm.GetUpperBound(1) + 1} categories.";
+            $"PlottableRadialGauge with {Data.Length} points.";
+
+        //public override string ToString() =>
+        //    $"PlottableRadialGauge with {PointCount} points and {Norm.GetUpperBound(1) + 1} categories.";
 
         /// <summary>
         /// Replace the data values with new ones.
@@ -182,22 +196,12 @@ namespace ScottPlot.Plottable
         public void Update(double[] values, bool independentAxes = false, double? maxValues = null)
         {
             IndependentAxes = independentAxes;
-            Norm = new double[values.GetLength(0)];
-            Array.Copy(values, 0, Norm, 0, values.Length);
+            //Norm = new double[values.GetLength(0)];
+            //Array.Copy(values, 0, Norm, 0, values.Length);
             Data = new double[values.Length];
             Array.Copy(values, 0, Data, 0, values.Length);
 
-            if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode == RadialGaugeMode.SingleGauge)
-            {
-                if (maxValues != null)
-                {
-                    ScaleMax += values.Sum();
-                }
-                else
-                    ScaleMax = values.Sum();
-            }
-            else
-                ScaleMax = values.Max();
+            Compute_ScaleMax_Factor(maxValues);
 
             //if (IndependentAxes)
             //    NormMax = NormalizeInPlace(Norm, maxValues);
@@ -205,12 +209,27 @@ namespace ScottPlot.Plottable
             //    NormMax = NormalizeInPlace(Norm, maxValues);
         }
 
+        private void Compute_ScaleMax_Factor(double? maxValues = null)
+        {
+            if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode == RadialGaugeMode.SingleGauge)
+            {
+                if (maxValues != null)
+                {
+                    ScaleMax += Data.Sum();
+                }
+                else
+                    ScaleMax = Data.Sum();
+            }
+            else
+                ScaleMax = Data.Max();
+        }
+
         public void ValidateData(bool deep = false)
         {
-            if (GroupLabels != null && GroupLabels.Length != Norm.GetLength(0))
+            if (GroupLabels != null && GroupLabels.Length != Data.Length)
                 throw new InvalidOperationException("group names must match size of values");
 
-            if (CategoryLabels != null && CategoryLabels.Length != Norm.GetLength(0))
+            if (CategoryLabels != null && CategoryLabels.Length != Data.Length)
                 throw new InvalidOperationException("category names must match size of values");
         }
 
@@ -218,25 +237,25 @@ namespace ScottPlot.Plottable
         /// Normalize a 2D array by dividing all values by the maximum value.
         /// </summary>
         /// <returns>maximum value in the array before normalization</returns>
-        private double NormalizeInPlace(double[] input, double[] maxValues = null)
-        {
-            double max;
-            if (maxValues != null && maxValues.Length == 1)
-            {
-                max = maxValues[0];
-            }
-            else
-            {
-                max = input[0];
-                for (int i = 0; i < input.GetLength(0); i++)
-                    max = Math.Max(max, input[i]);
-            }
+        //private double NormalizeInPlace(double[] input, double[] maxValues = null)
+        //{
+        //    double max;
+        //    if (maxValues != null && maxValues.Length == 1)
+        //    {
+        //        max = maxValues[0];
+        //    }
+        //    else
+        //    {
+        //        max = input[0];
+        //        for (int i = 0; i < input.GetLength(0); i++)
+        //            max = Math.Max(max, input[i]);
+        //    }
 
-            for (int i = 0; i < input.GetLength(0); i++)
-                    input[i] /= max;
+        //    for (int i = 0; i < input.GetLength(0); i++)
+        //            input[i] /= max;
 
-            return max;
-        }
+        //    return max;
+        //}
 
         /// <summary>
         /// Normalize each row of a 2D array independently by dividing all values by the maximum value.
@@ -298,7 +317,6 @@ namespace ScottPlot.Plottable
         public AxisLimits GetAxisLimits() =>
             (GroupLabels != null) ? new AxisLimits(-3.5, 3.5, -3.5, 3.5) : new AxisLimits(-2.5, 2.5, -2.5, 2.5);
 
-        public int PointCount { get => Norm.Length; }
 
         /// <summary>
         /// This is where the drawing of the plot is done
@@ -308,19 +326,10 @@ namespace ScottPlot.Plottable
         /// <param name="lowQuality"></param>
         public virtual void Render(PlotDimensions dims, Bitmap bmp, bool lowQuality = false)
         {
-            int numGroups = Norm.GetUpperBound(0) + 1;
-            //int numCategories = Norm.GetUpperBound(1) + 1;
-            //double sweepAngle = 2 * Math.PI / numCategories;
-            float sweepAngle = 0;
+            int numGroups = Data.Length;
+            float sweepAngle;
             double minScale = new double[] { dims.GetPixelX(1), dims.GetPixelY(1) }.Min();
             PointF origin = new PointF(dims.GetPixelX(0), dims.GetPixelY(0));
-            //double[] radii = new double[] { 0.25 * minScale, 0.5 * minScale, 1 * minScale };
-            //double[] radii = new double[numCategories];
-
-            //for (int i = 0; i < numGroups; i++)
-            //{
-            //    radii[i] = minScale * (i + 1) / numGroups;
-            //}
 
             using Graphics gfx = GDI.Graphics(bmp, dims, lowQuality);
             using Pen pen = GDI.Pen(WebColor);
@@ -352,9 +361,12 @@ namespace ScottPlot.Plottable
                 {
                     sweepAngle = (GaugeDirection == RadialGaugeDirection.AntiClockwise ? -1 : 1) * (float)(360f * Data[i] / ScaleMax);
                     if (GaugeMode == RadialGaugeMode.SingleGauge)
+                    {
                         gaugeRadius = (numGroups - 1) * radiusSpace;
+                        gaugeAngleStart -= sweepAngle;
+                    }
                     else
-                        gaugeRadius = (GaugeStart == RadialGaugeStart.InsideToOutside ? i : (numGroups - i)) * radiusSpace;
+                        gaugeRadius = (GaugeStart == RadialGaugeStart.InsideToOutside ? i + 1 : (numGroups - i)) * radiusSpace;
 
                     pen.Color = LineColors[i];
                     penCircle.Color = LightenBy(LineColors[i], DimPercentage);
@@ -379,14 +391,16 @@ namespace ScottPlot.Plottable
                             Data[i].ToString("0.##"));
                     }
 
-                    if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode==RadialGaugeMode.SingleGauge)
-                        gaugeAngleStart += sweepAngle;
+                    //if (GaugeMode == RadialGaugeMode.Sequential || GaugeMode==RadialGaugeMode.SingleGauge)
+                    //    gaugeAngleStart += sweepAngle;
     
                 }
 
             }
 
         }
+
+        #region Color routines
 
         /// <summary>Creates color with corrected brightness.</summary>
         /// <param name="color">Color to correct.</param>
@@ -426,6 +440,8 @@ namespace ScottPlot.Plottable
         {
             return ChangeColorBrightness(color, -1f * percent / 100f);
         }
+
+        #endregion Color routines
 
         #region DrawText routines
         /// <summary>
@@ -527,34 +543,32 @@ namespace ScottPlot.Plottable
         /// <returns></returns>
         private List<RectangleF> MeasureCharactersInWord(Graphics gfx, System.Drawing.Font font, RectangleF clientRectangle, string text)
         {
-            List<RectangleF> result = new List<RectangleF>();
+            List<RectangleF> result = new();
 
-            using (StringFormat string_format = new StringFormat())
+            using StringFormat string_format = new();
+
+            string_format.Alignment = StringAlignment.Center;
+            string_format.LineAlignment = StringAlignment.Center;
+            string_format.Trimming = StringTrimming.None;
+            string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+
+            CharacterRange[] ranges = new CharacterRange[text.Length];
+            for (int i = 0; i < text.Length; i++)
             {
-                string_format.Alignment = StringAlignment.Near;
-                string_format.LineAlignment = StringAlignment.Near;
-                string_format.Trimming = StringTrimming.None;
-                string_format.FormatFlags =
-                    StringFormatFlags.MeasureTrailingSpaces;
-
-                CharacterRange[] ranges = new CharacterRange[text.Length];
-                for (int i = 0; i < text.Length; i++)
-                {
-                    ranges[i] = new CharacterRange(i, 1);
-                }
-                string_format.SetMeasurableCharacterRanges(ranges);
-
-                // Find the character ranges.
-                RectangleF rect = new RectangleF(0, 0, 10000, 100);
-                Region[] regions =
-                    gfx.MeasureCharacterRanges(
-                        text, font, clientRectangle,
-                        string_format);
-
-                // Convert the regions into rectangles.
-                foreach (Region region in regions)
-                    result.Add(region.GetBounds(gfx));
+                ranges[i] = new CharacterRange(i, 1);
             }
+            string_format.SetMeasurableCharacterRanges(ranges);
+
+            // Find the character ranges.
+            RectangleF rect = new RectangleF(0, 0, 10000, 100);
+            Region[] regions =
+                gfx.MeasureCharacterRanges(
+                    text, font, clientRectangle,
+                    string_format);
+
+            // Convert the regions into rectangles.
+            foreach (Region region in regions)
+                result.Add(region.GetBounds(gfx));
 
             return result;
         }
