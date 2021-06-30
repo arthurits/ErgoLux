@@ -40,9 +40,14 @@ namespace ScottPlot.Plottable
         private double[] Data;
 
         /// <summary>
-        /// Tha maximum value for scaling the gauges. It represents the value of an hypothetical 360° gauge.
+        /// Tha maximum value for scaling the gauges. It represents the value of an hypothetical 360Â° gauge.
         /// </summary>
         private double ScaleMax;
+
+        /// <summary>
+        /// Tha maximum angle value [0-360] corresponding to the ScaleMax property.
+        /// </summary>
+        private double MaxAngle;
 
         //public int PointCount { get => Data.Length; }
 
