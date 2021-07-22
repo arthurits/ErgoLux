@@ -122,9 +122,14 @@ namespace ErgoLux
 
             if (File.Exists(_path + @"\images\about.ico")) this.mnuMainFrm_Help_About.Image = new Icon(_path + @"\images\about.ico", 16, 16).ToBitmap();
 
+            // Initialize the menu checked items
             this.mnuMainFrm_View_Menu.Checked = true;
             this.mnuMainFrm_View_Toolbar.Checked = true;
-
+            this.mnuMainFrm_View_Raw.Checked = _sett.Plot_ShowRawData;
+            this.mnuMainFrm_View_Radial.Checked = _sett.Plot_ShowRadar;
+            this.mnuMainFrm_View_Average.Checked = _sett.Plot_ShowAverage;
+            this.mnuMainFrm_View_Ratio.Checked = _sett.Plot_ShowRatios;
+            
             return;
         }
 
@@ -283,6 +288,70 @@ namespace ErgoLux
             SaveProgramSettingsJSON();
         }
 
+        #region mnuMainFrm events
+        private void mnuMainFrm_File_Exit_Click(object sender, EventArgs e)
+        {
+            this.toolStripMain_Exit_Click(sender, e);
+        }
+        private void mnuMainFrm_File_Open_Click(object sender, EventArgs e)
+        {
+            this.toolStripMain_Open_Click(sender, e);
+        }
+
+        private void mnuMainFrm_File_Save_Click(object sender, EventArgs e)
+        {
+            this.toolStripMain_Save_Click(sender, e);
+        }
+
+        private void mnuMainFrm_View_Menu_Click(object sender, EventArgs e)
+        {
+            bool status = !this.mnuMainFrm_View_Menu.Checked;
+            this.mnuMainFrm_View_Menu.Checked = status;
+            this.mnuMainFrm.Visible = status;
+        }
+        private void mnuMainFrm_View_Toolbar_Click(object sender, EventArgs e)
+        {
+            bool status = !this.mnuMainFrm_View_Toolbar.Checked;
+            this.mnuMainFrm_View_Toolbar.Checked = status;
+            this.toolStripMain.Visible = status;
+        }
+
+        private void mnuMainFrm_View_Raw_Click(object sender, EventArgs e)
+        {
+            bool status = !this.mnuMainFrm_View_Raw.Checked;
+            this.mnuMainFrm_View_Raw.Checked = status;
+            this.statusStripLabelRaw.Checked = status;
+            _sett.Plot_ShowRawData = status;
+        }
+
+        private void mnuMainFrm_View_Radial_Click(object sender, EventArgs e)
+        {
+            bool status = !this.mnuMainFrm_View_Radial.Checked;
+            this.mnuMainFrm_View_Radial.Checked = status;
+            this.statusStripLabelRadar.Checked = status;
+            _sett.Plot_ShowRadar = status;
+        }
+
+        private void mnuMainFrm_View_Average_Click(object sender, EventArgs e)
+        {
+            bool status = !this.mnuMainFrm_View_Average.Checked;
+            this.mnuMainFrm_View_Average.Checked = status;
+            this.statusStripLabelMax.Checked = status;
+            _sett.Plot_ShowAverage = status;
+        }
+
+        private void mnuMainFrm_View_Ratio_Click(object sender, EventArgs e)
+        {
+            bool status = !this.mnuMainFrm_View_Ratio.Checked;
+            this.mnuMainFrm_View_Ratio.Checked = status;
+            this.statusStripLabelRatio.Checked = status;
+            _sett.Plot_ShowRatios = status;
+        }
+        private void mnuMainFrm_Help_About_Click(object sender, EventArgs e)
+        {
+            this.toolStripMain_About_Click(sender, e);
+        }
+        #endregion mnuMainFrm events
 
         #region toolStripMain events
         private void toolStripMain_Exit_Click(object sender, EventArgs e)
@@ -657,16 +726,16 @@ namespace ErgoLux
                 switch (label.Text)
                 {
                     case "W":
-                        mnuMainFrm_View_Raw.Checked = label.Checked;
+                        //mnuMainFrm_View_Raw.Checked = label.Checked;
                         break;
                     case "D":
-                        mnuMainFrm_View_Radial.Checked = label.Checked;
+                        //mnuMainFrm_View_Radial.Checked = label.Checked;
                         break;
                     case "A":
-                        mnuMainFrm_View_Average.Checked = label.Checked;
+                        //mnuMainFrm_View_Average.Checked = label.Checked;
                         break;
                     case "R":
-                        mnuMainFrm_View_Ratio.Checked = label.Checked;
+                        //mnuMainFrm_View_Ratio.Checked = label.Checked;
                         break;
                 }
             }
@@ -684,15 +753,19 @@ namespace ErgoLux
                 {
                     case "W":
                         _sett.Plot_ShowRawData = label.Checked;
+                        mnuMainFrm_View_Raw.Checked = label.Checked;
                         break;
                     case "D":
                         _sett.Plot_ShowRadar = label.Checked;
+                        mnuMainFrm_View_Radial.Checked = label.Checked;
                         break;
                     case "A":
                         _sett.Plot_ShowAverage = label.Checked;
+                        mnuMainFrm_View_Average.Checked = label.Checked;
                         break;
                     case "R":
                         _sett.Plot_ShowRatios = label.Checked;
+                        mnuMainFrm_View_Ratio.Checked = label.Checked;
                         break;
                 }
             }
@@ -1116,6 +1189,8 @@ namespace ErgoLux
             formsPlot2.Render(skipIfCurrentlyRendering: true);
 
         }
+
+        
     }
 }
 
