@@ -120,6 +120,10 @@ namespace ErgoLux
             if (File.Exists(_path + @"\images\save.ico")) this.mnuMainFrm_File_Save.Image = new Icon(_path + @"\images\save.ico", 16, 16).ToBitmap();
             if (File.Exists(_path + @"\images\exit.ico")) this.mnuMainFrm_File_Exit.Image = new Icon(_path + @"\images\exit.ico", 16, 16).ToBitmap();
 
+            if (File.Exists(_path + @"\images\connect.ico")) this.mnuMainFrm_Tools_Connect.Image = new Icon(_path + @"\images\connect.ico", 16, 16).ToBitmap();
+            if (File.Exists(_path + @"\images\disconnect.ico")) this.mnuMainFrm_Tools_Disconnect.Image = new Icon(_path + @"\images\disconnect.ico", 16, 16).ToBitmap();
+            if (File.Exists(_path + @"\images\settings.ico")) this.mnuMainFrm_Tools_Settings.Image = new Icon(_path + @"\images\settings.ico", 16, 16).ToBitmap();
+
             if (File.Exists(_path + @"\images\about.ico")) this.mnuMainFrm_Help_About.Image = new Icon(_path + @"\images\about.ico", 16, 16).ToBitmap();
 
             // Initialize the menu checked items
@@ -129,7 +133,13 @@ namespace ErgoLux
             this.mnuMainFrm_View_Radial.Checked = _sett.Plot_ShowRadar;
             this.mnuMainFrm_View_Average.Checked = _sett.Plot_ShowAverage;
             this.mnuMainFrm_View_Ratio.Checked = _sett.Plot_ShowRatios;
-            
+
+            // Initialize enable status
+            this.mnuMainFrm_Tools_Connect.Enabled = false;
+            this.mnuMainFrm_Tools_Disconnect.Enabled = false;
+            this.toolStripMain_Disconnect.Enabled = false;
+            this.toolStripMain_Connect.Enabled = false;
+
             return;
         }
 
@@ -220,6 +230,7 @@ namespace ErgoLux
 
         #endregion Initialization routines 
 
+        #region Form events
         private void Form1_Shown(object sender, EventArgs e)
         {
             // signal the native process (that launched us) to close the splash screen
@@ -288,6 +299,8 @@ namespace ErgoLux
             SaveProgramSettingsJSON();
         }
 
+        #endregion Form events
+
         #region mnuMainFrm events
         private void mnuMainFrm_File_Exit_Click(object sender, EventArgs e)
         {
@@ -346,6 +359,22 @@ namespace ErgoLux
             this.mnuMainFrm_View_Ratio.Checked = status;
             this.statusStripLabelRatio.Checked = status;
             _sett.Plot_ShowRatios = status;
+        }
+        private void mnuMainFrm_Tools_Connect_Click(object sender, EventArgs e)
+        {
+            bool status = !this.toolStripMain_Connect.Checked;
+            this.mnuMainFrm_Tools_Connect.Checked = status;
+            this.toolStripMain_Connect.Checked = status;
+        }
+
+        private void mnuMainFrm_Tools_Disconnect_Click(object sender, EventArgs e)
+        {
+            this.toolStripMain_Disconnect_Click(sender, e);
+        }
+
+        private void mnuMainFrm_Tools_Settings_Click(object sender, EventArgs e)
+        {
+            this.toolStripMain_Settings_Click(sender, e);
         }
         private void mnuMainFrm_Help_About_Click(object sender, EventArgs e)
         {
@@ -595,9 +624,11 @@ namespace ErgoLux
                         MessageBox.Show("The device is closed. Please, go to\n'Settings' to open the device.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     toolStripMain_Connect.Checked = false;
+                    mnuMainFrm_Tools_Connect.Enabled = false;
                     return;
                 }
 
+                mnuMainFrm_Tools_Disconnect.Enabled = true;
                 toolStripMain_Disconnect.Enabled = true;
                 toolStripMain_Open.Enabled = false;
                 toolStripMain_Save.Enabled = false;
@@ -615,6 +646,7 @@ namespace ErgoLux
             }
             else if (toolStripMain_Connect.Checked == false)
             {
+                mnuMainFrm_Tools_Disconnect.Enabled = false;
                 toolStripMain_Disconnect.Enabled = false;
                 toolStripMain_Open.Enabled = true;
                 toolStripMain_Save.Enabled = true;
@@ -1190,7 +1222,6 @@ namespace ErgoLux
 
         }
 
-        
     }
 }
 
