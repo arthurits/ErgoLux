@@ -37,7 +37,7 @@ namespace ErgoLux
             _path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             _sett = new ClassSettings(_path);
             LoadProgramSettingsJSON();
-
+            
             // Initilizate components and GUI
             InitializeComponent();
             InitializeToolStripPanel();
@@ -45,7 +45,7 @@ namespace ErgoLux
             InitializeStatusStrip();
             InitializeMenuStrip();
             InitializePlots();
-
+            
             // Initialize the internal timer
             m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
             m_timer.Elapsed += OnTimedEvent;
@@ -193,7 +193,6 @@ namespace ErgoLux
             formsPlot1.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
             formsPlot1.MouseClick += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
             formsPlot1.Click += new EventHandler(formsPlot_Click);
-            
 
             // Customize the Radar plot
             formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
@@ -226,6 +225,11 @@ namespace ErgoLux
             formsPlot4.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
 
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
+            // Call render
+            formsPlot1.Render();
+            formsPlot2.Render();
+            formsPlot3.Render();
+            formsPlot4.Render();
         }
 
         #endregion Initialization routines 
@@ -816,6 +820,7 @@ namespace ErgoLux
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
             {
                 var plot = formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
+                formsPlot1.Render();
                 plot.MinRenderIndex = 0;
                 plot.MaxRenderIndex = 0;
             }
