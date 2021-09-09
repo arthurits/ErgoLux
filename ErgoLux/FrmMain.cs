@@ -45,7 +45,7 @@ namespace ErgoLux
             InitializeStatusStrip();
             InitializeMenuStrip();
             InitializePlots();
-            
+
             // Initialize the internal timer
             m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
             m_timer.Elapsed += OnTimedEvent;
@@ -179,6 +179,11 @@ namespace ErgoLux
         /// </summary>
         private void InitializePlots()
         {
+            // Starting from v 4.1.18 Render() must be called manually at least once
+            formsPlot1.Render();
+            formsPlot2.Render();
+            formsPlot3.Render();
+            formsPlot4.Render();
 
             //formsPlot1.plt.AxisAutoX(margin: 0);
             formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
@@ -225,11 +230,6 @@ namespace ErgoLux
             formsPlot4.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
 
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
-            // Call render
-            formsPlot1.Render();
-            formsPlot2.Render();
-            formsPlot3.Render();
-            formsPlot4.Render();
         }
 
         #endregion Initialization routines 

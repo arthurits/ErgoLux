@@ -531,6 +531,7 @@ namespace ErgoLux
             // 
             // formsPlot1
             // 
+            this.formsPlot1.Configuration.WarnIfRenderNotCalledManually = false;
             this.formsPlot1.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot1.Location = new System.Drawing.Point(0, 0);
@@ -542,6 +543,7 @@ namespace ErgoLux
             // 
             // formsPlot2
             // 
+            this.formsPlot2.Configuration.WarnIfRenderNotCalledManually = false;
             this.formsPlot2.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot2.Location = new System.Drawing.Point(531, 0);
@@ -589,6 +591,7 @@ namespace ErgoLux
             // 
             // formsPlot3
             // 
+            this.formsPlot3.Configuration.WarnIfRenderNotCalledManually = false;
             this.formsPlot3.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot3.Location = new System.Drawing.Point(4, 246);
@@ -599,6 +602,7 @@ namespace ErgoLux
             // 
             // formsPlot4
             // 
+            this.formsPlot4.Configuration.WarnIfRenderNotCalledManually = false;
             this.formsPlot4.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot4.Location = new System.Drawing.Point(535, 246);
