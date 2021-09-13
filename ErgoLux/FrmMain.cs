@@ -26,6 +26,7 @@ namespace ErgoLux
         private double _min = 0;
         private double _average = 0;
         private double[,] _plotRadar;
+        private double[] _plotRadialGauge;
         private int _nPoints = 0;
         private DateTime _timeStart;
         private DateTime _timeEnd;
@@ -825,22 +826,26 @@ namespace ErgoLux
                 plot.MaxRenderIndex = 0;
             }
             formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
-
+            
             // Binding for Plot Radar
             // Control wether 2 or more sensors, otherwise don't
             string[] labels = new string[_sett.T10_NumberOfSensors];
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                 labels[i] = "#" + i.ToString("#0");
 
-            var plt = formsPlot2.Plot.AddRadar(_plotRadar, disableFrameAndGrid: false);
-            plt.FillColors[0] = Color.FromArgb(100, plt.LineColors[0]);
-            plt.FillColors[1] = Color.FromArgb(150, plt.LineColors[1]);
-            //formsPlot2.Plot.Grid(enable: false);
-            
-            plt.AxisType = ScottPlot.RadarAxis.Polygon;
-            plt.ShowAxisValues = false;
-            plt.CategoryLabels = labels;
-            plt.GroupLabels = new string[] { "Average", "Illuminance" };
+            //var plt = formsPlot2.Plot.AddRadar(_plotRadar, disableFrameAndGrid: false);
+            //plt.FillColors[0] = Color.FromArgb(100, plt.LineColors[0]);
+            //plt.FillColors[1] = Color.FromArgb(150, plt.LineColors[1]);
+            ////formsPlot2.Plot.Grid(enable: false);
+
+            //plt.AxisType = ScottPlot.RadarAxis.Polygon;
+            //plt.ShowAxisValues = false;
+            //plt.CategoryLabels = labels;
+            //plt.GroupLabels = new string[] { "Average", "Illuminance" };
+
+            var plt = formsPlot2.Plot.AddRadialGauge(_plotRadialGauge);
+            plt.Labels = new string[] { "alpha", "beta", "gamma", "delta", "epsilon" };
+
 
             // Binding for Plot Average
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
@@ -1055,7 +1060,8 @@ namespace ErgoLux
                     {
                         _plotRadar[0, i] = _average;
                     }
-                    ((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+                    //((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+                    ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadialGauge);
                     formsPlot2.Render(skipIfCurrentlyRendering: true);
                 }
 
@@ -1096,6 +1102,7 @@ namespace ErgoLux
         /// </summary>
         private void InitializeArrays()
         {
+            _plotRadialGauge = new double[_sett.T10_NumberOfSensors];
             _plotRadar = new double[2, _sett.T10_NumberOfSensors];
             _plotData = new double[_sett.T10_NumberOfSensors + _sett.ArrayFixedColumns][];
             for (int i = 0; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
@@ -1218,11 +1225,13 @@ namespace ErgoLux
 
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
             {
+                _plotRadialGauge[i] = _plotData[i][pointIndex];
                 _plotRadar[1, i] = _plotData[i][pointIndex];
                 _plotRadar[0, i] = _plotData[_sett.T10_NumberOfSensors + 1][pointIndex];
             }
 
-            ((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+            //((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+            ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadialGauge);
             formsPlot2.Render(skipIfCurrentlyRendering: true);
 
         }
