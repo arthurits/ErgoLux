@@ -275,7 +275,7 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_Help_About.Name = "mnuMainFrm_Help_About";
             this.mnuMainFrm_Help_About.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.mnuMainFrm_Help_About.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_Help_About.Size = new System.Drawing.Size(158, 22);
             this.mnuMainFrm_Help_About.Text = "&About...";
             this.mnuMainFrm_Help_About.Click += new System.EventHandler(this.mnuMainFrm_Help_About_Click);
             // 
@@ -531,7 +531,6 @@ namespace ErgoLux
             // 
             // formsPlot1
             // 
-            this.formsPlot1.Configuration.WarnIfRenderNotCalledManually = false;
             this.formsPlot1.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot1.Location = new System.Drawing.Point(0, 0);
@@ -543,7 +542,6 @@ namespace ErgoLux
             // 
             // formsPlot2
             // 
-            this.formsPlot2.Configuration.WarnIfRenderNotCalledManually = false;
             this.formsPlot2.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot2.Location = new System.Drawing.Point(531, 0);
@@ -591,7 +589,6 @@ namespace ErgoLux
             // 
             // formsPlot3
             // 
-            this.formsPlot3.Configuration.WarnIfRenderNotCalledManually = false;
             this.formsPlot3.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot3.Location = new System.Drawing.Point(4, 246);
@@ -602,7 +599,6 @@ namespace ErgoLux
             // 
             // formsPlot4
             // 
-            this.formsPlot4.Configuration.WarnIfRenderNotCalledManually = false;
             this.formsPlot4.BackColor = System.Drawing.Color.Transparent;
             this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formsPlot4.Location = new System.Drawing.Point(535, 246);

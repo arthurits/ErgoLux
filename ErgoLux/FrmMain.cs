@@ -611,6 +611,7 @@ namespace ErgoLux
                 // Show data into plots
                 Plots_Clear();  // this also sets _nPoints = 0, so we need to reset it next
                 _nPoints = _sett.Plot_ArrayPoints;
+                _plotRadialGauge[0] = 1;
                 Plots_DataBinding();
                 Plots_ShowLegends();
                 Plots_ShowFull();
@@ -845,7 +846,14 @@ namespace ErgoLux
 
             var plt = formsPlot2.Plot.AddRadialGauge(_plotRadialGauge);
             plt.Labels = new string[] { "alpha", "beta", "gamma", "delta", "epsilon" };
-
+            formsPlot2.Plot.XAxis2.Hide(false);
+            formsPlot2.Plot.XAxis2.Ticks(false);
+            formsPlot2.Plot.XAxis.Hide(false);
+            formsPlot2.Plot.XAxis.Ticks(false);
+            formsPlot2.Plot.YAxis2.Hide(false);
+            formsPlot2.Plot.YAxis2.Ticks(false);
+            formsPlot2.Plot.YAxis.Hide(false);
+            formsPlot2.Plot.YAxis.Ticks(false);
 
             // Binding for Plot Average
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
