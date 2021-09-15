@@ -233,6 +233,18 @@ namespace ErgoLux
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
         }
 
+        private void InitializeRadialGauge()
+        {
+            formsPlot2.Plot.XAxis2.Hide(false);
+            formsPlot2.Plot.XAxis2.Ticks(false);
+            formsPlot2.Plot.XAxis.Hide(false);
+            formsPlot2.Plot.XAxis.Ticks(false);
+            formsPlot2.Plot.YAxis2.Hide(false);
+            formsPlot2.Plot.YAxis2.Ticks(false);
+            formsPlot2.Plot.YAxis.Hide(false);
+            formsPlot2.Plot.YAxis.Ticks(false);
+        }
+
         #endregion Initialization routines 
 
         #region Form events
@@ -845,15 +857,12 @@ namespace ErgoLux
             //plt.GroupLabels = new string[] { "Average", "Illuminance" };
 
             var plt = formsPlot2.Plot.AddRadialGauge(_plotRadialGauge);
-            plt.Labels = new string[] { "alpha", "beta", "gamma", "delta", "epsilon" };
-            formsPlot2.Plot.XAxis2.Hide(false);
-            formsPlot2.Plot.XAxis2.Ticks(false);
-            formsPlot2.Plot.XAxis.Hide(false);
-            formsPlot2.Plot.XAxis.Ticks(false);
-            formsPlot2.Plot.YAxis2.Hide(false);
-            formsPlot2.Plot.YAxis2.Ticks(false);
-            formsPlot2.Plot.YAxis.Hide(false);
-            formsPlot2.Plot.YAxis.Ticks(false);
+            var strLabels = new string[_sett.T10_NumberOfSensors];
+            for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+                strLabels[i] = "Sensor #" + i.ToString("#0");
+            plt.Labels = strLabels;
+            plt.StartingAngle = 180;
+            InitializeRadialGauge();
 
             // Binding for Plot Average
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
@@ -1015,6 +1024,7 @@ namespace ErgoLux
             // Data computation
             _plotData[sensor][_nPoints] = value;
             _plotRadar[1, sensor] = value;
+            _plotRadialGauge[sensor] = value;
             
             _max = sensor == 0 ? value : (value > _max ? value : _max);
             _min = sensor == 0 ? value : (value < _min ? value : _min);
@@ -1239,7 +1249,9 @@ namespace ErgoLux
             }
 
             //((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+            var plot = ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]);
             ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadialGauge);
+            plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _plotRadialGauge.Average();
             formsPlot2.Render(skipIfCurrentlyRendering: true);
 
         }
