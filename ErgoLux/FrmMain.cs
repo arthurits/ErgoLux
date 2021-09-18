@@ -623,7 +623,6 @@ namespace ErgoLux
                 // Show data into plots
                 Plots_Clear();  // this also sets _nPoints = 0, so we need to reset it next
                 _nPoints = _sett.Plot_ArrayPoints;
-                _plotRadialGauge[0] = 1;
                 Plots_DataBinding();
                 Plots_ShowLegends();
                 Plots_ShowFull();
@@ -750,6 +749,7 @@ namespace ErgoLux
 
             }
         }
+        
         private void toolStripMain_About_Click(object sender, EventArgs e)
         {
             var frm = new FrmAbout();
