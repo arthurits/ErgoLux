@@ -88,12 +88,8 @@ namespace ErgoLux
             if (File.Exists(_path + @"\images\exit.ico")) this.toolStripMain_Exit.Image = new Icon(_path + @"\images\exit.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\connect.ico")) this.toolStripMain_Connect.Image = new Icon(_path + @"\images\connect.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new Icon(_path + @"\images\disconnect.ico", 48, 48).ToBitmap();
-            //if (File.Exists(path + @"\images\cinema.ico")) this.toolStripMain_Video.Image = new Icon(path + @"\images\cinema.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\save.ico")) this.toolStripMain_Save.Image = new Icon(_path + @"\images\save.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\openfolder.ico")) this.toolStripMain_Open.Image = new Icon(_path + @"\images\openfolder.ico", 48, 48).ToBitmap();
-            //if (File.Exists(path + @"\images\picture.ico")) this.toolStripMain_Picture.Image = new Icon(path + @"\images\picture.ico", 48, 48).ToBitmap();
-            //if (File.Exists(path + @"\images\reflect-horizontal.ico")) this.toolStripMain_Mirror.Image = new Icon(path + @"\images\reflect-horizontal.ico", 48, 48).ToBitmap();
-            //if (File.Exists(path + @"\images\plot.ico")) this.toolStripMain_Plots.Image = new Icon(path + @"\images\plot.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\settings.ico")) this.toolStripMain_Settings.Image = new Icon(_path + @"\images\settings.ico", 48, 48).ToBitmap();
             if (File.Exists(_path + @"\images\about.ico")) this.toolStripMain_About.Image = new Icon(_path + @"\images\about.ico", 48, 48).ToBitmap();
 
@@ -201,7 +197,7 @@ namespace ErgoLux
             formsPlot1.Click += new EventHandler(formsPlot_Click);
 
             // Customize the Radar plot
-            formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
+            formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
             formsPlot2.Plot.Grid(enable: false);
             formsPlot2.Plot.Title("Illuminance distribution");
             formsPlot2.Plot.XAxis.Ticks(false);
@@ -439,7 +435,7 @@ namespace ErgoLux
             {
                 //object writer;
 
-                //switch(Path.GetExtension(SaveDlg.FileName).ToLower())
+                //switch (Path.GetExtension(SaveDlg.FileName).ToLower())
                 //{
                 //    case ".elux":
                 //        writer = new BinaryWriter(SaveDlg.OpenFile());
@@ -834,7 +830,7 @@ namespace ErgoLux
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
             {
                 var plot = formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
-                formsPlot1.Render();
+                //formsPlot1.Render();
                 plot.MinRenderIndex = 0;
                 plot.MaxRenderIndex = 0;
             }
@@ -924,10 +920,10 @@ namespace ErgoLux
         private void Plots_ShowLegends()
         {
             int nVertDist = 10;
-
+            
             // Combine legends from Plot1 and Plot2 and draw a black border around each legend
             var legendA = formsPlot1.Plot.RenderLegend();
-            var legendB = _sett.T10_NumberOfSensors > 1 ? formsPlot2.Plot.RenderLegend() : new Bitmap(1, 1);
+            var legendB = _sett.T10_NumberOfSensors > 0 ? formsPlot2.Plot.RenderLegend() : new Bitmap(1, 1);
             var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + nVertDist + 4);
             using Graphics GraphicsA = Graphics.FromImage(bitmap);
             GraphicsA.DrawRectangle(new Pen(Color.Black),
