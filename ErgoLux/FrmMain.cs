@@ -176,11 +176,11 @@ namespace ErgoLux
         /// </summary>
         private void InitializePlots()
         {
-            // Starting from v 4.1.18 Render() must be called manually at least once
-            formsPlot1.Render();
-            formsPlot2.Render();
-            formsPlot3.Render();
-            formsPlot4.Render();
+            // Starting from v 4.1.18 Refresh() must be called manually at least once
+            formsPlot1.Refresh();
+            formsPlot2.Refresh();
+            formsPlot3.Refresh();
+            formsPlot4.Refresh();
 
             //formsPlot1.plt.AxisAutoX(margin: 0);
             formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
@@ -830,7 +830,7 @@ namespace ErgoLux
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
             {
                 var plot = formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
-                //formsPlot1.Render();
+                //formsPlot1.Refresh();
                 plot.MinRenderIndex = 0;
                 plot.MaxRenderIndex = 0;
             }
@@ -890,10 +890,10 @@ namespace ErgoLux
                     ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
                 formsPlot1.Plot.AxisAuto();
                 formsPlot1.Plot.SetAxisLimits(xMin: 0, yMin: 0);
-                formsPlot1.Render();
+                formsPlot1.Refresh();
             }
 
-            formsPlot2.Render();
+            formsPlot2.Refresh();
 
             if (_sett.Plot_ShowAverage)
             {
@@ -901,7 +901,7 @@ namespace ErgoLux
                     ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
                 formsPlot3.Plot.AxisAuto();
                 formsPlot3.Plot.SetAxisLimits(xMin: 0, yMin: 0);
-                formsPlot3.Render();
+                formsPlot3.Refresh();
             }
 
             if (_sett.Plot_ShowRatios)
@@ -910,7 +910,7 @@ namespace ErgoLux
                     ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
                 formsPlot4.Plot.AxisAuto();
                 formsPlot4.Plot.SetAxisLimits(xMin: 0, yMin: 0, yMax: 1);
-                formsPlot4.Render();
+                formsPlot4.Refresh();
             }
         }
 
@@ -979,7 +979,7 @@ namespace ErgoLux
         }
 
         /// <summary>
-        /// Updates the plots with a new value
+        /// Updates the plots with new values
         /// </summary>
         /// <param name="sensor">Sensor number</param>
         /// <param name="value">New illuminance value</param>
@@ -1064,7 +1064,7 @@ namespace ErgoLux
                         //sigPlot.maxRenderIndex = _dataN;
                         //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
                     }
-                    formsPlot1.Render(skipIfCurrentlyRendering: true);
+                    formsPlot1.Refresh(skipIfCurrentlyRendering: true);
                 }
                 
                 // Update radar plot
@@ -1074,9 +1074,12 @@ namespace ErgoLux
                     {
                         _plotRadar[0, i] = _average;
                     }
+
                     //((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
-                    ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadialGauge);
-                    formsPlot2.Render(skipIfCurrentlyRendering: true);
+                    var plot = (ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0];
+                    plot.Update(_plotRadialGauge);
+                    plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _average;
+                    formsPlot2.Refresh(skipIfCurrentlyRendering: true);
                 }
 
                 // Update max, average, and min plot
@@ -1086,7 +1089,7 @@ namespace ErgoLux
                     {
                         ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                     }
-                    formsPlot3.Render(skipIfCurrentlyRendering: true);
+                    formsPlot3.Refresh(skipIfCurrentlyRendering: true);
                 }
 
                 // Update ratios plot
@@ -1096,7 +1099,7 @@ namespace ErgoLux
                     {
                         ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                     }
-                    formsPlot4.Render(skipIfCurrentlyRendering: true);
+                    formsPlot4.Refresh(skipIfCurrentlyRendering: true);
                 }
 
                 // Modify internal numeric variables
@@ -1246,9 +1249,9 @@ namespace ErgoLux
 
             //((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
             var plot = ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]);
-            ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadialGauge);
+            plot.Update(_plotRadialGauge);
             plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _plotRadialGauge.Average();
-            formsPlot2.Render(skipIfCurrentlyRendering: true);
+            formsPlot2.Refresh(skipIfCurrentlyRendering: true);
 
         }
 
