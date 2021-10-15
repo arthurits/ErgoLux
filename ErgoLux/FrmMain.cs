@@ -30,7 +30,7 @@ namespace ErgoLux
         private int _nPoints = 0;
         private DateTime _timeStart;
         private DateTime _timeEnd;
-        private bool _reading = false;   // this controls whether clicking the plots is allowed
+        private bool _reading = false;   // this controls whether clicking the plots is allowed or not
 
         public FrmMain()
         {

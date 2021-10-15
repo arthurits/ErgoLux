@@ -428,9 +428,9 @@ namespace ErgoLux
             this.chkShowRadar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.chkShowRadar.Location = new System.Drawing.Point(211, 25);
             this.chkShowRadar.Name = "chkShowRadar";
-            this.chkShowRadar.Size = new System.Drawing.Size(88, 23);
+            this.chkShowRadar.Size = new System.Drawing.Size(126, 23);
             this.chkShowRadar.TabIndex = 1;
-            this.chkShowRadar.Text = "Plot radar";
+            this.chkShowRadar.Text = "Plot distribution";
             this.chkShowRadar.UseVisualStyleBackColor = true;
             // 
             // chkShowRaw

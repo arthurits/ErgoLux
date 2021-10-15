@@ -133,17 +133,17 @@ namespace ErgoLux
             if (m.Msg == WM_PARENTNOTIFY && m.WParam.ToInt32() == WM_LBUTTONDOWN)
             {
                 this.Close();
-                /*
-                // get the clicked position
-                var x = (int)(m.LParam.ToInt32() & 0xFFFF);
-                var y = (int)(m.LParam.ToInt32() >> 16);
+                
+                //// get the clicked position
+                //var x = (int)(m.LParam.ToInt32() & 0xFFFF);
+                //var y = (int)(m.LParam.ToInt32() >> 16);
 
-                // get the clicked control
-                var childControl = this.GetChildAtPoint(new Point(x, y));
+                //// get the clicked control
+                //var childControl = this.GetChildAtPoint(new Point(x, y));
 
-                // call onClick (which fires Click event)
-                OnClick(EventArgs.Empty)
-                */
+                //// call onClick (which fires Click event)
+                //OnClick(EventArgs.Empty)
+                
                 // do something else...
             }
             else if (m.Msg == WM_KEYUP && ((m.WParam.ToInt32() == VK_ESCAPE) | (m.WParam.ToInt32() == VK_RETURN)))
