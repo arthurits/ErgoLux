@@ -55,14 +55,17 @@ namespace ErgoLux
         [JsonPropertyName("Show illuminance plot")]
         public bool Plot_ShowRawData { get; set; }
         
-        [JsonPropertyName("Show radar plot")]
-        public bool Plot_ShowRadar { get; set; }
+        [JsonPropertyName("Show distribution plot")]
+        public bool Plot_ShowDistribution { get; set; }
         
         [JsonPropertyName("Show average plot")]
         public bool Plot_ShowAverage { get; set; }
         
         [JsonPropertyName("Show ratios plot")]
         public bool Plot_ShowRatios { get; set; }
+
+        [JsonPropertyName("Distribution is radar")]
+        public bool Plot_DistIsRadar { get; set; }
 
         /// <summary>
         /// Icon indicating the T-10 is opened and ready to be sent commands
@@ -117,9 +120,10 @@ namespace ErgoLux
             Plot_ArrayPoints = 7200;
             Plot_WindowPoints = 20;
             Plot_ShowRawData = true;
-            Plot_ShowRadar = true;
+            Plot_ShowDistribution = true;
             Plot_ShowAverage = true;
             Plot_ShowRatios = true;
+            Plot_DistIsRadar = true;
 
             FileName = "configuration.json";
             Path = string.Empty;
@@ -143,7 +147,7 @@ namespace ErgoLux
         }
 
         /// <summary>
-        /// Initializes all the fields that are JsonIgnored
+        /// Initializes all the fields that are Json-ignored
         /// </summary>
         public void InitializeJsonIgnore(string path = null)
         {

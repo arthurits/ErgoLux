@@ -27,6 +27,7 @@ namespace ErgoLux
         private double _average = 0;
         private double[,] _plotRadar;
         private double[] _plotRadialGauge;
+        //private bool _distIsRadar = true;
         private int _nPoints = 0;
         private DateTime _timeStart;
         private DateTime _timeEnd;
@@ -127,7 +128,7 @@ namespace ErgoLux
             this.mnuMainFrm_View_Menu.Checked = true;
             this.mnuMainFrm_View_Toolbar.Checked = true;
             this.mnuMainFrm_View_Raw.Checked = _sett.Plot_ShowRawData;
-            this.mnuMainFrm_View_Radial.Checked = _sett.Plot_ShowRadar;
+            this.mnuMainFrm_View_Radial.Checked = _sett.Plot_ShowDistribution;
             this.mnuMainFrm_View_Average.Checked = _sett.Plot_ShowAverage;
             this.mnuMainFrm_View_Ratio.Checked = _sett.Plot_ShowRatios;
 
@@ -165,7 +166,7 @@ namespace ErgoLux
         private void InitializeStatusStripLabelsStatus()
         {
             statusStripLabelRaw.Checked = _sett.Plot_ShowRawData;
-            statusStripLabelRadar.Checked = _sett.Plot_ShowRadar;
+            statusStripLabelRadar.Checked = _sett.Plot_ShowDistribution;
             statusStripLabelMax.Checked = _sett.Plot_ShowAverage;
             statusStripLabelRatio.Checked = _sett.Plot_ShowRatios;
         }
@@ -196,8 +197,7 @@ namespace ErgoLux
             formsPlot1.MouseClick += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
             formsPlot1.Click += new EventHandler(formsPlot_Click);
 
-            // Customize the Radar plot
-            formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
+            // Customize the Distribution plot
             formsPlot2.Plot.Grid(enable: false);
             formsPlot2.Plot.Title("Illuminance distribution");
             formsPlot2.Plot.XAxis.Ticks(false);
@@ -225,12 +225,13 @@ namespace ErgoLux
             formsPlot4.Plot.Grid(enable: false);
 
             formsPlot4.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
-
-            //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
         }
 
         private void InitializeRadialGauge()
         {
+            formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
+            formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
+            
             formsPlot2.Plot.XAxis2.Hide(false);
             formsPlot2.Plot.XAxis2.Ticks(false);
             formsPlot2.Plot.XAxis.Hide(false);
@@ -239,6 +240,12 @@ namespace ErgoLux
             formsPlot2.Plot.YAxis2.Ticks(false);
             formsPlot2.Plot.YAxis.Hide(false);
             formsPlot2.Plot.YAxis.Ticks(false);
+        }
+
+        private void InitializeRadarPlot()
+        {
+            formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
+            formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
         }
 
         #endregion Initialization routines 
@@ -355,7 +362,7 @@ namespace ErgoLux
             bool status = !this.mnuMainFrm_View_Radial.Checked;
             this.mnuMainFrm_View_Radial.Checked = status;
             this.statusStripLabelRadar.Checked = status;
-            _sett.Plot_ShowRadar = status;
+            _sett.Plot_ShowDistribution = status;
         }
 
         private void mnuMainFrm_View_Average_Click(object sender, EventArgs e)
@@ -802,7 +809,7 @@ namespace ErgoLux
                         mnuMainFrm_View_Raw.Checked = label.Checked;
                         break;
                     case "D":
-                        _sett.Plot_ShowRadar = label.Checked;
+                        _sett.Plot_ShowDistribution = label.Checked;
                         mnuMainFrm_View_Radial.Checked = label.Checked;
                         break;
                     case "A":
@@ -836,29 +843,35 @@ namespace ErgoLux
             }
             formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
             
-            // Binding for Plot Radar
-            // Control wether 2 or more sensors, otherwise don't
-            string[] labels = new string[_sett.T10_NumberOfSensors];
-            for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-                labels[i] = "#" + i.ToString("#0");
+            // Binding for Distribution plot
+            if (_sett.Plot_DistIsRadar)
+            {
+                // Radar plot
+                InitializeRadarPlot();
+                string[] labels = new string[_sett.T10_NumberOfSensors];
+                for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+                    labels[i] = "#" + i.ToString("#0");
+                var plt = formsPlot2.Plot.AddRadar(_plotRadar, disableFrameAndGrid: false);
+                plt.FillColors[0] = Color.FromArgb(100, plt.LineColors[0]);
+                plt.FillColors[1] = Color.FromArgb(150, plt.LineColors[1]);
+                //formsPlot2.Plot.Grid(enable: false);
 
-            //var plt = formsPlot2.Plot.AddRadar(_plotRadar, disableFrameAndGrid: false);
-            //plt.FillColors[0] = Color.FromArgb(100, plt.LineColors[0]);
-            //plt.FillColors[1] = Color.FromArgb(150, plt.LineColors[1]);
-            ////formsPlot2.Plot.Grid(enable: false);
-
-            //plt.AxisType = ScottPlot.RadarAxis.Polygon;
-            //plt.ShowAxisValues = false;
-            //plt.CategoryLabels = labels;
-            //plt.GroupLabels = new string[] { "Average", "Illuminance" };
-
-            var plt = formsPlot2.Plot.AddRadialGauge(_plotRadialGauge);
-            var strLabels = new string[_sett.T10_NumberOfSensors];
-            for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-                strLabels[i] = "Sensor #" + i.ToString("#0");
-            plt.Labels = strLabels;
-            plt.StartingAngle = 180;
-            InitializeRadialGauge();
+                plt.AxisType = ScottPlot.RadarAxis.Polygon;
+                plt.ShowAxisValues = false;
+                plt.CategoryLabels = labels;
+                plt.GroupLabels = new string[] { "Average", "Illuminance" };
+            }
+            else
+            {
+                // RadialGauge plot
+                InitializeRadialGauge();
+                var plt = formsPlot2.Plot.AddRadialGauge(_plotRadialGauge);
+                var strLabels = new string[_sett.T10_NumberOfSensors];
+                for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+                    strLabels[i] = "Sensor #" + i.ToString("#0");
+                plt.Labels = strLabels;
+                plt.StartingAngle = 180;
+            }
 
             // Binding for Plot Average
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
@@ -922,8 +935,8 @@ namespace ErgoLux
             int nVertDist = 10;
             
             // Combine legends from Plot1 and Plot2 and draw a black border around each legend
-            var legendA = formsPlot1.Plot.RenderLegend();
-            var legendB = _sett.T10_NumberOfSensors > 0 ? formsPlot2.Plot.RenderLegend() : new Bitmap(1, 1);
+            var legendA = _sett.Plot_DistIsRadar ? formsPlot1.Plot.RenderLegend() : new Bitmap(1, 1);
+            var legendB = _sett.T10_NumberOfSensors > (_sett.Plot_DistIsRadar ? 2 : 0) ? formsPlot2.Plot.RenderLegend() : new Bitmap(1, 1);
             var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + nVertDist + 4);
             using Graphics GraphicsA = Graphics.FromImage(bitmap);
             GraphicsA.DrawRectangle(new Pen(Color.Black),
@@ -1068,17 +1081,24 @@ namespace ErgoLux
                 }
                 
                 // Update radar plot
-                if (_sett.Plot_ShowRadar)
+                if (_sett.Plot_ShowDistribution)
                 {
+                    // We always store the RadarPlot data in case the user wants to use it later
                     for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-                    {
                         _plotRadar[0, i] = _average;
-                    }
 
-                    //((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
-                    var plot = (ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0];
-                    plot.Update(_plotRadialGauge);
-                    plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _average;
+                    // Update the distribution plot
+                    if (_sett.Plot_DistIsRadar)
+                    {    
+                        ((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+                    }
+                    else
+                    {
+                        var plot = (ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0];
+                        plot.Update(_plotRadialGauge);
+                        plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _average;
+                        if (plot.MaximumAngle > 360) plot.MaximumAngle = 360.0;
+                    }
                     formsPlot2.Refresh(skipIfCurrentlyRendering: true);
                 }
 
@@ -1247,10 +1267,18 @@ namespace ErgoLux
                 _plotRadar[0, i] = _plotData[_sett.T10_NumberOfSensors + 1][pointIndex];
             }
 
-            //((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
-            var plot = ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]);
-            plot.Update(_plotRadialGauge);
-            plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _plotRadialGauge.Average();
+            // Update the distribution plot
+            if (_sett.Plot_DistIsRadar)
+            {
+                ((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+            }
+            else
+            {
+                var plot = ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]);
+                plot.Update(_plotRadialGauge);
+                plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _plotRadialGauge.Average();
+                if (plot.MaximumAngle > 360) plot.MaximumAngle = 360.0;
+            }
             formsPlot2.Refresh(skipIfCurrentlyRendering: true);
 
         }

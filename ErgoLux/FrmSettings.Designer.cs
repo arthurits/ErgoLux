@@ -60,13 +60,18 @@ namespace ErgoLux
             this.lblArrayPoints = new System.Windows.Forms.Label();
             this.chkShowRatio = new System.Windows.Forms.CheckBox();
             this.chkShowAverage = new System.Windows.Forms.CheckBox();
-            this.chkShowRadar = new System.Windows.Forms.CheckBox();
             this.chkShowRaw = new System.Windows.Forms.CheckBox();
             this.btnReset = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkShowDistribution = new System.Windows.Forms.CheckBox();
+            this.chkShowRadial = new System.Windows.Forms.CheckBox();
+            this.radRadar = new System.Windows.Forms.RadioButton();
+            this.radRadial = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.updSensors)).BeginInit();
             this.tabSettings.SuspendLayout();
             this.tabDevice.SuspendLayout();
             this.tabPlots.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // updSensors
@@ -333,7 +338,6 @@ namespace ErgoLux
             // 
             this.viewDevices.FullRowSelect = true;
             this.viewDevices.GridLines = true;
-            this.viewDevices.HideSelection = false;
             this.viewDevices.Location = new System.Drawing.Point(10, 29);
             this.viewDevices.MultiSelect = false;
             this.viewDevices.Name = "viewDevices";
@@ -345,13 +349,15 @@ namespace ErgoLux
             // 
             // tabPlots
             // 
+            this.tabPlots.Controls.Add(this.chkShowRadial);
+            this.tabPlots.Controls.Add(this.chkShowDistribution);
+            this.tabPlots.Controls.Add(this.groupBox1);
             this.tabPlots.Controls.Add(this.txtPlotWindow);
             this.tabPlots.Controls.Add(this.txtArrayPoints);
             this.tabPlots.Controls.Add(this.lblPlotWindow);
             this.tabPlots.Controls.Add(this.lblArrayPoints);
             this.tabPlots.Controls.Add(this.chkShowRatio);
             this.tabPlots.Controls.Add(this.chkShowAverage);
-            this.tabPlots.Controls.Add(this.chkShowRadar);
             this.tabPlots.Controls.Add(this.chkShowRaw);
             this.tabPlots.Location = new System.Drawing.Point(4, 26);
             this.tabPlots.Name = "tabPlots";
@@ -364,7 +370,7 @@ namespace ErgoLux
             // txtPlotWindow
             // 
             this.txtPlotWindow.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtPlotWindow.Location = new System.Drawing.Point(183, 126);
+            this.txtPlotWindow.Location = new System.Drawing.Point(183, 156);
             this.txtPlotWindow.Name = "txtPlotWindow";
             this.txtPlotWindow.Size = new System.Drawing.Size(84, 25);
             this.txtPlotWindow.TabIndex = 7;
@@ -372,7 +378,7 @@ namespace ErgoLux
             // txtArrayPoints
             // 
             this.txtArrayPoints.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtArrayPoints.Location = new System.Drawing.Point(183, 95);
+            this.txtArrayPoints.Location = new System.Drawing.Point(183, 125);
             this.txtArrayPoints.Name = "txtArrayPoints";
             this.txtArrayPoints.Size = new System.Drawing.Size(85, 25);
             this.txtArrayPoints.TabIndex = 6;
@@ -381,7 +387,7 @@ namespace ErgoLux
             // 
             this.lblPlotWindow.AutoSize = true;
             this.lblPlotWindow.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPlotWindow.Location = new System.Drawing.Point(31, 129);
+            this.lblPlotWindow.Location = new System.Drawing.Point(31, 159);
             this.lblPlotWindow.Name = "lblPlotWindow";
             this.lblPlotWindow.Size = new System.Drawing.Size(145, 19);
             this.lblPlotWindow.TabIndex = 5;
@@ -391,7 +397,7 @@ namespace ErgoLux
             // 
             this.lblArrayPoints.AutoSize = true;
             this.lblArrayPoints.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblArrayPoints.Location = new System.Drawing.Point(31, 98);
+            this.lblArrayPoints.Location = new System.Drawing.Point(31, 128);
             this.lblArrayPoints.Name = "lblArrayPoints";
             this.lblArrayPoints.Size = new System.Drawing.Size(146, 19);
             this.lblArrayPoints.TabIndex = 4;
@@ -402,7 +408,7 @@ namespace ErgoLux
             this.chkShowRatio.AutoSize = true;
             this.chkShowRatio.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkShowRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowRatio.Location = new System.Drawing.Point(211, 54);
+            this.chkShowRatio.Location = new System.Drawing.Point(167, 69);
             this.chkShowRatio.Name = "chkShowRatio";
             this.chkShowRatio.Size = new System.Drawing.Size(90, 23);
             this.chkShowRatio.TabIndex = 3;
@@ -414,31 +420,19 @@ namespace ErgoLux
             this.chkShowAverage.AutoSize = true;
             this.chkShowAverage.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkShowAverage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowAverage.Location = new System.Drawing.Point(27, 54);
+            this.chkShowAverage.Location = new System.Drawing.Point(27, 69);
             this.chkShowAverage.Name = "chkShowAverage";
             this.chkShowAverage.Size = new System.Drawing.Size(104, 23);
             this.chkShowAverage.TabIndex = 2;
             this.chkShowAverage.Text = "Plot average";
             this.chkShowAverage.UseVisualStyleBackColor = true;
             // 
-            // chkShowRadar
-            // 
-            this.chkShowRadar.AutoSize = true;
-            this.chkShowRadar.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkShowRadar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowRadar.Location = new System.Drawing.Point(211, 25);
-            this.chkShowRadar.Name = "chkShowRadar";
-            this.chkShowRadar.Size = new System.Drawing.Size(88, 23);
-            this.chkShowRadar.TabIndex = 1;
-            this.chkShowRadar.Text = "Plot radar";
-            this.chkShowRadar.UseVisualStyleBackColor = true;
-            // 
             // chkShowRaw
             // 
             this.chkShowRaw.AutoSize = true;
             this.chkShowRaw.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkShowRaw.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowRaw.Location = new System.Drawing.Point(27, 25);
+            this.chkShowRaw.Location = new System.Drawing.Point(27, 32);
             this.chkShowRaw.Name = "chkShowRaw";
             this.chkShowRaw.Size = new System.Drawing.Size(109, 23);
             this.chkShowRaw.TabIndex = 0;
@@ -455,6 +449,62 @@ namespace ErgoLux
             this.btnReset.Text = "&Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radRadar);
+            this.groupBox1.Controls.Add(this.radRadial);
+            this.groupBox1.Location = new System.Drawing.Point(315, 30);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(138, 98);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Plot distribution";
+            // 
+            // chkShowDistribution
+            // 
+            this.chkShowDistribution.AutoSize = true;
+            this.chkShowDistribution.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkShowDistribution.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.chkShowDistribution.Location = new System.Drawing.Point(167, 32);
+            this.chkShowDistribution.Name = "chkShowDistribution";
+            this.chkShowDistribution.Size = new System.Drawing.Size(126, 23);
+            this.chkShowDistribution.TabIndex = 2;
+            this.chkShowDistribution.Text = "Plot distribution";
+            this.chkShowDistribution.UseVisualStyleBackColor = true;
+            // 
+            // chkShowRadial
+            // 
+            this.chkShowRadial.AutoSize = true;
+            this.chkShowRadial.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkShowRadial.Location = new System.Drawing.Point(40, 239);
+            this.chkShowRadial.Name = "chkShowRadial";
+            this.chkShowRadial.Size = new System.Drawing.Size(106, 23);
+            this.chkShowRadial.TabIndex = 9;
+            this.chkShowRadial.Text = "Radial gauge";
+            this.chkShowRadial.UseVisualStyleBackColor = true;
+            // 
+            // radRadar
+            // 
+            this.radRadar.AutoSize = true;
+            this.radRadar.Location = new System.Drawing.Point(14, 24);
+            this.radRadar.Name = "radRadar";
+            this.radRadar.Size = new System.Drawing.Size(62, 23);
+            this.radRadar.TabIndex = 10;
+            this.radRadar.TabStop = true;
+            this.radRadar.Text = "Radar";
+            this.radRadar.UseVisualStyleBackColor = true;
+            // 
+            // radRadial
+            // 
+            this.radRadial.AutoSize = true;
+            this.radRadial.Location = new System.Drawing.Point(14, 53);
+            this.radRadial.Name = "radRadial";
+            this.radRadial.Size = new System.Drawing.Size(105, 23);
+            this.radRadial.TabIndex = 11;
+            this.radRadial.TabStop = true;
+            this.radRadial.Text = "Radial gauge";
+            this.radRadial.UseVisualStyleBackColor = true;
             // 
             // FrmSettings
             // 
@@ -478,6 +528,8 @@ namespace ErgoLux
             this.tabDevice.PerformLayout();
             this.tabPlots.ResumeLayout(false);
             this.tabPlots.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -512,10 +564,14 @@ namespace ErgoLux
         private System.Windows.Forms.Label lblArrayPoints;
         private System.Windows.Forms.CheckBox chkShowRatio;
         private System.Windows.Forms.CheckBox chkShowAverage;
-        private System.Windows.Forms.CheckBox chkShowRadar;
         private System.Windows.Forms.CheckBox chkShowRaw;
         private System.Windows.Forms.TextBox txtPlotWindow;
         private System.Windows.Forms.TextBox txtArrayPoints;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.CheckBox chkShowRadial;
+        private System.Windows.Forms.CheckBox chkShowDistribution;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radRadar;
+        private System.Windows.Forms.RadioButton radRadial;
     }
 }

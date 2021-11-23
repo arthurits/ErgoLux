@@ -107,9 +107,10 @@ namespace ErgoLux
             txtArrayPoints.Text = settings.Plot_ArrayPoints.ToString();
             txtPlotWindow.Text = settings.Plot_WindowPoints.ToString();
             chkShowRaw.Checked = settings.Plot_ShowRawData;
-            chkShowRadar.Checked = settings.Plot_ShowRadar;
+            chkShowDistribution.Checked = settings.Plot_ShowDistribution;
             chkShowAverage.Checked = settings.Plot_ShowAverage;
             chkShowRatio.Checked = settings.Plot_ShowRatios;
+            radRadar.Checked = settings.Plot_DistIsRadar;
         }
 
         /// <summary>
@@ -211,9 +212,10 @@ namespace ErgoLux
             _settings.Plot_ArrayPoints = Convert.ToInt32(txtArrayPoints.Text);
             _settings.Plot_WindowPoints = Convert.ToInt32(txtPlotWindow.Text);
             _settings.Plot_ShowRawData = chkShowRaw.Checked;
-            _settings.Plot_ShowRadar = chkShowRadar.Checked;
+            _settings.Plot_ShowDistribution = chkShowDistribution.Checked;
             _settings.Plot_ShowAverage = chkShowAverage.Checked;
             _settings.Plot_ShowRatios = chkShowRatio.Checked;
+            _settings.Plot_DistIsRadar = radRadar.Checked;
 
             this.DialogResult = DialogResult.OK;
         }
@@ -262,9 +264,10 @@ namespace ErgoLux
             txtPlotWindow.Text = "20";
             
             chkShowRaw.Checked = true;
-            chkShowRadar.Checked = true;
+            chkShowDistribution.Checked = true;
             chkShowAverage.Checked = true;
             chkShowRatio.Checked = true;
+            radRadar.Checked = true;
         }
     }
 }
