@@ -110,7 +110,14 @@ namespace ErgoLux
             chkShowDistribution.Checked = settings.Plot_ShowDistribution;
             chkShowAverage.Checked = settings.Plot_ShowAverage;
             chkShowRatio.Checked = settings.Plot_ShowRatios;
-            radRadar.Checked = settings.Plot_DistIsRadar;
+            if (settings.Plot_DistIsRadar)
+            {
+                radRadar.Checked = true;
+            }
+            else
+            {
+                radRadial.Checked = true;
+            }
         }
 
         /// <summary>
@@ -173,6 +180,11 @@ namespace ErgoLux
             }
         }
 
+        private void chkShowDistribution_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox1.Enabled = chkShowDistribution.Checked;
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
@@ -180,14 +192,22 @@ namespace ErgoLux
             // Check that a device has been selected from the list
             if (viewDevices.SelectedIndices.Count == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Please select one of the devices from the list.",
-                    "Error",
-                    System.Windows.Forms.MessageBoxButtons.OK,
-                    System.Windows.Forms.MessageBoxIcon.Error);
-                return;
+                //System.Windows.Forms.MessageBox.Show("Please select one of the devices from the list.",
+                //    "Error",
+                //    System.Windows.Forms.MessageBoxButtons.OK,
+                //    System.Windows.Forms.MessageBoxIcon.Error);
+                //return;
+
+                _deviceType = String.Empty;
+                _deviceID = String.Empty;
+                _settings.T10_LocationID = -1;
             }
-            _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
-            _deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
+            else
+            {
+                _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
+                _deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
+                _settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
+            }
 
             // Check that all texboxes have valid values
             if (!Validation.IsValidRange<int>(txtBaudRate.Text, 0, 9600, true, this)) { txtBaudRate.Focus(); txtBaudRate.SelectAll(); return; }
@@ -198,7 +218,7 @@ namespace ErgoLux
             if (!Validation.IsValidRange<int>(txtPlotWindow.Text, 20, Int32.MaxValue, true, this)) { txtPlotWindow.Focus(); txtPlotWindow.SelectAll(); return; }
 
             // Save to class settings
-            _settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
+            //_settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
             _settings.T10_NumberOfSensors = (int)updSensors.Value;
             _settings.T10_BaudRate = Convert.ToInt32(txtBaudRate.Text);
             _settings.T10_DataBits = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
@@ -269,5 +289,6 @@ namespace ErgoLux
             chkShowRatio.Checked = true;
             radRadar.Checked = true;
         }
+
     }
 }

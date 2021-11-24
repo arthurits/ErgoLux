@@ -54,6 +54,10 @@ namespace ErgoLux
             this.lblDevices = new System.Windows.Forms.Label();
             this.viewDevices = new System.Windows.Forms.ListView();
             this.tabPlots = new System.Windows.Forms.TabPage();
+            this.chkShowDistribution = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radRadar = new System.Windows.Forms.RadioButton();
+            this.radRadial = new System.Windows.Forms.RadioButton();
             this.txtPlotWindow = new System.Windows.Forms.TextBox();
             this.txtArrayPoints = new System.Windows.Forms.TextBox();
             this.lblPlotWindow = new System.Windows.Forms.Label();
@@ -62,11 +66,6 @@ namespace ErgoLux
             this.chkShowAverage = new System.Windows.Forms.CheckBox();
             this.chkShowRaw = new System.Windows.Forms.CheckBox();
             this.btnReset = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkShowDistribution = new System.Windows.Forms.CheckBox();
-            this.chkShowRadial = new System.Windows.Forms.CheckBox();
-            this.radRadar = new System.Windows.Forms.RadioButton();
-            this.radRadial = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.updSensors)).BeginInit();
             this.tabSettings.SuspendLayout();
             this.tabDevice.SuspendLayout();
@@ -349,7 +348,6 @@ namespace ErgoLux
             // 
             // tabPlots
             // 
-            this.tabPlots.Controls.Add(this.chkShowRadial);
             this.tabPlots.Controls.Add(this.chkShowDistribution);
             this.tabPlots.Controls.Add(this.groupBox1);
             this.tabPlots.Controls.Add(this.txtPlotWindow);
@@ -366,6 +364,52 @@ namespace ErgoLux
             this.tabPlots.TabIndex = 1;
             this.tabPlots.Text = "Plots";
             this.tabPlots.UseVisualStyleBackColor = true;
+            // 
+            // chkShowDistribution
+            // 
+            this.chkShowDistribution.AutoSize = true;
+            this.chkShowDistribution.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkShowDistribution.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.chkShowDistribution.Location = new System.Drawing.Point(167, 32);
+            this.chkShowDistribution.Name = "chkShowDistribution";
+            this.chkShowDistribution.Size = new System.Drawing.Size(126, 23);
+            this.chkShowDistribution.TabIndex = 2;
+            this.chkShowDistribution.Text = "Plot distribution";
+            this.chkShowDistribution.UseVisualStyleBackColor = true;
+            this.chkShowDistribution.CheckedChanged += new System.EventHandler(this.chkShowDistribution_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radRadar);
+            this.groupBox1.Controls.Add(this.radRadial);
+            this.groupBox1.Location = new System.Drawing.Point(315, 30);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(138, 98);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Plot distribution";
+            // 
+            // radRadar
+            // 
+            this.radRadar.AutoSize = true;
+            this.radRadar.Location = new System.Drawing.Point(14, 24);
+            this.radRadar.Name = "radRadar";
+            this.radRadar.Size = new System.Drawing.Size(62, 23);
+            this.radRadar.TabIndex = 10;
+            this.radRadar.TabStop = true;
+            this.radRadar.Text = "Radar";
+            this.radRadar.UseVisualStyleBackColor = true;
+            // 
+            // radRadial
+            // 
+            this.radRadial.AutoSize = true;
+            this.radRadial.Location = new System.Drawing.Point(14, 53);
+            this.radRadial.Name = "radRadial";
+            this.radRadial.Size = new System.Drawing.Size(105, 23);
+            this.radRadial.TabIndex = 11;
+            this.radRadial.TabStop = true;
+            this.radRadial.Text = "Radial gauge";
+            this.radRadial.UseVisualStyleBackColor = true;
             // 
             // txtPlotWindow
             // 
@@ -450,62 +494,6 @@ namespace ErgoLux
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.radRadar);
-            this.groupBox1.Controls.Add(this.radRadial);
-            this.groupBox1.Location = new System.Drawing.Point(315, 30);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(138, 98);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Plot distribution";
-            // 
-            // chkShowDistribution
-            // 
-            this.chkShowDistribution.AutoSize = true;
-            this.chkShowDistribution.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkShowDistribution.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowDistribution.Location = new System.Drawing.Point(167, 32);
-            this.chkShowDistribution.Name = "chkShowDistribution";
-            this.chkShowDistribution.Size = new System.Drawing.Size(126, 23);
-            this.chkShowDistribution.TabIndex = 2;
-            this.chkShowDistribution.Text = "Plot distribution";
-            this.chkShowDistribution.UseVisualStyleBackColor = true;
-            // 
-            // chkShowRadial
-            // 
-            this.chkShowRadial.AutoSize = true;
-            this.chkShowRadial.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkShowRadial.Location = new System.Drawing.Point(40, 239);
-            this.chkShowRadial.Name = "chkShowRadial";
-            this.chkShowRadial.Size = new System.Drawing.Size(106, 23);
-            this.chkShowRadial.TabIndex = 9;
-            this.chkShowRadial.Text = "Radial gauge";
-            this.chkShowRadial.UseVisualStyleBackColor = true;
-            // 
-            // radRadar
-            // 
-            this.radRadar.AutoSize = true;
-            this.radRadar.Location = new System.Drawing.Point(14, 24);
-            this.radRadar.Name = "radRadar";
-            this.radRadar.Size = new System.Drawing.Size(62, 23);
-            this.radRadar.TabIndex = 10;
-            this.radRadar.TabStop = true;
-            this.radRadar.Text = "Radar";
-            this.radRadar.UseVisualStyleBackColor = true;
-            // 
-            // radRadial
-            // 
-            this.radRadial.AutoSize = true;
-            this.radRadial.Location = new System.Drawing.Point(14, 53);
-            this.radRadial.Name = "radRadial";
-            this.radRadial.Size = new System.Drawing.Size(105, 23);
-            this.radRadial.TabIndex = 11;
-            this.radRadial.TabStop = true;
-            this.radRadial.Text = "Radial gauge";
-            this.radRadial.UseVisualStyleBackColor = true;
-            // 
             // FrmSettings
             // 
             this.AcceptButton = this.btnOK;
@@ -568,7 +556,6 @@ namespace ErgoLux
         private System.Windows.Forms.TextBox txtPlotWindow;
         private System.Windows.Forms.TextBox txtArrayPoints;
         private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.CheckBox chkShowRadial;
         private System.Windows.Forms.CheckBox chkShowDistribution;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radRadar;

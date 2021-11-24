@@ -699,58 +699,72 @@ namespace ErgoLux
             frm.ShowDialog();
             if (frm.DialogResult == DialogResult.OK)
             {
-                this.toolStripMain_Connect.Enabled = true;
-
-                if (myFtdiDevice != null && myFtdiDevice.IsOpen)
-                    myFtdiDevice.Close();
-
-                myFtdiDevice = new FTDISample();
-                result = myFtdiDevice.OpenDevice(location: (uint)_sett.T10_LocationID,
-                    baud: _sett.T10_BaudRate,
-                    dataBits: _sett.T10_DataBits,
-                    stopBits: _sett.T10_StopBits,
-                    parity: _sett.T10_Parity,
-                    flowControl: _sett.T10_FlowControl,
-                    xOn: _sett.T10_CharOn,
-                    xOff: _sett.T10_CharOff,
-                    readTimeOut: 0,
-                    writeTimeOut: 0);
-
-                if (result == FTDI.FT_STATUS.FT_OK)
+                // If a device is selected, then set up the parameters
+                if (_sett.T10_LocationID > 0)
                 {
-                    // Set the timer interval according to the sampling frecuency
-                    m_timer.Interval = 1000 / _sett.T10_Frequency;
+                    this.toolStripMain_Connect.Enabled = true;
 
-                    // Update the status strip with information
-                    this.statusStripLabelLocation.Text = "Location ID: " + String.Format("{0:X}", _sett.T10_LocationID);
-                    this.statusStripLabelType.Text = "Device type: " + frm.GetDeviceType;
-                    this.statusStripLabelID.Text = "Device ID: " + frm.GetDeviceID;
-                    this.statusStripIconOpen.Image = _sett.Icon_Open;
+                    if (myFtdiDevice != null && myFtdiDevice.IsOpen)
+                        myFtdiDevice.Close();
 
+                    myFtdiDevice = new FTDISample();
+                    result = myFtdiDevice.OpenDevice(location: (uint)_sett.T10_LocationID,
+                        baud: _sett.T10_BaudRate,
+                        dataBits: _sett.T10_DataBits,
+                        stopBits: _sett.T10_StopBits,
+                        parity: _sett.T10_Parity,
+                        flowControl: _sett.T10_FlowControl,
+                        xOn: _sett.T10_CharOn,
+                        xOff: _sett.T10_CharOff,
+                        readTimeOut: 0,
+                        writeTimeOut: 0);
+
+                    if (result == FTDI.FT_STATUS.FT_OK)
+                    {
+                        // Set the timer interval according to the sampling frecuency
+                        m_timer.Interval = 1000 / _sett.T10_Frequency;
+
+                        // Update the status strip with information
+                        this.statusStripLabelLocation.Text = "Location ID: " + String.Format("{0:X}", _sett.T10_LocationID);
+                        this.statusStripLabelType.Text = "Device type: " + frm.GetDeviceType;
+                        this.statusStripLabelID.Text = "Device ID: " + frm.GetDeviceID;
+                        this.statusStripIconOpen.Image = _sett.Icon_Open;
+
+                        InitializeStatusStripLabelsStatus();
+                        InitializeArrays();     // Initialize the arrays containing the data
+                        Plots_Clear();          // First, clear all data (if any) in the plots
+                        Plots_DataBinding();    // Bind the arrays to the plots
+                        Plots_ShowLegends();    // Show the legends in the picture boxes
+                    }
+                    else
+                    {
+                        this.statusStripIconOpen.Image = _sett.Icon_Close;
+                        using (new CenterWinDialog(this))
+                        {
+                            MessageBox.Show("Could not open the device", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                } // End _sett.T10_LocationID
+                else
+                {
                     InitializeStatusStripLabelsStatus();
 
-                    // Initialize the arrays containing the data
-                    InitializeArrays();
-
-                    // First, clear all data (if any) in the plots
-                    Plots_Clear();
+                    Plots_Clear();  // This sets _nPoints to 0
+                    _nPoints = _sett.Plot_ArrayPoints;
 
                     // Bind the arrays to the plots
                     Plots_DataBinding();
-                    
+
                     // Show the legends in the picture boxes
                     Plots_ShowLegends();
-                }
-                else
-                {
-                    this.statusStripIconOpen.Image = _sett.Icon_Close;
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show("Could not open the device", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+
+                    // Show all data (fit data)
+                    Plots_ShowFull();
                 }
 
-            }
+            }   // End DialogResult.OK
+
         }
         
         private void toolStripMain_About_Click(object sender, EventArgs e)
@@ -846,8 +860,6 @@ namespace ErgoLux
             // Binding for Distribution plot
             if (_sett.Plot_DistIsRadar)
             {
-                // Radar plot
-                InitializeRadarPlot();
                 string[] labels = new string[_sett.T10_NumberOfSensors];
                 for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                     labels[i] = "#" + i.ToString("#0");
@@ -860,17 +872,19 @@ namespace ErgoLux
                 plt.ShowAxisValues = false;
                 plt.CategoryLabels = labels;
                 plt.GroupLabels = new string[] { "Average", "Illuminance" };
+
+                InitializeRadarPlot();
             }
             else
             {
-                // RadialGauge plot
-                InitializeRadialGauge();
                 var plt = formsPlot2.Plot.AddRadialGauge(_plotRadialGauge);
                 var strLabels = new string[_sett.T10_NumberOfSensors];
                 for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                     strLabels[i] = "Sensor #" + i.ToString("#0");
                 plt.Labels = strLabels;
                 plt.StartingAngle = 180;
+
+                InitializeRadialGauge();
             }
 
             // Binding for Plot Average
