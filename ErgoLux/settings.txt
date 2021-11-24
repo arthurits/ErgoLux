@@ -1,0 +1,3 @@
+images/splash.png
+ErgoLux.exe
+500
