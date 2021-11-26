@@ -27,7 +27,6 @@ namespace ErgoLux
         private double _average = 0;
         private double[,] _plotRadar;
         private double[] _plotRadialGauge;
-        //private bool _distIsRadar = true;
         private int _nPoints = 0;
         private DateTime _timeStart;
         private DateTime _timeEnd;
@@ -225,13 +224,31 @@ namespace ErgoLux
             formsPlot4.Plot.Grid(enable: false);
 
             formsPlot4.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
+
+            // Set the colorsets
+            InitializePlotsColorset();
+        }
+
+        private void InitializePlotsColorset()
+        {
+            // Define colorsets
+            if (_sett.Plot_DistIsRadar)
+            {
+                formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
+                formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
+            }
+            else
+            {
+                formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
+                formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
+            }
+
+            formsPlot3.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
+            formsPlot4.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
         }
 
         private void InitializeRadialGauge()
         {
-            formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
-            formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
-            
             formsPlot2.Plot.XAxis2.Hide(false);
             formsPlot2.Plot.XAxis2.Ticks(false);
             formsPlot2.Plot.XAxis.Hide(false);
@@ -240,12 +257,19 @@ namespace ErgoLux
             formsPlot2.Plot.YAxis2.Ticks(false);
             formsPlot2.Plot.YAxis.Hide(false);
             formsPlot2.Plot.YAxis.Ticks(false);
+
         }
 
         private void InitializeRadarPlot()
         {
-            formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
-            formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
+            formsPlot2.Plot.XAxis2.Hide(false);
+            formsPlot2.Plot.XAxis2.Ticks(false);
+            formsPlot2.Plot.XAxis.Hide(false);
+            formsPlot2.Plot.XAxis.Ticks(false);
+            formsPlot2.Plot.YAxis2.Hide(false);
+            formsPlot2.Plot.YAxis2.Ticks(false);
+            formsPlot2.Plot.YAxis.Hide(false);
+            formsPlot2.Plot.YAxis.Ticks(false);
         }
 
         #endregion Initialization routines 
@@ -856,7 +880,7 @@ namespace ErgoLux
                 plot.MaxRenderIndex = 0;
             }
             formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
-            
+
             // Binding for Distribution plot
             if (_sett.Plot_DistIsRadar)
             {
@@ -1000,6 +1024,8 @@ namespace ErgoLux
             formsPlot2.Plot.Clear();
             formsPlot3.Plot.Clear();
             formsPlot4.Plot.Clear();
+
+            InitializePlotsColorset();
 
             // to do: this is unnecessary. Verify it in order to delete it.
             //InitializePlots();
