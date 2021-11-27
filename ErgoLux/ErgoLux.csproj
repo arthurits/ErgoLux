@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
-<UseWPF>true</UseWPF>
+    <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
     <Authors>Arthurits</Authors>
     <Company>Arthurits Ltd.</Company>

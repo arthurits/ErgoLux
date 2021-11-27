@@ -247,7 +247,7 @@ namespace ErgoLux
             formsPlot4.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
         }
 
-        private void InitializeRadialGauge()
+        private void InitializePlotDistribution()
         {
             formsPlot2.Plot.XAxis2.Hide(false);
             formsPlot2.Plot.XAxis2.Ticks(false);
@@ -258,18 +258,6 @@ namespace ErgoLux
             formsPlot2.Plot.YAxis.Hide(false);
             formsPlot2.Plot.YAxis.Ticks(false);
 
-        }
-
-        private void InitializeRadarPlot()
-        {
-            formsPlot2.Plot.XAxis2.Hide(false);
-            formsPlot2.Plot.XAxis2.Ticks(false);
-            formsPlot2.Plot.XAxis.Hide(false);
-            formsPlot2.Plot.XAxis.Ticks(false);
-            formsPlot2.Plot.YAxis2.Hide(false);
-            formsPlot2.Plot.YAxis2.Ticks(false);
-            formsPlot2.Plot.YAxis.Hide(false);
-            formsPlot2.Plot.YAxis.Ticks(false);
         }
 
         #endregion Initialization routines 
@@ -896,8 +884,6 @@ namespace ErgoLux
                 plt.ShowAxisValues = false;
                 plt.CategoryLabels = labels;
                 plt.GroupLabels = new string[] { "Average", "Illuminance" };
-
-                InitializeRadarPlot();
             }
             else
             {
@@ -907,9 +893,8 @@ namespace ErgoLux
                     strLabels[i] = "Sensor #" + i.ToString("#0");
                 plt.Labels = strLabels;
                 plt.StartingAngle = 180;
-
-                InitializeRadialGauge();
             }
+            InitializePlotDistribution();
 
             // Binding for Plot Average
             for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
@@ -971,24 +956,47 @@ namespace ErgoLux
         private void Plots_ShowLegends()
         {
             int nVertDist = 10;
-            
+            Bitmap legendA;
+            Bitmap legendB;
+            Bitmap bitmap = null;
+
             // Combine legends from Plot1 and Plot2 and draw a black border around each legend
-            var legendA = _sett.Plot_DistIsRadar ? formsPlot1.Plot.RenderLegend() : new Bitmap(1, 1);
-            var legendB = _sett.T10_NumberOfSensors > (_sett.Plot_DistIsRadar ? 2 : 0) ? formsPlot2.Plot.RenderLegend() : new Bitmap(1, 1);
-            var bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + nVertDist + 4);
-            using Graphics GraphicsA = Graphics.FromImage(bitmap);
-            GraphicsA.DrawRectangle(new Pen(Color.Black),
-                                    (bitmap.Width - legendA.Width - 2) / 2,
-                                    0,
-                                    legendA.Width + 1,
-                                    legendA.Height + 1);
-            GraphicsA.DrawImage(legendA, (bitmap.Width - legendA.Width - 2) / 2 + 1, 1);
-            GraphicsA.DrawRectangle(new Pen(Color.Black),
-                                    (bitmap.Width - legendB.Width - 2) / 2,
-                                    legendA.Height + nVertDist + 1,
-                                    legendB.Width + 1,
-                                    legendB.Height + 2);
-            GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + nVertDist + 2);
+            if (_sett.Plot_DistIsRadar == false)
+            {
+                bitmap = formsPlot2.Plot.RenderLegend();
+            }
+            else
+            {
+                if (_sett.T10_NumberOfSensors < 3)
+                {
+                    bitmap = formsPlot1.Plot.RenderLegend();
+                }
+            }
+
+            if (bitmap == null)
+            {
+                legendA = formsPlot1.Plot.RenderLegend();
+                legendB = _sett.T10_NumberOfSensors > (_sett.Plot_DistIsRadar ? 2 : 0) ? formsPlot2.Plot.RenderLegend() : new Bitmap(1, 1);
+                bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + nVertDist + 4);
+                using Graphics GraphicsA = Graphics.FromImage(bitmap);
+                GraphicsA.DrawRectangle(new Pen(Color.Black),
+                                        (bitmap.Width - legendA.Width - 2) / 2,
+                                        0,
+                                        legendA.Width + 1,
+                                        legendA.Height + 1);
+                GraphicsA.DrawImage(legendA, (bitmap.Width - legendA.Width - 2) / 2 + 1, 1);
+                GraphicsA.DrawRectangle(new Pen(Color.Black),
+                                        (bitmap.Width - legendB.Width - 2) / 2,
+                                        legendA.Height + nVertDist + 1,
+                                        legendB.Width + 1,
+                                        legendB.Height + 2);
+                GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + nVertDist + 2);
+            }
+            else
+            {
+                using Graphics gfx = Graphics.FromImage(bitmap);
+                gfx.DrawRectangle(Pens.Black, 0, 0, bitmap.Width - 1, bitmap.Height - 1);
+            }
             pictureBox1.Image = bitmap;
 
             // Combine legends from Plot3 and Plot4 and draw a black border around each legend
