@@ -958,7 +958,7 @@ namespace ErgoLux
             bool showLegB = !_sett.Plot_DistIsRadar || _sett.T10_NumberOfSensors >= 2;
             Bitmap legendA;
             Bitmap legendB;
-            Bitmap bitmap = null;
+            Bitmap bitmap;
             Size szLegend = new ();
 
             // Combine legends from Plot1 and Plot2 and draw a black border around each legend
