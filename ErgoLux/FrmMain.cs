@@ -193,9 +193,7 @@ namespace ErgoLux
             formsPlot1.Plot.XLabel("Time (seconds)");
             formsPlot1.Plot.Grid(enable: false);
 
-            formsPlot1.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
-            formsPlot1.MouseClick += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
-            formsPlot1.Click += new EventHandler(formsPlot_Click);
+            formsPlot1.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_MouseDown);
 
             // Customize the Distribution plot
             formsPlot2.Plot.Grid(enable: false);
@@ -212,7 +210,7 @@ namespace ErgoLux
             formsPlot3.Plot.XLabel("Time (seconds)");
             formsPlot3.Plot.Grid(enable: false);
 
-            formsPlot3.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
+            formsPlot3.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_MouseDown);
 
             // Customize the Ratio plot
             //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
@@ -224,7 +222,7 @@ namespace ErgoLux
             formsPlot4.Plot.XLabel("Time (seconds)");
             formsPlot4.Plot.Grid(enable: false);
 
-            formsPlot4.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_Click);
+            formsPlot4.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_MouseDown);
 
             // Set the colorsets
             InitializePlotsColorset();
@@ -1278,16 +1276,7 @@ namespace ErgoLux
 
         #endregion Program settings
 
-        private void formsPlot_Click(object sender, EventArgs e)
-        {
-            Text = sender.ToString();
-            (double mouseCoordX, double mouseCoordY) = formsPlot1.GetMouseCoordinates();
-            double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
-            //(double pointX, double pointY, int pointIndex) = MyScatterPlot.GetPointNearest(mouseCoordX, mouseCoordY, xyRatio);
-            //Text = $"Point index {pointIndex} at ({pointX}, {pointY})";
-        }
-
-        private void formsPlot_Click(object sender, MouseEventArgs e)
+        private void formsPlot_MouseDown(object sender, MouseEventArgs e)
         {
             
             // If we are reading from the sensor, then exit
@@ -1296,6 +1285,7 @@ namespace ErgoLux
             if (e.Button != MouseButtons.Left) return;
 
             var MyPlot = ((ScottPlot.FormsPlot)sender);
+            if (MyPlot.Name != "formsPlot1") return;
             if (MyPlot.Plot.GetPlottables().Length == 0) return;
             (double mouseCoordX, double mouseCoordY) = MyPlot.GetMouseCoordinates();
             (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(MyPlot.Plot.GetPlottables()[0])).GetPointNearestX(mouseCoordX);
