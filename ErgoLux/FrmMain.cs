@@ -225,10 +225,10 @@ namespace ErgoLux
             formsPlot4.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_MouseDown);
 
             // Set the colorsets
-            InitializePlotsColorset();
+            InitializePlotsPalette();
         }
 
-        private void InitializePlotsColorset()
+        private void InitializePlotsPalette()
         {
             // Define colorsets
             if (_sett.Plot_DistIsRadar)
@@ -1026,7 +1026,7 @@ namespace ErgoLux
             formsPlot3.Plot.Clear();
             formsPlot4.Plot.Clear();
 
-            InitializePlotsColorset();
+            InitializePlotsPalette();
 
             // to do: this is unnecessary. Verify it in order to delete it.
             //InitializePlots();
