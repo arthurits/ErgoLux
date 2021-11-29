@@ -954,72 +954,41 @@ namespace ErgoLux
         /// </summary>
         private void Plots_ShowLegends()
         {
-            //int nVertDist = 10;
+            bool showLegA = _sett.Plot_DistIsRadar;
+            bool showLegB = !_sett.Plot_DistIsRadar || _sett.T10_NumberOfSensors >= 2;
             Bitmap legendA;
             Bitmap legendB;
             Bitmap bitmap = null;
+            Size szLegend = new ();
 
             // Combine legends from Plot1 and Plot2 and draw a black border around each legend
-            //if (_sett.Plot_DistIsRadar == false)
-            //{
-            //    bitmap = formsPlot2.Plot.RenderLegend();
-            //}
-            //else
-            //{
-            //    if (_sett.T10_NumberOfSensors < 3)
-            //    {
-            //        bitmap = formsPlot1.Plot.RenderLegend();
-            //    }
-            //}
-            var szLegend = new Size();
-            if (bitmap == null)
-            {
-                legendA = formsPlot1.Plot.RenderLegend();
-                //legendB = _sett.T10_NumberOfSensors > (_sett.Plot_DistIsRadar ? 2 : 0) ? formsPlot2.Plot.RenderLegend() : new Bitmap(1, 1);
-                legendB = formsPlot2.Plot.RenderLegend();
-                szLegend.Width = 2 + Math.Max(_sett.Plot_DistIsRadar ? legendA.Width : 0, !_sett.Plot_DistIsRadar || _sett.T10_NumberOfSensors >= 2 ? legendB.Width : 0);
-                szLegend.Height = (_sett.Plot_DistIsRadar ? legendA.Height + 2 : 0) + (!_sett.Plot_DistIsRadar || _sett.T10_NumberOfSensors >= 2 ? legendB.Height + 2 : 0);
-                szLegend.Height += _sett.Plot_DistIsRadar && _sett.T10_NumberOfSensors >= 2 ? PxBetweenLegends : 0;
-                //bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + PxBetweenLegends + 4);
-                bitmap = new Bitmap(szLegend.Width, szLegend.Height);
-                using Graphics GraphicsA = Graphics.FromImage(bitmap);
-                
-                if (_sett.Plot_DistIsRadar)
-                {
-                    GraphicsA.DrawRectangle(new Pen(Color.Black, 1),
-                                        (bitmap.Width - legendA.Width - 2) / 2,
-                                        0,
-                                        legendA.Width + 1,
-                                        legendA.Height + 1);
-                    GraphicsA.DrawImage(legendA, (bitmap.Width - legendA.Width - 2) / 2 + 1, 1);
-                }
-                if (!_sett.Plot_DistIsRadar || _sett.T10_NumberOfSensors >= 2)
-                {
-                    GraphicsA.DrawRectangle(new Pen(Color.Black, 1),
-                                        (bitmap.Width - legendB.Width - 2) / 2,
-                                        (_sett.Plot_DistIsRadar ? legendA.Height + PxBetweenLegends + 1 : 0),
-                                        legendB.Width + 1,
-                                        legendB.Height + 1);
-                    GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, (_sett.Plot_DistIsRadar ? legendA.Height + PxBetweenLegends + 2 : 1));
-                }
+            legendA = showLegA ? formsPlot1.Plot.RenderLegend() : null;
+            legendB = showLegB ? formsPlot2.Plot.RenderLegend() : null;
+            szLegend.Width = Math.Max(showLegA ? legendA.Width : 0, showLegB ? legendB.Width : 0);
+            szLegend.Width += 2;    // black border drawing
+            szLegend.Height = (showLegA ? legendA.Height + 2 : 0);
+            szLegend.Height += (showLegB ? legendB.Height + 2 : 0);
+            szLegend.Height += (showLegA && showLegB ? PxBetweenLegends : 0);
+            bitmap = new Bitmap(szLegend.Width, szLegend.Height);
+            using Graphics GraphicsA = Graphics.FromImage(bitmap);
 
-                //GraphicsA.DrawRectangle(new Pen(Color.Black),
-                //                        (bitmap.Width - legendA.Width - 2) / 2,
-                //                        0,
-                //                        legendA.Width + 1,
-                //                        legendA.Height + 1);
-                //GraphicsA.DrawImage(legendA, (bitmap.Width - legendA.Width - 2) / 2 + 1, 1);
-                //GraphicsA.DrawRectangle(new Pen(Color.Black),
-                //                        (bitmap.Width - legendB.Width - 2) / 2,
-                //                        legendA.Height + PxBetweenLegends + 1,
-                //                        legendB.Width + 1,
-                //                        legendB.Height + 2);
-                //GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + PxBetweenLegends + 2);
-            }
-            else
+            if (showLegA)
             {
-                using Graphics gfx = Graphics.FromImage(bitmap);
-                gfx.DrawRectangle(Pens.Black, 0, 0, bitmap.Width - 1, bitmap.Height - 1);
+                GraphicsA.DrawRectangle(new Pen(Color.Black, 1),
+                                    (bitmap.Width - legendA.Width - 2) / 2,
+                                    0,
+                                    legendA.Width + 1,
+                                    legendA.Height + 1);
+                GraphicsA.DrawImage(legendA, (bitmap.Width - legendA.Width - 2) / 2 + 1, 1);
+            }
+            if (showLegB)
+            {
+                GraphicsA.DrawRectangle(new Pen(Color.Black, 1),
+                                    (bitmap.Width - legendB.Width - 2) / 2,
+                                    (showLegA ? legendA.Height + PxBetweenLegends + 1 : 0),
+                                    legendB.Width + 1,
+                                    legendB.Height + 1);
+                GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, (showLegA ? legendA.Height + PxBetweenLegends + 2 : 1));
             }
             pictureBox1.Image = bitmap;
 
