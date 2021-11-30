@@ -23,7 +23,7 @@ namespace ScottPlot
             }
         }
         
-        FormsPlotCrossHair()
+        public FormsPlotCrossHair()
             :base()
         {
             vLine = this.Plot.AddVerticalLine(0.0, color: System.Drawing.Color.Red, width: 3, style: ScottPlot.LineStyle.Dash);
