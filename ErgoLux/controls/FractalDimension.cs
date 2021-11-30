@@ -1,5 +1,7 @@
-﻿namespace ErgoLux
+namespace ErgoLux
 {
+    // This class implements the computation of the fractal dimension of a discrete curve according to 
+    // Carlos Sevcik's "A procedure to estimate the fractal dimension of waveforms" (https://arxiv.org/abs/1003.5266)
     public class FractalDimension
     {
         private int _n;
