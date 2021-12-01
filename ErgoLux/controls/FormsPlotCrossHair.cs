@@ -6,43 +6,100 @@ using System.Threading.Tasks;
 
 namespace ScottPlot
 {
-    class FormsPlotCrossHair : ScottPlot.FormsPlot
+    public class FormsPlotCrossHair : ScottPlot.FormsPlot
     {
         public event EventHandler<VLineDragEventArgs> VLineDragged;
+        private ScottPlot.Plottable.Crosshair crossHair;
         private ScottPlot.Plottable.VLine vLine;
-        public ScottPlot.Plottable.VLine GetVLine { get; }
+        private ScottPlot.Plottable.HLine hLine;
+        public ScottPlot.Plottable.VLine GetVerticalLine => crossHair.VerticalLine;
+        public ScottPlot.Plottable.HLine GetHorizontalLine => crossHair.HorizontalLine;
 
-        //private bool ShowVLine;
-        public bool ShowVLine
+        private bool _verticalLine;
+        public bool VerticalLine
         {
-            get => ShowVLine;
+            get => _verticalLine;
             set
             {
-                ShowVLine = value;
-                vLine.IsVisible = value;
+                _verticalLine = value;
+                //vLine.IsVisible = value;
             }
         }
-        
+
+        private bool _horizontalLine;
+        public bool HorizontalLine
+        {
+            get => _horizontalLine;
+            set
+            {
+                _horizontalLine = value;
+                //hLine.IsVisible = value;
+            }
+        }
+
         public FormsPlotCrossHair()
             :base()
         {
-            vLine = this.Plot.AddVerticalLine(0.0, color: System.Drawing.Color.Red, width: 3, style: ScottPlot.LineStyle.Dash);
-            ShowVLine = false;
-            //vLine.IsVisible = false;
-            vLine.DragEnabled = true;
-            vLine.Dragged += OnDragged;
+            crossHair = this.Plot.AddCrosshair(0.0, 0.0);
+            crossHair.IsVisible = true;
+            
+            //vLine = this.Plot.AddVerticalLine(0.0, color: System.Drawing.Color.Red, width: 3, style: ScottPlot.LineStyle.Dash);
+            //VerticalLine = true;
+            ////vLine.IsVisible = false;
+            //vLine.PositionLabel = true;
+            //vLine.DragEnabled = true;
+            //vLine.Dragged += OnDraggedVertical;
+            crossHair.VerticalLine.DragEnabled = true;
+            crossHair.VerticalLine.Dragged += OnDraggedVertical;
+
+            //hLine = this.Plot.AddHorizontalLine(0.0, color: System.Drawing.Color.Red, width: 3, style: ScottPlot.LineStyle.Dash);
+            //HorizontalLine = true;
+            //hLine.DragEnabled = true;
+            crossHair.HorizontalLine.DragEnabled = true;
+            crossHair.HorizontalLine.Dragged += OnDraggedHorizontal;
+            crossHair.HorizontalLine.Dragged += new EventHandler(OnDraggedHorizontal);
+            //hLine.Dragged += OnDraggedHorizontal;
+
+            //this.Click += OnClick;
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(OnClick);
+
+
         }
 
-        
+        private void OnClick(object sender, EventArgs e)
+        {
+            crossHair.IsVisible = !crossHair.IsVisible;
+        }
 
-        private void OnDragged(object sender, EventArgs e)
+        private void OnDraggedVertical(object sender, EventArgs e)
         {
             // If we are reading from the sensor, then exit
-            if (!ShowVLine) return;
+            if (!_verticalLine) return;
 
             (double mouseCoordX, double mouseCoordY) = this.GetMouseCoordinates();
             //double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
-            (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(this.Plot.GetPlottables()[1])).GetPointNearestX(mouseCoordX);
+            (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.ScatterPlot)(this.Plot.GetPlottables()[1])).GetPointNearestX(mouseCoordX);
+            crossHair.VerticalLine.X = pointX;
+            crossHair.HorizontalLine.Y = pointY;
+            
+            // Raise the custom event for the subscribers
+            OnVLineDragged(new VLineDragEventArgs(pointX, pointY, pointIndex));
+            //EventHandler<VLineDragEventArgs> handler = VLineDragged;
+            //handler?.Invoke(this, new VLineDragEventArgs(pointX, pointY, pointIndex));
+
+        }
+
+        private void OnDraggedHorizontal(object sender, EventArgs e)
+        {
+            // If we are reading from the sensor, then exit
+            if (!HorizontalLine) return;
+
+            (double mouseCoordX, double mouseCoordY) = this.GetMouseCoordinates();
+            //double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
+            (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.ScatterPlot)(this.Plot.GetPlottables()[1])).GetPointNearestY(mouseCoordY);
+
+            crossHair.VerticalLine.X = pointX;
+            crossHair.HorizontalLine.Y = pointY;
 
             // Raise the custom event for the subscribers
             OnVLineDragged(new VLineDragEventArgs(pointX, pointY, pointIndex));
@@ -102,7 +159,18 @@ namespace ScottPlot
             }
         }
 
-        
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FormsPlotCrossHair
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.Name = "FormsPlotCrossHair";
+            this.ResumeLayout(false);
+
+        }
+
     }
 
     public class VLineDragEventArgs : EventArgs

@@ -34,11 +34,13 @@
             // formsPlot1
             // 
             this.formsPlot1.BackColor = System.Drawing.Color.Transparent;
-            this.formsPlot1.Location = new System.Drawing.Point(309, 44);
+            this.formsPlot1.HorizontalLine = false;
+            this.formsPlot1.Location = new System.Drawing.Point(13, 12);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(437, 290);
+            this.formsPlot1.Size = new System.Drawing.Size(774, 426);
             this.formsPlot1.TabIndex = 0;
+            this.formsPlot1.VerticalLine = false;
             // 
             // Form2
             // 
@@ -47,6 +49,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.formsPlot1);
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
             this.ResumeLayout(false);
 
