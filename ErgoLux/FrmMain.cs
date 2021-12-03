@@ -40,7 +40,7 @@ namespace ErgoLux
             _sett = new ClassSettings(_path);
             LoadProgramSettingsJSON();
             
-            // Initilizate components and GUI
+            // Initialize components and GUI
             InitializeComponent();
             InitializeToolStripPanel();
             InitializeToolStrip();
@@ -854,7 +854,7 @@ namespace ErgoLux
         #region Plot custom methods
 
         /// <summary>
-        /// Binds the data arrays to the plots. Both _plotData and _plotRadar should be initilized, otherwise this function will throw an error.
+        /// Binds the data arrays to the plots. Both _plotData and _plotRadar should be initialized, otherwise this function will throw an error.
         /// </summary>
         private void Plots_DataBinding()
         {
