@@ -430,15 +430,15 @@ namespace ErgoLux
                 return;
             }
 
-            // Displays a SaveFileDialog so the user can save the Image  
+            // Displays a SaveFileDialog, so the user can save the data into a file  
             SaveFileDialog SaveDlg = new()
             {
                 DefaultExt = "*.elux",
-                Filter = "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|All files (*.*)|*.*",
+                Filter = "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
                 FilterIndex = 1,
                 Title = "Save illuminance data",
                 OverwritePrompt = true,
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
             };
 
             DialogResult result;
@@ -447,194 +447,66 @@ namespace ErgoLux
                 result = SaveDlg.ShowDialog(this.Parent);
             }
 
-            // If the file name is not an empty string open it for saving.  
+            // If the file name is not an empty string, call the corresponding routine to save the data into a file.  
             if (result == DialogResult.OK && SaveDlg.FileName != "")
             {
-                //object writer;
-
-                //switch (Path.GetExtension(SaveDlg.FileName).ToLower())
-                //{
-                //    case ".elux":
-                //        writer = new BinaryWriter(SaveDlg.OpenFile());
-                //        break;
-                //    case ".txt":
-                //    default:
-                //        writer = new StreamWriter(SaveDlg.OpenFile());
-                //        break;
-                //}
-
-                // Append millisecond pattern to current culture's full date time pattern
-                string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
-                fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", "$1.fff");
-                TimeSpan nTime = _timeEnd - _timeStart;
-
-                // Convert array data into CSV format.
-                using var outfile = new StreamWriter(SaveDlg.OpenFile());
-                
-                // Save the header text into the file
-                string content = string.Empty;
-                outfile.WriteLine("ErgoLux data");
-                outfile.WriteLine("Start time: {0}", _timeStart.ToString(fullPattern));
-                outfile.WriteLine("End time: {0}", _timeEnd.ToString(fullPattern));
-                //outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
-                outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
-                outfile.WriteLine("Number of sensors: {0}", _sett.T10_NumberOfSensors.ToString());
-                outfile.WriteLine("Number of data points: {0}", _nPoints.ToString());
-                outfile.WriteLine("Sampling frequency: {0}", _sett.T10_Frequency.ToString());
-                outfile.WriteLine();
-                for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+                switch (Path.GetExtension(SaveDlg.FileName).ToLower())
                 {
-                    content += "Sensor #" + i.ToString("00") + "\t";
-                }
-                content += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
-                outfile.WriteLine(content);
-
-                // Save the numerical values
-                for (int j = 0; j < _nPoints; j++)
-                {
-                    content = string.Empty;
-                    for (int i = 0; i < _plotData.Length; i++)
-                    {
-                        content += _plotData[i][j].ToString(i < _sett.T10_NumberOfSensors + 3 ? "#0.0" : "0.000") + "\t";
-                    }
-                    //trying to write data to csv
-                    outfile.WriteLine(content.TrimEnd('\t'));
+                    case ".elux":
+                        SaveELuxData(SaveDlg.FileName);
+                        break;
+                    case ".txt":
+                        SaveTextData(SaveDlg.FileName);
+                        break;
+                    case ".bin":
+                        SaveBinaryData(SaveDlg.FileName);
+                        break;
+                    default:
+                        SaveDefaultData(SaveDlg.FileName);
+                        break;
                 }
             }
-
+            
         }
 
         private void toolStripMain_Open_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openDlg = new()
+            OpenFileDialog OpenDlg = new()
             {
                 DefaultExt = "*.elux",
-                Filter = "ELUX file (*.elux)|*.elux|All files (*.*)|*.*",
+                Filter = "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
                 FilterIndex = 1,
-                Title = "Open ErgoLux file",
+                Title = "Open illuminance data",
                 InitialDirectory = _path + @"\Examples"
             };
 
             DialogResult result;
             using (new CenterWinDialog(this))
             {
-                result = openDlg.ShowDialog(this);
+                result = OpenDlg.ShowDialog(this);
             }
 
             // If the file name is not an empty string open it for saving.  
-            if (result == DialogResult.OK && openDlg.FileName != "")
+            if (result == DialogResult.OK && OpenDlg.FileName != "")
             {
-                // https://stackoverflow.com/questions/897796/how-do-i-open-an-already-opened-file-with-a-net-streamreader
-                using var fs = File.Open(openDlg.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                using var sr = new StreamReader(fs, Encoding.UTF8);
-
-                int nSensors = 0, nPoints = 0;
-                double nFreq = 0.0;
-
-                string strLine = sr.ReadLine();
-                if (strLine != "ErgoLux data")
+                switch (Path.GetExtension(OpenDlg.FileName).ToLower())
                 {
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    return;
-                }
-
-                // Better implement a try parse block. Each read line should throw an exception instead of "return"
-                strLine = sr.ReadLine();
-                if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
-                {
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    return;
-                }
-
-                strLine = sr.ReadLine();
-                if (!strLine.Contains("End time: ", StringComparison.Ordinal))
-                {
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    return;
-                }
-
-                strLine = sr.ReadLine();
-                if (!strLine.Contains("Total measuring time: ", StringComparison.Ordinal))
-                {
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    return;
-                }
-
-                strLine = sr.ReadLine();
-                if (!strLine.Contains("Number of sensors: ", StringComparison.Ordinal))
-                {
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    return;
-                }
-                if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSensors)) return;
-                if (nSensors == 0) return;
-                _sett.T10_NumberOfSensors = nSensors;
-
-                strLine = sr.ReadLine();
-                if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal))
-                {
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    return;
-                }
-                if(!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints)) return;
-                if (nPoints == 0) return;
-                _sett.Plot_ArrayPoints = nPoints;
-
-                strLine = sr.ReadLine();
-                if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
-                {
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    return;
-                }
-                if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nFreq)) return;
-                _sett.T10_Frequency = nFreq;
-
-                strLine = sr.ReadLine();    // Empty line
-                strLine = sr.ReadLine();    // Column header lines
-
-                // Initialize data arrays
-                InitializeArrays();
-
-                // Read data into _plotData
-                for (int i = 0; i < _plotData.Length; i++)
-                {
-                    _plotData[i] = new double[_sett.Plot_ArrayPoints];
-                }
-                string[] data;
-                int row = 0, col = 0;
-                while ((strLine = sr.ReadLine()) != null)
-                {
-                    data = strLine.Split("\t");
-                    for (row = 0; row < data.Length; row++)
-                    {
-                        double.TryParse(data[row], out _plotData[row][col]);
-                    }
-                    col++;
+                    case ".elux":
+                        OpenELuxData(OpenDlg.FileName);
+                        break;
+                    case ".txt":
+                        OpenTextData(OpenDlg.FileName);
+                        break;
+                    case ".bin":
+                        OpenBinaryData(OpenDlg.FileName);
+                        break;
+                    default:
+                        //OpenDefaultData(OpenDlg.FileName);
+                        break;
                 }
 
                 // Show data into plots
-                Plots_Clear();  // this also sets _nPoints = 0, so we need to reset it next
+                Plots_Clear();  // this also sets _nPoints = 0, so we need to reset it now
                 _nPoints = _sett.Plot_ArrayPoints;
                 Plots_DataBinding();
                 Plots_ShowLegends();
@@ -1135,9 +1007,11 @@ namespace ErgoLux
                     else
                     {
                         var plot = (ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0];
+                        var maxAngle = 180 * _plotRadialGauge.Max() / _average;
+                        plot.MaximumAngle = maxAngle > 360 ? 360.0 : maxAngle;
                         plot.Update(_plotRadialGauge);
-                        plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _average;
-                        if (plot.MaximumAngle > 360) plot.MaximumAngle = 360.0;
+                        //plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _average;
+                        //if (plot.MaximumAngle > 360) plot.MaximumAngle = 360.0;
                     }
                     formsPlot2.Refresh(skipIfCurrentlyRendering: true);
                 }
