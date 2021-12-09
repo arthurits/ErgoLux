@@ -78,10 +78,6 @@ namespace ErgoLux
         /// </summary>
         private void InitializeToolStrip()
         {
-
-            //ToolStripNumericUpDown c = new ToolStripNumericUpDown();
-            //this.toolStripMain.Items.Add((ToolStripItem)c);
-
             toolStripMain.Renderer = new customRenderer<ToolStripButton>(Brushes.SteelBlue, Brushes.LightSkyBlue);
 
             //var path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
@@ -97,13 +93,6 @@ namespace ErgoLux
             this.toolStripMain_Connect.Enabled = false;
             this.toolStripMain_Open.Enabled = true; // maybe set as default in the WinForms designer
             this.toolStripMain_Save.Enabled = false;
-
-            /*
-            using (Graphics g = Graphics.FromImage(this.toolStripMain_Skeleton.Image))
-            {
-                g.Clear(Color.PowderBlue);
-            }
-            */
 
             return;
         }
@@ -204,7 +193,7 @@ namespace ErgoLux
             formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
             formsPlot3.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
-            formsPlot3.Plot.Title("Average, max, min");
+            formsPlot3.Plot.Title("Max, average, max");
             formsPlot3.Plot.YLabel("Lux");
             formsPlot3.Plot.XLabel("Time (seconds)");
             formsPlot3.Plot.Grid(enable: false);
@@ -632,17 +621,20 @@ namespace ErgoLux
                 {
                     InitializeStatusStripLabelsStatus();
 
-                    Plots_Clear();  // This sets _nPoints to 0
-                    _nPoints = _sett.Plot_ArrayPoints;
+                    if (_plotData != null && _plotRadar != null && _plotRadialGauge != null)
+                    {
+                        Plots_Clear();  // This sets _nPoints to 0
+                        _nPoints = _sett.Plot_ArrayPoints;
 
-                    // Bind the arrays to the plots
-                    Plots_DataBinding();
+                        // Bind the arrays to the plots
+                        Plots_DataBinding();
 
-                    // Show the legends in the picture boxes
-                    Plots_ShowLegends();
+                        // Show the legends in the picture boxes
+                        Plots_ShowLegends();
 
-                    // Show all data (fit data)
-                    Plots_ShowFull();
+                        // Show all data (fit data)
+                        Plots_ShowFull();
+                    }
                 }
 
             }   // End DialogResult.OK
@@ -1007,7 +999,7 @@ namespace ErgoLux
                     else
                     {
                         var plot = (ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0];
-                        var maxAngle = 180 * _plotRadialGauge.Max() / _average;
+                        var maxAngle = _average > 0 ? 180 * _plotRadialGauge.Max() / _average : 0.0;
                         plot.MaximumAngle = maxAngle > 360 ? 360.0 : maxAngle;
                         plot.Update(_plotRadialGauge);
                         //plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _average;
