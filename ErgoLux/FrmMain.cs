@@ -38,7 +38,10 @@ namespace ErgoLux
             _path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             _sett = new ClassSettings(_path);
             LoadProgramSettingsJSON();
-            
+
+            // Set form icon
+            if (File.Exists(_path + @"\images\logo.ico")) this.Icon = new Icon(_path + @"\images\logo.ico");
+
             // Initialize components and GUI
             InitializeComponent();
             InitializeToolStripPanel();
@@ -52,8 +55,98 @@ namespace ErgoLux
             m_timer.Elapsed += OnTimedEvent;
             m_timer.Enabled = false;
 
-            // Set form icon
-            if (File.Exists(_path + @"\images\logo.ico")) this.Icon = new Icon(_path + @"\images\logo.ico");
+            // To be deleted: just for testing purposes
+            //_sett.T10_NumberOfSensors = 8;
+            //_sett.T10_Frequency = 1;
+            //_sett.Plot_ArrayPoints = 10;
+            //_sett.Plot_DistIsRadar = false;
+
+            //InitializeStatusStripLabelsStatus();
+            //InitializeArrays();     // Initialize the arrays containing the data
+            //Plots_Clear();          // First, clear all data (if any) in the plots
+            //Plots_DataBinding();    // Bind the arrays to the plots
+            //Plots_ShowLegends();    // Show the legends in the picture boxes
+
+            //Plots_Update(0, 550);
+            //Plots_Update(1, 560);
+            //Plots_Update(2, 540);
+            //Plots_Update(3, 545);
+            //Plots_Update(4, 555);
+            //Plots_Update(5, 565);
+            //Plots_Update(6, 530);
+            //Plots_Update(7, 535);
+
+            //Plots_Update(0, 510);
+            //Plots_Update(1, 520);
+            //Plots_Update(2, 515);
+            //Plots_Update(3, 525);
+            //Plots_Update(4, 520);
+            //Plots_Update(5, 530);
+            //Plots_Update(6, 535);
+            //Plots_Update(7, 540);
+
+            //Plots_Update(0, 510);
+            //Plots_Update(1, 505);
+            //Plots_Update(2, 520);
+            //Plots_Update(3, 515);
+            //Plots_Update(4, 510);
+            //Plots_Update(5, 525);
+            //Plots_Update(6, 530);
+            //Plots_Update(7, 0);
+            
+            //Plots_Update(0, 505);
+            //Plots_Update(1, 515);
+            //Plots_Update(2, 510);
+            //Plots_Update(3, 520);
+            //Plots_Update(4, 515);
+            //Plots_Update(5, 510);
+            //Plots_Update(6, 0);
+            //Plots_Update(7, 0);
+
+            //Plots_Update(0, 525);
+            //Plots_Update(1, 535);
+            //Plots_Update(2, 515);
+            //Plots_Update(3, 505);
+            //Plots_Update(4, 510);
+            //Plots_Update(5, 0);
+            //Plots_Update(6, 0);
+            //Plots_Update(7, 0);
+
+            //Plots_Update(0, 555);
+            //Plots_Update(1, 560);
+            //Plots_Update(2, 540);
+            //Plots_Update(3, 530);
+            //Plots_Update(4, 0);
+            //Plots_Update(5, 0);
+            //Plots_Update(6, 0);
+            //Plots_Update(7, 0);
+
+            //Plots_Update(0, 595);
+            //Plots_Update(1, 540);
+            //Plots_Update(2, 570);
+            //Plots_Update(3, 0);
+            //Plots_Update(4, 0);
+            //Plots_Update(5, 0);
+            //Plots_Update(6, 0);
+            //Plots_Update(7, 0);
+
+            //Plots_Update(0, 505);
+            //Plots_Update(1, 590);
+            //Plots_Update(2, 0.005);
+            //Plots_Update(3, 0.005);
+            //Plots_Update(4, 0.0005);
+            //Plots_Update(5, 0.005);
+            //Plots_Update(6, 0.005);
+            //Plots_Update(7, 0.0005);
+
+            //Plots_Update(0, 0.1);
+            //Plots_Update(1, 0);
+            //Plots_Update(2, 0);
+            //Plots_Update(3, 0);
+            //Plots_Update(4, 0);
+            //Plots_Update(5, 0);
+            //Plots_Update(6, 0);
+            //Plots_Update(7, 0);
         }
 
         #region Form events
@@ -216,7 +309,7 @@ namespace ErgoLux
 
         private void toolStripMain_Save_Click(object sender, EventArgs e)
         {
-            // Exit if no data has been received or the matrix is still un-initialized
+            // Exit if no data has been received or the matrices are still un-initialized
             if (_nPoints == 0 || _plotData == null)
             {
                 using (new CenterWinDialog(this))
@@ -276,9 +369,7 @@ namespace ErgoLux
 
             DialogResult result;
             using (new CenterWinDialog(this))
-            {
                 result = OpenDlg.ShowDialog(this);
-            }
 
             // If the file name is not an empty string open it for saving.  
             if (result == DialogResult.OK && OpenDlg.FileName != "")
@@ -300,11 +391,7 @@ namespace ErgoLux
                 }
 
                 // Show data into plots
-                Plots_Clear();  // this also sets _nPoints = 0, so we need to reset it now
-                _nPoints = _sett.Plot_ArrayPoints;
-                Plots_DataBinding();
-                Plots_ShowLegends();
-                Plots_ShowFull();
+                Plots_FetchData();
             }
         }
 
@@ -368,11 +455,12 @@ namespace ErgoLux
         private void toolStripMain_Settings_Click(object sender, EventArgs e)
         {
             FTDI.FT_STATUS result;
-            
+
             var frm = new FrmSettings(_sett);
             // Set form icon
             if (File.Exists(_path + @"\images\logo.ico")) frm.Icon = new Icon(_path + @"\images\logo.ico");
             frm.ShowDialog();
+            
             if (frm.DialogResult == DialogResult.OK)
             {
                 // If a device is selected, then set up the parameters
@@ -428,17 +516,7 @@ namespace ErgoLux
 
                     if (_plotData != null && _plotRadar != null && _plotRadialGauge != null)
                     {
-                        Plots_Clear();  // This sets _nPoints to 0
-                        _nPoints = _sett.Plot_ArrayPoints;
-
-                        // Bind the arrays to the plots
-                        Plots_DataBinding();
-
-                        // Show the legends in the picture boxes
-                        Plots_ShowLegends();
-
-                        // Show all data (fit data)
-                        Plots_ShowFull();
+                        Plots_FetchData();
                     }
                 }
 
@@ -521,6 +599,19 @@ namespace ErgoLux
 
         #region Plot custom methods
 
+        /// <summary>
+        /// Fetchs data into the plots
+        /// </summary>
+        private void Plots_FetchData()
+        {
+            Plots_Clear();  // This sets _nPoints = 0, so we need to reset it now
+            _nPoints = _sett.Plot_ArrayPoints;
+            
+            Plots_DataBinding();    // Bind the arrays to the plots
+            Plots_ShowLegends();    // Show the legends in the picture boxes
+            Plots_ShowFull();       // Show all data (fit data)
+        }
+        
         /// <summary>
         /// Binds the data arrays to the plots. Both _plotData and _plotRadar should be initialized, otherwise this function will throw an error.
         /// </summary>
