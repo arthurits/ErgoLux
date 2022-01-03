@@ -137,7 +137,7 @@ partial class FrmMain
         formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
         formsPlot3.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
-        formsPlot3.Plot.Title("Max, average, max");
+        formsPlot3.Plot.Title("Max, average, min");
         formsPlot3.Plot.YLabel("Lux");
         formsPlot3.Plot.XLabel("Time (seconds)");
         formsPlot3.Plot.Grid(enable: false);
