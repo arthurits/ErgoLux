@@ -30,7 +30,6 @@ namespace ErgoLux
         private DateTime _timeStart;
         private DateTime _timeEnd;
         private bool _reading = false;   // this controls whether clicking the plots is allowed or not
-        private int PxBetweenLegends = 10;    // the number of pixels between two legends
 
         public FrmMain()
         {
@@ -646,7 +645,7 @@ namespace ErgoLux
             szLegend.Width += 2;    // black border drawing
             szLegend.Height = (showLegA ? legendA.Height + 2 : 0);
             szLegend.Height += (showLegB ? legendB.Height + 2 : 0);
-            szLegend.Height += (showLegA && showLegB ? PxBetweenLegends : 0);
+            szLegend.Height += (showLegA && showLegB ? _sett.PxBetweenLegends : 0);
             bitmap = new Bitmap(szLegend.Width, szLegend.Height);
             using Graphics GraphicsA = Graphics.FromImage(bitmap);
 
@@ -663,17 +662,17 @@ namespace ErgoLux
             {
                 GraphicsA.DrawRectangle(new Pen(Color.Black, 1),
                                     (bitmap.Width - legendB.Width - 2) / 2,
-                                    (showLegA ? legendA.Height + PxBetweenLegends + 1 : 0),
+                                    (showLegA ? legendA.Height + _sett.PxBetweenLegends + 1 : 0),
                                     legendB.Width + 1,
                                     legendB.Height + 1);
-                GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, (showLegA ? legendA.Height + PxBetweenLegends + 2 : 1));
+                GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, (showLegA ? legendA.Height + _sett.PxBetweenLegends + 2 : 1));
             }
             pictureBox1.Image = bitmap;
 
             // Combine legends from Plot3 and Plot4 and draw a black border around each legend
             legendA = formsPlot3.Plot.RenderLegend();
             legendB = formsPlot4.Plot.RenderLegend();
-            bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + PxBetweenLegends + 4);
+            bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + _sett.PxBetweenLegends + 4);
             using Graphics GraphicsB = Graphics.FromImage(bitmap);
             GraphicsB.DrawRectangle(new Pen(Color.Black),
                                     (bitmap.Width - legendA.Width - 2) / 2,
@@ -683,10 +682,10 @@ namespace ErgoLux
             GraphicsB.DrawImage(legendA, (bitmap.Width - legendA.Width - 2) / 2 + 1, 1);
             GraphicsB.DrawRectangle(new Pen(Color.Black),
                                     (bitmap.Width - legendB.Width - 2) / 2,
-                                    legendA.Height + PxBetweenLegends + 1,
+                                    legendA.Height + _sett.PxBetweenLegends + 1,
                                     legendB.Width + 1,
                                     legendB.Height + 2);
-            GraphicsB.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + PxBetweenLegends + 2);
+            GraphicsB.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + _sett.PxBetweenLegends + 2);
             pictureBox2.Image = bitmap;
         }
 
@@ -855,7 +854,6 @@ namespace ErgoLux
 
         #endregion Plots functions
 
-        
 
         private void formsPlot_MouseDown(object sender, MouseEventArgs e)
         {

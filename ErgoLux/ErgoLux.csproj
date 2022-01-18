@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows7.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <UseWPF>true</UseWPF>
+    <UseWPF>False</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
     <Authors>Arthurits</Authors>
     <Company>Arthurits Ltd.</Company>

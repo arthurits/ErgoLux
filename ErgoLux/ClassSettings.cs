@@ -188,7 +188,7 @@ namespace ErgoLux
             Plot_ShowRatios = true;
             Plot_DistIsRadar = true;
 
-            PxBetweenLegends = 10;    // the number of pixels between two legends
+            PxBetweenLegends = 10;
 
             FileName = "configuration.json";
             Path = string.Empty;
