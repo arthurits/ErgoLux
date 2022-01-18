@@ -105,7 +105,8 @@ partial class FrmMain
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nFreq)) return;
             _sett.T10_Frequency = nFreq;
 
-            strLine = sr.ReadLine();    // Empty line
+            strLine = sr.ReadLine();    // It should be an empty line
+            if (strLine != string.Empty) return;
             strLine = sr.ReadLine();    // Column header lines
 
             // Initialize data arrays

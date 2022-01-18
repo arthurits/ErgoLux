@@ -66,6 +66,11 @@ namespace ErgoLux
 
         [JsonPropertyName("Distribution is radar")]
         public bool Plot_DistIsRadar { get; set; }
+        /// <summary>
+        /// The number of pixels between two legends
+        /// </summary>
+        [JsonPropertyName("Pixels between legends")]
+        public int PxBetweenLegends { get; set; }    
 
         /// <summary>
         /// Icon indicating the T-10 is opened and ready to be sent commands
@@ -98,7 +103,65 @@ namespace ErgoLux
         /// </summary>
         [JsonIgnore]
         public int ArrayFixedColumns { get; set; }
+        
+        /// <summary>
+        /// Culture used throughout the app
+        /// </summary>
+        [JsonIgnore]
+        public System.Globalization.CultureInfo AppCulture { get; set; } = System.Globalization.CultureInfo.CurrentCulture;
 
+        /// <summary>
+        /// Define the culture used throughout the app by asigning a culture string name
+        /// </summary>
+        [JsonPropertyName("Culture")]
+        public string AppCultureName
+        {
+            get { return AppCulture.Name; }
+            set { AppCulture = new System.Globalization.CultureInfo(value); }
+        }
+
+        /// <summary>
+        /// Milliseconds format
+        /// </summary>
+        [JsonIgnore]
+        public string MillisecondsFormat
+        {
+            get { return $"$1{AppCulture.NumberFormat.NumberDecimalSeparator}fff"; }
+        }
+
+        /// <summary>
+        /// Numeric data formatting string
+        /// </summary>
+        [JsonIgnore]
+        public string DataFormat { get; set; }
+
+        /// <summary>
+        /// True if open/save dialogs should remember the user's previous path
+        /// </summary>
+        [JsonPropertyName("Remember path in FileDlg?")]
+        public bool RememberFileDialogPath { get; set; }
+        /// <summary>
+        /// Default path for saving files to disk
+        /// </summary>
+        [JsonPropertyName("Default save path")]
+        public string DefaultSavePath { get; set; }
+        /// <summary>
+        /// User-defined path for saving files to disk
+        /// </summary>
+        [JsonPropertyName("User save path")]
+        public string UserSavePath { get; set; }
+        /// <summary>
+        /// Default path for reading files from disk
+        /// </summary>
+        [JsonPropertyName("Default open path")]
+        public string DefaultOpenPath { get; set; }
+        /// <summary>
+        /// User-defined path for reading files from disk
+        /// </summary>
+        [JsonPropertyName("User open path")]
+        public string UserOpenPath { get; set; }
+        
+        
         public ClassSettings()
         {
             Wnd_Top = 0;
@@ -125,9 +188,22 @@ namespace ErgoLux
             Plot_ShowRatios = true;
             Plot_DistIsRadar = true;
 
+            PxBetweenLegends = 10;    // the number of pixels between two legends
+
             FileName = "configuration.json";
             Path = string.Empty;
             ArrayFixedColumns = 6;
+
+            AppCulture = System.Globalization.CultureInfo.CurrentCulture;
+
+            RememberFileDialogPath = true;
+
+            DataFormat = "#0.0##";
+
+            DefaultSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            UserSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            DefaultOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
+            UserOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
         }
 
         public ClassSettings(string path)

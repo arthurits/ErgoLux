@@ -118,6 +118,14 @@ namespace ErgoLux
             {
                 radRadial.Checked = true;
             }
+
+            // Update tabUI
+            if (settings.AppCultureName == string.Empty)
+                radInvariantCulture.Checked = true;
+            else
+                radCurrentCulture.Checked = true;
+            chkDlgPath.Checked = settings.RememberFileDialogPath;
+            txtDataFormat.Text = settings.DataFormat;
         }
 
         /// <summary>
@@ -237,6 +245,11 @@ namespace ErgoLux
             _settings.Plot_ShowRatios = chkShowRatio.Checked;
             _settings.Plot_DistIsRadar = radRadar.Checked;
 
+            if (radCurrentCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
+            else _settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            _settings.RememberFileDialogPath = chkDlgPath.Checked;
+            _settings.DataFormat = txtDataFormat.Text;
+
             this.DialogResult = DialogResult.OK;
         }
         
@@ -288,7 +301,18 @@ namespace ErgoLux
             chkShowAverage.Checked = true;
             chkShowRatio.Checked = true;
             radRadar.Checked = true;
+
+            radCurrentCulture.Checked = true;
+            chkDlgPath.Checked = true;
+            txtDataFormat.Text = "#0.0##";
         }
 
+        private void radCurrentCulture_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radCurrentCulture.Checked)
+                radCurrentCulture.Text = $"Current culture ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+            else
+                radCurrentCulture.Text = "Current culture";
+        }
     }
 }

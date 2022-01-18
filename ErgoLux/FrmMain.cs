@@ -216,6 +216,9 @@ namespace ErgoLux
 
         private void toolStripMain_Save_Click(object sender, EventArgs e)
         {
+            DialogResult result;
+            string filePath;
+
             // Exit if no data has been received or the matrices are still un-initialized
             if (_nPoints == 0 || _plotData == null)
             {
@@ -234,16 +237,19 @@ namespace ErgoLux
                 FilterIndex = 1,
                 Title = "Save illuminance data",
                 OverwritePrompt = true,
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
+                InitialDirectory = _sett.RememberFileDialogPath ? _sett.UserSavePath : _sett.DefaultSavePath
             };
 
-            DialogResult result;
             using (new CenterWinDialog(this))
                 result = SaveDlg.ShowDialog(this.Parent);
 
             // If the file name is not an empty string, call the corresponding routine to save the data into a file.  
             if (result == DialogResult.OK && SaveDlg.FileName != "")
             {
+                //Get the path of specified file and store the directory for future calls
+                filePath = SaveDlg.FileName;
+                if (_sett.RememberFileDialogPath) _sett.UserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
+
                 switch (Path.GetExtension(SaveDlg.FileName).ToLower())
                 {
                     case ".elux":
@@ -265,22 +271,28 @@ namespace ErgoLux
 
         private void toolStripMain_Open_Click(object sender, EventArgs e)
         {
+            DialogResult result;
+            string filePath;
+
             OpenFileDialog OpenDlg = new()
             {
                 DefaultExt = "*.elux",
                 Filter = "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
                 FilterIndex = 1,
                 Title = "Open illuminance data",
-                InitialDirectory = _path + @"\Examples"
+                InitialDirectory = _sett.RememberFileDialogPath ? _sett.UserOpenPath : _sett.DefaultOpenPath
             };
 
-            DialogResult result;
             using (new CenterWinDialog(this))
                 result = OpenDlg.ShowDialog(this);
 
             // If the file name is not an empty string open it for saving.  
             if (result == DialogResult.OK && OpenDlg.FileName != "")
             {
+                //Get the path of specified file and store the directory for future calls
+                filePath = OpenDlg.FileName;
+                if (_sett.RememberFileDialogPath) _sett.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
+
                 switch (Path.GetExtension(OpenDlg.FileName).ToLower())
                 {
                     case ".elux":

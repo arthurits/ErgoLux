@@ -65,12 +65,21 @@ namespace ErgoLux
             this.chkShowRatio = new System.Windows.Forms.CheckBox();
             this.chkShowAverage = new System.Windows.Forms.CheckBox();
             this.chkShowRaw = new System.Windows.Forms.CheckBox();
+            this.tabUI = new System.Windows.Forms.TabPage();
+            this.txtDataFormat = new System.Windows.Forms.TextBox();
+            this.lblDataFormat = new System.Windows.Forms.Label();
+            this.chkDlgPath = new System.Windows.Forms.CheckBox();
+            this.grpCulture = new System.Windows.Forms.GroupBox();
+            this.radInvariantCulture = new System.Windows.Forms.RadioButton();
+            this.radCurrentCulture = new System.Windows.Forms.RadioButton();
             this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.updSensors)).BeginInit();
             this.tabSettings.SuspendLayout();
             this.tabDevice.SuspendLayout();
             this.tabPlots.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabUI.SuspendLayout();
+            this.grpCulture.SuspendLayout();
             this.SuspendLayout();
             // 
             // updSensors
@@ -134,6 +143,7 @@ namespace ErgoLux
             // 
             this.tabSettings.Controls.Add(this.tabDevice);
             this.tabSettings.Controls.Add(this.tabPlots);
+            this.tabSettings.Controls.Add(this.tabUI);
             this.tabSettings.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabSettings.Location = new System.Drawing.Point(12, 12);
             this.tabSettings.Name = "tabSettings";
@@ -483,6 +493,80 @@ namespace ErgoLux
             this.chkShowRaw.Text = "Plot raw data";
             this.chkShowRaw.UseVisualStyleBackColor = true;
             // 
+            // tabUI
+            // 
+            this.tabUI.Controls.Add(this.txtDataFormat);
+            this.tabUI.Controls.Add(this.lblDataFormat);
+            this.tabUI.Controls.Add(this.chkDlgPath);
+            this.tabUI.Controls.Add(this.grpCulture);
+            this.tabUI.Location = new System.Drawing.Point(4, 26);
+            this.tabUI.Name = "tabUI";
+            this.tabUI.Padding = new System.Windows.Forms.Padding(3);
+            this.tabUI.Size = new System.Drawing.Size(472, 303);
+            this.tabUI.TabIndex = 2;
+            this.tabUI.Text = "Interface";
+            this.tabUI.UseVisualStyleBackColor = true;
+            // 
+            // txtDataFormat
+            // 
+            this.txtDataFormat.Location = new System.Drawing.Point(229, 234);
+            this.txtDataFormat.Name = "txtDataFormat";
+            this.txtDataFormat.Size = new System.Drawing.Size(100, 25);
+            this.txtDataFormat.TabIndex = 3;
+            // 
+            // lblDataFormat
+            // 
+            this.lblDataFormat.AutoSize = true;
+            this.lblDataFormat.Location = new System.Drawing.Point(46, 237);
+            this.lblDataFormat.Name = "lblDataFormat";
+            this.lblDataFormat.Size = new System.Drawing.Size(177, 19);
+            this.lblDataFormat.TabIndex = 2;
+            this.lblDataFormat.Text = "Numeric data-format string";
+            // 
+            // chkDlgPath
+            // 
+            this.chkDlgPath.AutoSize = true;
+            this.chkDlgPath.Location = new System.Drawing.Point(46, 187);
+            this.chkDlgPath.Name = "chkDlgPath";
+            this.chkDlgPath.Size = new System.Drawing.Size(290, 23);
+            this.chkDlgPath.TabIndex = 1;
+            this.chkDlgPath.Text = "Remember open/save dialog previous path";
+            this.chkDlgPath.UseVisualStyleBackColor = true;
+            // 
+            // grpCulture
+            // 
+            this.grpCulture.Controls.Add(this.radInvariantCulture);
+            this.grpCulture.Controls.Add(this.radCurrentCulture);
+            this.grpCulture.Location = new System.Drawing.Point(46, 24);
+            this.grpCulture.Name = "grpCulture";
+            this.grpCulture.Size = new System.Drawing.Size(252, 126);
+            this.grpCulture.TabIndex = 0;
+            this.grpCulture.TabStop = false;
+            this.grpCulture.Text = "Culture settings";
+            // 
+            // radInvariantCulture
+            // 
+            this.radInvariantCulture.AutoSize = true;
+            this.radInvariantCulture.Location = new System.Drawing.Point(27, 80);
+            this.radInvariantCulture.Name = "radInvariantCulture";
+            this.radInvariantCulture.Size = new System.Drawing.Size(127, 23);
+            this.radInvariantCulture.TabIndex = 1;
+            this.radInvariantCulture.TabStop = true;
+            this.radInvariantCulture.Text = "Invariant culture";
+            this.radInvariantCulture.UseVisualStyleBackColor = true;
+            // 
+            // radCurrentCulture
+            // 
+            this.radCurrentCulture.AutoSize = true;
+            this.radCurrentCulture.Location = new System.Drawing.Point(27, 41);
+            this.radCurrentCulture.Name = "radCurrentCulture";
+            this.radCurrentCulture.Size = new System.Drawing.Size(120, 23);
+            this.radCurrentCulture.TabIndex = 0;
+            this.radCurrentCulture.TabStop = true;
+            this.radCurrentCulture.Text = "Current culture";
+            this.radCurrentCulture.UseVisualStyleBackColor = true;
+            this.radCurrentCulture.CheckedChanged += new System.EventHandler(this.radCurrentCulture_CheckedChanged);
+            // 
             // btnReset
             // 
             this.btnReset.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -518,6 +602,10 @@ namespace ErgoLux
             this.tabPlots.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabUI.ResumeLayout(false);
+            this.tabUI.PerformLayout();
+            this.grpCulture.ResumeLayout(false);
+            this.grpCulture.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -560,5 +648,12 @@ namespace ErgoLux
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radRadar;
         private System.Windows.Forms.RadioButton radRadial;
+        private TabPage tabUI;
+        private CheckBox chkDlgPath;
+        private GroupBox grpCulture;
+        private RadioButton radInvariantCulture;
+        private RadioButton radCurrentCulture;
+        private TextBox txtDataFormat;
+        private Label lblDataFormat;
     }
 }

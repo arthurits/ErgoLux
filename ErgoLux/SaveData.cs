@@ -24,7 +24,7 @@ partial class FrmMain
 
             // Append millisecond pattern to current culture's full date time pattern
             string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", "$1.fff");
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _sett.MillisecondsFormat);
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
@@ -51,7 +51,7 @@ partial class FrmMain
                 content = string.Empty;
                 for (int i = 0; i < _plotData.Length; i++)
                 {
-                    content += _plotData[i][j].ToString(i < _sett.T10_NumberOfSensors + 3 ? "#0.0" : "0.000") + "\t";
+                    content += _plotData[i][j].ToString(_sett.DataFormat) + "\t";
                 }
                 //trying to write data to csv
                 sw.WriteLine(content.TrimEnd('\t'));
