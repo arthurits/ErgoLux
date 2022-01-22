@@ -19,7 +19,7 @@ namespace ErgoLux
             {
                 var jsonString = File.ReadAllText(_sett.SettingsFileName);
                 _sett = JsonSerializer.Deserialize<ClassSettings>(jsonString);
-                _sett.InitializeJsonIgnore(_path);
+                _sett.InitializeJsonIgnore(_sett.AppPath);
                 //var settings = JsonSerializer.Deserialize<ClassSettings>(jsonString);
                 //settings.InitializeJsonIgnore(_path);
                 //_sett = settings;
