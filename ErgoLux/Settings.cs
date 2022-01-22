@@ -17,7 +17,7 @@ namespace ErgoLux
         {
             try
             {
-                var jsonString = File.ReadAllText(_sett.FileName);
+                var jsonString = File.ReadAllText(_sett.SettingsFileName);
                 _sett = JsonSerializer.Deserialize<ClassSettings>(jsonString);
                 _sett.InitializeJsonIgnore(_path);
                 //var settings = JsonSerializer.Deserialize<ClassSettings>(jsonString);
@@ -59,7 +59,7 @@ namespace ErgoLux
                 WriteIndented = true
             };
             var jsonString = JsonSerializer.Serialize(_sett, options);
-            File.WriteAllText(_sett.FileName, jsonString);
+            File.WriteAllText(_sett.SettingsFileName, jsonString);
         }
     }
 }

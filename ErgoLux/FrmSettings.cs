@@ -18,6 +18,7 @@ namespace ErgoLux
         private string _deviceType;
         private string _deviceID;
         private ClassSettings _settings;
+        private System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
 
         public string GetDeviceType { get => _deviceType; }
         public string GetDeviceID { get => _deviceID; }
@@ -39,7 +40,7 @@ namespace ErgoLux
             viewDevices.Columns.Add("Location ID", 70);
             viewDevices.Columns.Add("Serial number", 100);
             viewDevices.Columns.Add("Description", 100);
-            
+
             PopulateDevices();
 
             // Populate cboDataBits
@@ -59,7 +60,7 @@ namespace ErgoLux
             cboStopBits.DataSource = new BindingSource(cboList, null);
             cboStopBits.DisplayMember = "Key";
             cboStopBits.ValueMember = "Value";
-            
+
             // Populate cboParity
             cboList.Clear();
             cboList.Add("None", FTDI.FT_PARITY.FT_PARITY_NONE);
@@ -82,13 +83,17 @@ namespace ErgoLux
             cboFlowControl.DataSource = new BindingSource(cboList, null);
             cboFlowControl.DisplayMember = "Key";
             cboFlowControl.ValueMember = "Value";
-            
+
             // Set control's default input-values
             SetDefaultValues();
+
+            //
+            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+            UpdateUI_Language();
         }
 
         public FrmSettings(ClassSettings settings)
-            :this()
+            : this()
         {
             _settings = settings;
 
@@ -252,7 +257,7 @@ namespace ErgoLux
 
             this.DialogResult = DialogResult.OK;
         }
-        
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             DialogResult result;
@@ -267,13 +272,26 @@ namespace ErgoLux
 
             if (result == DialogResult.Yes)
             {
+                UpdateControls(new ClassSettings());
                 SetDefaultValues();
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
+        }
 
+        private void radCurrentCulture_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radCurrentCulture.Checked)
+            {
+                _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
+                UpdateUI_Language();
+                radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting") + $" ({_settings.AppCultureName})";
+            }
+            else
+                radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting";
         }
 
         /// <summary>
@@ -295,7 +313,7 @@ namespace ErgoLux
 
             txtArrayPoints.Text = "7200";
             txtPlotWindow.Text = "20";
-            
+
             chkShowRaw.Checked = true;
             chkShowDistribution.Checked = true;
             chkShowAverage.Checked = true;
@@ -307,12 +325,91 @@ namespace ErgoLux
             txtDataFormat.Text = "#0.0##";
         }
 
-        private void radCurrentCulture_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Updates the form's controls with values from the settings class
+        /// </summary>
+        /// <param name="settings">Class containing the values to show on the form's controls</param>
+        private void UpdateControls(ClassSettings settings)
         {
-            if (radCurrentCulture.Checked)
-                radCurrentCulture.Text = $"Current culture ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+            _settings = settings;
+
+            cboDataBits.SelectedText = _settings.T10_DataBits.ToString();
+            cboStopBits.SelectedText = _settings.T10_StopBits.ToString();
+            cboParity.SelectedText = _settings.T10_Parity.ToString();
+            cboFlowControl.SelectedText = _settings.T10_FlowControl.ToString();
+
+            txtBaudRate.Text = _settings.T10_BaudRate.ToString();
+            txtOn.Text = _settings.T10_CharOn.ToString();
+            txtOff.Text = _settings.T10_CharOff.ToString();
+            txtHz.Text = _settings.T10_Frequency.ToString();
+
+            updSensors.Value = _settings.T10_NumberOfSensors;
+
+            txtArrayPoints.Text = _settings.Plot_ArrayPoints.ToString();
+            txtPlotWindow.Text = _settings.Plot_WindowPoints.ToString();
+
+            chkShowRaw.Checked = _settings.Plot_ShowRawData;
+            chkShowDistribution.Checked = _settings.Plot_ShowDistribution;
+            chkShowAverage.Checked = _settings.Plot_ShowAverage;
+            chkShowRatio.Checked = _settings.Plot_ShowRatios;
+            radRadar.Checked = _settings.Plot_DistIsRadar;
+
+            if (_settings.AppCultureName == string.Empty)
+                radInvariantCulture.Checked = true;
+            else if (_settings.AppCultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
+                radCurrentCulture.Checked = true;
             else
-                radCurrentCulture.Text = "Current culture";
+                radUserCulture.Checked = true;
+            cboAllCultures.SelectedValue = _settings.AppCultureName;
+
+            chkDlgPath.Checked = _settings.RememberFileDialogPath;
+            txtDataFormat.Text = _settings.DataFormat;
         }
+
+        /// <summary>
+        /// Databind only the cultures found in .resources files for a given type
+        /// </summary>
+        /// <param name="type">A type from which the resource manager derives all information for finding .resources files</param>
+        private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
+        {
+            var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
+            cboAllCultures.DisplayMember = "DisplayName";
+            cboAllCultures.ValueMember = "Name";
+            cboAllCultures.DataSource = cultures.ToArray();
+        }
+
+        /// <summary>
+        /// Update the form's interface language
+        /// </summary>
+        /// <param name="culture">Culture used to display the UI</param>
+        private void UpdateUI_Language()
+        {
+            UpdateUI_Language(_settings.AppCulture);
+        }
+
+        /// <summary>
+        /// Update the form's interface language
+        /// </summary>
+        /// <param name="culture">Culture used to display the UI</param>
+        private void UpdateUI_Language(System.Globalization.CultureInfo culture)
+        {
+            this.Text = StringsRM.GetString("strFrmSettings", culture) ?? "Settings";
+
+            this.tabDevice.Text = StringsRM.GetString("strTabDevice", culture) ?? "T-10A";
+            this.tabPlots.Text = StringsRM.GetString("strTabPlots", culture) ?? "Plotting";
+            this.tabGUI.Text = StringsRM.GetString("strTabGUI", culture) ?? "User interface";
+
+            this.grpCulture.Text = StringsRM.GetString("strGrpCulture", culture) ?? "UI and data format";
+            this.radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting";
+            this.radInvariantCulture.Text = StringsRM.GetString("strRadInvariantCulture", culture) ?? "Invariant culture formatting";
+            this.radUserCulture.Text = StringsRM.GetString("strRadUserCulture", culture) ?? "Select culture";
+            this.chkDlgPath.Text = StringsRM.GetString("strChkDlgPath", culture) ?? "Remember open/save dialog previous path";
+            this.lblDataFormat.Text = StringsRM.GetString("strLblDataFormat", culture) ?? "Numeric data-formatting string";
+
+            this.btnReset.Text = StringsRM.GetString("strBtnReset", culture) ?? "&Reset";
+            this.btnCancel.Text = StringsRM.GetString("strBtnCancel", culture) ?? "&Cancel";
+            this.btnAccept.Text = StringsRM.GetString("strBtnAccept", culture) ?? "&Accept";
+        }
+
     }
 }

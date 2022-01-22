@@ -31,7 +31,7 @@ namespace ErgoLux
         {
             this.updSensors = new System.Windows.Forms.NumericUpDown();
             this.lblSensors = new System.Windows.Forms.Label();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.tabSettings = new System.Windows.Forms.TabControl();
             this.tabDevice = new System.Windows.Forms.TabPage();
@@ -65,7 +65,7 @@ namespace ErgoLux
             this.chkShowRatio = new System.Windows.Forms.CheckBox();
             this.chkShowAverage = new System.Windows.Forms.CheckBox();
             this.chkShowRaw = new System.Windows.Forms.CheckBox();
-            this.tabUI = new System.Windows.Forms.TabPage();
+            this.tabGUI = new System.Windows.Forms.TabPage();
             this.txtDataFormat = new System.Windows.Forms.TextBox();
             this.lblDataFormat = new System.Windows.Forms.Label();
             this.chkDlgPath = new System.Windows.Forms.CheckBox();
@@ -73,12 +73,14 @@ namespace ErgoLux
             this.radInvariantCulture = new System.Windows.Forms.RadioButton();
             this.radCurrentCulture = new System.Windows.Forms.RadioButton();
             this.btnReset = new System.Windows.Forms.Button();
+            this.radUserCulture = new System.Windows.Forms.RadioButton();
+            this.cboAllCultures = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.updSensors)).BeginInit();
             this.tabSettings.SuspendLayout();
             this.tabDevice.SuspendLayout();
             this.tabPlots.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabUI.SuspendLayout();
+            this.tabGUI.SuspendLayout();
             this.grpCulture.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,23 +117,23 @@ namespace ErgoLux
             this.lblSensors.TabIndex = 8;
             this.lblSensors.Text = "Number of sensors";
             // 
-            // btnOK
+            // btnAccept
             // 
-            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnOK.Location = new System.Drawing.Point(302, 354);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(90, 30);
-            this.btnOK.TabIndex = 17;
-            this.btnOK.Text = "&Accept";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnAccept.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAccept.Location = new System.Drawing.Point(402, 354);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(90, 30);
+            this.btnAccept.TabIndex = 17;
+            this.btnAccept.Text = "&Accept";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCancel.Location = new System.Drawing.Point(402, 354);
+            this.btnCancel.Location = new System.Drawing.Point(302, 354);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(90, 30);
             this.btnCancel.TabIndex = 18;
@@ -143,7 +145,7 @@ namespace ErgoLux
             // 
             this.tabSettings.Controls.Add(this.tabDevice);
             this.tabSettings.Controls.Add(this.tabPlots);
-            this.tabSettings.Controls.Add(this.tabUI);
+            this.tabSettings.Controls.Add(this.tabGUI);
             this.tabSettings.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabSettings.Location = new System.Drawing.Point(12, 12);
             this.tabSettings.Name = "tabSettings";
@@ -493,19 +495,19 @@ namespace ErgoLux
             this.chkShowRaw.Text = "Plot raw data";
             this.chkShowRaw.UseVisualStyleBackColor = true;
             // 
-            // tabUI
+            // tabGUI
             // 
-            this.tabUI.Controls.Add(this.txtDataFormat);
-            this.tabUI.Controls.Add(this.lblDataFormat);
-            this.tabUI.Controls.Add(this.chkDlgPath);
-            this.tabUI.Controls.Add(this.grpCulture);
-            this.tabUI.Location = new System.Drawing.Point(4, 26);
-            this.tabUI.Name = "tabUI";
-            this.tabUI.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUI.Size = new System.Drawing.Size(472, 303);
-            this.tabUI.TabIndex = 2;
-            this.tabUI.Text = "Interface";
-            this.tabUI.UseVisualStyleBackColor = true;
+            this.tabGUI.Controls.Add(this.txtDataFormat);
+            this.tabGUI.Controls.Add(this.lblDataFormat);
+            this.tabGUI.Controls.Add(this.chkDlgPath);
+            this.tabGUI.Controls.Add(this.grpCulture);
+            this.tabGUI.Location = new System.Drawing.Point(4, 26);
+            this.tabGUI.Name = "tabGUI";
+            this.tabGUI.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGUI.Size = new System.Drawing.Size(472, 303);
+            this.tabGUI.TabIndex = 2;
+            this.tabGUI.Text = "Interface";
+            this.tabGUI.UseVisualStyleBackColor = true;
             // 
             // txtDataFormat
             // 
@@ -535,11 +537,13 @@ namespace ErgoLux
             // 
             // grpCulture
             // 
+            this.grpCulture.Controls.Add(this.cboAllCultures);
+            this.grpCulture.Controls.Add(this.radUserCulture);
             this.grpCulture.Controls.Add(this.radInvariantCulture);
             this.grpCulture.Controls.Add(this.radCurrentCulture);
             this.grpCulture.Location = new System.Drawing.Point(46, 24);
             this.grpCulture.Name = "grpCulture";
-            this.grpCulture.Size = new System.Drawing.Size(252, 126);
+            this.grpCulture.Size = new System.Drawing.Size(290, 157);
             this.grpCulture.TabIndex = 0;
             this.grpCulture.TabStop = false;
             this.grpCulture.Text = "Culture settings";
@@ -547,7 +551,7 @@ namespace ErgoLux
             // radInvariantCulture
             // 
             this.radInvariantCulture.AutoSize = true;
-            this.radInvariantCulture.Location = new System.Drawing.Point(27, 80);
+            this.radInvariantCulture.Location = new System.Drawing.Point(27, 78);
             this.radInvariantCulture.Name = "radInvariantCulture";
             this.radInvariantCulture.Size = new System.Drawing.Size(127, 23);
             this.radInvariantCulture.TabIndex = 1;
@@ -578,16 +582,35 @@ namespace ErgoLux
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // radUserCulture
+            // 
+            this.radUserCulture.AutoSize = true;
+            this.radUserCulture.Location = new System.Drawing.Point(27, 115);
+            this.radUserCulture.Name = "radUserCulture";
+            this.radUserCulture.Size = new System.Drawing.Size(101, 23);
+            this.radUserCulture.TabIndex = 2;
+            this.radUserCulture.TabStop = true;
+            this.radUserCulture.Text = "User culture";
+            this.radUserCulture.UseVisualStyleBackColor = true;
+            // 
+            // cboAllCultures
+            // 
+            this.cboAllCultures.FormattingEnabled = true;
+            this.cboAllCultures.Location = new System.Drawing.Point(146, 115);
+            this.cboAllCultures.Name = "cboAllCultures";
+            this.cboAllCultures.Size = new System.Drawing.Size(121, 25);
+            this.cboAllCultures.TabIndex = 3;
+            // 
             // FrmSettings
             // 
-            this.AcceptButton = this.btnOK;
+            this.AcceptButton = this.btnAccept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(504, 396);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.tabSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FrmSettings";
@@ -602,8 +625,8 @@ namespace ErgoLux
             this.tabPlots.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabUI.ResumeLayout(false);
-            this.tabUI.PerformLayout();
+            this.tabGUI.ResumeLayout(false);
+            this.tabGUI.PerformLayout();
             this.grpCulture.ResumeLayout(false);
             this.grpCulture.PerformLayout();
             this.ResumeLayout(false);
@@ -613,7 +636,7 @@ namespace ErgoLux
         #endregion
         private System.Windows.Forms.NumericUpDown updSensors;
         private System.Windows.Forms.Label lblSensors;
-        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TabControl tabSettings;
         private System.Windows.Forms.TabPage tabDevice;
@@ -648,12 +671,14 @@ namespace ErgoLux
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radRadar;
         private System.Windows.Forms.RadioButton radRadial;
-        private TabPage tabUI;
+        private TabPage tabGUI;
         private CheckBox chkDlgPath;
         private GroupBox grpCulture;
         private RadioButton radInvariantCulture;
         private RadioButton radCurrentCulture;
         private TextBox txtDataFormat;
         private Label lblDataFormat;
+        private ComboBox cboAllCultures;
+        private RadioButton radUserCulture;
     }
 }

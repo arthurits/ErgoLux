@@ -17,7 +17,7 @@ namespace ErgoLux
     public partial class FrmMain : Form
     {
         private readonly System.Timers.Timer m_timer;
-        private readonly string _path;
+        //private readonly string _path;
         private ClassSettings _sett;
         private FTDISample myFtdiDevice;
         private double[][] _plotData;
@@ -34,12 +34,11 @@ namespace ErgoLux
         public FrmMain()
         {
             // Load settings. This has to go before custom initialization, since some routines depends on this
-            _path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            _sett = new ClassSettings(_path);
+            _sett = new ClassSettings(Path.GetDirectoryName(System.Environment.ProcessPath));
             LoadProgramSettingsJSON();
 
             // Set form icon
-            if (File.Exists(_path + @"\images\logo.ico")) this.Icon = new Icon(_path + @"\images\logo.ico");
+            if (File.Exists(_sett.AppPath + @"\images\logo.ico")) this.Icon = new Icon(_sett.AppPath + @"\images\logo.ico");
 
             // Initialize components and GUI
             InitializeComponent();
@@ -376,7 +375,7 @@ namespace ErgoLux
 
             var frm = new FrmSettings(_sett);
             // Set form icon
-            if (File.Exists(_path + @"\images\logo.ico")) frm.Icon = new Icon(_path + @"\images\logo.ico");
+            if (File.Exists(_sett.AppPath + @"\images\logo.ico")) frm.Icon = new Icon(_sett.AppPath + @"\images\logo.ico");
             frm.ShowDialog();
             
             if (frm.DialogResult == DialogResult.OK)
