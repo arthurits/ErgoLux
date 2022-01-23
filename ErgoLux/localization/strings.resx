@@ -224,6 +224,57 @@ Default values will be used instead.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Window</value>
   </data>
+  <data name="strMenuMainFile" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="strMenuMainFileExit" xml:space="preserve">
+    <value>&amp;Exit...</value>
+  </data>
+  <data name="strMenuMainFileOpen" xml:space="preserve">
+    <value>&amp;Open...</value>
+  </data>
+  <data name="strMenuMainFileSave" xml:space="preserve">
+    <value>&amp;Save...</value>
+  </data>
+  <data name="strMenuMainHelpAbout" xml:space="preserve">
+    <value>&amp;About...</value>
+  </data>
+  <data name="strMenuMainHelpText" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="strMenuMainTools" xml:space="preserve">
+    <value>&amp;Tools</value>
+  </data>
+  <data name="strMenuMainToolsConnect" xml:space="preserve">
+    <value>&amp;Connect</value>
+  </data>
+  <data name="strMenuMainToolsDisconnect" xml:space="preserve">
+    <value>&amp;Disconnect</value>
+  </data>
+  <data name="strMenuMainToolsSettings" xml:space="preserve">
+    <value>&amp;Settings...</value>
+  </data>
+  <data name="strMenuMainView" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
+  <data name="strMenuMainViewAverage" xml:space="preserve">
+    <value>Averages</value>
+  </data>
+  <data name="strMenuMainViewDistribution" xml:space="preserve">
+    <value>Radial distribution</value>
+  </data>
+  <data name="strMenuMainViewMenu" xml:space="preserve">
+    <value>Show menu</value>
+  </data>
+  <data name="strMenuMainViewRatio" xml:space="preserve">
+    <value>Ratios</value>
+  </data>
+  <data name="strMenuMainViewRaw" xml:space="preserve">
+    <value>Raw data</value>
+  </data>
+  <data name="strMenuMainViewToolbar" xml:space="preserve">
+    <value>Show toolbar</value>
+  </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>Exit?</value>
   </data>
@@ -245,68 +296,11 @@ dimension has been stopped.</value>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
     <value>Stop</value>
   </data>
-  <data name="strPlotAppliedTitle" xml:space="preserve">
-    <value>Windowed signal</value>
-  </data>
-  <data name="strPlotAppliedXLabel" xml:space="preserve">
-    <value>Time (seconds)</value>
-  </data>
-  <data name="strPlotAppliedYLabel" xml:space="preserve">
-    <value>Amplitude</value>
-  </data>
-  <data name="strPlotFFTTitle" xml:space="preserve">
-    <value>Fast Fourier transform</value>
-  </data>
-  <data name="strPlotFFTXLabel" xml:space="preserve">
-    <value>Frequency (Hz)</value>
-  </data>
-  <data name="strPlotFFTYLabelMag" xml:space="preserve">
-    <value>Magnitude (RMS²)</value>
-  </data>
-  <data name="strPlotFFTYLabelPow" xml:space="preserve">
-    <value>Power (dB)</value>
-  </data>
-  <data name="strPlotFractalTitle" xml:space="preserve">
-    <value>Fractal dimension</value>
-  </data>
-  <data name="strPlotFractalXLabel" xml:space="preserve">
-    <value>Time (seconds)</value>
-  </data>
-  <data name="strPlotFractalYLabel" xml:space="preserve">
-    <value>Dimension (H)</value>
-  </data>
-  <data name="strPlotOriginalTitle" xml:space="preserve">
-    <value>Input signal</value>
-  </data>
-  <data name="strPlotOriginalXLabel" xml:space="preserve">
-    <value>Time (seconds)</value>
-  </data>
-  <data name="strPlotOriginalYLabel" xml:space="preserve">
-    <value>Amplitude</value>
-  </data>
-  <data name="strPlotWindowTitle" xml:space="preserve">
-    <value>{0} window</value>
-  </data>
-  <data name="strPlotWindowXLabel" xml:space="preserve">
-    <value>Time (seconds)</value>
-  </data>
-  <data name="strPlotWindowYLabel" xml:space="preserve">
-    <value>Amplitude</value>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Current culture formatting</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Invariant culture formatting</value>
-  </data>
-  <data name="strRadPoints" xml:space="preserve">
-    <value>Data points</value>
-  </data>
-  <data name="strRadSeconds" xml:space="preserve">
-    <value>Seconds</value>
-  </data>
-  <data name="strRadTime" xml:space="preserve">
-    <value>Date and time</value>
   </data>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Select culture</value>
@@ -324,17 +318,17 @@ dimension has been stopped.</value>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="strStatusTipCrossHair" xml:space="preserve">
-    <value>Show plot's crosshair mode</value>
+  <data name="strStatusTipDistribution" xml:space="preserve">
+    <value>Plot distribution</value>
   </data>
-  <data name="strStatusTipEntropy" xml:space="preserve">
-    <value>Compute the approximate and sample entropy</value>
+  <data name="strStatusTipMax" xml:space="preserve">
+    <value>Plot max, average and min</value>
   </data>
-  <data name="strStatusTipFractal" xml:space="preserve">
-    <value>Compute the cumulative fractal dimension (CPU intensive)</value>
+  <data name="strStatusTipRatio" xml:space="preserve">
+    <value>Plot ratios</value>
   </data>
-  <data name="strStatusTipPower" xml:space="preserve">
-    <value>Plot either FFT power spectra(dB) or magnitude</value>
+  <data name="strStatusTipRaw" xml:space="preserve">
+    <value>Plot raw data</value>
   </data>
   <data name="strTabDevice" xml:space="preserve">
     <value>T-10A sensor</value>

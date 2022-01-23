@@ -168,8 +168,8 @@ namespace ErgoLux
 
         private void mnuMainFrm_View_Radial_Click(object sender, EventArgs e)
         {
-            bool status = !this.mnuMainFrm_View_Radial.Checked;
-            this.mnuMainFrm_View_Radial.Checked = status;
+            bool status = !this.mnuMainFrm_View_Distribution.Checked;
+            this.mnuMainFrm_View_Distribution.Checked = status;
             this.statusStripLabelRadar.Checked = status;
             _sett.Plot_ShowDistribution = status;
         }
@@ -505,7 +505,7 @@ namespace ErgoLux
                         break;
                     case "D":
                         _sett.Plot_ShowDistribution = label.Checked;
-                        mnuMainFrm_View_Radial.Checked = label.Checked;
+                        mnuMainFrm_View_Distribution.Checked = label.Checked;
                         break;
                     case "A":
                         _sett.Plot_ShowAverage = label.Checked;
@@ -882,10 +882,30 @@ namespace ErgoLux
             toolStripMain_About.ToolTipText = StringsRM.GetString("strToolTipAbout", _sett.AppCulture) ?? "About this software";
 
             // Update StatusStrip
-            ((ToolStrip)tspBottom.Controls[0]).Items[1].ToolTipText = StringsRM.GetString("strStatusTipPower", _sett.AppCulture) ?? "Power spectra(dB)";
-            ((ToolStrip)tspBottom.Controls[0]).Items[2].ToolTipText = StringsRM.GetString("strStatusTipFractal", _sett.AppCulture) ?? "Cumulative fractal dimension";
-            ((ToolStrip)tspBottom.Controls[0]).Items[3].ToolTipText = StringsRM.GetString("strStatusTipEntropy", _sett.AppCulture) ?? "Approximate and sample entropy";
-            ((ToolStrip)tspBottom.Controls[0]).Items[4].ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _sett.AppCulture) ?? "Plot's crosshair mode";
+            statusStripLabelRaw.ToolTipText = StringsRM.GetString("strStatusTipRaw", _sett.AppCulture) ?? "Plot raw data";
+            statusStripLabelRadar.ToolTipText = StringsRM.GetString("strStatusTipDistribution", _sett.AppCulture) ?? "Plot distribution";
+            statusStripLabelMax.ToolTipText = StringsRM.GetString("strStatusTipMax", _sett.AppCulture) ?? "Plot max, average and min";
+            statusStripLabelRatio.ToolTipText = StringsRM.GetString("strStatusTipRatio", _sett.AppCulture) ?? "Plot ratios";
+
+            // Update menu
+            mnuMainFrm_File.Text = StringsRM.GetString("strMenuMainFile", _sett.AppCulture) ?? "&File";
+            mnuMainFrm_File_Open.Text = StringsRM.GetString("strMenuMainFileOpen", _sett.AppCulture) ?? "&Open";
+            mnuMainFrm_File_Save.Text = StringsRM.GetString("strMenuMainFileSave", _sett.AppCulture) ?? "&Save";
+            mnuMainFrm_File_Exit.Text = StringsRM.GetString("strMenuMainFileExit", _sett.AppCulture) ?? "&Exit";
+            mnuMainFrm_View.Text = StringsRM.GetString("strMenuMainView", _sett.AppCulture) ?? "&View";
+            mnuMainFrm_View_Menu.Text = StringsRM.GetString("strMenuMainViewMenu", _sett.AppCulture) ?? "Show menu";
+            mnuMainFrm_View_Toolbar.Text = StringsRM.GetString("strMenuMainViewToolbar", _sett.AppCulture) ?? "Show toolbar";
+            mnuMainFrm_View_Raw.Text = StringsRM.GetString("strMenuMainViewRaw", _sett.AppCulture) ?? "Raw data";
+            mnuMainFrm_View_Distribution.Text = StringsRM.GetString("strMenuMainViewDistribution", _sett.AppCulture) ?? "Radial distribution";
+            mnuMainFrm_View_Average.Text = StringsRM.GetString("strMenuMainViewAverage", _sett.AppCulture) ?? "Averages";
+            mnuMainFrm_View_Ratio.Text = StringsRM.GetString("strMenuMainViewRatio", _sett.AppCulture) ?? "Ratios";
+            mnuMainFrm_Tools.Text = StringsRM.GetString("strMenuMainTools", _sett.AppCulture) ?? "&Tools";
+            mnuMainFrm_Tools_Connect.Text = StringsRM.GetString("strMenuMainToolsConnect", _sett.AppCulture) ?? "&Connect";
+            mnuMainFrm_Tools_Disconnect.Text = StringsRM.GetString("strMenuMainToolsDisconnect", _sett.AppCulture) ?? "&Disconnect";
+            mnuMainFrm_Tools_Settings.Text = StringsRM.GetString("strMenuMainToolsSettings", _sett.AppCulture) ?? "&Settings";
+            mnuMainFrm_Help.Text = StringsRM.GetString("strMenuMainHelpText", _sett.AppCulture) ?? "&Help";
+            mnuMainFrm_Help_About.Text = StringsRM.GetString("strMenuMainHelpAbout", _sett.AppCulture) ?? "&About";
+
         }
 
         private void formsPlot_MouseDown(object sender, MouseEventArgs e)

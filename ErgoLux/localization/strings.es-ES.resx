@@ -201,7 +201,7 @@ Se utilizarán los valores por defecto.</value>
     <value>Opciones</value>
   </data>
   <data name="strFrmTitle" xml:space="preserve">
-    <value>Análisis de señales</value>
+    <value>ErgoLux</value>
   </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Eje de abscisas</value>
@@ -227,6 +227,57 @@ Se utilizarán los valores por defecto.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Ventana</value>
   </data>
+  <data name="strMenuMainFile" xml:space="preserve">
+    <value>&amp;Archivo</value>
+  </data>
+  <data name="strMenuMainFileExit" xml:space="preserve">
+    <value>&amp;Salir...</value>
+  </data>
+  <data name="strMenuMainFileOpen" xml:space="preserve">
+    <value>&amp;Abrir...</value>
+  </data>
+  <data name="strMenuMainFileSave" xml:space="preserve">
+    <value>&amp;Guardar...</value>
+  </data>
+  <data name="strMenuMainHelpAbout" xml:space="preserve">
+    <value>&amp;Acerca de...</value>
+  </data>
+  <data name="strMenuMainHelpText" xml:space="preserve">
+    <value>&amp;Ayuda</value>
+  </data>
+  <data name="strMenuMainTools" xml:space="preserve">
+    <value>&amp;Herramientas</value>
+  </data>
+  <data name="strMenuMainToolsConnect" xml:space="preserve">
+    <value>&amp;Conectar</value>
+  </data>
+  <data name="strMenuMainToolsDisconnect" xml:space="preserve">
+    <value>&amp;Desconectar</value>
+  </data>
+  <data name="strMenuMainToolsSettings" xml:space="preserve">
+    <value>&amp;Opciones...</value>
+  </data>
+  <data name="strMenuMainView" xml:space="preserve">
+    <value>&amp;Ver</value>
+  </data>
+  <data name="strMenuMainViewAverage" xml:space="preserve">
+    <value>Promedios</value>
+  </data>
+  <data name="strMenuMainViewDistribution" xml:space="preserve">
+    <value>Distribución radial</value>
+  </data>
+  <data name="strMenuMainViewMenu" xml:space="preserve">
+    <value>Mostrar barra de menú</value>
+  </data>
+  <data name="strMenuMainViewRatio" xml:space="preserve">
+    <value>Ratios</value>
+  </data>
+  <data name="strMenuMainViewRaw" xml:space="preserve">
+    <value>Datos originales</value>
+  </data>
+  <data name="strMenuMainViewToolbar" xml:space="preserve">
+    <value>Mostrar barra de herramientas</value>
+  </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>¿Salir?</value>
   </data>
@@ -249,68 +300,11 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
     <value>Fin</value>
   </data>
-  <data name="strPlotAppliedTitle" xml:space="preserve">
-    <value>Señal transformada</value>
-  </data>
-  <data name="strPlotAppliedXLabel" xml:space="preserve">
-    <value>Tiempo (segundos)</value>
-  </data>
-  <data name="strPlotAppliedYLabel" xml:space="preserve">
-    <value>Amplitud</value>
-  </data>
-  <data name="strPlotFFTTitle" xml:space="preserve">
-    <value>Transformada de Fourier (FFT)</value>
-  </data>
-  <data name="strPlotFFTXLabel" xml:space="preserve">
-    <value>Frecuencia (Hz)</value>
-  </data>
-  <data name="strPlotFFTYLabelMag" xml:space="preserve">
-    <value>Amplitud (RMS²)</value>
-  </data>
-  <data name="strPlotFFTYLabelPow" xml:space="preserve">
-    <value>Espectro (dB)</value>
-  </data>
-  <data name="strPlotFractalTitle" xml:space="preserve">
-    <value>Dimensión fractal</value>
-  </data>
-  <data name="strPlotFractalXLabel" xml:space="preserve">
-    <value>Tiempo (segundos)</value>
-  </data>
-  <data name="strPlotFractalYLabel" xml:space="preserve">
-    <value>Dimensión (H)</value>
-  </data>
-  <data name="strPlotOriginalTitle" xml:space="preserve">
-    <value>Señal inicial</value>
-  </data>
-  <data name="strPlotOriginalXLabel" xml:space="preserve">
-    <value>Tiempo (segundos)</value>
-  </data>
-  <data name="strPlotOriginalYLabel" xml:space="preserve">
-    <value>Amplitud</value>
-  </data>
-  <data name="strPlotWindowTitle" xml:space="preserve">
-    <value>Ventana {0}</value>
-  </data>
-  <data name="strPlotWindowXLabel" xml:space="preserve">
-    <value>Tiempo (segundos)</value>
-  </data>
-  <data name="strPlotWindowYLabel" xml:space="preserve">
-    <value>Amplitud</value>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Referencia cultural actual</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Referencia cultural invariable</value>
-  </data>
-  <data name="strRadPoints" xml:space="preserve">
-    <value>Puntos</value>
-  </data>
-  <data name="strRadSeconds" xml:space="preserve">
-    <value>Segundos</value>
-  </data>
-  <data name="strRadTime" xml:space="preserve">
-    <value>Tiempo</value>
   </data>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Seleccionar</value>
@@ -328,17 +322,17 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="strStatusTipCrossHair" xml:space="preserve">
-    <value>Activar la cruz (mira) gráfica en los gráficos</value>
+  <data name="strStatusTipDistribution" xml:space="preserve">
+    <value>Mostrar gráfico de distribución</value>
   </data>
-  <data name="strStatusTipEntropy" xml:space="preserve">
-    <value>Calcular la entropía (aproximada, muestra)</value>
+  <data name="strStatusTipMax" xml:space="preserve">
+    <value>Mostrar gráfico de máximo, promedio y mínimo</value>
   </data>
-  <data name="strStatusTipFractal" xml:space="preserve">
-    <value>Calcular la dimensión fractal acumulada (elevado uso de la CPU)</value>
+  <data name="strStatusTipRatio" xml:space="preserve">
+    <value>Mostrar gráfico de ratios</value>
   </data>
-  <data name="strStatusTipPower" xml:space="preserve">
-    <value>Mostrar el espectro (dB) o la magnitud de la FFT</value>
+  <data name="strStatusTipRaw" xml:space="preserve">
+    <value>Mostrar gráfico de datos originales</value>
   </data>
   <data name="strTabDevice" xml:space="preserve">
     <value>Sensor T-10A</value>

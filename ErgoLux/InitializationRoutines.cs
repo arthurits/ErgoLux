@@ -60,7 +60,7 @@ partial class FrmMain
         this.mnuMainFrm_View_Menu.Checked = true;
         this.mnuMainFrm_View_Toolbar.Checked = true;
         this.mnuMainFrm_View_Raw.Checked = _sett.Plot_ShowRawData;
-        this.mnuMainFrm_View_Radial.Checked = _sett.Plot_ShowDistribution;
+        this.mnuMainFrm_View_Distribution.Checked = _sett.Plot_ShowDistribution;
         this.mnuMainFrm_View_Average.Checked = _sett.Plot_ShowAverage;
         this.mnuMainFrm_View_Ratio.Checked = _sett.Plot_ShowRatios;
 
