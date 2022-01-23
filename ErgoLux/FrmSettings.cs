@@ -17,8 +17,8 @@ namespace ErgoLux
         private int[] _data = new int[10];
         private string _deviceType;
         private string _deviceID;
-        private ClassSettings _settings;
-        private System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+        private ClassSettings _settings = new();
+        private System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
 
         public string GetDeviceType { get => _deviceType; }
         public string GetDeviceID { get => _deviceID; }
@@ -88,7 +88,7 @@ namespace ErgoLux
             SetDefaultValues();
 
             //
-            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+            FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
             UpdateUI_Language();
         }
 
@@ -292,6 +292,16 @@ namespace ErgoLux
             }
             else
                 radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting";
+        }
+
+        private void cboAllCultures_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var cbo = sender as ComboBox;
+            if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
+            {
+                _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cbo.SelectedValue);
+                UpdateUI_Language();
+            }
         }
 
         /// <summary>

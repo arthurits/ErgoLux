@@ -31,6 +31,8 @@ namespace ErgoLux
         private DateTime _timeEnd;
         private bool _reading = false;   // this controls whether clicking the plots is allowed or not
 
+        private readonly System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
+
         public FrmMain()
         {
             // Load settings. This has to go before custom initialization, since some routines depends on this
@@ -47,6 +49,9 @@ namespace ErgoLux
             InitializeStatusStrip();
             InitializeMenuStrip();
             InitializePlots();
+
+            // Language GUI
+            UpdateUI_Language();
 
             // Initialize the internal timer
             m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
@@ -380,6 +385,8 @@ namespace ErgoLux
             
             if (frm.DialogResult == DialogResult.OK)
             {
+                UpdateUI_Language();
+
                 // If a device is selected, then set up the parameters
                 if (_sett.T10_LocationID > 0)
                 {
@@ -854,9 +861,36 @@ namespace ErgoLux
         #endregion Plots functions
 
 
+        private void UpdateUI_Language()
+        {
+            this.Text = StringsRM.GetString("strFrmTitle", _sett.AppCulture);
+            
+            // Update ToolStrip
+            toolStripMain_Exit.Text = StringsRM.GetString("strToolStripExit", _sett.AppCulture) ?? "Exit";
+            toolStripMain_Exit.ToolTipText = StringsRM.GetString("strToolTipExit", _sett.AppCulture) ?? "Exit the application";
+            toolStripMain_Open.Text = StringsRM.GetString("strToolStripOpen", _sett.AppCulture) ?? "Open";
+            toolStripMain_Open.ToolTipText = StringsRM.GetString("strToolTipOpen", _sett.AppCulture) ?? "Open data file from disk";
+            toolStripMain_Save.Text = StringsRM.GetString("strToolStripSave", _sett.AppCulture) ?? "Save";
+            toolStripMain_Save.ToolTipText = StringsRM.GetString("strToolTipSave", _sett.AppCulture) ?? "Save data";
+            toolStripMain_Connect.Text = StringsRM.GetString("strToolStripConnect", _sett.AppCulture) ?? "Connect";
+            toolStripMain_Connect.ToolTipText = StringsRM.GetString("strToolTipConnect", _sett.AppCulture) ?? "Start receiving data from T-10A device";
+            toolStripMain_Disconnect.Text = StringsRM.GetString("strToolStripDisconnect", _sett.AppCulture) ?? "Disconnect";
+            toolStripMain_Disconnect.ToolTipText = StringsRM.GetString("strToolTipDisconnect", _sett.AppCulture) ?? "Stop and disconnect T-10A device";
+            toolStripMain_Settings.Text = StringsRM.GetString("strToolStripSettings", _sett.AppCulture) ?? "Settings";
+            toolStripMain_Settings.ToolTipText = StringsRM.GetString("strToolTipSettings", _sett.AppCulture) ?? "Settings for plots, data, and UI";
+            toolStripMain_About.Text = StringsRM.GetString("strToolStripAbout", _sett.AppCulture) ?? "About";
+            toolStripMain_About.ToolTipText = StringsRM.GetString("strToolTipAbout", _sett.AppCulture) ?? "About this software";
+
+            // Update StatusStrip
+            ((ToolStrip)tspBottom.Controls[0]).Items[1].ToolTipText = StringsRM.GetString("strStatusTipPower", _sett.AppCulture) ?? "Power spectra(dB)";
+            ((ToolStrip)tspBottom.Controls[0]).Items[2].ToolTipText = StringsRM.GetString("strStatusTipFractal", _sett.AppCulture) ?? "Cumulative fractal dimension";
+            ((ToolStrip)tspBottom.Controls[0]).Items[3].ToolTipText = StringsRM.GetString("strStatusTipEntropy", _sett.AppCulture) ?? "Approximate and sample entropy";
+            ((ToolStrip)tspBottom.Controls[0]).Items[4].ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _sett.AppCulture) ?? "Plot's crosshair mode";
+        }
+
         private void formsPlot_MouseDown(object sender, MouseEventArgs e)
         {
-            
+
             // If we are reading from the sensor, then exit
             if (_reading) return;
 

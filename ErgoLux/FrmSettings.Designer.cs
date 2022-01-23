@@ -70,11 +70,11 @@ namespace ErgoLux
             this.lblDataFormat = new System.Windows.Forms.Label();
             this.chkDlgPath = new System.Windows.Forms.CheckBox();
             this.grpCulture = new System.Windows.Forms.GroupBox();
+            this.cboAllCultures = new System.Windows.Forms.ComboBox();
+            this.radUserCulture = new System.Windows.Forms.RadioButton();
             this.radInvariantCulture = new System.Windows.Forms.RadioButton();
             this.radCurrentCulture = new System.Windows.Forms.RadioButton();
             this.btnReset = new System.Windows.Forms.Button();
-            this.radUserCulture = new System.Windows.Forms.RadioButton();
-            this.cboAllCultures = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.updSensors)).BeginInit();
             this.tabSettings.SuspendLayout();
             this.tabDevice.SuspendLayout();
@@ -548,6 +548,26 @@ namespace ErgoLux
             this.grpCulture.TabStop = false;
             this.grpCulture.Text = "Culture settings";
             // 
+            // cboAllCultures
+            // 
+            this.cboAllCultures.FormattingEnabled = true;
+            this.cboAllCultures.Location = new System.Drawing.Point(146, 115);
+            this.cboAllCultures.Name = "cboAllCultures";
+            this.cboAllCultures.Size = new System.Drawing.Size(121, 25);
+            this.cboAllCultures.TabIndex = 3;
+            this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.cboAllCultures_SelectedValueChanged);
+            // 
+            // radUserCulture
+            // 
+            this.radUserCulture.AutoSize = true;
+            this.radUserCulture.Location = new System.Drawing.Point(27, 115);
+            this.radUserCulture.Name = "radUserCulture";
+            this.radUserCulture.Size = new System.Drawing.Size(101, 23);
+            this.radUserCulture.TabIndex = 2;
+            this.radUserCulture.TabStop = true;
+            this.radUserCulture.Text = "User culture";
+            this.radUserCulture.UseVisualStyleBackColor = true;
+            // 
             // radInvariantCulture
             // 
             this.radInvariantCulture.AutoSize = true;
@@ -581,25 +601,6 @@ namespace ErgoLux
             this.btnReset.Text = "&Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
-            // radUserCulture
-            // 
-            this.radUserCulture.AutoSize = true;
-            this.radUserCulture.Location = new System.Drawing.Point(27, 115);
-            this.radUserCulture.Name = "radUserCulture";
-            this.radUserCulture.Size = new System.Drawing.Size(101, 23);
-            this.radUserCulture.TabIndex = 2;
-            this.radUserCulture.TabStop = true;
-            this.radUserCulture.Text = "User culture";
-            this.radUserCulture.UseVisualStyleBackColor = true;
-            // 
-            // cboAllCultures
-            // 
-            this.cboAllCultures.FormattingEnabled = true;
-            this.cboAllCultures.Location = new System.Drawing.Point(146, 115);
-            this.cboAllCultures.Name = "cboAllCultures";
-            this.cboAllCultures.Size = new System.Drawing.Size(121, 25);
-            this.cboAllCultures.TabIndex = 3;
             // 
             // FrmSettings
             // 
