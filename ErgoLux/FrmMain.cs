@@ -906,6 +906,17 @@ namespace ErgoLux
             mnuMainFrm_Help.Text = StringsRM.GetString("strMenuMainHelpText", _sett.AppCulture) ?? "&Help";
             mnuMainFrm_Help_About.Text = StringsRM.GetString("strMenuMainHelpAbout", _sett.AppCulture) ?? "&About";
 
+            // Update plots
+            formsPlot1.Plot.Title(StringsRM.GetString("strPlotRawTitle", _sett.AppCulture) ?? "Illuminance");
+            formsPlot1.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _sett.AppCulture) ?? "Lux");
+            formsPlot1.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _sett.AppCulture) ?? "Time (seconds)");
+            formsPlot2.Plot.Title(StringsRM.GetString("strPlotDistributionTitle", _sett.AppCulture) ?? "Illuminance distribution");
+            formsPlot3.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _sett.AppCulture) ?? "Max, average, min");
+            formsPlot3.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _sett.AppCulture) ?? "Lux");
+            formsPlot3.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _sett.AppCulture) ?? "Time (seconds)");
+            formsPlot4.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _sett.AppCulture) ?? "Illuminance ratios");
+            formsPlot4.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _sett.AppCulture) ?? "Ratio");
+            formsPlot4.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _sett.AppCulture) ?? "Time (seconds)");
         }
 
         private void formsPlot_MouseDown(object sender, MouseEventArgs e)

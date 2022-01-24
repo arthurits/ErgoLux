@@ -300,6 +300,36 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
     <value>Fin</value>
   </data>
+  <data name="strPlotAverageTitle" xml:space="preserve">
+    <value>Máximo, promedio, mínimo</value>
+  </data>
+  <data name="strPlotAverageXLabel" xml:space="preserve">
+    <value>Tiempo (segundos)</value>
+  </data>
+  <data name="strPlotAverageYLabel" xml:space="preserve">
+    <value>Lux</value>
+  </data>
+  <data name="strPlotDistributionTitle" xml:space="preserve">
+    <value>Distribución de iluminancias</value>
+  </data>
+  <data name="strPlotRatiosTitle" xml:space="preserve">
+    <value>Relación de iluminancias</value>
+  </data>
+  <data name="strPlotRatiosXLabel" xml:space="preserve">
+    <value>Tiempo (segundos)</value>
+  </data>
+  <data name="strPlotRatiosYLabel" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="strPlotRawTitle" xml:space="preserve">
+    <value>Iluminancia</value>
+  </data>
+  <data name="strPlotRawXLabel" xml:space="preserve">
+    <value>Tiempo (segundos)</value>
+  </data>
+  <data name="strPlotRawYLabel" xml:space="preserve">
+    <value>Lux</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Referencia cultural actual</value>
   </data>

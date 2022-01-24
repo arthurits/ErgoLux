@@ -109,7 +109,7 @@ public class ClassSettings
     /// <summary>
     /// Define the culture used throughout the app by asigning a culture string name
     /// </summary>
-    [JsonPropertyName("Culture")]
+    [JsonPropertyName("Culture name")]
     public string AppCultureName
     {
         get { return AppCulture.Name; }

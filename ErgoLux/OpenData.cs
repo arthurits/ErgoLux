@@ -14,6 +14,11 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the elux file</param>
     private void OpenELuxData(string FileName)
     {
+        bool result = true;
+        int nSensors = 0, nPoints = 0;
+        double nFreq = 0.0;
+        string strLine;
+
         var cursor = Cursor.Current;
         Cursor.Current = Cursors.WaitCursor;
 
@@ -23,18 +28,11 @@ partial class FrmMain
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, Encoding.UTF8);
 
-            int nSensors = 0, nPoints = 0;
-            double nFreq = 0.0;
-
-            string strLine = sr.ReadLine();
-            if (strLine != "ErgoLux data")
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return;
-            }
+            strLine = sr.ReadLine();    // ErgoLux data
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _sett.AppCulture));
+            if (!strLine.Contains("ErgoLux data", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _sett.AppCulture));
 
             // Better implement a try parse block. Each read line should throw an exception instead of "return"
             strLine = sr.ReadLine();
@@ -130,8 +128,14 @@ partial class FrmMain
             }
 
         }
-        catch
+        catch (FormatException ex)
         {
+            result = false;
+            using (new CenterWinDialog(this))
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataError", _sett.AppCulture) ?? "Unable to read data from file.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorTitle", _sett.AppCulture),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             // Show error message
             using (new CenterWinDialog(this))
             {
