@@ -275,6 +275,13 @@ Default values will be used instead.</value>
   <data name="strMenuMainViewToolbar" xml:space="preserve">
     <value>Show toolbar</value>
   </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>An unexpected error happened while saving data to disk.
+Please try again later or contact the software engineer.</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>Error saving data</value>
+  </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>Exit?</value>
   </data>
@@ -282,12 +289,18 @@ Default values will be used instead.</value>
     <value>Are you sure you want to exit
 the application?</value>
   </data>
-  <data name="strMsgBoxInitArray" xml:space="preserve">
-    <value>Unexpected error in 'InitializeDataArrays'.
+  <data name="strMsgBoxReadArray" xml:space="preserve">
+    <value>Unexpected error in 'ReadDataArray'.
 {0}</value>
   </data>
-  <data name="strMsgBoxInitArrayTitle" xml:space="preserve">
+  <data name="strMsgBoxReadArrayTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strMsgBoxSaveData" xml:space="preserve">
+    <value>Data has been successfully saved to disk.</value>
+  </data>
+  <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
+    <value>Data saving</value>
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>Computation of the Hausdorff-Besicovitch fractal
@@ -346,7 +359,7 @@ dimension has been stopped.</value>
     <value>Error parsing data</value>
   </data>
   <data name="strReadDataErrorTitle" xml:space="preserve">
-    <value>Error</value>
+    <value>Error opening data</value>
   </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
     <value>Plot distribution</value>

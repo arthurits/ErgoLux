@@ -278,6 +278,13 @@ Se utilizarán los valores por defecto.</value>
   <data name="strMenuMainViewToolbar" xml:space="preserve">
     <value>Mostrar barra de herramientas</value>
   </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>Se ha producido un error inesperado al guardar los datos.
+Por favor, inténtelo más tarde o contacte al autor de este software.</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>Error al guardar datos</value>
+  </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>¿Salir?</value>
   </data>
@@ -285,13 +292,20 @@ Se utilizarán los valores por defecto.</value>
     <value>¿Está seguro de que quiere
 salir de la aplicación?</value>
   </data>
-  <data name="strMsgBoxInitArray" xml:space="preserve">
+  <data name="strMsgBoxReadArray" xml:space="preserve">
     <value>Se ha producido un error inesperado
-en la función 'InitializeDataArrays'.
+en la función 'ReadDataArray'.
 {0}</value>
   </data>
-  <data name="strMsgBoxInitArrayTitle" xml:space="preserve">
+  <data name="strMsgBoxreadArrayTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strMsgBoxSaveData" xml:space="preserve">
+    <value>Los datos se han guardado correctamente
+en la ubicación especificada.</value>
+  </data>
+  <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
+    <value>Guardar datos</value>
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>El cálculo de la dimensión fractal de
@@ -350,7 +364,7 @@ Hausdorff-Besicovitch se ha detenido.</value>
     <value>Error de conversión</value>
   </data>
   <data name="strReadDataErrorTitle" xml:space="preserve">
-    <value>Error</value>
+    <value>Error de lectura de datos</value>
   </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
     <value>Mostrar gráfico de distribución</value>

@@ -20,7 +20,7 @@ partial class FrmMain
         try
         {
             using var fs = File.Open(FileName, FileMode.CreateNew, FileAccess.Write, FileShare.ReadWrite);
-            using var sw = new StreamWriter(fs, Encoding.UTF8);
+            using var sw = new StreamWriter(fs, Encoding.UTF8, leaveOpen: false);
 
             // Append millisecond pattern to current culture's full date time pattern
             string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
@@ -28,7 +28,6 @@ partial class FrmMain
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
-            string content = string.Empty;
             sw.WriteLine("ErgoLux data");
             sw.WriteLine("Start time: {0}", _timeStart.ToString(fullPattern));
             sw.WriteLine("End time: {0}", _timeEnd.ToString(fullPattern));
@@ -38,10 +37,9 @@ partial class FrmMain
             sw.WriteLine("Number of data points: {0}", _nPoints.ToString());
             sw.WriteLine("Sampling frequency: {0}", _sett.T10_Frequency.ToString());
             sw.WriteLine();
+            string content = string.Empty;
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-            {
                 content += "Sensor #" + i.ToString("00") + "\t";
-            }
             content += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
             sw.WriteLine(content);
 
@@ -60,7 +58,10 @@ partial class FrmMain
             // Show OK save data
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show("Data has been successfully saved to disk.", "Data saving", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(StringsRM.GetString("strMsgBoxSaveData", _sett.AppCulture) ?? "Data has been successfully saved to disk.",
+                    StringsRM.GetString("strMsgBoxSaveDataTitle", _sett.AppCulture) ?? "Data saving",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
         }
         catch
@@ -68,7 +69,10 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show("An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer.", "Error saving data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(StringsRM.GetString("strMsgBoxErrorSaveData", _sett.AppCulture) ?? "An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer.",
+                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _sett.AppCulture) ?? "Error saving data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
         finally
@@ -92,7 +96,63 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the elux file</param>
     private void SaveBinaryData (string FileName)
     {
-        throw new Exception("Saving to binary has not yet been implemented.");
+        try
+        {
+            using var fs = File.Open(FileName, FileMode.CreateNew, FileAccess.Write, FileShare.ReadWrite);
+            using var bw = new BinaryWriter(fs, Encoding.UTF8, false);
+
+            // Append millisecond pattern to current culture's full date time pattern
+            string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _sett.MillisecondsFormat);
+            TimeSpan nTime = _timeEnd - _timeStart;
+
+            // Save the header text into the file
+            bw.WriteLine("ErgoLux data");
+            bw.WriteLine($"Start time: {_timeStart.ToString(fullPattern)}");
+            bw.WriteLine($"End time: {_timeEnd.ToString(fullPattern)}");
+            bw.WriteLine($"Total measuring time: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} milliseconds");
+            bw.WriteLine($"Number of sensors: {_sett.T10_NumberOfSensors}");
+            bw.WriteLine($"Number of data points: {_nPoints}");
+            bw.WriteLine($"Sampling frequency: {_sett.T10_Frequency}");
+            bw.WriteLine();
+            string content = string.Empty;
+            for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+                content += "Sensor #" + i.ToString("00") + "\t";
+            content += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
+            bw.WriteLine(content);
+
+            // Save the numerical values
+            for (int j = 0; j < _nPoints; j++)
+            {
+                content = string.Empty;
+                for (int i = 0; i < _plotData.Length; i++)
+                {
+                    content += _plotData[i][j].ToString(_sett.DataFormat) + "\t";
+                }
+                //trying to write data to csv
+                bw.WriteLine(content.TrimEnd('\t'));
+            }
+
+            // Show OK save data
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show(StringsRM.GetString("strMsgBoxSaveData", _sett.AppCulture) ?? "Data has been successfully saved to disk.",
+                    StringsRM.GetString("strMsgBoxSaveDataTitle", _sett.AppCulture) ?? "Data saving",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+        catch
+        {
+            // Show error message
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show(StringsRM.GetString("strMsgBoxErrorSaveData", _sett.AppCulture) ?? "An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer.",
+                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _sett.AppCulture) ?? "Error saving data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
     }
 
     /// <summary>
@@ -106,5 +166,6 @@ partial class FrmMain
             MessageBox.Show("No data has been saved to disk.", "No data saved", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
+
 }
 
