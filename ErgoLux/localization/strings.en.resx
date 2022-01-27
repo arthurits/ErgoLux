@@ -290,7 +290,7 @@ Please try again later or contact the software engineer.</value>
 the application?</value>
   </data>
   <data name="strMsgBoxReadArray" xml:space="preserve">
-    <value>Unexpected error in 'ReadDataArray'.
+    <value>Unexpected error in 'ReadData'.
 {0}</value>
   </data>
   <data name="strMsgBoxReadArrayTitle" xml:space="preserve">

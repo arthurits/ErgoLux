@@ -294,10 +294,10 @@ salir de la aplicación?</value>
   </data>
   <data name="strMsgBoxReadArray" xml:space="preserve">
     <value>Se ha producido un error inesperado
-en la función 'ReadDataArray'.
+en la función 'ReadData'.
 {0}</value>
   </data>
-  <data name="strMsgBoxreadArrayTitle" xml:space="preserve">
+  <data name="strMsgBoxReadArrayTitle" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="strMsgBoxSaveData" xml:space="preserve">

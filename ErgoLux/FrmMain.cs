@@ -296,24 +296,30 @@ namespace ErgoLux
                 filePath = OpenDlg.FileName;
                 if (_sett.RememberFileDialogPath) _sett.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
+                // Read the data file in the corresponding format
+                bool boolRead = false;
+
                 switch (Path.GetExtension(OpenDlg.FileName).ToLower())
                 {
                     case ".elux":
-                        OpenELuxData(OpenDlg.FileName);
+                        boolRead = OpenELuxData(OpenDlg.FileName);
                         break;
                     case ".txt":
                         OpenTextData(OpenDlg.FileName);
                         break;
                     case ".bin":
-                        OpenBinaryData(OpenDlg.FileName);
+                        boolRead = OpenBinaryData(OpenDlg.FileName);
                         break;
                     default:
                         //OpenDefaultData(OpenDlg.FileName);
                         break;
                 }
 
-                // Show data into plots
-                Plots_FetchData();
+                if (boolRead)
+                {
+                    // Show data into plots
+                    Plots_FetchData();
+                }
             }
         }
 

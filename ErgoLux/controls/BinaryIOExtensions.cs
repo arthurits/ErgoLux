@@ -12,7 +12,7 @@ public static class BinaryIOExtensions
     /// <param name="reader">The binary stream to be read from.</param>
     /// <returns>The next line from the input stream, or null if the end of the input stream is reached.</returns>
     /// <seealso cref="https://www.codeproject.com/Articles/996254/BinaryReader-ReadLine-extension"/>
-    public static string? ReadLine(this BinaryReader reader)
+    public static string ReadLine(this BinaryReader reader)
     {
         var result = new System.Text.StringBuilder();
         bool foundEndOfLine = false;
