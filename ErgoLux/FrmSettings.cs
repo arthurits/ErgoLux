@@ -85,7 +85,7 @@ namespace ErgoLux
             cboFlowControl.ValueMember = "Value";
 
             // Set control's default input-values
-            SetDefaultValues();
+            //SetDefaultValues();
 
             //
             FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
@@ -263,8 +263,8 @@ namespace ErgoLux
             DialogResult result;
             using (new CenterWinDialog(this))
             {
-                result = MessageBox.Show("Do you want to reset all fields\nto their default values?",
-                    "Reset?",
+                result = MessageBox.Show(StringsRM.GetString("strMsgBoxReset", _settings.AppCulture) ?? "Do you want to reset all fields" + Environment.NewLine + "to their default values?",
+                    StringsRM.GetString("strMsgBoxResetTitle", _settings.AppCulture) ?? "Reset?",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2);
@@ -273,7 +273,7 @@ namespace ErgoLux
             if (result == DialogResult.Yes)
             {
                 UpdateControls(new ClassSettings());
-                SetDefaultValues();
+                //SetDefaultValues();
             }
         }
 

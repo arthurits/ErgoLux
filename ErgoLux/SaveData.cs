@@ -64,12 +64,12 @@ partial class FrmMain
                     MessageBoxIcon.Information);
             }
         }
-        catch
+        catch (Exception ex)
         {
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(StringsRM.GetString("strMsgBoxErrorSaveData", _sett.AppCulture) ?? "An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer.",
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _sett.AppCulture) ?? "An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
                     StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _sett.AppCulture) ?? "Error saving data",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -84,16 +84,16 @@ partial class FrmMain
     /// <summary>
     /// Saves data into a text format file.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the elux file</param>
+    /// <param name="FileName">Path (including name) of the text file</param>
     private void SaveTextData (string FileName)
     {
-        throw new Exception("Saving to text has not yet been implemented.");
+        SaveELuxData(FileName);
     }
 
     /// <summary>
     /// Saves data into a binary format file.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the elux file</param>
+    /// <param name="FileName">Path (including name) of the binary file</param>
     private void SaveBinaryData (string FileName)
     {
         try
@@ -107,31 +107,27 @@ partial class FrmMain
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
-            bw.WriteLine("ErgoLux data");
-            bw.WriteLine($"Start time: {_timeStart.ToString(fullPattern)}");
-            bw.WriteLine($"End time: {_timeEnd.ToString(fullPattern)}");
-            bw.WriteLine($"Total measuring time: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} milliseconds");
-            bw.WriteLine($"Number of sensors: {_sett.T10_NumberOfSensors}");
-            bw.WriteLine($"Number of data points: {_nPoints}");
-            bw.WriteLine($"Sampling frequency: {_sett.T10_Frequency}");
-            bw.WriteLine();
+            bw.Write("ErgoLux data");
+            bw.Write(_timeStart);
+            bw.Write(_timeEnd);
+            bw.Write(nTime.Days);
+            bw.Write(nTime.Hours);
+            bw.Write(nTime.Minutes);
+            bw.Write(nTime.Seconds);
+            bw.Write(nTime.Milliseconds);
+            bw.Write(_sett.T10_NumberOfSensors);
+            bw.Write(_nPoints);
+            bw.Write(_sett.T10_Frequency);
             string content = string.Empty;
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                 content += "Sensor #" + i.ToString("00") + "\t";
             content += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
-            bw.WriteLine(content);
+            bw.Write(content);
+            //bw.Write("Headers");
 
-            // Save the numerical values
-            for (int j = 0; j < _nPoints; j++)
-            {
-                content = string.Empty;
-                for (int i = 0; i < _plotData.Length; i++)
-                {
-                    content += _plotData[i][j].ToString(_sett.DataFormat) + "\t";
-                }
-                //trying to write data to csv
-                bw.WriteLine(content.TrimEnd('\t'));
-            }
+            // https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
+            for (int i = 0; i < _plotData.Length; i++)
+                bw.Write(_plotData[i].SelectMany(value => BitConverter.GetBytes(value)).ToArray());
 
             // Show OK save data
             using (new CenterWinDialog(this))
@@ -142,12 +138,12 @@ partial class FrmMain
                     MessageBoxIcon.Information);
             }
         }
-        catch
+        catch (Exception ex)
         {
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(StringsRM.GetString("strMsgBoxErrorSaveData", _sett.AppCulture) ?? "An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer.",
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _sett.AppCulture) ?? "An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
                     StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _sett.AppCulture) ?? "Error saving data",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -161,10 +157,7 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the elux file</param>
     private void SaveDefaultData(string FileName)
     {
-        using (new CenterWinDialog(this))
-        {
-            MessageBox.Show("No data has been saved to disk.", "No data saved", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+        SaveELuxData(FileName);
     }
 
 }

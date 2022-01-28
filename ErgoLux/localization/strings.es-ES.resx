@@ -278,12 +278,37 @@ Se utilizarán los valores por defecto.</value>
   <data name="strMenuMainViewToolbar" xml:space="preserve">
     <value>Mostrar barra de herramientas</value>
   </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>Se ha producido un error inesperado al guardar los datos.
+Por favor, inténtelo más tarde o contacte al autor de este software.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>Error al abrir archivo de datos</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDevice" xml:space="preserve">
+    <value>No se ha podido abrir el recurso</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDeviceTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="strMsgBoxErrorSaveData" xml:space="preserve">
     <value>Se ha producido un error inesperado al guardar los datos.
-Por favor, inténtelo más tarde o contacte al autor de este software.</value>
+Por favor, inténtelo más tarde o contacte al autor de este software.
+{0}</value>
   </data>
   <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
     <value>Error al guardar datos</value>
+  </data>
+  <data name="strMsgBoxErrorSettings" xml:space="preserve">
+    <value>Error en el archivo de opciones.
+
+{0}
+
+Se utilizarán los valores por defecto.</value>
+  </data>
+  <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>¿Salir?</value>
@@ -292,13 +317,12 @@ Por favor, inténtelo más tarde o contacte al autor de este software.</value>
     <value>¿Está seguro de que quiere
 salir de la aplicación?</value>
   </data>
-  <data name="strMsgBoxReadArray" xml:space="preserve">
-    <value>Se ha producido un error inesperado
-en la función 'ReadData'.
-{0}</value>
+  <data name="strMsgBoxReset" xml:space="preserve">
+    <value>¿Desea restablecer todos los campos
+a sus valores por defecto?</value>
   </data>
-  <data name="strMsgBoxReadArrayTitle" xml:space="preserve">
-    <value>Error</value>
+  <data name="strMsgBoxResetTitle" xml:space="preserve">
+    <value>Reset?</value>
   </data>
   <data name="strMsgBoxSaveData" xml:space="preserve">
     <value>Los datos se han guardado correctamente
@@ -366,8 +390,20 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Error de lectura de datos</value>
   </data>
+  <data name="strStatusID" xml:space="preserve">
+    <value>ID del recurso</value>
+  </data>
+  <data name="strStatusLocation" xml:space="preserve">
+    <value>Ubicación ID</value>
+  </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
     <value>Mostrar gráfico de distribución</value>
+  </data>
+  <data name="strStatusTipID" xml:space="preserve">
+    <value>ID del recurso</value>
+  </data>
+  <data name="strStatusTipLocation" xml:space="preserve">
+    <value>Dirección de ubicación del sensor T-10A</value>
   </data>
   <data name="strStatusTipMax" xml:space="preserve">
     <value>Mostrar gráfico de máximo, promedio y mínimo</value>
@@ -377,6 +413,12 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strStatusTipRaw" xml:space="preserve">
     <value>Mostrar gráfico de datos originales</value>
+  </data>
+  <data name="strStatusTipType" xml:space="preserve">
+    <value>Tipo de recurso</value>
+  </data>
+  <data name="strStatusType" xml:space="preserve">
+    <value>Tipo de recurso</value>
   </data>
   <data name="strTabDevice" xml:space="preserve">
     <value>Sensor T-10A</value>

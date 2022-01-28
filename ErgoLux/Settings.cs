@@ -20,9 +20,6 @@ namespace ErgoLux
                 var jsonString = File.ReadAllText(_sett.SettingsFileName);
                 _sett = JsonSerializer.Deserialize<ClassSettings>(jsonString);
                 _sett.InitializeJsonIgnore(_sett.AppPath);
-                //var settings = JsonSerializer.Deserialize<ClassSettings>(jsonString);
-                //settings.InitializeJsonIgnore(_path);
-                //_sett = settings;
 
                 this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
                 this.DesktopLocation = new Point(_sett.Wnd_Left, _sett.Wnd_Top);
@@ -36,8 +33,8 @@ namespace ErgoLux
                 using (new CenterWinDialog(this))
                 {
                     MessageBox.Show(this,
-                        "Error loading settings file.\n\n" + ex.Message + "\n\n" + "Default values will be used instead.",
-                        "Error",
+                        StringsRM.GetString("strMsgBoxErrorSettings", _sett.AppCulture) ?? $"Error loading settings file.\n\n{ex.Message}\n\nDefault values will be used instead.",
+                        StringsRM.GetString("strMsgBoxErrorSettingsTitle", _sett.AppCulture) ?? "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }

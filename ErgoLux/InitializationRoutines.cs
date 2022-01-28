@@ -160,6 +160,9 @@ partial class FrmMain
         InitializePlotsPalette();
     }
 
+    /// <summary>
+    /// Function to initialize the plots' color palettes
+    /// </summary>
     private void InitializePlotsPalette()
     {
         // Define colorsets
@@ -178,6 +181,9 @@ partial class FrmMain
         formsPlot4.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
     }
 
+    /// <summary>
+    /// Function to initialize the illuminance distribution plot
+    /// </summary>
     private void InitializePlotDistribution()
     {
         formsPlot2.Plot.XAxis2.Hide(false);

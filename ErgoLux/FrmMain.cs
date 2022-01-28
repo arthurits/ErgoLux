@@ -297,25 +297,25 @@ namespace ErgoLux
                 if (_sett.RememberFileDialogPath) _sett.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
                 // Read the data file in the corresponding format
-                bool boolRead = false;
+                bool OKread = false;
 
                 switch (Path.GetExtension(OpenDlg.FileName).ToLower())
                 {
                     case ".elux":
-                        boolRead = OpenELuxData(OpenDlg.FileName);
+                        OKread = OpenELuxData(OpenDlg.FileName);
                         break;
                     case ".txt":
                         OpenTextData(OpenDlg.FileName);
                         break;
                     case ".bin":
-                        boolRead = OpenBinaryData(OpenDlg.FileName);
+                        OKread = OpenBinaryData(OpenDlg.FileName);
                         break;
                     default:
                         //OpenDefaultData(OpenDlg.FileName);
                         break;
                 }
 
-                if (boolRead)
+                if (OKread)
                 {
                     // Show data into plots
                     Plots_FetchData();
@@ -419,9 +419,9 @@ namespace ErgoLux
                         m_timer.Interval = 1000 / _sett.T10_Frequency;
 
                         // Update the status strip with information
-                        this.statusStripLabelLocation.Text = "Location ID: " + String.Format("{0:X}", _sett.T10_LocationID);
-                        this.statusStripLabelType.Text = "Device type: " + frm.GetDeviceType;
-                        this.statusStripLabelID.Text = "Device ID: " + frm.GetDeviceID;
+                        this.statusStripLabelLocation.Text = (StringsRM.GetString("strStatusLocation", _sett.AppCulture) ?? "Location ID") + $": {_sett.T10_LocationID:X}";
+                        this.statusStripLabelType.Text = (StringsRM.GetString("strStatusType", _sett.AppCulture) ?? "Device type") + $": {frm.GetDeviceType}";
+                        this.statusStripLabelID.Text = (StringsRM.GetString("strStatusID", _sett.AppCulture) ?? "Device ID") + $": {frm.GetDeviceID}";
                         this.statusStripIconOpen.Image = _sett.Icon_Open;
 
                         InitializeStatusStripLabelsStatus();
@@ -435,7 +435,10 @@ namespace ErgoLux
                         this.statusStripIconOpen.Image = _sett.Icon_Close;
                         using (new CenterWinDialog(this))
                         {
-                            MessageBox.Show("Could not open the device", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(StringsRM.GetString("strMsgBoxErrorOpenDevice", _sett.AppCulture) ?? "Could not open the device",
+                                StringsRM.GetString("strMsgBoxErrorOpenDeviceTitle", _sett.AppCulture) ?? "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
                         }
                     }
 
@@ -892,6 +895,14 @@ namespace ErgoLux
             statusStripLabelRadar.ToolTipText = StringsRM.GetString("strStatusTipDistribution", _sett.AppCulture) ?? "Plot distribution";
             statusStripLabelMax.ToolTipText = StringsRM.GetString("strStatusTipMax", _sett.AppCulture) ?? "Plot max, average and min";
             statusStripLabelRatio.ToolTipText = StringsRM.GetString("strStatusTipRatio", _sett.AppCulture) ?? "Plot ratios";
+
+            statusStripLabelID.Text = StringsRM.GetString("strStatusID", _sett.AppCulture) ?? "Device ID";
+            statusStripLabelID.ToolTipText = StringsRM.GetString("strStatusTipID", _sett.AppCulture) ?? "Device ID";
+            statusStripLabelType.Text = StringsRM.GetString("strStatusType", _sett.AppCulture) ?? "Device type";
+            statusStripLabelType.ToolTipText = StringsRM.GetString("strStatusTipType", _sett.AppCulture) ?? "Device type";
+            statusStripLabelLocation.Text = StringsRM.GetString("strStatusLocation", _sett.AppCulture) ?? "Location ID";
+            statusStripLabelLocation.ToolTipText = StringsRM.GetString("strStatusTipLocation", _sett.AppCulture) ?? "T-10A location ID";
+
 
             // Update menu
             mnuMainFrm_File.Text = StringsRM.GetString("strMenuMainFile", _sett.AppCulture) ?? "&File";
