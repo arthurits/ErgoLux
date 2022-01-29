@@ -136,7 +136,7 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_File_Open.Name = "mnuMainFrm_File_Open";
             this.mnuMainFrm_File_Open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuMainFrm_File_Open.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_File_Open.Size = new System.Drawing.Size(155, 22);
             this.mnuMainFrm_File_Open.Text = "&Open...";
             this.mnuMainFrm_File_Open.Click += new System.EventHandler(this.mnuMainFrm_File_Open_Click);
             // 
@@ -144,20 +144,20 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_File_Save.Name = "mnuMainFrm_File_Save";
             this.mnuMainFrm_File_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuMainFrm_File_Save.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_File_Save.Size = new System.Drawing.Size(155, 22);
             this.mnuMainFrm_File_Save.Text = "&Save...";
             this.mnuMainFrm_File_Save.Click += new System.EventHandler(this.mnuMainFrm_File_Save_Click);
             // 
             // toolStripMenuSeparator1
             // 
             this.toolStripMenuSeparator1.Name = "toolStripMenuSeparator1";
-            this.toolStripMenuSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuSeparator1.Size = new System.Drawing.Size(152, 6);
             // 
             // mnuMainFrm_File_Exit
             // 
             this.mnuMainFrm_File_Exit.Name = "mnuMainFrm_File_Exit";
             this.mnuMainFrm_File_Exit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.mnuMainFrm_File_Exit.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_File_Exit.Size = new System.Drawing.Size(155, 22);
             this.mnuMainFrm_File_Exit.Text = "&Exit...";
             this.mnuMainFrm_File_Exit.Click += new System.EventHandler(this.mnuMainFrm_File_Exit_Click);
             // 
@@ -259,7 +259,7 @@ namespace ErgoLux
             // mnuMainFrm_Tools_Settings
             // 
             this.mnuMainFrm_Tools_Settings.Name = "mnuMainFrm_Tools_Settings";
-            this.mnuMainFrm_Tools_Settings.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_Tools_Settings.Size = new System.Drawing.Size(175, 22);
             this.mnuMainFrm_Tools_Settings.Text = "&Settings...";
             this.mnuMainFrm_Tools_Settings.Click += new System.EventHandler(this.mnuMainFrm_Tools_Settings_Click);
             // 
@@ -461,6 +461,7 @@ namespace ErgoLux
             this.toolStripMain_Save.Text = "Save";
             this.toolStripMain_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Save.ToolTipText = "Save data";
+            this.toolStripMain_Save.CheckedChanged += new System.EventHandler(this.toolStripMain_Save_CheckedChanged);
             this.toolStripMain_Save.Click += new System.EventHandler(this.toolStripMain_Save_Click);
             // 
             // toolStripMain_Open

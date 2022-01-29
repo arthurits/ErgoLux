@@ -308,11 +308,17 @@ Default values will be used instead.</value>
     <value>Error</value>
   </data>
   <data name="strMsgBoxExit" xml:space="preserve">
-    <value>Exit?</value>
-  </data>
-  <data name="strMsgBoxExitTitle" xml:space="preserve">
     <value>Are you sure you want to exit
 the application?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>Exit?</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>There is no data available to be saved.</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>No data</value>
   </data>
   <data name="strMsgBoxReset" xml:space="preserve">
     <value>Do you want to reset all fields
@@ -386,14 +392,23 @@ dimension has been stopped.</value>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Error opening data</value>
   </data>
+  <data name="strStatusExchange" xml:space="preserve">
+    <value>Receiving data</value>
+  </data>
   <data name="strStatusID" xml:space="preserve">
     <value>Device ID</value>
   </data>
   <data name="strStatusLocation" xml:space="preserve">
     <value>Location ID</value>
   </data>
+  <data name="strStatusOpen" xml:space="preserve">
+    <value>Disconnected</value>
+  </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
     <value>Plot distribution</value>
+  </data>
+  <data name="strStatusTipExchange" xml:space="preserve">
+    <value>Exchange status</value>
   </data>
   <data name="strStatusTipID" xml:space="preserve">
     <value>Device ID</value>
@@ -403,6 +418,9 @@ dimension has been stopped.</value>
   </data>
   <data name="strStatusTipMax" xml:space="preserve">
     <value>Plot max, average and min</value>
+  </data>
+  <data name="strStatusTipOpen" xml:space="preserve">
+    <value>Connexion status</value>
   </data>
   <data name="strStatusTipRatio" xml:space="preserve">
     <value>Plot ratios</value>

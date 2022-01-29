@@ -311,11 +311,17 @@ Se utilizarán los valores por defecto.</value>
     <value>Error</value>
   </data>
   <data name="strMsgBoxExit" xml:space="preserve">
-    <value>¿Salir?</value>
-  </data>
-  <data name="strMsgBoxExitTitle" xml:space="preserve">
     <value>¿Está seguro de que quiere
 salir de la aplicación?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>¿Salir?</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>No hay datos disponibles para guardar.</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>Datos</value>
   </data>
   <data name="strMsgBoxReset" xml:space="preserve">
     <value>¿Desea restablecer todos los campos
@@ -390,14 +396,23 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Error de lectura de datos</value>
   </data>
+  <data name="strStatusExchange" xml:space="preserve">
+    <value>Recibiendo datos</value>
+  </data>
   <data name="strStatusID" xml:space="preserve">
     <value>ID del recurso</value>
   </data>
   <data name="strStatusLocation" xml:space="preserve">
     <value>Ubicación ID</value>
   </data>
+  <data name="strStatusOpen" xml:space="preserve">
+    <value>Desconectado</value>
+  </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
     <value>Mostrar gráfico de distribución</value>
+  </data>
+  <data name="strStatusTipExchange" xml:space="preserve">
+    <value>Estado de la recepción</value>
   </data>
   <data name="strStatusTipID" xml:space="preserve">
     <value>ID del recurso</value>
@@ -407,6 +422,9 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strStatusTipMax" xml:space="preserve">
     <value>Mostrar gráfico de máximo, promedio y mínimo</value>
+  </data>
+  <data name="strStatusTipOpen" xml:space="preserve">
+    <value>Estado de la conexión</value>
   </data>
   <data name="strStatusTipRatio" xml:space="preserve">
     <value>Mostrar gráfico de ratios</value>

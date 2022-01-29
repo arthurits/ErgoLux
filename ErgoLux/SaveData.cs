@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ErgoLux;
+﻿namespace ErgoLux;
 
 partial class FrmMain
 {
     /// <summary>
-    /// Saves data into an elux format file.
+    /// Saves data into an elux-formatted file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the elux file</param>
     private void SaveELuxData(string FileName)
@@ -20,7 +14,7 @@ partial class FrmMain
         try
         {
             using var fs = File.Open(FileName, FileMode.CreateNew, FileAccess.Write, FileShare.ReadWrite);
-            using var sw = new StreamWriter(fs, Encoding.UTF8, leaveOpen: false);
+            using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8, leaveOpen: false);
 
             // Append millisecond pattern to current culture's full date time pattern
             string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
@@ -82,7 +76,7 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Saves data into a text format file.
+    /// Saves data into a text-formatted file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the text file</param>
     private void SaveTextData (string FileName)
@@ -91,7 +85,7 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Saves data into a binary format file.
+    /// Saves data into a binary-formatted file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the binary file</param>
     private void SaveBinaryData (string FileName)
@@ -99,7 +93,7 @@ partial class FrmMain
         try
         {
             using var fs = File.Open(FileName, FileMode.CreateNew, FileAccess.Write, FileShare.ReadWrite);
-            using var bw = new BinaryWriter(fs, Encoding.UTF8, false);
+            using var bw = new BinaryWriter(fs, System.Text.Encoding.UTF8, false);
 
             // Append millisecond pattern to current culture's full date time pattern
             string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
@@ -118,16 +112,21 @@ partial class FrmMain
             bw.Write(_sett.T10_NumberOfSensors);
             bw.Write(_nPoints);
             bw.Write(_sett.T10_Frequency);
-            string content = string.Empty;
+            string strLine = string.Empty;
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-                content += "Sensor #" + i.ToString("00") + "\t";
-            content += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
-            bw.Write(content);
-            //bw.Write("Headers");
+                strLine += "Sensor #" + i.ToString("00") + "\t";
+            strLine += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
+            bw.Write(strLine);
 
             // https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
+            byte[] bytesLine;
             for (int i = 0; i < _plotData.Length; i++)
-                bw.Write(_plotData[i].SelectMany(value => BitConverter.GetBytes(value)).ToArray());
+            {
+                // bw.Write(_plotData[i].SelectMany(value => BitConverter.GetBytes(value)).ToArray()); // Requires LINQ
+                bytesLine = new byte[_plotData[i].Length * sizeof(double)];
+                Buffer.BlockCopy(_plotData[i], 0, bytesLine, 0, bytesLine.Length);
+                bw.Write(bytesLine);
+            }
 
             // Show OK save data
             using (new CenterWinDialog(this))

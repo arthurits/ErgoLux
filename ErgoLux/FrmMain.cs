@@ -104,11 +104,11 @@ namespace ErgoLux
             using (new CenterWinDialog(this))
             {
                 if (DialogResult.No == MessageBox.Show(this,
-                                                        "Are you sure you want to exit\nthe application?",
-                                                        "Exit?",
-                                                        MessageBoxButtons.YesNo,
-                                                        MessageBoxIcon.Question,
-                                                        MessageBoxDefaultButton.Button2))
+                            StringsRM.GetString("strMsgBoxExit", _sett.AppCulture) ?? "Are you sure you want to exit\nthe application?",
+                            StringsRM.GetString("strMsgBoxExitTitle", _sett.AppCulture) ?? "Exit?",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question,
+                            MessageBoxDefaultButton.Button2))
                 {
                     // Cancel
                     e.Cancel = true;
@@ -217,6 +217,11 @@ namespace ErgoLux
             this.Close();
         }
 
+        private void toolStripMain_Save_CheckedChanged(object sender, EventArgs e)
+        {
+            this.mnuMainFrm_File_Save.Enabled = toolStripMain_Save.Checked;
+        }
+
         private void toolStripMain_Save_Click(object sender, EventArgs e)
         {
             DialogResult result;
@@ -227,7 +232,10 @@ namespace ErgoLux
             {
                 using (new CenterWinDialog(this))
                 {
-                    MessageBox.Show("There is no data available to be saved.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(StringsRM.GetString("strMsgBoxNoData", _sett.AppCulture) ?? "There is no data available to be saved.",
+                        StringsRM.GetString("strMsgBoxNoDataTitle", _sett.AppCulture) ?? "No data",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
                 return;
             }
@@ -289,7 +297,8 @@ namespace ErgoLux
             using (new CenterWinDialog(this))
                 result = OpenDlg.ShowDialog(this);
 
-            // If the file name is not an empty string open it for saving.  
+            // If the file name is not an empty string open it for saving.
+            bool readOK = false;
             if (result == DialogResult.OK && OpenDlg.FileName != "")
             {
                 //Get the path of specified file and store the directory for future calls
@@ -297,29 +306,27 @@ namespace ErgoLux
                 if (_sett.RememberFileDialogPath) _sett.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
                 // Read the data file in the corresponding format
-                bool OKread = false;
-
                 switch (Path.GetExtension(OpenDlg.FileName).ToLower())
                 {
                     case ".elux":
-                        OKread = OpenELuxData(OpenDlg.FileName);
+                        readOK = OpenELuxData(OpenDlg.FileName);
                         break;
                     case ".txt":
-                        OpenTextData(OpenDlg.FileName);
+                        readOK = OpenTextData(OpenDlg.FileName);
                         break;
                     case ".bin":
-                        OKread = OpenBinaryData(OpenDlg.FileName);
+                        readOK = OpenBinaryData(OpenDlg.FileName);
                         break;
                     default:
                         //OpenDefaultData(OpenDlg.FileName);
                         break;
                 }
+            }
 
-                if (OKread)
-                {
-                    // Show data into plots
-                    Plots_FetchData();
-                }
+            if (readOK)
+            {
+                // Show data into plots
+                Plots_FetchData();
             }
         }
 
@@ -869,7 +876,9 @@ namespace ErgoLux
 
         #endregion Plots functions
 
-
+        /// <summary>
+        /// Update user-interface language and localization
+        /// </summary>
         private void UpdateUI_Language()
         {
             this.Text = StringsRM.GetString("strFrmTitle", _sett.AppCulture);
@@ -902,6 +911,11 @@ namespace ErgoLux
             statusStripLabelType.ToolTipText = StringsRM.GetString("strStatusTipType", _sett.AppCulture) ?? "Device type";
             statusStripLabelLocation.Text = StringsRM.GetString("strStatusLocation", _sett.AppCulture) ?? "Location ID";
             statusStripLabelLocation.ToolTipText = StringsRM.GetString("strStatusTipLocation", _sett.AppCulture) ?? "T-10A location ID";
+
+            statusStripIconOpen.Text = StringsRM.GetString("strStatusOpen", _sett.AppCulture) ?? "Disconnected";
+            statusStripIconOpen.ToolTipText = StringsRM.GetString("strStatusTipOpen", _sett.AppCulture) ?? "Connexion status";
+            statusStripIconExchange.Text = StringsRM.GetString("strStatusExchange", _sett.AppCulture) ?? "Receiving data";
+            statusStripIconExchange.ToolTipText = StringsRM.GetString("strStatusTipExchange", _sett.AppCulture) ?? "Exchange status";
 
 
             // Update menu

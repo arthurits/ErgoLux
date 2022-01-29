@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ErgoLux;
+﻿namespace ErgoLux;
 
 partial class FrmMain
 {
@@ -12,6 +6,7 @@ partial class FrmMain
     /// Opens an elux-formatted illuminance data file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the elux file</param>
+    /// <returns><see langword="True"/> if successfull, <see langword="false"/> otherwise</returns>
     private bool OpenELuxData(string FileName)
     {
         bool result = true;
@@ -26,7 +21,7 @@ partial class FrmMain
         {
             // https://stackoverflow.com/questions/897796/how-do-i-open-an-already-opened-file-with-a-net-streamreader
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            using var sr = new StreamReader(fs, Encoding.UTF8);
+            using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
 
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
@@ -97,7 +92,7 @@ partial class FrmMain
             if (strLine != string.Empty)
                 throw new FormatException(StringsRM.GetString("strELuxHeader08", _sett.AppCulture));
 
-            strLine = sr.ReadLine();    // Column header lines
+            strLine = sr.ReadLine();    // Column header names
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader09", _sett.AppCulture));
             string[] seriesLabels = strLine.Split('\t');
@@ -159,20 +154,35 @@ partial class FrmMain
         return result;
     }
 
-    private void OpenTextData(string FileName)
+    /// <summary>
+    /// Opens a text-formatted illuminance data file
+    /// </summary>
+    /// <param name="FileName">Path (including name) of the elux file</param>
+    /// <returns><see langword="True"/> if successfull, <see langword="false"/> otherwise</returns>
+    private bool OpenTextData(string FileName)
     {
-        OpenELuxData(FileName);
+        return OpenELuxData(FileName);
     }
 
+    /// <summary>
+    /// Opens a binary-formatted illuminance data file
+    /// </summary>
+    /// <param name="FileName">Path (including name) of the elux file</param>
+    /// <returns><see langword="True"/> if successfull, <see langword="false"/> otherwise</returns>
     private bool OpenBinaryData(string FileName)
     {
         bool result = true;
         try
         {
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            using var br = new BinaryReader(fs, Encoding.UTF8);
+            using var br = new BinaryReader(fs, System.Text.Encoding.UTF8);
 
-            string content = br.ReadString();   // ErgoLux data
+            string strLine = br.ReadString();   // ErgoLux data
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _sett.AppCulture));
+            if (!strLine.Contains("ErgoLux data", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _sett.AppCulture));
+
             _timeStart = br.ReadDateTime();
             _timeEnd = br.ReadDateTime();
             int dummy = br.ReadInt32();     // days
@@ -181,10 +191,15 @@ partial class FrmMain
             dummy = br.ReadInt32();         // seconds
             dummy = br.ReadInt32();         // milliseconds
             _sett.T10_NumberOfSensors = br.ReadInt32();
-            _nPoints = br.ReadInt32();
-            _sett.Plot_ArrayPoints = _nPoints;
+            _sett.Plot_ArrayPoints = br.ReadInt32();
+            _nPoints = _sett.Plot_ArrayPoints;
             _sett.T10_Frequency = br.ReadDouble();
-            content = br.ReadString();      // data string header names
+            strLine = br.ReadString();      // column header names
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strELuxHeader09", _sett.AppCulture));
+            string[] seriesLabels = strLine.Split('\t');
+            if (seriesLabels == Array.Empty<string>())
+                throw new FormatException(StringsRM.GetString("strELuxHeader09", _sett.AppCulture));
 
             // Initialize data arrays
             InitializeArrays();
