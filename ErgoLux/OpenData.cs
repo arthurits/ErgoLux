@@ -26,8 +26,9 @@ partial class FrmMain
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _sett.AppCulture));
-            if (!strLine.Contains("ErgoLux data", StringComparison.Ordinal))
+            if (!strLine.Contains("ErgoLux data (", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _sett.AppCulture));
+            System.Globalization.CultureInfo fileCulture = new (strLine[(strLine.IndexOf("(") + 1)..^1]);
 
             strLine = sr.ReadLine();    // Start time
             if (strLine is null)
@@ -35,8 +36,8 @@ partial class FrmMain
             if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader02", _sett.AppCulture));
             string fullPattern = _sett.AppCulture.DateTimeFormat.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _sett.MillisecondsFormat);
-            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, _sett.AppCulture, System.Globalization.DateTimeStyles.None, out _timeStart))
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _sett.GetMillisecondsFormat(fileCulture));
+            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeStart))
                 throw new FormatException(StringsRM.GetString("strELuxHeader02", _sett.AppCulture));
 
             strLine = sr.ReadLine();    // End time
@@ -44,7 +45,7 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strELuxHeader03", _sett.AppCulture));
             if (!strLine.Contains("End time: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader03", _sett.AppCulture));
-            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, _sett.AppCulture, System.Globalization.DateTimeStyles.None, out _timeEnd))
+            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeEnd))
                 throw new FormatException(StringsRM.GetString("strELuxHeader03", _sett.AppCulture));
 
             strLine = sr.ReadLine();    // Total measuring time
@@ -117,6 +118,15 @@ partial class FrmMain
             }
 
         }
+        catch (System.Globalization.CultureNotFoundException ex)
+        {
+            result = false;
+            using (new CenterWinDialog(this))
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _sett.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorCultureTitle" ?? "Culture name error", _sett.AppCulture),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
         catch (FormatException ex)
         {
             result = false;
@@ -180,7 +190,7 @@ partial class FrmMain
             string strLine = br.ReadString();   // ErgoLux data
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _sett.AppCulture));
-            if (!strLine.Contains("ErgoLux data", StringComparison.Ordinal))
+            if (!strLine.Contains("ErgoLux data (", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _sett.AppCulture));
 
             _timeStart = br.ReadDateTime();
@@ -213,7 +223,16 @@ partial class FrmMain
             }
 
         }
-        catch(Exception ex)
+        catch (System.Globalization.CultureNotFoundException ex)
+        {
+            result = false;
+            using (new CenterWinDialog(this))
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _sett.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorCultureTitle" ?? "Culture name error", _sett.AppCulture),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+        catch (Exception ex)
         {
             result = false;
             using (new CenterWinDialog(this))

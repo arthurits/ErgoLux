@@ -22,7 +22,7 @@ partial class FrmMain
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
-            sw.WriteLine("ErgoLux data");
+            sw.WriteLine($"ErgoLux data ({_sett.AppCultureName})");
             sw.WriteLine("Start time: {0}", _timeStart.ToString(fullPattern));
             sw.WriteLine("End time: {0}", _timeEnd.ToString(fullPattern));
             //outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
@@ -101,7 +101,7 @@ partial class FrmMain
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
-            bw.Write("ErgoLux data");
+            bw.Write($"ErgoLux data ({_sett.AppCultureName})");
             bw.Write(_timeStart);
             bw.Write(_timeEnd);
             bw.Write(nTime.Days);

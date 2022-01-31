@@ -50,7 +50,7 @@ public class ClassSettings
     /// <value><see langword="True" /> if the plot gets updated, <see langword="false" /> otherwise</value>
     [JsonPropertyName("Show illuminance plot")]
     public bool Plot_ShowRawData { get; set; } = true;
-
+    
     [JsonPropertyName("Show distribution plot")]
     public bool Plot_ShowDistribution { get; set; } = true;
 
@@ -122,7 +122,8 @@ public class ClassSettings
     [JsonIgnore]
     public string MillisecondsFormat
     {
-        get { return $"$1{AppCulture.NumberFormat.NumberDecimalSeparator}fff"; }
+        //get { return $"$1{AppCulture.NumberFormat.NumberDecimalSeparator}fff"; }
+        get { return GetMillisecondsFormat(AppCulture); }
     }
 
     /// <summary>
@@ -192,6 +193,11 @@ public class ClassSettings
             if (System.IO.File.Exists(AppPath + @"\images\open.ico")) Icon_Open = new System.Drawing.Icon(AppPath + @"\images\open.ico", 16, 16).ToBitmap();
             if (System.IO.File.Exists(AppPath + @"\images\exchange.ico")) Icon_Data = new System.Drawing.Icon(AppPath + @"\images\exchange.ico", 16, 16).ToBitmap();
         }
+    }
+
+    public string GetMillisecondsFormat(System.Globalization.CultureInfo culture)
+    {
+        return $"$1{culture.NumberFormat.NumberDecimalSeparator}fff";
     }
 }
 
