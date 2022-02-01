@@ -17,19 +17,20 @@ partial class FrmMain
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8, leaveOpen: false);
 
             // Append millisecond pattern to current culture's full date time pattern
-            string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
+            //string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
+            string fullPattern = _sett.AppCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _sett.MillisecondsFormat);
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
             sw.WriteLine($"ErgoLux data ({_sett.AppCultureName})");
-            sw.WriteLine("Start time: {0}", _timeStart.ToString(fullPattern));
-            sw.WriteLine("End time: {0}", _timeEnd.ToString(fullPattern));
+            sw.WriteLine("Start time: {0}", _timeStart.ToString(fullPattern, _sett.AppCulture));
+            sw.WriteLine("End time: {0}", _timeEnd.ToString(fullPattern, _sett.AppCulture));
             //outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
             sw.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
             sw.WriteLine("Number of sensors: {0}", _sett.T10_NumberOfSensors.ToString());
             sw.WriteLine("Number of data points: {0}", _nPoints.ToString());
-            sw.WriteLine("Sampling frequency: {0}", _sett.T10_Frequency.ToString());
+            sw.WriteLine("Sampling frequency: {0}", _sett.T10_Frequency.ToString(_sett.AppCulture));
             sw.WriteLine();
             string content = string.Empty;
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
@@ -43,7 +44,7 @@ partial class FrmMain
                 content = string.Empty;
                 for (int i = 0; i < _plotData.Length; i++)
                 {
-                    content += _plotData[i][j].ToString(_sett.DataFormat) + "\t";
+                    content += _plotData[i][j].ToString(_sett.DataFormat,_sett.AppCulture) + "\t";
                 }
                 //trying to write data to csv
                 sw.WriteLine(content.TrimEnd('\t'));

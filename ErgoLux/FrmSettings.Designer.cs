@@ -567,6 +567,7 @@ namespace ErgoLux
             this.radUserCulture.TabStop = true;
             this.radUserCulture.Text = "User culture";
             this.radUserCulture.UseVisualStyleBackColor = true;
+            this.radUserCulture.CheckedChanged += new System.EventHandler(this.radUserCulture_CheckedChanged);
             // 
             // radInvariantCulture
             // 
@@ -578,6 +579,7 @@ namespace ErgoLux
             this.radInvariantCulture.TabStop = true;
             this.radInvariantCulture.Text = "Invariant culture";
             this.radInvariantCulture.UseVisualStyleBackColor = true;
+            this.radInvariantCulture.CheckedChanged += new System.EventHandler(this.radInvariantCulture_CheckedChanged);
             // 
             // radCurrentCulture
             // 

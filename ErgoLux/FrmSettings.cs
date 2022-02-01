@@ -95,42 +95,7 @@ namespace ErgoLux
         public FrmSettings(ClassSettings settings)
             : this()
         {
-            _settings = settings;
-
-            // Update tabDevice
-            updSensors.Value = settings.T10_NumberOfSensors;
-            txtBaudRate.Text = settings.T10_BaudRate.ToString();
-            cboDataBits.SelectedValue = settings.T10_DataBits;
-            cboStopBits.SelectedValue = settings.T10_StopBits;
-            cboParity.SelectedValue = settings.T10_Parity;
-            cboFlowControl.SelectedValue = settings.T10_FlowControl;
-            txtOn.Text = settings.T10_CharOn.ToString();
-            txtOff.Text = settings.T10_CharOff.ToString();
-            txtHz.Text = settings.T10_Frequency.ToString();
-
-            // Update tabPlots
-            txtArrayPoints.Text = settings.Plot_ArrayPoints.ToString();
-            txtPlotWindow.Text = settings.Plot_WindowPoints.ToString();
-            chkShowRaw.Checked = settings.Plot_ShowRawData;
-            chkShowDistribution.Checked = settings.Plot_ShowDistribution;
-            chkShowAverage.Checked = settings.Plot_ShowAverage;
-            chkShowRatio.Checked = settings.Plot_ShowRatios;
-            if (settings.Plot_DistIsRadar)
-            {
-                radRadar.Checked = true;
-            }
-            else
-            {
-                radRadial.Checked = true;
-            }
-
-            // Update tabUI
-            if (settings.AppCultureName == string.Empty)
-                radInvariantCulture.Checked = true;
-            else
-                radCurrentCulture.Checked = true;
-            chkDlgPath.Checked = settings.RememberFileDialogPath;
-            txtDataFormat.Text = settings.DataFormat;
+            UpdateControls(settings);
         }
 
         /// <summary>
@@ -251,7 +216,8 @@ namespace ErgoLux
             _settings.Plot_DistIsRadar = radRadar.Checked;
 
             if (radCurrentCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
-            else _settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            else if (radInvariantCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            else if (radUserCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
             _settings.RememberFileDialogPath = chkDlgPath.Checked;
             _settings.DataFormat = txtDataFormat.Text;
 
@@ -292,6 +258,25 @@ namespace ErgoLux
             }
             else
                 radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting";
+        }
+
+        private void radInvariantCulture_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radInvariantCulture.Checked)
+            {
+                _settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+                UpdateUI_Language();
+            }
+        }
+
+        private void radUserCulture_CheckedChanged(object sender, EventArgs e)
+        {
+            cboAllCultures.Enabled = radUserCulture.Checked;
+            if (cboAllCultures.Enabled)
+            {
+                _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
+                UpdateUI_Language();
+            }
         }
 
         private void cboAllCultures_SelectedValueChanged(object sender, EventArgs e)
@@ -364,6 +349,7 @@ namespace ErgoLux
             chkShowRatio.Checked = _settings.Plot_ShowRatios;
             radRadar.Checked = _settings.Plot_DistIsRadar;
 
+            cboAllCultures.Enabled = false;
             if (_settings.AppCultureName == string.Empty)
                 radInvariantCulture.Checked = true;
             else if (_settings.AppCultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
@@ -421,5 +407,6 @@ namespace ErgoLux
             this.btnAccept.Text = StringsRM.GetString("strBtnAccept", culture) ?? "&Accept";
         }
 
+        
     }
 }
