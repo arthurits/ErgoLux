@@ -276,7 +276,7 @@ Default values will be used instead.</value>
     <value>Show toolbar</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
-    <value>An unexpected error happened while saving data to disk.
+    <value>An unexpected error happened while opening data file.
 Please try again later or contact the software engineer.
 {0}</value>
   </data>
