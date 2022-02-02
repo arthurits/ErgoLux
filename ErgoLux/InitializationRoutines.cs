@@ -11,7 +11,7 @@ partial class FrmMain
         //tspBottom = new ToolStripPanel();
         tspTop.Join(toolStripMain);
         tspTop.Join(mnuMainFrm);
-        tspBottom.Join(this.statusStrip);
+        tspBottom.Join(statusStrip);
 
         // Exit the method
         return;
