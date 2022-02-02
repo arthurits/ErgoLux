@@ -8,7 +8,7 @@
     <Platforms>AnyCPU;x64</Platforms>
     <Authors>Arthurits</Authors>
     <Company>Arthurits Ltd.</Company>
-    <Copyright>Copyright © 2021</Copyright>
+    <Copyright>Copyright © 2022</Copyright>
     <Description>Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A</Description>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <PackageProjectUrl>https://github.com/arthurits/ErgoLux</PackageProjectUrl>
