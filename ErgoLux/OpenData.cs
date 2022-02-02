@@ -6,7 +6,7 @@ partial class FrmMain
     /// Opens an elux-formatted illuminance data file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the elux file</param>
-    /// <returns><see langword="True"/> if successfull, <see langword="false"/> otherwise</returns>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool OpenELuxData(string FileName)
     {
         bool result = true;
@@ -168,7 +168,7 @@ partial class FrmMain
     /// Opens a text-formatted illuminance data file
     /// </summary>
     /// <param name="FileName">Path (including name) of the elux file</param>
-    /// <returns><see langword="True"/> if successfull, <see langword="false"/> otherwise</returns>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool OpenTextData(string FileName)
     {
         return OpenELuxData(FileName);
@@ -178,7 +178,7 @@ partial class FrmMain
     /// Opens a binary-formatted illuminance data file
     /// </summary>
     /// <param name="FileName">Path (including name) of the elux file</param>
-    /// <returns><see langword="True"/> if successfull, <see langword="false"/> otherwise</returns>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool OpenBinaryData(string FileName)
     {
         bool result = true;
