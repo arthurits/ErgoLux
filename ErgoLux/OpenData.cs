@@ -81,7 +81,7 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _sett.AppCulture));
             if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _sett.AppCulture));
-            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Number | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nFreq))
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nFreq))
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _sett.AppCulture));
             if (nFreq <= 0)
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _sett.AppCulture));
@@ -111,7 +111,7 @@ partial class FrmMain
                 data = strLine.Split("\t");
                 for (row = 0; row < data.Length; row++)
                 {
-                    if (!double.TryParse(data[row], System.Globalization.NumberStyles.Number | System.Globalization.NumberStyles.AllowThousands, fileCulture, out _plotData[row][col]))
+                    if (!double.TryParse(data[row], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out _plotData[row][col]))
                         throw new ArithmeticException(data[row].ToString(fileCulture));
                 }
                 col++;
