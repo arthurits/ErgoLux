@@ -235,11 +235,11 @@ public partial class FrmMain : Form
         SaveFileDialog SaveDlg = new()
         {
             DefaultExt = "*.elux",
-            Filter = "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            Filter = StringsRM.GetString("strSaveDlgFilter", _sett.AppCulture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
             FilterIndex = 1,
-            Title = "Save illuminance data",
+            Title = StringsRM.GetString("strSaveDlgTitle", _sett.AppCulture) ?? "Save illuminance data",
             OverwritePrompt = true,
-            InitialDirectory = _sett.RememberFileDialogPath ? _sett.UserSavePath : _sett.DefaultSavePath
+            InitialDirectory = _sett.RememberFileDialogPath ? _sett.UserSavePath : _sett.DefaultSavePath,
         };
 
         using (new CenterWinDialog(this))
@@ -279,9 +279,9 @@ public partial class FrmMain : Form
         OpenFileDialog OpenDlg = new()
         {
             DefaultExt = "*.elux",
-            Filter = "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            Filter = StringsRM.GetString("strOpenDlgFilter", _sett.AppCulture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
             FilterIndex = 1,
-            Title = "Open illuminance data",
+            Title = StringsRM.GetString("strOpenDlgTitle", _sett.AppCulture) ?? "Open illuminance data",
             InitialDirectory = _sett.RememberFileDialogPath ? _sett.UserOpenPath : _sett.DefaultOpenPath
         };
 
