@@ -2,6 +2,7 @@
 
 public partial class Form2 : Form
 {
+    private ScottPlot.Plottable.Crosshair ch;
     public Form2()
     {
         InitializeComponent();
@@ -13,16 +14,23 @@ public partial class Form2 : Form
 
         formsPlot1.Plot.AddSignal(ScottPlot.DataGen.Sin(51));
         formsPlot1.Plot.AddSignal(ScottPlot.DataGen.Cos(51));
-        var ch = formsPlot1.Plot.AddCrosshair(42, 0.48);
+        ch = formsPlot1.Plot.AddCrosshair(42, 0.48);
         ch.VerticalLine.DragEnabled = true;
         ch.HorizontalLine.DragEnabled = true;
+        ch.VerticalLine.Dragged += new System.EventHandler(OnDraggedVertical);
 
         formsPlot1.Plot.Title("Crosshair Demo");
         formsPlot1.Plot.XLabel("Horizontal Axis");
         formsPlot1.Plot.YLabel("Vertical Axis");
-
         formsPlot1.Refresh();
     }
+
+    private void OnDraggedVertical(object sender, EventArgs e)
+    {
+        ch.VerticalLine.X = 0;
+
+    }
+
 
 }
 
