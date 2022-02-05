@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.formsPlot1 = new ScottPlot.FormsPlotCrossHair();
+            this.formsPlot1 = new ScottPlot.FormsPlot();
             this.SuspendLayout();
             // 
             // formsPlot1
             // 
             this.formsPlot1.BackColor = System.Drawing.Color.Transparent;
-            this.formsPlot1.HorizontalLine = false;
+            //this.formsPlot1.HorizontalLine = false;
             this.formsPlot1.Location = new System.Drawing.Point(13, 12);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot1.Name = "formsPlot1";
             this.formsPlot1.Size = new System.Drawing.Size(774, 426);
             this.formsPlot1.TabIndex = 0;
-            this.formsPlot1.VerticalLine = false;
+            //this.formsPlot1.VerticalLine = false;
             // 
             // Form2
             // 
@@ -57,6 +57,6 @@
 
         #endregion
 
-        private ScottPlot.FormsPlotCrossHair formsPlot1;
+        private ScottPlot.FormsPlot formsPlot1;
     }
 }
