@@ -23,19 +23,23 @@ partial class FrmMain
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
-            sw.WriteLine($"ErgoLux data ({_sett.AppCultureName})");
-            sw.WriteLine("Start time: {0}", _timeStart.ToString(fullPattern, _sett.AppCulture));
-            sw.WriteLine("End time: {0}", _timeEnd.ToString(fullPattern, _sett.AppCulture));
-            //outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
-            sw.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
-            sw.WriteLine("Number of sensors: {0}", _sett.T10_NumberOfSensors.ToString());
-            sw.WriteLine("Number of data points: {0}", _nPoints.ToString());
-            sw.WriteLine("Sampling frequency: {0}", _sett.T10_Frequency.ToString(_sett.AppCulture));
+            sw.WriteLine($"{(StringsRM.GetString("strHeader01", _sett.AppCulture) ?? "ErgoLux data")} ({_sett.AppCultureName})");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader02", _sett.AppCulture) ?? "Start time")}: {_timeStart.ToString(fullPattern, _sett.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader03", _sett.AppCulture) ?? "End time")}: {_timeEnd.ToString(fullPattern, _sett.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader04", _sett.AppCulture) ?? "Total measuring time")}: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} millisecons");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader05", _sett.AppCulture) ?? "Number of sensors")}: {_sett.T10_NumberOfSensors.ToString()}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader06", _sett.AppCulture) ?? "Number of data points")}: {_nPoints.ToString()}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader07", _sett.AppCulture) ?? "Sampling frequency")}: {_sett.T10_Frequency.ToString(_sett.AppCulture)}");
             sw.WriteLine();
             string content = string.Empty;
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-                content += "Sensor #" + i.ToString("00") + "\t";
-            content += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
+                content += $"{(StringsRM.GetString("strHeader08", _sett.AppCulture) ?? "Sensor #")}{i.ToString("00")}\t";
+            content += $"{(StringsRM.GetString("strHeader09", _sett.AppCulture) ?? "Maximum")}\t" +
+                    $"{(StringsRM.GetString("strHeader10", _sett.AppCulture) ?? "Average")}\t" +
+                    $"{(StringsRM.GetString("strHeader11", _sett.AppCulture) ?? "Minimum")}\t" +
+                    $"{(StringsRM.GetString("strHeader12", _sett.AppCulture) ?? "Min/Average")}\t" +
+                    $"{(StringsRM.GetString("strHeader13", _sett.AppCulture) ?? "Min/Max")}\t" +
+                    $"{(StringsRM.GetString("strHeader14", _sett.AppCulture) ?? "Average/Max")}\t";
             sw.WriteLine(content);
 
             // Save the numerical values
@@ -102,7 +106,7 @@ partial class FrmMain
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
-            bw.Write($"ErgoLux data ({_sett.AppCultureName})");
+            bw.Write($"{(StringsRM.GetString("strHeader01", _sett.AppCulture) ?? "ErgoLux data")} ({_sett.AppCultureName})");
             bw.Write(_timeStart);
             bw.Write(_timeEnd);
             bw.Write(nTime.Days);

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Accept</value>
@@ -193,6 +193,57 @@ Default values will be used instead.</value>
   </data>
   <data name="strErrorDeserializeTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>ErgoLux data</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>End time</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>Total measuring time</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>Number of sensors</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>Number of data points</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>Sampling frequency</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>Sensor #</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>Min/Average</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>Min/Max</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>Average/Max</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>Missing an empty line.</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>Missing column headers (series names).</value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>Section '{0}' is mis-formatted.</value>
   </data>
   <data name="strFrmSettings" xml:space="preserve">
     <value>Settings</value>
