@@ -136,30 +136,30 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_File_Open.Name = "mnuMainFrm_File_Open";
             this.mnuMainFrm_File_Open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuMainFrm_File_Open.Size = new System.Drawing.Size(155, 22);
+            this.mnuMainFrm_File_Open.Size = new System.Drawing.Size(180, 22);
             this.mnuMainFrm_File_Open.Text = "&Open...";
-            this.mnuMainFrm_File_Open.Click += new System.EventHandler(this.mnuMainFrm_File_Open_Click);
+            this.mnuMainFrm_File_Open.Click += new System.EventHandler(this.Open_Click);
             // 
             // mnuMainFrm_File_Save
             // 
             this.mnuMainFrm_File_Save.Name = "mnuMainFrm_File_Save";
             this.mnuMainFrm_File_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuMainFrm_File_Save.Size = new System.Drawing.Size(155, 22);
+            this.mnuMainFrm_File_Save.Size = new System.Drawing.Size(180, 22);
             this.mnuMainFrm_File_Save.Text = "&Save...";
-            this.mnuMainFrm_File_Save.Click += new System.EventHandler(this.mnuMainFrm_File_Save_Click);
+            this.mnuMainFrm_File_Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // toolStripMenuSeparator1
             // 
             this.toolStripMenuSeparator1.Name = "toolStripMenuSeparator1";
-            this.toolStripMenuSeparator1.Size = new System.Drawing.Size(152, 6);
+            this.toolStripMenuSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuMainFrm_File_Exit
             // 
             this.mnuMainFrm_File_Exit.Name = "mnuMainFrm_File_Exit";
             this.mnuMainFrm_File_Exit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.mnuMainFrm_File_Exit.Size = new System.Drawing.Size(155, 22);
+            this.mnuMainFrm_File_Exit.Size = new System.Drawing.Size(180, 22);
             this.mnuMainFrm_File_Exit.Text = "&Exit...";
-            this.mnuMainFrm_File_Exit.Click += new System.EventHandler(this.mnuMainFrm_File_Exit_Click);
+            this.mnuMainFrm_File_Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // mnuMainFrm_View
             // 
@@ -247,9 +247,9 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_Tools_Disconnect.Name = "mnuMainFrm_Tools_Disconnect";
             this.mnuMainFrm_Tools_Disconnect.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.mnuMainFrm_Tools_Disconnect.Size = new System.Drawing.Size(175, 22);
+            this.mnuMainFrm_Tools_Disconnect.Size = new System.Drawing.Size(180, 22);
             this.mnuMainFrm_Tools_Disconnect.Text = "&Disconnect";
-            this.mnuMainFrm_Tools_Disconnect.Click += new System.EventHandler(this.mnuMainFrm_Tools_Disconnect_Click);
+            this.mnuMainFrm_Tools_Disconnect.Click += new System.EventHandler(this.Disconnect_Click);
             // 
             // toolStripSeparator5
             // 
@@ -259,9 +259,9 @@ namespace ErgoLux
             // mnuMainFrm_Tools_Settings
             // 
             this.mnuMainFrm_Tools_Settings.Name = "mnuMainFrm_Tools_Settings";
-            this.mnuMainFrm_Tools_Settings.Size = new System.Drawing.Size(175, 22);
+            this.mnuMainFrm_Tools_Settings.Size = new System.Drawing.Size(180, 22);
             this.mnuMainFrm_Tools_Settings.Text = "&Settings...";
-            this.mnuMainFrm_Tools_Settings.Click += new System.EventHandler(this.mnuMainFrm_Tools_Settings_Click);
+            this.mnuMainFrm_Tools_Settings.Click += new System.EventHandler(this.Settings_Click);
             // 
             // mnuMainFrm_Help
             // 
@@ -275,9 +275,9 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_Help_About.Name = "mnuMainFrm_Help_About";
             this.mnuMainFrm_Help_About.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.mnuMainFrm_Help_About.Size = new System.Drawing.Size(158, 22);
+            this.mnuMainFrm_Help_About.Size = new System.Drawing.Size(180, 22);
             this.mnuMainFrm_Help_About.Text = "&About...";
-            this.mnuMainFrm_Help_About.Click += new System.EventHandler(this.mnuMainFrm_Help_About_Click);
+            this.mnuMainFrm_Help_About.Click += new System.EventHandler(this.About_Click);
             // 
             // statusStrip
             // 

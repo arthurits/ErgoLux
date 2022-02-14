@@ -118,88 +118,6 @@ public partial class FrmMain : Form
 
     }
 
-
-    #region mnuMainFrm events
-    private void mnuMainFrm_File_Exit_Click(object sender, EventArgs e)
-    {
-        this.Exit_Click(sender, e);
-    }
-    private void mnuMainFrm_File_Open_Click(object sender, EventArgs e)
-    {
-        this.Open_Click(sender, e);
-    }
-
-    private void mnuMainFrm_File_Save_Click(object sender, EventArgs e)
-    {
-        this.Save_Click(sender, e);
-    }
-
-    private void mnuMainFrm_View_Menu_Click(object sender, EventArgs e)
-    {
-        bool status = !this.mnuMainFrm_View_Menu.Checked;
-        this.mnuMainFrm_View_Menu.Checked = status;
-        this.mnuMainFrm.Visible = status;
-    }
-    private void mnuMainFrm_View_Toolbar_Click(object sender, EventArgs e)
-    {
-        bool status = !this.mnuMainFrm_View_Toolbar.Checked;
-        this.mnuMainFrm_View_Toolbar.Checked = status;
-        this.toolStripMain.Visible = status;
-    }
-
-    private void mnuMainFrm_View_Raw_Click(object sender, EventArgs e)
-    {
-        bool status = !this.mnuMainFrm_View_Raw.Checked;
-        this.mnuMainFrm_View_Raw.Checked = status;
-        this.statusStripLabelRaw.Checked = status;
-        _sett.Plot_ShowRawData = status;
-    }
-
-    private void mnuMainFrm_View_Radial_Click(object sender, EventArgs e)
-    {
-        bool status = !this.mnuMainFrm_View_Distribution.Checked;
-        this.mnuMainFrm_View_Distribution.Checked = status;
-        this.statusStripLabelRadar.Checked = status;
-        _sett.Plot_ShowDistribution = status;
-    }
-
-    private void mnuMainFrm_View_Average_Click(object sender, EventArgs e)
-    {
-        bool status = !this.mnuMainFrm_View_Average.Checked;
-        this.mnuMainFrm_View_Average.Checked = status;
-        this.statusStripLabelMax.Checked = status;
-        _sett.Plot_ShowAverage = status;
-    }
-
-    private void mnuMainFrm_View_Ratio_Click(object sender, EventArgs e)
-    {
-        bool status = !this.mnuMainFrm_View_Ratio.Checked;
-        this.mnuMainFrm_View_Ratio.Checked = status;
-        this.statusStripLabelRatio.Checked = status;
-        _sett.Plot_ShowRatios = status;
-    }
-    private void mnuMainFrm_Tools_Connect_Click(object sender, EventArgs e)
-    {
-        bool status = !this.toolStripMain_Connect.Checked;
-        this.mnuMainFrm_Tools_Connect.Checked = status;
-        this.toolStripMain_Connect.Checked = status;
-    }
-
-    private void mnuMainFrm_Tools_Disconnect_Click(object sender, EventArgs e)
-    {
-        this.Disconnect_Click(sender, e);
-    }
-
-    private void mnuMainFrm_Tools_Settings_Click(object sender, EventArgs e)
-    {
-        this.Settings_Click(sender, e);
-    }
-    private void mnuMainFrm_Help_About_Click(object sender, EventArgs e)
-    {
-        this.About_Click(sender, e);
-    }
-    #endregion mnuMainFrm events
-
     /// <summary>
     /// Update user-interface language and localization
     /// </summary>
@@ -309,6 +227,5 @@ public partial class FrmMain : Form
         }
 
     }
-
 }
 

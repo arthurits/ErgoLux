@@ -305,5 +305,54 @@ partial class FrmMain
             }
         }
     }
+
+
+    private void mnuMainFrm_View_Menu_Click(object sender, EventArgs e)
+    {
+        bool status = !this.mnuMainFrm_View_Menu.Checked;
+        this.mnuMainFrm_View_Menu.Checked = status;
+        this.mnuMainFrm.Visible = status;
+    }
+    private void mnuMainFrm_View_Toolbar_Click(object sender, EventArgs e)
+    {
+        bool status = !this.mnuMainFrm_View_Toolbar.Checked;
+        this.mnuMainFrm_View_Toolbar.Checked = status;
+        this.toolStripMain.Visible = status;
+    }
+    private void mnuMainFrm_View_Raw_Click(object sender, EventArgs e)
+    {
+        bool status = !this.mnuMainFrm_View_Raw.Checked;
+        this.mnuMainFrm_View_Raw.Checked = status;
+        this.statusStripLabelRaw.Checked = status;
+        _sett.Plot_ShowRawData = status;
+    }
+    private void mnuMainFrm_View_Radial_Click(object sender, EventArgs e)
+    {
+        bool status = !this.mnuMainFrm_View_Distribution.Checked;
+        this.mnuMainFrm_View_Distribution.Checked = status;
+        this.statusStripLabelRadar.Checked = status;
+        _sett.Plot_ShowDistribution = status;
+    }
+    private void mnuMainFrm_View_Average_Click(object sender, EventArgs e)
+    {
+        bool status = !this.mnuMainFrm_View_Average.Checked;
+        this.mnuMainFrm_View_Average.Checked = status;
+        this.statusStripLabelMax.Checked = status;
+        _sett.Plot_ShowAverage = status;
+    }
+    private void mnuMainFrm_View_Ratio_Click(object sender, EventArgs e)
+    {
+        bool status = !this.mnuMainFrm_View_Ratio.Checked;
+        this.mnuMainFrm_View_Ratio.Checked = status;
+        this.statusStripLabelRatio.Checked = status;
+        _sett.Plot_ShowRatios = status;
+    }
+    private void mnuMainFrm_Tools_Connect_Click(object sender, EventArgs e)
+    {
+        bool status = !this.toolStripMain_Connect.Checked;
+        this.mnuMainFrm_Tools_Connect.Checked = status;
+        this.toolStripMain_Connect.Checked = status;
+    }
+
 }
 
