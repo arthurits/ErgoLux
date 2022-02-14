@@ -451,7 +451,7 @@ namespace ErgoLux
             this.toolStripMain_Exit.Text = "Exit";
             this.toolStripMain_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Exit.ToolTipText = "Exit application";
-            this.toolStripMain_Exit.Click += new System.EventHandler(this.toolStripMain_Exit_Click);
+            this.toolStripMain_Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // toolStripMain_Save
             // 
@@ -461,8 +461,8 @@ namespace ErgoLux
             this.toolStripMain_Save.Text = "Save";
             this.toolStripMain_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Save.ToolTipText = "Save data";
-            this.toolStripMain_Save.CheckedChanged += new System.EventHandler(this.toolStripMain_Save_CheckedChanged);
-            this.toolStripMain_Save.Click += new System.EventHandler(this.toolStripMain_Save_Click);
+            this.toolStripMain_Save.CheckedChanged += new System.EventHandler(this.Save_CheckedChanged);
+            this.toolStripMain_Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // toolStripMain_Open
             // 
@@ -471,7 +471,7 @@ namespace ErgoLux
             this.toolStripMain_Open.Size = new System.Drawing.Size(44, 69);
             this.toolStripMain_Open.Text = "Open";
             this.toolStripMain_Open.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripMain_Open.Click += new System.EventHandler(this.toolStripMain_Open_Click);
+            this.toolStripMain_Open.Click += new System.EventHandler(this.Open_Click);
             // 
             // toolStripSeparator1
             // 
@@ -487,7 +487,7 @@ namespace ErgoLux
             this.toolStripMain_Connect.Text = "Connect";
             this.toolStripMain_Connect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Connect.ToolTipText = "Connect Kinnect";
-            this.toolStripMain_Connect.CheckedChanged += new System.EventHandler(this.toolStripMain_Connect_CheckedChanged);
+            this.toolStripMain_Connect.CheckedChanged += new System.EventHandler(this.Connect_CheckedChanged);
             // 
             // toolStripMain_Disconnect
             // 
@@ -497,7 +497,7 @@ namespace ErgoLux
             this.toolStripMain_Disconnect.Text = "Disconnect";
             this.toolStripMain_Disconnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Disconnect.ToolTipText = "Disconnect Kinnect";
-            this.toolStripMain_Disconnect.Click += new System.EventHandler(this.toolStripMain_Disconnect_Click);
+            this.toolStripMain_Disconnect.Click += new System.EventHandler(this.Disconnect_Click);
             // 
             // toolStripSeparator2
             // 
@@ -512,7 +512,7 @@ namespace ErgoLux
             this.toolStripMain_Settings.Text = "Settings";
             this.toolStripMain_Settings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_Settings.ToolTipText = "T-10A settings";
-            this.toolStripMain_Settings.Click += new System.EventHandler(this.toolStripMain_Settings_Click);
+            this.toolStripMain_Settings.Click += new System.EventHandler(this.Settings_Click);
             // 
             // toolStripSeparator3
             // 
@@ -528,7 +528,7 @@ namespace ErgoLux
             this.toolStripMain_About.Text = "About";
             this.toolStripMain_About.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripMain_About.ToolTipText = "About this software";
-            this.toolStripMain_About.Click += new System.EventHandler(this.toolStripMain_About_Click);
+            this.toolStripMain_About.Click += new System.EventHandler(this.About_Click);
             // 
             // formsPlot1
             // 
@@ -635,7 +635,7 @@ namespace ErgoLux
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ErgoLux";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
-            this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.mnuMainFrm.ResumeLayout(false);
             this.mnuMainFrm.PerformLayout();
             this.statusStrip.ResumeLayout(false);
