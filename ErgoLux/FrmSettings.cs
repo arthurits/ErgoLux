@@ -246,10 +246,10 @@ public partial class FrmSettings : Form
         {
             _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
             UpdateUI_Language();
-            radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting") + $" ({_settings.AppCultureName})";
+            //radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting") + $" ({_settings.AppCultureName})";
         }
-        else
-            radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting";
+        //else
+        //    radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting";
     }
 
     private void radInvariantCulture_CheckedChanged(object sender, EventArgs e)
