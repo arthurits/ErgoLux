@@ -388,7 +388,7 @@ public partial class FrmSettings : Form
         this.tabGUI.Text = StringsRM.GetString("strTabGUI", culture) ?? "User interface";
 
         this.grpCulture.Text = StringsRM.GetString("strGrpCulture", culture) ?? "UI and data format";
-        this.radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting";
+        this.radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting" + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
         this.radInvariantCulture.Text = StringsRM.GetString("strRadInvariantCulture", culture) ?? "Invariant culture formatting";
         this.radUserCulture.Text = StringsRM.GetString("strRadUserCulture", culture) ?? "Select culture";
         this.chkDlgPath.Text = StringsRM.GetString("strChkDlgPath", culture) ?? "Remember open/save dialog previous path";
