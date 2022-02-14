@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grpCulture" xml:space="preserve">
     <value>Interfaz y formato de datos</value>
@@ -240,9 +240,15 @@ Se utilizarán los valores por defecto.</value>
     <value>Promedio/Máx</value>
   </data>
   <data name="strFileHeader15" xml:space="preserve">
-    <value>No se ha encontrado una línea en blanco.</value>
+    <value>Promedio</value>
   </data>
   <data name="strFileHeader16" xml:space="preserve">
+    <value>Iluminancia</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>No se ha encontrado una línea en blanco.</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
     <value>No se ha encontrado el nombre de las series de datos.</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">

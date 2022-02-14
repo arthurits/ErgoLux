@@ -21,7 +21,7 @@ partial class FrmMain
         {
             // https://stackoverflow.com/questions/897796/how-do-i-open-an-already-opened-file-with-a-net-streamreader
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            using var sr = new StreamReader(fs, System.Text.Encoding.UTF7);
+            using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
 
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
@@ -89,16 +89,16 @@ partial class FrmMain
 
             strLine = sr.ReadLine();    // Empty line
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strFileHeader15", _sett.AppCulture) ?? "Missing an empty line.");
+                throw new FormatException(StringsRM.GetString("strFileHeader17", _sett.AppCulture) ?? "Missing an empty line.");
             if (strLine != string.Empty)
-                throw new FormatException(StringsRM.GetString("strFileHeader15", _sett.AppCulture) ?? "Missing an empty line.");
+                throw new FormatException(StringsRM.GetString("strFileHeader17", _sett.AppCulture) ?? "Missing an empty line.");
 
             strLine = sr.ReadLine();    // Column header names
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strFileHeader16", _sett.AppCulture) ?? "Missing column headers (series names).");
-            string[] seriesLabels = strLine.Split('\t');
-            if (seriesLabels == Array.Empty<string>())
-                throw new FormatException(StringsRM.GetString("strFileHeader16", _sett.AppCulture) ?? "Missing column headers (series names).");
+                throw new FormatException(StringsRM.GetString("strFileHeader18", _sett.AppCulture) ?? "Missing column headers (series names).");
+            _seriesLabels = strLine.Split('\t');
+            if (_seriesLabels == Array.Empty<string>())
+                throw new FormatException(StringsRM.GetString("strFileHeader18", _sett.AppCulture) ?? "Missing column headers (series names).");
 
             // Initialize data arrays
             InitializeArrays();
@@ -182,6 +182,9 @@ partial class FrmMain
     private bool OpenBinaryData(string FileName)
     {
         bool result = true;
+        var cursor = Cursor.Current;
+        Cursor.Current = Cursors.WaitCursor;
+
         try
         {
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
@@ -206,10 +209,10 @@ partial class FrmMain
             _sett.T10_Frequency = br.ReadDouble();
             strLine = br.ReadString();      // column header names
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strFileHeader16", _sett.AppCulture) ?? "Missing column headers (series names).");
-            string[] seriesLabels = strLine.Split('\t');
-            if (seriesLabels == Array.Empty<string>())
-                throw new FormatException(StringsRM.GetString("strFileHeader16", _sett.AppCulture) ?? "Missing column headers (series names).");
+                throw new FormatException(StringsRM.GetString("strFileHeader18", _sett.AppCulture) ?? "Missing column headers (series names).");
+            _seriesLabels = strLine.Split('\t');
+            if (_seriesLabels == Array.Empty<string>())
+                throw new FormatException(StringsRM.GetString("strFileHeader18", _sett.AppCulture) ?? "Missing column headers (series names).");
 
             // Initialize data arrays
             InitializeArrays();
@@ -242,6 +245,10 @@ partial class FrmMain
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+        finally
+        {
+            Cursor.Current = cursor;
         }
 
         return result;

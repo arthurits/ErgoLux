@@ -18,6 +18,7 @@ public partial class FrmMain : Form
     private double[,] _plotRadar;
     private double[] _plotRadialGauge;
     private int _nPoints = 0;
+    private string[] _seriesLabels;
     private DateTime _timeStart;
     private DateTime _timeEnd;
     private bool _reading = false;   // this controls whether clicking the plots is allowed or not
@@ -551,7 +552,7 @@ public partial class FrmMain : Form
         // Binding for Plot Raw Data
         for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
         {
-            var plot = formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: "Sensor #" + i.ToString("#0"));
+            var plot = formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
             //formsPlot1.Refresh();
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
@@ -563,7 +564,7 @@ public partial class FrmMain : Form
         {
             string[] labels = new string[_sett.T10_NumberOfSensors];
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-                labels[i] = "#" + i.ToString("#0");
+                labels[i] = $"#{i:#0}";
             var plt = formsPlot2.Plot.AddRadar(_plotRadar, disableFrameAndGrid: false);
             plt.FillColors[0] = Color.FromArgb(100, plt.LineColors[0]);
             plt.FillColors[1] = Color.FromArgb(150, plt.LineColors[1]);
@@ -572,14 +573,15 @@ public partial class FrmMain : Form
             plt.AxisType = ScottPlot.RadarAxis.Polygon;
             plt.ShowAxisValues = false;
             plt.CategoryLabels = labels;
-            plt.GroupLabels = new string[] { "Average", "Illuminance" };
+            plt.GroupLabels = new string[] { $"{(StringsRM.GetString("strFileHeader15", _sett.AppCulture) ?? "Average")}",
+                                            $"{(StringsRM.GetString("strFileHeader16", _sett.AppCulture) ?? "Illuminance")}" };
         }
         else
         {
             var plt = formsPlot2.Plot.AddRadialGauge(_plotRadialGauge);
             var strLabels = new string[_sett.T10_NumberOfSensors];
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-                strLabels[i] = "Sensor #" + i.ToString("#0");
+                strLabels[i] = _seriesLabels[i];
             plt.Labels = strLabels;
             plt.StartingAngle = 180;
         }
@@ -588,7 +590,8 @@ public partial class FrmMain : Form
         // Binding for Plot Average
         for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
         {
-            var plot = formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
+            //var plot = formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
+            var plot = formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
@@ -597,7 +600,8 @@ public partial class FrmMain : Form
         // Binding for Plot Ratio
         for (int i = _sett.T10_NumberOfSensors + 3; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
         {
-            var plot = formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
+            //var plot = formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
+            var plot = formsPlot4.Plot.AddSignal( _plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
@@ -939,6 +943,42 @@ public partial class FrmMain : Form
         formsPlot4.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _sett.AppCulture) ?? "Illuminance ratios");
         formsPlot4.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _sett.AppCulture) ?? "Ratio");
         formsPlot4.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _sett.AppCulture) ?? "Time (seconds)");
+
+        // Update plots' legends
+        if (_plotData is not null)
+        {
+            _seriesLabels = new string[_plotData.Length];
+            for (int i = 0; i < _seriesLabels.Length - _sett.ArrayFixedColumns; i++)
+            {
+                _seriesLabels[i] = $"{(StringsRM.GetString("strFileHeader08", _sett.AppCulture) ?? "Sensor #")}{i:#0}";
+            }
+            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 0] = $"{(StringsRM.GetString("strFileHeader09", _sett.AppCulture) ?? "Maximum")}";
+            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 1] = $"{(StringsRM.GetString("strFileHeader10", _sett.AppCulture) ?? "Average")}";
+            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 2] = $"{(StringsRM.GetString("strFileHeader11", _sett.AppCulture) ?? "Minimum")}";
+            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 3] = $"{(StringsRM.GetString("strFileHeader12", _sett.AppCulture) ?? "Min/Average")}";
+            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 4] = $"{(StringsRM.GetString("strFileHeader13", _sett.AppCulture) ?? "Min/Max")}";
+            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 5] = $"{(StringsRM.GetString("strFileHeader14", _sett.AppCulture) ?? "Average/Max")}";
+
+            for (int i = 0; i < formsPlot1.Plot.GetPlottables().Length; i++)
+            {
+                formsPlot1.Plot.GetPlottables()[i].GetLegendItems()[0].label = _seriesLabels[i];
+            }
+
+            if (formsPlot3.Plot.GetPlottables().Length == 3)
+            {
+                formsPlot3.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 0];
+                formsPlot3.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 1];
+                formsPlot3.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 2];
+            }
+
+            if (formsPlot4.Plot.GetPlottables().Length == 3)
+            {
+                formsPlot4.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 3];
+                formsPlot4.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 4];
+                formsPlot4.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 5];
+            }
+        }
+
     }
 
     private void formsPlot_MouseDown(object sender, MouseEventArgs e)
