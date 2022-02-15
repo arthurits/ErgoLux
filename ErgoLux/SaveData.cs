@@ -26,7 +26,14 @@ partial class FrmMain
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader01", _sett.AppCulture) ?? "ErgoLux data")} ({_sett.AppCultureName})");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader02", _sett.AppCulture) ?? "Start time")}: {_timeStart.ToString(fullPattern, _sett.AppCulture)}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader03", _sett.AppCulture) ?? "End time")}: {_timeEnd.ToString(fullPattern, _sett.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _sett.AppCulture) ?? "Total measuring time")}: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} millisecons");
+            //sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _sett.AppCulture) ?? "Total measuring time")}: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} millisecons");
+            sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _sett.AppCulture) ?? "Total measuring time")}: " +
+                $"{nTime.Days} {(StringsRM.GetString("strFileHeader19", _sett.AppCulture) ?? "days")}, " +
+                $"{nTime.Hours} {(StringsRM.GetString("strFileHeader20", _sett.AppCulture) ?? "hours")}, " +
+                $"{nTime.Minutes} {(StringsRM.GetString("strFileHeader21", _sett.AppCulture) ?? "minutes")}, " +
+                $"{nTime.Seconds} {(StringsRM.GetString("strFileHeader22", _sett.AppCulture) ?? "seconds")} " +
+                $"{(StringsRM.GetString("strFileHeader23", _sett.AppCulture) ?? "and")} " +
+                $"{nTime.Milliseconds} {(StringsRM.GetString("strFileHeader24", _sett.AppCulture) ?? "milliseconds")}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader05", _sett.AppCulture) ?? "Number of sensors")}: {_sett.T10_NumberOfSensors}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader06", _sett.AppCulture) ?? "Number of data points")}: {_nPoints}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader07", _sett.AppCulture) ?? "Sampling frequency")}: {_sett.T10_Frequency.ToString(_sett.AppCulture)}");

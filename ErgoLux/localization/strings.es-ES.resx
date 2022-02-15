@@ -160,33 +160,6 @@ los campos a sus valores por defecto?</value>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>¿Restablecer opciones?</value>
   </data>
-  <data name="strELuxHeader01" xml:space="preserve">
-    <value>La sección 'ErgoLux data' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader02" xml:space="preserve">
-    <value>La sección 'Start time' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader03" xml:space="preserve">
-    <value>La sección 'End time' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader04" xml:space="preserve">
-    <value>La sección 'Total measuring time' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader05" xml:space="preserve">
-    <value>La sección 'Number of sensors' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader06" xml:space="preserve">
-    <value>La sección 'Number of data points' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader07" xml:space="preserve">
-    <value>La sección 'Sampling frequency' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader08" xml:space="preserve">
-    <value>No se ha encontrado una línea en blanco.</value>
-  </data>
-  <data name="strELuxHeader09" xml:space="preserve">
-    <value>No se ha encontrado el nombre de las series de datos.</value>
-  </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Error al leer el archivo de ajustes.
 
@@ -250,6 +223,24 @@ Se utilizarán los valores por defecto.</value>
   </data>
   <data name="strFileHeader18" xml:space="preserve">
     <value>No se ha encontrado el nombre de las series de datos.</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>días</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>horas</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>minutos</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>segundos</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>y</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>milisegundos</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>La sección '{0}' tiene formato incorrecto.</value>
