@@ -118,6 +118,11 @@ public partial class FrmMain : Form
 
     }
 
+private void SetFormTitle(Form frm, string strFileName = String.Empty)
+{
+frm.Text = (StringsRM.GetString("strToolStripExit", _sett.AppCulture) ?? "Exit") + strFilename == String.Empty ? String.Empty : $" - {strFileName}";
+}
+
     /// <summary>
     /// Update user-interface language and localization
     /// </summary>
