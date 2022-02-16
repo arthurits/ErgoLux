@@ -43,6 +43,7 @@ public partial class FrmMain : Form
 
         // Language GUI
         UpdateUI_Language();
+        SetFormTitle(this);
 
         // Initialize the internal timer
         m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
@@ -52,7 +53,7 @@ public partial class FrmMain : Form
 
     private void FrmMain_Shown(object sender, EventArgs e)
     {
-        // signal the native process (that launched us) to close the splash screen
+        // Signal the native process (that launched us) to close the splash screen
         using var closeSplashEvent = new System.Threading.EventWaitHandle(false, System.Threading.EventResetMode.ManualReset, "CloseSplashScreenEvent");
         closeSplashEvent.Set();
     }
@@ -88,8 +89,7 @@ public partial class FrmMain : Form
 
     private void OnTimedEvent(object sender, EventArgs e)
     {
-        var result = false;
-        result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+        bool result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
     }
 
     private void OnDataReceived(object sender, DataReceivedEventArgs e)
@@ -118,10 +118,10 @@ public partial class FrmMain : Form
 
     }
 
-private void SetFormTitle(Form frm, string strFileName = String.Empty)
-{
-frm.Text = (StringsRM.GetString("strToolStripExit", _sett.AppCulture) ?? "Exit") + strFilename == String.Empty ? String.Empty : $" - {strFileName}";
-}
+    private void SetFormTitle(System.Windows.Forms.Form frm, string strFileName = "")
+    {
+        frm.Text = (StringsRM.GetString("strFormTitle", _sett.AppCulture) ?? "ErgoLux") + (strFileName == String.Empty ? String.Empty : $" — {strFileName}");
+    }
 
     /// <summary>
     /// Update user-interface language and localization

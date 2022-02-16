@@ -69,6 +69,8 @@ partial class FrmMain
                     SaveDefaultData(SaveDlg.FileName);
                     break;
             }
+
+            SetFormTitle(this, SaveDlg.FileName);
         }
     }
 
@@ -117,6 +119,7 @@ partial class FrmMain
 
         if (readOK)
         {
+            SetFormTitle(this, OpenDlg.FileName);
             // Show data into plots
             Plots_FetchData();
         }
@@ -145,6 +148,7 @@ partial class FrmMain
             toolStripMain_Settings.Enabled = false;
             toolStripMain_About.Enabled = false;
             this.statusStripIconExchange.Image = _sett.Icon_Data;
+            SetFormTitle(this);
             _reading = true;
 
             myFtdiDevice.DataReceived += OnDataReceived;
