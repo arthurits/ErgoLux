@@ -15,3 +15,6 @@ Download latest release: [![GitHub release (latest by date)](https://img.shields
 This project uses controls and routines from the following Gits:
 * [ScottPlot](https://github.com/ScottPlot/ScottPlot)
 * FTDI .NET wrapper from [FTDI website](https://ftdichip.com/wp-content/uploads/2020/07/FTD2XX_NET.zip)
+
+## Stats
+![Alt](https://repobeats.axiom.co/api/embed/8a48c3dcfbc2dd7fba3a5913be7c20d29bb561b9.svg "Repobeats analytics image")
