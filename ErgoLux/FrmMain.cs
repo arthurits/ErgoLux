@@ -118,9 +118,29 @@ public partial class FrmMain : Form
 
     }
 
-    private void SetFormTitle(System.Windows.Forms.Form frm, string strFileName = "")
+    /// <summary>
+    /// Sets the form's title
+    /// </summary>
+    /// <param name="frm">Form which title is to be set</param>
+    /// <param name="strFileName">String to be added at the default title in 'strFormTitle' string.
+    /// If <see langword="null"/>, no string is added.
+    /// If <see cref="String.Empty"/>, the current added text is mantained.
+    /// Other values are added to the default title.</param>
+    private void SetFormTitle(System.Windows.Forms.Form frm, string? strFileName = null)
     {
-        frm.Text = (StringsRM.GetString("strFormTitle", _sett.AppCulture) ?? "ErgoLux") + (strFileName == String.Empty ? String.Empty : $" — {strFileName}");
+        string strText = String.Empty;
+        string strSep = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? " - ";
+        if (strFileName is not null)
+        {
+            if (strFileName != String.Empty)
+                strText = $"{strSep}{strFileName}";
+            else
+            {
+                int index = frm.Text.IndexOf(strSep) > -1 ? frm.Text.IndexOf(strSep) : frm.Text.Length;
+                strText = frm.Text[index..];
+            }
+        }
+        frm.Text = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? "Signal analysis" + strText;
     }
 
     /// <summary>
@@ -128,7 +148,8 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_Language()
     {
-        this.Text = StringsRM.GetString("strFrmTitle", _sett.AppCulture);
+        // Update the form's tittle
+        SetFormTitle(this, String.Empty);
 
         // Update ToolStrip
         toolStripMain_Exit.Text = StringsRM.GetString("strToolStripExit", _sett.AppCulture) ?? "Exit";
