@@ -129,7 +129,7 @@ public partial class FrmMain : Form
     private void SetFormTitle(System.Windows.Forms.Form frm, string? strFileName = null)
     {
         string strText = String.Empty;
-        string strSep = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? " - ";
+        string strSep = StringsRM.GetString("strFrmTitleUnion", _sett.AppCulture) ?? " - ";
         if (strFileName is not null)
         {
             if (strFileName != String.Empty)
@@ -140,7 +140,7 @@ public partial class FrmMain : Form
                 strText = frm.Text[index..];
             }
         }
-        frm.Text = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? "Signal analysis" + strText;
+        frm.Text = StringsRM.GetString("strFormTitle", _sett.AppCulture) ?? "ErgoLux" + strText;
     }
 
     /// <summary>
