@@ -43,7 +43,6 @@ public partial class FrmMain : Form
 
         // Language GUI
         UpdateUI_Language();
-        SetFormTitle(this);
 
         // Initialize the internal timer
         m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
