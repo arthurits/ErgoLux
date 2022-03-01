@@ -82,6 +82,7 @@ namespace ErgoLux
             this.formsPlot3 = new ScottPlot.FormsPlot();
             this.formsPlot4 = new ScottPlot.FormsPlot();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.statusStripLabelUILanguage = new System.Windows.Forms.ToolStripStatusLabel();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -136,7 +137,7 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_File_Open.Name = "mnuMainFrm_File_Open";
             this.mnuMainFrm_File_Open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuMainFrm_File_Open.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_File_Open.Size = new System.Drawing.Size(155, 22);
             this.mnuMainFrm_File_Open.Text = "&Open...";
             this.mnuMainFrm_File_Open.Click += new System.EventHandler(this.Open_Click);
             // 
@@ -144,20 +145,20 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_File_Save.Name = "mnuMainFrm_File_Save";
             this.mnuMainFrm_File_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuMainFrm_File_Save.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_File_Save.Size = new System.Drawing.Size(155, 22);
             this.mnuMainFrm_File_Save.Text = "&Save...";
             this.mnuMainFrm_File_Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // toolStripMenuSeparator1
             // 
             this.toolStripMenuSeparator1.Name = "toolStripMenuSeparator1";
-            this.toolStripMenuSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuSeparator1.Size = new System.Drawing.Size(152, 6);
             // 
             // mnuMainFrm_File_Exit
             // 
             this.mnuMainFrm_File_Exit.Name = "mnuMainFrm_File_Exit";
             this.mnuMainFrm_File_Exit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.mnuMainFrm_File_Exit.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_File_Exit.Size = new System.Drawing.Size(155, 22);
             this.mnuMainFrm_File_Exit.Text = "&Exit...";
             this.mnuMainFrm_File_Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
@@ -247,7 +248,7 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_Tools_Disconnect.Name = "mnuMainFrm_Tools_Disconnect";
             this.mnuMainFrm_Tools_Disconnect.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.mnuMainFrm_Tools_Disconnect.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_Tools_Disconnect.Size = new System.Drawing.Size(175, 22);
             this.mnuMainFrm_Tools_Disconnect.Text = "&Disconnect";
             this.mnuMainFrm_Tools_Disconnect.Click += new System.EventHandler(this.Disconnect_Click);
             // 
@@ -259,7 +260,7 @@ namespace ErgoLux
             // mnuMainFrm_Tools_Settings
             // 
             this.mnuMainFrm_Tools_Settings.Name = "mnuMainFrm_Tools_Settings";
-            this.mnuMainFrm_Tools_Settings.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_Tools_Settings.Size = new System.Drawing.Size(175, 22);
             this.mnuMainFrm_Tools_Settings.Text = "&Settings...";
             this.mnuMainFrm_Tools_Settings.Click += new System.EventHandler(this.Settings_Click);
             // 
@@ -275,7 +276,7 @@ namespace ErgoLux
             // 
             this.mnuMainFrm_Help_About.Name = "mnuMainFrm_Help_About";
             this.mnuMainFrm_Help_About.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.mnuMainFrm_Help_About.Size = new System.Drawing.Size(180, 22);
+            this.mnuMainFrm_Help_About.Size = new System.Drawing.Size(158, 22);
             this.mnuMainFrm_Help_About.Text = "&About...";
             this.mnuMainFrm_Help_About.Click += new System.EventHandler(this.About_Click);
             // 
@@ -289,6 +290,7 @@ namespace ErgoLux
             this.statusStripIconOpen,
             this.statusStripIconExchange,
             this.statusStripLabelXtras,
+            this.statusStripLabelUILanguage,
             this.statusStripLabelRaw,
             this.statusStripLabelRadar,
             this.statusStripLabelMax,
@@ -359,7 +361,7 @@ namespace ErgoLux
             this.statusStripLabelXtras.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelXtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelXtras.Name = "statusStripLabelXtras";
-            this.statusStripLabelXtras.Size = new System.Drawing.Size(234, 23);
+            this.statusStripLabelXtras.Size = new System.Drawing.Size(143, 23);
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -619,6 +621,16 @@ namespace ErgoLux
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
+            // statusStripLabelUILanguage
+            // 
+            this.statusStripLabelUILanguage.AutoSize = false;
+            this.statusStripLabelUILanguage.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.statusStripLabelUILanguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusStripLabelUILanguage.Name = "statusStripLabelUILanguage";
+            this.statusStripLabelUILanguage.Size = new System.Drawing.Size(60, 23);
+            this.statusStripLabelUILanguage.Text = "Invariant";
+            this.statusStripLabelUILanguage.ToolTipText = "User interface language";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -704,6 +716,7 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_Tools_Disconnect;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_Tools_Settings;
+        private ToolStripStatusLabel statusStripLabelUILanguage;
     }
 }
 

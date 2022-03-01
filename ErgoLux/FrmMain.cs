@@ -184,6 +184,8 @@ public partial class FrmMain : Form
         statusStripIconExchange.Text = StringsRM.GetString("strStatusExchange", _sett.AppCulture) ?? "Receiving data";
         statusStripIconExchange.ToolTipText = StringsRM.GetString("strStatusTipExchange", _sett.AppCulture) ?? "Exchange status";
 
+        statusStripLabelUILanguage.Text = _sett.AppCulture.Name == String.Empty ? "Invariant" : _sett.AppCulture.Name;
+        statusStripLabelUILanguage.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _sett.AppCulture) ?? "User interface language";
 
         // Update menu
         mnuMainFrm_File.Text = StringsRM.GetString("strMenuMainFile", _sett.AppCulture) ?? "&File";
