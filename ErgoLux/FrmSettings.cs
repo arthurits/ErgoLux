@@ -282,37 +282,6 @@ public partial class FrmSettings : Form
     }
 
     /// <summary>
-    /// Sets default input-values for all controls
-    /// </summary>
-    private void SetDefaultValues()
-    {
-        cboDataBits.SelectedIndex = 0;
-        cboStopBits.SelectedIndex = 0;
-        cboParity.SelectedIndex = 2;
-        cboFlowControl.SelectedIndex = 0;
-
-        txtBaudRate.Text = "9600";
-        txtOn.Text = "11";
-        txtOff.Text = "13";
-        txtHz.Text = "2";
-
-        updSensors.Value = 1;
-
-        txtArrayPoints.Text = "7200";
-        txtPlotWindow.Text = "20";
-
-        chkShowRaw.Checked = true;
-        chkShowDistribution.Checked = true;
-        chkShowAverage.Checked = true;
-        chkShowRatio.Checked = true;
-        radRadar.Checked = true;
-
-        radCurrentCulture.Checked = true;
-        chkDlgPath.Checked = true;
-        txtDataFormat.Text = "#0.0##";
-    }
-
-    /// <summary>
     /// Updates the form's controls with values from the settings class
     /// </summary>
     /// <param name="settings">Class containing the values to show on the form's controls</param>
@@ -398,6 +367,5 @@ public partial class FrmSettings : Form
         this.btnCancel.Text = StringsRM.GetString("strBtnCancel", culture) ?? "&Cancel";
         this.btnAccept.Text = StringsRM.GetString("strBtnAccept", culture) ?? "&Accept";
     }
-
 
 }
