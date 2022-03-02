@@ -245,6 +245,9 @@ Default values will be used instead.</value>
   <data name="strFormTitle" xml:space="preserve">
     <value>ErgoLux</value>
   </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>Select culture</value>
+  </data>
   <data name="strFrmSettings" xml:space="preserve">
     <value>Settings</value>
   </data>

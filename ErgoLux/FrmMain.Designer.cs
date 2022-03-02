@@ -60,6 +60,7 @@ namespace ErgoLux
             this.statusStripIconOpen = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripIconExchange = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelXtras = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripLabelUILanguage = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelRaw = new System.Windows.Forms.ToolStripStatusLabelEx();
             this.statusStripLabelRadar = new System.Windows.Forms.ToolStripStatusLabelEx();
             this.statusStripLabelMax = new System.Windows.Forms.ToolStripStatusLabelEx();
@@ -82,7 +83,6 @@ namespace ErgoLux
             this.formsPlot3 = new ScottPlot.FormsPlot();
             this.formsPlot4 = new ScottPlot.FormsPlot();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.statusStripLabelUILanguage = new System.Windows.Forms.ToolStripStatusLabel();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -365,6 +365,17 @@ namespace ErgoLux
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // statusStripLabelUILanguage
+            // 
+            this.statusStripLabelUILanguage.AutoSize = false;
+            this.statusStripLabelUILanguage.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.statusStripLabelUILanguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusStripLabelUILanguage.Name = "statusStripLabelUILanguage";
+            this.statusStripLabelUILanguage.Size = new System.Drawing.Size(60, 23);
+            this.statusStripLabelUILanguage.Text = "Invariant";
+            this.statusStripLabelUILanguage.ToolTipText = "User interface language";
+            this.statusStripLabelUILanguage.Click += new System.EventHandler(this.Language_Click);
+            // 
             // statusStripLabelRaw
             // 
             this.statusStripLabelRaw.AutoSize = false;
@@ -620,16 +631,6 @@ namespace ErgoLux
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
-            // 
-            // statusStripLabelUILanguage
-            // 
-            this.statusStripLabelUILanguage.AutoSize = false;
-            this.statusStripLabelUILanguage.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.statusStripLabelUILanguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelUILanguage.Name = "statusStripLabelUILanguage";
-            this.statusStripLabelUILanguage.Size = new System.Drawing.Size(60, 23);
-            this.statusStripLabelUILanguage.Text = "Invariant";
-            this.statusStripLabelUILanguage.ToolTipText = "User interface language";
             // 
             // FrmMain
             // 

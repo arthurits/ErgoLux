@@ -187,7 +187,7 @@ partial class FrmMain
     {
         FTDI.FT_STATUS result;
 
-        var frm = new FrmSettings(_sett);
+        FrmSettings frm = new(_sett);
         // Set form icon
         if (File.Exists(_sett.AppPath + @"\images\logo.ico")) frm.Icon = new Icon(_sett.AppPath + @"\images\logo.ico");
         frm.ShowDialog();
@@ -265,7 +265,18 @@ partial class FrmMain
         var frm = new FrmAbout();
         frm.ShowDialog();
     }
-  
+
+    private void Language_Click(object sender, EventArgs e)
+    {
+        FrmLanguage frm = new(_sett);
+        frm.ShowDialog();
+
+        if (frm.DialogResult == DialogResult.OK)
+        {
+            UpdateUI_Language();
+        }
+    }
+
     private void statusStripLabelPlots_CheckedChanged(object sender, EventArgs e)
     {
         if (sender is ToolStripStatusLabelEx)

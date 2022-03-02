@@ -6,7 +6,7 @@ namespace ErgoLux;
 
 public partial class FrmSettings : Form
 {
-    private int[] _data = new int[10];
+    //private int[] _data = new int[10];
     private string _deviceType;
     private string _deviceID;
     private ClassSettings _settings = new();
