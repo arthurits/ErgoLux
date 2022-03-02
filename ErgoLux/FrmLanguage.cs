@@ -70,7 +70,7 @@ namespace ErgoLux
             cboAllCultures.Enabled = radUserCulture.Checked;
             if (cboAllCultures.Enabled)
             {
-                _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
+                _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue ?? String.Empty);
                 UpdateUI_Language();
             }
         }

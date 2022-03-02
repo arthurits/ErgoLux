@@ -28,7 +28,7 @@ public static class GlobalizationUtilities
         {
             try
             {
-                //if (culture.Equals(CultureInfo.InvariantCulture)) continue; //do not use "==", won't work
+                if (culture.Equals(CultureInfo.InvariantCulture)) continue; //do not use "==", won't work
 
                 ResourceSet? rs = rm.GetResourceSet(culture, true, false);
                 if (rs is not null)
