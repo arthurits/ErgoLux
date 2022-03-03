@@ -39,7 +39,7 @@
             // cboAllCultures
             // 
             this.cboAllCultures.FormattingEnabled = true;
-            this.cboAllCultures.Location = new System.Drawing.Point(145, 127);
+            this.cboAllCultures.Location = new System.Drawing.Point(150, 127);
             this.cboAllCultures.Name = "cboAllCultures";
             this.cboAllCultures.Size = new System.Drawing.Size(145, 25);
             this.cboAllCultures.TabIndex = 0;
