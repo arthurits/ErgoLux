@@ -10,7 +10,7 @@ public partial class FrmSettings : Form
     private string _deviceType;
     private string _deviceID;
     private ClassSettings _settings = new();
-    private System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
+    private readonly System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
 
     public string GetDeviceType { get => _deviceType; }
     public string GetDeviceID { get => _deviceID; }
@@ -155,7 +155,7 @@ public partial class FrmSettings : Form
         groupBox1.Enabled = chkShowDistribution.Checked;
     }
 
-    private void btnOK_Click(object sender, EventArgs e)
+    private void Accept_Click(object sender, EventArgs e)
     {
         this.DialogResult = DialogResult.None;
 
@@ -207,16 +207,16 @@ public partial class FrmSettings : Form
         _settings.Plot_ShowRatios = chkShowRatio.Checked;
         _settings.Plot_DistIsRadar = radRadar.Checked;
 
-        if (radCurrentCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
-        else if (radInvariantCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
-        else if (radUserCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
+        //if (radCurrentCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
+        //else if (radInvariantCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+        //else if (radUserCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
         _settings.RememberFileDialogPath = chkDlgPath.Checked;
         _settings.DataFormat = txtDataFormat.Text;
 
         this.DialogResult = DialogResult.OK;
     }
 
-    private void btnReset_Click(object sender, EventArgs e)
+    private void Reset_Click(object sender, EventArgs e)
     {
         DialogResult result;
         using (new CenterWinDialog(this))
@@ -235,24 +235,21 @@ public partial class FrmSettings : Form
         }
     }
 
-    private void btnCancel_Click(object sender, EventArgs e)
+    private void Cancel_Click(object sender, EventArgs e)
     {
         DialogResult = DialogResult.Cancel;
     }
 
-    private void radCurrentCulture_CheckedChanged(object sender, EventArgs e)
+    private void CurrentCulture_CheckedChanged(object sender, EventArgs e)
     {
         if (radCurrentCulture.Checked)
         {
             _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
             UpdateUI_Language();
-            //radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting") + $" ({_settings.AppCultureName})";
         }
-        //else
-        //    radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", _settings.AppCulture) ?? "Current culture formatting";
     }
 
-    private void radInvariantCulture_CheckedChanged(object sender, EventArgs e)
+    private void InvariantCulture_CheckedChanged(object sender, EventArgs e)
     {
         if (radInvariantCulture.Checked)
         {
@@ -261,22 +258,22 @@ public partial class FrmSettings : Form
         }
     }
 
-    private void radUserCulture_CheckedChanged(object sender, EventArgs e)
+    private void UserCulture_CheckedChanged(object sender, EventArgs e)
     {
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
+            _settings.AppCulture = new((string)cboAllCultures.SelectedValue);
             UpdateUI_Language();
         }
     }
 
-    private void cboAllCultures_SelectedValueChanged(object sender, EventArgs e)
+    private void AllCultures_SelectedValueChanged(object sender, EventArgs e)
     {
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
-            _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cbo.SelectedValue ?? String.Empty);
+            _settings.AppCulture = new((string)cbo.SelectedValue ?? String.Empty);
             UpdateUI_Language();
         }
     }

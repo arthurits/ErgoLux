@@ -127,7 +127,7 @@ namespace ErgoLux
             this.btnAccept.TabIndex = 17;
             this.btnAccept.Text = "&Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnAccept.Click += new System.EventHandler(this.Accept_Click);
             // 
             // btnCancel
             // 
@@ -139,7 +139,7 @@ namespace ErgoLux
             this.btnCancel.TabIndex = 18;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
             // tabSettings
             // 
@@ -555,7 +555,7 @@ namespace ErgoLux
             this.cboAllCultures.Name = "cboAllCultures";
             this.cboAllCultures.Size = new System.Drawing.Size(121, 25);
             this.cboAllCultures.TabIndex = 3;
-            this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.cboAllCultures_SelectedValueChanged);
+            this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.AllCultures_SelectedValueChanged);
             // 
             // radUserCulture
             // 
@@ -567,7 +567,7 @@ namespace ErgoLux
             this.radUserCulture.TabStop = true;
             this.radUserCulture.Text = "User culture";
             this.radUserCulture.UseVisualStyleBackColor = true;
-            this.radUserCulture.CheckedChanged += new System.EventHandler(this.radUserCulture_CheckedChanged);
+            this.radUserCulture.CheckedChanged += new System.EventHandler(this.UserCulture_CheckedChanged);
             // 
             // radInvariantCulture
             // 
@@ -579,7 +579,7 @@ namespace ErgoLux
             this.radInvariantCulture.TabStop = true;
             this.radInvariantCulture.Text = "Invariant culture";
             this.radInvariantCulture.UseVisualStyleBackColor = true;
-            this.radInvariantCulture.CheckedChanged += new System.EventHandler(this.radInvariantCulture_CheckedChanged);
+            this.radInvariantCulture.CheckedChanged += new System.EventHandler(this.InvariantCulture_CheckedChanged);
             // 
             // radCurrentCulture
             // 
@@ -591,7 +591,7 @@ namespace ErgoLux
             this.radCurrentCulture.TabStop = true;
             this.radCurrentCulture.Text = "Current culture";
             this.radCurrentCulture.UseVisualStyleBackColor = true;
-            this.radCurrentCulture.CheckedChanged += new System.EventHandler(this.radCurrentCulture_CheckedChanged);
+            this.radCurrentCulture.CheckedChanged += new System.EventHandler(this.CurrentCulture_CheckedChanged);
             // 
             // btnReset
             // 
@@ -602,7 +602,7 @@ namespace ErgoLux
             this.btnReset.TabIndex = 23;
             this.btnReset.Text = "&Reset";
             this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.btnReset.Click += new System.EventHandler(this.Reset_Click);
             // 
             // FrmSettings
             // 
