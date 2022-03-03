@@ -5,7 +5,7 @@ namespace ErgoLux;
 public partial class FrmLanguage : Form
 {
     private ClassSettings _settings = new();
-    private System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
+    private readonly System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
 
     public FrmLanguage()
     {
