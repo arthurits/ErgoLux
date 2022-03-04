@@ -207,16 +207,19 @@ public partial class FrmMain : Form
         mnuMainFrm_Help_About.Text = StringsRM.GetString("strMenuMainHelpAbout", _sett.AppCulture) ?? "&About";
 
         // Update plots
-        formsPlot1.Plot.Title(StringsRM.GetString("strPlotRawTitle", _sett.AppCulture) ?? "Illuminance");
-        formsPlot1.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _sett.AppCulture) ?? "Lux");
-        formsPlot1.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _sett.AppCulture) ?? "Time (seconds)");
-        formsPlot2.Plot.Title(StringsRM.GetString("strPlotDistributionTitle", _sett.AppCulture) ?? "Illuminance distribution");
-        formsPlot3.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _sett.AppCulture) ?? "Max, average, min");
-        formsPlot3.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _sett.AppCulture) ?? "Lux");
-        formsPlot3.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _sett.AppCulture) ?? "Time (seconds)");
-        formsPlot4.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _sett.AppCulture) ?? "Illuminance ratios");
-        formsPlot4.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _sett.AppCulture) ?? "Ratio");
-        formsPlot4.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _sett.AppCulture) ?? "Time (seconds)");
+        plotData.CultureUI = _sett.AppCulture;
+        plotData.Plot.Title(StringsRM.GetString("strPlotRawTitle", _sett.AppCulture) ?? "Illuminance");
+        plotData.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _sett.AppCulture) ?? "Lux");
+        plotData.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _sett.AppCulture) ?? "Time (seconds)");
+        plotDistribution.Plot.Title(StringsRM.GetString("strPlotDistributionTitle", _sett.AppCulture) ?? "Illuminance distribution");
+        plotStats.CultureUI = _sett.AppCulture;
+        plotStats.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _sett.AppCulture) ?? "Max, average, min");
+        plotStats.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _sett.AppCulture) ?? "Lux");
+        plotStats.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _sett.AppCulture) ?? "Time (seconds)");
+        plotRatio.CultureUI = _sett.AppCulture;
+        plotRatio.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _sett.AppCulture) ?? "Illuminance ratios");
+        plotRatio.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _sett.AppCulture) ?? "Ratio");
+        plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _sett.AppCulture) ?? "Time (seconds)");
 
         // Update plots' legends
         if (_plotData is not null)
@@ -233,23 +236,23 @@ public partial class FrmMain : Form
             _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 4] = $"{(StringsRM.GetString("strFileHeader13", _sett.AppCulture) ?? "Min/Max")}";
             _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 5] = $"{(StringsRM.GetString("strFileHeader14", _sett.AppCulture) ?? "Average/Max")}";
 
-            for (int i = 0; i < formsPlot1.Plot.GetPlottables().Length; i++)
+            for (int i = 0; i < plotData.Plot.GetPlottables().Length; i++)
             {
-                formsPlot1.Plot.GetPlottables()[i].GetLegendItems()[0].label = _seriesLabels[i];
+                plotData.Plot.GetPlottables()[i].GetLegendItems()[0].label = _seriesLabels[i];
             }
 
-            if (formsPlot3.Plot.GetPlottables().Length == 3)
+            if (plotStats.Plot.GetPlottables().Length == 3)
             {
-                formsPlot3.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 0];
-                formsPlot3.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 1];
-                formsPlot3.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 2];
+                plotStats.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 0];
+                plotStats.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 1];
+                plotStats.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 2];
             }
 
-            if (formsPlot4.Plot.GetPlottables().Length == 3)
+            if (plotRatio.Plot.GetPlottables().Length == 3)
             {
-                formsPlot4.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 3];
-                formsPlot4.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 4];
-                formsPlot4.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 5];
+                plotRatio.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 3];
+                plotRatio.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 4];
+                plotRatio.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 5];
             }
         }
 

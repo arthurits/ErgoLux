@@ -14,10 +14,10 @@ partial class FrmMain
         _max = 0;
         _min = 0;
 
-        formsPlot1.Plot.Clear();
-        formsPlot2.Plot.Clear();
-        formsPlot3.Plot.Clear();
-        formsPlot4.Plot.Clear();
+        plotData.Plot.Clear();
+        plotDistribution.Plot.Clear();
+        plotStats.Plot.Clear();
+        plotRatio.Plot.Clear();
 
         InitializePlotsPalette();
 
@@ -33,12 +33,12 @@ partial class FrmMain
         // Binding for Plot Raw Data
         for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
         {
-            var plot = formsPlot1.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
+            var plot = plotData.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
             //formsPlot1.Refresh();
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
-        formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
+        plotData.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
         // Binding for Distribution plot
         if (_sett.Plot_DistIsRadar)
@@ -46,7 +46,7 @@ partial class FrmMain
             string[] labels = new string[_sett.T10_NumberOfSensors];
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                 labels[i] = $"#{i:#0}";
-            var plt = formsPlot2.Plot.AddRadar(_plotRadar, disableFrameAndGrid: false);
+            var plt = plotDistribution.Plot.AddRadar(_plotRadar, disableFrameAndGrid: false);
             plt.FillColors[0] = Color.FromArgb(100, plt.LineColors[0]);
             plt.FillColors[1] = Color.FromArgb(150, plt.LineColors[1]);
             //formsPlot2.Plot.Grid(enable: false);
@@ -59,7 +59,7 @@ partial class FrmMain
         }
         else
         {
-            var plt = formsPlot2.Plot.AddRadialGauge(_plotRadialGauge);
+            var plt = plotDistribution.Plot.AddRadialGauge(_plotRadialGauge);
             var strLabels = new string[_sett.T10_NumberOfSensors];
             for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
                 strLabels[i] = _seriesLabels[i];
@@ -72,21 +72,21 @@ partial class FrmMain
         for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
         {
             //var plot = formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
-            var plot = formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
+            var plot = plotStats.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
-        formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
+        plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
 
         // Binding for Plot Ratio
         for (int i = _sett.T10_NumberOfSensors + 3; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
         {
             //var plot = formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
-            var plot = formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
+            var plot = plotRatio.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
-        formsPlot4.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
+        plotRatio.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
     }
 
     /// <summary>
@@ -109,31 +109,31 @@ partial class FrmMain
     {
         if (_sett.Plot_ShowRawData)
         {
-            foreach (var plot in formsPlot1.Plot.GetPlottables())
+            foreach (var plot in plotData.Plot.GetPlottables())
                 ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
-            formsPlot1.Plot.AxisAuto();
-            formsPlot1.Plot.SetAxisLimits(xMin: 0, yMin: 0);
-            formsPlot1.Refresh();
+            plotData.Plot.AxisAuto();
+            plotData.Plot.SetAxisLimits(xMin: 0, yMin: 0);
+            plotData.Refresh();
         }
 
-        formsPlot2.Refresh();
+        plotDistribution.Refresh();
 
         if (_sett.Plot_ShowAverage)
         {
-            foreach (var plot in formsPlot3.Plot.GetPlottables())
+            foreach (var plot in plotStats.Plot.GetPlottables())
                 ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
-            formsPlot3.Plot.AxisAuto();
-            formsPlot3.Plot.SetAxisLimits(xMin: 0, yMin: 0);
-            formsPlot3.Refresh();
+            plotStats.Plot.AxisAuto();
+            plotStats.Plot.SetAxisLimits(xMin: 0, yMin: 0);
+            plotStats.Refresh();
         }
 
         if (_sett.Plot_ShowRatios)
         {
-            foreach (var plot in formsPlot4.Plot.GetPlottables())
+            foreach (var plot in plotRatio.Plot.GetPlottables())
                 ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
-            formsPlot4.Plot.AxisAuto();
-            formsPlot4.Plot.SetAxisLimits(xMin: 0, yMin: 0, yMax: 1);
-            formsPlot4.Refresh();
+            plotRatio.Plot.AxisAuto();
+            plotRatio.Plot.SetAxisLimits(xMin: 0, yMin: 0, yMax: 1);
+            plotRatio.Refresh();
         }
     }
 
@@ -150,8 +150,8 @@ partial class FrmMain
         Size szLegend = new();
 
         // Combine legends from Plot1 and Plot2 and draw a black border around each legend
-        legendA = showLegA ? formsPlot1.Plot.RenderLegend() : null;
-        legendB = showLegB ? formsPlot2.Plot.RenderLegend() : null;
+        legendA = showLegA ? plotData.Plot.RenderLegend() : null;
+        legendB = showLegB ? plotDistribution.Plot.RenderLegend() : null;
         szLegend.Width = Math.Max(showLegA ? legendA.Width : 0, showLegB ? legendB.Width : 0);
         szLegend.Width += 2;    // black border drawing
         szLegend.Height = (showLegA ? legendA.Height + 2 : 0);
@@ -181,8 +181,8 @@ partial class FrmMain
         pictureBox1.Image = bitmap;
 
         // Combine legends from Plot3 and Plot4 and draw a black border around each legend
-        legendA = formsPlot3.Plot.RenderLegend();
-        legendB = formsPlot4.Plot.RenderLegend();
+        legendA = plotStats.Plot.RenderLegend();
+        legendB = plotRatio.Plot.RenderLegend();
         bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + _sett.PxBetweenLegends + 4);
         using Graphics GraphicsB = Graphics.FromImage(bitmap);
         GraphicsB.DrawRectangle(new Pen(Color.Black),
@@ -222,17 +222,17 @@ partial class FrmMain
             // https://swharden.com/scottplot/faq/version-4.1/
             // Update array reference in the plots. The Update() method doesn't allow a bigger array, so we need to modify Ys property
             int j = 0;
-            foreach (var plot in formsPlot1.Plot.GetPlottables())
+            foreach (var plot in plotData.Plot.GetPlottables())
             {
                 ((ScottPlot.Plottable.SignalPlot)plot).Ys = _plotData[j];
                 j++;
             }
-            foreach (var plot in formsPlot3.Plot.GetPlottables())
+            foreach (var plot in plotStats.Plot.GetPlottables())
             {
                 ((ScottPlot.Plottable.SignalPlot)plot).Ys = _plotData[j];
                 j++;
             }
-            foreach (var plot in formsPlot4.Plot.GetPlottables())
+            foreach (var plot in plotRatio.Plot.GetPlottables())
             {
                 ((ScottPlot.Plottable.SignalPlot)plot).Ys = _plotData[j];
                 j++;
@@ -261,17 +261,17 @@ partial class FrmMain
             _plotData[_sett.T10_NumberOfSensors + 5][_nPoints] = _min > 0 ? _average / _max : 0;
 
             // Adjust the plots's axis
-            formsPlot1.Plot.AxisAutoY();
-            formsPlot3.Plot.AxisAutoY();
-            formsPlot1.Plot.SetAxisLimits(yMin: 0);
-            formsPlot3.Plot.SetAxisLimits(yMin: 0);
-            if (_nPoints / _sett.T10_Frequency >= formsPlot1.Plot.GetAxisLimits().XMax)
+            plotData.Plot.AxisAutoY();
+            plotStats.Plot.AxisAutoY();
+            plotData.Plot.SetAxisLimits(yMin: 0);
+            plotStats.Plot.SetAxisLimits(yMin: 0);
+            if (_nPoints / _sett.T10_Frequency >= plotData.Plot.GetAxisLimits().XMax)
             {
                 int xMin = (int)((_nPoints / _sett.T10_Frequency) - _sett.Plot_WindowPoints * 1 / 5);
                 int xMax = xMin + _sett.Plot_WindowPoints;
-                formsPlot1.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
-                formsPlot3.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
-                formsPlot4.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
+                plotData.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
+                plotStats.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
+                plotRatio.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
                 //formsPlot3.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
                 //formsPlot4.Plot.SetAxisLimits(xMin: (_nPoints - _sett.Plot_WindowPoints) / _sett.T10_Frequency, xMax: (_nPoints + _sett.Plot_WindowPoints) / _sett.T10_Frequency);
             }
@@ -279,14 +279,14 @@ partial class FrmMain
             // Update first plot
             if (_sett.Plot_ShowRawData)
             {
-                foreach (var plot in formsPlot1.Plot.GetPlottables())
+                foreach (var plot in plotData.Plot.GetPlottables())
                 {
                     ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                     //((ScottPlot.PlottableSignal)plot).minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
                     //sigPlot.maxRenderIndex = _dataN;
                     //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
                 }
-                formsPlot1.Refresh(skipIfCurrentlyRendering: true);
+                plotData.Refresh(skipIfCurrentlyRendering: true);
             }
 
             // Update radar plot
@@ -299,38 +299,38 @@ partial class FrmMain
                 // Update the distribution plot
                 if (_sett.Plot_DistIsRadar)
                 {
-                    ((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+                    ((ScottPlot.Plottable.RadarPlot)plotDistribution.Plot.GetPlottables()[0]).Update(_plotRadar, false);
                 }
                 else
                 {
-                    var plot = (ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0];
+                    var plot = (ScottPlot.Plottable.RadialGaugePlot)plotDistribution.Plot.GetPlottables()[0];
                     var maxAngle = _average > 0 ? 180 * _plotRadialGauge.Max() / _average : 0.0;
                     plot.MaximumAngle = maxAngle > 360 ? 360.0 : maxAngle;
                     plot.Update(_plotRadialGauge);
                     //plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _average;
                     //if (plot.MaximumAngle > 360) plot.MaximumAngle = 360.0;
                 }
-                formsPlot2.Refresh(skipIfCurrentlyRendering: true);
+                plotDistribution.Refresh(skipIfCurrentlyRendering: true);
             }
 
             // Update max, average, and min plot
             if (_sett.Plot_ShowAverage)
             {
-                foreach (var plot in formsPlot3.Plot.GetPlottables())
+                foreach (var plot in plotStats.Plot.GetPlottables())
                 {
                     ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                 }
-                formsPlot3.Refresh(skipIfCurrentlyRendering: true);
+                plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
 
             // Update ratios plot
             if (_sett.Plot_ShowRatios)
             {
-                foreach (var plot in formsPlot4.Plot.GetPlottables())
+                foreach (var plot in plotRatio.Plot.GetPlottables())
                 {
                     ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                 }
-                formsPlot4.Refresh(skipIfCurrentlyRendering: true);
+                plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
 
             // Modify internal numeric variables
@@ -344,75 +344,118 @@ partial class FrmMain
     }
 
 
-    private void formsPlot_MouseDown(object sender, MouseEventArgs e)
-    {
+    //private void formsPlot_MouseDown(object sender, MouseEventArgs e)
+    //{
 
-        // If we are reading from the sensor, then exit
-        if (_reading) return;
+    //    // If we are reading from the sensor, then exit
+    //    if (_reading) return;
 
-        if (e.Button != MouseButtons.Left) return;
+    //    if (e.Button != MouseButtons.Left) return;
 
-        var MyPlot = ((ScottPlot.FormsPlot)sender);
-        if (MyPlot.Name != "formsPlot1") return;
-        if (MyPlot.Plot.GetPlottables().Length == 0) return;
-        (double mouseCoordX, double mouseCoordY) = MyPlot.GetMouseCoordinates();
-        (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(MyPlot.Plot.GetPlottables()[0])).GetPointNearestX(mouseCoordX);
-        if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors)
-        {
-            var VLine = MyPlot.Plot.AddVerticalLine(pointX, color: Color.Red, width: 3, style: ScottPlot.LineStyle.Dash);
-            VLine.DragEnabled = true;
-        }
-        else if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors + 1)
-        {
-            ((ScottPlot.Plottable.VLine)MyPlot.Plot.GetPlottables().Last()).X = pointX;
-        }
+    //    var MyPlot = ((ScottPlot.FormsPlot)sender);
+    //    if (MyPlot.Name != "formsPlot1") return;
+    //    if (MyPlot.Plot.GetPlottables().Length == 0) return;
+    //    (double mouseCoordX, double mouseCoordY) = MyPlot.GetMouseCoordinates();
+    //    (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(MyPlot.Plot.GetPlottables()[0])).GetPointNearestX(mouseCoordX);
+    //    if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors)
+    //    {
+    //        var VLine = MyPlot.Plot.AddVerticalLine(pointX, color: Color.Red, width: 3, style: ScottPlot.LineStyle.Dash);
+    //        VLine.DragEnabled = true;
+    //    }
+    //    else if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors + 1)
+    //    {
+    //        ((ScottPlot.Plottable.VLine)MyPlot.Plot.GetPlottables().Last()).X = pointX;
+    //    }
 
-        // Some information:
-        // https://swharden.com/scottplot/faq/mouse-position/#highlight-the-data-point-near-the-cursor
-        // https://github.com/ScottPlot/ScottPlot/discussions/862
-        // https://github.com/ScottPlot/ScottPlot/discussions/645
-        // https://github.com/ScottPlot/ScottPlot/issues/1090
-        // frmWRmodel.cs chart_MouseClicked
+    //    // Some information:
+    //    // https://swharden.com/scottplot/faq/mouse-position/#highlight-the-data-point-near-the-cursor
+    //    // https://github.com/ScottPlot/ScottPlot/discussions/862
+    //    // https://github.com/ScottPlot/ScottPlot/discussions/645
+    //    // https://github.com/ScottPlot/ScottPlot/issues/1090
+    //    // frmWRmodel.cs chart_MouseClicked
 
-    }
+    //}
 
-    private void formsPlot_PlottableDragged(object sender, EventArgs e)
+    private void formsPlot_PlottableDragged(object sender, ScottPlot.LineDragEventArgs e)
     {
         // If we are reading from the sensor, then exit
         if (_reading) return;
 
         //var MyPlot = ((ScottPlot.FormsPlot)sender);
-        if (sender.GetType() != typeof(ScottPlot.Plottable.VLine)) return;
+        if (sender.GetType() != typeof(ScottPlot.FormsPlotCrossHair)) return;
 
-        var MyPlot = ((ScottPlot.Plottable.VLine)sender);
+        var MyPlot = sender as ScottPlot.FormsPlotCrossHair;
 
         //(double mouseCoordX, double mouseCoordY) = formsPlot1.GetMouseCoordinates();
         ////double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
-        (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(formsPlot1.Plot.GetPlottables()[0])).GetPointNearestX(MyPlot.X);
+        //(double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(formsPlot1.Plot.GetPlottables()[0])).GetPointNearestX(MyPlot.X);
         ////Text = $"Point index {pointIndex} at ({pointX}, {pointY})";
 
 
         for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
         {
-            _plotRadialGauge[i] = _plotData[i][pointIndex];
-            _plotRadar[1, i] = _plotData[i][pointIndex];
-            _plotRadar[0, i] = _plotData[_sett.T10_NumberOfSensors + 1][pointIndex];
+            _plotRadialGauge[i] = _plotData[i][e.PointIndex];
+            _plotRadar[1, i] = _plotData[i][e.PointIndex];
+            _plotRadar[0, i] = _plotData[_sett.T10_NumberOfSensors + 1][e.PointIndex];
         }
 
         // Update the distribution plot
         if (_sett.Plot_DistIsRadar)
         {
-            ((ScottPlot.Plottable.RadarPlot)formsPlot2.Plot.GetPlottables()[0]).Update(_plotRadar, false);
+            ((ScottPlot.Plottable.RadarPlot)plotDistribution.Plot.GetPlottables()[0]).Update(_plotRadar, false);
         }
         else
         {
-            var plot = ((ScottPlot.Plottable.RadialGaugePlot)formsPlot2.Plot.GetPlottables()[0]);
+            var plot = ((ScottPlot.Plottable.RadialGaugePlot)plotDistribution.Plot.GetPlottables()[0]);
             plot.Update(_plotRadialGauge);
             plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _plotRadialGauge.Average();
             if (plot.MaximumAngle > 360) plot.MaximumAngle = 360.0;
         }
-        formsPlot2.Refresh(skipIfCurrentlyRendering: true);
+        plotDistribution.Refresh(skipIfCurrentlyRendering: true);
 
+        if (MyPlot.Name == "plotData")
+        {
+            plotData.Refresh(skipIfCurrentlyRendering: true);
+            if (plotStats.ShowCrossHair)
+            {
+                plotStats.VerticalLine.X = e.PointX;
+                plotStats.Refresh(skipIfCurrentlyRendering: true);
+            }
+
+            if (plotRatio.ShowCrossHair)
+            {
+                plotRatio.VerticalLine.X = e.PointX;
+                plotRatio.Refresh(skipIfCurrentlyRendering: true);
+            }
+        }
+        else if (MyPlot.Name == "plotStats")
+        {
+            plotStats.Refresh(skipIfCurrentlyRendering: true);
+            if (plotData.ShowCrossHair)
+            {
+                plotData.VerticalLine.X = e.PointX;
+                plotData.Refresh(skipIfCurrentlyRendering: true);
+            }
+            if (plotRatio.ShowCrossHair)
+            {
+                plotRatio.VerticalLine.X = e.PointX;
+                plotRatio.Refresh(skipIfCurrentlyRendering: true);
+            }
+        }
+        else if (MyPlot.Name == "plotRatio")
+        {
+            plotRatio.Refresh(skipIfCurrentlyRendering: true);
+            if (plotData.ShowCrossHair)
+            {
+                plotData.VerticalLine.X = e.PointX;
+                plotData.Refresh(skipIfCurrentlyRendering: true);
+            }
+            if (plotStats.ShowCrossHair)
+            {
+                plotStats.VerticalLine.X = e.PointX;
+                plotStats.Refresh(skipIfCurrentlyRendering: true);
+            }
+        }
     }
 }
 

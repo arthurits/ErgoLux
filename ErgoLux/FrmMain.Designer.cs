@@ -76,12 +76,12 @@ namespace ErgoLux
             this.toolStripMain_Settings = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMain_About = new System.Windows.Forms.ToolStripButton();
-            this.formsPlot1 = new ScottPlot.FormsPlot();
-            this.formsPlot2 = new ScottPlot.FormsPlot();
+            this.plotData = new ScottPlot.FormsPlotCrossHair();
+            this.plotDistribution = new ScottPlot.FormsPlot();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.formsPlot3 = new ScottPlot.FormsPlot();
-            this.formsPlot4 = new ScottPlot.FormsPlot();
+            this.plotStats = new ScottPlot.FormsPlotCrossHair();
+            this.plotRatio = new ScottPlot.FormsPlotCrossHair();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.mnuMainFrm.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -361,7 +361,7 @@ namespace ErgoLux
             this.statusStripLabelXtras.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelXtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelXtras.Name = "statusStripLabelXtras";
-            this.statusStripLabelXtras.Size = new System.Drawing.Size(143, 23);
+            this.statusStripLabelXtras.Size = new System.Drawing.Size(174, 23);
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -543,26 +543,63 @@ namespace ErgoLux
             this.toolStripMain_About.ToolTipText = "About this software";
             this.toolStripMain_About.Click += new System.EventHandler(this.About_Click);
             // 
-            // formsPlot1
+            // plotData
             // 
-            this.formsPlot1.BackColor = System.Drawing.Color.Transparent;
-            this.formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot1.Location = new System.Drawing.Point(0, 0);
-            this.formsPlot1.Margin = new System.Windows.Forms.Padding(0);
-            this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(381, 243);
-            this.formsPlot1.TabIndex = 0;
-            this.formsPlot1.PlottableDragged += new System.EventHandler(this.formsPlot_PlottableDragged);
+            this.plotData.BackColor = System.Drawing.Color.Transparent;
+            this.plotData.CrossHairColor = System.Drawing.Color.Red;
+            this.plotData.CultureUI = new System.Globalization.CultureInfo("en-US");
+            this.plotData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotData.Location = new System.Drawing.Point(0, 0);
+            this.plotData.Margin = new System.Windows.Forms.Padding(0);
+            this.plotData.Name = "plotData";
+            this.plotData.ShowCrossHair = false;
+            this.plotData.ShowCrossHairHorizontal = false;
+            this.plotData.ShowCrossHairVertical = false;
+            this.plotData.Size = new System.Drawing.Size(381, 243);
+            this.plotData.SnapToPoint = false;
+            this.plotData.TabIndex = 0;
             // 
-            // formsPlot2
+            // plotDistribution
             // 
-            this.formsPlot2.BackColor = System.Drawing.Color.Transparent;
-            this.formsPlot2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot2.Location = new System.Drawing.Point(531, 0);
-            this.formsPlot2.Margin = new System.Windows.Forms.Padding(0);
-            this.formsPlot2.Name = "formsPlot2";
-            this.formsPlot2.Size = new System.Drawing.Size(382, 243);
-            this.formsPlot2.TabIndex = 1;
+            this.plotDistribution.BackColor = System.Drawing.Color.Transparent;
+            this.plotDistribution.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotDistribution.Location = new System.Drawing.Point(531, 0);
+            this.plotDistribution.Margin = new System.Windows.Forms.Padding(0);
+            this.plotDistribution.Name = "plotDistribution";
+            this.plotDistribution.Size = new System.Drawing.Size(382, 243);
+            this.plotDistribution.TabIndex = 1;
+            // 
+            // plotStats
+            // 
+            this.plotStats.BackColor = System.Drawing.Color.Transparent;
+            this.plotStats.CrossHairColor = System.Drawing.Color.Red;
+            this.plotStats.CultureUI = new System.Globalization.CultureInfo("en-US");
+            this.plotStats.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotStats.Location = new System.Drawing.Point(4, 246);
+            this.plotStats.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.plotStats.Name = "plotStats";
+            this.plotStats.ShowCrossHair = false;
+            this.plotStats.ShowCrossHairHorizontal = false;
+            this.plotStats.ShowCrossHairVertical = false;
+            this.plotStats.Size = new System.Drawing.Size(373, 238);
+            this.plotStats.SnapToPoint = false;
+            this.plotStats.TabIndex = 4;
+            // 
+            // plotRatio
+            // 
+            this.plotRatio.BackColor = System.Drawing.Color.Transparent;
+            this.plotRatio.CrossHairColor = System.Drawing.Color.Red;
+            this.plotRatio.CultureUI = new System.Globalization.CultureInfo("en-US");
+            this.plotRatio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotRatio.Location = new System.Drawing.Point(535, 246);
+            this.plotRatio.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.plotRatio.Name = "plotRatio";
+            this.plotRatio.ShowCrossHair = false;
+            this.plotRatio.ShowCrossHairHorizontal = false;
+            this.plotRatio.ShowCrossHairVertical = false;
+            this.plotRatio.Size = new System.Drawing.Size(374, 238);
+            this.plotRatio.SnapToPoint = false;
+            this.plotRatio.TabIndex = 5;
             // 
             // tableLayoutPanel1
             // 
@@ -575,11 +612,11 @@ namespace ErgoLux
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.formsPlot1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.formsPlot2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.plotData, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.plotDistribution, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.formsPlot3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.formsPlot4, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.plotStats, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.plotRatio, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 96);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -600,26 +637,6 @@ namespace ErgoLux
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            // 
-            // formsPlot3
-            // 
-            this.formsPlot3.BackColor = System.Drawing.Color.Transparent;
-            this.formsPlot3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot3.Location = new System.Drawing.Point(4, 246);
-            this.formsPlot3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.formsPlot3.Name = "formsPlot3";
-            this.formsPlot3.Size = new System.Drawing.Size(373, 238);
-            this.formsPlot3.TabIndex = 4;
-            // 
-            // formsPlot4
-            // 
-            this.formsPlot4.BackColor = System.Drawing.Color.Transparent;
-            this.formsPlot4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot4.Location = new System.Drawing.Point(535, 246);
-            this.formsPlot4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.formsPlot4.Name = "formsPlot4";
-            this.formsPlot4.Size = new System.Drawing.Size(374, 238);
-            this.formsPlot4.TabIndex = 5;
             // 
             // pictureBox2
             // 
@@ -686,16 +703,16 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRatio;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelXtras;
         private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRaw;
-        private ScottPlot.FormsPlot formsPlot1;
-        private ScottPlot.FormsPlot formsPlot2;
+        private ScottPlot.FormsPlotCrossHair plotData;
+        private ScottPlot.FormsPlot plotDistribution;
+        private ScottPlot.FormsPlotCrossHair plotStats;
+        private ScottPlot.FormsPlotCrossHair plotRatio;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripMain_About;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelType;
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconExchange;
-        private ScottPlot.FormsPlot formsPlot3;
-        private ScottPlot.FormsPlot formsPlot4;
         private System.Windows.Forms.ToolStripButton toolStripMain_Save;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelID;
         private System.Windows.Forms.PictureBox pictureBox2;

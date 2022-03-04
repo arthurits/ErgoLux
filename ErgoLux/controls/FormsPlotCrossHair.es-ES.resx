@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strMenuCopy" xml:space="preserve">
-    <value>Copy image</value>
+    <value>Copiar imagen</value>
   </data>
   <data name="strMenuCrossHair" xml:space="preserve">
-    <value>Show crosshair</value>
+    <value>Mostrar punto de mira</value>
   </data>
   <data name="strMenuDetach" xml:space="preserve">
-    <value>Detach legend</value>
+    <value>Separar la leyenda</value>
   </data>
   <data name="strMenuHelp" xml:space="preserve">
-    <value>Help</value>
+    <value>Ayuda</value>
   </data>
   <data name="strMenuOpen" xml:space="preserve">
-    <value>Open in new window</value>
+    <value>Abrir en una nueva ventana</value>
   </data>
   <data name="strMenuSave" xml:space="preserve">
-    <value>Save image as...</value>
+    <value>Guardar imagen como...</value>
   </data>
   <data name="strMenuZoom" xml:space="preserve">
-    <value>Zoom to fit data</value>
+    <value>Ajustar datos a la ventana</value>
   </data>
 </root>

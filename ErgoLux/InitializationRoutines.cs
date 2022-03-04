@@ -110,51 +110,53 @@ partial class FrmMain
     private void InitializePlots()
     {
         // Starting from v 4.1.18 Refresh() must be called manually at least once
-        formsPlot1.Refresh();
-        formsPlot2.Refresh();
-        formsPlot3.Refresh();
-        formsPlot4.Refresh();
+        plotData.Refresh();
+        plotDistribution.Refresh();
+        plotStats.Refresh();
+        plotRatio.Refresh();
 
         //formsPlot1.plt.AxisAutoX(margin: 0);
-        formsPlot1.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
+        plotData.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
         // customize styling
-        formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
-        formsPlot1.Plot.Title("Illuminance");
-        formsPlot1.Plot.YLabel("Lux");
-        formsPlot1.Plot.XLabel("Time (seconds)");
-        formsPlot1.Plot.Grid(enable: false);
-
-        formsPlot1.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_MouseDown);
+        plotData.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
+        plotData.Plot.Title("Illuminance");
+        plotData.Plot.YLabel("Lux");
+        plotData.Plot.XLabel("Time (seconds)");
+        plotData.Plot.Grid(enable: false);
+        plotData.SnapToPoint = true;
 
         // Customize the Distribution plot
-        formsPlot2.Plot.Grid(enable: false);
-        formsPlot2.Plot.Title("Illuminance distribution");
-        formsPlot2.Plot.XAxis.Ticks(false);
-        formsPlot2.Plot.YAxis.Ticks(false);
+        plotDistribution.Plot.Grid(enable: false);
+        plotDistribution.Plot.Title("Illuminance distribution");
+        plotDistribution.Plot.XAxis.Ticks(false);
+        plotDistribution.Plot.YAxis.Ticks(false);
 
         // Customize the Average plot
-        formsPlot3.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
+        plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
-        formsPlot3.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
-        formsPlot3.Plot.Title("Max, average, min");
-        formsPlot3.Plot.YLabel("Lux");
-        formsPlot3.Plot.XLabel("Time (seconds)");
-        formsPlot3.Plot.Grid(enable: false);
-
-        formsPlot3.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_MouseDown);
+        plotStats.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
+        plotStats.Plot.Title("Max, average, min");
+        plotStats.Plot.YLabel("Lux");
+        plotStats.Plot.XLabel("Time (seconds)");
+        plotStats.Plot.Grid(enable: false);
+        plotStats.SnapToPoint = true;
 
         // Customize the Ratio plot
         //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
-        formsPlot4.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
+        plotRatio.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
 
-        formsPlot4.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
-        formsPlot4.Plot.Title("Illuminance ratios");
-        formsPlot4.Plot.YLabel("Ratio");
-        formsPlot4.Plot.XLabel("Time (seconds)");
-        formsPlot4.Plot.Grid(enable: false);
+        plotRatio.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
+        plotRatio.Plot.Title("Illuminance ratios");
+        plotRatio.Plot.YLabel("Ratio");
+        plotRatio.Plot.XLabel("Time (seconds)");
+        plotRatio.Plot.Grid(enable: false);
+        plotRatio.SnapToPoint = true;
 
-        formsPlot4.MouseDown += new System.Windows.Forms.MouseEventHandler(formsPlot_MouseDown);
+        // Subscribe to the events
+        plotData.VLineDragged += formsPlot_PlottableDragged;
+        plotStats.VLineDragged += formsPlot_PlottableDragged;
+        plotRatio.VLineDragged += formsPlot_PlottableDragged;
 
         // Set the colorsets
         InitializePlotsPalette();
@@ -168,17 +170,17 @@ partial class FrmMain
         // Define colorsets
         if (_sett.Plot_DistIsRadar)
         {
-            formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
-            formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
+            plotData.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
+            plotDistribution.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
         }
         else
         {
-            formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
-            formsPlot2.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
+            plotData.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
+            plotDistribution.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
         }
 
-        formsPlot3.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
-        formsPlot4.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
+        plotStats.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
+        plotRatio.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
     }
 
     /// <summary>
@@ -186,14 +188,14 @@ partial class FrmMain
     /// </summary>
     private void InitializePlotDistribution()
     {
-        formsPlot2.Plot.XAxis2.Hide(false);
-        formsPlot2.Plot.XAxis2.Ticks(false);
-        formsPlot2.Plot.XAxis.Hide(false);
-        formsPlot2.Plot.XAxis.Ticks(false);
-        formsPlot2.Plot.YAxis2.Hide(false);
-        formsPlot2.Plot.YAxis2.Ticks(false);
-        formsPlot2.Plot.YAxis.Hide(false);
-        formsPlot2.Plot.YAxis.Ticks(false);
+        plotDistribution.Plot.XAxis2.Hide(false);
+        plotDistribution.Plot.XAxis2.Ticks(false);
+        plotDistribution.Plot.XAxis.Hide(false);
+        plotDistribution.Plot.XAxis.Ticks(false);
+        plotDistribution.Plot.YAxis2.Hide(false);
+        plotDistribution.Plot.YAxis2.Ticks(false);
+        plotDistribution.Plot.YAxis.Hide(false);
+        plotDistribution.Plot.YAxis.Ticks(false);
 
     }
     /// <summary>
