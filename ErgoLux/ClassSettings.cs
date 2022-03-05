@@ -72,17 +72,17 @@ public class ClassSettings
     /// Icon indicating the T-10 is opened and ready to be sent commands
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap Icon_Open { get; set; }
+    public System.Drawing.Bitmap? Icon_Open { get; set; }
     /// <summary>
     /// Icon indicating the T-10 is closed
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap Icon_Close { get; set; }
+    public System.Drawing.Bitmap? Icon_Close { get; set; }
     /// <summary>
     /// Icon indicating the T-10 receiving and sending data
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap Icon_Data { get; set; }
+    public System.Drawing.Bitmap? Icon_Data { get; set; }
 
     /// <summary>
     /// Stores the settings file name
@@ -93,7 +93,7 @@ public class ClassSettings
     /// Absolute path of the executable
     /// </summary>
     [JsonIgnore]
-    public string AppPath { get; set; } = System.IO.Path.GetDirectoryName(System.Environment.ProcessPath);
+    public string AppPath { get; set; } = System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty;
     /// <summary>
     /// Number of columns reserved for computed (not measured) values
     /// </summary>
@@ -162,29 +162,32 @@ public class ClassSettings
     {
     }
 
-    public ClassSettings(string path)
+    public ClassSettings(string? path)
         : this()
     {
-        AppPath = path;
-        if (System.IO.File.Exists(path + @"\images\close.ico")) Icon_Close = new System.Drawing.Icon(path + @"\images\close.ico", 16, 16).ToBitmap();
-        if (System.IO.File.Exists(path + @"\images\open.ico")) Icon_Open = new System.Drawing.Icon(path + @"\images\open.ico", 16, 16).ToBitmap();
-        if (System.IO.File.Exists(path + @"\images\exchange.ico")) Icon_Data = new System.Drawing.Icon(path + @"\images\exchange.ico", 16, 16).ToBitmap();
+        if (System.IO.Directory.Exists(path))
+        {
+            AppPath = path;
+            if (System.IO.File.Exists(path + @"\images\close.ico")) Icon_Close = new System.Drawing.Icon(path + @"\images\close.ico", 16, 16).ToBitmap();
+            if (System.IO.File.Exists(path + @"\images\open.ico")) Icon_Open = new System.Drawing.Icon(path + @"\images\open.ico", 16, 16).ToBitmap();
+            if (System.IO.File.Exists(path + @"\images\exchange.ico")) Icon_Data = new System.Drawing.Icon(path + @"\images\exchange.ico", 16, 16).ToBitmap();
+        }
     }
 
     ~ClassSettings()
     {
-        if (Icon_Open != null) Icon_Open.Dispose();
-        if (Icon_Close != null) Icon_Close.Dispose();
-        if (Icon_Data != null) Icon_Data.Dispose();
+        if (Icon_Open is not null) Icon_Open.Dispose();
+        if (Icon_Close is not null) Icon_Close.Dispose();
+        if (Icon_Data is not null) Icon_Data.Dispose();
     }
 
     /// <summary>
     /// Initializes all the fields that are Json-ignored
     /// </summary>
-    public void InitializeJsonIgnore(string path = null)
+    public void InitializeJsonIgnore(string? path = null)
     {
         SettingsFileName = "configuration.json";
-        AppPath = path ?? string.Empty;
+        AppPath = path ?? String.Empty;
         ArrayFixedColumns = 6;
 
         if (AppPath != string.Empty)

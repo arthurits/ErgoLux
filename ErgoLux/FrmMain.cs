@@ -8,15 +8,15 @@ public partial class FrmMain : Form
 {
     private readonly System.Timers.Timer m_timer;
     private ClassSettings _sett;
-    private FTDISample myFtdiDevice;
-    private double[][] _plotData;
+    private FTDISample? myFtdiDevice = null;
+    private double[][] _plotData = Array.Empty<double[]>();
     private double _max = 0;
     private double _min = 0;
     private double _average = 0;
-    private double[,] _plotRadar;
-    private double[] _plotRadialGauge;
+    private double[,] _plotRadar = new double[0, 0];
+    private double[] _plotRadialGauge = Array.Empty<double>();
     private int _nPoints = 0;
-    private string[] _seriesLabels;
+    private string[] _seriesLabels = Array.Empty<string>();
     private DateTime _timeStart;
     private DateTime _timeEnd;
     private bool _reading = false;   // this controls whether clicking the plots is allowed or not
@@ -85,12 +85,12 @@ public partial class FrmMain : Form
         SaveProgramSettingsJSON();
     }
 
-    private void OnTimedEvent(object sender, EventArgs e)
+    private void OnTimedEvent(object? sender, EventArgs e)
     {
-        bool result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+        bool result = myFtdiDevice?.Write(ClassT10.ReceptorsSingle[0]) ?? false;
     }
 
-    private void OnDataReceived(object sender, DataReceivedEventArgs e)
+    private void OnDataReceived(object? sender, DataReceivedEventArgs e)
     {
         //_data = true;
         (int Sensor, double Iluminance, double Increment, double Percent) result = (0, 0, 0, 0);
@@ -104,7 +104,7 @@ public partial class FrmMain : Form
             //                            DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
             if (result.Sensor < _sett.T10_NumberOfSensors - 1)
             {
-                myFtdiDevice.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
+                myFtdiDevice?.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
             }
         }
         else if (e.StrDataReceived.Length == ClassT10.ShortBytesLength)
@@ -222,7 +222,7 @@ public partial class FrmMain : Form
         plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _sett.AppCulture) ?? "Time (seconds)");
 
         // Update plots' legends
-        if (_plotData is not null)
+        if (_plotData.Length > 0)
         {
             _seriesLabels = new string[_plotData.Length];
             for (int i = 0; i < _seriesLabels.Length - _sett.ArrayFixedColumns; i++)

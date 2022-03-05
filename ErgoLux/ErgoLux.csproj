@@ -14,6 +14,7 @@
     <PackageProjectUrl>https://github.com/arthurits/ErgoLux</PackageProjectUrl>
     <RepositoryUrl>https://github.com/arthurits/ErgoLux</RepositoryUrl>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

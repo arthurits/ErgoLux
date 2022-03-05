@@ -6,11 +6,10 @@ namespace ErgoLux;
 
 public partial class FrmSettings : Form
 {
-    //private int[] _data = new int[10];
-    private string _deviceType;
-    private string _deviceID;
+    private string _deviceType = String.Empty;
+    private string _deviceID = String.Empty;
     private ClassSettings _settings = new();
-    private readonly System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
+    private readonly System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmSettings).Assembly);
 
     public string GetDeviceType { get => _deviceType; }
     public string GetDeviceID { get => _deviceID; }
@@ -160,19 +159,7 @@ public partial class FrmSettings : Form
         this.DialogResult = DialogResult.None;
 
         // Check that a device has been selected from the list
-        if (viewDevices.SelectedIndices.Count == 0)
-        {
-            //System.Windows.Forms.MessageBox.Show("Please select one of the devices from the list.",
-            //    "Error",
-            //    System.Windows.Forms.MessageBoxButtons.OK,
-            //    System.Windows.Forms.MessageBoxIcon.Error);
-            //return;
-
-            _deviceType = String.Empty;
-            _deviceID = String.Empty;
-            _settings.T10_LocationID = -1;
-        }
-        else
+        if (viewDevices.SelectedIndices.Count > 0)
         {
             _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
             _deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
@@ -305,7 +292,10 @@ public partial class FrmSettings : Form
         chkShowDistribution.Checked = _settings.Plot_ShowDistribution;
         chkShowAverage.Checked = _settings.Plot_ShowAverage;
         chkShowRatio.Checked = _settings.Plot_ShowRatios;
-        radRadar.Checked = _settings.Plot_DistIsRadar;
+        if (_settings.Plot_DistIsRadar)
+            radRadar.Checked = true;
+        else
+            radRadial.Checked = true;
 
         cboAllCultures.Enabled = false;
         if (_settings.AppCultureName == string.Empty)

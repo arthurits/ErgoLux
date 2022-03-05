@@ -14,6 +14,10 @@ partial class FrmMain
         _max = 0;
         _min = 0;
 
+        plotData.ShowCrossHair = false;
+        plotStats.ShowCrossHair = false;
+        plotRatio.ShowCrossHair = false;
+
         plotData.Plot.Clear();
         plotDistribution.Plot.Clear();
         plotStats.Plot.Clear();
@@ -150,8 +154,8 @@ partial class FrmMain
         Size szLegend = new();
 
         // Combine legends from Plot1 and Plot2 and draw a black border around each legend
-        legendA = showLegA ? plotData.Plot.RenderLegend() : null;
-        legendB = showLegB ? plotDistribution.Plot.RenderLegend() : null;
+        legendA = showLegA ? plotData.Plot.RenderLegend() : new(1,1);
+        legendB = showLegB ? plotDistribution.Plot.RenderLegend() : new(1, 1);
         szLegend.Width = Math.Max(showLegA ? legendA.Width : 0, showLegB ? legendB.Width : 0);
         szLegend.Width += 2;    // black border drawing
         szLegend.Height = (showLegA ? legendA.Height + 2 : 0);
@@ -348,15 +352,15 @@ partial class FrmMain
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void formsPlot_PlottableDragged(object sender, ScottPlot.LineDragEventArgs e)
+    private void formsPlot_PlottableDragged(object? sender, ScottPlot.LineDragEventArgs e)
     {
         // If we are reading from the sensor, then exit
         if (_reading) return;
 
         //var MyPlot = ((ScottPlot.FormsPlot)sender);
-        if (sender.GetType() != typeof(ScottPlot.FormsPlotCrossHair)) return;
+        if (sender?.GetType() != typeof(ScottPlot.FormsPlotCrossHair)) return;
 
-        var MyPlot = sender as ScottPlot.FormsPlotCrossHair;
+        var MyPlot = (ScottPlot.FormsPlotCrossHair)sender;
 
         // Set the data to be shown on the distribution plot (Radar or RadialGauge)
         for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
@@ -386,15 +390,15 @@ partial class FrmMain
             plotData.Refresh(skipIfCurrentlyRendering: true);
             if (plotStats.ShowCrossHair)
             {
-                plotStats.VerticalLine.X = e.PointX;
-                plotStats.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors][e.PointIndex];
+                if (plotStats.VerticalLine is not null) plotStats.VerticalLine.X = e.PointX;
+                if (plotStats.HorizontalLine is not null) plotStats.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors][e.PointIndex];
                 plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
 
             if (plotRatio.ShowCrossHair)
             {
-                plotRatio.VerticalLine.X = e.PointX;
-                plotRatio.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors + 3][e.PointIndex];
+                if (plotRatio.VerticalLine is not null) plotRatio.VerticalLine.X = e.PointX;
+                if (plotRatio.HorizontalLine is not null) plotRatio.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors + 3][e.PointIndex];
                 plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
         }
@@ -403,14 +407,14 @@ partial class FrmMain
             plotStats.Refresh(skipIfCurrentlyRendering: true);
             if (plotData.ShowCrossHair)
             {
-                plotData.VerticalLine.X = e.PointX;
-                plotData.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors-1][e.PointIndex];
+                if (plotData.VerticalLine is not null) plotData.VerticalLine.X = e.PointX;
+                if (plotData.HorizontalLine is not null) plotData.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors-1][e.PointIndex];
                 plotData.Refresh(skipIfCurrentlyRendering: true);
             }
             if (plotRatio.ShowCrossHair)
             {
-                plotRatio.VerticalLine.X = e.PointX;
-                plotRatio.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors + 3][e.PointIndex];
+                if (plotRatio.VerticalLine is not null) plotRatio.VerticalLine.X = e.PointX;
+                if (plotRatio.HorizontalLine is not null) plotRatio.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors + 3][e.PointIndex];
                 plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
         }
@@ -419,14 +423,14 @@ partial class FrmMain
             plotRatio.Refresh(skipIfCurrentlyRendering: true);
             if (plotData.ShowCrossHair)
             {
-                plotData.VerticalLine.X = e.PointX;
-                plotData.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors - 1][e.PointIndex];
+                if (plotData.VerticalLine is not null) plotData.VerticalLine.X = e.PointX;
+                if (plotData.HorizontalLine is not null) plotData.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors - 1][e.PointIndex];
                 plotData.Refresh(skipIfCurrentlyRendering: true);
             }
             if (plotStats.ShowCrossHair)
             {
-                plotStats.VerticalLine.X = e.PointX;
-                plotStats.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors][e.PointIndex];
+                if (plotStats.VerticalLine is not null) plotStats.VerticalLine.X = e.PointX;
+                if (plotStats.HorizontalLine is not null) plotStats.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors][e.PointIndex];
                 plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
         }

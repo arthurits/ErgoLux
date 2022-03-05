@@ -55,7 +55,7 @@ public partial class Form2 : Form
         formsPlot1.Refresh();
     }
 
-    private void OnDraggedVertical(object sender, EventArgs e)
+    private void OnDraggedVertical(object? sender, EventArgs e)
     {
         //formsPlot1.Refresh();
     }

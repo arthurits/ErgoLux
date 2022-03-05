@@ -12,7 +12,7 @@ partial class FrmMain
         bool result = true;
         int nSensors = 0, nPoints = 0;
         double nFreq = 0.0;
-        string strLine;
+        string? strLine;
 
         var cursor = Cursor.Current;
         Cursor.Current = Cursors.WaitCursor;

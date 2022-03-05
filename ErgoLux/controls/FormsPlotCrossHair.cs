@@ -205,12 +205,14 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         if (VerticalLine is not null)
         {
             VerticalLine.Dragged -= new System.EventHandler(OnDraggedVertical);
+            VerticalLine = null;
             this.Plot.Clear(typeof(Plottable.VLine));
         }
 
         if (HorizontalLine is not null)
         {
             HorizontalLine.Dragged -= new System.EventHandler(OnDraggedHorizontal);
+            HorizontalLine = null;
             this.Plot.Clear(typeof(Plottable.HLine));
         }
     }

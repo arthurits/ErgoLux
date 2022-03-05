@@ -176,7 +176,7 @@ partial class FrmMain
         // Stop receiving data
         m_timer.Stop();
         _timeEnd = DateTime.Now;
-        myFtdiDevice.DataReceived -= OnDataReceived;
+        if (myFtdiDevice is not null) myFtdiDevice.DataReceived -= OnDataReceived;
 
         // Update GUI
         toolStripMain_Connect.Checked = false;
@@ -250,10 +250,8 @@ partial class FrmMain
             {
                 InitializeStatusStripLabelsStatus();
 
-                if (_plotData != null && _plotRadar != null && _plotRadialGauge != null)
-                {
+                if (_plotData.Length > 0 && _plotRadar.Length > 0 && _plotRadialGauge.Length > 0)
                     Plots_FetchData();
-                }
             }
 
         }   // End DialogResult.OK
@@ -281,7 +279,7 @@ partial class FrmMain
     {
         if (sender is ToolStripStatusLabelEx)
         {
-            var label = sender as ToolStripStatusLabelEx;
+            var label = (ToolStripStatusLabelEx)sender;
 
             // Change the text color
             if (label.Checked)
@@ -295,7 +293,7 @@ partial class FrmMain
     {
         if (sender is ToolStripStatusLabelEx)
         {
-            var label = sender as ToolStripStatusLabelEx;
+            var label = (ToolStripStatusLabelEx)sender;
             label.Checked = !label.Checked;
 
             // Update the settings
@@ -325,7 +323,7 @@ partial class FrmMain
     {
         if (sender is ToolStripStatusLabelEx)
         {
-            var label = sender as ToolStripStatusLabelEx;
+            var label = (ToolStripStatusLabelEx)sender;
             if (plotData.Plot.GetPlottables().Length > 0 && plotStats.Plot.GetPlottables().Length > 0 && plotRatio.Plot.GetPlottables().Length > 0)
             {
                 label.Checked = !label.Checked;
