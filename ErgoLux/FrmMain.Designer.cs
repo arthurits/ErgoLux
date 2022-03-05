@@ -65,6 +65,7 @@ namespace ErgoLux
             this.statusStripLabelRadar = new System.Windows.Forms.ToolStripStatusLabelEx();
             this.statusStripLabelMax = new System.Windows.Forms.ToolStripStatusLabelEx();
             this.statusStripLabelRatio = new System.Windows.Forms.ToolStripStatusLabelEx();
+            this.statusStripLabelCross = new System.Windows.Forms.ToolStripStatusLabelEx();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.toolStripMain_Exit = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain_Save = new System.Windows.Forms.ToolStripButton();
@@ -294,7 +295,8 @@ namespace ErgoLux
             this.statusStripLabelRaw,
             this.statusStripLabelRadar,
             this.statusStripLabelMax,
-            this.statusStripLabelRatio});
+            this.statusStripLabelRatio,
+            this.statusStripLabelCross});
             this.statusStrip.Location = new System.Drawing.Point(0, 583);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
@@ -361,7 +363,7 @@ namespace ErgoLux
             this.statusStripLabelXtras.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelXtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelXtras.Name = "statusStripLabelXtras";
-            this.statusStripLabelXtras.Size = new System.Drawing.Size(174, 23);
+            this.statusStripLabelXtras.Size = new System.Drawing.Size(113, 23);
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -389,6 +391,7 @@ namespace ErgoLux
             this.statusStripLabelRaw.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelRaw.Text = "W";
             this.statusStripLabelRaw.ToolTipText = "Plot raw data";
+            this.statusStripLabelRaw.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
             this.statusStripLabelRaw.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
             // statusStripLabelRadar
@@ -404,6 +407,7 @@ namespace ErgoLux
             this.statusStripLabelRadar.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelRadar.Text = "D";
             this.statusStripLabelRadar.ToolTipText = "Plot distribution";
+            this.statusStripLabelRadar.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
             this.statusStripLabelRadar.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
             // statusStripLabelMax
@@ -418,6 +422,7 @@ namespace ErgoLux
             this.statusStripLabelMax.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelMax.Text = "A";
             this.statusStripLabelMax.ToolTipText = "Plot max, average and min";
+            this.statusStripLabelMax.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
             this.statusStripLabelMax.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
             // 
             // statusStripLabelRatio
@@ -432,7 +437,24 @@ namespace ErgoLux
             this.statusStripLabelRatio.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelRatio.Text = "R";
             this.statusStripLabelRatio.ToolTipText = "Plot ratios";
+            this.statusStripLabelRatio.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
             this.statusStripLabelRatio.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
+            // 
+            // statusStripLabelCross
+            // 
+            this.statusStripLabelCross.AutoSize = false;
+            this.statusStripLabelCross.BackColor = System.Drawing.Color.Transparent;
+            this.statusStripLabelCross.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.statusStripLabelCross.Checked = false;
+            this.statusStripLabelCross.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.statusStripLabelCross.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelCross.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
+            this.statusStripLabelCross.Name = "statusStripLabelCross";
+            this.statusStripLabelCross.Size = new System.Drawing.Size(28, 23);
+            this.statusStripLabelCross.Text = "C";
+            this.statusStripLabelCross.ToolTipText = "Show plot\'s crosshairs";
+            this.statusStripLabelCross.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
+            this.statusStripLabelCross.Click += new System.EventHandler(this.statusStripLabelCross_Click);
             // 
             // toolStripMain
             // 
@@ -569,38 +591,6 @@ namespace ErgoLux
             this.plotDistribution.Size = new System.Drawing.Size(382, 243);
             this.plotDistribution.TabIndex = 1;
             // 
-            // plotStats
-            // 
-            this.plotStats.BackColor = System.Drawing.Color.Transparent;
-            this.plotStats.CrossHairColor = System.Drawing.Color.Red;
-            this.plotStats.CultureUI = new System.Globalization.CultureInfo("en-US");
-            this.plotStats.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotStats.Location = new System.Drawing.Point(4, 246);
-            this.plotStats.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotStats.Name = "plotStats";
-            this.plotStats.ShowCrossHair = false;
-            this.plotStats.ShowCrossHairHorizontal = false;
-            this.plotStats.ShowCrossHairVertical = false;
-            this.plotStats.Size = new System.Drawing.Size(373, 238);
-            this.plotStats.SnapToPoint = false;
-            this.plotStats.TabIndex = 4;
-            // 
-            // plotRatio
-            // 
-            this.plotRatio.BackColor = System.Drawing.Color.Transparent;
-            this.plotRatio.CrossHairColor = System.Drawing.Color.Red;
-            this.plotRatio.CultureUI = new System.Globalization.CultureInfo("en-US");
-            this.plotRatio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotRatio.Location = new System.Drawing.Point(535, 246);
-            this.plotRatio.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotRatio.Name = "plotRatio";
-            this.plotRatio.ShowCrossHair = false;
-            this.plotRatio.ShowCrossHairHorizontal = false;
-            this.plotRatio.ShowCrossHairVertical = false;
-            this.plotRatio.Size = new System.Drawing.Size(374, 238);
-            this.plotRatio.SnapToPoint = false;
-            this.plotRatio.TabIndex = 5;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -637,6 +627,38 @@ namespace ErgoLux
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
+            // 
+            // plotStats
+            // 
+            this.plotStats.BackColor = System.Drawing.Color.Transparent;
+            this.plotStats.CrossHairColor = System.Drawing.Color.Red;
+            this.plotStats.CultureUI = new System.Globalization.CultureInfo("en-US");
+            this.plotStats.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotStats.Location = new System.Drawing.Point(4, 246);
+            this.plotStats.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.plotStats.Name = "plotStats";
+            this.plotStats.ShowCrossHair = false;
+            this.plotStats.ShowCrossHairHorizontal = false;
+            this.plotStats.ShowCrossHairVertical = false;
+            this.plotStats.Size = new System.Drawing.Size(373, 238);
+            this.plotStats.SnapToPoint = false;
+            this.plotStats.TabIndex = 4;
+            // 
+            // plotRatio
+            // 
+            this.plotRatio.BackColor = System.Drawing.Color.Transparent;
+            this.plotRatio.CrossHairColor = System.Drawing.Color.Red;
+            this.plotRatio.CultureUI = new System.Globalization.CultureInfo("en-US");
+            this.plotRatio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotRatio.Location = new System.Drawing.Point(535, 246);
+            this.plotRatio.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.plotRatio.Name = "plotRatio";
+            this.plotRatio.ShowCrossHair = false;
+            this.plotRatio.ShowCrossHairHorizontal = false;
+            this.plotRatio.ShowCrossHairVertical = false;
+            this.plotRatio.Size = new System.Drawing.Size(374, 238);
+            this.plotRatio.SnapToPoint = false;
+            this.plotRatio.TabIndex = 5;
             // 
             // pictureBox2
             // 
@@ -735,6 +757,7 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_Tools_Settings;
         private ToolStripStatusLabel statusStripLabelUILanguage;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelCross;
     }
 }
 

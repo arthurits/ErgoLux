@@ -480,6 +480,9 @@ dimension has been stopped.</value>
   <data name="strStatusOpen" xml:space="preserve">
     <value>Disconnected</value>
   </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>Show plot's crosshair mode</value>
+  </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
     <value>Plot distribution</value>
   </data>

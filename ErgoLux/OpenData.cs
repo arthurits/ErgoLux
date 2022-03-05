@@ -123,7 +123,7 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
                 MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _sett.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
-                    StringsRM.GetString("strReadDataErrorCultureTitle" ?? "Culture name error", _sett.AppCulture),
+                    StringsRM.GetString("strReadDataErrorCultureTitle", _sett.AppCulture) ?? "Culture name error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
@@ -132,7 +132,7 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
                 MessageBox.Show(String.Format(StringsRM.GetString("strReadDataError", _sett.AppCulture) ?? "Unable to read data from file.\n{0}", ex.Message),
-                    StringsRM.GetString("strReadDataErrorTitle" ?? "Error opening data", _sett.AppCulture),
+                    StringsRM.GetString("strReadDataErrorTitle", _sett.AppCulture) ?? "Error opening data",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
@@ -231,7 +231,7 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
                 MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _sett.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
-                    StringsRM.GetString("strReadDataErrorCultureTitle" ?? "Culture name error", _sett.AppCulture),
+                    StringsRM.GetString("strReadDataErrorCultureTitle", _sett.AppCulture) ?? "Culture name error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }

@@ -81,11 +81,6 @@ partial class FrmMain
         //if (File.Exists(_sett.AppPath + @"\images\close.ico")) this.statusStripIconOpen.Image = new Icon(_sett.AppPath + @"\images\close.ico", 16, 16).ToBitmap();
         statusStripIconOpen.Image = _sett.Icon_Close;
 
-        statusStripLabelRaw.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
-        statusStripLabelRadar.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
-        statusStripLabelMax.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
-        statusStripLabelRatio.CheckedChanged += new System.EventHandler(this.statusStripLabelPlots_CheckedChanged);
-
         InitializeStatusStripLabelsStatus();
 
         //statusStrip.Renderer = new customRenderer<ToolStripLabel>(Brushes.SteelBlue, Brushes.LightSkyBlue);

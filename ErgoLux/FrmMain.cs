@@ -2,7 +2,6 @@
 using System.Linq;
 using System.IO.Ports;
 
-
 namespace ErgoLux;
 
 public partial class FrmMain : Form
@@ -171,6 +170,7 @@ public partial class FrmMain : Form
         statusStripLabelRadar.ToolTipText = StringsRM.GetString("strStatusTipDistribution", _sett.AppCulture) ?? "Plot distribution";
         statusStripLabelMax.ToolTipText = StringsRM.GetString("strStatusTipMax", _sett.AppCulture) ?? "Plot max, average and min";
         statusStripLabelRatio.ToolTipText = StringsRM.GetString("strStatusTipRatio", _sett.AppCulture) ?? "Plot ratios";
+        statusStripLabelCross.ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _sett.AppCulture) ?? "Show plot's crosshair mode";
 
         statusStripLabelID.Text = StringsRM.GetString("strStatusID", _sett.AppCulture) ?? "Device ID";
         statusStripLabelID.ToolTipText = StringsRM.GetString("strStatusTipID", _sett.AppCulture) ?? "Device ID";

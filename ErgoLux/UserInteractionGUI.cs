@@ -277,7 +277,7 @@ partial class FrmMain
         }
     }
 
-    private void statusStripLabelPlots_CheckedChanged(object sender, EventArgs e)
+    private void statusStripLabelEx_CheckedChanged(object sender, EventArgs e)
     {
         if (sender is ToolStripStatusLabelEx)
         {
@@ -321,6 +321,23 @@ partial class FrmMain
         }
     }
 
+    private void statusStripLabelCross_Click(object sender, EventArgs e)
+    {
+        if (sender is ToolStripStatusLabelEx)
+        {
+            var label = sender as ToolStripStatusLabelEx;
+            if (plotData.Plot.GetPlottables().Length > 0 && plotStats.Plot.GetPlottables().Length > 0 && plotRatio.Plot.GetPlottables().Length > 0)
+            {
+                label.Checked = !label.Checked;
+                plotData.ShowCrossHair = label.Checked;
+                plotData.Refresh();
+                plotStats.ShowCrossHair = label.Checked;
+                plotStats.Refresh();
+                plotRatio.ShowCrossHair = label.Checked;
+                plotRatio.Refresh();
+            }
+        }
+    }
 
     private void mnuMainFrm_View_Menu_Click(object sender, EventArgs e)
     {

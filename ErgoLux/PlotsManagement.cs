@@ -343,39 +343,11 @@ partial class FrmMain
         // https://github.com/ScottPlot/ScottPlot/blob/096062f5dfde8fd5f1e2eb2e15e0e7ce9b17a54b/src/ScottPlot.Demo.WinForms/WinFormsDemos/LiveDataUpdate.cs#L14-L91
     }
 
-
-    //private void formsPlot_MouseDown(object sender, MouseEventArgs e)
-    //{
-
-    //    // If we are reading from the sensor, then exit
-    //    if (_reading) return;
-
-    //    if (e.Button != MouseButtons.Left) return;
-
-    //    var MyPlot = ((ScottPlot.FormsPlot)sender);
-    //    if (MyPlot.Name != "formsPlot1") return;
-    //    if (MyPlot.Plot.GetPlottables().Length == 0) return;
-    //    (double mouseCoordX, double mouseCoordY) = MyPlot.GetMouseCoordinates();
-    //    (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(MyPlot.Plot.GetPlottables()[0])).GetPointNearestX(mouseCoordX);
-    //    if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors)
-    //    {
-    //        var VLine = MyPlot.Plot.AddVerticalLine(pointX, color: Color.Red, width: 3, style: ScottPlot.LineStyle.Dash);
-    //        VLine.DragEnabled = true;
-    //    }
-    //    else if (MyPlot.Plot.GetPlottables().Length == _sett.T10_NumberOfSensors + 1)
-    //    {
-    //        ((ScottPlot.Plottable.VLine)MyPlot.Plot.GetPlottables().Last()).X = pointX;
-    //    }
-
-    //    // Some information:
-    //    // https://swharden.com/scottplot/faq/mouse-position/#highlight-the-data-point-near-the-cursor
-    //    // https://github.com/ScottPlot/ScottPlot/discussions/862
-    //    // https://github.com/ScottPlot/ScottPlot/discussions/645
-    //    // https://github.com/ScottPlot/ScottPlot/issues/1090
-    //    // frmWRmodel.cs chart_MouseClicked
-
-    //}
-
+    /// <summary>
+    /// Called when the user drags the any plot crosshair 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void formsPlot_PlottableDragged(object sender, ScottPlot.LineDragEventArgs e)
     {
         // If we are reading from the sensor, then exit
@@ -386,12 +358,7 @@ partial class FrmMain
 
         var MyPlot = sender as ScottPlot.FormsPlotCrossHair;
 
-        //(double mouseCoordX, double mouseCoordY) = formsPlot1.GetMouseCoordinates();
-        ////double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
-        //(double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.SignalPlot)(formsPlot1.Plot.GetPlottables()[0])).GetPointNearestX(MyPlot.X);
-        ////Text = $"Point index {pointIndex} at ({pointX}, {pointY})";
-
-
+        // Set the data to be shown on the distribution plot (Radar or RadialGauge)
         for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
         {
             _plotRadialGauge[i] = _plotData[i][e.PointIndex];
@@ -413,18 +380,21 @@ partial class FrmMain
         }
         plotDistribution.Refresh(skipIfCurrentlyRendering: true);
 
+        // Update the rest of the plots accordingly
         if (MyPlot.Name == "plotData")
         {
             plotData.Refresh(skipIfCurrentlyRendering: true);
             if (plotStats.ShowCrossHair)
             {
                 plotStats.VerticalLine.X = e.PointX;
+                plotStats.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors][e.PointIndex];
                 plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
 
             if (plotRatio.ShowCrossHair)
             {
                 plotRatio.VerticalLine.X = e.PointX;
+                plotRatio.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors + 3][e.PointIndex];
                 plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
         }
@@ -434,11 +404,13 @@ partial class FrmMain
             if (plotData.ShowCrossHair)
             {
                 plotData.VerticalLine.X = e.PointX;
+                plotData.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors-1][e.PointIndex];
                 plotData.Refresh(skipIfCurrentlyRendering: true);
             }
             if (plotRatio.ShowCrossHair)
             {
                 plotRatio.VerticalLine.X = e.PointX;
+                plotRatio.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors + 3][e.PointIndex];
                 plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
         }
@@ -448,11 +420,13 @@ partial class FrmMain
             if (plotData.ShowCrossHair)
             {
                 plotData.VerticalLine.X = e.PointX;
+                plotData.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors - 1][e.PointIndex];
                 plotData.Refresh(skipIfCurrentlyRendering: true);
             }
             if (plotStats.ShowCrossHair)
             {
                 plotStats.VerticalLine.X = e.PointX;
+                plotStats.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors][e.PointIndex];
                 plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
         }

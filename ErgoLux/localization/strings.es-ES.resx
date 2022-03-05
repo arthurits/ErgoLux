@@ -484,6 +484,9 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strStatusOpen" xml:space="preserve">
     <value>Desconectado</value>
   </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>Activar la cruz (mira) gráfica en los gráficos</value>
+  </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
     <value>Mostrar gráfico de distribución</value>
   </data>
