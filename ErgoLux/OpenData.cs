@@ -14,9 +14,6 @@ partial class FrmMain
         double nFreq = 0.0;
         string? strLine;
 
-        var cursor = Cursor.Current;
-        Cursor.Current = Cursors.WaitCursor;
-
         try
         {
             // https://stackoverflow.com/questions/897796/how-do-i-open-an-already-opened-file-with-a-net-streamreader
@@ -156,10 +153,6 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
-        finally
-        {
-            Cursor.Current = cursor;
-        }
 
         return result;
     }
@@ -182,8 +175,6 @@ partial class FrmMain
     private bool OpenBinaryData(string FileName)
     {
         bool result = true;
-        var cursor = Cursor.Current;
-        Cursor.Current = Cursors.WaitCursor;
 
         try
         {
@@ -245,10 +236,6 @@ partial class FrmMain
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-        }
-        finally
-        {
-            Cursor.Current = cursor;
         }
 
         return result;

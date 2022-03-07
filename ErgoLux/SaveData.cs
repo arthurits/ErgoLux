@@ -8,9 +8,6 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the elux file</param>
     private void SaveELuxData(string FileName)
     {
-        var cursor = Cursor.Current;
-        Cursor.Current = Cursors.WaitCursor;
-
         try
         {
             using var fs = File.Open(FileName, FileMode.CreateNew, FileAccess.Write, FileShare.ReadWrite);
@@ -81,10 +78,6 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
-        finally
-        {
-            Cursor.Current = cursor;
-        }
     }
 
     /// <summary>
@@ -102,9 +95,6 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the binary file</param>
     private void SaveBinaryData (string FileName)
     {
-        var cursor = Cursor.Current;
-        Cursor.Current = Cursors.WaitCursor;
-
         try
         {
             using var fs = File.Open(FileName, FileMode.CreateNew, FileAccess.Write, FileShare.ReadWrite);
@@ -167,10 +157,6 @@ partial class FrmMain
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-        }
-        finally
-        {
-            Cursor.Current = cursor;
         }
     }
 

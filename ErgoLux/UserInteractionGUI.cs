@@ -47,9 +47,13 @@ partial class FrmMain
         using (new CenterWinDialog(this))
             result = SaveDlg.ShowDialog(this.Parent);
 
+        var cursor = Cursor.Current;
         // If the file name is not an empty string, call the corresponding routine to save the data into a file.  
         if (result == DialogResult.OK && SaveDlg.FileName != "")
         {
+            // Show waiting cursor
+            Cursor.Current = Cursors.WaitCursor;
+
             //Get the path of specified file and store the directory for future calls
             filePath = SaveDlg.FileName;
             if (_sett.RememberFileDialogPath) _sett.UserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
@@ -71,6 +75,9 @@ partial class FrmMain
             }
 
             SetFormTitle(this, SaveDlg.FileName);
+
+            // Restore cursor
+            Cursor.Current = cursor;
         }
     }
 
@@ -92,9 +99,13 @@ partial class FrmMain
             result = OpenDlg.ShowDialog(this);
 
         // If the file name is not an empty string open it for saving.
+        var cursor = Cursor.Current;
         bool readOK = false;
         if (result == DialogResult.OK && OpenDlg.FileName != "")
         {
+            // Show waiting cursor
+            Cursor.Current = Cursors.WaitCursor;
+
             //Get the path of specified file and store the directory for future calls
             filePath = OpenDlg.FileName;
             if (_sett.RememberFileDialogPath) _sett.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
@@ -123,6 +134,9 @@ partial class FrmMain
             // Show data into plots
             Plots_FetchData();
         }
+
+        // Restore cursor
+        Cursor.Current = cursor;
     }
 
     private void Connect_CheckedChanged(object sender, EventArgs e)
