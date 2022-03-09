@@ -363,7 +363,7 @@ namespace ErgoLux
             this.statusStripLabelXtras.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelXtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelXtras.Name = "statusStripLabelXtras";
-            this.statusStripLabelXtras.Size = new System.Drawing.Size(113, 23);
+            this.statusStripLabelXtras.Size = new System.Drawing.Size(144, 23);
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -683,6 +683,7 @@ namespace ErgoLux
             this.Controls.Add(this.mnuMainFrm);
             this.Controls.Add(this.tspBottom);
             this.Controls.Add(this.tspTop);
+            this.MinimumSize = new System.Drawing.Size(950, 650);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ErgoLux";
