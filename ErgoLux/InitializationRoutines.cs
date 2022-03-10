@@ -12,9 +12,6 @@ partial class FrmMain
         tspTop.Join(toolStripMain);
         tspTop.Join(mnuMainFrm);
         tspBottom.Join(statusStrip);
-
-        // Exit the method
-        return;
     }
 
     /// <summary>
@@ -24,7 +21,6 @@ partial class FrmMain
     {
         toolStripMain.Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
-        //var path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
         if (File.Exists(_sett.AppPath + @"\images\exit.ico")) this.toolStripMain_Exit.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\exit.ico", 48, 48).ToBitmap();
         if (File.Exists(_sett.AppPath + @"\images\connect.ico")) this.toolStripMain_Connect.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\connect.ico", 48, 48).ToBitmap();
         if (File.Exists(_sett.AppPath + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\disconnect.ico", 48, 48).ToBitmap();
@@ -37,8 +33,6 @@ partial class FrmMain
         this.toolStripMain_Connect.Enabled = false;
         this.toolStripMain_Open.Enabled = true; // maybe set as default in the WinForms designer
         this.toolStripMain_Save.Enabled = true;
-
-        return;
     }
 
     /// <summary>
@@ -69,8 +63,6 @@ partial class FrmMain
         this.mnuMainFrm_Tools_Disconnect.Enabled = false;
         this.toolStripMain_Disconnect.Enabled = false;
         this.toolStripMain_Connect.Enabled = false;
-
-        return;
     }
 
     /// <summary>
@@ -79,12 +71,10 @@ partial class FrmMain
     private void InitializeStatusStrip()
     {
         statusStripIconOpen.Image = _sett.Icon_Close;
-
         InitializeStatusStripLabelsStatus();
 
         // It would be nice to be able to do this
-        //statusStrip.Renderer = new customRenderer<ToolStripStatusLabelEx>(Brushes.SteelBlue, Brushes.LightSkyBlue);
-        return;
+        //statusStrip.Renderer = new customRenderer<ToolStripStatusLabelEx>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
     }
 
     /// <summary>
