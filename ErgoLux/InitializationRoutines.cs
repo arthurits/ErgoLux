@@ -78,12 +78,12 @@ partial class FrmMain
     /// </summary>
     private void InitializeStatusStrip()
     {
-        //if (File.Exists(_sett.AppPath + @"\images\close.ico")) this.statusStripIconOpen.Image = new Icon(_sett.AppPath + @"\images\close.ico", 16, 16).ToBitmap();
         statusStripIconOpen.Image = _sett.Icon_Close;
 
         InitializeStatusStripLabelsStatus();
 
-        //statusStrip.Renderer = new customRenderer<ToolStripLabel>(Brushes.SteelBlue, Brushes.LightSkyBlue);
+        // It would be nice to be able to do this
+        //statusStrip.Renderer = new customRenderer<ToolStripStatusLabelEx>(Brushes.SteelBlue, Brushes.LightSkyBlue);
         return;
     }
 
@@ -113,17 +113,17 @@ partial class FrmMain
         //formsPlot1.plt.AxisAutoX(margin: 0);
         plotData.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
-        // customize styling
+        // Customize styling
         plotData.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
-        plotData.Plot.Title("Illuminance");
-        plotData.Plot.YLabel("Lux");
-        plotData.Plot.XLabel("Time (seconds)");
+        plotData.Plot.Title(StringsRM.GetString("strPlotRawTitle", _sett.AppCulture) ?? "Illuminance");
+        plotData.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _sett.AppCulture) ?? "Lux");
+        plotData.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _sett.AppCulture) ?? "Time (seconds)");
         plotData.Plot.Grid(enable: false);
         plotData.SnapToPoint = true;
 
         // Customize the Distribution plot
         plotDistribution.Plot.Grid(enable: false);
-        plotDistribution.Plot.Title("Illuminance distribution");
+        plotDistribution.Plot.Title(StringsRM.GetString("strPlotDistributionTitle", _sett.AppCulture) ?? "Illuminance distribution");
         plotDistribution.Plot.XAxis.Ticks(false);
         plotDistribution.Plot.YAxis.Ticks(false);
 
@@ -131,9 +131,9 @@ partial class FrmMain
         plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
         plotStats.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
-        plotStats.Plot.Title("Max, average, min");
-        plotStats.Plot.YLabel("Lux");
-        plotStats.Plot.XLabel("Time (seconds)");
+        plotStats.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _sett.AppCulture) ?? "Max, average, min");
+        plotStats.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _sett.AppCulture) ?? "Lux");
+        plotStats.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _sett.AppCulture) ?? "Time (seconds)");
         plotStats.Plot.Grid(enable: false);
         plotStats.SnapToPoint = true;
 
@@ -142,9 +142,9 @@ partial class FrmMain
         plotRatio.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
 
         plotRatio.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
-        plotRatio.Plot.Title("Illuminance ratios");
-        plotRatio.Plot.YLabel("Ratio");
-        plotRatio.Plot.XLabel("Time (seconds)");
+        plotRatio.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _sett.AppCulture) ?? "Illuminance ratios");
+        plotRatio.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _sett.AppCulture) ?? "Ratio");
+        plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _sett.AppCulture) ?? "Time (seconds)");
         plotRatio.Plot.Grid(enable: false);
         plotRatio.SnapToPoint = true;
 
