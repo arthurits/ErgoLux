@@ -25,7 +25,7 @@ public partial class FrmMain : Form
 
     public FrmMain()
     {
-        // Load settings. This has to go before custom initialization, since some routines depend on these values
+        // Load settings. This has to go before custom initialization, since some routines depends on this
         _sett = new ClassSettings(Path.GetDirectoryName(System.Environment.ProcessPath));
         LoadProgramSettingsJSON();
 
