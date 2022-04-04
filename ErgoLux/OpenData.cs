@@ -22,80 +22,80 @@ partial class FrmMain
 
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _sett.AppCulture) ?? "ErgoLux data"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader01", _sett.AppCulture) ?? "ErgoLux data"} (", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _sett.AppCulture) ?? "ErgoLux data"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "ErgoLux data"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "ErgoLux data"} (", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "ErgoLux data"));
             System.Globalization.CultureInfo fileCulture = new (strLine[(strLine.IndexOf("(") + 1)..^1]);
 
             strLine = sr.ReadLine();    // Start time
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader02", _sett.AppCulture) ?? "Start time"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader02", _sett.AppCulture) ?? "Start time"}: ", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader02", _sett.AppCulture) ?? "Start time"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader02", _settings.AppCulture) ?? "Start time"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader02", _settings.AppCulture) ?? "Start time"}: ", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader02", _settings.AppCulture) ?? "Start time"));
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _sett.GetMillisecondsFormat(fileCulture));
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.GetMillisecondsFormat(fileCulture));
             if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeStart))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader02", _sett.AppCulture) ?? "Start time"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader02", _settings.AppCulture) ?? "Start time"));
 
             strLine = sr.ReadLine();    // End time
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader03", _sett.AppCulture) ?? "End time"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader03", _sett.AppCulture) ?? "End time"}: ", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader03", _sett.AppCulture) ?? "End time"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader03", _settings.AppCulture) ?? "End time"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader03", _settings.AppCulture) ?? "End time"}: ", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader03", _settings.AppCulture) ?? "End time"));
             if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeEnd))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader03", _sett.AppCulture) ?? "End time"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader03", _settings.AppCulture) ?? "End time"));
 
             strLine = sr.ReadLine();    // Total measuring time
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader04", _sett.AppCulture) ?? "Total measuring time"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader04", _sett.AppCulture) ?? "Total measuring time"}: ", StringComparison.InvariantCulture))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader04", _sett.AppCulture) ?? "Total measuring time"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader04", _settings.AppCulture) ?? "Total measuring time"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader04", _settings.AppCulture) ?? "Total measuring time"}: ", StringComparison.InvariantCulture))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader04", _settings.AppCulture) ?? "Total measuring time"));
 
             strLine = sr.ReadLine();    // Number of sensors
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader05", _sett.AppCulture) ?? "Number of sensors"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader05", _sett.AppCulture) ?? "Number of sensors"}: ", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader05", _sett.AppCulture) ?? "Number of sensors"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of sensors"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of sensors"}: ", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of sensors"));
             if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSensors))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader05", _sett.AppCulture) ?? "Number of sensors"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of sensors"));
             if (nSensors == 0)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader05", _sett.AppCulture) ?? "Number of sensors"));
-            _sett.T10_NumberOfSensors = nSensors;
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of sensors"));
+            _settings.T10_NumberOfSensors = nSensors;
 
             strLine = sr.ReadLine();    // Number of data points
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader06", _sett.AppCulture) ?? "Number of data points"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader06", _sett.AppCulture) ?? "Number of data points"}: ", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader06", _sett.AppCulture) ?? "Number of data points"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Number of data points"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Number of data points"}: ", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Number of data points"));
             if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader06", _sett.AppCulture) ?? "Number of data points"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Number of data points"));
             if (nPoints == 0)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader06", _sett.AppCulture) ?? "Number of data points"));
-            _sett.Plot_ArrayPoints = nPoints;
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Number of data points"));
+            _settings.Plot_ArrayPoints = nPoints;
 
             strLine = sr.ReadLine();    // Sampling frequency
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _sett.AppCulture) ?? "Sampling frequency"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader07", _sett.AppCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _sett.AppCulture) ?? "Sampling frequency"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Sampling frequency"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Sampling frequency"));
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nFreq))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _sett.AppCulture) ?? "Sampling frequency"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Sampling frequency"));
             if (nFreq <= 0)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _sett.AppCulture) ?? "Sampling frequency"));
-            _sett.T10_Frequency = nFreq;
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Sampling frequency"));
+            _settings.T10_Frequency = nFreq;
 
             strLine = sr.ReadLine();    // Empty line
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strFileHeader17", _sett.AppCulture) ?? "Missing an empty line.");
+                throw new FormatException(StringsRM.GetString("strFileHeader17", _settings.AppCulture) ?? "Missing an empty line.");
             if (strLine != string.Empty)
-                throw new FormatException(StringsRM.GetString("strFileHeader17", _sett.AppCulture) ?? "Missing an empty line.");
+                throw new FormatException(StringsRM.GetString("strFileHeader17", _settings.AppCulture) ?? "Missing an empty line.");
 
             strLine = sr.ReadLine();    // Column header names
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strFileHeader18", _sett.AppCulture) ?? "Missing column headers (series names).");
+                throw new FormatException(StringsRM.GetString("strFileHeader18", _settings.AppCulture) ?? "Missing column headers (series names).");
             _seriesLabels = strLine.Split('\t');
             if (_seriesLabels == Array.Empty<string>())
-                throw new FormatException(StringsRM.GetString("strFileHeader18", _sett.AppCulture) ?? "Missing column headers (series names).");
+                throw new FormatException(StringsRM.GetString("strFileHeader18", _settings.AppCulture) ?? "Missing column headers (series names).");
 
             // Initialize data arrays
             InitializeArrays();
@@ -119,8 +119,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _sett.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
-                    StringsRM.GetString("strReadDataErrorCultureTitle", _sett.AppCulture) ?? "Culture name error",
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _settings.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorCultureTitle", _settings.AppCulture) ?? "Culture name error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
@@ -128,8 +128,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataError", _sett.AppCulture) ?? "Unable to read data from file.\n{0}", ex.Message),
-                    StringsRM.GetString("strReadDataErrorTitle", _sett.AppCulture) ?? "Error opening data",
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataError", _settings.AppCulture) ?? "Unable to read data from file.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorTitle", _settings.AppCulture) ?? "Error opening data",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
@@ -137,8 +137,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorNumber", _sett.AppCulture) ?? "Invalid numeric value: {0}", ex.Message),
-                    StringsRM.GetString("strReadDataErrorNumberTitle", _sett.AppCulture) ?? "Error parsing data",
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorNumber", _settings.AppCulture) ?? "Invalid numeric value: {0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorNumberTitle", _settings.AppCulture) ?? "Error parsing data",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
@@ -147,8 +147,8 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorOpenData", _sett.AppCulture) ?? "An unexpected error happened while opening data file.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
-                    StringsRM.GetString("strMsgBoxErrorOpenDataTitle", _sett.AppCulture) ?? "Error opening data",
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorOpenData", _settings.AppCulture) ?? "An unexpected error happened while opening data file.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorOpenDataTitle", _settings.AppCulture) ?? "Error opening data",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -183,9 +183,9 @@ partial class FrmMain
 
             string strLine = br.ReadString();   // ErgoLux data
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _sett.AppCulture) ?? "ErgoLux data"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader01", _sett.AppCulture) ?? "ErgoLux data"} (", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _sett.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _sett.AppCulture) ?? "ErgoLux data"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "ErgoLux data"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "ErgoLux data"} (", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "ErgoLux data"));
 
             _timeStart = br.ReadDateTime();
             _timeEnd = br.ReadDateTime();
@@ -194,16 +194,16 @@ partial class FrmMain
             dummy = br.ReadInt32();         // minutes
             dummy = br.ReadInt32();         // seconds
             dummy = br.ReadInt32();         // milliseconds
-            _sett.T10_NumberOfSensors = br.ReadInt32();
-            _sett.Plot_ArrayPoints = br.ReadInt32();
-            _nPoints = _sett.Plot_ArrayPoints;
-            _sett.T10_Frequency = br.ReadDouble();
+            _settings.T10_NumberOfSensors = br.ReadInt32();
+            _settings.Plot_ArrayPoints = br.ReadInt32();
+            _nPoints = _settings.Plot_ArrayPoints;
+            _settings.T10_Frequency = br.ReadDouble();
             strLine = br.ReadString();      // column header names
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strFileHeader18", _sett.AppCulture) ?? "Missing column headers (series names).");
+                throw new FormatException(StringsRM.GetString("strFileHeader18", _settings.AppCulture) ?? "Missing column headers (series names).");
             _seriesLabels = strLine.Split('\t');
             if (_seriesLabels == Array.Empty<string>())
-                throw new FormatException(StringsRM.GetString("strFileHeader18", _sett.AppCulture) ?? "Missing column headers (series names).");
+                throw new FormatException(StringsRM.GetString("strFileHeader18", _settings.AppCulture) ?? "Missing column headers (series names).");
 
             // Initialize data arrays
             InitializeArrays();
@@ -221,8 +221,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _sett.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
-                    StringsRM.GetString("strReadDataErrorCultureTitle", _sett.AppCulture) ?? "Culture name error",
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _settings.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorCultureTitle", _settings.AppCulture) ?? "Culture name error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
@@ -231,8 +231,8 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorOpenData", _sett.AppCulture) ?? "An unexpected error happened while opening data file.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
-                    StringsRM.GetString("strMsgBoxErrorOpenDataTitle", _sett.AppCulture) ?? "Error opening data",
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorOpenData", _settings.AppCulture) ?? "An unexpected error happened while opening data file.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorOpenDataTitle", _settings.AppCulture) ?? "Error opening data",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

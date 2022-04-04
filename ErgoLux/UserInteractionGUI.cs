@@ -25,8 +25,8 @@ partial class FrmMain
         {
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(StringsRM.GetString("strMsgBoxNoData", _sett.AppCulture) ?? "There is no data available to be saved.",
-                    StringsRM.GetString("strMsgBoxNoDataTitle", _sett.AppCulture) ?? "No data",
+                MessageBox.Show(StringsRM.GetString("strMsgBoxNoData", _settings.AppCulture) ?? "There is no data available to be saved.",
+                    StringsRM.GetString("strMsgBoxNoDataTitle", _settings.AppCulture) ?? "No data",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
@@ -37,11 +37,11 @@ partial class FrmMain
         SaveFileDialog SaveDlg = new()
         {
             DefaultExt = "*.elux",
-            Filter = StringsRM.GetString("strSaveDlgFilter", _sett.AppCulture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            Filter = StringsRM.GetString("strSaveDlgFilter", _settings.AppCulture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
             FilterIndex = 1,
-            Title = StringsRM.GetString("strSaveDlgTitle", _sett.AppCulture) ?? "Save illuminance data",
+            Title = StringsRM.GetString("strSaveDlgTitle", _settings.AppCulture) ?? "Save illuminance data",
             OverwritePrompt = true,
-            InitialDirectory = _sett.RememberFileDialogPath ? _sett.UserSavePath : _sett.DefaultSavePath,
+            InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserSavePath : _settings.DefaultSavePath,
         };
 
         using (new CenterWinDialog(this))
@@ -56,7 +56,7 @@ partial class FrmMain
 
             //Get the path of specified file and store the directory for future calls
             filePath = SaveDlg.FileName;
-            if (_sett.RememberFileDialogPath) _sett.UserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
+            if (_settings.RememberFileDialogPath) _settings.UserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
             switch (Path.GetExtension(SaveDlg.FileName).ToLower())
             {
@@ -89,10 +89,10 @@ partial class FrmMain
         OpenFileDialog OpenDlg = new()
         {
             DefaultExt = "*.elux",
-            Filter = StringsRM.GetString("strOpenDlgFilter", _sett.AppCulture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            Filter = StringsRM.GetString("strOpenDlgFilter", _settings.AppCulture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
             FilterIndex = 1,
-            Title = StringsRM.GetString("strOpenDlgTitle", _sett.AppCulture) ?? "Open illuminance data",
-            InitialDirectory = _sett.RememberFileDialogPath ? _sett.UserOpenPath : _sett.DefaultOpenPath
+            Title = StringsRM.GetString("strOpenDlgTitle", _settings.AppCulture) ?? "Open illuminance data",
+            InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserOpenPath : _settings.DefaultOpenPath
         };
 
         using (new CenterWinDialog(this))
@@ -108,7 +108,7 @@ partial class FrmMain
 
             //Get the path of specified file and store the directory for future calls
             filePath = OpenDlg.FileName;
-            if (_sett.RememberFileDialogPath) _sett.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
+            if (_settings.RememberFileDialogPath) _settings.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
             // Read the data file in the corresponding format
             switch (Path.GetExtension(OpenDlg.FileName).ToLower())
@@ -161,7 +161,7 @@ partial class FrmMain
             toolStripMain_Save.Enabled = false;
             toolStripMain_Settings.Enabled = false;
             toolStripMain_About.Enabled = false;
-            this.statusStripIconExchange.Image = _sett.Icon_Data;
+            this.statusStripIconExchange.Image = _settings.Icon_Data;
             SetFormTitle(this);
             _reading = true;
 
@@ -201,9 +201,9 @@ partial class FrmMain
     {
         FTDI.FT_STATUS result;
 
-        FrmSettings frm = new(_sett);
+        FrmSettings frm = new(_settings);
         // Set form icon
-        if (File.Exists(_sett.AppPath + @"\images\logo.ico")) frm.Icon = new Icon(_sett.AppPath + @"\images\logo.ico");
+        if (File.Exists(_settings.AppPath + @"\images\logo.ico")) frm.Icon = new Icon(_settings.AppPath + @"\images\logo.ico");
         frm.ShowDialog();
 
         if (frm.DialogResult == DialogResult.OK)
@@ -211,7 +211,7 @@ partial class FrmMain
             UpdateUI_Language();
 
             // If a device is selected, then set up the parameters
-            if (_sett.T10_LocationID > 0)
+            if (_settings.T10_LocationID > 0)
             {
                 this.toolStripMain_Connect.Enabled = true;
 
@@ -219,27 +219,27 @@ partial class FrmMain
                     myFtdiDevice.Close();
 
                 myFtdiDevice = new FTDISample();
-                result = myFtdiDevice.OpenDevice(location: (uint)_sett.T10_LocationID,
-                    baud: _sett.T10_BaudRate,
-                    dataBits: _sett.T10_DataBits,
-                    stopBits: _sett.T10_StopBits,
-                    parity: _sett.T10_Parity,
-                    flowControl: _sett.T10_FlowControl,
-                    xOn: _sett.T10_CharOn,
-                    xOff: _sett.T10_CharOff,
+                result = myFtdiDevice.OpenDevice(location: (uint)_settings.T10_LocationID,
+                    baud: _settings.T10_BaudRate,
+                    dataBits: _settings.T10_DataBits,
+                    stopBits: _settings.T10_StopBits,
+                    parity: _settings.T10_Parity,
+                    flowControl: _settings.T10_FlowControl,
+                    xOn: _settings.T10_CharOn,
+                    xOff: _settings.T10_CharOff,
                     readTimeOut: 0,
                     writeTimeOut: 0);
 
                 if (result == FTDI.FT_STATUS.FT_OK)
                 {
                     // Set the timer interval according to the sampling frecuency
-                    m_timer.Interval = 1000 / _sett.T10_Frequency;
+                    m_timer.Interval = 1000 / _settings.T10_Frequency;
 
                     // Update the status strip with information
-                    this.statusStripLabelLocation.Text = (StringsRM.GetString("strStatusLocation", _sett.AppCulture) ?? "Location ID") + $": {_sett.T10_LocationID:X}";
-                    this.statusStripLabelType.Text = (StringsRM.GetString("strStatusType", _sett.AppCulture) ?? "Device type") + $": {frm.GetDeviceType}";
-                    this.statusStripLabelID.Text = (StringsRM.GetString("strStatusID", _sett.AppCulture) ?? "Device ID") + $": {frm.GetDeviceID}";
-                    this.statusStripIconOpen.Image = _sett.Icon_Open;
+                    this.statusStripLabelLocation.Text = (StringsRM.GetString("strStatusLocation", _settings.AppCulture) ?? "Location ID") + $": {_settings.T10_LocationID:X}";
+                    this.statusStripLabelType.Text = (StringsRM.GetString("strStatusType", _settings.AppCulture) ?? "Device type") + $": {frm.GetDeviceType}";
+                    this.statusStripLabelID.Text = (StringsRM.GetString("strStatusID", _settings.AppCulture) ?? "Device ID") + $": {frm.GetDeviceID}";
+                    this.statusStripIconOpen.Image = _settings.Icon_Open;
 
                     InitializeStatusStripLabelsStatus();
                     InitializeArrays();     // Initialize the arrays containing the data
@@ -249,11 +249,11 @@ partial class FrmMain
                 }
                 else
                 {
-                    this.statusStripIconOpen.Image = _sett.Icon_Close;
+                    this.statusStripIconOpen.Image = _settings.Icon_Close;
                     using (new CenterWinDialog(this))
                     {
-                        MessageBox.Show(StringsRM.GetString("strMsgBoxErrorOpenDevice", _sett.AppCulture) ?? "Could not open the device",
-                            StringsRM.GetString("strMsgBoxErrorOpenDeviceTitle", _sett.AppCulture) ?? "Error",
+                        MessageBox.Show(StringsRM.GetString("strMsgBoxErrorOpenDevice", _settings.AppCulture) ?? "Could not open the device",
+                            StringsRM.GetString("strMsgBoxErrorOpenDeviceTitle", _settings.AppCulture) ?? "Error",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                     }
@@ -280,7 +280,7 @@ partial class FrmMain
 
     private void Language_Click(object sender, EventArgs e)
     {
-        FrmLanguage frm = new(_sett);
+        FrmLanguage frm = new(_settings);
         frm.ShowDialog();
 
         if (frm.DialogResult == DialogResult.OK)
@@ -314,19 +314,19 @@ partial class FrmMain
             switch (label.Text)
             {
                 case "W":
-                    _sett.Plot_ShowRawData = label.Checked;
+                    _settings.Plot_ShowRawData = label.Checked;
                     mnuMainFrm_View_Raw.Checked = label.Checked;
                     break;
                 case "D":
-                    _sett.Plot_ShowDistribution = label.Checked;
+                    _settings.Plot_ShowDistribution = label.Checked;
                     mnuMainFrm_View_Distribution.Checked = label.Checked;
                     break;
                 case "A":
-                    _sett.Plot_ShowAverage = label.Checked;
+                    _settings.Plot_ShowAverage = label.Checked;
                     mnuMainFrm_View_Average.Checked = label.Checked;
                     break;
                 case "R":
-                    _sett.Plot_ShowRatios = label.Checked;
+                    _settings.Plot_ShowRatios = label.Checked;
                     mnuMainFrm_View_Ratio.Checked = label.Checked;
                     break;
             }
@@ -368,28 +368,28 @@ partial class FrmMain
         bool status = !this.mnuMainFrm_View_Raw.Checked;
         this.mnuMainFrm_View_Raw.Checked = status;
         this.statusStripLabelRaw.Checked = status;
-        _sett.Plot_ShowRawData = status;
+        _settings.Plot_ShowRawData = status;
     }
     private void mnuMainFrm_View_Radial_Click(object sender, EventArgs e)
     {
         bool status = !this.mnuMainFrm_View_Distribution.Checked;
         this.mnuMainFrm_View_Distribution.Checked = status;
         this.statusStripLabelRadar.Checked = status;
-        _sett.Plot_ShowDistribution = status;
+        _settings.Plot_ShowDistribution = status;
     }
     private void mnuMainFrm_View_Average_Click(object sender, EventArgs e)
     {
         bool status = !this.mnuMainFrm_View_Average.Checked;
         this.mnuMainFrm_View_Average.Checked = status;
         this.statusStripLabelMax.Checked = status;
-        _sett.Plot_ShowAverage = status;
+        _settings.Plot_ShowAverage = status;
     }
     private void mnuMainFrm_View_Ratio_Click(object sender, EventArgs e)
     {
         bool status = !this.mnuMainFrm_View_Ratio.Checked;
         this.mnuMainFrm_View_Ratio.Checked = status;
         this.statusStripLabelRatio.Checked = status;
-        _sett.Plot_ShowRatios = status;
+        _settings.Plot_ShowRatios = status;
     }
     private void mnuMainFrm_Tools_Connect_Click(object sender, EventArgs e)
     {

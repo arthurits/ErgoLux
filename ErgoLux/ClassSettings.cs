@@ -8,14 +8,26 @@ namespace ErgoLux;
 /// </summary>
 public class ClassSettings
 {
+    /// <summary>
+    /// Stores the settings file name
+    /// </summary>
+    [JsonIgnore]
+    public string SettingsFileName { get; set; } = "configuration.json";
+
+    /// <summary>
+    /// Remember window position on start up
+    /// </summary>
+    [JsonPropertyName("Window position")]
+    public bool WindowPosition { get; set; } = true;
+
     [JsonPropertyName("Window top")]
-    public int Wnd_Top { get; set; } = 0;
+    public int WindowTop { get; set; } = 0;
     [JsonPropertyName("Window left")]
-    public int Wnd_Left { get; set; } = 0;
+    public int WindowLeft { get; set; } = 0;
     [JsonPropertyName("Window width")]
-    public int Wnd_Width { get; set; } = 950;
+    public int WindowWidth { get; set; } = 950;
     [JsonPropertyName("Window height")]
-    public int Wnd_Height { get; set; } = 650;
+    public int WindowHeight { get; set; } = 650;
 
     [JsonPropertyName("Location id")]
     public int T10_LocationID { get; set; } = 0;
@@ -84,11 +96,6 @@ public class ClassSettings
     [JsonIgnore]
     public System.Drawing.Bitmap? Icon_Data { get; set; }
 
-    /// <summary>
-    /// Stores the settings file name
-    /// </summary>
-    [JsonIgnore]
-    public string SettingsFileName { get; set; } = "configuration.json";
     /// <summary>
     /// Absolute path of the executable
     /// </summary>

@@ -6,20 +6,19 @@ namespace ErgoLux;
 partial class FrmMain
 {
     /// <summary>
-    /// Loads all settings from file _sett.FileName into class instance _sett
+    /// Loads all settings from file _settings.FileName into class instance _settings
     /// Shows MessageBox error if unsuccessful
     /// </summary>
-    private void LoadProgramSettingsJSON()
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
+    private bool LoadProgramSettingsJSON()
     {
+        bool result = false;
         try
         {
-            var jsonString = File.ReadAllText(_sett.SettingsFileName);
-            _sett = JsonSerializer.Deserialize<ClassSettings>(jsonString);
-            _sett.InitializeJsonIgnore(_sett.AppPath);
-
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.DesktopLocation = new Point(_sett.Wnd_Left, _sett.Wnd_Top);
-            this.ClientSize = new Size(_sett.Wnd_Width, _sett.Wnd_Height);
+            var jsonString = File.ReadAllText(_settings.SettingsFileName);
+            _settings = JsonSerializer.Deserialize<ClassSettings>(jsonString) ?? _settings;
+            _settings.InitializeJsonIgnore(_settings.AppPath);
+            result = true;
         }
         catch (FileNotFoundException)
         {
@@ -29,12 +28,13 @@ partial class FrmMain
             using (new CenterWinDialog(this))
             {
                 MessageBox.Show(this,
-                    StringsRM.GetString("strMsgBoxErrorSettings", _sett.AppCulture) ?? $"Error loading settings file.\n\n{ex.Message}\n\nDefault values will be used instead.",
-                    StringsRM.GetString("strMsgBoxErrorSettingsTitle", _sett.AppCulture) ?? "Error",
+                    StringsRM.GetString("strMsgBoxErrorSettings", _settings.AppCulture) ?? $"Error loading settings file.\n\n{ex.Message}\n\nDefault values will be used instead.",
+                    StringsRM.GetString("strMsgBoxErrorSettingsTitle", _settings.AppCulture) ?? "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
+        return result;
     }
 
     /// <summary>
@@ -42,16 +42,30 @@ partial class FrmMain
     /// </summary>
     private void SaveProgramSettingsJSON()
     {
-        _sett.Wnd_Left = DesktopLocation.X;
-        _sett.Wnd_Top = DesktopLocation.Y;
-        _sett.Wnd_Width = ClientSize.Width;
-        _sett.Wnd_Height = ClientSize.Height;
+        _settings.WindowLeft = DesktopLocation.X;
+        _settings.WindowTop = DesktopLocation.Y;
+        _settings.WindowWidth = ClientSize.Width;
+        _settings.WindowHeight = ClientSize.Height;
 
         var options = new JsonSerializerOptions
         {
             WriteIndented = true
         };
-        var jsonString = JsonSerializer.Serialize(_sett, options);
-        File.WriteAllText(_sett.SettingsFileName, jsonString);
+        var jsonString = JsonSerializer.Serialize(_settings, options);
+        File.WriteAllText(_settings.SettingsFileName, jsonString);
+    }
+
+    /// <summary>
+    /// Update UI with settings
+    /// </summary>
+    /// <param name="WindowSettings"><see langword="True"/> if the window position and size should be applied. <see langword="False"/> if omitted</param>
+    private void ApplySettingsJSON(bool WindowPosition = false)
+    {
+        if (WindowPosition)
+        {
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.DesktopLocation = new Point(_settings.WindowLeft, _settings.WindowTop);
+            this.ClientSize = new Size(_settings.WindowWidth, _settings.WindowHeight);
+        }
     }
 }

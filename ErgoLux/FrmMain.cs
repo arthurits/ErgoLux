@@ -7,7 +7,7 @@ namespace ErgoLux;
 public partial class FrmMain : Form
 {
     private readonly System.Timers.Timer m_timer;
-    private ClassSettings _sett;
+    private ClassSettings _settings;
     private FTDISample? myFtdiDevice = null;
     private double[][] _plotData = Array.Empty<double[]>();
     private double _max = 0;
@@ -26,11 +26,10 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         // Load settings. This has to go before custom initialization, since some routine depend on these values
-        _sett = new ClassSettings(Path.GetDirectoryName(System.Environment.ProcessPath));
-        LoadProgramSettingsJSON();
-
+        _settings = new ClassSettings(Path.GetDirectoryName(System.Environment.ProcessPath));
+        
         // Set form icon
-        if (File.Exists(_sett.AppPath + @"\images\logo.ico")) this.Icon = new Icon(_sett.AppPath + @"\images\logo.ico");
+        if (File.Exists(_settings.AppPath + @"\images\logo.ico")) this.Icon = new Icon(_settings.AppPath + @"\images\logo.ico");
 
         // Initialize components and GUI
         InitializeComponent();
@@ -41,6 +40,12 @@ public partial class FrmMain : Form
         InitializePlots();
 
         // Language GUI
+        bool result = LoadProgramSettingsJSON();
+        if (result)
+            ApplySettingsJSON(_settings.WindowPosition);
+        else
+            ApplySettingsJSON();
+
         UpdateUI_Language();
 
         // Initialize the internal timer
@@ -61,8 +66,8 @@ public partial class FrmMain : Form
         using (new CenterWinDialog(this))
         {
             if (DialogResult.No == MessageBox.Show(this,
-                        StringsRM.GetString("strMsgBoxExit", _sett.AppCulture) ?? "Are you sure you want to exit\nthe application?",
-                        StringsRM.GetString("strMsgBoxExitTitle", _sett.AppCulture) ?? "Exit?",
+                        StringsRM.GetString("strMsgBoxExit", _settings.AppCulture) ?? "Are you sure you want to exit\nthe application?",
+                        StringsRM.GetString("strMsgBoxExitTitle", _settings.AppCulture) ?? "Exit?",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2))
@@ -102,7 +107,7 @@ public partial class FrmMain : Form
             //System.Diagnostics.Debug.Print("Daata: {0} — TimeStamp: {1}",
             //                            result.ToString(),
             //                            DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
-            if (result.Sensor < _sett.T10_NumberOfSensors - 1)
+            if (result.Sensor < _settings.T10_NumberOfSensors - 1)
             {
                 myFtdiDevice?.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
             }
@@ -127,7 +132,7 @@ public partial class FrmMain : Form
     private void SetFormTitle(System.Windows.Forms.Form frm, string? strFileName = null)
     {
         string strText = String.Empty;
-        string strSep = StringsRM.GetString("strFrmTitleUnion", _sett.AppCulture) ?? " - ";
+        string strSep = StringsRM.GetString("strFrmTitleUnion", _settings.AppCulture) ?? " - ";
         if (strFileName is not null)
         {
             if (strFileName != String.Empty)
@@ -138,7 +143,7 @@ public partial class FrmMain : Form
                 strText = frm.Text[index..];
             }
         }
-        frm.Text = StringsRM.GetString("strFormTitle", _sett.AppCulture) ?? "ErgoLux" + strText;
+        frm.Text = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? "ErgoLux" + strText;
     }
 
     /// <summary>
@@ -150,91 +155,91 @@ public partial class FrmMain : Form
         SetFormTitle(this, String.Empty);
 
         // Update ToolStrip
-        toolStripMain_Exit.Text = StringsRM.GetString("strToolStripExit", _sett.AppCulture) ?? "Exit";
-        toolStripMain_Exit.ToolTipText = StringsRM.GetString("strToolTipExit", _sett.AppCulture) ?? "Exit the application";
-        toolStripMain_Open.Text = StringsRM.GetString("strToolStripOpen", _sett.AppCulture) ?? "Open";
-        toolStripMain_Open.ToolTipText = StringsRM.GetString("strToolTipOpen", _sett.AppCulture) ?? "Open data file from disk";
-        toolStripMain_Save.Text = StringsRM.GetString("strToolStripSave", _sett.AppCulture) ?? "Save";
-        toolStripMain_Save.ToolTipText = StringsRM.GetString("strToolTipSave", _sett.AppCulture) ?? "Save data";
-        toolStripMain_Connect.Text = StringsRM.GetString("strToolStripConnect", _sett.AppCulture) ?? "Connect";
-        toolStripMain_Connect.ToolTipText = StringsRM.GetString("strToolTipConnect", _sett.AppCulture) ?? "Start receiving data from T-10A device";
-        toolStripMain_Disconnect.Text = StringsRM.GetString("strToolStripDisconnect", _sett.AppCulture) ?? "Disconnect";
-        toolStripMain_Disconnect.ToolTipText = StringsRM.GetString("strToolTipDisconnect", _sett.AppCulture) ?? "Stop and disconnect T-10A device";
-        toolStripMain_Settings.Text = StringsRM.GetString("strToolStripSettings", _sett.AppCulture) ?? "Settings";
-        toolStripMain_Settings.ToolTipText = StringsRM.GetString("strToolTipSettings", _sett.AppCulture) ?? "Settings for plots, data, and UI";
-        toolStripMain_About.Text = StringsRM.GetString("strToolStripAbout", _sett.AppCulture) ?? "About";
-        toolStripMain_About.ToolTipText = StringsRM.GetString("strToolTipAbout", _sett.AppCulture) ?? "About this software";
+        toolStripMain_Exit.Text = StringsRM.GetString("strToolStripExit", _settings.AppCulture) ?? "Exit";
+        toolStripMain_Exit.ToolTipText = StringsRM.GetString("strToolTipExit", _settings.AppCulture) ?? "Exit the application";
+        toolStripMain_Open.Text = StringsRM.GetString("strToolStripOpen", _settings.AppCulture) ?? "Open";
+        toolStripMain_Open.ToolTipText = StringsRM.GetString("strToolTipOpen", _settings.AppCulture) ?? "Open data file from disk";
+        toolStripMain_Save.Text = StringsRM.GetString("strToolStripSave", _settings.AppCulture) ?? "Save";
+        toolStripMain_Save.ToolTipText = StringsRM.GetString("strToolTipSave", _settings.AppCulture) ?? "Save data";
+        toolStripMain_Connect.Text = StringsRM.GetString("strToolStripConnect", _settings.AppCulture) ?? "Connect";
+        toolStripMain_Connect.ToolTipText = StringsRM.GetString("strToolTipConnect", _settings.AppCulture) ?? "Start receiving data from T-10A device";
+        toolStripMain_Disconnect.Text = StringsRM.GetString("strToolStripDisconnect", _settings.AppCulture) ?? "Disconnect";
+        toolStripMain_Disconnect.ToolTipText = StringsRM.GetString("strToolTipDisconnect", _settings.AppCulture) ?? "Stop and disconnect T-10A device";
+        toolStripMain_Settings.Text = StringsRM.GetString("strToolStripSettings", _settings.AppCulture) ?? "Settings";
+        toolStripMain_Settings.ToolTipText = StringsRM.GetString("strToolTipSettings", _settings.AppCulture) ?? "Settings for plots, data, and UI";
+        toolStripMain_About.Text = StringsRM.GetString("strToolStripAbout", _settings.AppCulture) ?? "About";
+        toolStripMain_About.ToolTipText = StringsRM.GetString("strToolTipAbout", _settings.AppCulture) ?? "About this software";
 
         // Update StatusStrip
-        statusStripLabelRaw.ToolTipText = StringsRM.GetString("strStatusTipRaw", _sett.AppCulture) ?? "Plot raw data";
-        statusStripLabelRadar.ToolTipText = StringsRM.GetString("strStatusTipDistribution", _sett.AppCulture) ?? "Plot distribution";
-        statusStripLabelMax.ToolTipText = StringsRM.GetString("strStatusTipMax", _sett.AppCulture) ?? "Plot max, average and min";
-        statusStripLabelRatio.ToolTipText = StringsRM.GetString("strStatusTipRatio", _sett.AppCulture) ?? "Plot ratios";
-        statusStripLabelCross.ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _sett.AppCulture) ?? "Show plot's crosshair mode";
+        statusStripLabelRaw.ToolTipText = StringsRM.GetString("strStatusTipRaw", _settings.AppCulture) ?? "Plot raw data";
+        statusStripLabelRadar.ToolTipText = StringsRM.GetString("strStatusTipDistribution", _settings.AppCulture) ?? "Plot distribution";
+        statusStripLabelMax.ToolTipText = StringsRM.GetString("strStatusTipMax", _settings.AppCulture) ?? "Plot max, average and min";
+        statusStripLabelRatio.ToolTipText = StringsRM.GetString("strStatusTipRatio", _settings.AppCulture) ?? "Plot ratios";
+        statusStripLabelCross.ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Show plot's crosshair mode";
 
-        statusStripLabelID.Text = StringsRM.GetString("strStatusID", _sett.AppCulture) ?? "Device ID";
-        statusStripLabelID.ToolTipText = StringsRM.GetString("strStatusTipID", _sett.AppCulture) ?? "Device ID";
-        statusStripLabelType.Text = StringsRM.GetString("strStatusType", _sett.AppCulture) ?? "Device type";
-        statusStripLabelType.ToolTipText = StringsRM.GetString("strStatusTipType", _sett.AppCulture) ?? "Device type";
-        statusStripLabelLocation.Text = StringsRM.GetString("strStatusLocation", _sett.AppCulture) ?? "Location ID";
-        statusStripLabelLocation.ToolTipText = StringsRM.GetString("strStatusTipLocation", _sett.AppCulture) ?? "T-10A location ID";
+        statusStripLabelID.Text = StringsRM.GetString("strStatusID", _settings.AppCulture) ?? "Device ID";
+        statusStripLabelID.ToolTipText = StringsRM.GetString("strStatusTipID", _settings.AppCulture) ?? "Device ID";
+        statusStripLabelType.Text = StringsRM.GetString("strStatusType", _settings.AppCulture) ?? "Device type";
+        statusStripLabelType.ToolTipText = StringsRM.GetString("strStatusTipType", _settings.AppCulture) ?? "Device type";
+        statusStripLabelLocation.Text = StringsRM.GetString("strStatusLocation", _settings.AppCulture) ?? "Location ID";
+        statusStripLabelLocation.ToolTipText = StringsRM.GetString("strStatusTipLocation", _settings.AppCulture) ?? "T-10A location ID";
 
-        statusStripIconOpen.Text = StringsRM.GetString("strStatusOpen", _sett.AppCulture) ?? "Disconnected";
-        statusStripIconOpen.ToolTipText = StringsRM.GetString("strStatusTipOpen", _sett.AppCulture) ?? "Connexion status";
-        statusStripIconExchange.Text = StringsRM.GetString("strStatusExchange", _sett.AppCulture) ?? "Receiving data";
-        statusStripIconExchange.ToolTipText = StringsRM.GetString("strStatusTipExchange", _sett.AppCulture) ?? "Exchange status";
+        statusStripIconOpen.Text = StringsRM.GetString("strStatusOpen", _settings.AppCulture) ?? "Disconnected";
+        statusStripIconOpen.ToolTipText = StringsRM.GetString("strStatusTipOpen", _settings.AppCulture) ?? "Connexion status";
+        statusStripIconExchange.Text = StringsRM.GetString("strStatusExchange", _settings.AppCulture) ?? "Receiving data";
+        statusStripIconExchange.ToolTipText = StringsRM.GetString("strStatusTipExchange", _settings.AppCulture) ?? "Exchange status";
 
-        statusStripLabelUILanguage.Text = _sett.AppCulture.Name == String.Empty ? "Invariant" : _sett.AppCulture.Name;
-        statusStripLabelUILanguage.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _sett.AppCulture) ?? "User interface language";
+        statusStripLabelUILanguage.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
+        statusStripLabelUILanguage.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _settings.AppCulture) ?? "User interface language";
 
         // Update menu
-        mnuMainFrm_File.Text = StringsRM.GetString("strMenuMainFile", _sett.AppCulture) ?? "&File";
-        mnuMainFrm_File_Open.Text = StringsRM.GetString("strMenuMainFileOpen", _sett.AppCulture) ?? "&Open";
-        mnuMainFrm_File_Save.Text = StringsRM.GetString("strMenuMainFileSave", _sett.AppCulture) ?? "&Save";
-        mnuMainFrm_File_Exit.Text = StringsRM.GetString("strMenuMainFileExit", _sett.AppCulture) ?? "&Exit";
-        mnuMainFrm_View.Text = StringsRM.GetString("strMenuMainView", _sett.AppCulture) ?? "&View";
-        mnuMainFrm_View_Menu.Text = StringsRM.GetString("strMenuMainViewMenu", _sett.AppCulture) ?? "Show menu";
-        mnuMainFrm_View_Toolbar.Text = StringsRM.GetString("strMenuMainViewToolbar", _sett.AppCulture) ?? "Show toolbar";
-        mnuMainFrm_View_Raw.Text = StringsRM.GetString("strMenuMainViewRaw", _sett.AppCulture) ?? "Raw data";
-        mnuMainFrm_View_Distribution.Text = StringsRM.GetString("strMenuMainViewDistribution", _sett.AppCulture) ?? "Radial distribution";
-        mnuMainFrm_View_Average.Text = StringsRM.GetString("strMenuMainViewAverage", _sett.AppCulture) ?? "Averages";
-        mnuMainFrm_View_Ratio.Text = StringsRM.GetString("strMenuMainViewRatio", _sett.AppCulture) ?? "Ratios";
-        mnuMainFrm_Tools.Text = StringsRM.GetString("strMenuMainTools", _sett.AppCulture) ?? "&Tools";
-        mnuMainFrm_Tools_Connect.Text = StringsRM.GetString("strMenuMainToolsConnect", _sett.AppCulture) ?? "&Connect";
-        mnuMainFrm_Tools_Disconnect.Text = StringsRM.GetString("strMenuMainToolsDisconnect", _sett.AppCulture) ?? "&Disconnect";
-        mnuMainFrm_Tools_Settings.Text = StringsRM.GetString("strMenuMainToolsSettings", _sett.AppCulture) ?? "&Settings";
-        mnuMainFrm_Help.Text = StringsRM.GetString("strMenuMainHelpText", _sett.AppCulture) ?? "&Help";
-        mnuMainFrm_Help_About.Text = StringsRM.GetString("strMenuMainHelpAbout", _sett.AppCulture) ?? "&About";
+        mnuMainFrm_File.Text = StringsRM.GetString("strMenuMainFile", _settings.AppCulture) ?? "&File";
+        mnuMainFrm_File_Open.Text = StringsRM.GetString("strMenuMainFileOpen", _settings.AppCulture) ?? "&Open";
+        mnuMainFrm_File_Save.Text = StringsRM.GetString("strMenuMainFileSave", _settings.AppCulture) ?? "&Save";
+        mnuMainFrm_File_Exit.Text = StringsRM.GetString("strMenuMainFileExit", _settings.AppCulture) ?? "&Exit";
+        mnuMainFrm_View.Text = StringsRM.GetString("strMenuMainView", _settings.AppCulture) ?? "&View";
+        mnuMainFrm_View_Menu.Text = StringsRM.GetString("strMenuMainViewMenu", _settings.AppCulture) ?? "Show menu";
+        mnuMainFrm_View_Toolbar.Text = StringsRM.GetString("strMenuMainViewToolbar", _settings.AppCulture) ?? "Show toolbar";
+        mnuMainFrm_View_Raw.Text = StringsRM.GetString("strMenuMainViewRaw", _settings.AppCulture) ?? "Raw data";
+        mnuMainFrm_View_Distribution.Text = StringsRM.GetString("strMenuMainViewDistribution", _settings.AppCulture) ?? "Radial distribution";
+        mnuMainFrm_View_Average.Text = StringsRM.GetString("strMenuMainViewAverage", _settings.AppCulture) ?? "Averages";
+        mnuMainFrm_View_Ratio.Text = StringsRM.GetString("strMenuMainViewRatio", _settings.AppCulture) ?? "Ratios";
+        mnuMainFrm_Tools.Text = StringsRM.GetString("strMenuMainTools", _settings.AppCulture) ?? "&Tools";
+        mnuMainFrm_Tools_Connect.Text = StringsRM.GetString("strMenuMainToolsConnect", _settings.AppCulture) ?? "&Connect";
+        mnuMainFrm_Tools_Disconnect.Text = StringsRM.GetString("strMenuMainToolsDisconnect", _settings.AppCulture) ?? "&Disconnect";
+        mnuMainFrm_Tools_Settings.Text = StringsRM.GetString("strMenuMainToolsSettings", _settings.AppCulture) ?? "&Settings";
+        mnuMainFrm_Help.Text = StringsRM.GetString("strMenuMainHelpText", _settings.AppCulture) ?? "&Help";
+        mnuMainFrm_Help_About.Text = StringsRM.GetString("strMenuMainHelpAbout", _settings.AppCulture) ?? "&About";
 
         // Update plots
-        plotData.CultureUI = _sett.AppCulture;
-        plotData.Plot.Title(StringsRM.GetString("strPlotRawTitle", _sett.AppCulture) ?? "Illuminance");
-        plotData.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _sett.AppCulture) ?? "Lux");
-        plotData.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _sett.AppCulture) ?? "Time (seconds)");
-        plotDistribution.Plot.Title(StringsRM.GetString("strPlotDistributionTitle", _sett.AppCulture) ?? "Illuminance distribution");
-        plotStats.CultureUI = _sett.AppCulture;
-        plotStats.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _sett.AppCulture) ?? "Max, average, min");
-        plotStats.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _sett.AppCulture) ?? "Lux");
-        plotStats.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _sett.AppCulture) ?? "Time (seconds)");
-        plotRatio.CultureUI = _sett.AppCulture;
-        plotRatio.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _sett.AppCulture) ?? "Illuminance ratios");
-        plotRatio.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _sett.AppCulture) ?? "Ratio");
-        plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _sett.AppCulture) ?? "Time (seconds)");
+        plotData.CultureUI = _settings.AppCulture;
+        plotData.Plot.Title(StringsRM.GetString("strPlotRawTitle", _settings.AppCulture) ?? "Illuminance");
+        plotData.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _settings.AppCulture) ?? "Lux");
+        plotData.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _settings.AppCulture) ?? "Time (seconds)");
+        plotDistribution.Plot.Title(StringsRM.GetString("strPlotDistributionTitle", _settings.AppCulture) ?? "Illuminance distribution");
+        plotStats.CultureUI = _settings.AppCulture;
+        plotStats.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _settings.AppCulture) ?? "Max, average, min");
+        plotStats.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _settings.AppCulture) ?? "Lux");
+        plotStats.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _settings.AppCulture) ?? "Time (seconds)");
+        plotRatio.CultureUI = _settings.AppCulture;
+        plotRatio.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _settings.AppCulture) ?? "Illuminance ratios");
+        plotRatio.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _settings.AppCulture) ?? "Ratio");
+        plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _settings.AppCulture) ?? "Time (seconds)");
 
         // Update plots' legends
         if (_plotData.Length > 0)
         {
             _seriesLabels = new string[_plotData.Length];
-            for (int i = 0; i < _seriesLabels.Length - _sett.ArrayFixedColumns; i++)
+            for (int i = 0; i < _seriesLabels.Length - _settings.ArrayFixedColumns; i++)
             {
-                _seriesLabels[i] = $"{(StringsRM.GetString("strFileHeader08", _sett.AppCulture) ?? "Sensor #")}{i:#0}";
+                _seriesLabels[i] = $"{(StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Sensor #")}{i:#0}";
             }
-            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 0] = $"{(StringsRM.GetString("strFileHeader09", _sett.AppCulture) ?? "Maximum")}";
-            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 1] = $"{(StringsRM.GetString("strFileHeader10", _sett.AppCulture) ?? "Average")}";
-            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 2] = $"{(StringsRM.GetString("strFileHeader11", _sett.AppCulture) ?? "Minimum")}";
-            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 3] = $"{(StringsRM.GetString("strFileHeader12", _sett.AppCulture) ?? "Min/Average")}";
-            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 4] = $"{(StringsRM.GetString("strFileHeader13", _sett.AppCulture) ?? "Min/Max")}";
-            _seriesLabels[_seriesLabels.Length - _sett.ArrayFixedColumns + 5] = $"{(StringsRM.GetString("strFileHeader14", _sett.AppCulture) ?? "Average/Max")}";
+            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 0] = $"{(StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Maximum")}";
+            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 1] = $"{(StringsRM.GetString("strFileHeader10", _settings.AppCulture) ?? "Average")}";
+            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 2] = $"{(StringsRM.GetString("strFileHeader11", _settings.AppCulture) ?? "Minimum")}";
+            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 3] = $"{(StringsRM.GetString("strFileHeader12", _settings.AppCulture) ?? "Min/Average")}";
+            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 4] = $"{(StringsRM.GetString("strFileHeader13", _settings.AppCulture) ?? "Min/Max")}";
+            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 5] = $"{(StringsRM.GetString("strFileHeader14", _settings.AppCulture) ?? "Average/Max")}";
 
             for (int i = 0; i < plotData.Plot.GetPlottables().Length; i++)
             {
@@ -243,16 +248,16 @@ public partial class FrmMain : Form
 
             if (plotStats.Plot.GetPlottables().Length == 3)
             {
-                plotStats.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 0];
-                plotStats.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 1];
-                plotStats.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 2];
+                plotStats.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
+                plotStats.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
+                plotStats.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
             }
 
             if (plotRatio.Plot.GetPlottables().Length == 3)
             {
-                plotRatio.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 3];
-                plotRatio.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 4];
-                plotRatio.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _sett.ArrayFixedColumns + 5];
+                plotRatio.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
+                plotRatio.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
+                plotRatio.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
             }
         }
 

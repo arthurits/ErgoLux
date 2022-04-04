@@ -21,13 +21,13 @@ partial class FrmMain
     {
         toolStripMain.Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
-        if (File.Exists(_sett.AppPath + @"\images\exit.ico")) this.toolStripMain_Exit.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\exit.ico", 48, 48).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\connect.ico")) this.toolStripMain_Connect.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\connect.ico", 48, 48).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\disconnect.ico", 48, 48).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\save.ico")) this.toolStripMain_Save.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\save.ico", 48, 48).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\openfolder.ico")) this.toolStripMain_Open.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\openfolder.ico", 48, 48).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\settings.ico")) this.toolStripMain_Settings.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\settings.ico", 48, 48).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\about.ico")) this.toolStripMain_About.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\about.ico", 48, 48).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\exit.ico")) this.toolStripMain_Exit.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\exit.ico", 48, 48).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\connect.ico")) this.toolStripMain_Connect.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\connect.ico", 48, 48).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\disconnect.ico", 48, 48).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\save.ico")) this.toolStripMain_Save.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\save.ico", 48, 48).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\openfolder.ico")) this.toolStripMain_Open.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\openfolder.ico", 48, 48).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\settings.ico")) this.toolStripMain_Settings.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\settings.ico", 48, 48).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\about.ico")) this.toolStripMain_About.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\about.ico", 48, 48).ToBitmap();
 
         this.toolStripMain_Disconnect.Enabled = false;
         this.toolStripMain_Connect.Enabled = false;
@@ -40,23 +40,23 @@ partial class FrmMain
     /// </summary>
     private void InitializeMenuStrip()
     {
-        if (File.Exists(_sett.AppPath + @"\images\openfolder.ico")) this.mnuMainFrm_File_Open.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\openfolder.ico", 16, 16).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\save.ico")) this.mnuMainFrm_File_Save.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\save.ico", 16, 16).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\exit.ico")) this.mnuMainFrm_File_Exit.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\exit.ico", 16, 16).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\openfolder.ico")) this.mnuMainFrm_File_Open.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\openfolder.ico", 16, 16).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\save.ico")) this.mnuMainFrm_File_Save.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\save.ico", 16, 16).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\exit.ico")) this.mnuMainFrm_File_Exit.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\exit.ico", 16, 16).ToBitmap();
 
-        if (File.Exists(_sett.AppPath + @"\images\connect.ico")) this.mnuMainFrm_Tools_Connect.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\connect.ico", 16, 16).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\disconnect.ico")) this.mnuMainFrm_Tools_Disconnect.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\disconnect.ico", 16, 16).ToBitmap();
-        if (File.Exists(_sett.AppPath + @"\images\settings.ico")) this.mnuMainFrm_Tools_Settings.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\settings.ico", 16, 16).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\connect.ico")) this.mnuMainFrm_Tools_Connect.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\connect.ico", 16, 16).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\disconnect.ico")) this.mnuMainFrm_Tools_Disconnect.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\disconnect.ico", 16, 16).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\settings.ico")) this.mnuMainFrm_Tools_Settings.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\settings.ico", 16, 16).ToBitmap();
 
-        if (File.Exists(_sett.AppPath + @"\images\about.ico")) this.mnuMainFrm_Help_About.Image = new System.Drawing.Icon(_sett.AppPath + @"\images\about.ico", 16, 16).ToBitmap();
+        if (File.Exists(_settings.AppPath + @"\images\about.ico")) this.mnuMainFrm_Help_About.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\about.ico", 16, 16).ToBitmap();
 
         // Initialize the menu checked items
         this.mnuMainFrm_View_Menu.Checked = true;
         this.mnuMainFrm_View_Toolbar.Checked = true;
-        this.mnuMainFrm_View_Raw.Checked = _sett.Plot_ShowRawData;
-        this.mnuMainFrm_View_Distribution.Checked = _sett.Plot_ShowDistribution;
-        this.mnuMainFrm_View_Average.Checked = _sett.Plot_ShowAverage;
-        this.mnuMainFrm_View_Ratio.Checked = _sett.Plot_ShowRatios;
+        this.mnuMainFrm_View_Raw.Checked = _settings.Plot_ShowRawData;
+        this.mnuMainFrm_View_Distribution.Checked = _settings.Plot_ShowDistribution;
+        this.mnuMainFrm_View_Average.Checked = _settings.Plot_ShowAverage;
+        this.mnuMainFrm_View_Ratio.Checked = _settings.Plot_ShowRatios;
 
         // Initialize enable status
         this.mnuMainFrm_Tools_Connect.Enabled = false;
@@ -70,7 +70,7 @@ partial class FrmMain
     /// </summary>
     private void InitializeStatusStrip()
     {
-        statusStripIconOpen.Image = _sett.Icon_Close;
+        statusStripIconOpen.Image = _settings.Icon_Close;
         InitializeStatusStripLabelsStatus();
 
         // It would be nice to be able to do this
@@ -82,10 +82,10 @@ partial class FrmMain
     /// </summary>
     private void InitializeStatusStripLabelsStatus()
     {
-        statusStripLabelRaw.Checked = _sett.Plot_ShowRawData;
-        statusStripLabelRadar.Checked = _sett.Plot_ShowDistribution;
-        statusStripLabelMax.Checked = _sett.Plot_ShowAverage;
-        statusStripLabelRatio.Checked = _sett.Plot_ShowRatios;
+        statusStripLabelRaw.Checked = _settings.Plot_ShowRawData;
+        statusStripLabelRadar.Checked = _settings.Plot_ShowDistribution;
+        statusStripLabelMax.Checked = _settings.Plot_ShowAverage;
+        statusStripLabelRatio.Checked = _settings.Plot_ShowRatios;
     }
 
     /// <summary>
@@ -101,40 +101,40 @@ partial class FrmMain
         plotRatio.Refresh();
 
         //formsPlot1.plt.AxisAutoX(margin: 0);
-        plotData.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
+        plotData.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
         // Customize styling
         plotData.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
-        plotData.Plot.Title(StringsRM.GetString("strPlotRawTitle", _sett.AppCulture) ?? "Illuminance");
-        plotData.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _sett.AppCulture) ?? "Lux");
-        plotData.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _sett.AppCulture) ?? "Time (seconds)");
+        plotData.Plot.Title(StringsRM.GetString("strPlotRawTitle", _settings.AppCulture) ?? "Illuminance");
+        plotData.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _settings.AppCulture) ?? "Lux");
+        plotData.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _settings.AppCulture) ?? "Time (seconds)");
         plotData.Plot.Grid(enable: false);
         plotData.SnapToPoint = true;
 
         // Customize the Distribution plot
         plotDistribution.Plot.Grid(enable: false);
-        plotDistribution.Plot.Title(StringsRM.GetString("strPlotDistributionTitle", _sett.AppCulture) ?? "Illuminance distribution");
+        plotDistribution.Plot.Title(StringsRM.GetString("strPlotDistributionTitle", _settings.AppCulture) ?? "Illuminance distribution");
         plotDistribution.Plot.XAxis.Ticks(false);
         plotDistribution.Plot.YAxis.Ticks(false);
 
         // Customize the Average plot
-        plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1000);
+        plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
         plotStats.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
-        plotStats.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _sett.AppCulture) ?? "Max, average, min");
-        plotStats.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _sett.AppCulture) ?? "Lux");
-        plotStats.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _sett.AppCulture) ?? "Time (seconds)");
+        plotStats.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _settings.AppCulture) ?? "Max, average, min");
+        plotStats.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _settings.AppCulture) ?? "Lux");
+        plotStats.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _settings.AppCulture) ?? "Time (seconds)");
         plotStats.Plot.Grid(enable: false);
         plotStats.SnapToPoint = true;
 
         // Customize the Ratio plot
         //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
-        plotRatio.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
+        plotRatio.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1);
 
         plotRatio.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
-        plotRatio.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _sett.AppCulture) ?? "Illuminance ratios");
-        plotRatio.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _sett.AppCulture) ?? "Ratio");
-        plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _sett.AppCulture) ?? "Time (seconds)");
+        plotRatio.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _settings.AppCulture) ?? "Illuminance ratios");
+        plotRatio.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _settings.AppCulture) ?? "Ratio");
+        plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _settings.AppCulture) ?? "Time (seconds)");
         plotRatio.Plot.Grid(enable: false);
         plotRatio.SnapToPoint = true;
 
@@ -153,7 +153,7 @@ partial class FrmMain
     private void InitializePlotsPalette()
     {
         // Define colorsets
-        if (_sett.Plot_DistIsRadar)
+        if (_settings.Plot_DistIsRadar)
         {
             plotData.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
             plotDistribution.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
@@ -188,10 +188,10 @@ partial class FrmMain
     /// </summary>
     private void InitializeArrays()
     {
-        _plotRadialGauge = new double[_sett.T10_NumberOfSensors];
-        _plotRadar = new double[2, _sett.T10_NumberOfSensors];
-        _plotData = new double[_sett.T10_NumberOfSensors + _sett.ArrayFixedColumns][];
-        for (int i = 0; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
-            _plotData[i] = new double[_sett.Plot_ArrayPoints];
+        _plotRadialGauge = new double[_settings.T10_NumberOfSensors];
+        _plotRadar = new double[2, _settings.T10_NumberOfSensors];
+        _plotData = new double[_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns][];
+        for (int i = 0; i < _settings.T10_NumberOfSensors + _settings.ArrayFixedColumns; i++)
+            _plotData[i] = new double[_settings.Plot_ArrayPoints];
     }
 }

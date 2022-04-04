@@ -35,20 +35,20 @@ partial class FrmMain
     private void Plots_DataBinding()
     {
         // Binding for Plot Raw Data
-        for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+        for (int i = 0; i < _settings.T10_NumberOfSensors; i++)
         {
-            var plot = plotData.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
+            var plot = plotData.Plot.AddSignal(_plotData[i], sampleRate: _settings.T10_Frequency, label: _seriesLabels[i]);
             //formsPlot1.Refresh();
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
-        plotData.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
+        plotData.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0);
 
         // Binding for Distribution plot
-        if (_sett.Plot_DistIsRadar)
+        if (_settings.Plot_DistIsRadar)
         {
-            string[] labels = new string[_sett.T10_NumberOfSensors];
-            for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+            string[] labels = new string[_settings.T10_NumberOfSensors];
+            for (int i = 0; i < _settings.T10_NumberOfSensors; i++)
                 labels[i] = $"#{i:#0}";
             var plt = plotDistribution.Plot.AddRadar(_plotRadar, disableFrameAndGrid: false);
             plt.FillColors[0] = Color.FromArgb(100, plt.LineColors[0]);
@@ -58,14 +58,14 @@ partial class FrmMain
             plt.AxisType = ScottPlot.RadarAxis.Polygon;
             plt.ShowAxisValues = false;
             plt.CategoryLabels = labels;
-            plt.GroupLabels = new string[] { $"{(StringsRM.GetString("strFileHeader15", _sett.AppCulture) ?? "Average")}",
-                                            $"{(StringsRM.GetString("strFileHeader16", _sett.AppCulture) ?? "Illuminance")}" };
+            plt.GroupLabels = new string[] { $"{(StringsRM.GetString("strFileHeader15", _settings.AppCulture) ?? "Average")}",
+                                            $"{(StringsRM.GetString("strFileHeader16", _settings.AppCulture) ?? "Illuminance")}" };
         }
         else
         {
             var plt = plotDistribution.Plot.AddRadialGauge(_plotRadialGauge);
-            var strLabels = new string[_sett.T10_NumberOfSensors];
-            for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+            var strLabels = new string[_settings.T10_NumberOfSensors];
+            for (int i = 0; i < _settings.T10_NumberOfSensors; i++)
                 strLabels[i] = _seriesLabels[i];
             plt.Labels = strLabels;
             plt.StartingAngle = 180;
@@ -73,24 +73,24 @@ partial class FrmMain
         InitializePlotDistribution();
 
         // Binding for Plot Average
-        for (int i = _sett.T10_NumberOfSensors; i < _sett.T10_NumberOfSensors + 3; i++)
+        for (int i = _settings.T10_NumberOfSensors; i < _settings.T10_NumberOfSensors + 3; i++)
         {
             //var plot = formsPlot3.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == _sett.T10_NumberOfSensors ? "Max" : (i == (_sett.T10_NumberOfSensors + 1) ? "Average" : "Min")));
-            var plot = plotStats.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
+            var plot = plotStats.Plot.AddSignal(_plotData[i], sampleRate: _settings.T10_Frequency, label: _seriesLabels[i]);
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
-        plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0);
+        plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0);
 
         // Binding for Plot Ratio
-        for (int i = _sett.T10_NumberOfSensors + 3; i < _sett.T10_NumberOfSensors + _sett.ArrayFixedColumns; i++)
+        for (int i = _settings.T10_NumberOfSensors + 3; i < _settings.T10_NumberOfSensors + _settings.ArrayFixedColumns; i++)
         {
             //var plot = formsPlot4.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: (i == (_sett.T10_NumberOfSensors + 3) ? "Min/Average" : (i == (_sett.T10_NumberOfSensors + 4) ? "Min/Max" : "Average/Max")));
-            var plot = plotRatio.Plot.AddSignal(_plotData[i], sampleRate: _sett.T10_Frequency, label: _seriesLabels[i]);
+            var plot = plotRatio.Plot.AddSignal(_plotData[i], sampleRate: _settings.T10_Frequency, label: _seriesLabels[i]);
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
-        plotRatio.Plot.SetAxisLimits(xMin: 0, xMax: _sett.Plot_WindowPoints, yMin: 0, yMax: 1);
+        plotRatio.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1);
     }
 
     /// <summary>
@@ -99,7 +99,7 @@ partial class FrmMain
     private void Plots_FetchData()
     {
         Plots_Clear();  // This sets _nPoints = 0, so we need to reset it now
-        _nPoints = _sett.Plot_ArrayPoints;
+        _nPoints = _settings.Plot_ArrayPoints;
 
         Plots_DataBinding();    // Bind the arrays to the plots
         Plots_ShowLegends();    // Show the legends in the picture boxes
@@ -111,7 +111,7 @@ partial class FrmMain
     /// </summary>
     private void Plots_ShowFull()
     {
-        if (_sett.Plot_ShowRawData)
+        if (_settings.Plot_ShowRawData)
         {
             foreach (var plot in plotData.Plot.GetPlottables())
                 ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
@@ -122,7 +122,7 @@ partial class FrmMain
 
         plotDistribution.Refresh();
 
-        if (_sett.Plot_ShowAverage)
+        if (_settings.Plot_ShowAverage)
         {
             foreach (var plot in plotStats.Plot.GetPlottables())
                 ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
@@ -131,7 +131,7 @@ partial class FrmMain
             plotStats.Refresh();
         }
 
-        if (_sett.Plot_ShowRatios)
+        if (_settings.Plot_ShowRatios)
         {
             foreach (var plot in plotRatio.Plot.GetPlottables())
                 ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
@@ -146,8 +146,8 @@ partial class FrmMain
     /// </summary>
     private void Plots_ShowLegends()
     {
-        bool showLegA = _sett.Plot_DistIsRadar;
-        bool showLegB = !_sett.Plot_DistIsRadar || _sett.T10_NumberOfSensors >= 2;
+        bool showLegA = _settings.Plot_DistIsRadar;
+        bool showLegB = !_settings.Plot_DistIsRadar || _settings.T10_NumberOfSensors >= 2;
         Bitmap legendA;
         Bitmap legendB;
         Bitmap bitmap;
@@ -160,7 +160,7 @@ partial class FrmMain
         szLegend.Width += 2;    // black border drawing
         szLegend.Height = (showLegA ? legendA.Height + 2 : 0);
         szLegend.Height += (showLegB ? legendB.Height + 2 : 0);
-        szLegend.Height += (showLegA && showLegB ? _sett.PxBetweenLegends : 0);
+        szLegend.Height += (showLegA && showLegB ? _settings.PxBetweenLegends : 0);
         bitmap = new Bitmap(szLegend.Width, szLegend.Height);
         using Graphics GraphicsA = Graphics.FromImage(bitmap);
 
@@ -177,17 +177,17 @@ partial class FrmMain
         {
             GraphicsA.DrawRectangle(new Pen(Color.Black, 1),
                                 (bitmap.Width - legendB.Width - 2) / 2,
-                                (showLegA ? legendA.Height + _sett.PxBetweenLegends + 1 : 0),
+                                (showLegA ? legendA.Height + _settings.PxBetweenLegends + 1 : 0),
                                 legendB.Width + 1,
                                 legendB.Height + 1);
-            GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, (showLegA ? legendA.Height + _sett.PxBetweenLegends + 2 : 1));
+            GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, (showLegA ? legendA.Height + _settings.PxBetweenLegends + 2 : 1));
         }
         pictureBox1.Image = bitmap;
 
         // Combine legends from Plot3 and Plot4 and draw a black border around each legend
         legendA = plotStats.Plot.RenderLegend();
         legendB = plotRatio.Plot.RenderLegend();
-        bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + _sett.PxBetweenLegends + 4);
+        bitmap = new Bitmap(Math.Max(legendA.Width, legendB.Width) + 2, legendA.Height + legendB.Height + _settings.PxBetweenLegends + 4);
         using Graphics GraphicsB = Graphics.FromImage(bitmap);
         GraphicsB.DrawRectangle(new Pen(Color.Black),
                                 (bitmap.Width - legendA.Width - 2) / 2,
@@ -197,10 +197,10 @@ partial class FrmMain
         GraphicsB.DrawImage(legendA, (bitmap.Width - legendA.Width - 2) / 2 + 1, 1);
         GraphicsB.DrawRectangle(new Pen(Color.Black),
                                 (bitmap.Width - legendB.Width - 2) / 2,
-                                legendA.Height + _sett.PxBetweenLegends + 1,
+                                legendA.Height + _settings.PxBetweenLegends + 1,
                                 legendB.Width + 1,
                                 legendB.Height + 2);
-        GraphicsB.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + _sett.PxBetweenLegends + 2);
+        GraphicsB.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + _settings.PxBetweenLegends + 2);
         pictureBox2.Image = bitmap;
     }
 
@@ -212,14 +212,14 @@ partial class FrmMain
     private void Plots_Update(int sensor, double value)
     {
         // Resize arrays if necessary
-        int factor = (_nPoints + 10) / _sett.Plot_ArrayPoints;
-        factor *= _sett.Plot_ArrayPoints;
+        int factor = (_nPoints + 10) / _settings.Plot_ArrayPoints;
+        factor *= _settings.Plot_ArrayPoints;
         if (factor > _plotData[0].Length - 1)
         {
-            _sett.Plot_ArrayPoints += factor;
+            _settings.Plot_ArrayPoints += factor;
             for (int i = 0; i < _plotData.Length; i++)
             {
-                Array.Resize<double>(ref _plotData[i], _sett.Plot_ArrayPoints);
+                Array.Resize<double>(ref _plotData[i], _settings.Plot_ArrayPoints);
             }
 
             // https://github.com/ScottPlot/ScottPlot/discussions/1042
@@ -253,26 +253,26 @@ partial class FrmMain
         _average += value;
 
         // Only render when the last sensor value is received
-        if (sensor == _sett.T10_NumberOfSensors - 1)
+        if (sensor == _settings.T10_NumberOfSensors - 1)
         {
             // Compute data
-            _average /= _sett.T10_NumberOfSensors;
-            _plotData[_sett.T10_NumberOfSensors][_nPoints] = _max;
-            _plotData[_sett.T10_NumberOfSensors + 1][_nPoints] = _average;
-            _plotData[_sett.T10_NumberOfSensors + 2][_nPoints] = _min;
-            _plotData[_sett.T10_NumberOfSensors + 3][_nPoints] = _average > 0 ? _min / _average : 0;
-            _plotData[_sett.T10_NumberOfSensors + 4][_nPoints] = _max > 0 ? _min / _max : 0;
-            _plotData[_sett.T10_NumberOfSensors + 5][_nPoints] = _min > 0 ? _average / _max : 0;
+            _average /= _settings.T10_NumberOfSensors;
+            _plotData[_settings.T10_NumberOfSensors][_nPoints] = _max;
+            _plotData[_settings.T10_NumberOfSensors + 1][_nPoints] = _average;
+            _plotData[_settings.T10_NumberOfSensors + 2][_nPoints] = _min;
+            _plotData[_settings.T10_NumberOfSensors + 3][_nPoints] = _average > 0 ? _min / _average : 0;
+            _plotData[_settings.T10_NumberOfSensors + 4][_nPoints] = _max > 0 ? _min / _max : 0;
+            _plotData[_settings.T10_NumberOfSensors + 5][_nPoints] = _min > 0 ? _average / _max : 0;
 
             // Adjust the plots's axis
             plotData.Plot.AxisAutoY();
             plotStats.Plot.AxisAutoY();
             plotData.Plot.SetAxisLimits(yMin: 0);
             plotStats.Plot.SetAxisLimits(yMin: 0);
-            if (_nPoints / _sett.T10_Frequency >= plotData.Plot.GetAxisLimits().XMax)
+            if (_nPoints / _settings.T10_Frequency >= plotData.Plot.GetAxisLimits().XMax)
             {
-                int xMin = (int)((_nPoints / _sett.T10_Frequency) - _sett.Plot_WindowPoints * 1 / 5);
-                int xMax = xMin + _sett.Plot_WindowPoints;
+                int xMin = (int)((_nPoints / _settings.T10_Frequency) - _settings.Plot_WindowPoints * 1 / 5);
+                int xMax = xMin + _settings.Plot_WindowPoints;
                 plotData.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
                 plotStats.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
                 plotRatio.Plot.SetAxisLimits(xMin: xMin, xMax: xMax);
@@ -281,7 +281,7 @@ partial class FrmMain
             }
 
             // Update first plot
-            if (_sett.Plot_ShowRawData)
+            if (_settings.Plot_ShowRawData)
             {
                 foreach (var plot in plotData.Plot.GetPlottables())
                 {
@@ -294,14 +294,14 @@ partial class FrmMain
             }
 
             // Update radar plot
-            if (_sett.Plot_ShowDistribution)
+            if (_settings.Plot_ShowDistribution)
             {
                 // We always store the RadarPlot data in case the user wants to use it later
-                for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+                for (int i = 0; i < _settings.T10_NumberOfSensors; i++)
                     _plotRadar[0, i] = _average;
 
                 // Update the distribution plot
-                if (_sett.Plot_DistIsRadar)
+                if (_settings.Plot_DistIsRadar)
                 {
                     ((ScottPlot.Plottable.RadarPlot)plotDistribution.Plot.GetPlottables()[0]).Update(_plotRadar, false);
                 }
@@ -318,7 +318,7 @@ partial class FrmMain
             }
 
             // Update max, average, and min plot
-            if (_sett.Plot_ShowAverage)
+            if (_settings.Plot_ShowAverage)
             {
                 foreach (var plot in plotStats.Plot.GetPlottables())
                 {
@@ -328,7 +328,7 @@ partial class FrmMain
             }
 
             // Update ratios plot
-            if (_sett.Plot_ShowRatios)
+            if (_settings.Plot_ShowRatios)
             {
                 foreach (var plot in plotRatio.Plot.GetPlottables())
                 {
@@ -363,15 +363,15 @@ partial class FrmMain
         var MyPlot = (ScottPlot.FormsPlotCrossHair)sender;
 
         // Set the data to be shown on the distribution plot (Radar or RadialGauge)
-        for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
+        for (int i = 0; i < _settings.T10_NumberOfSensors; i++)
         {
             _plotRadialGauge[i] = _plotData[i][e.PointIndex];
             _plotRadar[1, i] = _plotData[i][e.PointIndex];
-            _plotRadar[0, i] = _plotData[_sett.T10_NumberOfSensors + 1][e.PointIndex];
+            _plotRadar[0, i] = _plotData[_settings.T10_NumberOfSensors + 1][e.PointIndex];
         }
 
         // Update the distribution plot
-        if (_sett.Plot_DistIsRadar)
+        if (_settings.Plot_DistIsRadar)
         {
             ((ScottPlot.Plottable.RadarPlot)plotDistribution.Plot.GetPlottables()[0]).Update(_plotRadar, false);
         }
@@ -391,14 +391,14 @@ partial class FrmMain
             if (plotStats.ShowCrossHair)
             {
                 if (plotStats.VerticalLine is not null) plotStats.VerticalLine.X = e.PointX;
-                if (plotStats.HorizontalLine is not null) plotStats.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors][e.PointIndex];
+                if (plotStats.HorizontalLine is not null) plotStats.HorizontalLine.Y = _plotData[_settings.T10_NumberOfSensors][e.PointIndex];
                 plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
 
             if (plotRatio.ShowCrossHair)
             {
                 if (plotRatio.VerticalLine is not null) plotRatio.VerticalLine.X = e.PointX;
-                if (plotRatio.HorizontalLine is not null) plotRatio.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors + 3][e.PointIndex];
+                if (plotRatio.HorizontalLine is not null) plotRatio.HorizontalLine.Y = _plotData[_settings.T10_NumberOfSensors + 3][e.PointIndex];
                 plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
         }
@@ -408,13 +408,13 @@ partial class FrmMain
             if (plotData.ShowCrossHair)
             {
                 if (plotData.VerticalLine is not null) plotData.VerticalLine.X = e.PointX;
-                if (plotData.HorizontalLine is not null) plotData.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors-1][e.PointIndex];
+                if (plotData.HorizontalLine is not null) plotData.HorizontalLine.Y = _plotData[_settings.T10_NumberOfSensors-1][e.PointIndex];
                 plotData.Refresh(skipIfCurrentlyRendering: true);
             }
             if (plotRatio.ShowCrossHair)
             {
                 if (plotRatio.VerticalLine is not null) plotRatio.VerticalLine.X = e.PointX;
-                if (plotRatio.HorizontalLine is not null) plotRatio.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors + 3][e.PointIndex];
+                if (plotRatio.HorizontalLine is not null) plotRatio.HorizontalLine.Y = _plotData[_settings.T10_NumberOfSensors + 3][e.PointIndex];
                 plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
         }
@@ -424,13 +424,13 @@ partial class FrmMain
             if (plotData.ShowCrossHair)
             {
                 if (plotData.VerticalLine is not null) plotData.VerticalLine.X = e.PointX;
-                if (plotData.HorizontalLine is not null) plotData.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors - 1][e.PointIndex];
+                if (plotData.HorizontalLine is not null) plotData.HorizontalLine.Y = _plotData[_settings.T10_NumberOfSensors - 1][e.PointIndex];
                 plotData.Refresh(skipIfCurrentlyRendering: true);
             }
             if (plotStats.ShowCrossHair)
             {
                 if (plotStats.VerticalLine is not null) plotStats.VerticalLine.X = e.PointX;
-                if (plotStats.HorizontalLine is not null) plotStats.HorizontalLine.Y = _plotData[_sett.T10_NumberOfSensors][e.PointIndex];
+                if (plotStats.HorizontalLine is not null) plotStats.HorizontalLine.Y = _plotData[_settings.T10_NumberOfSensors][e.PointIndex];
                 plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
         }
