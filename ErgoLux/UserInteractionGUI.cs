@@ -202,8 +202,7 @@ partial class FrmMain
         FTDI.FT_STATUS result;
 
         FrmSettings frm = new(_settings);
-        // Set form icon
-        if (File.Exists(_settings.AppPath + @"\images\logo.ico")) frm.Icon = new Icon(_settings.AppPath + @"\images\logo.ico");
+        frm.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
         frm.ShowDialog();
 
         if (frm.DialogResult == DialogResult.OK)
@@ -281,12 +280,11 @@ partial class FrmMain
     private void Language_Click(object sender, EventArgs e)
     {
         FrmLanguage frm = new(_settings);
+        frm.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
         frm.ShowDialog();
 
         if (frm.DialogResult == DialogResult.OK)
-        {
             UpdateUI_Language();
-        }
     }
 
     private void statusStripLabelEx_CheckedChanged(object sender, EventArgs e)

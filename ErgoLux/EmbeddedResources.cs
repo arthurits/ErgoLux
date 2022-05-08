@@ -8,9 +8,12 @@ public class GraphicsResources
 	public const string AppLogo = @"images\logo.ico";
 	public const string AppLogo256 = @"images\logo@256.png";
 	public const string IconAbout = @"images\about.ico";
+	public const string IconCloseConnection = @"images\close.ico";
 	public const string IconConnect = @"images\connect.ico";
 	public const string IconDisconnect = @"images\disconnect.ico";
+	public const string IconExchangeConnection = @"images\exchange.ico";
 	public const string IconExit = @"images\exit.ico";
+	public const string IconOpenConnection = @"images\open.ico";
 	public const string IconOpen = @"images\openfolder.ico";
 	public const string IconSave = @"images\save.ico";
 	public const string IconSettings = @"images\settings.ico";

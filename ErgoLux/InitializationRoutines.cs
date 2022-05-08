@@ -21,7 +21,7 @@ partial class FrmMain
     {
         toolStripMain.Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
-        this.toolStripMain_Exit.Image = new System.Drawing.Icon(GraphicsResources.IconSave,48,48).ToBitmap();
+        this.toolStripMain_Exit.Image = new System.Drawing.Icon(GraphicsResources.IconExit,48,48).ToBitmap();
         this.toolStripMain_Connect.Image = new System.Drawing.Icon(GraphicsResources.IconConnect, 48, 48).ToBitmap();
         this.toolStripMain_Disconnect.Image = new System.Drawing.Icon(GraphicsResources.IconDisconnect, 48, 48).ToBitmap();
         this.toolStripMain_Save.Image = new System.Drawing.Icon(GraphicsResources.IconSave, 48, 48).ToBitmap();

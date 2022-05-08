@@ -175,9 +175,9 @@ public class ClassSettings
         if (System.IO.Directory.Exists(path))
         {
             AppPath = path;
-            if (System.IO.File.Exists(path + @"\images\close.ico")) Icon_Close = new System.Drawing.Icon(path + @"\images\close.ico", 16, 16).ToBitmap();
-            if (System.IO.File.Exists(path + @"\images\open.ico")) Icon_Open = new System.Drawing.Icon(path + @"\images\open.ico", 16, 16).ToBitmap();
-            if (System.IO.File.Exists(path + @"\images\exchange.ico")) Icon_Data = new System.Drawing.Icon(path + @"\images\exchange.ico", 16, 16).ToBitmap();
+            Icon_Close = new System.Drawing.Icon(GraphicsResources.IconCloseConnection, 16, 16).ToBitmap();
+            Icon_Open = new System.Drawing.Icon(GraphicsResources.IconOpenConnection, 16, 16).ToBitmap();
+            Icon_Data = new System.Drawing.Icon(GraphicsResources.IconExchangeConnection, 16, 16).ToBitmap();
         }
     }
 
@@ -193,15 +193,14 @@ public class ClassSettings
     /// </summary>
     public void InitializeJsonIgnore(string? path = null)
     {
-        SettingsFileName = "configuration.json";
         AppPath = path ?? String.Empty;
         ArrayFixedColumns = 6;
 
         if (AppPath != string.Empty)
         {
-            if (System.IO.File.Exists(AppPath + @"\images\close.ico")) Icon_Close = new System.Drawing.Icon(AppPath + @"\images\close.ico", 16, 16).ToBitmap();
-            if (System.IO.File.Exists(AppPath + @"\images\open.ico")) Icon_Open = new System.Drawing.Icon(AppPath + @"\images\open.ico", 16, 16).ToBitmap();
-            if (System.IO.File.Exists(AppPath + @"\images\exchange.ico")) Icon_Data = new System.Drawing.Icon(AppPath + @"\images\exchange.ico", 16, 16).ToBitmap();
+            Icon_Close = new System.Drawing.Icon(GraphicsResources.IconCloseConnection, 16, 16).ToBitmap();
+            Icon_Open = new System.Drawing.Icon(GraphicsResources.IconOpenConnection, 16, 16).ToBitmap();
+            Icon_Data = new System.Drawing.Icon(GraphicsResources.IconExchangeConnection, 16, 16).ToBitmap();
         }
     }
 

@@ -109,13 +109,13 @@ namespace ErgoLux
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
-            
-            // Set form icons and images
-            var path = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            //if (System.IO.File.Exists(path + @"\images\about.ico")) this.Icon = new Icon(path + @"\images\about.ico");
 
-            //Bitmap image = new Icon(path + @"\images\logo.ico", 256, 256).ToBitmap();
-            if (System.IO.File.Exists(path + @"\images\logo@256.png")) this.logoPictureBox.Image = new Bitmap(path + @"\images\logo@256.png");
+            // Set form icons and images
+            //this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.IconAbout);
+            //if (System.IO.File.Exists(@"images\about.ico")) this.Icon = new Icon(@"images\about.ico");
+
+            //Bitmap image = new Icon(@"images\logo.ico", 256, 256).ToBitmap();
+            this.logoPictureBox.Image = GraphicsResources.Load<Image>(GraphicsResources.AppLogo256);
         }
 
         //[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
