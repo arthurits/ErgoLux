@@ -21,13 +21,13 @@ partial class FrmMain
     {
         toolStripMain.Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
-        if (File.Exists(_settings.AppPath + @"\images\exit.ico")) this.toolStripMain_Exit.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\exit.ico", 48, 48).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\connect.ico")) this.toolStripMain_Connect.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\connect.ico", 48, 48).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\disconnect.ico")) this.toolStripMain_Disconnect.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\disconnect.ico", 48, 48).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\save.ico")) this.toolStripMain_Save.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\save.ico", 48, 48).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\openfolder.ico")) this.toolStripMain_Open.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\openfolder.ico", 48, 48).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\settings.ico")) this.toolStripMain_Settings.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\settings.ico", 48, 48).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\about.ico")) this.toolStripMain_About.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\about.ico", 48, 48).ToBitmap();
+        this.toolStripMain_Exit.Image = new System.Drawing.Icon(GraphicsResources.IconSave,48,48).ToBitmap();
+        this.toolStripMain_Connect.Image = new System.Drawing.Icon(GraphicsResources.IconConnect, 48, 48).ToBitmap();
+        this.toolStripMain_Disconnect.Image = new System.Drawing.Icon(GraphicsResources.IconDisconnect, 48, 48).ToBitmap();
+        this.toolStripMain_Save.Image = new System.Drawing.Icon(GraphicsResources.IconSave, 48, 48).ToBitmap();
+        this.toolStripMain_Open.Image = new System.Drawing.Icon(GraphicsResources.IconOpen, 48, 48).ToBitmap();
+        this.toolStripMain_Settings.Image = new System.Drawing.Icon(GraphicsResources.IconSettings, 48, 48).ToBitmap();
+        this.toolStripMain_About.Image = new System.Drawing.Icon(GraphicsResources.IconAbout, 48, 48).ToBitmap();
 
         this.toolStripMain_Disconnect.Enabled = false;
         this.toolStripMain_Connect.Enabled = false;
@@ -40,15 +40,15 @@ partial class FrmMain
     /// </summary>
     private void InitializeMenuStrip()
     {
-        if (File.Exists(_settings.AppPath + @"\images\openfolder.ico")) this.mnuMainFrm_File_Open.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\openfolder.ico", 16, 16).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\save.ico")) this.mnuMainFrm_File_Save.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\save.ico", 16, 16).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\exit.ico")) this.mnuMainFrm_File_Exit.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\exit.ico", 16, 16).ToBitmap();
+        this.mnuMainFrm_File_Open.Image = new System.Drawing.Icon(GraphicsResources.IconOpen, 16, 16).ToBitmap();
+        this.mnuMainFrm_File_Save.Image = new System.Drawing.Icon(GraphicsResources.IconSave, 16, 16).ToBitmap();
+        this.mnuMainFrm_File_Exit.Image = new System.Drawing.Icon(GraphicsResources.IconExit, 16, 16).ToBitmap();
 
-        if (File.Exists(_settings.AppPath + @"\images\connect.ico")) this.mnuMainFrm_Tools_Connect.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\connect.ico", 16, 16).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\disconnect.ico")) this.mnuMainFrm_Tools_Disconnect.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\disconnect.ico", 16, 16).ToBitmap();
-        if (File.Exists(_settings.AppPath + @"\images\settings.ico")) this.mnuMainFrm_Tools_Settings.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\settings.ico", 16, 16).ToBitmap();
+        this.mnuMainFrm_Tools_Connect.Image = new System.Drawing.Icon(GraphicsResources.IconConnect, 16, 16).ToBitmap();
+        this.mnuMainFrm_Tools_Disconnect.Image = new System.Drawing.Icon(GraphicsResources.IconDisconnect, 16, 16).ToBitmap();
+        this.mnuMainFrm_Tools_Settings.Image = new System.Drawing.Icon(GraphicsResources.IconSettings, 16, 16).ToBitmap();
 
-        if (File.Exists(_settings.AppPath + @"\images\about.ico")) this.mnuMainFrm_Help_About.Image = new System.Drawing.Icon(_settings.AppPath + @"\images\about.ico", 16, 16).ToBitmap();
+        this.mnuMainFrm_Help_About.Image = new System.Drawing.Icon(GraphicsResources.IconAbout, 16, 16).ToBitmap();
 
         // Initialize the menu checked items
         this.mnuMainFrm_View_Menu.Checked = true;

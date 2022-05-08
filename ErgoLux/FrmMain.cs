@@ -27,9 +27,9 @@ public partial class FrmMain : Form
     {
         // Load settings. This has to go before custom initialization, since some routine depend on these values
         _settings = new ClassSettings(Path.GetDirectoryName(System.Environment.ProcessPath));
-        
+
         // Set form icon
-        if (File.Exists(_settings.AppPath + @"\images\logo.ico")) this.Icon = new Icon(_settings.AppPath + @"\images\logo.ico");
+        this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
 
         // Initialize components and GUI
         InitializeComponent();
