@@ -17,7 +17,6 @@ partial class FrmMain
         {
             var jsonString = File.ReadAllText(_settings.SettingsFileName);
             _settings = JsonSerializer.Deserialize<ClassSettings>(jsonString) ?? _settings;
-            _settings.InitializeJsonIgnore(_settings.AppPath);
             result = true;
         }
         catch (FileNotFoundException)

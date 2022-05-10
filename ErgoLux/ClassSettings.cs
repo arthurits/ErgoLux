@@ -84,17 +84,17 @@ public class ClassSettings
     /// Icon indicating the T-10 is opened and ready to be sent commands
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap? Icon_Open { get; set; }
+    public System.Drawing.Bitmap Icon_Open { get; set; } = new System.Drawing.Icon(GraphicsResources.IconOpenConnection, 16, 16).ToBitmap();
     /// <summary>
     /// Icon indicating the T-10 is closed
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap? Icon_Close { get; set; }
+    public System.Drawing.Bitmap Icon_Close { get; set; } = new System.Drawing.Icon(GraphicsResources.IconCloseConnection, 16, 16).ToBitmap();
     /// <summary>
     /// Icon indicating the T-10 receiving and sending data
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap? Icon_Data { get; set; }
+    public System.Drawing.Bitmap Icon_Data { get; set; } = new System.Drawing.Icon(GraphicsResources.IconExchangeConnection, 16, 16).ToBitmap();
 
     /// <summary>
     /// Absolute path of the executable
@@ -167,18 +167,7 @@ public class ClassSettings
 
     public ClassSettings()
     {
-    }
 
-    public ClassSettings(string? path)
-        : this()
-    {
-        if (System.IO.Directory.Exists(path))
-        {
-            AppPath = path;
-            Icon_Close = new System.Drawing.Icon(GraphicsResources.IconCloseConnection, 16, 16).ToBitmap();
-            Icon_Open = new System.Drawing.Icon(GraphicsResources.IconOpenConnection, 16, 16).ToBitmap();
-            Icon_Data = new System.Drawing.Icon(GraphicsResources.IconExchangeConnection, 16, 16).ToBitmap();
-        }
     }
 
     ~ClassSettings()
@@ -188,25 +177,8 @@ public class ClassSettings
         if (Icon_Data is not null) Icon_Data.Dispose();
     }
 
-    /// <summary>
-    /// Initializes all the fields that are Json-ignored
-    /// </summary>
-    public void InitializeJsonIgnore(string? path = null)
-    {
-        AppPath = path ?? String.Empty;
-        ArrayFixedColumns = 6;
-
-        if (AppPath != string.Empty)
-        {
-            Icon_Close = new System.Drawing.Icon(GraphicsResources.IconCloseConnection, 16, 16).ToBitmap();
-            Icon_Open = new System.Drawing.Icon(GraphicsResources.IconOpenConnection, 16, 16).ToBitmap();
-            Icon_Data = new System.Drawing.Icon(GraphicsResources.IconExchangeConnection, 16, 16).ToBitmap();
-        }
-    }
-
     public string GetMillisecondsFormat(System.Globalization.CultureInfo culture)
     {
         return $"$1{culture.NumberFormat.NumberDecimalSeparator}fff";
     }
 }
-
