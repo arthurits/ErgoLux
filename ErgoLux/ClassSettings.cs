@@ -167,7 +167,6 @@ public class ClassSettings
 
     public ClassSettings()
     {
-
     }
 
     ~ClassSettings()
@@ -175,6 +174,16 @@ public class ClassSettings
         if (Icon_Open is not null) Icon_Open.Dispose();
         if (Icon_Close is not null) Icon_Close.Dispose();
         if (Icon_Data is not null) Icon_Data.Dispose();
+    }
+
+    /// <summary>
+    /// To be used only if we want to load specific GraphicsResources
+    /// </summary>
+    public void LoadGraphicResources()
+    {
+        Icon_Open = new System.Drawing.Icon(Path.Combine(AppPath, GraphicsResources.IconOpenConnection), 16, 16).ToBitmap();
+        Icon_Close = new System.Drawing.Icon(Path.Combine(AppPath, GraphicsResources.IconCloseConnection), 16, 16).ToBitmap();
+        Icon_Data = new System.Drawing.Icon(Path.Combine(AppPath, GraphicsResources.IconExchangeConnection), 16, 16).ToBitmap();
     }
 
     public string GetMillisecondsFormat(System.Globalization.CultureInfo culture)
