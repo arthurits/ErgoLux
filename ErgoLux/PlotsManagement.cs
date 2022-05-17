@@ -114,7 +114,7 @@ partial class FrmMain
         if (_settings.Plot_ShowRawData)
         {
             foreach (var plot in plotData.Plot.GetPlottables())
-                ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
+                ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = (_nPoints > 0) ? (_nPoints - 1) : 0;
             plotData.Plot.AxisAuto();
             plotData.Plot.SetAxisLimits(xMin: 0, yMin: 0);
             plotData.Refresh();
@@ -125,7 +125,7 @@ partial class FrmMain
         if (_settings.Plot_ShowAverage)
         {
             foreach (var plot in plotStats.Plot.GetPlottables())
-                ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
+                ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = (_nPoints > 0) ? (_nPoints - 1) : 0;
             plotStats.Plot.AxisAuto();
             plotStats.Plot.SetAxisLimits(xMin: 0, yMin: 0);
             plotStats.Refresh();
@@ -134,7 +134,7 @@ partial class FrmMain
         if (_settings.Plot_ShowRatios)
         {
             foreach (var plot in plotRatio.Plot.GetPlottables())
-                ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints - 1;
+                ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = (_nPoints > 0) ? (_nPoints - 1) : 0;
             plotRatio.Plot.AxisAuto();
             plotRatio.Plot.SetAxisLimits(xMin: 0, yMin: 0, yMax: 1);
             plotRatio.Refresh();

@@ -92,7 +92,6 @@ public partial class FrmMain : Form
 
     private void OnTimedEvent(object? sender, EventArgs e)
     {
-        m_timer.Stop();
         bool result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
     }
 
