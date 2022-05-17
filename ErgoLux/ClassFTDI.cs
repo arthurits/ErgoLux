@@ -67,7 +67,7 @@ namespace ErgoLux
         /// <param name="readTimeOut">Read timeout value in ms. A value of 0 indicates an infinite timeout.</param>
         /// <param name="writeTimeOut">Write timeout value in ms. A value of 0 indicates an infinite timeout.</param>
         /// <returns><see cref="FTDI.FT_STATUS.FT_OK"/> if all parameters could be set, <see cref="FTDI.FT_STATUS"/> error otherwise.</returns>
-        public FTDI.FT_STATUS OpenDevice(string description = null, uint? index = null, uint? location = null, string serialNumber = null, int? baud = 9600, int? dataBits = 7, int? stopBits = 1, int? parity = 2, int? flowControl = 400, int? xOn = 10, int? xOff = 13, uint readTimeOut = 0, uint writeTimeOut = 0)
+        public FTDI.FT_STATUS OpenDevice(string? description = null, uint? index = null, uint? location = null, string? serialNumber = null, int? baud = 9600, int? dataBits = 7, int? stopBits = 1, int? parity = 2, int? flowControl = 400, int? xOn = 10, int? xOff = 13, uint readTimeOut = 0, uint writeTimeOut = 0)
         {
             // FTDI connection code
             UInt32 ftdiDeviceCount = 0;
@@ -217,7 +217,7 @@ namespace ErgoLux
         /// </summary>
         /// <param name="pSender"></param>
         /// <param name="pEventArgs"></param>
-        private void ReadData(object pSender, DoWorkEventArgs pEventArgs)
+        private void ReadData(object? pSender, DoWorkEventArgs pEventArgs)
         {
             FTDI.FT_STATUS status;
             UInt32 nrOfBytesAvailable = 0;
@@ -253,7 +253,7 @@ namespace ErgoLux
         /// </summary>
         /// <param name="pSender">Object sending the event</param>
         /// <param name="pEventArgs">Event arguments</param>
-        private void ReadData_KonicaT10(object pSender, DoWorkEventArgs pEventArgs)
+        private void ReadData_KonicaT10(object? pSender, DoWorkEventArgs pEventArgs)
         {
             FTDI.FT_STATUS status;
             UInt32 nrOfBytesAvailable = 0;
@@ -297,7 +297,7 @@ namespace ErgoLux
         public bool Write(string data)
         {
             UInt32 numBytesWritten = 0;
-            ASCIIEncoding enconding = new ASCIIEncoding();
+            ASCIIEncoding enconding = new();
             byte[] bytes = enconding.GetBytes(data);
             FTDI.FT_STATUS status = base.Write(bytes, bytes.Length, ref numBytesWritten);
             if (status != FTDI.FT_STATUS.FT_OK)

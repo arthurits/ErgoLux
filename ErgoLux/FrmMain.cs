@@ -8,7 +8,7 @@ public partial class FrmMain : Form
 {
     private readonly System.Timers.Timer m_timer;
     private ClassSettings _settings;
-    private FTDISample? myFtdiDevice = null;
+    private FTDISample myFtdiDevice = new();
     private double[][] _plotData = Array.Empty<double[]>();
     private double _max = 0;
     private double _min = 0;
@@ -92,7 +92,8 @@ public partial class FrmMain : Form
 
     private void OnTimedEvent(object? sender, EventArgs e)
     {
-        bool result = myFtdiDevice?.Write(ClassT10.ReceptorsSingle[0]) ?? false;
+        m_timer.Stop();
+        bool result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
     }
 
     private void OnDataReceived(object? sender, DataReceivedEventArgs e)
@@ -149,7 +150,7 @@ public partial class FrmMain : Form
     /// <summary>
     /// Update user-interface language and localization
     /// </summary>
-    private void UpdateUI_Language()
+    private void UpdateUI_Language(int DataLength = default)
     {
         // Update the form's tittle
         SetFormTitle(this, String.Empty);
@@ -227,9 +228,9 @@ public partial class FrmMain : Form
         plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _settings.AppCulture) ?? "Time (seconds)");
 
         // Update plots' legends
-        if (_plotData.Length > 0)
+        if (DataLength > 0)
         {
-            _seriesLabels = new string[_plotData.Length];
+            _seriesLabels = new string[DataLength];
             for (int i = 0; i < _seriesLabels.Length - _settings.ArrayFixedColumns; i++)
             {
                 _seriesLabels[i] = $"{(StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Sensor #")}{i:#0}";

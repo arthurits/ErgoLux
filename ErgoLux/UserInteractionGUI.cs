@@ -207,7 +207,7 @@ partial class FrmMain
 
         if (frm.DialogResult == DialogResult.OK)
         {
-            UpdateUI_Language();
+            UpdateUI_Language(_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns);
 
             // If a device is selected, then set up the parameters
             if (_settings.T10_LocationID > 0)
@@ -284,7 +284,7 @@ partial class FrmMain
         frm.ShowDialog();
 
         if (frm.DialogResult == DialogResult.OK)
-            UpdateUI_Language();
+            UpdateUI_Language(_plotData.Length);
     }
 
     private void statusStripLabelEx_CheckedChanged(object sender, EventArgs e)

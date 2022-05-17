@@ -193,5 +193,7 @@ partial class FrmMain
         _plotData = new double[_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns][];
         for (int i = 0; i < _settings.T10_NumberOfSensors + _settings.ArrayFixedColumns; i++)
             _plotData[i] = new double[_settings.Plot_ArrayPoints];
+
+
     }
 }
