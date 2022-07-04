@@ -1,4 +1,4 @@
-# <img src="/EgoLux/images/logo@24.png?raw=true" height="24" width="24"> ErgoLux
+# <img src="ErgoLux/images/logo@24.png?raw=true" height="24" width="24"> ErgoLux
 Software to read multi-point measurement data from Konica Minolta's illuminance meter T-10A. Built using C# (WinForms) in .NET 6.
 
 Copyright © 2021-2022 by Arthurits Ltd. No commercial nor profit use allowed. This software is provided only for personal and not-for-profit use.
