@@ -8,7 +8,7 @@ public partial class FrmMain : Form
 {
     private readonly System.Timers.Timer m_timer;
     private ClassSettings _settings;
-    private FTDISample myFtdiDevice = new();
+    private FTDISample myFtdiDevice;
     private double[][] _plotData = Array.Empty<double[]>();
     private double _max = 0;
     private double _min = 0;
