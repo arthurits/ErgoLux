@@ -12,7 +12,7 @@ namespace System.Windows.Forms
     /// https://stackoverflow.com/questions/2097164/how-to-change-system-windows-forms-toolstripbutton-highlight-background-color-wh
     /// https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/walkthrough-creating-a-professionally-styled-toolstrip-control#implementing-a-custom-renderer
     /// </summary>
-    public class customRenderer<T> : System.Windows.Forms.ToolStripProfessionalRenderer
+    public class CustomRenderer<T> : System.Windows.Forms.ToolStripProfessionalRenderer
     {
         private System.Drawing.Brush _border;
         private System.Drawing.Brush _checkedBackground;
@@ -20,7 +20,7 @@ namespace System.Windows.Forms
         /// <summary>
         /// Class constructor. Sets SteelBlue and LightSkyBlue as defaults colors
         /// </summary>
-        public customRenderer()
+        public CustomRenderer()
         {
             _border = System.Drawing.Brushes.SteelBlue;
             _checkedBackground = System.Drawing.Brushes.LightSkyBlue;
@@ -31,7 +31,7 @@ namespace System.Windows.Forms
         /// </summary>
         /// <param name="border">Brush for the checked border</param>
         /// <param name="checkedBackground">Brush for the checked background</param>
-        public customRenderer(System.Drawing.Brush border, System.Drawing.Brush checkedBackground)
+        public CustomRenderer(System.Drawing.Brush border, System.Drawing.Brush checkedBackground)
         {
             _border = border;
             _checkedBackground = checkedBackground;
@@ -60,7 +60,8 @@ namespace System.Windows.Forms
             // check if the object being rendered is actually a ToolStripButton
             if (e.Item is T)
             {
-                var Checked = (bool)typeof(T).GetProperty("Checked").GetValue(e.Item);
+                var Property = typeof(T).GetProperty("Checked");
+                var Checked = (bool?)Property?.GetValue(e.Item) ?? false;
 
                 // only render checked items differently
                 if (Checked == true)

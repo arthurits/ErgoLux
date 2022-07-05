@@ -19,7 +19,7 @@ partial class FrmMain
     /// </summary>
     private void InitializeToolStrip()
     {
-        toolStripMain.Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
+        toolStripMain.Renderer = new CustomRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
         this.toolStripMain_Exit.Image = new System.Drawing.Icon(GraphicsResources.IconExit,48,48).ToBitmap();
         this.toolStripMain_Connect.Image = new System.Drawing.Icon(GraphicsResources.IconConnect, 48, 48).ToBitmap();

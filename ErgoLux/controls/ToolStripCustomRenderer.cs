@@ -60,10 +60,10 @@ namespace System.Windows.Forms
             // check if the object being rendered is actually a ToolStripButton
             if (e.Item is System.Windows.Forms.ToolStripButton)
             {
-                System.Windows.Forms.ToolStripButton button = e.Item as System.Windows.Forms.ToolStripButton;
+                System.Windows.Forms.ToolStripButton? button = e.Item as System.Windows.Forms.ToolStripButton;
 
                 // only render checked items differently
-                if (button.Checked)
+                if (button is not null && button.Checked)
                 {
                     // fill the entire button with a color (will be used as a border)
                     int buttonHeight = button.Size.Height;

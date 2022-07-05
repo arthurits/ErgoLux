@@ -1,5 +1,4 @@
 ﻿using FTD2XX_NET;
-using System.Drawing;
 
 namespace ErgoLux;
 
