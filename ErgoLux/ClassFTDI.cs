@@ -265,6 +265,7 @@ namespace ErgoLux
             while (true)
             {
                 status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
+                System.Diagnostics.Debug.Print("ReadData_KonicaT10 with status: {0} and NumBytes: {1}", status.ToString(), nrOfBytesAvailable);
                 if (status != FTDI.FT_STATUS.FT_OK)
                 {
                     return;

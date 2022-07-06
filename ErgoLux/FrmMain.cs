@@ -93,23 +93,25 @@ public partial class FrmMain : Form
     private void OnTimedEvent(object? sender, EventArgs e)
     {
         bool result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+        System.Diagnostics.Debug.Print("OnTimedEvent receptor 0 with code {0} and result: {1}", ClassT10.ReceptorsSingle[0], result);
     }
 
     private void OnDataReceived(object? sender, DataReceivedEventArgs e)
     {
+        System.Diagnostics.Debug.Print("OnDataReceived");
         //_data = true;
         (int Sensor, double Iluminance, double Increment, double Percent) result = (0, 0, 0, 0);
         //string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
-
+        
         if (e.StrDataReceived.Length == ClassT10.LongBytesLength)
         {
             result = ClassT10.DecodeCommand(e.StrDataReceived);
-            //System.Diagnostics.Debug.Print("Daata: {0} — TimeStamp: {1}",
-            //                            result.ToString(),
-            //                            DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
+            System.Diagnostics.Debug.Print("Data: {0} — TimeStamp: {1}",
+                                        result.ToString(),
+                                        DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
             if (result.Sensor < _settings.T10_NumberOfSensors - 1)
             {
-                myFtdiDevice?.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
+                myFtdiDevice.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
             }
         }
         else if (e.StrDataReceived.Length == ClassT10.ShortBytesLength)
