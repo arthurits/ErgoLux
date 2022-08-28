@@ -104,7 +104,7 @@ partial class FrmMain
         plotData.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
         // Customize styling
-        plotData.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
+        plotData.Plot.Palette = ScottPlot.Palette.Category10;
         plotData.Plot.Title(StringsRM.GetString("strPlotRawTitle", _settings.AppCulture) ?? "Illuminance");
         plotData.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _settings.AppCulture) ?? "Lux");
         plotData.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _settings.AppCulture) ?? "Time (seconds)");
@@ -120,7 +120,7 @@ partial class FrmMain
         // Customize the Average plot
         plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
-        plotStats.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
+        plotStats.Plot.Palette = ScottPlot.Palette.Nord;
         plotStats.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _settings.AppCulture) ?? "Max, average, min");
         plotStats.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _settings.AppCulture) ?? "Lux");
         plotStats.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _settings.AppCulture) ?? "Time (seconds)");
@@ -131,7 +131,7 @@ partial class FrmMain
         //formsPlot4.plt.AxisAuto(horizontalMargin: 0);
         plotRatio.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1);
 
-        plotRatio.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
+        plotRatio.Plot.Palette = ScottPlot.Palette.OneHalf;
         plotRatio.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _settings.AppCulture) ?? "Illuminance ratios");
         plotRatio.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _settings.AppCulture) ?? "Ratio");
         plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _settings.AppCulture) ?? "Time (seconds)");
@@ -155,17 +155,17 @@ partial class FrmMain
         // Define colorsets
         if (_settings.Plot_DistIsRadar)
         {
-            plotData.Plot.Palette = ScottPlot.Drawing.Palette.Category10;
-            plotDistribution.Plot.Palette = ScottPlot.Drawing.Palette.OneHalfDark;
+            plotData.Plot.Palette = ScottPlot.Palette.Category10;
+            plotDistribution.Plot.Palette = ScottPlot.Palette.OneHalfDark;
         }
         else
         {
-            plotData.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
-            plotDistribution.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
+            plotData.Plot.Palette = ScottPlot.Palette.Microcharts;
+            plotDistribution.Plot.Palette = ScottPlot.Palette.Microcharts;
         }
 
-        plotStats.Plot.Palette = ScottPlot.Drawing.Palette.Nord;
-        plotRatio.Plot.Palette = ScottPlot.Drawing.Palette.OneHalf;
+        plotStats.Plot.Palette = ScottPlot.Palette.Nord;
+        plotRatio.Plot.Palette = ScottPlot.Palette.OneHalf;
     }
 
     /// <summary>

@@ -25,7 +25,7 @@ public partial class FrmMain : Form
 
     public FrmMain()
     {
-        // Load settings. This has to go before custom initialization, since some routine depend on these values
+        // Load settings. This has to go before custom initialization, since some routines depend on these values
         _settings = new();
 
         // Set form icon
