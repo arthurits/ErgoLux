@@ -16,7 +16,7 @@ namespace ErgoLux
         {
             InitializeComponent();
 
-            formsPlot1.Plot.Palette = ScottPlot.Drawing.Palette.Microcharts;
+            formsPlot1.Plot.Palette = ScottPlot.Palette.Microcharts;
             double[] values = { 100, 80, 65, 45, 20 };
             var plt = formsPlot1.Plot.AddRadialGauge(values);
             plt.Labels = new string[] { "alpha", "beta", "gamma", "delta", "epsilon" };
