@@ -19,7 +19,7 @@ namespace System.Windows.Forms
         private System.Drawing.Brush _border;
         private System.Drawing.Brush _checkedBackground;
 
-        public event EventHandler CheckedChanged;
+        public event EventHandler? CheckedChanged;
 
         /// <summary>
         /// Class constructor. Sets SteelBlue and LightSkyBlue as defaults colors
@@ -73,7 +73,7 @@ namespace System.Windows.Forms
 
         protected virtual void OnCheckedChanged(EventArgs e)
         {
-            EventHandler handler = CheckedChanged;
+            EventHandler? handler = CheckedChanged;
             handler?.Invoke(this, e);
         }
 
