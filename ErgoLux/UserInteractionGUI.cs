@@ -169,7 +169,7 @@ partial class FrmMain
             {
                 _timeStart = DateTime.Now;
                 m_timer.Start();
-                m_timer.Stop();
+                //m_timer.Stop();
             }
         }
         else if (toolStripMain_Connect.Checked == false)

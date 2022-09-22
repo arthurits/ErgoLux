@@ -273,10 +273,10 @@ public partial class FrmSettings : Form
     {
         _settings = settings;
 
-        cboDataBits.SelectedText = _settings.T10_DataBits.ToString();
-        cboStopBits.SelectedText = _settings.T10_StopBits.ToString();
-        cboParity.SelectedText = _settings.T10_Parity.ToString();
-        cboFlowControl.SelectedText = _settings.T10_FlowControl.ToString();
+        cboDataBits.SelectedValue = _settings.T10_DataBits;
+        cboStopBits.SelectedValue = _settings.T10_StopBits;
+        cboParity.SelectedValue = _settings.T10_Parity;
+        cboFlowControl.SelectedValue = _settings.T10_FlowControl;
 
         txtBaudRate.Text = _settings.T10_BaudRate.ToString();
         txtOn.Text = _settings.T10_CharOn.ToString();
