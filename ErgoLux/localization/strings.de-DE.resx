@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strBtnAccept" xml:space="preserve">
+    <value>&amp;Akzeptieren</value>
+  </data>
+  <data name="strBtnCancel" xml:space="preserve">
+    <value>&amp;Abbrechen</value>
+  </data>
+  <data name="strBtnData" xml:space="preserve">
+    <value>Daten auswählen</value>
+  </data>
+  <data name="strBtnExport" xml:space="preserve">
+    <value>&amp;Exportieren</value>
+  </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>&amp;Zurücksetzen</value>
+  </data>
+  <data name="strBtnSettings" xml:space="preserve">
+    <value>&amp;Einstellungen</value>
+  </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>Fadenkreuz des Plots anzeigen</value>
+  </data>
+  <data name="strChkCumulative" xml:space="preserve">
+    <value>Kumulative fraktale Dimension</value>
+  </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>Dialog zum Öffnen/Speichern des vorherigen Pfads speichern</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>Entropie (ungefähr, Stichprobe)</value>
+  </data>
+  <data name="strChkPower" xml:space="preserve">
+    <value>Strom (dB)</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>Möchten Sie alle Felder
+auf ihre Standardwerte zurücksetzen?</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>Einstellungen zurücksetzen?</value>
+  </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>Fehler beim Laden der Einstellungsdatei.
+
+{0}
+
+Stattdessen werden die Standardwerte verwendet.</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>ErgoLux Daten</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>Startzeit</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>Endzeit</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>Messzeit insgesamt</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>Anzahl der Sensoren</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>Anzahl der Datenpunkte</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>Häufigkeit der Probenahme</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>Sensor #</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>Durchschnitt</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>Min/Durchschnitt</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>Min/Max</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>Durchschnitt/Max</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>Durchschnitt</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>Beleuchtungsstärke</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>Fehlende Leerzeile.</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>Fehlende Spaltenüberschriften (Seriennamen).</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>Tage</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>Stunden</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>Minuten</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>Sekunden</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>und</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>Millisekunden</value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>Sektion '{0}' ist falsch formatiert.</value>
+  </data>
+  <data name="strFormTitle" xml:space="preserve">
+    <value>ErgoLux</value>
+  </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>Kultur auswählen</value>
+  </data>
+  <data name="strFrmSettings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="strFrmTitle" xml:space="preserve">
+    <value>Signalanalyse</value>
+  </data>
+  <data name="strFrmTitleUnion" xml:space="preserve">
+    <value> - </value>
+  </data>
+  <data name="strGrpAxis" xml:space="preserve">
+    <value>Abszissenachse</value>
+  </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>UI und Datenformat</value>
+  </data>
+  <data name="strLblData" xml:space="preserve">
+    <value>Pfad der Datendatei</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>Numerische Datenformatierungszeichenfolge</value>
+  </data>
+  <data name="strLblEnd" xml:space="preserve">
+    <value>Array-Index Ende</value>
+  </data>
+  <data name="strLblSeries" xml:space="preserve">
+    <value>Serie auswählen</value>
+  </data>
+  <data name="strLblStart" xml:space="preserve">
+    <value>Array-Index Anfang</value>
+  </data>
+  <data name="strLblWindow" xml:space="preserve">
+    <value>Fenster</value>
+  </data>
+  <data name="strMenuMainFile" xml:space="preserve">
+    <value>&amp;Datei</value>
+  </data>
+  <data name="strMenuMainFileExit" xml:space="preserve">
+    <value>&amp;Beenden...</value>
+  </data>
+  <data name="strMenuMainFileOpen" xml:space="preserve">
+    <value>&amp;Öffnen...</value>
+  </data>
+  <data name="strMenuMainFileSave" xml:space="preserve">
+    <value>&amp;Speichern...</value>
+  </data>
+  <data name="strMenuMainHelpAbout" xml:space="preserve">
+    <value>&amp;Über...</value>
+  </data>
+  <data name="strMenuMainHelpText" xml:space="preserve">
+    <value>&amp;Hilfe</value>
+  </data>
+  <data name="strMenuMainTools" xml:space="preserve">
+    <value>&amp;Tools</value>
+  </data>
+  <data name="strMenuMainToolsConnect" xml:space="preserve">
+    <value>&amp;Verbinden</value>
+  </data>
+  <data name="strMenuMainToolsDisconnect" xml:space="preserve">
+    <value>&amp;Trennen</value>
+  </data>
+  <data name="strMenuMainToolsSettings" xml:space="preserve">
+    <value>&amp;Einstellungen...</value>
+  </data>
+  <data name="strMenuMainView" xml:space="preserve">
+    <value>&amp;Ansicht</value>
+  </data>
+  <data name="strMenuMainViewAverage" xml:space="preserve">
+    <value>Durchschnittswerte</value>
+  </data>
+  <data name="strMenuMainViewDistribution" xml:space="preserve">
+    <value>Radiale Verteilung</value>
+  </data>
+  <data name="strMenuMainViewMenu" xml:space="preserve">
+    <value>Menü anzeigen</value>
+  </data>
+  <data name="strMenuMainViewRatio" xml:space="preserve">
+    <value>Verhältnisse</value>
+  </data>
+  <data name="strMenuMainViewRaw" xml:space="preserve">
+    <value>Rohdaten</value>
+  </data>
+  <data name="strMenuMainViewToolbar" xml:space="preserve">
+    <value>Toolbar anzeigen</value>
+  </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>Beim Öffnen der Datendatei ist ein unerwarteter Fehler aufgetreten.
+Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Softwareentwickler.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>Fehler beim Öffnen von Daten</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDevice" xml:space="preserve">
+    <value>Das Gerät konnte nicht geöffnet werden</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDeviceTitle" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>Beim Speichern von Daten auf der Festplatte ist ein unerwarteter Fehler aufgetreten.
+Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Softwareentwickler.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>Fehler beim Speichern von Daten</value>
+  </data>
+  <data name="strMsgBoxErrorSettings" xml:space="preserve">
+    <value>Fehler beim Laden der Einstellungsdatei.
+
+{0}
+
+Stattdessen werden die Standardwerte verwendet.</value>
+  </data>
+  <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie das Programm
+beenden möchten?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>Beenden?</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>Es sind keine Daten vorhanden, die gespeichert werden können.</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>Keine Daten</value>
+  </data>
+  <data name="strMsgBoxReset" xml:space="preserve">
+    <value>Möchten Sie alle Felder auf
+ihre Standardwerte zurücksetzen?</value>
+  </data>
+  <data name="strMsgBoxResetTitle" xml:space="preserve">
+    <value>Zurücksetzen?</value>
+  </data>
+  <data name="strMsgBoxSaveData" xml:space="preserve">
+    <value>Die Daten wurden erfolgreich auf der Festplatte gespeichert.</value>
+  </data>
+  <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
+    <value>Datenspeicherung</value>
+  </data>
+  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+    <value>Die Berechnung der Hausdorff-Besicovitch-Fraktaldimension
+ wurde eingestellt.</value>
+  </data>
+  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="strOpenDlgFilter" xml:space="preserve">
+    <value>ErgoLux Daten (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*</value>
+  </data>
+  <data name="strOpenDlgTitle" xml:space="preserve">
+    <value>Beleuchtungsstärkedaten öffnen</value>
+  </data>
+  <data name="strPlotAverageTitle" xml:space="preserve">
+    <value>Max, Durchschnitt, Min</value>
+  </data>
+  <data name="strPlotAverageXLabel" xml:space="preserve">
+    <value>Zeit (Sekunden)</value>
+  </data>
+  <data name="strPlotAverageYLabel" xml:space="preserve">
+    <value>Lux</value>
+  </data>
+  <data name="strPlotDistributionTitle" xml:space="preserve">
+    <value>Beleuchtungsstärkeverteilung</value>
+  </data>
+  <data name="strPlotRatiosTitle" xml:space="preserve">
+    <value>Beleuchtungsstärkeverhältnisse</value>
+  </data>
+  <data name="strPlotRatiosXLabel" xml:space="preserve">
+    <value>Zeit (Sekunden)</value>
+  </data>
+  <data name="strPlotRatiosYLabel" xml:space="preserve">
+    <value>Verhältnisse</value>
+  </data>
+  <data name="strPlotRawTitle" xml:space="preserve">
+    <value>Beleuchtungsstärke</value>
+  </data>
+  <data name="strPlotRawXLabel" xml:space="preserve">
+    <value>Zeit (Sekunden)</value>
+  </data>
+  <data name="strPlotRawYLabel" xml:space="preserve">
+    <value>Lux</value>
+  </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>Aktuelle Kulturformatierung</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>Unveränderliche Kulturformatierung</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>Kultur auswählen</value>
+  </data>
+  <data name="strReadDataError" xml:space="preserve">
+    <value>Daten können nicht aus der Datei gelesen werden.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>Der Name der Kulturkennzeichenkette ist nicht gültig.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>Fehler beim Kulturnamen</value>
+  </data>
+  <data name="strReadDataErrorNumber" xml:space="preserve">
+    <value>Ungültiger numerischer Wert: {0}</value>
+  </data>
+  <data name="strReadDataErrorNumberTitle" xml:space="preserve">
+    <value>Fehler beim Parsen von Daten</value>
+  </data>
+  <data name="strReadDataErrorTitle" xml:space="preserve">
+    <value>Fehler beim Öffnen von Daten</value>
+  </data>
+  <data name="strSaveDlgFilter" xml:space="preserve">
+    <value>ErgoLux Daten (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*</value>
+  </data>
+  <data name="strSaveDlgTitle" xml:space="preserve">
+    <value>Beleuchtungsstärkedaten speichern</value>
+  </data>
+  <data name="strStatusExchange" xml:space="preserve">
+    <value>Empfangen von Daten</value>
+  </data>
+  <data name="strStatusID" xml:space="preserve">
+    <value>Gerät ID</value>
+  </data>
+  <data name="strStatusLocation" xml:space="preserve">
+    <value>Standort ID</value>
+  </data>
+  <data name="strStatusOpen" xml:space="preserve">
+    <value>Getrennt</value>
+  </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>Fadenkreuzmodus des Plots anzeigen</value>
+  </data>
+  <data name="strStatusTipDistribution" xml:space="preserve">
+    <value>Plotverteilung</value>
+  </data>
+  <data name="strStatusTipExchange" xml:space="preserve">
+    <value>Status des Austauschs</value>
+  </data>
+  <data name="strStatusTipID" xml:space="preserve">
+    <value>Gerät ID</value>
+  </data>
+  <data name="strStatusTipLocation" xml:space="preserve">
+    <value>T-10A Standort ID</value>
+  </data>
+  <data name="strStatusTipMax" xml:space="preserve">
+    <value>Plot Max, Durchschnitt und Min</value>
+  </data>
+  <data name="strStatusTipOpen" xml:space="preserve">
+    <value>Status der Verbindung</value>
+  </data>
+  <data name="strStatusTipRatio" xml:space="preserve">
+    <value>Plot-Verhältnisse</value>
+  </data>
+  <data name="strStatusTipRaw" xml:space="preserve">
+    <value>Plot-Rohdaten</value>
+  </data>
+  <data name="strStatusTipType" xml:space="preserve">
+    <value>Gerätetyp</value>
+  </data>
+  <data name="strStatusType" xml:space="preserve">
+    <value>Gerätetyp</value>
+  </data>
+  <data name="strTabDevice" xml:space="preserve">
+    <value>T-10A Sensor</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>User Interface</value>
+  </data>
+  <data name="strTabPlots" xml:space="preserve">
+    <value>Plotting</value>
+  </data>
+  <data name="strToolStripAbout" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="strToolStripConnect" xml:space="preserve">
+    <value>Verbinden</value>
+  </data>
+  <data name="strToolStripDisconnect" xml:space="preserve">
+    <value>Trennen</value>
+  </data>
+  <data name="strToolStripExit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="strToolStripOpen" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="strToolStripSave" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="strToolStripSettings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="strToolTipAbout" xml:space="preserve">
+    <value>Über diese Software</value>
+  </data>
+  <data name="strToolTipConnect" xml:space="preserve">
+    <value>Start des Datenempfangs vom T-10A-Gerät</value>
+  </data>
+  <data name="strToolTipDisconnect" xml:space="preserve">
+    <value>T-10A-Gerät anhalten und abtrennen</value>
+  </data>
+  <data name="strToolTipExit" xml:space="preserve">
+    <value>Die Anwendung beenden</value>
+  </data>
+  <data name="strToolTipOpen" xml:space="preserve">
+    <value>Datendatei von der Festplatte öffnen</value>
+  </data>
+  <data name="strToolTipSave" xml:space="preserve">
+    <value>Daten speichern</value>
+  </data>
+  <data name="strToolTipSettings" xml:space="preserve">
+    <value>Einstellungen für Plots, Daten und UI</value>
+  </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>User Interface Sprache</value>
+  </data>
+</root>
