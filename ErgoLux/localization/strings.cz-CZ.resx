@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="grpCulture" xml:space="preserve">
+    <value>Rozhraní a formát dat</value>
+  </data>
+  <data name="strBtnAccept" xml:space="preserve">
+    <value>&amp;Přijmout</value>
+  </data>
+  <data name="strBtnCancel" xml:space="preserve">
+    <value>&amp;Zrušit</value>
+  </data>
+  <data name="strBtnData" xml:space="preserve">
+    <value>Vyberte data</value>
+  </data>
+  <data name="strBtnExport" xml:space="preserve">
+    <value>&amp;Exportovat</value>
+  </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>&amp;Obnovit</value>
+  </data>
+  <data name="strBtnSettings" xml:space="preserve">
+    <value>&amp;Nastavení</value>
+  </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>Zobrazit zakreslovací křížek</value>
+  </data>
+  <data name="strChkCumulative" xml:space="preserve">
+    <value>Kumulativní fraktální dimenze</value>
+  </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>Zapaměť si předchozí cestu dialogového okna pro otevření/uložení</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>Entropie (přibližný &amp;&amp; vzorek)</value>
+  </data>
+  <data name="strChkPower" xml:space="preserve">
+    <value>Výkon (dB)</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>Chcete obnovit všechna pole na jejich výchozí hodnoty?</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>Obnovit nastavení?</value>
+  </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>Chyba při načítání souboru nastavení.
+
+{0}
+
+Namísto toho se použijí výchozí hodnoty.</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>Údaje ErgoLux</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>Čas začátku</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>Doba ukončení</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>Celkový čas měření</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>Počet senzorů</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>Počet datových bodů</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>Frekvence vzorkování</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>Senzor č.</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>Průměr</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>Min./Průměr</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>Min/Max</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>Průměr/Max</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>Průměr</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>Intenzita osvětlení</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>Chybí prázdný řádek.</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>Chybějící hlavičky sloupců (názvy sérií).</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>dny</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>hodiny</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>minuty</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>sekundy</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>milisekundy</value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>Sekce '{0}' má nesprávný formát.</value>
+  </data>
+  <data name="strFormTitle" xml:space="preserve">
+    <value>ErgoLux</value>
+  </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>Vyberte jazykovou lokalizaci</value>
+  </data>
+  <data name="strFrmSettings" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="strFrmTitle" xml:space="preserve">
+    <value>ErgoLux</value>
+  </data>
+  <data name="strFrmTitleUnion" xml:space="preserve">
+    <value> - </value>
+  </data>
+  <data name="strGrpAxis" xml:space="preserve">
+    <value>Abscisová osa</value>
+  </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>Uživatelské rozhraní a formát dat</value>
+  </data>
+  <data name="strLblData" xml:space="preserve">
+    <value>Cesta k souboru dat</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>Číselný řetězec formátování dat</value>
+  </data>
+  <data name="strLblEnd" xml:space="preserve">
+    <value>Konec indexu pole</value>
+  </data>
+  <data name="strLblSeries" xml:space="preserve">
+    <value>Vyberte sérii</value>
+  </data>
+  <data name="strLblStart" xml:space="preserve">
+    <value>Začátek indexu pole</value>
+  </data>
+  <data name="strLblWindow" xml:space="preserve">
+    <value>Okno</value>
+  </data>
+  <data name="strMenuMainFile" xml:space="preserve">
+    <value>&amp;Soubor</value>
+  </data>
+  <data name="strMenuMainFileExit" xml:space="preserve">
+    <value>&amp;Ukončit...</value>
+  </data>
+  <data name="strMenuMainFileOpen" xml:space="preserve">
+    <value>&amp;Otevřít...</value>
+  </data>
+  <data name="strMenuMainFileSave" xml:space="preserve">
+    <value>&amp;Uložit...</value>
+  </data>
+  <data name="strMenuMainHelpAbout" xml:space="preserve">
+    <value>&amp;O nás...</value>
+  </data>
+  <data name="strMenuMainHelpText" xml:space="preserve">
+    <value>&amp;Nápověda</value>
+  </data>
+  <data name="strMenuMainTools" xml:space="preserve">
+    <value>&amp;Nástroje</value>
+  </data>
+  <data name="strMenuMainToolsConnect" xml:space="preserve">
+    <value>&amp;Připojit</value>
+  </data>
+  <data name="strMenuMainToolsDisconnect" xml:space="preserve">
+    <value>&amp;Odpojit</value>
+  </data>
+  <data name="strMenuMainToolsSettings" xml:space="preserve">
+    <value>&amp;Nastavení...</value>
+  </data>
+  <data name="strMenuMainView" xml:space="preserve">
+    <value>&amp;Zobrazit</value>
+  </data>
+  <data name="strMenuMainViewAverage" xml:space="preserve">
+    <value>Průměry</value>
+  </data>
+  <data name="strMenuMainViewDistribution" xml:space="preserve">
+    <value>Radiální rozdělení</value>
+  </data>
+  <data name="strMenuMainViewMenu" xml:space="preserve">
+    <value>Zobrazit nabídku</value>
+  </data>
+  <data name="strMenuMainViewRatio" xml:space="preserve">
+    <value>Poměry</value>
+  </data>
+  <data name="strMenuMainViewRaw" xml:space="preserve">
+    <value>Nezpracované údaje</value>
+  </data>
+  <data name="strMenuMainViewToolbar" xml:space="preserve">
+    <value>Zobrazit panel nástrojů</value>
+  </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>Při otevírání datového souboru se vyskytla neočekávaná chyba.
+Zkuste to znovu později nebo kontaktujte softwarového inženýra.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>Chyba při otevírání dat</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDevice" xml:space="preserve">
+    <value>Zařízení se nepodařilo otevřít</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDeviceTitle" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>Při ukládání dat na disk se vyskytla neočekávaná chyba.
+Zkuste to znovu později nebo kontaktujte softwarového inženýra.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>Chyba při ukládání dat</value>
+  </data>
+  <data name="strMsgBoxErrorSettings" xml:space="preserve">
+    <value>Chyba při načítání souboru nastavení.
+
+{0}
+
+Namísto toho se použijí výchozí hodnoty.</value>
+  </data>
+  <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>Opravdu chcete ukončit
+aplikaci?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>Ukončit?</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>Nejsou k dispozici žádná data pro uložení.</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>Žádné údaje</value>
+  </data>
+  <data name="strMsgBoxReset" xml:space="preserve">
+    <value>Chcete obnovit všechna pole
+na jejich výchozí hodnoty?</value>
+  </data>
+  <data name="strMsgBoxResetTitle" xml:space="preserve">
+    <value>Resetovat?</value>
+  </data>
+  <data name="strMsgBoxSaveData" xml:space="preserve">
+    <value>Údaje byly úspěšně uloženy na disk.</value>
+  </data>
+  <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
+    <value>Úspora údajů</value>
+  </data>
+  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+    <value>Výpočet Hausdorffova-Besicovitchova fraktálu
+dimenze byla zastavena.</value>
+  </data>
+  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+    <value>Zastavit</value>
+  </data>
+  <data name="strOpenDlgFilter" xml:space="preserve">
+    <value>Soubory ErgoLux (*.elux)|*.elux|Soubory analýzy signálu (*.sig)|*.sig|Textové soubory (*.txt)|*.txt|Všechny soubory (*.*)|*. *</value>
+  </data>
+  <data name="strOpenDlgTitle" xml:space="preserve">
+    <value>Otevřená data o osvětlení</value>
+  </data>
+  <data name="strPlotAverageTitle" xml:space="preserve">
+    <value>Max, průměr, min</value>
+  </data>
+  <data name="strPlotAverageXLabel" xml:space="preserve">
+    <value>Čas (sekundy)</value>
+  </data>
+  <data name="strPlotAverageYLabel" xml:space="preserve">
+    <value>Lux</value>
+  </data>
+  <data name="strPlotDistributionTitle" xml:space="preserve">
+    <value>Distribuce osvětlení</value>
+  </data>
+  <data name="strPlotRatiosTitle" xml:space="preserve">
+    <value>Poměry osvětlení</value>
+  </data>
+  <data name="strPlotRatiosXLabel" xml:space="preserve">
+    <value>Čas (sekundy)</value>
+  </data>
+  <data name="strPlotRatiosYLabel" xml:space="preserve">
+    <value>Poměr</value>
+  </data>
+  <data name="strPlotRawTitle" xml:space="preserve">
+    <value>Intenzita osvětlení</value>
+  </data>
+  <data name="strPlotRawXLabel" xml:space="preserve">
+    <value>Čas (sekundy)</value>
+  </data>
+  <data name="strPlotRawYLabel" xml:space="preserve">
+    <value>Lux</value>
+  </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>Aktuální formátování jazykové lokalizace</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>Invariantní formátování jazykové lokalizace</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>Vyberte jazykové lokalizace</value>
+  </data>
+  <data name="strReadDataError" xml:space="preserve">
+    <value>Nelze číst data ze souboru.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>Název řetězce identifikátoru kultury není platný.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>Chyba názvu jazykové lokalizace</value>
+  </data>
+  <data name="strReadDataErrorNumber" xml:space="preserve">
+    <value>Neplatná číselná hodnota: {0}</value>
+  </data>
+  <data name="strReadDataErrorNumberTitle" xml:space="preserve">
+    <value>Chyba při analýze dat</value>
+  </data>
+  <data name="strReadDataErrorTitle" xml:space="preserve">
+    <value>Chyba při otevírání dat</value>
+  </data>
+  <data name="strSaveDlgFilter" xml:space="preserve">
+    <value>Soubor ErgoLux (*.elux)|*.elux|Textový soubor (*.txt)|*.txt|Binární soubor (*.bin)|*.bin|Všechny soubory (*.*)|*.* </value>
+  </data>
+  <data name="strSaveDlgTitle" xml:space="preserve">
+    <value>Uložit údaje o osvětlení</value>
+  </data>
+  <data name="strStatusExchange" xml:space="preserve">
+    <value>Přijímání údajů</value>
+  </data>
+  <data name="strStatusID" xml:space="preserve">
+    <value>ID zařízení</value>
+  </data>
+  <data name="strStatusLocation" xml:space="preserve">
+    <value>ID polohy</value>
+  </data>
+  <data name="strStatusOpen" xml:space="preserve">
+    <value>Odpojeno</value>
+  </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>Zobrazit režim zaměřovacího kříže grafu</value>
+  </data>
+  <data name="strStatusTipDistribution" xml:space="preserve">
+    <value>Rozdělení grafu</value>
+  </data>
+  <data name="strStatusTipExchange" xml:space="preserve">
+    <value>Status výměny</value>
+  </data>
+  <data name="strStatusTipID" xml:space="preserve">
+    <value>ID zařízení</value>
+  </data>
+  <data name="strStatusTipLocation" xml:space="preserve">
+    <value>ID polohy T-10A</value>
+  </data>
+  <data name="strStatusTipMax" xml:space="preserve">
+    <value>Vykreslit max., průměr a min.</value>
+  </data>
+  <data name="strStatusTipOpen" xml:space="preserve">
+    <value>Stav připojení</value>
+  </data>
+  <data name="strStatusTipRatio" xml:space="preserve">
+    <value>Poměry grafů</value>
+  </data>
+  <data name="strStatusTipRaw" xml:space="preserve">
+    <value>Zobrazit nezpracovaná data</value>
+  </data>
+  <data name="strStatusTipType" xml:space="preserve">
+    <value>Typ zařízení</value>
+  </data>
+  <data name="strStatusType" xml:space="preserve">
+    <value>Typ zařízení</value>
+  </data>
+  <data name="strTabDevice" xml:space="preserve">
+    <value>Snímač T-10A</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>Uživatelské rozhraní</value>
+  </data>
+  <data name="strTabPlots" xml:space="preserve">
+    <value>Vykreslování</value>
+  </data>
+  <data name="strToolStripAbout" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="strToolStripConnect" xml:space="preserve">
+    <value>Připojit</value>
+  </data>
+  <data name="strToolStripDisconnect" xml:space="preserve">
+    <value>Odpojit</value>
+  </data>
+  <data name="strToolStripExit" xml:space="preserve">
+    <value>Ukončit</value>
+  </data>
+  <data name="strToolStripOpen" xml:space="preserve">
+    <value>Otevřeno</value>
+  </data>
+  <data name="strToolStripSave" xml:space="preserve">
+    <value>Uložit</value>
+  </data>
+  <data name="strToolStripSettings" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="strToolTipAbout" xml:space="preserve">
+    <value>O tomto softwaru</value>
+  </data>
+  <data name="strToolTipConnect" xml:space="preserve">
+    <value>Začít přijímat data ze zařízení T-10A</value>
+  </data>
+  <data name="strToolTipDisconnect" xml:space="preserve">
+    <value>Zastavte a odpojte zařízení T-10A</value>
+  </data>
+  <data name="strToolTipExit" xml:space="preserve">
+    <value>Ukončete aplikaci</value>
+  </data>
+  <data name="strToolTipOpen" xml:space="preserve">
+    <value>Otevřít datový soubor z disku</value>
+  </data>
+  <data name="strToolTipSave" xml:space="preserve">
+    <value>Uložit data</value>
+  </data>
+  <data name="strToolTipSettings" xml:space="preserve">
+    <value>Nastavení grafů, dat a uživatelského rozhraní</value>
+  </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>Jazyk uživatelského rozhraní</value>
+  </data>
+</root>
