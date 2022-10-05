@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using FTD2XX_NET;
 
@@ -8,7 +9,8 @@ public partial class FrmSettings : Form
 {
     private string _deviceType = String.Empty;
     private string _deviceID = String.Empty;
-    private ClassSettings _settings = new();
+    private CultureInfo _culture = CultureInfo.CurrentCulture;
+    private ClassSettings? Settings;
     private readonly System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmSettings).Assembly);
 
     public string GetDeviceType { get => _deviceType; }
@@ -78,14 +80,14 @@ public partial class FrmSettings : Form
         // Set control's default input-values
         //SetDefaultValues();
 
-        //
         FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
-        UpdateUI_Language();
     }
 
     public FrmSettings(ClassSettings settings)
         : this()
     {
+        Settings = settings;
+        _culture = settings.AppCulture;
         UpdateControls(settings);
     }
 
@@ -156,14 +158,15 @@ public partial class FrmSettings : Form
 
     private void Accept_Click(object sender, EventArgs e)
     {
-        this.DialogResult = DialogResult.None;
+        DialogResult = DialogResult.None;
+        if (Settings is null) return;
 
         // Check that a device has been selected from the list
         if (viewDevices.SelectedIndices.Count > 0)
         {
             _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
             _deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
-            _settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
+            Settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
         }
 
         // Check that all texboxes have valid values
@@ -176,31 +179,29 @@ public partial class FrmSettings : Form
 
         // Save to class settings
         //_settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
-        _settings.T10_NumberOfSensors = (int)updSensors.Value;
-        _settings.T10_BaudRate = Convert.ToInt32(txtBaudRate.Text);
-        _settings.T10_DataBits = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
-        _settings.T10_StopBits = ((KeyValuePair<string, int>)cboStopBits.SelectedItem).Value;
-        _settings.T10_Parity = ((KeyValuePair<string, int>)cboParity.SelectedItem).Value;
-        _settings.T10_FlowControl = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
-        _settings.T10_CharOn = Convert.ToInt32(txtOn.Text);
-        _settings.T10_CharOff = Convert.ToInt32(txtOff.Text);
-        _settings.T10_Frequency = Convert.ToDouble(txtHz.Text);
+        Settings.T10_NumberOfSensors = (int)updSensors.Value;
+        Settings.T10_BaudRate = Convert.ToInt32(txtBaudRate.Text);
+        Settings.T10_DataBits = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
+        Settings.T10_StopBits = ((KeyValuePair<string, int>)cboStopBits.SelectedItem).Value;
+        Settings.T10_Parity = ((KeyValuePair<string, int>)cboParity.SelectedItem).Value;
+        Settings.T10_FlowControl = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
+        Settings.T10_CharOn = Convert.ToInt32(txtOn.Text);
+        Settings.T10_CharOff = Convert.ToInt32(txtOff.Text);
+        Settings.T10_Frequency = Convert.ToDouble(txtHz.Text);
 
-        _settings.Plot_ArrayPoints = Convert.ToInt32(txtArrayPoints.Text);
-        _settings.Plot_WindowPoints = Convert.ToInt32(txtPlotWindow.Text);
-        _settings.Plot_ShowRawData = chkShowRaw.Checked;
-        _settings.Plot_ShowDistribution = chkShowDistribution.Checked;
-        _settings.Plot_ShowAverage = chkShowAverage.Checked;
-        _settings.Plot_ShowRatios = chkShowRatio.Checked;
-        _settings.Plot_DistIsRadar = radRadar.Checked;
+        Settings.Plot_ArrayPoints = Convert.ToInt32(txtArrayPoints.Text);
+        Settings.Plot_WindowPoints = Convert.ToInt32(txtPlotWindow.Text);
+        Settings.Plot_ShowRawData = chkShowRaw.Checked;
+        Settings.Plot_ShowDistribution = chkShowDistribution.Checked;
+        Settings.Plot_ShowAverage = chkShowAverage.Checked;
+        Settings.Plot_ShowRatios = chkShowRatio.Checked;
+        Settings.Plot_DistIsRadar = radRadar.Checked;
 
-        //if (radCurrentCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
-        //else if (radInvariantCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
-        //else if (radUserCulture.Checked) _settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
-        _settings.RememberFileDialogPath = chkDlgPath.Checked;
-        _settings.DataFormat = txtDataFormat.Text;
+        Settings.AppCulture = _culture;
+        Settings.RememberFileDialogPath = chkDlgPath.Checked;
+        Settings.DataFormat = txtDataFormat.Text;
 
-        this.DialogResult = DialogResult.OK;
+        DialogResult = DialogResult.OK;
     }
 
     private void Reset_Click(object sender, EventArgs e)
@@ -208,8 +209,8 @@ public partial class FrmSettings : Form
         DialogResult result;
         using (new CenterWinDialog(this))
         {
-            result = MessageBox.Show(StringsRM.GetString("strMsgBoxReset", _settings.AppCulture) ?? "Do you want to reset all fields" + Environment.NewLine + "to their default values?",
-                StringsRM.GetString("strMsgBoxResetTitle", _settings.AppCulture) ?? "Reset?",
+            result = MessageBox.Show(StringsRM.GetString("strMsgBoxReset", _culture) ?? "Do you want to reset all fields" + Environment.NewLine + "to their default values?",
+                StringsRM.GetString("strMsgBoxResetTitle", _culture) ?? "Reset?",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
@@ -218,7 +219,6 @@ public partial class FrmSettings : Form
         if (result == DialogResult.Yes)
         {
             UpdateControls(new ClassSettings());
-            //SetDefaultValues();
         }
     }
 
@@ -231,7 +231,7 @@ public partial class FrmSettings : Form
     {
         if (radCurrentCulture.Checked)
         {
-            _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
+            _culture = System.Globalization.CultureInfo.CurrentCulture;
             UpdateUI_Language();
         }
     }
@@ -240,7 +240,7 @@ public partial class FrmSettings : Form
     {
         if (radInvariantCulture.Checked)
         {
-            _settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            _culture = System.Globalization.CultureInfo.InvariantCulture;
             UpdateUI_Language();
         }
     }
@@ -250,7 +250,7 @@ public partial class FrmSettings : Form
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            _settings.AppCulture = new((string)cboAllCultures.SelectedValue);
+            _culture = new((string)cboAllCultures.SelectedValue);
             UpdateUI_Language();
         }
     }
@@ -260,7 +260,7 @@ public partial class FrmSettings : Form
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
-            _settings.AppCulture = new((string)cbo.SelectedValue ?? String.Empty);
+            _culture = new((string)cbo.SelectedValue ?? String.Empty);
             UpdateUI_Language();
         }
     }
@@ -271,43 +271,43 @@ public partial class FrmSettings : Form
     /// <param name="settings">Class containing the values to show on the form's controls</param>
     private void UpdateControls(ClassSettings settings)
     {
-        _settings = settings;
+        cboDataBits.SelectedValue = settings.T10_DataBits;
+        cboStopBits.SelectedValue = settings.T10_StopBits;
+        cboParity.SelectedValue = settings.T10_Parity;
+        cboFlowControl.SelectedValue = settings.T10_FlowControl;
 
-        cboDataBits.SelectedValue = _settings.T10_DataBits;
-        cboStopBits.SelectedValue = _settings.T10_StopBits;
-        cboParity.SelectedValue = _settings.T10_Parity;
-        cboFlowControl.SelectedValue = _settings.T10_FlowControl;
+        txtBaudRate.Text = settings.T10_BaudRate.ToString();
+        txtOn.Text = settings.T10_CharOn.ToString();
+        txtOff.Text = settings.T10_CharOff.ToString();
+        txtHz.Text = settings.T10_Frequency.ToString();
 
-        txtBaudRate.Text = _settings.T10_BaudRate.ToString();
-        txtOn.Text = _settings.T10_CharOn.ToString();
-        txtOff.Text = _settings.T10_CharOff.ToString();
-        txtHz.Text = _settings.T10_Frequency.ToString();
+        updSensors.Value = settings.T10_NumberOfSensors;
 
-        updSensors.Value = _settings.T10_NumberOfSensors;
+        txtArrayPoints.Text = settings.Plot_ArrayPoints.ToString();
+        txtPlotWindow.Text = settings.Plot_WindowPoints.ToString();
 
-        txtArrayPoints.Text = _settings.Plot_ArrayPoints.ToString();
-        txtPlotWindow.Text = _settings.Plot_WindowPoints.ToString();
-
-        chkShowRaw.Checked = _settings.Plot_ShowRawData;
-        chkShowDistribution.Checked = _settings.Plot_ShowDistribution;
-        chkShowAverage.Checked = _settings.Plot_ShowAverage;
-        chkShowRatio.Checked = _settings.Plot_ShowRatios;
-        if (_settings.Plot_DistIsRadar)
+        chkShowRaw.Checked = settings.Plot_ShowRawData;
+        chkShowDistribution.Checked = settings.Plot_ShowDistribution;
+        chkShowAverage.Checked = settings.Plot_ShowAverage;
+        chkShowRatio.Checked = settings.Plot_ShowRatios;
+        if (settings.Plot_DistIsRadar)
             radRadar.Checked = true;
         else
             radRadial.Checked = true;
 
         cboAllCultures.Enabled = false;
-        if (_settings.AppCultureName == string.Empty)
+        if (_culture.Name == string.Empty)
             radInvariantCulture.Checked = true;
-        else if (_settings.AppCultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
+        else if (_culture.Name == System.Globalization.CultureInfo.CurrentCulture.Name)
             radCurrentCulture.Checked = true;
         else
+        {
+            cboAllCultures.SelectedValue = _culture.Name;
             radUserCulture.Checked = true;
-        cboAllCultures.SelectedValue = _settings.AppCultureName;
+        }
 
-        chkDlgPath.Checked = _settings.RememberFileDialogPath;
-        txtDataFormat.Text = _settings.DataFormat;
+        chkDlgPath.Checked = settings.RememberFileDialogPath;
+        txtDataFormat.Text = settings.DataFormat;
     }
 
     /// <summary>
@@ -316,10 +316,12 @@ public partial class FrmSettings : Form
     /// <param name="type">A type from which the resource manager derives all information for finding .resources files</param>
     private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
     {
+        string cultureName = _culture.Name;
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
         cboAllCultures.DisplayMember = "DisplayName";
         cboAllCultures.ValueMember = "Name";
         cboAllCultures.DataSource = cultures.ToArray();
+        cboAllCultures.SelectedValue = cultureName;
     }
 
     /// <summary>
@@ -328,7 +330,7 @@ public partial class FrmSettings : Form
     /// <param name="culture">Culture used to display the UI</param>
     private void UpdateUI_Language()
     {
-        UpdateUI_Language(_settings.AppCulture);
+        UpdateUI_Language(_culture);
     }
 
     /// <summary>

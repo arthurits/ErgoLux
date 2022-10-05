@@ -193,7 +193,7 @@ public partial class FrmMain : Form
         statusStripIconExchange.ToolTipText = StringsRM.GetString("strStatusTipExchange", _settings.AppCulture) ?? "Exchange status";
 
         statusStripLabelUILanguage.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
-        statusStripLabelUILanguage.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _settings.AppCulture) ?? "User interface language";
+        statusStripLabelUILanguage.ToolTipText = (StringsRM.GetString("strToolTipUILanguage", _settings.AppCulture) ?? "User interface language") + ":"+ Environment.NewLine + _settings.AppCulture.NativeName; ;
 
         // Update menu
         mnuMainFrm_File.Text = StringsRM.GetString("strMenuMainFile", _settings.AppCulture) ?? "&File";

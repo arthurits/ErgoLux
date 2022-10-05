@@ -511,7 +511,7 @@ namespace ErgoLux
             // 
             // txtDataFormat
             // 
-            this.txtDataFormat.Location = new System.Drawing.Point(229, 234);
+            this.txtDataFormat.Location = new System.Drawing.Point(259, 247);
             this.txtDataFormat.Name = "txtDataFormat";
             this.txtDataFormat.Size = new System.Drawing.Size(100, 25);
             this.txtDataFormat.TabIndex = 3;
@@ -519,7 +519,7 @@ namespace ErgoLux
             // lblDataFormat
             // 
             this.lblDataFormat.AutoSize = true;
-            this.lblDataFormat.Location = new System.Drawing.Point(46, 237);
+            this.lblDataFormat.Location = new System.Drawing.Point(26, 250);
             this.lblDataFormat.Name = "lblDataFormat";
             this.lblDataFormat.Size = new System.Drawing.Size(177, 19);
             this.lblDataFormat.TabIndex = 2;
@@ -528,7 +528,7 @@ namespace ErgoLux
             // chkDlgPath
             // 
             this.chkDlgPath.AutoSize = true;
-            this.chkDlgPath.Location = new System.Drawing.Point(46, 187);
+            this.chkDlgPath.Location = new System.Drawing.Point(29, 209);
             this.chkDlgPath.Name = "chkDlgPath";
             this.chkDlgPath.Size = new System.Drawing.Size(290, 23);
             this.chkDlgPath.TabIndex = 1;
@@ -541,9 +541,9 @@ namespace ErgoLux
             this.grpCulture.Controls.Add(this.radUserCulture);
             this.grpCulture.Controls.Add(this.radInvariantCulture);
             this.grpCulture.Controls.Add(this.radCurrentCulture);
-            this.grpCulture.Location = new System.Drawing.Point(46, 24);
+            this.grpCulture.Location = new System.Drawing.Point(29, 24);
             this.grpCulture.Name = "grpCulture";
-            this.grpCulture.Size = new System.Drawing.Size(290, 157);
+            this.grpCulture.Size = new System.Drawing.Size(364, 171);
             this.grpCulture.TabIndex = 0;
             this.grpCulture.TabStop = false;
             this.grpCulture.Text = "Culture settings";
@@ -551,16 +551,16 @@ namespace ErgoLux
             // cboAllCultures
             // 
             this.cboAllCultures.FormattingEnabled = true;
-            this.cboAllCultures.Location = new System.Drawing.Point(146, 115);
+            this.cboAllCultures.Location = new System.Drawing.Point(71, 137);
             this.cboAllCultures.Name = "cboAllCultures";
-            this.cboAllCultures.Size = new System.Drawing.Size(121, 25);
+            this.cboAllCultures.Size = new System.Drawing.Size(190, 25);
             this.cboAllCultures.TabIndex = 3;
             this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.AllCultures_SelectedValueChanged);
             // 
             // radUserCulture
             // 
             this.radUserCulture.AutoSize = true;
-            this.radUserCulture.Location = new System.Drawing.Point(27, 115);
+            this.radUserCulture.Location = new System.Drawing.Point(27, 106);
             this.radUserCulture.Name = "radUserCulture";
             this.radUserCulture.Size = new System.Drawing.Size(101, 23);
             this.radUserCulture.TabIndex = 2;
@@ -572,7 +572,7 @@ namespace ErgoLux
             // radInvariantCulture
             // 
             this.radInvariantCulture.AutoSize = true;
-            this.radInvariantCulture.Location = new System.Drawing.Point(27, 78);
+            this.radInvariantCulture.Location = new System.Drawing.Point(27, 70);
             this.radInvariantCulture.Name = "radInvariantCulture";
             this.radInvariantCulture.Size = new System.Drawing.Size(127, 23);
             this.radInvariantCulture.TabIndex = 1;
@@ -584,7 +584,7 @@ namespace ErgoLux
             // radCurrentCulture
             // 
             this.radCurrentCulture.AutoSize = true;
-            this.radCurrentCulture.Location = new System.Drawing.Point(27, 41);
+            this.radCurrentCulture.Location = new System.Drawing.Point(27, 34);
             this.radCurrentCulture.Name = "radCurrentCulture";
             this.radCurrentCulture.Size = new System.Drawing.Size(120, 23);
             this.radCurrentCulture.TabIndex = 0;

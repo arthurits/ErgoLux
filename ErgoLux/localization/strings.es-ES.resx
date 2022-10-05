@@ -444,7 +444,7 @@ Hausdorff-Besicovitch se ha detenido.</value>
     <value>Referencia cultural invariable</value>
   </data>
   <data name="strRadUserCulture" xml:space="preserve">
-    <value>Seleccionar</value>
+    <value>Seleccionar referencia cultural</value>
   </data>
   <data name="strReadDataError" xml:space="preserve">
     <value>No se ha podido leer el archivo de datos.
