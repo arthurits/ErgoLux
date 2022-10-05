@@ -20,30 +20,30 @@ partial class FrmMain
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "ErgoLux data")} ({_settings.AppCultureName})");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader02", _settings.AppCulture) ?? "Start time")}: {_timeStart.ToString(fullPattern, _settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader03", _settings.AppCulture) ?? "End time")}: {_timeEnd.ToString(fullPattern, _settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
+            sw.WriteLine($"{StringResources.FileHeader02}: {_timeStart.ToString(fullPattern, _settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader03}: {_timeEnd.ToString(fullPattern, _settings.AppCulture)}");
             //sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _sett.AppCulture) ?? "Total measuring time")}: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} millisecons");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _settings.AppCulture) ?? "Total measuring time")}: " +
-                $"{nTime.Days} {(StringsRM.GetString("strFileHeader19", _settings.AppCulture) ?? "days")}, " +
-                $"{nTime.Hours} {(StringsRM.GetString("strFileHeader20", _settings.AppCulture) ?? "hours")}, " +
-                $"{nTime.Minutes} {(StringsRM.GetString("strFileHeader21", _settings.AppCulture) ?? "minutes")}, " +
-                $"{nTime.Seconds} {(StringsRM.GetString("strFileHeader22", _settings.AppCulture) ?? "seconds")} " +
-                $"{(StringsRM.GetString("strFileHeader23", _settings.AppCulture) ?? "and")} " +
-                $"{nTime.Milliseconds} {(StringsRM.GetString("strFileHeader24", _settings.AppCulture) ?? "milliseconds")}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of sensors")}: {_settings.T10_NumberOfSensors}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Number of data points")}: {_nPoints}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Sampling frequency")}: {_settings.T10_Frequency.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader04}: " +
+                $"{nTime.Days} {StringResources.FileHeader19}, " +
+                $"{nTime.Hours} {StringResources.FileHeader20}, " +
+                $"{nTime.Minutes} {StringResources.FileHeader21}, " +
+                $"{nTime.Seconds} {StringResources.FileHeader22} " +
+                $"{StringResources.FileHeader23} " +
+                $"{nTime.Milliseconds} {StringResources.FileHeader24}");
+            sw.WriteLine($"{StringResources.FileHeader05}: {_settings.T10_NumberOfSensors}");
+            sw.WriteLine($"{StringResources.FileHeader06}: {_nPoints}");
+            sw.WriteLine($"{StringResources.FileHeader07}: {_settings.T10_Frequency.ToString(_settings.AppCulture)}");
             sw.WriteLine();
             string content = string.Empty;
             for (int i = 0; i < _settings.T10_NumberOfSensors; i++)
-                content += $"{(StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Sensor #")}{i:00}\t";
-            content += $"{(StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Maximum")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader10", _settings.AppCulture) ?? "Average")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader11", _settings.AppCulture) ?? "Minimum")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader12", _settings.AppCulture) ?? "Min/Average")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader13", _settings.AppCulture) ?? "Min/Max")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader14", _settings.AppCulture) ?? "Average/Max")}";
+                content += $"{StringResources.FileHeader08}{i:00}\t";
+            content += $"{StringResources.FileHeader09}\t" +
+                    $"{StringResources.FileHeader10}\t" +
+                    $"{StringResources.FileHeader11}\t" +
+                    $"{StringResources.FileHeader12}\t" +
+                    $"{StringResources.FileHeader13}\t" +
+                    $"{StringResources.FileHeader14}";
             sw.WriteLine(content);
 
             // Save the numerical values
@@ -61,8 +61,8 @@ partial class FrmMain
             // Show OK save data
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(StringsRM.GetString("strMsgBoxSaveData", _settings.AppCulture) ?? "Data has been successfully saved to disk.",
-                    StringsRM.GetString("strMsgBoxSaveDataTitle", _settings.AppCulture) ?? "Data saving",
+                MessageBox.Show(StringResources.MsgBoxSaveData,
+                    StringResources.MsgBoxSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
@@ -72,8 +72,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
-                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                    StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -106,7 +106,7 @@ partial class FrmMain
             TimeSpan nTime = _timeEnd - _timeStart;
 
             // Save the header text into the file
-            bw.Write($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "ErgoLux data")} ({_settings.AppCultureName})");
+            bw.Write($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
             bw.Write(_timeStart);
             bw.Write(_timeEnd);
             bw.Write(nTime.Days);
@@ -119,13 +119,13 @@ partial class FrmMain
             bw.Write(_settings.T10_Frequency);
             string content = string.Empty;
             for (int i = 0; i < _settings.T10_NumberOfSensors; i++)
-                content += $"{(StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Sensor #")}{i:00}\t";
-            content += $"{(StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Maximum")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader10", _settings.AppCulture) ?? "Average")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader11", _settings.AppCulture) ?? "Minimum")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader12", _settings.AppCulture) ?? "Min/Average")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader13", _settings.AppCulture) ?? "Min/Max")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader14", _settings.AppCulture) ?? "Average/Max")}\t";
+                content += $"{StringResources.FileHeader08}{i:00}\t";
+            content += $"{StringResources.FileHeader09}\t" +
+                    $"{StringResources.FileHeader10}\t" +
+                    $"{StringResources.FileHeader11}\t" +
+                    $"{StringResources.FileHeader12}\t" +
+                    $"{StringResources.FileHeader13}\t" +
+                    $"{StringResources.FileHeader14}\t";
             bw.WriteLine(content);
 
             // https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
@@ -141,8 +141,8 @@ partial class FrmMain
             // Show OK save data
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(StringsRM.GetString("strMsgBoxSaveData", _settings.AppCulture) ?? "Data has been successfully saved to disk.",
-                    StringsRM.GetString("strMsgBoxSaveDataTitle", _settings.AppCulture) ?? "Data saving",
+                MessageBox.Show(StringResources.MsgBoxSaveData,
+                    StringResources.MsgBoxSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
@@ -152,8 +152,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
-                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                    StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -170,4 +170,3 @@ partial class FrmMain
     }
 
 }
-

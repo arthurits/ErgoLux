@@ -66,8 +66,8 @@ public partial class FrmMain : Form
         using (new CenterWinDialog(this))
         {
             if (DialogResult.No == MessageBox.Show(this,
-                        StringsRM.GetString("strMsgBoxExit", _settings.AppCulture) ?? "Are you sure you want to exit\nthe application?",
-                        StringsRM.GetString("strMsgBoxExitTitle", _settings.AppCulture) ?? "Exit?",
+                        StringResources.MsgBoxExit,
+                        StringResources.MsgBoxExitTitle,
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2))
@@ -154,6 +154,8 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_Language(int DataLength = default)
     {
+        StringResources.Culture = _settings.AppCulture;
+
         // Update the form's tittle
         SetFormTitle(this, String.Empty);
 

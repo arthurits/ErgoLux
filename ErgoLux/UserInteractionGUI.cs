@@ -24,8 +24,8 @@ partial class FrmMain
         {
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(StringsRM.GetString("strMsgBoxNoData", _settings.AppCulture) ?? "There is no data available to be saved.",
-                    StringsRM.GetString("strMsgBoxNoDataTitle", _settings.AppCulture) ?? "No data",
+                MessageBox.Show(StringResources.MsgBoxNoData,
+                    StringResources.MsgBoxNoDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
@@ -36,9 +36,9 @@ partial class FrmMain
         SaveFileDialog SaveDlg = new()
         {
             DefaultExt = "*.elux",
-            Filter = StringsRM.GetString("strSaveDlgFilter", _settings.AppCulture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            Filter = StringResources.SaveDlgFilter,
             FilterIndex = 1,
-            Title = StringsRM.GetString("strSaveDlgTitle", _settings.AppCulture) ?? "Save illuminance data",
+            Title = StringResources.SaveDlgTitle,
             OverwritePrompt = true,
             InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserSavePath : _settings.DefaultSavePath,
         };
@@ -88,9 +88,9 @@ partial class FrmMain
         OpenFileDialog OpenDlg = new()
         {
             DefaultExt = "*.elux",
-            Filter = StringsRM.GetString("strOpenDlgFilter", _settings.AppCulture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            Filter = StringResources.OpenDlgFilter,
             FilterIndex = 1,
-            Title = StringsRM.GetString("strOpenDlgTitle", _settings.AppCulture) ?? "Open illuminance data",
+            Title = StringResources.OpenDlgTitle,
             InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserOpenPath : _settings.DefaultOpenPath
         };
 
