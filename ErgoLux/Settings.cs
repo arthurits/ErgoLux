@@ -26,8 +26,8 @@ partial class FrmMain
             using (new CenterWinDialog(this))
             {
                 MessageBox.Show(this,
-                    StringsRM.GetString("strMsgBoxErrorSettings", _settings.AppCulture) ?? $"Error loading settings file.\n\n{ex.Message}\n\nDefault values will be used instead.",
-                    StringsRM.GetString("strMsgBoxErrorSettingsTitle", _settings.AppCulture) ?? "Error",
+                    StringResources.MsgBoxErrorSettings,
+                    StringResources.MsgBoxErrorSettingsTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

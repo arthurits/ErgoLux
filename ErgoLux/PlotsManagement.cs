@@ -58,8 +58,8 @@ partial class FrmMain
             plt.AxisType = ScottPlot.RadarAxis.Polygon;
             plt.ShowAxisValues = false;
             plt.CategoryLabels = labels;
-            plt.GroupLabels = new string[] { $"{(StringsRM.GetString("strFileHeader15", _settings.AppCulture) ?? "Average")}",
-                                            $"{(StringsRM.GetString("strFileHeader16", _settings.AppCulture) ?? "Illuminance")}" };
+            plt.GroupLabels = new string[] { $"{StringResources.FileHeader15}",
+                                            $"{StringResources.FileHeader16}" };
         }
         else
         {

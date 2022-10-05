@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
 using ScottPlot.Styles;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace ErgoLux;
 
@@ -94,12 +95,29 @@ public static class StringResources
     public static string MsgBoxResetTitle => StringRM.GetString("strMsgBoxResetTitle", Culture) ?? "Reset?";
     public static string MsgBoxSaveData => StringRM.GetString("strMsgBoxSaveData", Culture) ?? "Data has been successfully saved to disk.";
     public static string MsgBoxSaveDataTitle => StringRM.GetString("strMsgBoxSaveDataTitle", Culture) ?? "Data saving";
-    public static string MsgBoxTaskCancel => StringRM.GetString("strMsgBoxTaskCancel", Culture) ?? $"Computation of the Hausdorff-Besicovitch fractal{Environment.NewLine}dimension has been stopped.";
-    public static string MsgBoxTaskCancelTitle => StringRM.GetString("strMsgBoxTaskCancelTitle", Culture) ?? "Stop";
+    //public static string MsgBoxTaskCancel => StringRM.GetString("strMsgBoxTaskCancel", Culture) ?? $"Computation of the Hausdorff-Besicovitch fractal{Environment.NewLine}dimension has been stopped.";
+    //public static string MsgBoxTaskCancelTitle => StringRM.GetString("strMsgBoxTaskCancelTitle", Culture) ?? "Stop";
 
     public static string OpenDlgFilter => StringRM.GetString("strOpenDlgFilter", Culture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*";
     public static string OpenDlgTitle => StringRM.GetString("strOpenDlgTitle", Culture) ?? "Open illuminance data";
     public static string SaveDlgFilter => StringRM.GetString("strSaveDlgFilter", Culture) ?? "ErgoLux file(*.elux)|*.elux|Text file(*.txt)|*.txt|Binary file(*.bin)|*.bin|All files(*.*)|*.*";
     public static string SaveDlgTitle => StringRM.GetString("strSaveDlgTitle", Culture) ?? "Save illuminance data";
+
+    public static string ReadDataError => StringRM.GetString("strReadDataError", Culture) ?? "Unable to read data from file." + Environment.NewLine + "{0}";
+    public static string ReadDataErrorCulture => StringRM.GetString("strReadDataErrorCulture", Culture) ?? "The culture identifier string name is not valid." + Environment.NewLine + "{0}";
+    public static string ReadDataErrorCultureTitle => StringRM.GetString("strReadDataErrorCultureTitle", Culture) ?? "Culture name error";
+    public static string ReadDataErrorNumber => StringRM.GetString("strReadDataErrorNumber", Culture) ?? "Invalid numeric value: {0}";
+    public static string ReadDataErrorNumberTitle => StringRM.GetString("strReadDataErrorNumberTitle", Culture) ?? "Error parsing data";
+    public static string ReadDataErrorTitle => StringRM.GetString("strReadDataErrorTitle", Culture) ?? "Error opening data";
+
+    // FrmSettings
+    public static string GrpCulture => StringRM.GetString("strGrpCulture", Culture) ?? "UI and data format";
+    public static string LblDataFormat => StringRM.GetString("strLblDataFormat", Culture) ?? "Numeric data-formatting string";
+    public static string RadCurrentCulture => StringRM.GetString("strRadCurrentCulture", Culture) ?? "Current culture formatting";
+    public static string RadInvariantCulture => StringRM.GetString("strRadInvariantCulture", Culture) ?? "Invariant culture formatting";
+    public static string RadUserCulture => StringRM.GetString("strRadUserCulture", Culture) ?? "Select culture";
+    public static string TabDevice => StringRM.GetString("strTabDevice", Culture) ?? "T-10A sensor";
+    public static string TabGUI => StringRM.GetString("strTabGUI", Culture) ?? "User interface";
+    public static string TabPlots => StringRM.GetString("strTabPlots", Culture) ?? "Plotting";
 
 }

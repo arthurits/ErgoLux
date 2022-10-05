@@ -209,8 +209,8 @@ public partial class FrmSettings : Form
         DialogResult result;
         using (new CenterWinDialog(this))
         {
-            result = MessageBox.Show(StringsRM.GetString("strMsgBoxReset", _culture) ?? "Do you want to reset all fields" + Environment.NewLine + "to their default values?",
-                StringsRM.GetString("strMsgBoxResetTitle", _culture) ?? "Reset?",
+            result = MessageBox.Show(StringResources.MsgBoxReset,
+                StringResources.DlgResetTitle,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
@@ -339,22 +339,22 @@ public partial class FrmSettings : Form
     /// <param name="culture">Culture used to display the UI</param>
     private void UpdateUI_Language(System.Globalization.CultureInfo culture)
     {
-        this.Text = StringsRM.GetString("strFrmSettings", culture) ?? "Settings";
+        this.Text = StringResources.FormSettings;
 
-        this.tabDevice.Text = StringsRM.GetString("strTabDevice", culture) ?? "T-10A";
-        this.tabPlots.Text = StringsRM.GetString("strTabPlots", culture) ?? "Plotting";
-        this.tabGUI.Text = StringsRM.GetString("strTabGUI", culture) ?? "User interface";
+        this.tabDevice.Text = StringResources.TabDevice;
+        this.tabPlots.Text = StringResources.TabPlots;
+        this.tabGUI.Text = StringResources.TabGUI;
 
-        this.grpCulture.Text = StringsRM.GetString("strGrpCulture", culture) ?? "UI and data format";
-        this.radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting") + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
-        this.radInvariantCulture.Text = StringsRM.GetString("strRadInvariantCulture", culture) ?? "Invariant culture formatting";
-        this.radUserCulture.Text = StringsRM.GetString("strRadUserCulture", culture) ?? "Select culture";
-        this.chkDlgPath.Text = StringsRM.GetString("strChkDlgPath", culture) ?? "Remember open/save dialog previous path";
-        this.lblDataFormat.Text = StringsRM.GetString("strLblDataFormat", culture) ?? "Numeric data-formatting string";
+        this.grpCulture.Text = StringResources.GrpCulture;
+        this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+        this.radInvariantCulture.Text = StringResources.RadInvariantCulture;
+        this.radUserCulture.Text = StringResources.RadUserCulture;
+        this.chkDlgPath.Text = StringResources.ChkDlgPath;
+        this.lblDataFormat.Text = StringResources.LblDataFormat;
 
-        this.btnReset.Text = StringsRM.GetString("strBtnReset", culture) ?? "&Reset";
-        this.btnCancel.Text = StringsRM.GetString("strBtnCancel", culture) ?? "&Cancel";
-        this.btnAccept.Text = StringsRM.GetString("strBtnAccept", culture) ?? "&Accept";
+        this.btnReset.Text = StringResources.BtnReset;
+        this.btnCancel.Text = StringResources.BtnCancel;
+        this.btnAccept.Text = StringResources.BtnAccept;
     }
 
 }
