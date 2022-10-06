@@ -147,6 +147,18 @@
   <data name="strChkEntropy" xml:space="preserve">
     <value>Entropy (approximate &amp;&amp; sample)</value>
   </data>
+  <data name="strChkPlotAverage" xml:space="preserve">
+    <value>Plot average</value>
+  </data>
+  <data name="strChkPlotDistribution" xml:space="preserve">
+    <value>Plot distribution</value>
+  </data>
+  <data name="strChkPlotRatios" xml:space="preserve">
+    <value>Plot ratios</value>
+  </data>
+  <data name="strChkPlotRaw" xml:space="preserve">
+    <value>Plot raw data</value>
+  </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Power (dB)</value>
   </data>
@@ -257,26 +269,86 @@ Default values will be used instead.</value>
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
   </data>
+  <data name="strGridDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="strGridDevice" xml:space="preserve">
+    <value>Device location</value>
+  </data>
+  <data name="strGridFlags" xml:space="preserve">
+    <value>Flags</value>
+  </data>
+  <data name="strGridID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="strGridLocation" xml:space="preserve">
+    <value>Location ID</value>
+  </data>
+  <data name="strGridSerial" xml:space="preserve">
+    <value>Serial number</value>
+  </data>
+  <data name="strGridType" xml:space="preserve">
+    <value>Type</value>
+  </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Abscissa axis</value>
   </data>
   <data name="strGrpCulture" xml:space="preserve">
     <value>UI and data format</value>
   </data>
+  <data name="strGrpPlot" xml:space="preserve">
+    <value>Plot distribution</value>
+  </data>
+  <data name="strLblArrayPoints" xml:space="preserve">
+    <value>Array minimum points</value>
+  </data>
+  <data name="strLblBaudRate" xml:space="preserve">
+    <value>Baud rate</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Data-file path</value>
+  </data>
+  <data name="strLblDataBits" xml:space="preserve">
+    <value>Data bits</value>
   </data>
   <data name="strLblDataFormat" xml:space="preserve">
     <value>Numeric data-formatting string</value>
   </data>
+  <data name="strLblDeviceList" xml:space="preserve">
+    <value>FTDI device list</value>
+  </data>
   <data name="strLblEnd" xml:space="preserve">
     <value>Array index end</value>
+  </data>
+  <data name="strLblFlow" xml:space="preserve">
+    <value>Flow control</value>
+  </data>
+  <data name="strLblFrequency" xml:space="preserve">
+    <value>Frequency (Hz)</value>
+  </data>
+  <data name="strLblOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="strLblOn" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="strLblParity" xml:space="preserve">
+    <value>Parity</value>
+  </data>
+  <data name="strLblPlotWindow" xml:space="preserve">
+    <value>Plot window (seconds)</value>
+  </data>
+  <data name="strLblSensors" xml:space="preserve">
+    <value>Number of sensors</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Select series</value>
   </data>
   <data name="strLblStart" xml:space="preserve">
     <value>Array index start</value>
+  </data>
+  <data name="strLblStopBits" xml:space="preserve">
+    <value>Stop bits</value>
   </data>
   <data name="strLblWindow" xml:space="preserve">
     <value>Window</value>
@@ -332,6 +404,50 @@ Default values will be used instead.</value>
   <data name="strMenuMainViewToolbar" xml:space="preserve">
     <value>Show toolbar</value>
   </data>
+  <data name="strMsbBoxErrorBits" xml:space="preserve">
+    <value>Failed to set data characteristics
+(data bits, stop bits, and parity).
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorBaudRate" xml:space="preserve">
+    <value>Failed to set Baud rate.
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorBaudRateTitle" xml:space="preserve">
+    <value>Baud rate error</value>
+  </data>
+  <data name="strMsgBoxErrorBitsTitle" xml:space="preserve">
+    <value>Bits error</value>
+  </data>
+  <data name="strMsgBoxErrorDeviceClosed" xml:space="preserve">
+    <value>The device is closed. Please, go to
+'Settings' to open the device.</value>
+  </data>
+  <data name="strMsgBoxErrorDeviceClosedTitle" xml:space="preserve">
+    <value>Device error</value>
+  </data>
+  <data name="strMsgBoxErrorDrivers" xml:space="preserve">
+    <value>Failed to load FTD2XX.DLL.  Are the FTDI drivers installed?</value>
+  </data>
+  <data name="strMsgBoxErrorDriversTitle" xml:space="preserve">
+    <value>Error loading drivers</value>
+  </data>
+  <data name="strMsgBoxErrorFlowControl" xml:space="preserve">
+    <value>Failed to set flow control.
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFlowControlTitle" xml:space="preserve">
+    <value>Flow control error</value>
+  </data>
+  <data name="strMsgBoxErrorLoading" xml:space="preserve">
+    <value>Attempting to load FTD2XX.DLL from:</value>
+  </data>
+  <data name="strMsgBoxErrorLoadingTitle" xml:space="preserve">
+    <value>Error loading DLL</value>
+  </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>An unexpected error happened while opening data file.
 Please try again later or contact the software engineer.
@@ -345,6 +461,14 @@ Please try again later or contact the software engineer.
   </data>
   <data name="strMsgBoxErrorOpenDeviceTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strMsgBoxErrorOpening" xml:space="preserve">
+    <value>Failed to open device.
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpeningTitle" xml:space="preserve">
+    <value>Error opening device</value>
   </data>
   <data name="strMsgBoxErrorSaveData" xml:space="preserve">
     <value>An unexpected error happened while saving data to disk.
@@ -363,6 +487,14 @@ Default values will be used instead.</value>
   </data>
   <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strMsgBoxErrorTimeouts" xml:space="preserve">
+    <value>Failed to set timeouts.
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorTimeoutsTitle" xml:space="preserve">
+    <value>Timeouts error</value>
   </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>Are you sure you want to exit
@@ -438,6 +570,12 @@ dimension has been stopped.</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Invariant culture formatting</value>
+  </data>
+  <data name="strRadRadar" xml:space="preserve">
+    <value>Radar</value>
+  </data>
+  <data name="strRadRadialGauge" xml:space="preserve">
+    <value>Radial gauge</value>
   </data>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Select culture</value>
