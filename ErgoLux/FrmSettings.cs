@@ -197,7 +197,6 @@ public partial class FrmSettings : Form
         Settings.Plot_ShowRatios = chkShowRatio.Checked;
         Settings.Plot_DistIsRadar = radRadar.Checked;
 
-        StringResources.Culture = _culture;
         Settings.AppCulture = _culture;
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;

@@ -26,7 +26,6 @@ public partial class FrmLanguage : Form
     private void Accept_Click(object sender, EventArgs e)
     {
         if (Settings is not null) Settings.AppCulture = _culture;
-        StringResources.Culture = _culture;
         DialogResult = DialogResult.OK;
     }
 
