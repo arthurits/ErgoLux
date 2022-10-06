@@ -71,7 +71,8 @@ public static class StringResources
     public static string DlgReset => StringRM.GetString("strDlgReset", Culture) ?? "Do you want to reset all fields" + Environment.NewLine + "to their default values?";
     public static string DlgResetTitle => StringRM.GetString("strDlgResetTitle", Culture) ?? "Reset settings?";
 
-
+    public static string MsgBoxErrorDeviceClosed => StringRM.GetString("strMsgBoxErrorDeviceClosed", Culture) ?? "The device is closed. Please, go to" + Environment.NewLine + "'Settings' to open the device.";
+    public static string MsgBoxErrorDeviceClosedTitle => StringRM.GetString("strMsgBoxErrorDeviceClosedTitle", Culture) ?? "Device error";
     public static string MsgBoxErrorOpenData => StringRM.GetString("strMsgBoxErrorOpenData", Culture) ?? "An unexpected error happened while opening file data." + Environment.NewLine + "Please try again later or contact the software engineer." + Environment.NewLine + "{0}";
     public static string MsgBoxErrorOpenDataTitle => StringRM.GetString("strMsgBoxErrorOpenDataTitle", Culture) ?? "Error opening data";
     public static string MsgBoxErrorOpenDevice => StringRM.GetString("strMsgBoxErrorOpenDevice", Culture) ?? "Could not open the device";

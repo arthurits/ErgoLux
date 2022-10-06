@@ -147,7 +147,10 @@ partial class FrmMain
             {
                 using (new CenterWinDialog(this))
                 {
-                    MessageBox.Show("The device is closed. Please, go to\n'Settings' to open the device.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(StringResources.MsgBoxErrorDeviceClosed,
+                        StringResources.MsgBoxErrorDeviceClosedTitle,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
                 toolStripMain_Connect.Checked = false;
                 mnuMainFrm_Tools_Connect.Enabled = false;
