@@ -394,7 +394,7 @@ Verranno utilizzati i valori di default.</value>
     <value>Ferma</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>File di ErgoLux (*.elux)|*.elux| File di analisi dei segnali (*.sig)|*.sig| File di testo (*.txt)|*.txt| Tutti i file (*.*)|*.*</value>
+    <value>File di ErgoLux (*.elux)|*.elux| File di SignalAnalysis (*.sig)|*.sig| File di testo (*.txt)|*.txt| Tutti i file (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Apri dati di illuminazione</value>
