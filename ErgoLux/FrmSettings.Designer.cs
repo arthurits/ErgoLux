@@ -380,7 +380,6 @@ namespace ErgoLux
             // chkShowDistribution
             // 
             this.chkShowDistribution.AutoSize = true;
-            this.chkShowDistribution.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkShowDistribution.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.chkShowDistribution.Location = new System.Drawing.Point(167, 32);
             this.chkShowDistribution.Name = "chkShowDistribution";
@@ -462,7 +461,6 @@ namespace ErgoLux
             // chkShowRatio
             // 
             this.chkShowRatio.AutoSize = true;
-            this.chkShowRatio.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkShowRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.chkShowRatio.Location = new System.Drawing.Point(167, 69);
             this.chkShowRatio.Name = "chkShowRatio";
@@ -474,7 +472,6 @@ namespace ErgoLux
             // chkShowAverage
             // 
             this.chkShowAverage.AutoSize = true;
-            this.chkShowAverage.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkShowAverage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.chkShowAverage.Location = new System.Drawing.Point(27, 69);
             this.chkShowAverage.Name = "chkShowAverage";
@@ -486,7 +483,6 @@ namespace ErgoLux
             // chkShowRaw
             // 
             this.chkShowRaw.AutoSize = true;
-            this.chkShowRaw.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkShowRaw.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.chkShowRaw.Location = new System.Drawing.Point(27, 32);
             this.chkShowRaw.Name = "chkShowRaw";
@@ -530,9 +526,9 @@ namespace ErgoLux
             this.chkDlgPath.AutoSize = true;
             this.chkDlgPath.Location = new System.Drawing.Point(29, 209);
             this.chkDlgPath.Name = "chkDlgPath";
-            this.chkDlgPath.Size = new System.Drawing.Size(290, 23);
+            this.chkDlgPath.Size = new System.Drawing.Size(311, 23);
             this.chkDlgPath.TabIndex = 1;
-            this.chkDlgPath.Text = "Remember open/save dialog previous path";
+            this.chkDlgPath.Text = "Remember previous path in open/save dialogs";
             this.chkDlgPath.UseVisualStyleBackColor = true;
             // 
             // grpCulture
