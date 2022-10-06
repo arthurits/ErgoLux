@@ -406,12 +406,14 @@ Default values will be used instead.</value>
   </data>
   <data name="strMsbBoxErrorBits" xml:space="preserve">
     <value>Failed to set data characteristics
-(data bits, stop bits, and parity)
-Error:</value>
+(data bits, stop bits, and parity).
+Error:
+{0}</value>
   </data>
   <data name="strMsgBoxErrorBaudRate" xml:space="preserve">
-    <value>Failed to set Baud rate
-Error: {0}"</value>
+    <value>Failed to set Baud rate.
+Error:
+{0}</value>
   </data>
   <data name="strMsgBoxErrorBaudRateTitle" xml:space="preserve">
     <value>Baud rate error</value>
@@ -433,8 +435,9 @@ Error: {0}"</value>
     <value>Error loading drivers</value>
   </data>
   <data name="strMsgBoxErrorFlowControl" xml:space="preserve">
-    <value>Failed to set flow control
-Error: {0}</value>
+    <value>Failed to set flow control.
+Error:
+{0}</value>
   </data>
   <data name="strMsgBoxErrorFlowControlTitle" xml:space="preserve">
     <value>Flow control error</value>
@@ -460,8 +463,9 @@ Please try again later or contact the software engineer.
     <value>Error</value>
   </data>
   <data name="strMsgBoxErrorOpening" xml:space="preserve">
-    <value>Failed to open device
-Error: {0}</value>
+    <value>Failed to open device.
+Error:
+{0}</value>
   </data>
   <data name="strMsgBoxErrorOpeningTitle" xml:space="preserve">
     <value>Error opening device</value>
@@ -485,7 +489,9 @@ Default values will be used instead.</value>
     <value>Error</value>
   </data>
   <data name="strMsgBoxErrorTimeouts" xml:space="preserve">
-    <value>Failed to set timeoutsError: {0}</value>
+    <value>Failed to set timeouts.
+Error:
+{0}</value>
   </data>
   <data name="strMsgBoxErrorTimeoutsTitle" xml:space="preserve">
     <value>Timeouts error</value>
@@ -569,7 +575,7 @@ dimension has been stopped.</value>
     <value>Radar</value>
   </data>
   <data name="strRadRadialGauge" xml:space="preserve">
-    <value>RadialGauge</value>
+    <value>Radial gauge</value>
   </data>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Select culture</value>
