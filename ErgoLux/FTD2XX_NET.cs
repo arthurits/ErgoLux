@@ -72,9 +72,9 @@ namespace FTD2XX_NET
             else
             {
                 // Failed to load our DLL - alert the user
-                Console.WriteLine("Failed to load FTD2XX.DLL.  Are the FTDI drivers installed?");
+                Console.WriteLine("Failed to load FTD2XX.DLL. Are the FTDI drivers installed?");
 #if DEBUG
-                MessageBox.Show("Failed to load FTD2XX.DLL.  Are the FTDI drivers installed?");
+                MessageBox.Show("Failed to load FTD2XX.DLL. Are the FTDI drivers installed?");
 #endif
             }
         }

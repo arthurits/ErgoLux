@@ -153,7 +153,7 @@ public partial class FrmSettings : Form
 
     private void chkShowDistribution_CheckedChanged(object sender, EventArgs e)
     {
-        groupBox1.Enabled = chkShowDistribution.Checked;
+        grpPlot.Enabled = chkShowDistribution.Checked;
     }
 
     private void Accept_Click(object sender, EventArgs e)
@@ -197,6 +197,7 @@ public partial class FrmSettings : Form
         Settings.Plot_ShowRatios = chkShowRatio.Checked;
         Settings.Plot_DistIsRadar = radRadar.Checked;
 
+        StringResources.Culture = _culture;
         Settings.AppCulture = _culture;
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;
@@ -339,22 +340,57 @@ public partial class FrmSettings : Form
     /// <param name="culture">Culture used to display the UI</param>
     private void UpdateUI_Language(System.Globalization.CultureInfo culture)
     {
-        this.Text = StringResources.FormSettings;
+        StringResources.Culture = culture;
+
+        // Form
+        this.Text = StringResources.FrmSettings;
 
         this.tabDevice.Text = StringResources.TabDevice;
         this.tabPlots.Text = StringResources.TabPlots;
         this.tabGUI.Text = StringResources.TabGUI;
+        
+        this.btnReset.Text = StringResources.BtnReset;
+        this.btnCancel.Text = StringResources.BtnCancel;
+        this.btnAccept.Text = StringResources.BtnAccept;
 
+        // Tab T-10A
+        this.lblDevices.Text = StringResources.LblDeviceList;
+        this.lblBaudRate.Text = StringResources.LblBaudRate;
+        this.lblDataBits.Text = StringResources.LblDataBits;
+        this.lblParity.Text = StringResources.LblParity;
+        this.lblSensors.Text = StringResources.LblSensors;
+        this.lblFrequency.Text = StringResources.LblFrequency;
+        this.lblStopBits.Text = StringResources.LblStopBits;
+        this.lblFlowControl.Text = StringResources.LblFlow;
+        this.lblOn.Text = StringResources.LblOn;
+        this.lblOff.Text = StringResources.LblOff;
+
+        this.viewDevices.Columns[0].Text = StringResources.GridDevice;
+        this.viewDevices.Columns[1].Text = StringResources.GridFlags;
+        this.viewDevices.Columns[2].Text = StringResources.GridType;
+        this.viewDevices.Columns[3].Text = StringResources.GridID;
+        this.viewDevices.Columns[4].Text = StringResources.GridLocation;
+        this.viewDevices.Columns[5].Text = StringResources.GridSerial;
+        this.viewDevices.Columns[6].Text = StringResources.GridDescription;
+
+        // Tab Plots
+        this.chkShowRaw.Text = StringResources.ChkPlotRaw;
+        this.chkShowDistribution.Text = StringResources.ChkPlotDistribution;
+        this.chkShowAverage.Text = StringResources.ChkPlotAverage;
+        this.chkShowRatio.Text=StringResources.ChkPlotRatios;
+        this.grpPlot.Text = StringResources.GrpPlot;
+        this.radRadar.Text = StringResources.RadRadar;
+        this.radRadial.Text = StringResources.RadRadialGauge;
+        this.lblArrayPoints.Text = StringResources.LblArrayPoints;
+        this.lblPlotWindow.Text = StringResources.LblPlotWindow;
+
+        // Tab Interface
         this.grpCulture.Text = StringResources.GrpCulture;
         this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
         this.radInvariantCulture.Text = StringResources.RadInvariantCulture;
         this.radUserCulture.Text = StringResources.RadUserCulture;
         this.chkDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDataFormat.Text = StringResources.LblDataFormat;
-
-        this.btnReset.Text = StringResources.BtnReset;
-        this.btnCancel.Text = StringResources.BtnCancel;
-        this.btnAccept.Text = StringResources.BtnAccept;
     }
 
 }

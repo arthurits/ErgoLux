@@ -35,7 +35,7 @@ namespace ErgoLux
             this.btnCancel = new System.Windows.Forms.Button();
             this.tabSettings = new System.Windows.Forms.TabControl();
             this.tabDevice = new System.Windows.Forms.TabPage();
-            this.lblHz = new System.Windows.Forms.Label();
+            this.lblFrequency = new System.Windows.Forms.Label();
             this.txtHz = new System.Windows.Forms.TextBox();
             this.lblOff = new System.Windows.Forms.Label();
             this.lblOn = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@ namespace ErgoLux
             this.viewDevices = new System.Windows.Forms.ListView();
             this.tabPlots = new System.Windows.Forms.TabPage();
             this.chkShowDistribution = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grpPlot = new System.Windows.Forms.GroupBox();
             this.radRadar = new System.Windows.Forms.RadioButton();
             this.radRadial = new System.Windows.Forms.RadioButton();
             this.txtPlotWindow = new System.Windows.Forms.TextBox();
@@ -79,7 +79,7 @@ namespace ErgoLux
             this.tabSettings.SuspendLayout();
             this.tabDevice.SuspendLayout();
             this.tabPlots.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.grpPlot.SuspendLayout();
             this.tabGUI.SuspendLayout();
             this.grpCulture.SuspendLayout();
             this.SuspendLayout();
@@ -87,7 +87,7 @@ namespace ErgoLux
             // updSensors
             // 
             this.updSensors.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.updSensors.Location = new System.Drawing.Point(151, 262);
+            this.updSensors.Location = new System.Drawing.Point(161, 262);
             this.updSensors.Maximum = new decimal(new int[] {
             30,
             0,
@@ -155,7 +155,7 @@ namespace ErgoLux
             // 
             // tabDevice
             // 
-            this.tabDevice.Controls.Add(this.lblHz);
+            this.tabDevice.Controls.Add(this.lblFrequency);
             this.tabDevice.Controls.Add(this.txtHz);
             this.tabDevice.Controls.Add(this.lblSensors);
             this.tabDevice.Controls.Add(this.updSensors);
@@ -184,20 +184,20 @@ namespace ErgoLux
             this.tabDevice.Text = "T-10A";
             this.tabDevice.UseVisualStyleBackColor = true;
             // 
-            // lblHz
+            // lblFrequency
             // 
-            this.lblHz.AutoSize = true;
-            this.lblHz.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblHz.Location = new System.Drawing.Point(243, 156);
-            this.lblHz.Name = "lblHz";
-            this.lblHz.Size = new System.Drawing.Size(67, 19);
-            this.lblHz.TabIndex = 37;
-            this.lblHz.Text = "Freq. (Hz)";
+            this.lblFrequency.AutoSize = true;
+            this.lblFrequency.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblFrequency.Location = new System.Drawing.Point(258, 156);
+            this.lblFrequency.Name = "lblFrequency";
+            this.lblFrequency.Size = new System.Drawing.Size(67, 19);
+            this.lblFrequency.TabIndex = 37;
+            this.lblFrequency.Text = "Freq. (Hz)";
             // 
             // txtHz
             // 
             this.txtHz.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtHz.Location = new System.Drawing.Point(328, 153);
+            this.txtHz.Location = new System.Drawing.Point(369, 158);
             this.txtHz.Name = "txtHz";
             this.txtHz.Size = new System.Drawing.Size(32, 25);
             this.txtHz.TabIndex = 36;
@@ -252,7 +252,7 @@ namespace ErgoLux
             // 
             this.lblFlowControl.AutoSize = true;
             this.lblFlowControl.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblFlowControl.Location = new System.Drawing.Point(243, 228);
+            this.lblFlowControl.Location = new System.Drawing.Point(258, 228);
             this.lblFlowControl.Name = "lblFlowControl";
             this.lblFlowControl.Size = new System.Drawing.Size(84, 19);
             this.lblFlowControl.TabIndex = 30;
@@ -262,9 +262,9 @@ namespace ErgoLux
             // 
             this.cboFlowControl.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cboFlowControl.FormattingEnabled = true;
-            this.cboFlowControl.Location = new System.Drawing.Point(328, 225);
+            this.cboFlowControl.Location = new System.Drawing.Point(369, 225);
             this.cboFlowControl.Name = "cboFlowControl";
-            this.cboFlowControl.Size = new System.Drawing.Size(125, 25);
+            this.cboFlowControl.Size = new System.Drawing.Size(80, 25);
             this.cboFlowControl.TabIndex = 29;
             this.cboFlowControl.SelectedIndexChanged += new System.EventHandler(this.cboFlowControl_SelectedIndexChanged);
             // 
@@ -272,9 +272,9 @@ namespace ErgoLux
             // 
             this.cboParity.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cboParity.FormattingEnabled = true;
-            this.cboParity.Location = new System.Drawing.Point(95, 225);
+            this.cboParity.Location = new System.Drawing.Point(133, 225);
             this.cboParity.Name = "cboParity";
-            this.cboParity.Size = new System.Drawing.Size(125, 25);
+            this.cboParity.Size = new System.Drawing.Size(80, 25);
             this.cboParity.TabIndex = 28;
             // 
             // lblBaudRate
@@ -291,7 +291,7 @@ namespace ErgoLux
             // 
             this.lblStopBits.AutoSize = true;
             this.lblStopBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblStopBits.Location = new System.Drawing.Point(243, 192);
+            this.lblStopBits.Location = new System.Drawing.Point(258, 192);
             this.lblStopBits.Name = "lblStopBits";
             this.lblStopBits.Size = new System.Drawing.Size(63, 19);
             this.lblStopBits.TabIndex = 26;
@@ -310,28 +310,28 @@ namespace ErgoLux
             // txtBaudRate
             // 
             this.txtBaudRate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtBaudRate.Location = new System.Drawing.Point(95, 153);
+            this.txtBaudRate.Location = new System.Drawing.Point(133, 153);
             this.txtBaudRate.Name = "txtBaudRate";
             this.txtBaudRate.ShortcutsEnabled = false;
-            this.txtBaudRate.Size = new System.Drawing.Size(125, 25);
+            this.txtBaudRate.Size = new System.Drawing.Size(80, 25);
             this.txtBaudRate.TabIndex = 24;
             // 
             // cboStopBits
             // 
             this.cboStopBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cboStopBits.FormattingEnabled = true;
-            this.cboStopBits.Location = new System.Drawing.Point(328, 189);
+            this.cboStopBits.Location = new System.Drawing.Point(369, 189);
             this.cboStopBits.Name = "cboStopBits";
-            this.cboStopBits.Size = new System.Drawing.Size(125, 25);
+            this.cboStopBits.Size = new System.Drawing.Size(80, 25);
             this.cboStopBits.TabIndex = 23;
             // 
             // cboDataBits
             // 
             this.cboDataBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cboDataBits.FormattingEnabled = true;
-            this.cboDataBits.Location = new System.Drawing.Point(95, 189);
+            this.cboDataBits.Location = new System.Drawing.Point(133, 189);
             this.cboDataBits.Name = "cboDataBits";
-            this.cboDataBits.Size = new System.Drawing.Size(125, 25);
+            this.cboDataBits.Size = new System.Drawing.Size(80, 25);
             this.cboDataBits.TabIndex = 22;
             // 
             // lblDevices
@@ -361,7 +361,7 @@ namespace ErgoLux
             // tabPlots
             // 
             this.tabPlots.Controls.Add(this.chkShowDistribution);
-            this.tabPlots.Controls.Add(this.groupBox1);
+            this.tabPlots.Controls.Add(this.grpPlot);
             this.tabPlots.Controls.Add(this.txtPlotWindow);
             this.tabPlots.Controls.Add(this.txtArrayPoints);
             this.tabPlots.Controls.Add(this.lblPlotWindow);
@@ -381,7 +381,7 @@ namespace ErgoLux
             // 
             this.chkShowDistribution.AutoSize = true;
             this.chkShowDistribution.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowDistribution.Location = new System.Drawing.Point(167, 32);
+            this.chkShowDistribution.Location = new System.Drawing.Point(215, 29);
             this.chkShowDistribution.Name = "chkShowDistribution";
             this.chkShowDistribution.Size = new System.Drawing.Size(126, 23);
             this.chkShowDistribution.TabIndex = 2;
@@ -389,16 +389,16 @@ namespace ErgoLux
             this.chkShowDistribution.UseVisualStyleBackColor = true;
             this.chkShowDistribution.CheckedChanged += new System.EventHandler(this.chkShowDistribution_CheckedChanged);
             // 
-            // groupBox1
+            // grpPlot
             // 
-            this.groupBox1.Controls.Add(this.radRadar);
-            this.groupBox1.Controls.Add(this.radRadial);
-            this.groupBox1.Location = new System.Drawing.Point(315, 30);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(138, 98);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Plot distribution";
+            this.grpPlot.Controls.Add(this.radRadar);
+            this.grpPlot.Controls.Add(this.radRadial);
+            this.grpPlot.Location = new System.Drawing.Point(81, 104);
+            this.grpPlot.Name = "grpPlot";
+            this.grpPlot.Size = new System.Drawing.Size(187, 98);
+            this.grpPlot.TabIndex = 9;
+            this.grpPlot.TabStop = false;
+            this.grpPlot.Text = "Plot distribution";
             // 
             // radRadar
             // 
@@ -425,15 +425,15 @@ namespace ErgoLux
             // txtPlotWindow
             // 
             this.txtPlotWindow.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtPlotWindow.Location = new System.Drawing.Point(183, 156);
+            this.txtPlotWindow.Location = new System.Drawing.Point(229, 251);
             this.txtPlotWindow.Name = "txtPlotWindow";
-            this.txtPlotWindow.Size = new System.Drawing.Size(84, 25);
+            this.txtPlotWindow.Size = new System.Drawing.Size(85, 25);
             this.txtPlotWindow.TabIndex = 7;
             // 
             // txtArrayPoints
             // 
             this.txtArrayPoints.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtArrayPoints.Location = new System.Drawing.Point(183, 125);
+            this.txtArrayPoints.Location = new System.Drawing.Point(229, 220);
             this.txtArrayPoints.Name = "txtArrayPoints";
             this.txtArrayPoints.Size = new System.Drawing.Size(85, 25);
             this.txtArrayPoints.TabIndex = 6;
@@ -442,7 +442,7 @@ namespace ErgoLux
             // 
             this.lblPlotWindow.AutoSize = true;
             this.lblPlotWindow.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPlotWindow.Location = new System.Drawing.Point(31, 159);
+            this.lblPlotWindow.Location = new System.Drawing.Point(31, 254);
             this.lblPlotWindow.Name = "lblPlotWindow";
             this.lblPlotWindow.Size = new System.Drawing.Size(145, 19);
             this.lblPlotWindow.TabIndex = 5;
@@ -452,7 +452,7 @@ namespace ErgoLux
             // 
             this.lblArrayPoints.AutoSize = true;
             this.lblArrayPoints.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblArrayPoints.Location = new System.Drawing.Point(31, 128);
+            this.lblArrayPoints.Location = new System.Drawing.Point(31, 223);
             this.lblArrayPoints.Name = "lblArrayPoints";
             this.lblArrayPoints.Size = new System.Drawing.Size(146, 19);
             this.lblArrayPoints.TabIndex = 4;
@@ -462,7 +462,7 @@ namespace ErgoLux
             // 
             this.chkShowRatio.AutoSize = true;
             this.chkShowRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowRatio.Location = new System.Drawing.Point(167, 69);
+            this.chkShowRatio.Location = new System.Drawing.Point(215, 66);
             this.chkShowRatio.Name = "chkShowRatio";
             this.chkShowRatio.Size = new System.Drawing.Size(90, 23);
             this.chkShowRatio.TabIndex = 3;
@@ -473,7 +473,7 @@ namespace ErgoLux
             // 
             this.chkShowAverage.AutoSize = true;
             this.chkShowAverage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowAverage.Location = new System.Drawing.Point(27, 69);
+            this.chkShowAverage.Location = new System.Drawing.Point(27, 66);
             this.chkShowAverage.Name = "chkShowAverage";
             this.chkShowAverage.Size = new System.Drawing.Size(104, 23);
             this.chkShowAverage.TabIndex = 2;
@@ -484,7 +484,7 @@ namespace ErgoLux
             // 
             this.chkShowRaw.AutoSize = true;
             this.chkShowRaw.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowRaw.Location = new System.Drawing.Point(27, 32);
+            this.chkShowRaw.Location = new System.Drawing.Point(27, 29);
             this.chkShowRaw.Name = "chkShowRaw";
             this.chkShowRaw.Size = new System.Drawing.Size(109, 23);
             this.chkShowRaw.TabIndex = 0;
@@ -624,8 +624,8 @@ namespace ErgoLux
             this.tabDevice.PerformLayout();
             this.tabPlots.ResumeLayout(false);
             this.tabPlots.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grpPlot.ResumeLayout(false);
+            this.grpPlot.PerformLayout();
             this.tabGUI.ResumeLayout(false);
             this.tabGUI.PerformLayout();
             this.grpCulture.ResumeLayout(false);
@@ -641,7 +641,7 @@ namespace ErgoLux
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TabControl tabSettings;
         private System.Windows.Forms.TabPage tabDevice;
-        private System.Windows.Forms.Label lblHz;
+        private System.Windows.Forms.Label lblFrequency;
         private System.Windows.Forms.TextBox txtHz;
         private System.Windows.Forms.Label lblOff;
         private System.Windows.Forms.Label lblOn;
@@ -669,7 +669,7 @@ namespace ErgoLux
         private System.Windows.Forms.TextBox txtArrayPoints;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.CheckBox chkShowDistribution;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grpPlot;
         private System.Windows.Forms.RadioButton radRadar;
         private System.Windows.Forms.RadioButton radRadial;
         private TabPage tabGUI;

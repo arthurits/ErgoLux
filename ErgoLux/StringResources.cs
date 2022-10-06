@@ -46,10 +46,10 @@ public static class StringResources
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
 
 
-    public static string FormTitle => StringRM.GetString("strFormTitle", Culture) ?? "ErgoLux";
-    public static string FormLanguage => StringRM.GetString("strFormLanguage", Culture) ?? "Select culture";
-    public static string FormSettings => StringRM.GetString("strFormSettings", Culture) ?? "Settings";
-    public static string FormTitleUnion => StringRM.GetString("strFormTitleUnion", Culture) ?? " - ";
+    public static string FrmTitle => StringRM.GetString("strFrmTitle", Culture) ?? "ErgoLux";
+    public static string FrmLanguage => StringRM.GetString("strFrmLanguage", Culture) ?? "Select culture";
+    public static string FrmSettings => StringRM.GetString("strFrmSettings", Culture) ?? "Settings";
+    public static string FrmTitleUnion => StringRM.GetString("strFrmTitleUnion", Culture) ?? " - ";
 
     public static string ErrorDeserialize => StringRM.GetString("strErrorDeserialize", Culture) ?? "Error loading settings file." +
         Environment.NewLine + Environment.NewLine + "{0}" +
@@ -80,10 +80,7 @@ public static class StringResources
     public static string MsgBoxErrorSaveData => StringRM.GetString("strMsgBoxErrorSaveData", Culture) ?? "An unexpected error happened while saving data to disk." + Environment.NewLine + "Please try again later or contact the software engineer." + Environment.NewLine + "{0}";
     public static string MsgBoxErrorSaveDataTitle => StringRM.GetString("strMsgBoxErrorSaveDataTitle", Culture) ?? "Error saving data";
     public static string MsgBoxErrorSettings => StringRM.GetString("strMsgBoxErrorSettings", Culture) ?? "Error loading settings file." +
-        Environment.NewLine +
-        Environment.NewLine + "{0}" +
-        Environment.NewLine +
-        Environment.NewLine +
+        Environment.NewLine + Environment.NewLine + "{0}" + Environment.NewLine + Environment.NewLine +
         "Default values will be used instead.";
     public static string MsgBoxErrorSettingsTitle => StringRM.GetString("strMsgBoxErrorSettingsTitle", Culture) ?? "Error";
     public static string MsgBoxExitTitle => StringRM.GetString("strMsgBoxExitTitle", Culture) ?? "Exit?";
@@ -120,5 +117,69 @@ public static class StringResources
     public static string TabDevice => StringRM.GetString("strTabDevice", Culture) ?? "T-10A sensor";
     public static string TabGUI => StringRM.GetString("strTabGUI", Culture) ?? "User interface";
     public static string TabPlots => StringRM.GetString("strTabPlots", Culture) ?? "Plotting";
+
+    public static string ChkPlotAverage => StringRM.GetString("strChkPlotAverage", Culture) ?? "Plot average";
+    public static string ChkPlotDistribution => StringRM.GetString("strChkPlotDistribution", Culture) ?? "Plot distribution";
+    public static string ChkPlotRatios => StringRM.GetString("strChkPlotRatios", Culture) ?? "Plot ratios";
+    public static string ChkPlotRaw => StringRM.GetString("strChkPlotRaw", Culture) ?? "Plot raw data";
+    public static string GridDescription => StringRM.GetString("strGridDescription", Culture) ?? "Description";
+    public static string GridDevice => StringRM.GetString("strGridDevice", Culture) ?? "Device location";
+    public static string GridFlags => StringRM.GetString("strGridFlags", Culture) ?? "Flags";
+    public static string GridID => StringRM.GetString("strGridID", Culture) ?? "ID";
+    public static string GridLocation => StringRM.GetString("strGridLocation", Culture) ?? "Location ID";
+    public static string GridSerial => StringRM.GetString("strGridSerial", Culture) ?? "Serial number";
+    public static string GridType => StringRM.GetString("strGridType", Culture) ?? "Type";
+    public static string GrpPlot => StringRM.GetString("strGrpPlot", Culture) ?? "Plot distribution";
+    public static string LblArrayPoints => StringRM.GetString("strLblArrayPoints", Culture) ?? "Array minimum points";
+    public static string LblBaudRate => StringRM.GetString("strLblBaudRate", Culture) ?? "Baud rate";
+    public static string LblDataBits => StringRM.GetString("strLblDataBits", Culture) ?? "Data bits";
+    public static string LblDeviceList => StringRM.GetString("strLblDeviceList", Culture) ?? "FTDI device list";
+    public static string LblFlow => StringRM.GetString("strLblFlow", Culture) ?? "Flow control";
+    public static string LblFrequency => StringRM.GetString("strLblFrequency", Culture) ?? "Frequency (Hz)";
+    public static string LblOff => StringRM.GetString("strLblOff", Culture) ?? "Off";
+    public static string LblOn => StringRM.GetString("strLblOn", Culture) ?? "On";
+    public static string LblParity => StringRM.GetString("strLblParity", Culture) ?? "Parity";
+    public static string LblPlotWindow => StringRM.GetString("strLblPlotWindow", Culture) ?? "Plot window (seconds)";
+    public static string LblSensors => StringRM.GetString("strLblSensors", Culture) ?? "Number of sensors";
+    public static string LblStopBits => StringRM.GetString("strLblStopBits", Culture) ?? "Stop bits";
+    public static string MsbBoxErrorBits => StringRM.GetString("strMsbBoxErrorBits", Culture) ?? "Failed to set data characteristics" +
+            Environment.NewLine +
+            "(data bits, stop bits, and parity)." +
+            Environment.NewLine +
+            "Error:" +
+            Environment.NewLine +
+            "{0}";
+    public static string MsgBoxErrorBaudRate => StringRM.GetString("strMsgBoxErrorBaudRate", Culture) ?? "Failed to set Baud rate." +
+            Environment.NewLine +
+            "Error:" +
+            Environment.NewLine +
+            "{0}";
+    public static string MsgBoxErrorBaudRateTitle => StringRM.GetString("strMsgBoxErrorBaudRateTitle", Culture) ?? "Baud rate error";
+    public static string MsgBoxErrorBitsTitle => StringRM.GetString("strMsgBoxErrorBitsTitle", Culture) ?? "Bits error";
+    public static string MsgBoxErrorDrivers => StringRM.GetString("strMsgBoxErrorDrivers", Culture) ?? "Failed to load FTD2XX.DLL.  Are the FTDI drivers installed?";
+    public static string MsgBoxErrorDriversTitle => StringRM.GetString("strMsgBoxErrorDriversTitle", Culture) ?? "Error loading drivers";
+    public static string MsgBoxErrorFlowControl => StringRM.GetString("strMsgBoxErrorFlowControl", Culture) ?? "Failed to set flow control." +
+            Environment.NewLine +
+            "Error:" +
+            Environment.NewLine +
+            "{0}";
+    public static string MsgBoxErrorFlowControlTitle => StringRM.GetString("strMsgBoxErrorFlowControlTitle", Culture) ?? "Flow control error";
+    public static string MsgBoxErrorLoading => StringRM.GetString("strMsgBoxErrorLoading", Culture) ?? "Attempting to load FTD2XX.DLL from:";
+    public static string MsgBoxErrorLoadingTitle => StringRM.GetString("strMsgBoxErrorLoadingTitle", Culture) ?? "Error loading DLL";
+    public static string MsgBoxErrorOpening => StringRM.GetString("strMsgBoxErrorOpening", Culture) ?? "Failed to open device." +
+            Environment.NewLine +
+            "Error:" +
+            Environment.NewLine +
+            "{0}";
+    public static string MsgBoxErrorOpeningTitle => StringRM.GetString("strMsgBoxErrorOpeningTitle", Culture) ?? "Error opening device";
+    public static string MsgBoxErrorTimeouts => StringRM.GetString("strMsgBoxErrorTimeouts", Culture) ?? "Failed to set timeouts." +
+            Environment.NewLine +
+            "Error:" +
+            Environment.NewLine +
+            "{0}";
+    public static string MsgBoxErrorTimeoutsTitle => StringRM.GetString("strMsgBoxErrorTimeoutsTitle", Culture) ?? "Timeouts error";
+    public static string RadRadar => StringRM.GetString("strRadRadar", Culture) ?? "Radar";
+    public static string RadRadialGauge => StringRM.GetString("strRadRadialGauge", Culture) ?? "Radial gauge";
+
 
 }
