@@ -13,8 +13,8 @@ public partial class FrmSettings : Form
     private ClassSettings? Settings;
     private readonly System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmSettings).Assembly);
 
-    public string GetDeviceType { get => _deviceType; }
-    public string GetDeviceID { get => _deviceID; }
+    public string GetDeviceType => _deviceType;
+    public string GetDeviceID => _deviceID;
 
     public FrmSettings()
     {

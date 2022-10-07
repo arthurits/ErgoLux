@@ -33,9 +33,9 @@ public partial class FrmMain : Form
 
         // Initialize components and GUI
         InitializeComponent();
-        InitializeToolStripPanel();
         InitializeToolStrip();
         InitializeStatusStrip();
+        InitializeToolStripPanel();
         InitializeMenuStrip();
         InitializePlots();
 

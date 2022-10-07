@@ -1,4 +1,6 @@
-﻿namespace ErgoLux;
+﻿using System.Windows.Forms;
+
+namespace ErgoLux;
 
 partial class FrmMain
 {
@@ -70,11 +72,12 @@ partial class FrmMain
     /// </summary>
     private void InitializeStatusStrip()
     {
-        statusStripIconOpen.Image = _settings.Icon_Close;
-        InitializeStatusStripLabelsStatus();
+        statusStrip.Renderer = new CustomRenderer<ToolStripStatusLabelEx>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
-        // It would be nice to be able to do this
-        //statusStrip.Renderer = new customRenderer<ToolStripStatusLabelEx>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
+        statusStripIconOpen.Image = _settings.Icon_Close;
+        statusStripLabelCross.Checked = false;
+
+        InitializeStatusStripLabelsStatus();
     }
 
     /// <summary>
