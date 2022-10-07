@@ -117,7 +117,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strBtnAccept" xml:space="preserve">
-    <value>&amp;受け入れる</value>
+    <value>&amp;承認</value>
   </data>
   <data name="strBtnCancel" xml:space="preserve">
     <value>&amp;キャンセル</value>
@@ -126,121 +126,135 @@
     <value>データを選択</value>
   </data>
   <data name="strBtnExport" xml:space="preserve">
-    <value>&amp;経験値ট</value>
+    <value>&amp;書き出す</value>
   </data>
   <data name="strBtnReset" xml:space="preserve">
-    <value>&amp;戻す</value>
+    <value>&amp;リセット</value>
   </data>
   <data name="strBtnSettings" xml:space="preserve">
-    <value>&amp;設定</value>
+    <value>&amp;Settings</value>
   </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>プロットの十字線を表示</value>
   </data>
   <data name="strChkCumulative" xml:space="preserve">
-    <value>フラクタル次元の増加</value>
+    <value>累積フラクタル次元</value>
   </data>
   <data name="strChkDlgPath" xml:space="preserve">
-    <value>以前の [開く/保存] ダイアログを思い出してください</value>
+    <value>ダイアログを開く/保存する前のパスを記憶する</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
     <value>エントロピー (おおよそのサンプル)</value>
   </data>
+  <data name="strChkPlotAverage" xml:space="preserve">
+    <value>プロット平均</value>
+  </data>
+  <data name="strChkPlotDistribution" xml:space="preserve">
+    <value>プロット分布</value>
+  </data>
+  <data name="strChkPlotRatios" xml:space="preserve">
+    <value>プロット比率</value>
+  </data>
+  <data name="strChkPlotRaw" xml:space="preserve">
+    <value>生データのプロット</value>
+  </data>
   <data name="strChkPower" xml:space="preserve">
-    <value>力(dB)</value>
+    <value>パワー (dB)</value>
   </data>
   <data name="strDlgReset" xml:space="preserve">
-    <value>
-すべてのフィールドをデフォルト値に設定していますか
-リセットしたい?</value>
+    <value>すべてのフィールドをリセットしますか
+デフォルト値に？</value>
   </data>
   <data name="strDlgResetTitle" xml:space="preserve">
-    <value>設定を復元しますか？</value>
+    <value>設定をリセット？</value>
   </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>設定ファイルのロード中にエラーが発生しました。
-代わりにデフォルト値が使用されます</value>
+
+{0}
+
+代わりにデフォルト値が使用されます。</value>
   </data>
   <data name="strErrorDeserializeTitle" xml:space="preserve">
     <value>エラー</value>
   </data>
   <data name="strFileHeader01" xml:space="preserve">
-    <value>エルゴルクス情報</value>
+    <value>エルゴラックスデータ</value>
   </data>
   <data name="strFileHeader02" xml:space="preserve">
     <value>始まる時間</value>
   </data>
   <data name="strFileHeader03" xml:space="preserve">
-    <value>前回</value>
+    <value>終了時間</value>
   </data>
   <data name="strFileHeader04" xml:space="preserve">
     <value>総測定時間</value>
   </data>
   <data name="strFileHeader05" xml:space="preserve">
-    <value>সセンサー番号যা</value>
+    <value>センサー数</value>
   </data>
   <data name="strFileHeader06" xml:space="preserve">
     <value>データポイント数</value>
   </data>
   <data name="strFileHeader07" xml:space="preserve">
-    <value>サンプリング周波数সি</value>
+    <value>サンプリング周波数</value>
   </data>
   <data name="strFileHeader08" xml:space="preserve">
     <value>センサー #</value>
   </data>
   <data name="strFileHeader09" xml:space="preserve">
-    <value>最高চ</value>
+    <value>最大</value>
   </data>
   <data name="strFileHeader10" xml:space="preserve">
     <value>平均</value>
   </data>
   <data name="strFileHeader11" xml:space="preserve">
-    <value>最低ন</value>
+    <value>最小</value>
   </data>
   <data name="strFileHeader12" xml:space="preserve">
-    <value>স最小/平均</value>
+    <value>最小/平均</value>
   </data>
   <data name="strFileHeader13" xml:space="preserve">
     <value>最小/最大</value>
   </data>
   <data name="strFileHeader14" xml:space="preserve">
-    <value>平均/最大চ</value>
+    <value>平均/最大</value>
   </data>
   <data name="strFileHeader15" xml:space="preserve">
     <value>平均</value>
   </data>
   <data name="strFileHeader16" xml:space="preserve">
-    <value>点灯জা</value>
+    <value>照度</value>
   </data>
   <data name="strFileHeader17" xml:space="preserve">
-    <value>空行がありません.</value>
+    <value>空行がありません。</value>
   </data>
   <data name="strFileHeader18" xml:space="preserve">
-    <value>列ヘッダーの欠落 (シリーズ名).</value>
+    <value>列ヘッダー (シリーズ名) がありません。</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>日</value>
+    <value>日々</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
     <value>時間</value>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>মニット</value>
+    <value>分</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
     <value>秒</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
-    <value>行きますং</value>
+    <value>と</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
     <value>ミリ秒</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
-    <value>セクション の形式が正しくありません</value>
+    <value>セクション '{0}' の形式が正しくありません。</value>
   </data>
   <data name="strFormTitle" xml:space="preserve">
-    <value>エルゴルクス</value>
+    <value>エルゴラックス</value>
   </data>
   <data name="strFrmLanguage" xml:space="preserve">
     <value>カルチャーを選択</value>
@@ -249,31 +263,91 @@
     <value>設定</value>
   </data>
   <data name="strFrmTitle" xml:space="preserve">
-    <value>সポイント分析</value>
+    <value>信号解析</value>
   </data>
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
   </data>
+  <data name="strGridDescription" xml:space="preserve">
+    <value>説明</value>
+  </data>
+  <data name="strGridDevice" xml:space="preserve">
+    <value>デバイスの場所</value>
+  </data>
+  <data name="strGridFlags" xml:space="preserve">
+    <value>フラグ</value>
+  </data>
+  <data name="strGridID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="strGridLocation" xml:space="preserve">
+    <value>ロケーション ID</value>
+  </data>
+  <data name="strGridSerial" xml:space="preserve">
+    <value>シリアルナンバー</value>
+  </data>
+  <data name="strGridType" xml:space="preserve">
+    <value>タイプ</value>
+  </data>
   <data name="strGrpAxis" xml:space="preserve">
-    <value>横座標 aqষ</value>
+    <value>横軸</value>
   </data>
   <data name="strGrpCulture" xml:space="preserve">
-    <value>UI およびデータ形式</value>
+    <value>UI とデータ形式</value>
+  </data>
+  <data name="strGrpPlot" xml:space="preserve">
+    <value>プロット分布</value>
+  </data>
+  <data name="strLblArrayPoints" xml:space="preserve">
+    <value>配列の最小点</value>
+  </data>
+  <data name="strLblBaudRate" xml:space="preserve">
+    <value>ボーレート</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>データファイルのパス</value>
   </data>
+  <data name="strLblDataBits" xml:space="preserve">
+    <value>データビット</value>
+  </data>
   <data name="strLblDataFormat" xml:space="preserve">
     <value>数値データ形式文字列</value>
+  </data>
+  <data name="strLblDeviceList" xml:space="preserve">
+    <value>FTDI デバイス一覧</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
     <value>配列インデックスの終わり</value>
   </data>
+  <data name="strLblFlow" xml:space="preserve">
+    <value>フロー制御</value>
+  </data>
+  <data name="strLblFrequency" xml:space="preserve">
+    <value>周波数 (Hz)</value>
+  </data>
+  <data name="strLblOff" xml:space="preserve">
+    <value>オフ</value>
+  </data>
+  <data name="strLblOn" xml:space="preserve">
+    <value>の上</value>
+  </data>
+  <data name="strLblParity" xml:space="preserve">
+    <value>パリティ</value>
+  </data>
+  <data name="strLblPlotWindow" xml:space="preserve">
+    <value>プロット ウィンドウ (秒)</value>
+  </data>
+  <data name="strLblSensors" xml:space="preserve">
+    <value>センサー数</value>
+  </data>
   <data name="strLblSeries" xml:space="preserve">
-    <value>সিরিজ নির্বাচন করুন</value>
+    <value>シリーズを選択</value>
   </data>
   <data name="strLblStart" xml:space="preserve">
-    <value>配列インデックスを初期化する</value>
+    <value>配列インデックスの開始</value>
+  </data>
+  <data name="strLblStopBits" xml:space="preserve">
+    <value>ストップビット</value>
   </data>
   <data name="strLblWindow" xml:space="preserve">
     <value>窓</value>
@@ -282,13 +356,13 @@
     <value>&amp;ファイル</value>
   </data>
   <data name="strMenuMainFileExit" xml:space="preserve">
-    <value>&amp;出発...</value>
+    <value>&amp;出口...</value>
   </data>
   <data name="strMenuMainFileOpen" xml:space="preserve">
     <value>&amp;開ける...</value>
   </data>
   <data name="strMenuMainFileSave" xml:space="preserve">
-    <value>&amp;保存中...</value>
+    <value>&amp;保存...</value>
   </data>
   <data name="strMenuMainHelpAbout" xml:space="preserve">
     <value>&amp;約...</value>
@@ -306,28 +380,72 @@
     <value>&amp;切断する</value>
   </data>
   <data name="strMenuMainToolsSettings" xml:space="preserve">
-    <value>&amp;স設定...</value>
+    <value>&amp;設定...</value>
   </data>
   <data name="strMenuMainView" xml:space="preserve">
-    <value>&amp;見る</value>
+    <value>&amp;意見</value>
   </data>
   <data name="strMenuMainViewAverage" xml:space="preserve">
     <value>平均</value>
   </data>
   <data name="strMenuMainViewDistribution" xml:space="preserve">
-    <value>র電子配布</value>
+    <value>放射状分布</value>
   </data>
   <data name="strMenuMainViewMenu" xml:space="preserve">
-    <value>মメニューを表示</value>
+    <value>メニューを表示</value>
   </data>
   <data name="strMenuMainViewRatio" xml:space="preserve">
-    <value>比</value>
+    <value>比率</value>
   </data>
   <data name="strMenuMainViewRaw" xml:space="preserve">
-    <value>基本情報য</value>
+    <value>生データ</value>
   </data>
   <data name="strMenuMainViewToolbar" xml:space="preserve">
-    <value>ツールバーを表示</value>
+    <value>Show toolbar</value>
+  </data>
+  <data name="strMsbBoxErrorBits" xml:space="preserve">
+    <value>データ特性の設定に失敗しました
+(データ ビット、ストップ ビット、およびパリティ)。
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorBaudRate" xml:space="preserve">
+    <value>ボーレートの設定に失敗しました。
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorBaudRateTitle" xml:space="preserve">
+    <value>ボーレートエラー</value>
+  </data>
+  <data name="strMsgBoxErrorBitsTitle" xml:space="preserve">
+    <value>ビットエラー</value>
+  </data>
+  <data name="strMsgBoxErrorDeviceClosed" xml:space="preserve">
+    <value>デバイスが閉じられています。に行ってください
+デバイスを開くための「設定」.</value>
+  </data>
+  <data name="strMsgBoxErrorDeviceClosedTitle" xml:space="preserve">
+    <value>デバイスエラー</value>
+  </data>
+  <data name="strMsgBoxErrorDrivers" xml:space="preserve">
+    <value>FTD2XX.DLL の読み込みに失敗しました。 FTDI ドライバーはインストールされていますか?</value>
+  </data>
+  <data name="strMsgBoxErrorDriversTitle" xml:space="preserve">
+    <value>ドライバーのロード中にエラーが発生しました</value>
+  </data>
+  <data name="strMsgBoxErrorFlowControl" xml:space="preserve">
+    <value>フロー制御の設定に失敗しました。
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFlowControlTitle" xml:space="preserve">
+    <value>フロー制御エラー</value>
+  </data>
+  <data name="strMsgBoxErrorLoading" xml:space="preserve">
+    <value>以下から FTD2XX.DLL を読み込もうとしています:</value>
+  </data>
+  <data name="strMsgBoxErrorLoadingTitle" xml:space="preserve">
+    <value>DLL のロード中にエラーが発生しました</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>データ ファイルを開くときに予期しないエラーが発生しました。
@@ -343,6 +461,14 @@
   <data name="strMsgBoxErrorOpenDeviceTitle" xml:space="preserve">
     <value>エラー</value>
   </data>
+  <data name="strMsgBoxErrorOpening" xml:space="preserve">
+    <value>デバイスを開くことができませんでした。
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpeningTitle" xml:space="preserve">
+    <value>デバイスを開く際のエラー</value>
+  </data>
   <data name="strMsgBoxErrorSaveData" xml:space="preserve">
     <value>データをディスクに保存中に予期しないエラーが発生しました。
 後で再試行するか、ソフトウェア エンジニアに連絡してください。
@@ -353,27 +479,38 @@
   </data>
   <data name="strMsgBoxErrorSettings" xml:space="preserve">
     <value>設定ファイルのロード中にエラーが発生しました。
-代わりにデフォルト値が使用されます.</value>
+
+{0}
+
+代わりにデフォルト値が使用されます。</value>
   </data>
   <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
     <value>エラー</value>
   </data>
+  <data name="strMsgBoxErrorTimeouts" xml:space="preserve">
+    <value>タイムアウトの設定に失敗しました。
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorTimeoutsTitle" xml:space="preserve">
+    <value>タイムアウト エラー</value>
+  </data>
   <data name="strMsgBoxExit" xml:space="preserve">
-    <value>終了したい
-ソフトウェア ?</value>
+    <value>終了してよろしいですか
+アプリケーション？</value>
   </data>
   <data name="strMsgBoxExitTitle" xml:space="preserve">
-    <value>প্出発？</value>
+    <value>出口？</value>
   </data>
   <data name="strMsgBoxNoData" xml:space="preserve">
     <value>保存できるデータがありません。</value>
   </data>
   <data name="strMsgBoxNoDataTitle" xml:space="preserve">
-    <value>ক情報なし</value>
+    <value>データなし</value>
   </data>
   <data name="strMsgBoxReset" xml:space="preserve">
-    <value>すべてのフィールドをデフォルト値に設定していますか
-リセットしたいですか？</value>
+    <value>すべてのフィールドをリセットしますか
+デフォルト値に？</value>
   </data>
   <data name="strMsgBoxResetTitle" xml:space="preserve">
     <value>リセットしますか？</value>
@@ -382,183 +519,189 @@
     <value>データは正常にディスクに保存されました。</value>
   </data>
   <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
-    <value>データストレージ</value>
+    <value>データ保存</value>
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
-    <value>Hausdorff-Besikovich フラクタルの計算
-ディメンションが閉じられました。</value>
+    <value>Computation of the Hausdorff-Besicovitch fractal
+dimension has been stopped.</value>
   </data>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
-    <value>森林ধ</value>
+    <value>Stop</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>Ergolux ファイル (*.elux)|*.elux|信号解析ファイル (*.sig)|*.sig|テキスト ファイル (*.txt)|*.txt|すべてのファイル (*.*)|*.*</value>
+    <value>"ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*"</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
-    <value>照らされたデータを開く</value>
+    <value>Open illuminance data</value>
   </data>
   <data name="strPlotAverageTitle" xml:space="preserve">
-    <value>最大、平均、最小</value>
+    <value>Max, average, min</value>
   </data>
   <data name="strPlotAverageXLabel" xml:space="preserve">
-    <value>時間 (秒)</value>
+    <value>Time (seconds)</value>
   </data>
   <data name="strPlotAverageYLabel" xml:space="preserve">
-    <value>ルクス</value>
+    <value>Lux</value>
   </data>
   <data name="strPlotDistributionTitle" xml:space="preserve">
-    <value>配光</value>
+    <value>Illuminance distribution</value>
   </data>
   <data name="strPlotRatiosTitle" xml:space="preserve">
-    <value>輝度比</value>
+    <value>Illuminance ratios</value>
   </data>
   <data name="strPlotRatiosXLabel" xml:space="preserve">
-    <value>時間 (秒)</value>
+    <value>Time (seconds)</value>
   </data>
   <data name="strPlotRatiosYLabel" xml:space="preserve">
-    <value>比</value>
+    <value>Ratio</value>
   </data>
   <data name="strPlotRawTitle" xml:space="preserve">
-    <value>イルミネーション</value>
+    <value>Illuminance</value>
   </data>
   <data name="strPlotRawXLabel" xml:space="preserve">
-    <value>時間 (秒)</value>
+    <value>Time (seconds)</value>
   </data>
   <data name="strPlotRawYLabel" xml:space="preserve">
-    <value>ラックস</value>
+    <value>Lux</value>
   </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
-    <value>現在のカルチャ形式</value>
+    <value>Current culture formatting</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
-    <value>文化的設定の変更</value>
+    <value>Invariant culture formatting</value>
+  </data>
+  <data name="strRadRadar" xml:space="preserve">
+    <value>Radar</value>
+  </data>
+  <data name="strRadRadialGauge" xml:space="preserve">
+    <value>Radial gauge</value>
   </data>
   <data name="strRadUserCulture" xml:space="preserve">
-    <value>カルチャーを選択</value>
+    <value>Select culture</value>
   </data>
   <data name="strReadDataError" xml:space="preserve">
-    <value>ファイルからデータを読み取れません。
+    <value>Unable to read data from file.
 {0}</value>
   </data>
   <data name="strReadDataErrorCulture" xml:space="preserve">
-    <value>カルチャ識別子文字列名が無効です。
+    <value>The culture identifier string name is not valid.
 {0}</value>
   </data>
   <data name="strReadDataErrorCultureTitle" xml:space="preserve">
-    <value>সংস্কৃতি নামের ত্রুটি</value>
+    <value>Culture name error</value>
   </data>
   <data name="strReadDataErrorNumber" xml:space="preserve">
-    <value>無効な数値:{0}</value>
+    <value>Invalid numeric value: {0}</value>
   </data>
   <data name="strReadDataErrorNumberTitle" xml:space="preserve">
-    <value>データ解析中のエラーি</value>
+    <value>Error parsing data</value>
   </data>
   <data name="strReadDataErrorTitle" xml:space="preserve">
-    <value>データを開く際のエラー</value>
+    <value>Error opening data</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
-    <value>Ergolux ファイル (*.elux)|*.elux|テキスト ファイル (*.txt)|*.txt|バイナリ ファイル (*.bin)|*.bin|すべてのファイル (*.*)|*.*</value>
+    <value>ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*</value>
   </data>
   <data name="strSaveDlgTitle" xml:space="preserve">
-    <value>点灯情報を保存</value>
+    <value>Save illuminance data</value>
   </data>
   <data name="strStatusExchange" xml:space="preserve">
-    <value>情報を受け取る</value>
+    <value>Receiving data</value>
   </data>
   <data name="strStatusID" xml:space="preserve">
-    <value>デバイス</value>
+    <value>Device ID</value>
   </data>
   <data name="strStatusLocation" xml:space="preserve">
-    <value>ロケーション ID</value>
+    <value>Location ID</value>
   </data>
   <data name="strStatusOpen" xml:space="preserve">
-    <value>切断されましたন</value>
+    <value>Disconnected</value>
   </data>
   <data name="strStatusTipCrossHair" xml:space="preserve">
-    <value>ロットのクロスヘア モードを表示する</value>
+    <value>Show plot's crosshair mode</value>
   </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
-    <value>প্ロットの分配</value>
+    <value>Plot distribution</value>
   </data>
   <data name="strStatusTipExchange" xml:space="preserve">
-    <value>為替レートথা</value>
+    <value>Exchange status</value>
   </data>
   <data name="strStatusTipID" xml:space="preserve">
-    <value>ডデバイスIDি</value>
+    <value>Device ID</value>
   </data>
   <data name="strStatusTipLocation" xml:space="preserve">
-    <value>T-10A ロケーション ID</value>
+    <value>T-10A location ID</value>
   </data>
   <data name="strStatusTipMax" xml:space="preserve">
-    <value>প্ロットの最大、平均、最小</value>
+    <value>Plot max, average and min</value>
   </data>
   <data name="strStatusTipOpen" xml:space="preserve">
-    <value>স接続状態</value>
+    <value>Connexion status</value>
   </data>
   <data name="strStatusTipRatio" xml:space="preserve">
-    <value>প্ロット比率</value>
+    <value>Plot ratios</value>
   </data>
   <data name="strStatusTipRaw" xml:space="preserve">
-    <value>প্生データのロットয</value>
+    <value>Plot raw data</value>
   </data>
   <data name="strStatusTipType" xml:space="preserve">
-    <value>デバイスタイプ</value>
+    <value>Device type</value>
   </data>
   <data name="strStatusType" xml:space="preserve">
-    <value>ডデバイスの種類</value>
+    <value>Device type</value>
   </data>
   <data name="strTabDevice" xml:space="preserve">
-    <value>T-10A センサー</value>
+    <value>T-10A sensor</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
-    <value>ব্ユーザーインターフェース</value>
+    <value>User interface</value>
   </data>
   <data name="strTabPlots" xml:space="preserve">
-    <value>サイクルত</value>
+    <value>Plotting</value>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
-    <value>約কে</value>
+    <value>About</value>
   </data>
   <data name="strToolStripConnect" xml:space="preserve">
-    <value>স接続</value>
+    <value>Connect</value>
   </data>
   <data name="strToolStripDisconnect" xml:space="preserve">
-    <value>切断する</value>
+    <value>Disconnect</value>
   </data>
   <data name="strToolStripExit" xml:space="preserve">
-    <value>প্出発する</value>
+    <value>Exit</value>
   </data>
   <data name="strToolStripOpen" xml:space="preserve">
-    <value>開く</value>
+    <value>Open</value>
   </data>
   <data name="strToolStripSave" xml:space="preserve">
-    <value>保存</value>
+    <value>Save</value>
   </data>
   <data name="strToolStripSettings" xml:space="preserve">
-    <value>設定</value>
+    <value>Settings</value>
   </data>
   <data name="strToolTipAbout" xml:space="preserve">
-    <value>このソフトウェアについて</value>
+    <value>About this software</value>
   </data>
   <data name="strToolTipConnect" xml:space="preserve">
-    <value>T-10A ডিভাইস থেকে ডেটা গ্রহণ করা শুরু করুন</value>
+    <value>Start receiving data from T-10A device</value>
   </data>
   <data name="strToolTipDisconnect" xml:space="preserve">
-    <value>T-10A デバイスの電源を切って切断する</value>
+    <value>Stop and disconnect T-10A device</value>
   </data>
   <data name="strToolTipExit" xml:space="preserve">
-    <value>ソフトウェアを終了します</value>
+    <value>Exit the application</value>
   </data>
   <data name="strToolTipOpen" xml:space="preserve">
-    <value>ディスクからデータ ファイルを開く</value>
+    <value>Open data file from disk</value>
   </data>
   <data name="strToolTipSave" xml:space="preserve">
-    <value>データストレージ</value>
+    <value>Save data</value>
   </data>
   <data name="strToolTipSettings" xml:space="preserve">
-    <value>প্ロット、データ、UIの設定</value>
+    <value>Settings for plots, data, and UI</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
-    <value>ユーザー インターフェイス言語</value>
+    <value>User interface language</value>
   </data>
 </root>
