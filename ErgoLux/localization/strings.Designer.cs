@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SignalAnalysis.localization {
+namespace ErgoLux.localization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SignalAnalysis.localization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SignalAnalysis.localization.strings", typeof(strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ErgoLux.localization.strings", typeof(strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -151,6 +151,42 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plot average.
+        /// </summary>
+        internal static string strChkPlotAverage {
+            get {
+                return ResourceManager.GetString("strChkPlotAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plot distribution.
+        /// </summary>
+        internal static string strChkPlotDistribution {
+            get {
+                return ResourceManager.GetString("strChkPlotDistribution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plot ratios.
+        /// </summary>
+        internal static string strChkPlotRatios {
+            get {
+                return ResourceManager.GetString("strChkPlotRatios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plot raw data.
+        /// </summary>
+        internal static string strChkPlotRaw {
+            get {
+                return ResourceManager.GetString("strChkPlotRaw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Power (dB).
         /// </summary>
         internal static string strChkPower {
@@ -179,87 +215,6 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Section &apos;ErgoLux data&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader01 {
-            get {
-                return ResourceManager.GetString("strELuxHeader01", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Start time&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader02 {
-            get {
-                return ResourceManager.GetString("strELuxHeader02", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;End time&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader03 {
-            get {
-                return ResourceManager.GetString("strELuxHeader03", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Total measuring time&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader04 {
-            get {
-                return ResourceManager.GetString("strELuxHeader04", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Number of sensors&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader05 {
-            get {
-                return ResourceManager.GetString("strELuxHeader05", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Number of data points&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader06 {
-            get {
-                return ResourceManager.GetString("strELuxHeader06", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Sampling frequency&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader07 {
-            get {
-                return ResourceManager.GetString("strELuxHeader07", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing an empty line..
-        /// </summary>
-        internal static string strELuxHeader08 {
-            get {
-                return ResourceManager.GetString("strELuxHeader08", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing column headers (series names)..
-        /// </summary>
-        internal static string strELuxHeader09 {
-            get {
-                return ResourceManager.GetString("strELuxHeader09", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error loading settings file.
         ///
         ///{0}
@@ -282,6 +237,249 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ErgoLux data.
+        /// </summary>
+        internal static string strFileHeader01 {
+            get {
+                return ResourceManager.GetString("strFileHeader01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start time.
+        /// </summary>
+        internal static string strFileHeader02 {
+            get {
+                return ResourceManager.GetString("strFileHeader02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End time.
+        /// </summary>
+        internal static string strFileHeader03 {
+            get {
+                return ResourceManager.GetString("strFileHeader03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total measuring time.
+        /// </summary>
+        internal static string strFileHeader04 {
+            get {
+                return ResourceManager.GetString("strFileHeader04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of sensors.
+        /// </summary>
+        internal static string strFileHeader05 {
+            get {
+                return ResourceManager.GetString("strFileHeader05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of data points.
+        /// </summary>
+        internal static string strFileHeader06 {
+            get {
+                return ResourceManager.GetString("strFileHeader06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sampling frequency.
+        /// </summary>
+        internal static string strFileHeader07 {
+            get {
+                return ResourceManager.GetString("strFileHeader07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sensor #.
+        /// </summary>
+        internal static string strFileHeader08 {
+            get {
+                return ResourceManager.GetString("strFileHeader08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum.
+        /// </summary>
+        internal static string strFileHeader09 {
+            get {
+                return ResourceManager.GetString("strFileHeader09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average.
+        /// </summary>
+        internal static string strFileHeader10 {
+            get {
+                return ResourceManager.GetString("strFileHeader10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum.
+        /// </summary>
+        internal static string strFileHeader11 {
+            get {
+                return ResourceManager.GetString("strFileHeader11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min/Average.
+        /// </summary>
+        internal static string strFileHeader12 {
+            get {
+                return ResourceManager.GetString("strFileHeader12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min/Max.
+        /// </summary>
+        internal static string strFileHeader13 {
+            get {
+                return ResourceManager.GetString("strFileHeader13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average/Max.
+        /// </summary>
+        internal static string strFileHeader14 {
+            get {
+                return ResourceManager.GetString("strFileHeader14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average.
+        /// </summary>
+        internal static string strFileHeader15 {
+            get {
+                return ResourceManager.GetString("strFileHeader15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Illuminance.
+        /// </summary>
+        internal static string strFileHeader16 {
+            get {
+                return ResourceManager.GetString("strFileHeader16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing an empty line..
+        /// </summary>
+        internal static string strFileHeader17 {
+            get {
+                return ResourceManager.GetString("strFileHeader17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing column headers (series names)..
+        /// </summary>
+        internal static string strFileHeader18 {
+            get {
+                return ResourceManager.GetString("strFileHeader18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to days.
+        /// </summary>
+        internal static string strFileHeader19 {
+            get {
+                return ResourceManager.GetString("strFileHeader19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hours.
+        /// </summary>
+        internal static string strFileHeader20 {
+            get {
+                return ResourceManager.GetString("strFileHeader20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minutes.
+        /// </summary>
+        internal static string strFileHeader21 {
+            get {
+                return ResourceManager.GetString("strFileHeader21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to seconds.
+        /// </summary>
+        internal static string strFileHeader22 {
+            get {
+                return ResourceManager.GetString("strFileHeader22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to and.
+        /// </summary>
+        internal static string strFileHeader23 {
+            get {
+                return ResourceManager.GetString("strFileHeader23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to milliseconds.
+        /// </summary>
+        internal static string strFileHeader24 {
+            get {
+                return ResourceManager.GetString("strFileHeader24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section &apos;{0}&apos; is mis-formatted..
+        /// </summary>
+        internal static string strFileHeaderSection {
+            get {
+                return ResourceManager.GetString("strFileHeaderSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ErgoLux.
+        /// </summary>
+        internal static string strFormTitle {
+            get {
+                return ResourceManager.GetString("strFormTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select culture.
+        /// </summary>
+        internal static string strFrmLanguage {
+            get {
+                return ResourceManager.GetString("strFrmLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string strFrmSettings {
@@ -296,6 +494,78 @@ namespace SignalAnalysis.localization {
         internal static string strFrmTitle {
             get {
                 return ResourceManager.GetString("strFrmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  - .
+        /// </summary>
+        internal static string strFrmTitleUnion {
+            get {
+                return ResourceManager.GetString("strFrmTitleUnion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string strGridDescription {
+            get {
+                return ResourceManager.GetString("strGridDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device location.
+        /// </summary>
+        internal static string strGridDevice {
+            get {
+                return ResourceManager.GetString("strGridDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flags.
+        /// </summary>
+        internal static string strGridFlags {
+            get {
+                return ResourceManager.GetString("strGridFlags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        internal static string strGridID {
+            get {
+                return ResourceManager.GetString("strGridID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location ID.
+        /// </summary>
+        internal static string strGridLocation {
+            get {
+                return ResourceManager.GetString("strGridLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serial number.
+        /// </summary>
+        internal static string strGridSerial {
+            get {
+                return ResourceManager.GetString("strGridSerial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string strGridType {
+            get {
+                return ResourceManager.GetString("strGridType", resourceCulture);
             }
         }
         
@@ -318,11 +588,47 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plot distribution.
+        /// </summary>
+        internal static string strGrpPlot {
+            get {
+                return ResourceManager.GetString("strGrpPlot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Array minimum points.
+        /// </summary>
+        internal static string strLblArrayPoints {
+            get {
+                return ResourceManager.GetString("strLblArrayPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Baud rate.
+        /// </summary>
+        internal static string strLblBaudRate {
+            get {
+                return ResourceManager.GetString("strLblBaudRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data-file path.
         /// </summary>
         internal static string strLblData {
             get {
                 return ResourceManager.GetString("strLblData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data bits.
+        /// </summary>
+        internal static string strLblDataBits {
+            get {
+                return ResourceManager.GetString("strLblDataBits", resourceCulture);
             }
         }
         
@@ -336,11 +642,83 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FTDI device list.
+        /// </summary>
+        internal static string strLblDeviceList {
+            get {
+                return ResourceManager.GetString("strLblDeviceList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Array index end.
         /// </summary>
         internal static string strLblEnd {
             get {
                 return ResourceManager.GetString("strLblEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flow control.
+        /// </summary>
+        internal static string strLblFlow {
+            get {
+                return ResourceManager.GetString("strLblFlow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Frequency (Hz).
+        /// </summary>
+        internal static string strLblFrequency {
+            get {
+                return ResourceManager.GetString("strLblFrequency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        internal static string strLblOff {
+            get {
+                return ResourceManager.GetString("strLblOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On.
+        /// </summary>
+        internal static string strLblOn {
+            get {
+                return ResourceManager.GetString("strLblOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parity.
+        /// </summary>
+        internal static string strLblParity {
+            get {
+                return ResourceManager.GetString("strLblParity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plot window (seconds).
+        /// </summary>
+        internal static string strLblPlotWindow {
+            get {
+                return ResourceManager.GetString("strLblPlotWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of sensors.
+        /// </summary>
+        internal static string strLblSensors {
+            get {
+                return ResourceManager.GetString("strLblSensors", resourceCulture);
             }
         }
         
@@ -363,6 +741,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stop bits.
+        /// </summary>
+        internal static string strLblStopBits {
+            get {
+                return ResourceManager.GetString("strLblStopBits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Window.
         /// </summary>
         internal static string strLblWindow {
@@ -372,7 +759,397 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exit?.
+        ///   Looks up a localized string similar to &amp;File.
+        /// </summary>
+        internal static string strMenuMainFile {
+            get {
+                return ResourceManager.GetString("strMenuMainFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Exit....
+        /// </summary>
+        internal static string strMenuMainFileExit {
+            get {
+                return ResourceManager.GetString("strMenuMainFileExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Open....
+        /// </summary>
+        internal static string strMenuMainFileOpen {
+            get {
+                return ResourceManager.GetString("strMenuMainFileOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Save....
+        /// </summary>
+        internal static string strMenuMainFileSave {
+            get {
+                return ResourceManager.GetString("strMenuMainFileSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;About....
+        /// </summary>
+        internal static string strMenuMainHelpAbout {
+            get {
+                return ResourceManager.GetString("strMenuMainHelpAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Help.
+        /// </summary>
+        internal static string strMenuMainHelpText {
+            get {
+                return ResourceManager.GetString("strMenuMainHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Tools.
+        /// </summary>
+        internal static string strMenuMainTools {
+            get {
+                return ResourceManager.GetString("strMenuMainTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Connect.
+        /// </summary>
+        internal static string strMenuMainToolsConnect {
+            get {
+                return ResourceManager.GetString("strMenuMainToolsConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Disconnect.
+        /// </summary>
+        internal static string strMenuMainToolsDisconnect {
+            get {
+                return ResourceManager.GetString("strMenuMainToolsDisconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Settings....
+        /// </summary>
+        internal static string strMenuMainToolsSettings {
+            get {
+                return ResourceManager.GetString("strMenuMainToolsSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;View.
+        /// </summary>
+        internal static string strMenuMainView {
+            get {
+                return ResourceManager.GetString("strMenuMainView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Averages.
+        /// </summary>
+        internal static string strMenuMainViewAverage {
+            get {
+                return ResourceManager.GetString("strMenuMainViewAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Radial distribution.
+        /// </summary>
+        internal static string strMenuMainViewDistribution {
+            get {
+                return ResourceManager.GetString("strMenuMainViewDistribution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show menu.
+        /// </summary>
+        internal static string strMenuMainViewMenu {
+            get {
+                return ResourceManager.GetString("strMenuMainViewMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ratios.
+        /// </summary>
+        internal static string strMenuMainViewRatio {
+            get {
+                return ResourceManager.GetString("strMenuMainViewRatio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raw data.
+        /// </summary>
+        internal static string strMenuMainViewRaw {
+            get {
+                return ResourceManager.GetString("strMenuMainViewRaw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show toolbar.
+        /// </summary>
+        internal static string strMenuMainViewToolbar {
+            get {
+                return ResourceManager.GetString("strMenuMainViewToolbar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to set data characteristics
+        ///(data bits, stop bits, and parity).
+        ///Error:
+        ///{0}.
+        /// </summary>
+        internal static string strMsbBoxErrorBits {
+            get {
+                return ResourceManager.GetString("strMsbBoxErrorBits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to set Baud rate.
+        ///Error:
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorBaudRate {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorBaudRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Baud rate error.
+        /// </summary>
+        internal static string strMsgBoxErrorBaudRateTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorBaudRateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bits error.
+        /// </summary>
+        internal static string strMsgBoxErrorBitsTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorBitsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The device is closed. Please, go to
+        ///&apos;Settings&apos; to open the device..
+        /// </summary>
+        internal static string strMsgBoxErrorDeviceClosed {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorDeviceClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device error.
+        /// </summary>
+        internal static string strMsgBoxErrorDeviceClosedTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorDeviceClosedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load FTD2XX.DLL.  Are the FTDI drivers installed?.
+        /// </summary>
+        internal static string strMsgBoxErrorDrivers {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorDrivers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error loading drivers.
+        /// </summary>
+        internal static string strMsgBoxErrorDriversTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorDriversTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to set flow control.
+        ///Error:
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorFlowControl {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorFlowControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flow control error.
+        /// </summary>
+        internal static string strMsgBoxErrorFlowControlTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorFlowControlTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempting to load FTD2XX.DLL from:.
+        /// </summary>
+        internal static string strMsgBoxErrorLoading {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error loading DLL.
+        /// </summary>
+        internal static string strMsgBoxErrorLoadingTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorLoadingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unexpected error happened while opening data file.
+        ///Please try again later or contact the software engineer.
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorOpenData {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorOpenData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error opening data.
+        /// </summary>
+        internal static string strMsgBoxErrorOpenDataTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorOpenDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not open the device.
+        /// </summary>
+        internal static string strMsgBoxErrorOpenDevice {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorOpenDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string strMsgBoxErrorOpenDeviceTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorOpenDeviceTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to open device.
+        ///Error:
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorOpening {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorOpening", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error opening device.
+        /// </summary>
+        internal static string strMsgBoxErrorOpeningTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorOpeningTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unexpected error happened while saving data to disk.
+        ///Please try again later or contact the software engineer.
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorSaveData {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorSaveData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error saving data.
+        /// </summary>
+        internal static string strMsgBoxErrorSaveDataTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorSaveDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error loading settings file.
+        ///
+        ///{0}
+        ///
+        ///Default values will be used instead..
+        /// </summary>
+        internal static string strMsgBoxErrorSettings {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string strMsgBoxErrorSettingsTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorSettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to set timeouts.
+        ///Error:
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorTimeouts {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorTimeouts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeouts error.
+        /// </summary>
+        internal static string strMsgBoxErrorTimeoutsTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorTimeoutsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to exit
+        ///the application?.
         /// </summary>
         internal static string strMsgBoxExit {
             get {
@@ -381,8 +1158,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to exit
-        ///the application?.
+        ///   Looks up a localized string similar to Exit?.
         /// </summary>
         internal static string strMsgBoxExitTitle {
             get {
@@ -391,21 +1167,57 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unexpected error in &apos;InitializeDataArrays&apos;.
-        ///{0}.
+        ///   Looks up a localized string similar to There is no data available to be saved..
         /// </summary>
-        internal static string strMsgBoxInitArray {
+        internal static string strMsgBoxNoData {
             get {
-                return ResourceManager.GetString("strMsgBoxInitArray", resourceCulture);
+                return ResourceManager.GetString("strMsgBoxNoData", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error.
+        ///   Looks up a localized string similar to No data.
         /// </summary>
-        internal static string strMsgBoxInitArrayTitle {
+        internal static string strMsgBoxNoDataTitle {
             get {
-                return ResourceManager.GetString("strMsgBoxInitArrayTitle", resourceCulture);
+                return ResourceManager.GetString("strMsgBoxNoDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to reset all fields
+        ///to their default values?.
+        /// </summary>
+        internal static string strMsgBoxReset {
+            get {
+                return ResourceManager.GetString("strMsgBoxReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset?.
+        /// </summary>
+        internal static string strMsgBoxResetTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxResetTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data has been successfully saved to disk..
+        /// </summary>
+        internal static string strMsgBoxSaveData {
+            get {
+                return ResourceManager.GetString("strMsgBoxSaveData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data saving.
+        /// </summary>
+        internal static string strMsgBoxSaveDataTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxSaveDataTitle", resourceCulture);
             }
         }
         
@@ -429,146 +1241,110 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Windowed signal.
+        ///   Looks up a localized string similar to &quot;ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*&quot;.
         /// </summary>
-        internal static string strPlotAppliedTitle {
+        internal static string strOpenDlgFilter {
             get {
-                return ResourceManager.GetString("strPlotAppliedTitle", resourceCulture);
+                return ResourceManager.GetString("strOpenDlgFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open illuminance data.
+        /// </summary>
+        internal static string strOpenDlgTitle {
+            get {
+                return ResourceManager.GetString("strOpenDlgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max, average, min.
+        /// </summary>
+        internal static string strPlotAverageTitle {
+            get {
+                return ResourceManager.GetString("strPlotAverageTitle", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Time (seconds).
         /// </summary>
-        internal static string strPlotAppliedXLabel {
+        internal static string strPlotAverageXLabel {
             get {
-                return ResourceManager.GetString("strPlotAppliedXLabel", resourceCulture);
+                return ResourceManager.GetString("strPlotAverageXLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Amplitude.
+        ///   Looks up a localized string similar to Lux.
         /// </summary>
-        internal static string strPlotAppliedYLabel {
+        internal static string strPlotAverageYLabel {
             get {
-                return ResourceManager.GetString("strPlotAppliedYLabel", resourceCulture);
+                return ResourceManager.GetString("strPlotAverageYLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fast Fourier transform.
+        ///   Looks up a localized string similar to Illuminance distribution.
         /// </summary>
-        internal static string strPlotFFTTitle {
+        internal static string strPlotDistributionTitle {
             get {
-                return ResourceManager.GetString("strPlotFFTTitle", resourceCulture);
+                return ResourceManager.GetString("strPlotDistributionTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Frequency (Hz).
+        ///   Looks up a localized string similar to Illuminance ratios.
         /// </summary>
-        internal static string strPlotFFTXLabel {
+        internal static string strPlotRatiosTitle {
             get {
-                return ResourceManager.GetString("strPlotFFTXLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Magnitude (RMS²).
-        /// </summary>
-        internal static string strPlotFFTYLabelMag {
-            get {
-                return ResourceManager.GetString("strPlotFFTYLabelMag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Power (dB).
-        /// </summary>
-        internal static string strPlotFFTYLabelPow {
-            get {
-                return ResourceManager.GetString("strPlotFFTYLabelPow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fractal dimension.
-        /// </summary>
-        internal static string strPlotFractalTitle {
-            get {
-                return ResourceManager.GetString("strPlotFractalTitle", resourceCulture);
+                return ResourceManager.GetString("strPlotRatiosTitle", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Time (seconds).
         /// </summary>
-        internal static string strPlotFractalXLabel {
+        internal static string strPlotRatiosXLabel {
             get {
-                return ResourceManager.GetString("strPlotFractalXLabel", resourceCulture);
+                return ResourceManager.GetString("strPlotRatiosXLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dimension (H).
+        ///   Looks up a localized string similar to Ratio.
         /// </summary>
-        internal static string strPlotFractalYLabel {
+        internal static string strPlotRatiosYLabel {
             get {
-                return ResourceManager.GetString("strPlotFractalYLabel", resourceCulture);
+                return ResourceManager.GetString("strPlotRatiosYLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input signal.
+        ///   Looks up a localized string similar to Illuminance.
         /// </summary>
-        internal static string strPlotOriginalTitle {
+        internal static string strPlotRawTitle {
             get {
-                return ResourceManager.GetString("strPlotOriginalTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Time (seconds).
-        /// </summary>
-        internal static string strPlotOriginalXLabel {
-            get {
-                return ResourceManager.GetString("strPlotOriginalXLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Amplitude.
-        /// </summary>
-        internal static string strPlotOriginalYLabel {
-            get {
-                return ResourceManager.GetString("strPlotOriginalYLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} window.
-        /// </summary>
-        internal static string strPlotWindowTitle {
-            get {
-                return ResourceManager.GetString("strPlotWindowTitle", resourceCulture);
+                return ResourceManager.GetString("strPlotRawTitle", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Time (seconds).
         /// </summary>
-        internal static string strPlotWindowXLabel {
+        internal static string strPlotRawXLabel {
             get {
-                return ResourceManager.GetString("strPlotWindowXLabel", resourceCulture);
+                return ResourceManager.GetString("strPlotRawXLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Amplitude.
+        ///   Looks up a localized string similar to Lux.
         /// </summary>
-        internal static string strPlotWindowYLabel {
+        internal static string strPlotRawYLabel {
             get {
-                return ResourceManager.GetString("strPlotWindowYLabel", resourceCulture);
+                return ResourceManager.GetString("strPlotRawYLabel", resourceCulture);
             }
         }
         
@@ -591,29 +1367,20 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data points.
+        ///   Looks up a localized string similar to Radar.
         /// </summary>
-        internal static string strRadPoints {
+        internal static string strRadRadar {
             get {
-                return ResourceManager.GetString("strRadPoints", resourceCulture);
+                return ResourceManager.GetString("strRadRadar", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Seconds.
+        ///   Looks up a localized string similar to Radial gauge.
         /// </summary>
-        internal static string strRadSeconds {
+        internal static string strRadRadialGauge {
             get {
-                return ResourceManager.GetString("strRadSeconds", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Date and time.
-        /// </summary>
-        internal static string strRadTime {
-            get {
-                return ResourceManager.GetString("strRadTime", resourceCulture);
+                return ResourceManager.GetString("strRadRadialGauge", resourceCulture);
             }
         }
         
@@ -637,6 +1404,25 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The culture identifier string name is not valid.
+        ///{0}.
+        /// </summary>
+        internal static string strReadDataErrorCulture {
+            get {
+                return ResourceManager.GetString("strReadDataErrorCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Culture name error.
+        /// </summary>
+        internal static string strReadDataErrorCultureTitle {
+            get {
+                return ResourceManager.GetString("strReadDataErrorCultureTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid numeric value: {0}.
         /// </summary>
         internal static string strReadDataErrorNumber {
@@ -655,11 +1441,65 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error.
+        ///   Looks up a localized string similar to Error opening data.
         /// </summary>
         internal static string strReadDataErrorTitle {
             get {
                 return ResourceManager.GetString("strReadDataErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*.
+        /// </summary>
+        internal static string strSaveDlgFilter {
+            get {
+                return ResourceManager.GetString("strSaveDlgFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save illuminance data.
+        /// </summary>
+        internal static string strSaveDlgTitle {
+            get {
+                return ResourceManager.GetString("strSaveDlgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receiving data.
+        /// </summary>
+        internal static string strStatusExchange {
+            get {
+                return ResourceManager.GetString("strStatusExchange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device ID.
+        /// </summary>
+        internal static string strStatusID {
+            get {
+                return ResourceManager.GetString("strStatusID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location ID.
+        /// </summary>
+        internal static string strStatusLocation {
+            get {
+                return ResourceManager.GetString("strStatusLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnected.
+        /// </summary>
+        internal static string strStatusOpen {
+            get {
+                return ResourceManager.GetString("strStatusOpen", resourceCulture);
             }
         }
         
@@ -673,29 +1513,101 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compute the approximate and sample entropy.
+        ///   Looks up a localized string similar to Plot distribution.
         /// </summary>
-        internal static string strStatusTipEntropy {
+        internal static string strStatusTipDistribution {
             get {
-                return ResourceManager.GetString("strStatusTipEntropy", resourceCulture);
+                return ResourceManager.GetString("strStatusTipDistribution", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Compute the cumulative fractal dimension (CPU intensive).
+        ///   Looks up a localized string similar to Exchange status.
         /// </summary>
-        internal static string strStatusTipFractal {
+        internal static string strStatusTipExchange {
             get {
-                return ResourceManager.GetString("strStatusTipFractal", resourceCulture);
+                return ResourceManager.GetString("strStatusTipExchange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plot either FFT power spectra(dB) or magnitude.
+        ///   Looks up a localized string similar to Device ID.
         /// </summary>
-        internal static string strStatusTipPower {
+        internal static string strStatusTipID {
             get {
-                return ResourceManager.GetString("strStatusTipPower", resourceCulture);
+                return ResourceManager.GetString("strStatusTipID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to T-10A location ID.
+        /// </summary>
+        internal static string strStatusTipLocation {
+            get {
+                return ResourceManager.GetString("strStatusTipLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plot max, average and min.
+        /// </summary>
+        internal static string strStatusTipMax {
+            get {
+                return ResourceManager.GetString("strStatusTipMax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connexion status.
+        /// </summary>
+        internal static string strStatusTipOpen {
+            get {
+                return ResourceManager.GetString("strStatusTipOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plot ratios.
+        /// </summary>
+        internal static string strStatusTipRatio {
+            get {
+                return ResourceManager.GetString("strStatusTipRatio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plot raw data.
+        /// </summary>
+        internal static string strStatusTipRaw {
+            get {
+                return ResourceManager.GetString("strStatusTipRaw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device type.
+        /// </summary>
+        internal static string strStatusTipType {
+            get {
+                return ResourceManager.GetString("strStatusTipType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device type.
+        /// </summary>
+        internal static string strStatusType {
+            get {
+                return ResourceManager.GetString("strStatusType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to T-10A sensor.
+        /// </summary>
+        internal static string strTabDevice {
+            get {
+                return ResourceManager.GetString("strTabDevice", resourceCulture);
             }
         }
         
@@ -711,9 +1623,9 @@ namespace SignalAnalysis.localization {
         /// <summary>
         ///   Looks up a localized string similar to Plotting.
         /// </summary>
-        internal static string strTabPlot {
+        internal static string strTabPlots {
             get {
-                return ResourceManager.GetString("strTabPlot", resourceCulture);
+                return ResourceManager.GetString("strTabPlots", resourceCulture);
             }
         }
         
@@ -727,6 +1639,24 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connect.
+        /// </summary>
+        internal static string strToolStripConnect {
+            get {
+                return ResourceManager.GetString("strToolStripConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnect.
+        /// </summary>
+        internal static string strToolStripDisconnect {
+            get {
+                return ResourceManager.GetString("strToolStripDisconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string strToolStripExit {
@@ -736,20 +1666,20 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export.
-        /// </summary>
-        internal static string strToolStripExport {
-            get {
-                return ResourceManager.GetString("strToolStripExport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         internal static string strToolStripOpen {
             get {
                 return ResourceManager.GetString("strToolStripOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string strToolStripSave {
+            get {
+                return ResourceManager.GetString("strToolStripSave", resourceCulture);
             }
         }
         
@@ -772,20 +1702,29 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start receiving data from T-10A device.
+        /// </summary>
+        internal static string strToolTipConnect {
+            get {
+                return ResourceManager.GetString("strToolTipConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop and disconnect T-10A device.
+        /// </summary>
+        internal static string strToolTipDisconnect {
+            get {
+                return ResourceManager.GetString("strToolTipDisconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit the application.
         /// </summary>
         internal static string strToolTipExit {
             get {
                 return ResourceManager.GetString("strToolTipExit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Export data and data analysis.
-        /// </summary>
-        internal static string strToolTipExport {
-            get {
-                return ResourceManager.GetString("strToolTipExport", resourceCulture);
             }
         }
         
@@ -799,11 +1738,29 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save data.
+        /// </summary>
+        internal static string strToolTipSave {
+            get {
+                return ResourceManager.GetString("strToolTipSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings for plots, data, and UI.
         /// </summary>
         internal static string strToolTipSettings {
             get {
                 return ResourceManager.GetString("strToolTipSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User interface language.
+        /// </summary>
+        internal static string strToolTipUILanguage {
+            get {
+                return ResourceManager.GetString("strToolTipUILanguage", resourceCulture);
             }
         }
     }
