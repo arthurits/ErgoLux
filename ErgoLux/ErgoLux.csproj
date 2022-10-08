@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="localization\strings.backup 1" />
+    <None Remove="localization\strings.Designer.backup 1" />
+    <None Remove="localization\strings.Designer.backup 2" />
     <None Remove="strCommands.txt" />
   </ItemGroup>
 
@@ -36,6 +39,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="localization\strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>strings.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -44,6 +52,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="localization\strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -56,7 +56,10 @@ namespace FTD2XX_NET
                     // Try the same directory that this FTD2XX_NET DLL is in
                     Console.WriteLine("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location));
 #if DEBUG
-                    MessageBox.Show("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location));
+                    MessageBox.Show("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location),
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                     hFTD2XXDLL = LoadLibrary(@Path.GetDirectoryName(GetType().Assembly.Location) + "\\FTD2XX.DLL");
                     //if (hFTD2XXDLL == IntPtr.Zero)
@@ -74,7 +77,10 @@ namespace FTD2XX_NET
                 // Failed to load our DLL - alert the user
                 Console.WriteLine("Failed to load FTD2XX.DLL. Are the FTDI drivers installed?");
 #if DEBUG
-                MessageBox.Show("Failed to load FTD2XX.DLL. Are the FTDI drivers installed?");
+                MessageBox.Show("Failed to load FTD2XX.DLL. Are the FTDI drivers installed?",
+                    "Error",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Error);
 #endif
             }
         }
@@ -98,7 +104,10 @@ namespace FTD2XX_NET
                     // Give up :(
                     Console.WriteLine("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location));
 #if DEBUG
-                    MessageBox.Show("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location));
+                    MessageBox.Show("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location),
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2108,7 +2117,10 @@ namespace FTD2XX_NET
             {
                 Console.WriteLine("Failed to load function FT_CreateDeviceInfoList.");
 #if DEBUG
-                MessageBox.Show("Failed to load function FT_CreateDeviceInfoList.");
+                MessageBox.Show("Failed to load function FT_CreateDeviceInfoList.",
+                    "Error",
+                    System.Windows.Forms.MessageBoxButtons.OK,
+                    System.Windows.Forms.MessageBoxIcon.Error);
 #endif
             }
             return ftStatus;
@@ -2189,14 +2201,20 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_CreateDeviceInfoList.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_CreateDeviceInfoList.");
+                    MessageBox.Show("Failed to load function FT_CreateDeviceInfoList.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_GetDeviceInfoDetail == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfoListDetail.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetDeviceInfoListDetail.");
+                    MessageBox.Show("Failed to load function FT_GetDeviceInfoListDetail.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2262,28 +2280,40 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Open.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Open.");
+                    MessageBox.Show("Failed to load function FT_Open.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetDataCharacteristics == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.");
+                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetFlowControl == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetFlowControl.");
+                    MessageBox.Show("Failed to load function FT_SetFlowControl.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetBaudRate == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetBaudRate.");
+                    MessageBox.Show("Failed to load function FT_SetBaudRate.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2348,28 +2378,40 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_OpenEx.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_OpenEx.");
+                    MessageBox.Show("Failed to load function FT_OpenEx.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetDataCharacteristics == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.");
+                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetFlowControl == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetFlowControl.");
+                    MessageBox.Show("Failed to load function FT_SetFlowControl.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetBaudRate == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetBaudRate.");
+                    MessageBox.Show("Failed to load function FT_SetBaudRate.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2434,28 +2476,40 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_OpenEx.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_OpenEx.");
+                    MessageBox.Show("Failed to load function FT_OpenEx.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetDataCharacteristics == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.");
+                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetFlowControl == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetFlowControl.");
+                    MessageBox.Show("Failed to load function FT_SetFlowControl.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetBaudRate == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetBaudRate.");
+                    MessageBox.Show("Failed to load function FT_SetBaudRate.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2520,28 +2574,40 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_OpenEx.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_OpenEx.");
+                    MessageBox.Show("Failed to load function FT_OpenEx.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetDataCharacteristics == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.");
+                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetFlowControl == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetFlowControl.");
+                    MessageBox.Show("Failed to load function FT_SetFlowControl.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetBaudRate == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetBaudRate.");
+                    MessageBox.Show("Failed to load function FT_SetBaudRate.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2585,7 +2651,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Close.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Close.");
+                    MessageBox.Show("Failed to load function FT_Close.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2637,7 +2706,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Read.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Read.");
+                    MessageBox.Show("Failed to load function FT_Read.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2688,7 +2760,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Read.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Read.");
+                    MessageBox.Show("Failed to load function FT_Read.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2732,7 +2807,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Write.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Write.");
+                    MessageBox.Show("Failed to load function FT_Write.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2773,7 +2851,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Write.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Write.");
+                    MessageBox.Show("Failed to load function FT_Write.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2817,7 +2898,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Write.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Write.");
+                    MessageBox.Show("Failed to load function FT_Write.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2861,7 +2945,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Write.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Write.");
+                    MessageBox.Show("Failed to load function FT_Write.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2902,7 +2989,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_ResetDevice.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_ResetDevice.");
+                    MessageBox.Show("Failed to load function FT_ResetDevice.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2944,7 +3034,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Purge.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Purge.");
+                    MessageBox.Show("Failed to load function FT_Purge.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -2988,7 +3081,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetEventNotification.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetEventNotification.");
+                    MessageBox.Show("Failed to load function FT_SetEventNotification.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3029,7 +3125,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_StopInTask.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_StopInTask.");
+                    MessageBox.Show("Failed to load function FT_StopInTask.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3070,7 +3169,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_RestartInTask.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_RestartInTask.");
+                    MessageBox.Show("Failed to load function FT_RestartInTask.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3111,7 +3213,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_ResetPort.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_ResetPort.");
+                    MessageBox.Show("Failed to load function FT_ResetPort.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3163,14 +3268,20 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_CyclePort.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_CyclePort.");
+                    MessageBox.Show("Failed to load function FT_CyclePort.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_Close == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Close.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Close.");
+                    MessageBox.Show("Failed to load function FT_Close.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3208,7 +3319,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Rescan.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Rescan.");
+                    MessageBox.Show("Failed to load function FT_Rescan.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3249,7 +3363,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_Reload.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_Reload.");
+                    MessageBox.Show("Failed to load function FT_Reload.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3396,7 +3513,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetBitMode.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetBitMode.");
+                    MessageBox.Show("Failed to load function FT_SetBitMode.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3438,7 +3558,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetBitMode.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetBitMode.");
+                    MessageBox.Show("Failed to load function FT_GetBitMode.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3481,7 +3604,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_ReadEE.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_ReadEE.");
+                    MessageBox.Show("Failed to load function FT_ReadEE.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3524,7 +3650,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_WriteEE.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_WriteEE.");
+                    MessageBox.Show("Failed to load function FT_WriteEE.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3577,7 +3706,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EraseEE.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EraseEE.");
+                    MessageBox.Show("Failed to load function FT_EraseEE.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3669,7 +3801,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Read.");
+                    MessageBox.Show("Failed to load function FT_EE_Read.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3771,7 +3906,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Read.");
+                    MessageBox.Show("Failed to load function FT_EE_Read.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3878,7 +4016,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Read.");
+                    MessageBox.Show("Failed to load function FT_EE_Read.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -3989,7 +4130,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Read.");
+                    MessageBox.Show("Failed to load function FT_EE_Read.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -4099,7 +4243,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Read.");
+                    MessageBox.Show("Failed to load function FT_EE_Read.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -4214,7 +4361,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Read.");
+                    MessageBox.Show("Failed to load function FT_EE_Read.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -4350,7 +4500,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Read.");
+                    MessageBox.Show("Failed to load function FT_EE_Read.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -4462,7 +4615,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Program.");
+                    MessageBox.Show("Failed to load function FT_EE_Program.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -4585,7 +4741,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Program.");
+                    MessageBox.Show("Failed to load function FT_EE_Program.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -4716,7 +4875,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Program.");
+                    MessageBox.Show("Failed to load function FT_EE_Program.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -4847,7 +5009,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Program.");
+                    MessageBox.Show("Failed to load function FT_EE_Program.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -4977,7 +5142,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Program.");
+                    MessageBox.Show("Failed to load function FT_EE_Program.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5112,7 +5280,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_Program.");
+                    MessageBox.Show("Failed to load function FT_EE_Program.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5306,14 +5477,20 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_UASize.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_UASize.");
+                    MessageBox.Show("Failed to load function FT_EE_UASize.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_EE_UARead == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_UARead.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_UARead.");
+                    MessageBox.Show("Failed to load function FT_EE_UARead.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5365,14 +5542,20 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_UASize.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_UASize.");
+                    MessageBox.Show("Failed to load function FT_EE_UASize.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_EE_UAWrite == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_UAWrite.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_UAWrite.");
+                    MessageBox.Show("Failed to load function FT_EE_UAWrite.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5420,7 +5603,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfo.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetDeviceInfo.");
+                    MessageBox.Show("Failed to load function FT_GetDeviceInfo.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5466,7 +5652,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfo.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetDeviceInfo.");
+                    MessageBox.Show("Failed to load function FT_GetDeviceInfo.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5518,7 +5707,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfo.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetDeviceInfo.");
+                    MessageBox.Show("Failed to load function FT_GetDeviceInfo.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5570,7 +5762,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfo.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetDeviceInfo.");
+                    MessageBox.Show("Failed to load function FT_GetDeviceInfo.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5612,7 +5807,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetQueueStatus.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetQueueStatus.");
+                    MessageBox.Show("Failed to load function FT_GetQueueStatus.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5657,7 +5855,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetStatus.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetStatus.");
+                    MessageBox.Show("Failed to load function FT_GetStatus.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5702,7 +5903,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetStatus.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetStatus.");
+                    MessageBox.Show("Failed to load function FT_GetStatus.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5748,7 +5952,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetModemStatus.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetModemStatus.");
+                    MessageBox.Show("Failed to load function FT_GetModemStatus.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5793,7 +6000,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetModemStatus.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetModemStatus.");
+                    MessageBox.Show("Failed to load function FT_GetModemStatus.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5835,7 +6045,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetBaudRate.");
+                    MessageBox.Show("Failed to load function FT_SetBaudRate.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5879,7 +6092,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.");
+                    MessageBox.Show("Failed to load function FT_SetDataCharacteristics.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5923,7 +6139,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetFlowControl.");
+                    MessageBox.Show("Failed to load function FT_SetFlowControl.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -5974,14 +6193,20 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetRts.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetRts.");
+                    MessageBox.Show("Failed to load function FT_SetRts.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_ClrRts == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_ClrRts.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_ClrRts.");
+                    MessageBox.Show("Failed to load function FT_ClrRts.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6032,14 +6257,20 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetDtr.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetDtr.");
+                    MessageBox.Show("Failed to load function FT_SetDtr.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_ClrDtr == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_ClrDtr.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_ClrDtr.");
+                    MessageBox.Show("Failed to load function FT_ClrDtr.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6082,7 +6313,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetTimeouts.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetTimeouts.");
+                    MessageBox.Show("Failed to load function FT_SetTimeouts.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6133,14 +6367,20 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetBreakOn.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetBreakOn.");
+                    MessageBox.Show("Failed to load function FT_SetBreakOn.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
                 if (pFT_SetBreakOff == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBreakOff.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetBreakOff.");
+                    MessageBox.Show("Failed to load function FT_SetBreakOff.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6183,7 +6423,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetResetPipeRetryCount.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetResetPipeRetryCount.");
+                    MessageBox.Show("Failed to load function FT_SetResetPipeRetryCount.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6225,7 +6468,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetDriverVersion.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetDriverVersion.");
+                    MessageBox.Show("Failed to load function FT_GetDriverVersion.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6264,7 +6510,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetLibraryVersion.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetLibraryVersion.");
+                    MessageBox.Show("Failed to load function FT_GetLibraryVersion.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6306,7 +6555,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetDeadmanTimeout.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetDeadmanTimeout.");
+                    MessageBox.Show("Failed to load function FT_SetDeadmanTimeout.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6361,7 +6613,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetLatencyTimer.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetLatencyTimer.");
+                    MessageBox.Show("Failed to load function FT_SetLatencyTimer.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6403,7 +6658,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetLatencyTimer.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetLatencyTimer.");
+                    MessageBox.Show("Failed to load function FT_GetLatencyTimer.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6449,7 +6707,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetUSBParameters.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetUSBParameters.");
+                    MessageBox.Show("Failed to load function FT_SetUSBParameters.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6494,7 +6755,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_SetChars.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_SetChars.");
+                    MessageBox.Show("Failed to load function FT_SetChars.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6535,7 +6799,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_EE_UASize.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_EE_UASize.");
+                    MessageBox.Show("Failed to load function FT_EE_UASize.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6593,7 +6860,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_GetComPortNumber.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_GetComPortNumber.");
+                    MessageBox.Show("Failed to load function FT_GetComPortNumber.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6635,7 +6905,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_VendorCmdGet.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_VendorCmdGet.");
+                    MessageBox.Show("Failed to load function FT_VendorCmdGet.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }
@@ -6676,7 +6949,10 @@ namespace FTD2XX_NET
                 {
                     Console.WriteLine("Failed to load function FT_VendorCmdSet.");
 #if DEBUG
-                    MessageBox.Show("Failed to load function FT_VendorCmdSet.");
+                    MessageBox.Show("Failed to load function FT_VendorCmdSet.",
+                        "Error",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
             }

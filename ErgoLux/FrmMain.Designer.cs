@@ -363,7 +363,7 @@ namespace ErgoLux
             this.statusStripLabelXtras.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelXtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelXtras.Name = "statusStripLabelXtras";
-            this.statusStripLabelXtras.Size = new System.Drawing.Size(144, 23);
+            this.statusStripLabelXtras.Size = new System.Drawing.Size(134, 23);
             this.statusStripLabelXtras.Spring = true;
             this.statusStripLabelXtras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -373,7 +373,7 @@ namespace ErgoLux
             this.statusStripLabelUILanguage.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelUILanguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelUILanguage.Name = "statusStripLabelUILanguage";
-            this.statusStripLabelUILanguage.Size = new System.Drawing.Size(60, 23);
+            this.statusStripLabelUILanguage.Size = new System.Drawing.Size(70, 23);
             this.statusStripLabelUILanguage.Text = "Invariant";
             this.statusStripLabelUILanguage.ToolTipText = "User interface language";
             this.statusStripLabelUILanguage.Click += new System.EventHandler(this.Language_Click);
@@ -417,6 +417,7 @@ namespace ErgoLux
             this.statusStripLabelMax.Checked = false;
             this.statusStripLabelMax.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelMax.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelMax.ForeColor = System.Drawing.SystemColors.ControlText;
             this.statusStripLabelMax.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelMax.Name = "statusStripLabelMax";
             this.statusStripLabelMax.Size = new System.Drawing.Size(28, 23);
@@ -432,6 +433,7 @@ namespace ErgoLux
             this.statusStripLabelRatio.Checked = false;
             this.statusStripLabelRatio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelRatio.ForeColor = System.Drawing.SystemColors.ControlText;
             this.statusStripLabelRatio.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelRatio.Name = "statusStripLabelRatio";
             this.statusStripLabelRatio.Size = new System.Drawing.Size(28, 23);
@@ -447,7 +449,8 @@ namespace ErgoLux
             this.statusStripLabelCross.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.statusStripLabelCross.Checked = false;
             this.statusStripLabelCross.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelCross.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelCross.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statusStripLabelCross.ForeColor = System.Drawing.SystemColors.ControlText;
             this.statusStripLabelCross.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelCross.Name = "statusStripLabelCross";
             this.statusStripLabelCross.Size = new System.Drawing.Size(28, 23);
@@ -723,9 +726,7 @@ namespace ErgoLux
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelLocation;
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconOpen;
-        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRatio;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelXtras;
-        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRaw;
         private ScottPlot.FormsPlotCrossHair plotData;
         private ScottPlot.FormsPlot plotDistribution;
         private ScottPlot.FormsPlotCrossHair plotStats;
@@ -738,9 +739,8 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconExchange;
         private System.Windows.Forms.ToolStripButton toolStripMain_Save;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelID;
+        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelUILanguage;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelMax;
-        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRadar;
         private System.Windows.Forms.ToolStripButton toolStripMain_Open;
         private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_View;
         private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_View_Menu;
@@ -757,7 +757,10 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_Tools_Disconnect;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem mnuMainFrm_Tools_Settings;
-        private ToolStripStatusLabel statusStripLabelUILanguage;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRatio;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRaw;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelMax;
+        private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelRadar;
         private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelCross;
     }
 }
