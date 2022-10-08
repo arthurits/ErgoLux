@@ -108,15 +108,15 @@ partial class FrmMain
 
         // Customize styling
         plotData.Plot.Palette = ScottPlot.Palette.Category10;
-        plotData.Plot.Title(StringsRM.GetString("strPlotRawTitle", _settings.AppCulture) ?? "Illuminance");
-        plotData.Plot.YLabel(StringsRM.GetString("strPlotRawYLabel", _settings.AppCulture) ?? "Lux");
-        plotData.Plot.XLabel(StringsRM.GetString("strPlotRawXLabel", _settings.AppCulture) ?? "Time (seconds)");
+        plotData.Plot.Title(StringResources.PlotRawTitle);
+        plotData.Plot.YLabel(StringResources.PlotRawYLabel);
+        plotData.Plot.XLabel(StringResources.PlotRawXLabel);
         plotData.Plot.Grid(enable: false);
         plotData.SnapToPoint = true;
 
         // Customize the Distribution plot
         plotDistribution.Plot.Grid(enable: false);
-        plotDistribution.Plot.Title(StringsRM.GetString("strPlotDistributionTitle", _settings.AppCulture) ?? "Illuminance distribution");
+        plotDistribution.Plot.Title(StringResources.PlotDistributionTitle);
         plotDistribution.Plot.XAxis.Ticks(false);
         plotDistribution.Plot.YAxis.Ticks(false);
 
@@ -124,9 +124,9 @@ partial class FrmMain
         plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
         plotStats.Plot.Palette = ScottPlot.Palette.Nord;
-        plotStats.Plot.Title(StringsRM.GetString("strPlotAverageTitle", _settings.AppCulture) ?? "Max, average, min");
-        plotStats.Plot.YLabel(StringsRM.GetString("strPlotAverageYLabel", _settings.AppCulture) ?? "Lux");
-        plotStats.Plot.XLabel(StringsRM.GetString("strPlotAverageXLabel", _settings.AppCulture) ?? "Time (seconds)");
+        plotStats.Plot.Title(StringResources.PlotAverageTitle);
+        plotStats.Plot.YLabel(StringResources.PlotAverageYLabel);
+        plotStats.Plot.XLabel(StringResources.PlotAverageXLabel);
         plotStats.Plot.Grid(enable: false);
         plotStats.SnapToPoint = true;
 
@@ -135,9 +135,9 @@ partial class FrmMain
         plotRatio.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1);
 
         plotRatio.Plot.Palette = ScottPlot.Palette.OneHalf;
-        plotRatio.Plot.Title(StringsRM.GetString("strPlotRatiosTitle", _settings.AppCulture) ?? "Illuminance ratios");
-        plotRatio.Plot.YLabel(StringsRM.GetString("strPlotRatiosYLabel", _settings.AppCulture) ?? "Ratio");
-        plotRatio.Plot.XLabel(StringsRM.GetString("strPlotRatiosXLabel", _settings.AppCulture) ?? "Time (seconds)");
+        plotRatio.Plot.Title(StringResources.PlotRatiosTitle);
+        plotRatio.Plot.YLabel(StringResources.PlotRatiosYLabel);
+        plotRatio.Plot.XLabel(StringResources.PlotRatiosXLabel);
         plotRatio.Plot.Grid(enable: false);
         plotRatio.SnapToPoint = true;
 

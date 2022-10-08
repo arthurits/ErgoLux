@@ -210,7 +210,7 @@ public partial class FrmSettings : Form
         using (new CenterWinDialog(this))
         {
             result = MessageBox.Show(StringResources.MsgBoxReset,
-                StringResources.DlgResetTitle,
+                StringResources.MsgBoxResetTitle,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);

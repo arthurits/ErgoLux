@@ -47,9 +47,9 @@ partial class FrmMain
 
             strLine = sr.ReadLine();    // Total measuring time
             if (strLine is null)
-                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringsRM.GetString("strFileHeader04", _settings.AppCulture) ?? "Total measuring time"));
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader04));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader04", fileCulture) ?? "Total measuring time"}: ", StringComparison.InvariantCulture))
-                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringsRM.GetString("strFileHeader04", _settings.AppCulture) ?? "Total measuring time"));
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader04));
 
             strLine = sr.ReadLine();    // Number of sensors
             if (strLine is null)

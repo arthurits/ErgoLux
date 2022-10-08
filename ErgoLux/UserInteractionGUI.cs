@@ -238,9 +238,9 @@ partial class FrmMain
                     m_timer.Interval = 1000 / _settings.T10_Frequency;
 
                     // Update the status strip with information
-                    this.statusStripLabelLocation.Text = (StringsRM.GetString("strStatusLocation", _settings.AppCulture) ?? "Location ID") + $": {_settings.T10_LocationID:X}";
-                    this.statusStripLabelType.Text = (StringsRM.GetString("strStatusType", _settings.AppCulture) ?? "Device type") + $": {frm.GetDeviceType}";
-                    this.statusStripLabelID.Text = (StringsRM.GetString("strStatusID", _settings.AppCulture) ?? "Device ID") + $": {frm.GetDeviceID}";
+                    this.statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
+                    this.statusStripLabelType.Text = StringResources.StatusType + $": {frm.GetDeviceType}";
+                    this.statusStripLabelID.Text = StringResources.StatusID + $": {frm.GetDeviceID}";
                     this.statusStripIconOpen.Image = _settings.Icon_Open;
 
                     InitializeStatusStripLabelsStatus();
@@ -254,8 +254,8 @@ partial class FrmMain
                     this.statusStripIconOpen.Image = _settings.Icon_Close;
                     using (new CenterWinDialog(this))
                     {
-                        MessageBox.Show(StringsRM.GetString("strMsgBoxErrorOpenDevice", _settings.AppCulture) ?? "Could not open the device",
-                            StringsRM.GetString("strMsgBoxErrorOpenDeviceTitle", _settings.AppCulture) ?? "Error",
+                        MessageBox.Show(StringResources.MsgBoxErrorOpenDevice,
+                            StringResources.MsgBoxErrorOpenDeviceTitle,
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                     }
