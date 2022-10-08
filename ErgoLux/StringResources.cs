@@ -156,7 +156,7 @@ public static class StringResources
             "{0}";
     public static string MsgBoxErrorBaudRateTitle => StringRM.GetString("strMsgBoxErrorBaudRateTitle", Culture) ?? "Baud rate error";
     public static string MsgBoxErrorBitsTitle => StringRM.GetString("strMsgBoxErrorBitsTitle", Culture) ?? "Bits error";
-    public static string MsgBoxErrorDrivers => StringRM.GetString("strMsgBoxErrorDrivers", Culture) ?? "Failed to load FTD2XX.DLL.  Are the FTDI drivers installed?";
+    public static string MsgBoxErrorDrivers => StringRM.GetString("strMsgBoxErrorDrivers", Culture) ?? "Failed to load FTD2XX.DLL. Are the FTDI drivers installed?";
     public static string MsgBoxErrorDriversTitle => StringRM.GetString("strMsgBoxErrorDriversTitle", Culture) ?? "Error loading drivers";
     public static string MsgBoxErrorFlowControl => StringRM.GetString("strMsgBoxErrorFlowControl", Culture) ?? "Failed to set flow control." +
             Environment.NewLine +

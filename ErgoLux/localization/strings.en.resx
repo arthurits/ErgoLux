@@ -429,7 +429,7 @@ Error:
     <value>Device error</value>
   </data>
   <data name="strMsgBoxErrorDrivers" xml:space="preserve">
-    <value>Failed to load FTD2XX.DLL.  Are the FTDI drivers installed?</value>
+    <value>Failed to load FTD2XX.DLL. Are the FTDI drivers installed?</value>
   </data>
   <data name="strMsgBoxErrorDriversTitle" xml:space="preserve">
     <value>Error loading drivers</value>

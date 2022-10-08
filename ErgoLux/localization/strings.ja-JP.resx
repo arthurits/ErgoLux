@@ -53,6 +53,7 @@
     value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
+
     mimetype: application/x-microsoft.net.object.bytearray.base64
     value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
@@ -132,7 +133,7 @@
     <value>&amp;リセット</value>
   </data>
   <data name="strBtnSettings" xml:space="preserve">
-    <value>&amp;Settings</value>
+    <value>&amp;設定</value>
   </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>プロットの十字線を表示</value>
@@ -401,12 +402,12 @@
     <value>生データ</value>
   </data>
   <data name="strMenuMainViewToolbar" xml:space="preserve">
-    <value>Show toolbar</value>
+    <value>ツールバーを表示</value>
   </data>
   <data name="strMsbBoxErrorBits" xml:space="preserve">
     <value>データ特性の設定に失敗しました
 (データ ビット、ストップ ビット、およびパリティ)。
-Error:
+エラー:
 {0}</value>
   </data>
   <data name="strMsgBoxErrorBaudRate" xml:space="preserve">
@@ -489,7 +490,7 @@ Error:
   </data>
   <data name="strMsgBoxErrorTimeouts" xml:space="preserve">
     <value>タイムアウトの設定に失敗しました。
-Error:
+エラー:
 {0}</value>
   </data>
   <data name="strMsgBoxErrorTimeoutsTitle" xml:space="preserve">
@@ -522,7 +523,7 @@ Error:
     <value>データ保存</value>
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
-  <value>Hausdorff-Besikovich フラクタルの計算
+    <value>Hausdorff-Besikovich フラクタルの計算
 ディメンションが閉じられました。</value>
   </data>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">

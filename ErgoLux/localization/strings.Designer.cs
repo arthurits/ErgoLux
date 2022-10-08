@@ -972,7 +972,7 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to load FTD2XX.DLL.  Are the FTDI drivers installed?.
+        ///   Looks up a localized string similar to Failed to load FTD2XX.DLL. Are the FTDI drivers installed?.
         /// </summary>
         internal static string strMsgBoxErrorDrivers {
             get {
