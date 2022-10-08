@@ -152,6 +152,8 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_Language(int DataLength = default)
     {
+        this.SuspendLayout();
+
         StringResources.Culture = _settings.AppCulture;
 
         // Update the form's tittle
@@ -219,18 +221,25 @@ public partial class FrmMain : Form
         plotData.Plot.Title(StringResources.PlotRawTitle);
         plotData.Plot.YLabel(StringResources.PlotRawYLabel);
         plotData.Plot.XLabel(StringResources.PlotRawXLabel);
+        plotData.Refresh(skipIfCurrentlyRendering: true);
+
         plotDistribution.Plot.Title(StringResources.PlotDistributionTitle);
+        plotDistribution.Refresh(skipIfCurrentlyRendering: true);
+
         plotStats.CultureUI = _settings.AppCulture;
         plotStats.Plot.Title(StringResources.PlotAverageTitle);
         plotStats.Plot.YLabel(StringResources.PlotAverageYLabel);
         plotStats.Plot.XLabel(StringResources.PlotAverageXLabel);
+        plotStats.Refresh(skipIfCurrentlyRendering: true);
+
         plotRatio.CultureUI = _settings.AppCulture;
         plotRatio.Plot.Title(StringResources.PlotRatiosTitle);
         plotRatio.Plot.YLabel(StringResources.PlotRatiosYLabel);
         plotRatio.Plot.XLabel(StringResources.PlotRatiosXLabel);
+        plotRatio.Refresh(skipIfCurrentlyRendering: true);
 
         // Update plots' legends
-        if (DataLength > 0)
+        if (DataLength > _settings.ArrayFixedColumns)
         {
             _seriesLabels = new string[DataLength];
             for (int i = 0; i < _seriesLabels.Length - _settings.ArrayFixedColumns; i++)
@@ -248,12 +257,14 @@ public partial class FrmMain : Form
             {
                 plotData.Plot.GetPlottables()[i].GetLegendItems()[0].label = _seriesLabels[i];
             }
+            plotData.Refresh(skipIfCurrentlyRendering: true);
 
             if (plotStats.Plot.GetPlottables().Length == 3)
             {
                 plotStats.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
                 plotStats.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
                 plotStats.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
+                plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
 
             if (plotRatio.Plot.GetPlottables().Length == 3)
@@ -261,9 +272,13 @@ public partial class FrmMain : Form
                 plotRatio.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
                 plotRatio.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
                 plotRatio.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
+                plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
+
+            Plots_ShowLegends();
         }
 
+        this.ResumeLayout();
     }
 
 }

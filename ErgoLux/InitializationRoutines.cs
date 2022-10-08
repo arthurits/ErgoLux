@@ -72,7 +72,7 @@ partial class FrmMain
     /// </summary>
     private void InitializeStatusStrip()
     {
-        statusStrip.Renderer = new CustomRenderer<ToolStripStatusLabelEx>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
+        //statusStrip.Renderer = new CustomRenderer<ToolStripStatusLabelEx>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
         statusStripIconOpen.Image = _settings.Icon_Close;
         statusStripLabelCross.Checked = false;
