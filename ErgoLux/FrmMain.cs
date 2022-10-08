@@ -21,8 +21,6 @@ public partial class FrmMain : Form
     private DateTime _timeEnd;
     private bool _reading = false;   // this controls whether clicking the plots is allowed or not
 
-    //private readonly System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
-
     public FrmMain()
     {
         // Load settings. This has to go before custom initialization, since some routines depend on these values

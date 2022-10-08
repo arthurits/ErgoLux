@@ -11,7 +11,6 @@ public partial class FrmSettings : Form
     private string _deviceID = String.Empty;
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private ClassSettings? Settings;
-    private readonly System.Resources.ResourceManager StringsRM = new("ErgoLux.localization.strings", typeof(FrmSettings).Assembly);
 
     public string GetDeviceType => _deviceType;
     public string GetDeviceID => _deviceID;
