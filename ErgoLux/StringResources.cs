@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
+using ScottPlot.Drawing.Colormaps;
 using ScottPlot.Styles;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -181,5 +182,79 @@ public static class StringResources
     public static string RadRadar => StringRM.GetString("strRadRadar", Culture) ?? "Radar";
     public static string RadRadialGauge => StringRM.GetString("strRadRadialGauge", Culture) ?? "Radial gauge";
 
+
+
+    public static string FormTitle => StringRM.GetString("strFormTitle", Culture) ?? "ErgoLux";
+    public static string GrpAxis => StringRM.GetString("strGrpAxis", Culture) ?? "Abscissa axis";
+    
+    public static string LblData => StringRM.GetString("strLblData", Culture) ?? "Data-file path";
+    
+    public static string LblEnd => StringRM.GetString("strLblEnd", Culture) ?? "Array index end";
+    
+    public static string LblSeries => StringRM.GetString("strLblSeries", Culture) ?? "Select series";
+    public static string LblStart => StringRM.GetString("strLblStart", Culture) ?? "Array index start";
+    
+    public static string LblWindow => StringRM.GetString("strLblWindow", Culture) ?? "Window";
+    public static string MenuMainFile => StringRM.GetString("strMenuMainFile", Culture) ?? "&File";
+    public static string MenuMainFileExit => StringRM.GetString("strMenuMainFileExit", Culture) ?? "&Exit...";
+    public static string MenuMainFileOpen => StringRM.GetString("strMenuMainFileOpen", Culture) ?? "&Open...";
+    public static string MenuMainFileSave => StringRM.GetString("strMenuMainFileSave", Culture) ?? "&Save...";
+    public static string MenuMainHelpAbout => StringRM.GetString("strMenuMainHelpAbout", Culture) ?? "&About...";
+    public static string MenuMainHelpText => StringRM.GetString("strMenuMainHelpText", Culture) ?? "&Help";
+    public static string MenuMainTools => StringRM.GetString("strMenuMainTools", Culture) ?? "&Tools";
+    public static string MenuMainToolsConnect => StringRM.GetString("strMenuMainToolsConnect", Culture) ?? "&Connect";
+    public static string MenuMainToolsDisconnect => StringRM.GetString("strMenuMainToolsDisconnect", Culture) ?? "&Disconnect";
+    public static string MenuMainToolsSettings => StringRM.GetString("strMenuMainToolsSettings", Culture) ?? "&Settings...";
+    public static string MenuMainView => StringRM.GetString("strMenuMainView", Culture) ?? "&View";
+    public static string MenuMainViewAverage => StringRM.GetString("strMenuMainViewAverage", Culture) ?? "Averages";
+    public static string MenuMainViewDistribution => StringRM.GetString("strMenuMainViewDistribution", Culture) ?? "Radial distribution";
+    public static string MenuMainViewMenu => StringRM.GetString("strMenuMainViewMenu", Culture) ?? "Show menu";
+    public static string MenuMainViewRatio => StringRM.GetString("strMenuMainViewRatio", Culture) ?? "Ratios";
+    public static string MenuMainViewRaw => StringRM.GetString("strMenuMainViewRaw", Culture) ?? "Raw data";
+    public static string MenuMainViewToolbar => StringRM.GetString("strMenuMainViewToolbar", Culture) ?? "Show toolbar";
+    public static string MsgBoxTaskCancel => StringRM.GetString("strMsgBoxTaskCancel", Culture) ?? "Computation of the Hausdorff-Besicovitch fractal" +
+        Environment.NewLine +
+        "dimension has been stopped.";
+    public static string MsgBoxTaskCancelTitle => StringRM.GetString("strMsgBoxTaskCancelTitle", Culture) ?? "Stop";
+    public static string PlotAverageTitle => StringRM.GetString("strPlotAverageTitle", Culture) ?? "Max, average, min";
+    public static string PlotAverageXLabel => StringRM.GetString("strPlotAverageXLabel", Culture) ?? "Time (seconds)";
+    public static string PlotAverageYLabel => StringRM.GetString("strPlotAverageYLabel", Culture) ?? "Lux";
+    public static string PlotDistributionTitle => StringRM.GetString("strPlotDistributionTitle", Culture) ?? "Illuminance distribution";
+    public static string PlotRatiosTitle => StringRM.GetString("strPlotRatiosTitle", Culture) ?? "Illuminance ratios";
+    public static string PlotRatiosXLabel => StringRM.GetString("strPlotRatiosXLabel", Culture) ?? "Time (seconds)";
+    public static string PlotRatiosYLabel => StringRM.GetString("strPlotRatiosYLabel", Culture) ?? "Ratio";
+    public static string PlotRawTitle => StringRM.GetString("strPlotRawTitle", Culture) ?? "Illuminance";
+    public static string PlotRawXLabel => StringRM.GetString("strPlotRawXLabel", Culture) ?? "Time (seconds)";
+    public static string PlotRawYLabel => StringRM.GetString("strPlotRawYLabel", Culture) ?? "Lux";
+    public static string StatusExchange => StringRM.GetString("strStatusExchange", Culture) ?? "Receiving data";
+    public static string StatusID => StringRM.GetString("strStatusID", Culture) ?? "Device ID";
+    public static string StatusLocation => StringRM.GetString("strStatusLocation", Culture) ?? "Location ID";
+    public static string StatusOpen => StringRM.GetString("strStatusOpen", Culture) ?? "Disconnected";
+    public static string StatusTipCrossHair => StringRM.GetString("strStatusTipCrossHair", Culture) ?? "Show plot's crosshair mode";
+    public static string StatusTipDistribution => StringRM.GetString("strStatusTipDistribution", Culture) ?? "Plot distribution";
+    public static string StatusTipExchange => StringRM.GetString("strStatusTipExchange", Culture) ?? "Exchange status";
+    public static string StatusTipID => StringRM.GetString("strStatusTipID", Culture) ?? "Device ID";
+    public static string StatusTipLocation => StringRM.GetString("strStatusTipLocation", Culture) ?? "T-10A location ID";
+    public static string StatusTipMax => StringRM.GetString("strStatusTipMax", Culture) ?? "Plot max, average and min";
+    public static string StatusTipOpen => StringRM.GetString("strStatusTipOpen", Culture) ?? "Connexion status";
+    public static string StatusTipRatio => StringRM.GetString("strStatusTipRatio", Culture) ?? "Plot ratios";
+    public static string StatusTipRaw => StringRM.GetString("strStatusTipRaw", Culture) ?? "Plot raw data";
+    public static string StatusTipType => StringRM.GetString("strStatusTipType", Culture) ?? "Device type";
+    public static string StatusType => StringRM.GetString("strStatusType", Culture) ?? "Device type";
+    public static string ToolStripAbout => StringRM.GetString("strToolStripAbout", Culture) ?? "About";
+    public static string ToolStripConnect => StringRM.GetString("strToolStripConnect", Culture) ?? "Connect";
+    public static string ToolStripDisconnect => StringRM.GetString("strToolStripDisconnect", Culture) ?? "Disconnect";
+    public static string ToolStripExit => StringRM.GetString("strToolStripExit", Culture) ?? "Exit";
+    public static string ToolStripOpen => StringRM.GetString("strToolStripOpen", Culture) ?? "Open";
+    public static string ToolStripSave => StringRM.GetString("strToolStripSave", Culture) ?? "Save";
+    public static string ToolStripSettings => StringRM.GetString("strToolStripSettings", Culture) ?? "Settings";
+    public static string ToolTipAbout => StringRM.GetString("strToolTipAbout", Culture) ?? "About this software";
+    public static string ToolTipConnect => StringRM.GetString("strToolTipConnect", Culture) ?? "Start receiving data from T-10A device";
+    public static string ToolTipDisconnect => StringRM.GetString("strToolTipDisconnect", Culture) ?? "Stop and disconnect T-10A device";
+    public static string ToolTipExit => StringRM.GetString("strToolTipExit", Culture) ?? "Exit the application";
+    public static string ToolTipOpen => StringRM.GetString("strToolTipOpen", Culture) ?? "Open data file from disk";
+    public static string ToolTipSave => StringRM.GetString("strToolTipSave", Culture) ?? "Save data";
+    public static string ToolTipSettings => StringRM.GetString("strToolTipSettings", Culture) ?? "Settings for plots, data, and UI";
+    public static string ToolTipUILanguage => StringRM.GetString("strToolTipUILanguage", Culture) ?? "User interface language";
 
 }
