@@ -391,8 +391,7 @@ namespace ErgoLux
             this.statusStripLabelRaw.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelRaw.Text = "W";
             this.statusStripLabelRaw.ToolTipText = "Plot raw data";
-            this.statusStripLabelRaw.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
-            this.statusStripLabelRaw.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
+            this.statusStripLabelRaw.Click += new System.EventHandler(this.LabelExPlots_Click);
             // 
             // statusStripLabelRadar
             // 
@@ -407,8 +406,7 @@ namespace ErgoLux
             this.statusStripLabelRadar.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelRadar.Text = "D";
             this.statusStripLabelRadar.ToolTipText = "Plot distribution";
-            this.statusStripLabelRadar.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
-            this.statusStripLabelRadar.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
+            this.statusStripLabelRadar.Click += new System.EventHandler(this.LabelExPlots_Click);
             // 
             // statusStripLabelMax
             // 
@@ -423,8 +421,7 @@ namespace ErgoLux
             this.statusStripLabelMax.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelMax.Text = "A";
             this.statusStripLabelMax.ToolTipText = "Plot max, average and min";
-            this.statusStripLabelMax.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
-            this.statusStripLabelMax.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
+            this.statusStripLabelMax.Click += new System.EventHandler(this.LabelExPlots_Click);
             // 
             // statusStripLabelRatio
             // 
@@ -439,8 +436,7 @@ namespace ErgoLux
             this.statusStripLabelRatio.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelRatio.Text = "R";
             this.statusStripLabelRatio.ToolTipText = "Plot ratios";
-            this.statusStripLabelRatio.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
-            this.statusStripLabelRatio.Click += new System.EventHandler(this.statusStripLabelPlots_Click);
+            this.statusStripLabelRatio.Click += new System.EventHandler(this.LabelExPlots_Click);
             // 
             // statusStripLabelCross
             // 
@@ -456,8 +452,7 @@ namespace ErgoLux
             this.statusStripLabelCross.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelCross.Text = "C";
             this.statusStripLabelCross.ToolTipText = "Show plot\'s crosshairs";
-            this.statusStripLabelCross.CheckedChanged += new System.EventHandler(this.statusStripLabelEx_CheckedChanged);
-            this.statusStripLabelCross.Click += new System.EventHandler(this.statusStripLabelCross_Click);
+            this.statusStripLabelCross.Click += new System.EventHandler(this.LabelExCross_Click);
             // 
             // toolStripMain
             // 

@@ -290,63 +290,49 @@ partial class FrmMain
             UpdateUI_Language(_plotData.Length);
     }
 
-    private void statusStripLabelEx_CheckedChanged(object sender, EventArgs e)
+    private void LabelExPlots_Click(object sender, EventArgs e)
     {
-        if (sender is ToolStripStatusLabelEx)
+        if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
         {
-            var label = (ToolStripStatusLabelEx)sender;
-
-            // Change the text color
-            if (label.Checked)
-                label.ForeColor = Color.Black;
-            else
-                label.ForeColor = Color.LightGray;
-        }
-    }
-
-    private void statusStripLabelPlots_Click(object sender, EventArgs e)
-    {
-        if (sender is ToolStripStatusLabelEx)
-        {
-            var label = (ToolStripStatusLabelEx)sender;
-            label.Checked = !label.Checked;
+            //var label = (ToolStripStatusLabelEx)sender;
+            LabelEx.Checked = !LabelEx.Checked;
 
             // Update the settings
-            switch (label.Text)
+            switch (LabelEx.Text)
             {
                 case "W":
-                    _settings.Plot_ShowRawData = label.Checked;
-                    mnuMainFrm_View_Raw.Checked = label.Checked;
+                    _settings.Plot_ShowRawData = LabelEx.Checked;
+                    mnuMainFrm_View_Raw.Checked = LabelEx.Checked;
                     break;
                 case "D":
-                    _settings.Plot_ShowDistribution = label.Checked;
-                    mnuMainFrm_View_Distribution.Checked = label.Checked;
+                    _settings.Plot_ShowDistribution = LabelEx.Checked;
+                    mnuMainFrm_View_Distribution.Checked = LabelEx.Checked;
                     break;
                 case "A":
-                    _settings.Plot_ShowAverage = label.Checked;
-                    mnuMainFrm_View_Average.Checked = label.Checked;
+                    _settings.Plot_ShowAverage = LabelEx.Checked;
+                    mnuMainFrm_View_Average.Checked = LabelEx.Checked;
                     break;
                 case "R":
-                    _settings.Plot_ShowRatios = label.Checked;
-                    mnuMainFrm_View_Ratio.Checked = label.Checked;
+                    _settings.Plot_ShowRatios = LabelEx.Checked;
+                    mnuMainFrm_View_Ratio.Checked = LabelEx.Checked;
                     break;
             }
         }
     }
 
-    private void statusStripLabelCross_Click(object sender, EventArgs e)
+    private void LabelExCross_Click(object sender, EventArgs e)
     {
-        if (sender is ToolStripStatusLabelEx)
+        if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
         {
-            var label = (ToolStripStatusLabelEx)sender;
+            //var label = (ToolStripStatusLabelEx)sender;
             if (plotData.Plot.GetPlottables().Length > 0 && plotStats.Plot.GetPlottables().Length > 0 && plotRatio.Plot.GetPlottables().Length > 0)
             {
-                label.Checked = !label.Checked;
-                plotData.ShowCrossHair = label.Checked;
+                LabelEx.Checked = !LabelEx.Checked;
+                plotData.ShowCrossHair = LabelEx.Checked;
                 plotData.Refresh();
-                plotStats.ShowCrossHair = label.Checked;
+                plotStats.ShowCrossHair = LabelEx.Checked;
                 plotStats.Refresh();
-                plotRatio.ShowCrossHair = label.Checked;
+                plotRatio.ShowCrossHair = LabelEx.Checked;
                 plotRatio.Refresh();
             }
         }
@@ -400,4 +386,3 @@ partial class FrmMain
     }
 
 }
-
