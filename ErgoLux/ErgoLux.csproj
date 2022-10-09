@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Compile Remove="ClassKonica.cs" />
+    <Compile Remove="controls\ToolStripCustomRenderer.cs" />
     <Compile Remove="Example program 01.cs" />
   </ItemGroup>
 

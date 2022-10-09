@@ -97,6 +97,8 @@ partial class FrmMain
             if (_seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader18);
 
+            UpdateUI_Series();
+
             // Initialize data arrays
             InitializeArrays();
 
@@ -204,6 +206,8 @@ partial class FrmMain
             _seriesLabels = strLine.Split('\t');
             if (_seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader18);
+
+            UpdateUI_Series();
 
             // Initialize data arrays
             InitializeArrays();

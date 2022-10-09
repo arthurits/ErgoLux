@@ -148,6 +148,25 @@ public partial class FrmMain : Form
     }
 
     /// <summary>
+    /// Updates the plots' legends according to the culture in <see cref="ClassSettings.AppCulture"/> stored as '_settings.AppCulture'.
+    /// </summary>
+    private void UpdateUI_Series()
+    {
+        if (_seriesLabels.Length < _settings.ArrayFixedColumns) return;
+
+        for (int i = 0; i < _seriesLabels.Length - _settings.ArrayFixedColumns; i++)
+        {
+            _seriesLabels[i] = $"{StringResources.FileHeader08}{i:#0}";
+        }
+        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 0] = StringResources.FileHeader09;
+        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 1] = StringResources.FileHeader10;
+        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 2] = StringResources.FileHeader11;
+        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 3] = StringResources.FileHeader12;
+        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 4] = StringResources.FileHeader13;
+        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 5] = StringResources.FileHeader14;
+    }
+
+    /// <summary>
     /// Update user-interface language and localization
     /// </summary>
     private void UpdateUI_Language(int DataLength = default)
@@ -238,21 +257,11 @@ public partial class FrmMain : Form
         plotRatio.Plot.XLabel(StringResources.PlotRatiosXLabel);
         plotRatio.Refresh(skipIfCurrentlyRendering: true);
 
+        UpdateUI_Series();
+
         // Update plots' legends
         if (DataLength > _settings.ArrayFixedColumns)
         {
-            _seriesLabels = new string[DataLength];
-            for (int i = 0; i < _seriesLabels.Length - _settings.ArrayFixedColumns; i++)
-            {
-                _seriesLabels[i] = $"{StringResources.FileHeader08}{i:#0}";
-            }
-            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 0] = StringResources.FileHeader09;
-            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 1] = StringResources.FileHeader10;
-            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 2] = StringResources.FileHeader11;
-            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 3] = StringResources.FileHeader12;
-            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 4] = StringResources.FileHeader13;
-            _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 5] = StringResources.FileHeader14;
-
             for (int i = 0; i < plotData.Plot.GetPlottables().Length; i++)
             {
                 plotData.Plot.GetPlottables()[i].GetLegendItems()[0].label = _seriesLabels[i];

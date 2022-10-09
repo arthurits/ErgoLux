@@ -186,8 +186,9 @@ partial class FrmMain
         plotDistribution.Plot.YAxis.Ticks(false);
 
     }
+
     /// <summary>
-    /// Initializes the data arrays using <see cref="ClassSettings"/> properties T10_NumberOfPoints and ArrayFixedColumns
+    /// Initializes the data arrays using <see cref="ClassSettings.T10_NumberOfSensors"/> and <see cref="ClassSettings.ArrayFixedColumns"/>.
     /// </summary>
     private void InitializeArrays()
     {
@@ -197,6 +198,6 @@ partial class FrmMain
         for (int i = 0; i < _settings.T10_NumberOfSensors + _settings.ArrayFixedColumns; i++)
             _plotData[i] = new double[_settings.Plot_ArrayPoints];
 
-
     }
+
 }
