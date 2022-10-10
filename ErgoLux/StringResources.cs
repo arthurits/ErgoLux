@@ -1,9 +1,3 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using ScottPlot.Drawing.Colormaps;
-using ScottPlot.Styles;
-using System.Reflection;
-using System.Text.RegularExpressions;
-
 namespace ErgoLux;
 
 public static class StringResources
@@ -205,6 +199,5 @@ public static class StringResources
     public static string ToolTipSave => StringRM.GetString("strToolTipSave", Culture) ?? "Save data";
     public static string ToolTipSettings => StringRM.GetString("strToolTipSettings", Culture) ?? "Settings for plots, data, and UI";
     public static string ToolTipUILanguage => StringRM.GetString("strToolTipUILanguage", Culture) ?? "User interface language";
-
 
 }
