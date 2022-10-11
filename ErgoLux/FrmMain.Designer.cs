@@ -341,6 +341,7 @@ namespace ErgoLux
             // 
             this.statusStripIconOpen.AutoSize = false;
             this.statusStripIconOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.statusStripIconOpen.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.statusStripIconOpen.Name = "statusStripIconOpen";
             this.statusStripIconOpen.Size = new System.Drawing.Size(30, 23);
             this.statusStripIconOpen.Text = "Disconnected";
@@ -385,7 +386,9 @@ namespace ErgoLux
             this.statusStripLabelRaw.Checked = false;
             this.statusStripLabelRaw.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelRaw.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelRaw.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.statusStripLabelRaw.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelRaw.ForeColorChecked = System.Drawing.Color.Black;
+            this.statusStripLabelRaw.ForeColorUnchecked = System.Drawing.Color.LightGray;
             this.statusStripLabelRaw.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelRaw.Name = "statusStripLabelRaw";
             this.statusStripLabelRaw.Size = new System.Drawing.Size(28, 23);
@@ -400,7 +403,9 @@ namespace ErgoLux
             this.statusStripLabelRadar.Checked = false;
             this.statusStripLabelRadar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelRadar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelRadar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.statusStripLabelRadar.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelRadar.ForeColorChecked = System.Drawing.Color.Black;
+            this.statusStripLabelRadar.ForeColorUnchecked = System.Drawing.Color.LightGray;
             this.statusStripLabelRadar.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelRadar.Name = "statusStripLabelRadar";
             this.statusStripLabelRadar.Size = new System.Drawing.Size(28, 23);
@@ -415,7 +420,9 @@ namespace ErgoLux
             this.statusStripLabelMax.Checked = false;
             this.statusStripLabelMax.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelMax.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelMax.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.statusStripLabelMax.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelMax.ForeColorChecked = System.Drawing.Color.Black;
+            this.statusStripLabelMax.ForeColorUnchecked = System.Drawing.Color.LightGray;
             this.statusStripLabelMax.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelMax.Name = "statusStripLabelMax";
             this.statusStripLabelMax.Size = new System.Drawing.Size(28, 23);
@@ -430,7 +437,9 @@ namespace ErgoLux
             this.statusStripLabelRatio.Checked = false;
             this.statusStripLabelRatio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelRatio.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.statusStripLabelRatio.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelRatio.ForeColorChecked = System.Drawing.Color.Black;
+            this.statusStripLabelRatio.ForeColorUnchecked = System.Drawing.Color.LightGray;
             this.statusStripLabelRatio.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelRatio.Name = "statusStripLabelRatio";
             this.statusStripLabelRatio.Size = new System.Drawing.Size(28, 23);
@@ -446,7 +455,9 @@ namespace ErgoLux
             this.statusStripLabelCross.Checked = false;
             this.statusStripLabelCross.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelCross.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statusStripLabelCross.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.statusStripLabelCross.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelCross.ForeColorChecked = System.Drawing.Color.Black;
+            this.statusStripLabelCross.ForeColorUnchecked = System.Drawing.Color.LightGray;
             this.statusStripLabelCross.Margin = new System.Windows.Forms.Padding(2, 3, 0, 2);
             this.statusStripLabelCross.Name = "statusStripLabelCross";
             this.statusStripLabelCross.Size = new System.Drawing.Size(28, 23);

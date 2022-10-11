@@ -88,6 +88,9 @@ public partial class FrmMain : Form
         SaveProgramSettingsJSON();
     }
 
+    /// <summary>
+    /// Under development. Checks the sensors exist.
+    /// </summary>
     private void CheckSensors()
     {
         //if (!myFtdiDevice.Write(ClassT10.Command_54)) return;
