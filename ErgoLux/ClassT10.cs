@@ -97,8 +97,8 @@ namespace ErgoLux
 
             // Commands initialization
             Command_54 = EncodeCommand("00541   ");
-            Command_55_Set = EncodeCommand("99550  0");
-            Command_55_Release = EncodeCommand("99551  0");
+            Command_55_Release = EncodeCommand("99550  0");
+            Command_55_Set = EncodeCommand("99551  0");
         }
 
         /// <summary>

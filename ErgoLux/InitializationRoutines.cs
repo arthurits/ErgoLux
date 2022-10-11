@@ -192,6 +192,8 @@ partial class FrmMain
     /// </summary>
     private void InitializeArrays()
     {
+        _seriesLabels = new string[_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns];
+        UpdateUI_Series();
         _plotRadialGauge = new double[_settings.T10_NumberOfSensors];
         _plotRadar = new double[2, _settings.T10_NumberOfSensors];
         _plotData = new double[_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns][];

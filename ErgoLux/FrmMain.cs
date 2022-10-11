@@ -88,17 +88,33 @@ public partial class FrmMain : Form
         SaveProgramSettingsJSON();
     }
 
+    private void CheckSensors()
+    {
+        //if (!myFtdiDevice.Write(ClassT10.Command_54)) return;
+        
+        int i = _settings.T10_NumberOfSensors - 1;
+        while (i >= 0)
+        {
+            if (myFtdiDevice.Write(ClassT10.ReceptorsSingle[i])) break;
+            i--;
+        }
+        _settings.T10_NumberOfSensors = i;
+    }
+
     private void OnTimedEvent(object? sender, EventArgs e)
     {
-        bool result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
         
+        bool result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+
+        //result = myFtdiDevice.Write(ClassT10.Command_55_Set);
+        //result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+
         if (result == false)
             System.Diagnostics.Debug.Print("OnTimedEvent receptor 0 with code {0} and result: {1}", ClassT10.ReceptorsSingle[0], result);
     }
 
     private void OnDataReceived(object? sender, DataReceivedEventArgs e)
     {
-        //System.Diagnostics.Debug.Print("OnDataReceived");
         (int Sensor, double Iluminance, double Increment, double Percent) result = (0, 0, 0, 0);
         //string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
         
@@ -111,6 +127,10 @@ public partial class FrmMain : Form
             if (result.Sensor < _settings.T10_NumberOfSensors - 1)
             {
                 myFtdiDevice.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
+            }
+            else
+            {
+                myFtdiDevice.Write(ClassT10.Command_55_Release);
             }
         }
         else if (e.StrDataReceived.Length == ClassT10.ShortBytesLength)

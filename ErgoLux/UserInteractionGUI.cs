@@ -234,6 +234,9 @@ partial class FrmMain
 
                 if (result == FTDI.FT_STATUS.FT_OK)
                 {
+                    // Check the number of sensors
+                    //CheckSensors();
+
                     // Set the timer interval according to the sampling frecuency
                     m_timer.Interval = 1000 / _settings.T10_Frequency;
 

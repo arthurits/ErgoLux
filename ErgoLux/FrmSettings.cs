@@ -92,7 +92,7 @@ public partial class FrmSettings : Form
 
     /// <summary>
     /// Populates ListView control with data from the FTDI devices connected
-    /// </summary<
+    /// </summary>
     private void PopulateDevices()
     {
         // FTDI connection code
@@ -166,6 +166,15 @@ public partial class FrmSettings : Form
             _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
             _deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
             Settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
+        }
+        else
+        {
+            if (viewDevices.Items.Count > 0)
+            {
+                _deviceType = viewDevices.Items[0].SubItems[2].Text;
+                _deviceID = viewDevices.Items[0].SubItems[3].Text;
+                Settings.T10_LocationID = Convert.ToInt32(viewDevices.Items[0].SubItems[4].Text, 16);
+            }
         }
 
         // Check that all texboxes have valid values
