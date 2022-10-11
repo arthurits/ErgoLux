@@ -129,6 +129,9 @@ partial class FrmMain
 
         if (readOK)
         {
+            // This needs further research. If omitted, the program crashes
+            this.statusStripIconOpen.Image = _settings.Icon_Close;
+
             SetFormTitle(this, OpenDlg.FileName);
             // Show data into plots
             Plots_FetchData();
@@ -266,6 +269,7 @@ partial class FrmMain
                     
                     InitializeStatusStripLabelsStatus();
                     InitializeArrays();     // Initialize the arrays containing the data
+                    //Plots_FetchData();    // Needs verification in substitution of the next 3 calls
                     Plots_Clear();          // First, clear all data (if any) in the plots
                     Plots_DataBinding();    // Bind the arrays to the plots
                     Plots_ShowLegends();    // Show the legends in the picture boxes
@@ -308,7 +312,9 @@ partial class FrmMain
         frm.ShowDialog();
 
         if (frm.DialogResult == DialogResult.OK)
+        {
             UpdateUI_Language(_plotData.Length);
+        }
     }
 
     private void LabelExPlots_Click(object sender, EventArgs e)

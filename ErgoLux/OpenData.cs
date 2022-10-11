@@ -97,7 +97,7 @@ partial class FrmMain
             if (_seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader18);
 
-            UpdateUI_Series();
+            //UpdateUI_Series();
 
             // Initialize data arrays
             InitializeArrays();

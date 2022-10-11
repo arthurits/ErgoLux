@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq;
 using System.IO.Ports;
+using ScottPlot.Plottable;
 
 namespace ErgoLux;
 
@@ -287,23 +288,35 @@ public partial class FrmMain : Form
         {
             for (int i = 0; i < plotData.Plot.GetPlottables().Length; i++)
             {
-                plotData.Plot.GetPlottables()[i].GetLegendItems()[0].label = _seriesLabels[i];
+                //plotData.Plot.GetPlottables()[i].GetLegendItems()[0].label = _seriesLabels[i];
+                ((ScottPlot.Plottable.SignalPlot)plotData.Plot.GetPlottables()[i]).Label = _seriesLabels[i];
             }
             plotData.Refresh(skipIfCurrentlyRendering: true);
 
+            if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadarPlot))
+                ((RadarPlot)plotDistribution.Plot.GetPlottables()[0]).CategoryLabels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+            else if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadialGaugePlot))
+                ((RadialGaugePlot)plotDistribution.Plot.GetPlottables()[0]).Labels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+
             if (plotStats.Plot.GetPlottables().Length == 3)
             {
-                plotStats.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
-                plotStats.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
-                plotStats.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
+                //plotStats.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
+                //plotStats.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
+                //plotStats.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
+                ((ScottPlot.Plottable.SignalPlot)plotStats.Plot.GetPlottables()[0]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
+                ((ScottPlot.Plottable.SignalPlot)plotStats.Plot.GetPlottables()[1]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
+                ((ScottPlot.Plottable.SignalPlot)plotStats.Plot.GetPlottables()[2]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
                 plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
 
             if (plotRatio.Plot.GetPlottables().Length == 3)
             {
-                plotRatio.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
-                plotRatio.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
-                plotRatio.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
+                //plotRatio.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
+                //plotRatio.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
+                //plotRatio.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
+                ((ScottPlot.Plottable.SignalPlot)plotRatio.Plot.GetPlottables()[0]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
+                ((ScottPlot.Plottable.SignalPlot)plotRatio.Plot.GetPlottables()[1]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
+                ((ScottPlot.Plottable.SignalPlot)plotRatio.Plot.GetPlottables()[2]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
                 plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
 
