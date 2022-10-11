@@ -50,6 +50,10 @@ public class ClassSettings
     [JsonPropertyName("Sample frequency")]
     public double T10_Frequency { get; set; } = 2;
 
+    [JsonIgnore]
+    public string T10_DeviceType { get; set; } = string.Empty;
+    [JsonIgnore]
+    public int T10_DevideID { get; set; } = 0;
 
     /// <value>Number of points the array can store</value>
     [JsonPropertyName("Array points")]

@@ -203,6 +203,15 @@ partial class FrmMain
     private void Settings_Click(object sender, EventArgs e)
     {
         FTDI.FT_STATUS result;
+        int _locationID = _settings.T10_LocationID;
+        int _baudRate = _settings.T10_BaudRate;
+        int _dataBits = _settings.T10_DataBits;
+        int _stopBits = _settings.T10_StopBits;
+        int _parity = _settings.T10_Parity;
+        int _flowControl = _settings.T10_FlowControl;
+        int _charOn = _settings.T10_CharOn;
+        int _charOff = _settings.T10_CharOff;
+        bool _equalSettings = true;
 
         FrmSettings frm = new(_settings);
         frm.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
@@ -212,8 +221,17 @@ partial class FrmMain
         {
             UpdateUI_Language(_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns);
 
-            // If a device is selected, then set up the parameters
-            if (_settings.T10_LocationID > 0)
+            _equalSettings = (_locationID == _settings.T10_LocationID) &&
+                            (_baudRate == _settings.T10_BaudRate) &&
+                            (_dataBits == _settings.T10_DataBits) &&
+                            (_stopBits == _settings.T10_StopBits) &&
+                            (_parity == _settings.T10_Parity) &&
+                            (_flowControl == _settings.T10_FlowControl) &&
+                            (_charOn == _settings.T10_CharOn) &&
+                            (_charOff == _settings.T10_CharOff);
+
+            // If a device is selected and settings have changed, then set up the new parameters for the device
+            if (_settings.T10_LocationID > 0 && !_equalSettings)
             {
                 this.toolStripMain_Connect.Enabled = true;
 
@@ -242,10 +260,10 @@ partial class FrmMain
 
                     // Update the status strip with information
                     this.statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
-                    this.statusStripLabelType.Text = StringResources.StatusType + $": {frm.GetDeviceType}";
-                    this.statusStripLabelID.Text = StringResources.StatusID + $": {frm.GetDeviceID}";
+                    this.statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
+                    this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID.ToString("0:X")}";
                     this.statusStripIconOpen.Image = _settings.Icon_Open;
-
+                    
                     InitializeStatusStripLabelsStatus();
                     InitializeArrays();     // Initialize the arrays containing the data
                     Plots_Clear();          // First, clear all data (if any) in the plots
@@ -264,7 +282,7 @@ partial class FrmMain
                     }
                 }
 
-            } // End _sett.T10_LocationID
+            } // End setting new device parameters
             else
             {
                 InitializeStatusStripLabelsStatus();

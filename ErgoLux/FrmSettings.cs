@@ -7,13 +7,13 @@ namespace ErgoLux;
 
 public partial class FrmSettings : Form
 {
-    private string _deviceType = String.Empty;
-    private string _deviceID = String.Empty;
+    //private string _deviceType = String.Empty;
+    //private string _deviceID = String.Empty;
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private ClassSettings? Settings;
 
-    public string GetDeviceType => _deviceType;
-    public string GetDeviceID => _deviceID;
+    //public string GetDeviceType => _deviceType;
+    //public string GetDeviceID => _deviceID;
 
     public FrmSettings()
     {
@@ -163,16 +163,20 @@ public partial class FrmSettings : Form
         // Check that a device has been selected from the list
         if (viewDevices.SelectedIndices.Count > 0)
         {
-            _deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
-            _deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
+            //_deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
+            //_deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
+            Settings.T10_DeviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
+            Settings.T10_DevideID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[3].Text, 16);
             Settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
         }
         else
         {
             if (viewDevices.Items.Count > 0)
             {
-                _deviceType = viewDevices.Items[0].SubItems[2].Text;
-                _deviceID = viewDevices.Items[0].SubItems[3].Text;
+                //_deviceType = viewDevices.Items[0].SubItems[2].Text;
+                //_deviceID = viewDevices.Items[0].SubItems[3].Text;
+                Settings.T10_DeviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
+                Settings.T10_DevideID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[3].Text, 16);
                 Settings.T10_LocationID = Convert.ToInt32(viewDevices.Items[0].SubItems[4].Text, 16);
             }
         }
