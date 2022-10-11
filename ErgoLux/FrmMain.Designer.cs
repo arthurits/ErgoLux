@@ -345,7 +345,6 @@ namespace ErgoLux
             this.statusStripIconOpen.Name = "statusStripIconOpen";
             this.statusStripIconOpen.Size = new System.Drawing.Size(30, 23);
             this.statusStripIconOpen.Text = "Disconnected";
-            this.statusStripIconOpen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.statusStripIconOpen.ToolTipText = "Connection status";
             // 
             // statusStripIconExchange
