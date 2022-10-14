@@ -341,6 +341,7 @@ namespace ErgoLux
             // 
             this.statusStripIconOpen.AutoSize = false;
             this.statusStripIconOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.statusStripIconOpen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.statusStripIconOpen.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.statusStripIconOpen.Name = "statusStripIconOpen";
             this.statusStripIconOpen.Size = new System.Drawing.Size(30, 23);
@@ -352,10 +353,11 @@ namespace ErgoLux
             this.statusStripIconExchange.AutoSize = false;
             this.statusStripIconExchange.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripIconExchange.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.statusStripIconExchange.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.statusStripIconExchange.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.statusStripIconExchange.Name = "statusStripIconExchange";
             this.statusStripIconExchange.Size = new System.Drawing.Size(30, 23);
-            this.statusStripIconExchange.Text = "Exchanging data";
+            this.statusStripIconExchange.Text = "Receiving data";
             this.statusStripIconExchange.ToolTipText = "Receiving data";
             // 
             // statusStripLabelXtras

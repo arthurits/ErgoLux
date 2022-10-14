@@ -129,9 +129,6 @@ partial class FrmMain
 
         if (readOK)
         {
-            // This needs further research. If omitted, the program crashes
-            this.statusStripIconOpen.Image = _settings.Icon_Close;
-
             SetFormTitle(this, OpenDlg.FileName);
             // Show data into plots
             Plots_FetchData();

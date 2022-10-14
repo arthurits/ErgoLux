@@ -26,6 +26,11 @@ public partial class FrmMain : Form
     {
         // Load settings. This has to go before custom initialization, since some routines depend on these values
         _settings = new();
+        bool result = LoadProgramSettingsJSON();
+        if (result)
+            ApplySettingsJSON(_settings.WindowPosition);
+        else
+            ApplySettingsJSON();
 
         // Set form icon
         this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
@@ -39,12 +44,6 @@ public partial class FrmMain : Form
         InitializePlots();
 
         // Language GUI
-        bool result = LoadProgramSettingsJSON();
-        if (result)
-            ApplySettingsJSON(_settings.WindowPosition);
-        else
-            ApplySettingsJSON();
-
         UpdateUI_Language();
 
         // Initialize the internal timer
@@ -154,7 +153,7 @@ public partial class FrmMain : Form
     /// If <see langword="null"/>, no string is added.
     /// If <see cref="String.Empty"/>, the current added text is mantained.
     /// Other values are added to the default title.</param>
-    private void SetFormTitle(System.Windows.Forms.Form frm, string? strFileName = null)
+    private void SetFormTitle(Form frm, string? strFileName = null)
     {
         string strText = String.Empty;
         string strSep = StringResources.FrmTitleUnion;
