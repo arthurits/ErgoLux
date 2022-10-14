@@ -104,6 +104,18 @@ partial class FrmMain
         Plots_DataBinding();    // Bind the arrays to the plots
         Plots_ShowLegends();    // Show the legends in the picture boxes
         Plots_ShowFull();       // Show all data (fit data)
+        Plots_Refresh();
+    }
+
+    /// <summary>
+    /// Refreshes all plot controls
+    /// </summary>
+    private void Plots_Refresh()
+    {
+        plotData.Refresh(skipIfCurrentlyRendering: true);
+        plotDistribution.Refresh(skipIfCurrentlyRendering: true);
+        plotStats.Refresh(skipIfCurrentlyRendering: true);
+        plotRatio.Refresh(skipIfCurrentlyRendering: true);
     }
 
     /// <summary>
@@ -117,7 +129,6 @@ partial class FrmMain
                 ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = (_nPoints > 0) ? (_nPoints - 1) : 0;
             plotData.Plot.AxisAuto();
             plotData.Plot.SetAxisLimits(xMin: 0, yMin: 0);
-            plotData.Refresh();
         }
 
         plotDistribution.Refresh();
@@ -128,7 +139,6 @@ partial class FrmMain
                 ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = (_nPoints > 0) ? (_nPoints - 1) : 0;
             plotStats.Plot.AxisAuto();
             plotStats.Plot.SetAxisLimits(xMin: 0, yMin: 0);
-            plotStats.Refresh();
         }
 
         if (_settings.Plot_ShowRatios)
@@ -137,7 +147,6 @@ partial class FrmMain
                 ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = (_nPoints > 0) ? (_nPoints - 1) : 0;
             plotRatio.Plot.AxisAuto();
             plotRatio.Plot.SetAxisLimits(xMin: 0, yMin: 0, yMax: 1);
-            plotRatio.Refresh();
         }
     }
 
@@ -290,7 +299,6 @@ partial class FrmMain
                     //sigPlot.maxRenderIndex = _dataN;
                     //sigPlot.minRenderIndex = _dataN > 40 ? _dataN - 40 : 0;
                 }
-                plotData.Refresh(skipIfCurrentlyRendering: true);
             }
 
             // Update radar plot
@@ -314,7 +322,6 @@ partial class FrmMain
                     //plot.MaximumAngle = 180 * _plotRadialGauge.Max() / _average;
                     //if (plot.MaximumAngle > 360) plot.MaximumAngle = 360.0;
                 }
-                plotDistribution.Refresh(skipIfCurrentlyRendering: true);
             }
 
             // Update max, average, and min plot
@@ -324,7 +331,6 @@ partial class FrmMain
                 {
                     ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                 }
-                plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
 
             // Update ratios plot
@@ -334,8 +340,9 @@ partial class FrmMain
                 {
                     ((ScottPlot.Plottable.SignalPlot)plot).MaxRenderIndex = _nPoints;
                 }
-                plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
+
+            Plots_Refresh();
 
             // Modify internal numeric variables
             ++_nPoints;

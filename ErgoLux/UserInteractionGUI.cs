@@ -1,4 +1,5 @@
 ﻿using FTD2XX_NET;
+using System.Globalization;
 
 namespace ErgoLux;
 
@@ -198,11 +199,12 @@ partial class FrmMain
         // Update GUI
         toolStripMain_Connect.Checked = false;
         Plots_ShowFull();
+        Plots_Refresh();
     }
 
     private void Settings_Click(object sender, EventArgs e)
     {
-        FTDI.FT_STATUS result;
+        FTDI.FT_STATUS result = FTDI.FT_STATUS.FT_DEVICE_NOT_OPENED;
         int _locationID = _settings.T10_LocationID;
         int _baudRate = _settings.T10_BaudRate;
         int _dataBits = _settings.T10_DataBits;
@@ -211,7 +213,17 @@ partial class FrmMain
         int _flowControl = _settings.T10_FlowControl;
         int _charOn = _settings.T10_CharOn;
         int _charOff = _settings.T10_CharOff;
-        bool _equalSettings = true;
+        bool ModifyDevice = false;
+        int _numberOfSensors = _settings.T10_NumberOfSensors;
+        double _frequency = _settings.T10_Frequency;
+        int _windowPoints = _settings.Plot_WindowPoints;
+        bool _isRadar = _settings.Plot_DistIsRadar;
+        int _arrayPoints = _settings.Plot_ArrayPoints;
+        bool ModifyPlots = false;
+        bool ModifyArrays = false;
+        bool InitializeArrays = false;
+        string _cultureName = _settings.AppCultureName;
+
 
         FrmSettings frm = new(_settings);
         frm.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
@@ -219,9 +231,7 @@ partial class FrmMain
 
         if (frm.DialogResult == DialogResult.OK)
         {
-            UpdateUI_Language(_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns);
-
-            _equalSettings = (_locationID == _settings.T10_LocationID) &&
+            ModifyDevice = (_locationID == _settings.T10_LocationID) &&
                             (_baudRate == _settings.T10_BaudRate) &&
                             (_dataBits == _settings.T10_DataBits) &&
                             (_stopBits == _settings.T10_StopBits) &&
@@ -229,12 +239,23 @@ partial class FrmMain
                             (_flowControl == _settings.T10_FlowControl) &&
                             (_charOn == _settings.T10_CharOn) &&
                             (_charOff == _settings.T10_CharOff);
+            ModifyDevice = !ModifyDevice;
 
-            // If a device is selected and settings have changed, then set up the new parameters for the device
-            if (_settings.T10_LocationID > 0 && !_equalSettings)
+            ModifyPlots = (_numberOfSensors == _settings.T10_NumberOfSensors) &&
+                (_frequency == _settings.T10_Frequency) &&
+                (_windowPoints == _settings.Plot_WindowPoints) &&
+                (_isRadar == _settings.Plot_DistIsRadar) &&
+                (_arrayPoints == _settings.Plot_ArrayPoints);
+            ModifyPlots = !ModifyPlots;
+            
+            ModifyArrays = (_numberOfSensors == _settings.T10_NumberOfSensors) && (_arrayPoints == _settings.Plot_ArrayPoints);
+            ModifyArrays = !ModifyArrays;
+
+            InitializeArrays = (_plotData.Length > 0) && (_plotRadar.Length > 0) && (_plotRadialGauge.Length > 0) && (_seriesLabels.Length > 0);
+            InitializeArrays = !InitializeArrays;
+
+            if (_settings.T10_LocationID > 0 && _locationID != _settings.T10_LocationID)
             {
-                this.toolStripMain_Connect.Enabled = true;
-
                 if (myFtdiDevice != null && myFtdiDevice.IsOpen)
                     myFtdiDevice.Close();
 
@@ -249,27 +270,20 @@ partial class FrmMain
                     xOff: _settings.T10_CharOff,
                     readTimeOut: 0,
                     writeTimeOut: 0);
-
+                
                 if (result == FTDI.FT_STATUS.FT_OK)
                 {
-                    // Check the number of sensors
-                    //CheckSensors();
-
-                    // Set the timer interval according to the sampling frecuency
-                    m_timer.Interval = 1000 / _settings.T10_Frequency;
-
                     // Update the status strip with information
                     this.statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
                     this.statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
                     this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID.ToString("0:X")}";
                     this.statusStripIconOpen.Image = _settings.Icon_Open;
-                    
-                    InitializeStatusStripLabelsStatus();
-                    InitializeArrays();     // Initialize the arrays containing the data
-                    //Plots_FetchData();    // Needs verification in substitution of the next 3 calls
-                    Plots_Clear();          // First, clear all data (if any) in the plots
-                    Plots_DataBinding();    // Bind the arrays to the plots
-                    Plots_ShowLegends();    // Show the legends in the picture boxes
+
+                    if (InitializeArrays)
+                    {
+                        this.InitializeArrays();
+                        ModifyArrays = false;
+                    }
                 }
                 else
                 {
@@ -282,15 +296,97 @@ partial class FrmMain
                             MessageBoxIcon.Error);
                     }
                 }
-
-            } // End setting new device parameters
+            }
             else
             {
-                InitializeStatusStripLabelsStatus();
+                if (_baudRate != _settings.T10_BaudRate)
+                    myFtdiDevice.SetBaudRate((uint)_settings.T10_BaudRate);
+                if (_dataBits != _settings.T10_DataBits || _stopBits != _settings.T10_StopBits || _parity != _settings.T10_Parity)
+                    myFtdiDevice.SetDataCharacteristics((byte)_settings.T10_DataBits, (byte)_settings.T10_StopBits, (byte)_settings.T10_Parity);
+                if (_flowControl != _settings.T10_FlowControl || _charOn != _settings.T10_CharOn || _charOff != _settings.T10_CharOff)
+                    myFtdiDevice.SetFlowControl((ushort)_settings.T10_FlowControl, (byte)_settings.T10_CharOn, (byte)_settings.T10_CharOff);
+            }
 
+            if (ModifyArrays)
+                this.InitializeArrays();
+
+            if (ModifyPlots)
+            {
                 if (_plotData.Length > 0 && _plotRadar.Length > 0 && _plotRadialGauge.Length > 0)
                     Plots_FetchData();
             }
+
+            if (_cultureName != _settings.AppCultureName)
+                UpdateUI_Language(_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns);
+
+            InitializeStatusStripLabelsStatus();
+
+            // Set the timer interval according to the sampling frecuency
+            m_timer.Interval = 1000 / _settings.T10_Frequency;
+
+
+
+            //// If a device is selected and settings have changed, then set up the new parameters for the device
+            //if (_settings.T10_LocationID > 0 && !_equalSettings)
+            //{
+            //    this.toolStripMain_Connect.Enabled = true;
+
+            //    if (myFtdiDevice != null && myFtdiDevice.IsOpen)
+            //        myFtdiDevice.Close();
+
+            //    myFtdiDevice = new FTDISample();
+            //    result = myFtdiDevice.OpenDevice(location: (uint)_settings.T10_LocationID,
+            //        baud: _settings.T10_BaudRate,
+            //        dataBits: _settings.T10_DataBits,
+            //        stopBits: _settings.T10_StopBits,
+            //        parity: _settings.T10_Parity,
+            //        flowControl: _settings.T10_FlowControl,
+            //        xOn: _settings.T10_CharOn,
+            //        xOff: _settings.T10_CharOff,
+            //        readTimeOut: 0,
+            //        writeTimeOut: 0);
+
+            //    if (result == FTDI.FT_STATUS.FT_OK)
+            //    {
+            //        // Check the number of sensors
+            //        //CheckSensors();
+
+            //        // Set the timer interval according to the sampling frecuency
+            //        m_timer.Interval = 1000 / _settings.T10_Frequency;
+
+            //        // Update the status strip with information
+            //        this.statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
+            //        this.statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
+            //        this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID.ToString("0:X")}";
+            //        this.statusStripIconOpen.Image = _settings.Icon_Open;
+                    
+            //        InitializeStatusStripLabelsStatus();
+            //        InitializeArrays();     // Initialize the arrays containing the data
+            //        //Plots_FetchData();    // Needs verification in substitution of the next 3 calls
+            //        Plots_Clear();          // First, clear all data (if any) in the plots
+            //        Plots_DataBinding();    // Bind the arrays to the plots
+            //        Plots_ShowLegends();    // Show the legends in the picture boxes
+            //    }
+            //    else
+            //    {
+            //        this.statusStripIconOpen.Image = _settings.Icon_Close;
+            //        using (new CenterWinDialog(this))
+            //        {
+            //            MessageBox.Show(StringResources.MsgBoxErrorOpenDevice,
+            //                StringResources.MsgBoxErrorOpenDeviceTitle,
+            //                MessageBoxButtons.OK,
+            //                MessageBoxIcon.Error);
+            //        }
+            //    }
+
+            //} // End setting new device parameters
+            //else
+            //{
+            //    InitializeStatusStripLabelsStatus();
+
+            //    if (_plotData.Length > 0 && _plotRadar.Length > 0 && _plotRadialGauge.Length > 0)
+            //        Plots_FetchData();
+            //}
 
         }   // End DialogResult.OK
 

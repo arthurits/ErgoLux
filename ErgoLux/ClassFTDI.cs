@@ -62,7 +62,7 @@ public class FTDISample : FTDI
     /// <param name="readTimeOut">Read timeout value in ms. A value of 0 indicates an infinite timeout.</param>
     /// <param name="writeTimeOut">Write timeout value in ms. A value of 0 indicates an infinite timeout.</param>
     /// <returns><see cref="FTDI.FT_STATUS.FT_OK"/> if all parameters could be set, <see cref="FTDI.FT_STATUS"/> error otherwise.</returns>
-    public FTDI.FT_STATUS OpenDevice(string? description = null, uint? index = null, uint? location = null, string? serialNumber = null, int? baud = 9600, int? dataBits = 7, int? stopBits = 1, int? parity = 2, int? flowControl = 400, int? xOn = 10, int? xOff = 13, uint readTimeOut = 0, uint writeTimeOut = 0)
+    public FTDI.FT_STATUS OpenDevice(string? description = null, uint? index = null, uint? location = null, string? serialNumber = null, int baud = 9600, int dataBits = 7, int stopBits = 1, int parity = 2, int flowControl = 400, int xOn = 10, int xOff = 13, uint readTimeOut = 0, uint writeTimeOut = 0)
     {
         // FTDI connection code
         UInt32 ftdiDeviceCount = 0;

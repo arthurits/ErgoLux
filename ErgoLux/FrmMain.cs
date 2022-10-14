@@ -263,26 +263,23 @@ public partial class FrmMain : Form
         plotData.Plot.Title(StringResources.PlotRawTitle);
         plotData.Plot.YLabel(StringResources.PlotRawYLabel);
         plotData.Plot.XLabel(StringResources.PlotRawXLabel);
-        plotData.Refresh(skipIfCurrentlyRendering: true);
 
         plotDistribution.Plot.Title(StringResources.PlotDistributionTitle);
-        plotDistribution.Refresh(skipIfCurrentlyRendering: true);
 
         plotStats.CultureUI = _settings.AppCulture;
         plotStats.Plot.Title(StringResources.PlotAverageTitle);
         plotStats.Plot.YLabel(StringResources.PlotAverageYLabel);
         plotStats.Plot.XLabel(StringResources.PlotAverageXLabel);
-        plotStats.Refresh(skipIfCurrentlyRendering: true);
 
         plotRatio.CultureUI = _settings.AppCulture;
         plotRatio.Plot.Title(StringResources.PlotRatiosTitle);
         plotRatio.Plot.YLabel(StringResources.PlotRatiosYLabel);
         plotRatio.Plot.XLabel(StringResources.PlotRatiosXLabel);
-        plotRatio.Refresh(skipIfCurrentlyRendering: true);
 
-        UpdateUI_Series();
+        Plots_Refresh();
 
         // Update plots' legends
+        UpdateUI_Series();
         if (DataLength > _settings.ArrayFixedColumns)
         {
             for (int i = 0; i < plotData.Plot.GetPlottables().Length; i++)
@@ -290,7 +287,6 @@ public partial class FrmMain : Form
                 //plotData.Plot.GetPlottables()[i].GetLegendItems()[0].label = _seriesLabels[i];
                 ((ScottPlot.Plottable.SignalPlot)plotData.Plot.GetPlottables()[i]).Label = _seriesLabels[i];
             }
-            plotData.Refresh(skipIfCurrentlyRendering: true);
 
             if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadarPlot))
                 ((RadarPlot)plotDistribution.Plot.GetPlottables()[0]).CategoryLabels = _seriesLabels[0.._settings.T10_NumberOfSensors];
@@ -299,24 +295,16 @@ public partial class FrmMain : Form
 
             if (plotStats.Plot.GetPlottables().Length == 3)
             {
-                //plotStats.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
-                //plotStats.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
-                //plotStats.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
                 ((ScottPlot.Plottable.SignalPlot)plotStats.Plot.GetPlottables()[0]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
                 ((ScottPlot.Plottable.SignalPlot)plotStats.Plot.GetPlottables()[1]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
                 ((ScottPlot.Plottable.SignalPlot)plotStats.Plot.GetPlottables()[2]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
-                plotStats.Refresh(skipIfCurrentlyRendering: true);
             }
 
             if (plotRatio.Plot.GetPlottables().Length == 3)
             {
-                //plotRatio.Plot.GetPlottables()[0].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
-                //plotRatio.Plot.GetPlottables()[1].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
-                //plotRatio.Plot.GetPlottables()[2].GetLegendItems()[0].label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
                 ((ScottPlot.Plottable.SignalPlot)plotRatio.Plot.GetPlottables()[0]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
                 ((ScottPlot.Plottable.SignalPlot)plotRatio.Plot.GetPlottables()[1]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
                 ((ScottPlot.Plottable.SignalPlot)plotRatio.Plot.GetPlottables()[2]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
-                plotRatio.Refresh(skipIfCurrentlyRendering: true);
             }
 
             Plots_ShowLegends();

@@ -151,7 +151,7 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Function to initialize the plots' color palettes
+    /// Function to assing color palettes to each of the plot controls
     /// </summary>
     private void InitializePlotsPalette()
     {
@@ -192,8 +192,10 @@ partial class FrmMain
     /// </summary>
     private void InitializeArrays()
     {
+        // Create new labels and fill in the corresponding text strings based on the culture selected
         _seriesLabels = new string[_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns];
         UpdateUI_Series();
+
         _plotRadialGauge = new double[_settings.T10_NumberOfSensors];
         _plotRadar = new double[2, _settings.T10_NumberOfSensors];
         _plotData = new double[_settings.T10_NumberOfSensors + _settings.ArrayFixedColumns][];
