@@ -162,12 +162,12 @@ public class ClassSettings
     /// Default path for reading files from disk
     /// </summary>
     [JsonPropertyName("Default open path")]
-    public string DefaultOpenPath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
+    public string DefaultOpenPath { get; set; } = Path.Combine(System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty, "examples");
     /// <summary>
     /// User-defined path for reading files from disk
     /// </summary>
     [JsonPropertyName("User open path")]
-    public string UserOpenPath { get; set; } = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
+    public string UserOpenPath { get; set; } = Path.Combine(System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty, "examples");
 
     public ClassSettings()
     {
