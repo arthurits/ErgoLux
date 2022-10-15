@@ -23,13 +23,13 @@ partial class FrmMain
     {
         toolStripMain.Renderer = new CustomRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
-        this.toolStripMain_Exit.Image = new System.Drawing.Icon(GraphicsResources.IconExit,48,48).ToBitmap();
-        this.toolStripMain_Connect.Image = new System.Drawing.Icon(GraphicsResources.IconConnect, 48, 48).ToBitmap();
-        this.toolStripMain_Disconnect.Image = new System.Drawing.Icon(GraphicsResources.IconDisconnect, 48, 48).ToBitmap();
-        this.toolStripMain_Save.Image = new System.Drawing.Icon(GraphicsResources.IconSave, 48, 48).ToBitmap();
-        this.toolStripMain_Open.Image = new System.Drawing.Icon(GraphicsResources.IconOpen, 48, 48).ToBitmap();
-        this.toolStripMain_Settings.Image = new System.Drawing.Icon(GraphicsResources.IconSettings, 48, 48).ToBitmap();
-        this.toolStripMain_About.Image = new System.Drawing.Icon(GraphicsResources.IconAbout, 48, 48).ToBitmap();
+        this.toolStripMain_Exit.Image = GraphicsResources.LoadIcon(GraphicsResources.IconExit, 48);
+        this.toolStripMain_Connect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconConnect, 48);
+        this.toolStripMain_Disconnect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconDisconnect, 48);
+        this.toolStripMain_Save.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSave, 48);
+        this.toolStripMain_Open.Image = GraphicsResources.LoadIcon(GraphicsResources.IconOpen, 48);
+        this.toolStripMain_Settings.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSettings, 48);
+        this.toolStripMain_About.Image = GraphicsResources.LoadIcon(GraphicsResources.IconAbout, 48);
 
         this.toolStripMain_Disconnect.Enabled = false;
         this.toolStripMain_Connect.Enabled = false;
@@ -42,15 +42,15 @@ partial class FrmMain
     /// </summary>
     private void InitializeMenuStrip()
     {
-        this.mnuMainFrm_File_Open.Image = new System.Drawing.Icon(GraphicsResources.IconOpen, 16, 16).ToBitmap();
-        this.mnuMainFrm_File_Save.Image = new System.Drawing.Icon(GraphicsResources.IconSave, 16, 16).ToBitmap();
-        this.mnuMainFrm_File_Exit.Image = new System.Drawing.Icon(GraphicsResources.IconExit, 16, 16).ToBitmap();
+        this.mnuMainFrm_File_Open.Image = GraphicsResources.LoadIcon(GraphicsResources.IconOpen, 16);
+        this.mnuMainFrm_File_Save.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSave, 16);
+        this.mnuMainFrm_File_Exit.Image = GraphicsResources.LoadIcon(GraphicsResources.IconExit, 16);
 
-        this.mnuMainFrm_Tools_Connect.Image = new System.Drawing.Icon(GraphicsResources.IconConnect, 16, 16).ToBitmap();
-        this.mnuMainFrm_Tools_Disconnect.Image = new System.Drawing.Icon(GraphicsResources.IconDisconnect, 16, 16).ToBitmap();
-        this.mnuMainFrm_Tools_Settings.Image = new System.Drawing.Icon(GraphicsResources.IconSettings, 16, 16).ToBitmap();
+        this.mnuMainFrm_Tools_Connect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconConnect, 16);
+        this.mnuMainFrm_Tools_Disconnect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconDisconnect, 16);
+        this.mnuMainFrm_Tools_Settings.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSettings, 16);
 
-        this.mnuMainFrm_Help_About.Image = new System.Drawing.Icon(GraphicsResources.IconAbout, 16, 16).ToBitmap();
+        this.mnuMainFrm_Help_About.Image = GraphicsResources.LoadIcon(GraphicsResources.IconAbout, 16);
 
         // Initialize the menu checked items
         this.mnuMainFrm_View_Menu.Checked = true;

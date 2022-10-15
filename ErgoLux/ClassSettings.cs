@@ -88,17 +88,17 @@ public class ClassSettings
     /// Icon indicating the T-10 is opened and ready to be sent commands
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap Icon_Open { get; set; } = new System.Drawing.Icon(GraphicsResources.IconOpenConnection, 16, 16).ToBitmap();
+    public System.Drawing.Bitmap? Icon_Open { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconOpenConnection, 16);
     /// <summary>
     /// Icon indicating the T-10 is closed
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap Icon_Close { get; set; } = new System.Drawing.Icon(GraphicsResources.IconCloseConnection, 16, 16).ToBitmap();
+    public System.Drawing.Bitmap? Icon_Close { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
     /// <summary>
     /// Icon indicating the T-10 receiving and sending data
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap Icon_Data { get; set; } = new System.Drawing.Icon(GraphicsResources.IconExchangeConnection, 16, 16).ToBitmap();
+    public System.Drawing.Bitmap? Icon_Data { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconExchangeConnection, 16);
 
     /// <summary>
     /// Absolute path of the executable
@@ -162,12 +162,12 @@ public class ClassSettings
     /// Default path for reading files from disk
     /// </summary>
     [JsonPropertyName("Default open path")]
-    public string DefaultOpenPath { get; set; } = Path.Combine(System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty, "examples");
+    public string DefaultOpenPath { get; set; } = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty, "examples");
     /// <summary>
     /// User-defined path for reading files from disk
     /// </summary>
     [JsonPropertyName("User open path")]
-    public string UserOpenPath { get; set; } = Path.Combine(System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty, "examples");
+    public string UserOpenPath { get; set; } = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty, "examples");
 
     public ClassSettings()
     {
@@ -185,9 +185,9 @@ public class ClassSettings
     /// </summary>
     public void LoadGraphicResources()
     {
-        Icon_Open = new System.Drawing.Icon(Path.Combine(AppPath, GraphicsResources.IconOpenConnection), 16, 16).ToBitmap();
-        Icon_Close = new System.Drawing.Icon(Path.Combine(AppPath, GraphicsResources.IconCloseConnection), 16, 16).ToBitmap();
-        Icon_Data = new System.Drawing.Icon(Path.Combine(AppPath, GraphicsResources.IconExchangeConnection), 16, 16).ToBitmap();
+        Icon_Open = GraphicsResources.LoadIcon(GraphicsResources.IconOpenConnection, 16);
+        Icon_Close = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
+        Icon_Data = GraphicsResources.LoadIcon(GraphicsResources.IconExchangeConnection, 16);
     }
 
     public string GetMillisecondsFormat(System.Globalization.CultureInfo culture)

@@ -3,7 +3,7 @@ namespace ErgoLux;
 /// <summary>
 /// Load graphics resources from disk
 /// </summary>
-public class GraphicsResources
+public static class GraphicsResources
 {
 	public const string AppLogo = @"images\logo.ico";
 	public const string AppLogo256 = @"images\logo@256.png";
@@ -49,4 +49,33 @@ public class GraphicsResources
 		}
 		return resource;
 	}
+
+    /// <summary>
+    /// Creates a bitmap from an icon file
+    /// </summary>
+    /// <param name="fileName">File name (absolute or relative to the working directory) to load resource from</param>
+	/// <param name="width">Width in pixels</param>
+	/// <param name="height">Height in pixels. If omitted, the width is used instead</param>
+    /// <returns>Bitmap from the icon resource</returns>
+    public static Bitmap? LoadIcon(string fileName, int width, int? height = null)
+	{
+		Bitmap? resource = null;
+        try
+        {
+            if (File.Exists(fileName))
+            {
+				resource = new Icon(fileName, width, height ?? width).ToBitmap();
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                $"Unexpected error while loading the {fileName} icon resource.{Environment.NewLine}{ex.Message}",
+                "Loading error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
+        return resource;
+
+    }
 }
