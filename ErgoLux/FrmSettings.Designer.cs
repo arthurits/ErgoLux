@@ -206,7 +206,7 @@ namespace ErgoLux
             // 
             this.lblOff.AutoSize = true;
             this.lblOff.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblOff.Location = new System.Drawing.Point(380, 264);
+            this.lblOff.Location = new System.Drawing.Point(378, 264);
             this.lblOff.Name = "lblOff";
             this.lblOff.Size = new System.Drawing.Size(28, 19);
             this.lblOff.TabIndex = 35;
@@ -216,7 +216,7 @@ namespace ErgoLux
             // 
             this.lblOn.AutoSize = true;
             this.lblOn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblOn.Location = new System.Drawing.Point(302, 264);
+            this.lblOn.Location = new System.Drawing.Point(295, 264);
             this.lblOn.Name = "lblOn";
             this.lblOn.Size = new System.Drawing.Size(28, 19);
             this.lblOn.TabIndex = 34;

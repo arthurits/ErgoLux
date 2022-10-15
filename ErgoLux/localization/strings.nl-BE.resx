@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strFrmTitleUnion" xml:space="preserve">
-    <value>-</value>
+    <value> - </value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
     <value>"ErgoLux-bestand (*.elux)|*.elux|Tekstbestand (*.txt)|*.txt|Binair bestand (*.bin)|*.bin|Alle bestanden (*.*)|*.*"</value>
