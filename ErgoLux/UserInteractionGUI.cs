@@ -131,8 +131,12 @@ partial class FrmMain
         if (readOK)
         {
             SetFormTitle(this, OpenDlg.FileName);
+            
             // Show data into plots
             Plots_FetchData();
+
+            // Show measuring time in the status bar
+            UpdateUI_MeasuringTime();
         }
 
         // Restore cursor
@@ -200,6 +204,7 @@ partial class FrmMain
         toolStripMain_Connect.Checked = false;
         Plots_ShowFull();
         Plots_Refresh();
+        UpdateUI_MeasuringTime();
     }
 
     private void Settings_Click(object sender, EventArgs e)

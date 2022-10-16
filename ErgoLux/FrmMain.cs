@@ -2,6 +2,7 @@
 using System.Linq;
 using System.IO.Ports;
 using ScottPlot.Plottable;
+using System.Xml.Linq;
 
 namespace ErgoLux;
 
@@ -171,6 +172,30 @@ public partial class FrmMain : Form
     }
 
     /// <summary>
+    /// Shows the measuring time in the StatusStrip control
+    /// </summary>
+    private void UpdateUI_MeasuringTime()
+    {
+        TimeSpan nTime = _timeEnd - _timeStart;
+
+        if (nTime == TimeSpan.Zero)
+        {
+            statusStripLabelXtras.Text = string.Empty;
+            statusStripLabelXtras.ToolTipText = string.Empty;
+        }
+        else
+        {
+            statusStripLabelXtras.Text = $"{nTime.Days} {StringResources.FileHeader19}, " +
+                $"{nTime.Hours} {StringResources.FileHeader20}, " +
+                $"{nTime.Minutes} {StringResources.FileHeader21}, " +
+                $"{nTime.Seconds} {StringResources.FileHeader22} " +
+                $"{StringResources.FileHeader23} " +
+                $"{nTime.Milliseconds} {StringResources.FileHeader24}";
+            statusStripLabelXtras.ToolTipText = statusStripLabelXtras.Text;
+        }
+    }
+
+    /// <summary>
     /// Updates the plots' legends according to the culture in <see cref="ClassSettings.AppCulture"/> stored as '_settings.AppCulture'.
     /// </summary>
     private void UpdateUI_Series()
@@ -200,6 +225,8 @@ public partial class FrmMain : Form
 
         // Update the form's tittle
         SetFormTitle(this, String.Empty);
+
+        UpdateUI_MeasuringTime();
 
         // Update ToolStrip
         toolStripMain_Exit.Text = StringResources.ToolStripExit;
@@ -282,10 +309,13 @@ public partial class FrmMain : Form
         UpdateUI_Series();
         if (DataLength > _settings.ArrayFixedColumns)
         {
-            for (int i = 0; i < plotData.Plot.GetPlottables().Length; i++)
+            // Since the crosshair might be activated, it's necessary to filter by typeof
+            var signalPlot = plotData.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
+            int count = signalPlot.Length;
+            for (int i = 0; i < count; i++)
             {
-                //plotData.Plot.GetPlottables()[i].GetLegendItems()[0].label = _seriesLabels[i];
-                ((ScottPlot.Plottable.SignalPlot)plotData.Plot.GetPlottables()[i]).Label = _seriesLabels[i];
+                //((ScottPlot.Plottable.SignalPlot)plotData.Plot.GetPlottables()[i]).Label = _seriesLabels[i];
+                signalPlot[i].Label = _seriesLabels[i];
             }
 
             if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadarPlot))
@@ -293,18 +323,20 @@ public partial class FrmMain : Form
             else if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadialGaugePlot))
                 ((RadialGaugePlot)plotDistribution.Plot.GetPlottables()[0]).Labels = _seriesLabels[0.._settings.T10_NumberOfSensors];
 
-            if (plotStats.Plot.GetPlottables().Length == 3)
+            signalPlot = plotStats.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
+            if (signalPlot.Length == 3)
             {
-                ((ScottPlot.Plottable.SignalPlot)plotStats.Plot.GetPlottables()[0]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
-                ((ScottPlot.Plottable.SignalPlot)plotStats.Plot.GetPlottables()[1]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
-                ((ScottPlot.Plottable.SignalPlot)plotStats.Plot.GetPlottables()[2]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
+                signalPlot[0].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
+                signalPlot[1].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
+                signalPlot[2].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
             }
 
+            signalPlot = plotRatio.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
             if (plotRatio.Plot.GetPlottables().Length == 3)
             {
-                ((ScottPlot.Plottable.SignalPlot)plotRatio.Plot.GetPlottables()[0]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
-                ((ScottPlot.Plottable.SignalPlot)plotRatio.Plot.GetPlottables()[1]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
-                ((ScottPlot.Plottable.SignalPlot)plotRatio.Plot.GetPlottables()[2]).Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
+                signalPlot[0].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
+                signalPlot[1].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
+                signalPlot[2].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
             }
 
             Plots_ShowLegends();
