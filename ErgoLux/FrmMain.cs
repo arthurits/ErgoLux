@@ -332,7 +332,7 @@ public partial class FrmMain : Form
             }
 
             signalPlot = plotRatio.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
-            if (plotRatio.Plot.GetPlottables().Length == 3)
+            if (signalPlot.Length == 3)
             {
                 signalPlot[0].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
                 signalPlot[1].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
