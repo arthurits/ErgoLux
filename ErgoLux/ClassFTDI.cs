@@ -271,7 +271,7 @@ public class FTDISample : FTDI
                 numBytesRead = 0;
                 status = base.Read(readData, nrOfBytesAvailable, ref numBytesRead);
                 strReadData += System.Text.Encoding.UTF8.GetString(readData);
-                if (readData[readData.Length - 1] == 10)
+                if (readData[^1] == 10)
                 {
                     // invoke your own event handler for data received...
                     OnDataReceived(new DataReceivedEventArgs(Encoding.ASCII.GetBytes(strReadData), numBytesRead, nrOfBytesAvailable));

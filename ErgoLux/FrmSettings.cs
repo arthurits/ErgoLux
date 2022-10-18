@@ -171,14 +171,16 @@ public partial class FrmSettings : Form
         }
         else
         {
-            if (viewDevices.Items.Count > 0)
+            if (viewDevices.Items.Count == 1)
             {
                 //_deviceType = viewDevices.Items[0].SubItems[2].Text;
                 //_deviceID = viewDevices.Items[0].SubItems[3].Text;
-                Settings.T10_DeviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
-                Settings.T10_DevideID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[3].Text, 16);
+                Settings.T10_DeviceType = viewDevices.Items[0].SubItems[2].Text;
+                Settings.T10_DevideID = Convert.ToInt32(viewDevices.Items[0].SubItems[3].Text, 16);
                 Settings.T10_LocationID = Convert.ToInt32(viewDevices.Items[0].SubItems[4].Text, 16);
             }
+            else
+                return;
         }
 
         // Check that all texboxes have valid values

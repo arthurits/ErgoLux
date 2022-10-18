@@ -96,14 +96,22 @@ partial class FrmMain
     /// <summary>
     /// Fetchs data into the plots
     /// </summary>
-    private void Plots_FetchData()
+    /// <param name="resetPlotPoints">True if <see cref="_nPoints"/> is set equal to <see cref="_settings.Plot_ArrayPoints"/>, false otherwise </param>
+    /// <param name="showAllData">True to fit data into the plots, false otherwise</param>
+    private void Plots_FetchData(bool resetPlotPoints = true, bool showAllData = true)
     {
+        int points = resetPlotPoints ? _settings.Plot_ArrayPoints : _nPoints;
+
         Plots_Clear();  // This sets _nPoints = 0, so we need to reset it now
-        _nPoints = _settings.Plot_ArrayPoints;
+        
+        _nPoints = points;
 
         Plots_DataBinding();    // Bind the arrays to the plots
         Plots_ShowLegends();    // Show the legends in the picture boxes
-        Plots_ShowFull();       // Show all data (fit data)
+        
+        if (showAllData)
+            Plots_ShowFull();   // Show all data (fit data)
+        
         Plots_Refresh();
     }
 

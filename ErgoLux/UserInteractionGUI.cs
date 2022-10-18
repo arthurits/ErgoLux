@@ -278,24 +278,38 @@ partial class FrmMain
                 
                 if (result == FTDI.FT_STATUS.FT_OK)
                 {
+                    this.toolStripMain_Connect.Enabled = true;
+
                     // Update the status strip with information
                     this.statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
                     this.statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
                     this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID.ToString("0:X")}";
                     this.statusStripIconOpen.Image = _settings.Icon_Open;
 
+                    // Check the number of sensors
+                    //CheckSensors();
+
                     if (InitializeArrays)
                     {
                         this.InitializeArrays();
                         ModifyArrays = false;
                     }
+
+                    Plots_FetchData(false, false);
+                    //Plots_Clear();          // First, clear all data (if any) in the plots
+                    //Plots_DataBinding();    // Bind the arrays to the plots
+                    //Plots_ShowLegends();    // Show the legends in the picture boxes
+                    ModifyPlots = false;
                 }
                 else
                 {
+                    this.toolStripMain_Connect.Enabled = false;
                     this.statusStripIconOpen.Image = _settings.Icon_Close;
+
                     using (new CenterWinDialog(this))
                     {
-                        MessageBox.Show(StringResources.MsgBoxErrorOpenDevice,
+                        MessageBox.Show(this,
+                            StringResources.MsgBoxErrorOpenDevice,
                             StringResources.MsgBoxErrorOpenDeviceTitle,
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
@@ -318,7 +332,7 @@ partial class FrmMain
             if (ModifyPlots)
             {
                 if (_plotData.Length > 0 && _plotRadar.Length > 0 && _plotRadialGauge.Length > 0)
-                    Plots_FetchData();
+                    Plots_FetchData(false, true);
             }
 
             if (_cultureName != _settings.AppCultureName)

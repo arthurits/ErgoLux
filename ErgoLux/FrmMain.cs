@@ -95,14 +95,17 @@ public partial class FrmMain : Form
     private void CheckSensors()
     {
         //if (!myFtdiDevice.Write(ClassT10.Command_54)) return;
-        
-        int i = _settings.T10_NumberOfSensors - 1;
-        while (i >= 0)
-        {
-            if (myFtdiDevice.Write(ClassT10.ReceptorsSingle[i])) break;
-            i--;
-        }
-        _settings.T10_NumberOfSensors = i;
+
+        myFtdiDevice.DataReceived += OnDataReceived;
+        myFtdiDevice.Write(ClassT10.Command_55_Set);
+        //myFtdiDevice.Write(ClassT10.ReceptorsSingle[5]);
+        //int i = _settings.T10_NumberOfSensors - 1;
+        //while (i >= 0)
+        //{
+        //    if (myFtdiDevice.Write(ClassT10.ReceptorsSingle[i])) break;
+        //    i--;
+        //}
+        //_settings.T10_NumberOfSensors = i;
     }
 
     private void OnTimedEvent(object? sender, EventArgs e)
