@@ -516,6 +516,7 @@ namespace ErgoLux
             // 
             this.lblDataFormat.AutoSize = true;
             this.lblDataFormat.Location = new System.Drawing.Point(26, 250);
+            this.lblDataFormat.MaximumSize = new System.Drawing.Size(230, 0);
             this.lblDataFormat.Name = "lblDataFormat";
             this.lblDataFormat.Size = new System.Drawing.Size(177, 19);
             this.lblDataFormat.TabIndex = 2;
