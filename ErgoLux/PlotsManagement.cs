@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using System.Linq;
-
-namespace ErgoLux;
+﻿namespace ErgoLux;
 
 partial class FrmMain
 {
@@ -96,7 +93,7 @@ partial class FrmMain
     /// <summary>
     /// Fetchs data into the plots
     /// </summary>
-    /// <param name="resetPlotPoints">True if <see cref="_nPoints"/> is set equal to <see cref="_settings.Plot_ArrayPoints"/>, false otherwise </param>
+    /// <param name="resetPlotPoints"><see langword="True"/> if <see cref="_nPoints"/> is set equal to <see cref="_settings.Plot_ArrayPoints"/>, <see langword="False">false</see> otherwise </param>
     /// <param name="showAllData">True to fit data into the plots, false otherwise</param>
     private void Plots_FetchData(bool resetPlotPoints = true, bool showAllData = true)
     {
@@ -233,12 +230,13 @@ partial class FrmMain
         factor *= _settings.Plot_ArrayPoints;
         if (factor > _plotData[0].Length - 1)
         {
+            //System.Diagnostics.Debug.WriteLine($"Current _plotData[i] points: {_nPoints}, array size: {_plotData[0].Length}, new size: {_settings.Plot_ArrayPoints + factor}");
             _settings.Plot_ArrayPoints += factor;
             for (int i = 0; i < _plotData.Length; i++)
             {
                 Array.Resize<double>(ref _plotData[i], _settings.Plot_ArrayPoints);
             }
-
+            
             // https://github.com/ScottPlot/ScottPlot/discussions/1042
             // https://swharden.com/scottplot/faq/version-4.1/
             // Update array reference in the plots. The Update() method doesn't allow a bigger array, so we need to modify Ys property
@@ -451,4 +449,3 @@ partial class FrmMain
         }
     }
 }
-

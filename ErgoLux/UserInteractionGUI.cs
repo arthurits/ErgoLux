@@ -218,7 +218,7 @@ partial class FrmMain
         int _flowControl = _settings.T10_FlowControl;
         int _charOn = _settings.T10_CharOn;
         int _charOff = _settings.T10_CharOff;
-        bool ModifyDevice = false;
+        //bool ModifyDevice = false;
         int _numberOfSensors = _settings.T10_NumberOfSensors;
         double _frequency = _settings.T10_Frequency;
         int _windowPoints = _settings.Plot_WindowPoints;
@@ -236,15 +236,15 @@ partial class FrmMain
 
         if (frm.DialogResult == DialogResult.OK)
         {
-            ModifyDevice = (_locationID == _settings.T10_LocationID) &&
-                            (_baudRate == _settings.T10_BaudRate) &&
-                            (_dataBits == _settings.T10_DataBits) &&
-                            (_stopBits == _settings.T10_StopBits) &&
-                            (_parity == _settings.T10_Parity) &&
-                            (_flowControl == _settings.T10_FlowControl) &&
-                            (_charOn == _settings.T10_CharOn) &&
-                            (_charOff == _settings.T10_CharOff);
-            ModifyDevice = !ModifyDevice;
+            //ModifyDevice = (_locationID == _settings.T10_LocationID) &&
+            //                (_baudRate == _settings.T10_BaudRate) &&
+            //                (_dataBits == _settings.T10_DataBits) &&
+            //                (_stopBits == _settings.T10_StopBits) &&
+            //                (_parity == _settings.T10_Parity) &&
+            //                (_flowControl == _settings.T10_FlowControl) &&
+            //                (_charOn == _settings.T10_CharOn) &&
+            //                (_charOff == _settings.T10_CharOff);
+            //ModifyDevice = !ModifyDevice;
 
             ModifyPlots = (_numberOfSensors == _settings.T10_NumberOfSensors) &&
                 (_frequency == _settings.T10_Frequency) &&
