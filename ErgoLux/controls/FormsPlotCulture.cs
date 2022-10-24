@@ -13,7 +13,7 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     }
 
     private readonly ContextMenuStrip customMenu = new();
-    private System.Windows.Forms.ToolStripMenuItem detachLegendMenuItem = new();
+    //private System.Windows.Forms.ToolStripMenuItem detachLegendMenuItem = new();
 
     private readonly System.Resources.ResourceManager StringsRM = new ("ScottPlot.FormsPlotCulture", typeof(FormsPlotCulture).Assembly);
 
@@ -34,7 +34,8 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
         customMenu.Items["Zoom"].Text = StringsRM.GetString("strMenuZoom", CultureUI) ?? "Zoom to fit data";
         customMenu.Items["Help"].Text = StringsRM.GetString("strMenuHelp", CultureUI) ?? "Help";
         customMenu.Items["Open"].Text = StringsRM.GetString("strMenuOpen", CultureUI) ?? "Open in new window";
-        detachLegendMenuItem.Text = StringsRM.GetString("strMenuDetach", CultureUI) ?? "Detach legend";
+        customMenu.Items["Detach"].Text = StringsRM.GetString("strMenuDetach", CultureUI) ?? "Detach legend";
+        //detachLegendMenuItem.Text = StringsRM.GetString("strMenuDetach", CultureUI) ?? "Detach legend";
     }
 
     private void InitilizeContextMenu()
@@ -69,8 +70,10 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
         menuItem.Name = "Open";
 
         item = customMenu.Items.Add(new ToolStripMenuItem("Detach legend", null, new EventHandler(RightClickMenu_DetachLegend_Click)));
-        detachLegendMenuItem = (ToolStripMenuItem)customMenu.Items[item];
-        detachLegendMenuItem.Name = "Detach";
+        menuItem = (ToolStripMenuItem)customMenu.Items[item];
+        menuItem.Name = "Detach";
+        //detachLegendMenuItem = (ToolStripMenuItem)customMenu.Items[item];
+        //detachLegendMenuItem.Name = "Detach";
 
     }
 
@@ -79,7 +82,8 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     /// </summary>
     private void CustomRightClickEvent(object? sender, EventArgs e)
     {
-        detachLegendMenuItem.Visible = Plot.Legend(null).Count > 0;
+        //detachLegendMenuItem.Visible = Plot.Legend(null).Count > 0;
+        customMenu.Items["Detach"].Visible = Plot.Legend(null).Count > 0;
         customMenu.Show(System.Windows.Forms.Cursor.Position);
     }
     private void RightClickMenu_Copy_Click(object? sender, EventArgs e) => Clipboard.SetImage(Plot.Render());
@@ -91,7 +95,7 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     {
         SaveFileDialog fileDialog = new()
         {
-            FileName = "Plot.png",
+            FileName = StringsRM.GetString("strFileDlgFileName", CultureUI) ?? "Plot.png",
             Filter = StringsRM.GetString("strDlgFilter", CultureUI) ?? "PNG Files (*.png)|*.png;*.png" +
                      "|JPG Files (*.jpg, *.jpeg)|*.jpg;*.jpeg" +
                      "|BMP Files (*.bmp)|*.bmp;*.bmp" +
