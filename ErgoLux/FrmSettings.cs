@@ -402,8 +402,19 @@ public partial class FrmSettings : Form
         this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
         this.radInvariantCulture.Text = StringResources.RadInvariantCulture;
         this.radUserCulture.Text = StringResources.RadUserCulture;
-        this.chkDlgPath.Text = StringResources.ChkDlgPath;
+        //this.chkDlgPath.Text = StringResources.ChkDlgPath;
+        this.lblDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDataFormat.Text = StringResources.LblDataFormat;
+
+        // Reposition controls to compensate for the culture text length in labels
+        int width = Math.Max(this.lblArrayPoints.Width, this.lblPlotWindow.Width);
+        this.txtArrayPoints.Left = this.lblArrayPoints.Left + width;
+        this.txtPlotWindow.Left = this.lblPlotWindow.Left + width;
+
+        this.chkDlgPath.Top = 1 + this.lblDlgPath.Top + (lblDlgPath.Height - chkDlgPath.Height) / 2;
+
+        this.txtDataFormat.Left = this.lblDataFormat.Left + this.lblDataFormat.Width;
+        this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }
 
 }

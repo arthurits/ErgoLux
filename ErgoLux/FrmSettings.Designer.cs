@@ -66,6 +66,7 @@ namespace ErgoLux
             this.chkShowAverage = new System.Windows.Forms.CheckBox();
             this.chkShowRaw = new System.Windows.Forms.CheckBox();
             this.tabGUI = new System.Windows.Forms.TabPage();
+            this.lblDlgPath = new System.Windows.Forms.Label();
             this.txtDataFormat = new System.Windows.Forms.TextBox();
             this.lblDataFormat = new System.Windows.Forms.Label();
             this.chkDlgPath = new System.Windows.Forms.CheckBox();
@@ -493,6 +494,7 @@ namespace ErgoLux
             // 
             // tabGUI
             // 
+            this.tabGUI.Controls.Add(this.lblDlgPath);
             this.tabGUI.Controls.Add(this.txtDataFormat);
             this.tabGUI.Controls.Add(this.lblDataFormat);
             this.tabGUI.Controls.Add(this.chkDlgPath);
@@ -505,9 +507,19 @@ namespace ErgoLux
             this.tabGUI.Text = "Interface";
             this.tabGUI.UseVisualStyleBackColor = true;
             // 
+            // lblDlgPath
+            // 
+            this.lblDlgPath.AutoSize = true;
+            this.lblDlgPath.Location = new System.Drawing.Point(45, 210);
+            this.lblDlgPath.MaximumSize = new System.Drawing.Size(350, 0);
+            this.lblDlgPath.Name = "lblDlgPath";
+            this.lblDlgPath.Size = new System.Drawing.Size(292, 19);
+            this.lblDlgPath.TabIndex = 4;
+            this.lblDlgPath.Text = "Remember previous path in open/save dialogs";
+            // 
             // txtDataFormat
             // 
-            this.txtDataFormat.Location = new System.Drawing.Point(259, 247);
+            this.txtDataFormat.Location = new System.Drawing.Point(259, 254);
             this.txtDataFormat.Name = "txtDataFormat";
             this.txtDataFormat.Size = new System.Drawing.Size(100, 25);
             this.txtDataFormat.TabIndex = 3;
@@ -515,7 +527,7 @@ namespace ErgoLux
             // lblDataFormat
             // 
             this.lblDataFormat.AutoSize = true;
-            this.lblDataFormat.Location = new System.Drawing.Point(26, 250);
+            this.lblDataFormat.Location = new System.Drawing.Point(26, 257);
             this.lblDataFormat.MaximumSize = new System.Drawing.Size(230, 0);
             this.lblDataFormat.Name = "lblDataFormat";
             this.lblDataFormat.Size = new System.Drawing.Size(177, 19);
@@ -525,11 +537,10 @@ namespace ErgoLux
             // chkDlgPath
             // 
             this.chkDlgPath.AutoSize = true;
-            this.chkDlgPath.Location = new System.Drawing.Point(29, 209);
+            this.chkDlgPath.Location = new System.Drawing.Point(29, 213);
             this.chkDlgPath.Name = "chkDlgPath";
-            this.chkDlgPath.Size = new System.Drawing.Size(311, 23);
+            this.chkDlgPath.Size = new System.Drawing.Size(15, 14);
             this.chkDlgPath.TabIndex = 1;
-            this.chkDlgPath.Text = "Remember previous path in open/save dialogs";
             this.chkDlgPath.UseVisualStyleBackColor = true;
             // 
             // grpCulture
@@ -548,7 +559,7 @@ namespace ErgoLux
             // cboAllCultures
             // 
             this.cboAllCultures.FormattingEnabled = true;
-            this.cboAllCultures.Location = new System.Drawing.Point(71, 137);
+            this.cboAllCultures.Location = new System.Drawing.Point(71, 135);
             this.cboAllCultures.Name = "cboAllCultures";
             this.cboAllCultures.Size = new System.Drawing.Size(190, 25);
             this.cboAllCultures.TabIndex = 3;
@@ -557,7 +568,7 @@ namespace ErgoLux
             // radUserCulture
             // 
             this.radUserCulture.AutoSize = true;
-            this.radUserCulture.Location = new System.Drawing.Point(27, 106);
+            this.radUserCulture.Location = new System.Drawing.Point(27, 102);
             this.radUserCulture.Name = "radUserCulture";
             this.radUserCulture.Size = new System.Drawing.Size(101, 23);
             this.radUserCulture.TabIndex = 2;
@@ -569,7 +580,7 @@ namespace ErgoLux
             // radInvariantCulture
             // 
             this.radInvariantCulture.AutoSize = true;
-            this.radInvariantCulture.Location = new System.Drawing.Point(27, 70);
+            this.radInvariantCulture.Location = new System.Drawing.Point(27, 66);
             this.radInvariantCulture.Name = "radInvariantCulture";
             this.radInvariantCulture.Size = new System.Drawing.Size(127, 23);
             this.radInvariantCulture.TabIndex = 1;
@@ -581,7 +592,7 @@ namespace ErgoLux
             // radCurrentCulture
             // 
             this.radCurrentCulture.AutoSize = true;
-            this.radCurrentCulture.Location = new System.Drawing.Point(27, 34);
+            this.radCurrentCulture.Location = new System.Drawing.Point(27, 30);
             this.radCurrentCulture.Name = "radCurrentCulture";
             this.radCurrentCulture.Size = new System.Drawing.Size(120, 23);
             this.radCurrentCulture.TabIndex = 0;
@@ -682,5 +693,6 @@ namespace ErgoLux
         private Label lblDataFormat;
         private ComboBox cboAllCultures;
         private RadioButton radUserCulture;
+        private Label lblDlgPath;
     }
 }
