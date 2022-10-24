@@ -156,8 +156,6 @@ public partial class FrmSettings : Form
         // Check that a device has been selected from the list
         if (viewDevices.SelectedIndices.Count > 0)
         {
-            //_deviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
-            //_deviceID = viewDevices.SelectedItems[0].SubItems[3].Text;
             Settings.T10_DeviceType = viewDevices.SelectedItems[0].SubItems[2].Text;
             Settings.T10_DevideID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[3].Text, 16);
             Settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
@@ -166,8 +164,6 @@ public partial class FrmSettings : Form
         {
             if (viewDevices.Items.Count == 1)
             {
-                //_deviceType = viewDevices.Items[0].SubItems[2].Text;
-                //_deviceID = viewDevices.Items[0].SubItems[3].Text;
                 Settings.T10_DeviceType = viewDevices.Items[0].SubItems[2].Text;
                 Settings.T10_DevideID = Convert.ToInt32(viewDevices.Items[0].SubItems[3].Text, 16);
                 Settings.T10_LocationID = Convert.ToInt32(viewDevices.Items[0].SubItems[4].Text, 16);
@@ -185,13 +181,16 @@ public partial class FrmSettings : Form
         if (!Validation.IsValidRange<int>(txtPlotWindow.Text, 20, Int32.MaxValue, true, this)) { txtPlotWindow.Focus(); txtPlotWindow.SelectAll(); return; }
 
         // Save to class settings
-        //_settings.T10_LocationID = Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16);
         Settings.T10_NumberOfSensors = (int)updSensors.Value;
         Settings.T10_BaudRate = Convert.ToInt32(txtBaudRate.Text);
-        Settings.T10_DataBits = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
-        Settings.T10_StopBits = ((KeyValuePair<string, int>)cboStopBits.SelectedItem).Value;
-        Settings.T10_Parity = ((KeyValuePair<string, int>)cboParity.SelectedItem).Value;
-        Settings.T10_FlowControl = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
+        //Settings.T10_DataBits = ((KeyValuePair<string, int>)cboDataBits.SelectedItem).Value;
+        //Settings.T10_StopBits = ((KeyValuePair<string, int>)cboStopBits.SelectedItem).Value;
+        //Settings.T10_Parity = ((KeyValuePair<string, int>)cboParity.SelectedItem).Value;
+        //Settings.T10_FlowControl = ((KeyValuePair<string, int>)cboFlowControl.SelectedItem).Value;
+        Settings.T10_DataBits = Convert.ToInt32(cboDataBits.SelectedValue);
+        Settings.T10_StopBits = Convert.ToInt32(cboStopBits.SelectedValue);
+        Settings.T10_Parity = Convert.ToInt32(cboParity.SelectedValue);
+        Settings.T10_FlowControl = Convert.ToInt32(cboFlowControl.SelectedValue);
         Settings.T10_CharOn = Convert.ToInt32(txtOn.Text);
         Settings.T10_CharOff = Convert.ToInt32(txtOff.Text);
         Settings.T10_Frequency = Convert.ToDouble(txtHz.Text);
