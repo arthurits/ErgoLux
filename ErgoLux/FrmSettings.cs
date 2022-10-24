@@ -1,19 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using FTD2XX_NET;
 using System.Globalization;
-using System.Linq;
-using FTD2XX_NET;
 
 namespace ErgoLux;
 
 public partial class FrmSettings : Form
 {
-    //private string _deviceType = String.Empty;
-    //private string _deviceID = String.Empty;
     private CultureInfo _culture = CultureInfo.CurrentCulture;
-    private ClassSettings? Settings;
-
-    //public string GetDeviceType => _deviceType;
-    //public string GetDeviceID => _deviceID;
+    private readonly ClassSettings? Settings;
 
     public FrmSettings()
     {
