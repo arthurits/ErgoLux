@@ -12,7 +12,12 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
         set { _cultureUI = value; ContextMenuUILanguage(); }
     }
 
-    private readonly ContextMenuStrip customMenu = new();
+    private ContextMenuStrip customMenu = new();
+    protected ContextMenuStrip ContextMenu
+    {
+        get { return customMenu; }
+        set { customMenu = value; }
+    }
     //private System.Windows.Forms.ToolStripMenuItem detachLegendMenuItem = new();
 
     private readonly System.Resources.ResourceManager StringsRM = new ("ScottPlot.FormsPlotCulture", typeof(FormsPlotCulture).Assembly);
@@ -27,7 +32,10 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
         this.RightClicked += CustomRightClickEvent;
     }
 
-    private void ContextMenuUILanguage()
+    /// <summary>
+    /// Sets the context menu items texts
+    /// </summary>
+    public virtual void ContextMenuUILanguage()
     {
         customMenu.Items["Copy"].Text = StringsRM.GetString("strMenuCopy", CultureUI) ?? "Copy image";
         customMenu.Items["Save"].Text = StringsRM.GetString("strMenuSave", CultureUI) ?? "Save image as...";
@@ -35,10 +43,13 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
         customMenu.Items["Help"].Text = StringsRM.GetString("strMenuHelp", CultureUI) ?? "Help";
         customMenu.Items["Open"].Text = StringsRM.GetString("strMenuOpen", CultureUI) ?? "Open in new window";
         customMenu.Items["Detach"].Text = StringsRM.GetString("strMenuDetach", CultureUI) ?? "Detach legend";
-        //detachLegendMenuItem.Text = StringsRM.GetString("strMenuDetach", CultureUI) ?? "Detach legend";
     }
 
-    private void InitilizeContextMenu()
+    /// <summary>
+    /// This is used to create all the items comprising the context menu.
+    /// Default items created: "Copy", "Save", | , "Zoom", | , "Help", | , "Open", "Detach"
+    /// </summary>
+    public virtual void InitilizeContextMenu()
     {
         int item;
         System.Windows.Forms.ToolStripMenuItem menuItem;

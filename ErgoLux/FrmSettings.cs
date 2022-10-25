@@ -168,8 +168,6 @@ public partial class FrmSettings : Form
                 Settings.T10_DevideID = Convert.ToInt32(viewDevices.Items[0].SubItems[3].Text, 16);
                 Settings.T10_LocationID = Convert.ToInt32(viewDevices.Items[0].SubItems[4].Text, 16);
             }
-            else
-                return;
         }
 
         // Check that all texboxes have valid values
