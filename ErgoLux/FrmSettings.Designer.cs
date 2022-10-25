@@ -100,7 +100,7 @@ namespace ErgoLux
             0,
             0});
             this.updSensors.Name = "updSensors";
-            this.updSensors.Size = new System.Drawing.Size(49, 25);
+            this.updSensors.Size = new System.Drawing.Size(52, 25);
             this.updSensors.TabIndex = 4;
             this.updSensors.Value = new decimal(new int[] {
             1,
@@ -198,7 +198,7 @@ namespace ErgoLux
             // txtHz
             // 
             this.txtHz.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtHz.Location = new System.Drawing.Point(369, 158);
+            this.txtHz.Location = new System.Drawing.Point(369, 153);
             this.txtHz.Name = "txtHz";
             this.txtHz.Size = new System.Drawing.Size(32, 25);
             this.txtHz.TabIndex = 36;

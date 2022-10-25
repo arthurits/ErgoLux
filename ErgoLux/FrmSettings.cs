@@ -397,10 +397,35 @@ public partial class FrmSettings : Form
         this.lblDataFormat.Text = StringResources.LblDataFormat;
 
         // Reposition controls to compensate for the culture text length in labels
+        // Tab T-10A
+        int nBaud = this.lblBaudRate.Left + this.lblBaudRate.Width + this.txtBaudRate.Width;
+        int nData = this.lblDataBits.Left + this.lblDataBits.Width + this.cboDataBits.Width;
+        int nParity = this.lblParity.Left + this.lblParity.Width + this.cboParity.Width;
+        int nSensors = this.lblSensors.Left + this.lblSensors.Width + this.updSensors.Width;
+        int nMaxRight = Math.Max(Math.Max(nBaud, nData), Math.Max(nParity, nSensors)) + 3;
+        this.txtBaudRate.Left = nMaxRight - this.txtBaudRate.Width;
+        this.cboDataBits.Left = nMaxRight - this.cboDataBits.Width;
+        this.cboParity.Left = nMaxRight - this.cboParity.Width;
+        this.updSensors.Left = nMaxRight - this.updSensors.Width;
+
+        int nFreq = this.txtHz.Left - this.lblFrequency.Width;
+        int nStop = this.cboStopBits.Left - this.lblStopBits.Width;
+        int nFlow = this.cboFlowControl.Left - this.lblFlowControl.Width;
+        int minLeft = Math.Min(Math.Min(nFreq, nStop), nFlow) - 3;
+        this.lblFrequency.Left = minLeft;
+        this.lblStopBits.Left = minLeft;
+        this.lblFlowControl.Left = minLeft;
+
+        this.lblOff.Left = this.txtOff.Left - this.lblOff.Width - 3;
+        this.txtOn.Left = this.lblOff.Left - this.txtOn.Width - 7;
+        this.lblOn.Left = this.txtOn.Left - this.lblOn.Width - 3;
+
+        // Tab plots
         int width = Math.Max(this.lblArrayPoints.Width, this.lblPlotWindow.Width);
         this.txtArrayPoints.Left = this.lblArrayPoints.Left + width;
         this.txtPlotWindow.Left = this.lblPlotWindow.Left + width;
 
+        // Tab Interface
         this.chkDlgPath.Top = 1 + this.lblDlgPath.Top + (lblDlgPath.Height - chkDlgPath.Height) / 2;
 
         this.txtDataFormat.Left = this.lblDataFormat.Left + this.lblDataFormat.Width;
