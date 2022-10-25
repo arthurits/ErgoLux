@@ -414,7 +414,9 @@ Klaida:
 {0}</value>
   </data>
   <data name="strMsgBoxErrorBaudRate" xml:space="preserve">
-    <value>Nepavyko nustatyti perdavimo spartos. Klaida:{0}</value>
+    <value>Nepavyko nustatyti perdavimo spartos.
+Klaida:
+{0}</value>
   </data>
   <data name="strMsgBoxErrorBaudRateTitle" xml:space="preserve">
     <value>Perdavimo spartos klaida</value>
@@ -436,7 +438,9 @@ Klaida:
     <value>Klaida įkeliant tvarkykles</value>
   </data>
   <data name="strMsgBoxErrorFlowControl" xml:space="preserve">
-    <value>Nepavyko nustatyti srauto valdymo. Klaida:{0}</value>
+    <value>Nepavyko nustatyti srauto valdymo.
+Klaida:
+{0}</value>
   </data>
   <data name="strMsgBoxErrorFlowControlTitle" xml:space="preserve">
     <value>Srauto valdymo klaida</value>
@@ -462,7 +466,9 @@ Bandykite dar kartą vėliau arba susisiekite su programinės įrangos inžinier
     <value>Klaida</value>
   </data>
   <data name="strMsgBoxErrorOpening" xml:space="preserve">
-    <value>Nepavyko atidaryti įrenginio. Klaida:{0}</value>
+    <value>Nepavyko atidaryti įrenginio.
+Klaida:
+{0}</value>
   </data>
   <data name="strMsgBoxErrorOpeningTitle" xml:space="preserve">
     <value>Klaida atidarant įrenginį</value>
@@ -486,7 +492,9 @@ Vietoj to bus naudojamos numatytosios reikšmės.</value>
     <value>Klaida</value>
   </data>
   <data name="strMsgBoxErrorTimeouts" xml:space="preserve">
-    <value>Nepavyko nustatyti skirtojo laiko. Klaida:{0}</value>
+    <value>Nepavyko nustatyti skirtojo laiko.
+Klaida:
+{0}</value>
   </data>
   <data name="strMsgBoxErrorTimeoutsTitle" xml:space="preserve">
     <value>Skirtojo laiko klaida</value>
@@ -524,7 +532,7 @@ skaičiavimas buvo sustabdytas.</value>
     <value>Sustabdyti</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>&quot;ErgoLux failas (*.elux)|*.elux|Teksto failas (*.txt)|*.txt|Dvejetainis failas (*.bin)|*.bin|Visi failai (*.*)|*.*&quot;</value>
+    <value>ErgoLux failas (*.elux)|*.elux|Teksto failas (*.txt)|*.txt|Dvejetainis failas (*.bin)|*.bin|Visi failai (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Atidaryti apšvietimo duomenis</value>
@@ -575,7 +583,8 @@ skaičiavimas buvo sustabdytas.</value>
     <value>Pasirinkti kultūrą</value>
   </data>
   <data name="strReadDataError" xml:space="preserve">
-    <value>Nepavyko nuskaityti duomenų iš failo.{0}</value>
+    <value>Nepavyko nuskaityti duomenų iš failo.
+{0}</value>
   </data>
   <data name="strReadDataErrorCulture" xml:space="preserve">
     <value>Kultūros identifikatoriaus eilutės pavadinimas neteisingas.
