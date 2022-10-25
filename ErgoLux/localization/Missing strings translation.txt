@@ -1,0 +1,79 @@
+strChkPlotAverage
+strChkPlotDistribution
+strChkPlotRatios
+strChkPlotRaw
+
+strGridDevice
+strGridFlags
+strGridID
+strGridLocation
+strGridSerial
+strGridType
+strGrpAxis
+
+strGrpPlot
+strLblArrayPoints
+strLblBaudRate
+
+strLblDataBits
+
+strLblDeviceList
+
+strLblFlow
+strLblFrequency
+strLblOff
+strLblOn
+strLblParity
+strLblPlotWindow
+strLblSensors
+
+strLblStopBits
+
+strMsbBoxErrorBits
+strMsgBoxErrorBaudRate
+strMsgBoxErrorBaudRateTitle
+strMsgBoxErrorBitsTitle
+strMsgBoxErrorDeviceClosed
+strMsgBoxErrorDeviceClosedTitle
+strMsgBoxErrorDrivers
+strMsgBoxErrorDriversTitle
+strMsgBoxErrorFlowControl
+strMsgBoxErrorFlowControlTitle
+strMsgBoxErrorLoading
+strMsgBoxErrorLoadingTitle
+
+strMsgBoxErrorOpening
+strMsgBoxErrorOpeningTitle
+
+strMsgBoxErrorTimeouts
+strMsgBoxErrorTimeoutsTitle
+
+strRadRadar
+strRadRadialGauge
+
+
+----------------------
+
+strChkPlotAverage	Durchschnittliche Daten darstellen	
+strChkPlotDistribution	Verteilung Daten plotten	
+strChkPlotRatios	Ratio Daten darstellen	
+strChkPlotRaw	Rohdaten darstellen	
+strGridDevice	Gerätestandort	
+strGridFlags	Flaggen	
+strGridID	ID	
+strGridLocation	Standort-ID	
+strGridSerial	Seriennummer	
+strGridType	Typ	
+strGrpPlot	Verteilung Plot	
+strLblArrayPoints	Array-Mindest Datenpunkte	
+strLblBaudRate	Baudrate	
+strLblDataBits	Daten Bits	
+strLblDeviceList	FTDI-Geräteliste	
+strLblFlow	Ablaufsteuerung	
+strLblFrequency	Frequenz (Hz)	
+strLblOff	Aus	
+strLblOn	An	
+strLblParity	Parität	
+strLblPlotWindow	Plot Fenster (Sekunden)	
+strLblSensors	Anzahl Sensoren	
+strLblStopBits	Stopp-Bits	
