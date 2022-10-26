@@ -294,6 +294,7 @@ public partial class FrmMain : Form
         plotData.Plot.YLabel(StringResources.PlotRawYLabel);
         plotData.Plot.XLabel(StringResources.PlotRawXLabel);
 
+        plotDistribution.CultureUI = _settings.AppCulture;
         plotDistribution.Plot.Title(StringResources.PlotDistributionTitle);
 
         plotStats.CultureUI = _settings.AppCulture;

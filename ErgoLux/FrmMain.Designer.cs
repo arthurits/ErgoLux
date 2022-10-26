@@ -78,7 +78,7 @@ namespace ErgoLux
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMain_About = new System.Windows.Forms.ToolStripButton();
             this.plotData = new ScottPlot.FormsPlotCrossHair();
-            this.plotDistribution = new ScottPlot.FormsPlot();
+            this.plotDistribution = new ScottPlot.FormsPlotCulture();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.plotStats = new ScottPlot.FormsPlotCrossHair();
@@ -735,7 +735,7 @@ namespace ErgoLux
         private System.Windows.Forms.ToolStripStatusLabel statusStripIconOpen;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelXtras;
         private ScottPlot.FormsPlotCrossHair plotData;
-        private ScottPlot.FormsPlot plotDistribution;
+        private ScottPlot.FormsPlotCulture plotDistribution;
         private ScottPlot.FormsPlotCrossHair plotStats;
         private ScottPlot.FormsPlotCrossHair plotRatio;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
