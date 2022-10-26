@@ -504,6 +504,12 @@ Verranno utilizzati i valori di default.</value>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Formato invariante della cultura</value>
   </data>
+  <data name="strRadRadar" xml:space="preserve">
+    <value>Radar</value>
+  </data>
+  <data name="strRadRadialGauge" xml:space="preserve">
+    <value>Cerchio concentrico</value>
+  </data>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Seleziona cultura</value>
   </data>

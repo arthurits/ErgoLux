@@ -508,6 +508,12 @@ ihre Standardwerte zurücksetzen?</value>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Unveränderliche Kulturformatierung</value>
   </data>
+  <data name="strRadRadar" xml:space="preserve">
+    <value>Radar</value>
+  </data>
+  <data name="strRadRadialGauge" xml:space="preserve">
+    <value>Radiallehre</value>
+  </data>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Kultur auswählen</value>
   </data>

@@ -505,6 +505,12 @@ a été arrêté.</value>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Formatage de culture invariante</value>
   </data>
+  <data name="strRadRadar" xml:space="preserve">
+    <value>Radar</value>
+  </data>
+  <data name="strRadRadialGauge" xml:space="preserve">
+    <value>Jauge radiale</value>
+  </data>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Sélectionner la culture</value>
   </data>
