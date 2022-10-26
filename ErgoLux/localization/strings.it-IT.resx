@@ -147,6 +147,18 @@
   <data name="strChkEntropy" xml:space="preserve">
     <value>Entropia (campione &amp;&amp; approssimato)</value>
   </data>
+  <data name="strChkPlotAverage" xml:space="preserve">
+    <value>Tracciare i dati medi</value>
+  </data>
+  <data name="strChkPlotDistribution" xml:space="preserve">
+    <value>Tracciare i dati di distribuzione</value>
+  </data>
+  <data name="strChkPlotRatios" xml:space="preserve">
+    <value>Tracciare i dati dei proporzione</value>
+  </data>
+  <data name="strChkPlotRaw" xml:space="preserve">
+    <value>Tracciare i dati grezzi</value>
+  </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Potenza (dB)</value>
   </data>
@@ -256,26 +268,83 @@ Verranno utilizzati i valori di default.</value>
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
   </data>
+  <data name="strGridDevice" xml:space="preserve">
+    <value>Gerätestandort</value>
+  </data>
+  <data name="strGridFlags" xml:space="preserve">
+    <value>Segnare</value>
+  </data>
+  <data name="strGridID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="strGridLocation" xml:space="preserve">
+    <value>ID posizione</value>
+  </data>
+  <data name="strGridSerial" xml:space="preserve">
+    <value>Numero di serie</value>
+  </data>
+  <data name="strGridType" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Asse delle ascisse</value>
   </data>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Interfaccia e formato dei dati</value>
   </data>
+  <data name="strGrpPlot" xml:space="preserve">
+    <value>Grafico di distribuzione</value>
+  </data>
+  <data name="strLblArrayPoints" xml:space="preserve">
+    <value>Punti minimi dell'array</value>
+  </data>
+  <data name="strLblBaudRate" xml:space="preserve">
+    <value>Baud rate</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Percorso dell'archivio dati</value>
+  </data>
+  <data name="strLblDataBits" xml:space="preserve">
+    <value>Bit di dati</value>
   </data>
   <data name="strLblDataFormat" xml:space="preserve">
     <value>Stringa del formato dati numerico</value>
   </data>
+  <data name="strLblDeviceList" xml:space="preserve">
+    <value>Elenco dispositivi FTDI</value>
+  </data>
   <data name="strLblEnd" xml:space="preserve">
     <value>Indice finale</value>
+  </data>
+  <data name="strLblFlow" xml:space="preserve">
+    <value>Controllo del flusso</value>
+  </data>
+  <data name="strLblFrequency" xml:space="preserve">
+    <value>Frequenza (Hz)</value>
+  </data>
+  <data name="strLblOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="strLblOn" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="strLblParity" xml:space="preserve">
+    <value>Bit di parità</value>
+  </data>
+  <data name="strLblPlotWindow" xml:space="preserve">
+    <value>finestra della trama (secondi)</value>
+  </data>
+  <data name="strLblSensors" xml:space="preserve">
+    <value>Numero di sensori</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Seleziona serie</value>
   </data>
   <data name="strLblStart" xml:space="preserve">
     <value>Indice iniziale</value>
+  </data>
+  <data name="strLblStopBits" xml:space="preserve">
+    <value>Stop bit</value>
   </data>
   <data name="strLblWindow" xml:space="preserve">
     <value>Finestra</value>
