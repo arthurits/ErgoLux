@@ -35,12 +35,19 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     /// </summary>
     protected virtual void ContextMenuUILanguage()
     {
-        ContextMenu.Items["Copy"].Text = StringsRM.GetString("strMenuCopy", CultureUI) ?? "Copy image";
-        ContextMenu.Items["Save"].Text = StringsRM.GetString("strMenuSave", CultureUI) ?? "Save image as...";
-        ContextMenu.Items["Zoom"].Text = StringsRM.GetString("strMenuZoom", CultureUI) ?? "Zoom to fit data";
-        ContextMenu.Items["Help"].Text = StringsRM.GetString("strMenuHelp", CultureUI) ?? "Help";
-        ContextMenu.Items["Open"].Text = StringsRM.GetString("strMenuOpen", CultureUI) ?? "Open in new window";
-        ContextMenu.Items["Detach"].Text = StringsRM.GetString("strMenuDetach", CultureUI) ?? "Detach legend";
+        string strResource;
+        foreach (ToolStripItem menuItem in ContextMenu.Items)
+        {
+            strResource = $"strMenu{menuItem.Name}";
+            menuItem.Text = StringsRM.GetString(strResource, CultureUI);
+        }
+
+        //ContextMenu.Items["Copy"].Text = StringsRM.GetString("strMenuCopy", CultureUI) ?? "Copy image";
+        //ContextMenu.Items["Save"].Text = StringsRM.GetString("strMenuSave", CultureUI) ?? "Save image as...";
+        //ContextMenu.Items["Zoom"].Text = StringsRM.GetString("strMenuZoom", CultureUI) ?? "Zoom to fit data";
+        //ContextMenu.Items["Help"].Text = StringsRM.GetString("strMenuHelp", CultureUI) ?? "Help";
+        //ContextMenu.Items["Open"].Text = StringsRM.GetString("strMenuOpen", CultureUI) ?? "Open in new window";
+        //ContextMenu.Items["Detach"].Text = StringsRM.GetString("strMenuDetach", CultureUI) ?? "Detach legend";
     }
 
     /// <summary>
@@ -56,7 +63,7 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
         menuItem = (ToolStripMenuItem)ContextMenu.Items[item];
         menuItem.Name = "Copy";
 
-        item = ContextMenu.Items.Add(new ToolStripMenuItem("Save image as...", null, new EventHandler(RightClickMenu_Help)));
+        item = ContextMenu.Items.Add(new ToolStripMenuItem("Save image as...", null, new EventHandler(RightClickMenu_SaveImage)));
         menuItem = (ToolStripMenuItem)ContextMenu.Items[item];
         menuItem.Name = "Save";
 
@@ -100,8 +107,8 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     {
         SaveFileDialog fileDialog = new()
         {
-            FileName = "Plot.png",
-            Filter = "PNG Files (*.png)|*.png;*.png" +
+            FileName = StringsRM.GetString("strFileDlgFileName", CultureUI) ?? "Plot.png",
+            Filter = StringsRM.GetString("strFileDlgFilter", CultureUI) ?? "PNG Files (*.png)|*.png;*.png" +
                      "|JPG Files (*.jpg, *.jpeg)|*.jpg;*.jpeg" +
                      "|BMP Files (*.bmp)|*.bmp;*.bmp" +
                      "|All files (*.*)|*.*"

@@ -77,13 +77,6 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
         //this.Refresh();
     }
 
-    protected override void ContextMenuUILanguage()
-    {
-        if (ContextMenu.Items.Count == 0) return;
-        base.ContextMenuUILanguage();
-        ContextMenu.Items["CrossHair"].Text = StringsRM.GetString("strMenuCrossHair", CultureUI) ?? "Show crosshair";
-    }
-
     protected override void InitilizeContextMenu()
     {
         base.InitilizeContextMenu();
@@ -315,25 +308,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
         //customMenu.Show(System.Windows.Forms.Cursor.Position);
         base.CustomRightClickEvent(sender, e);
     }
-    //private void RightClickMenu_Copy_Click(object? sender, EventArgs e) => Clipboard.SetImage(Plot.Render());
-    //private void RightClickMenu_Help_Click(object? sender, EventArgs e) => new FormHelp().Show();
-    //private void RightClickMenu_AutoAxis_Click(object? sender, EventArgs e) { Plot.AxisAuto(); Refresh(); }
-    //private void RightClickMenu_OpenInNewWindow_Click(object? sender, EventArgs e) => new FormsPlotViewer(Plot).Show();
-    //private void RightClickMenu_DetachLegend_Click(object? sender, EventArgs e) => new FormsPlotLegendViewer(this);
-    //private void RightClickMenu_SaveImage_Click(object? sender, EventArgs e)
-    //{
-    //    var sfd = new SaveFileDialog
-    //    {
-    //        FileName = "ScottPlot.png",
-    //        Filter = "PNG Files (*.png)|*.png;*.png" +
-    //                 "|JPG Files (*.jpg, *.jpeg)|*.jpg;*.jpeg" +
-    //                 "|BMP Files (*.bmp)|*.bmp;*.bmp" +
-    //                 "|All files (*.*)|*.*"
-    //    };
 
-    //    if (sfd.ShowDialog() == DialogResult.OK)
-    //        Plot.SaveFig(sfd.FileName);
-    //}
     private void RightClickMenu_CrossHair(object? sender, EventArgs e)
     {
         if (sender is not null)
