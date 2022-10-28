@@ -126,6 +126,9 @@
   <data name="strMenuCopy" xml:space="preserve">
     <value>Copy image</value>
   </data>
+  <data name="strMenuCrossHair" xml:space="preserve">
+    <value>Show crosshair</value>
+  </data>
   <data name="strMenuDetach" xml:space="preserve">
     <value>Detach legend</value>
   </data>

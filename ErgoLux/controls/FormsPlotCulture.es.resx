@@ -126,6 +126,9 @@
   <data name="strMenuCopy" xml:space="preserve">
     <value>Copiar imagen</value>
   </data>
+  <data name="strMenuCrossHair" xml:space="preserve">
+    <value>Mostrar punto de mira</value>
+  </data>
   <data name="strMenuDetach" xml:space="preserve">
     <value>Separar la leyenda</value>
   </data>
