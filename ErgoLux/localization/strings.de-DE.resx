@@ -198,7 +198,7 @@ Stattdessen werden die Standardwerte verwendet.</value>
     <value>Anzahl der Datenpunkte</value>
   </data>
   <data name="strFileHeader07" xml:space="preserve">
-    <value>Häufigkeit der Probenahme</value>
+    <value>Häufigkeit der Probennahme</value>
   </data>
   <data name="strFileHeader08" xml:space="preserve">
     <value>Sensor #</value>
@@ -269,6 +269,9 @@ Stattdessen werden die Standardwerte verwendet.</value>
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
   </data>
+  <data name="strGridDescription" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
   <data name="strGridDevice" xml:space="preserve">
     <value>Gerätestandort</value>
   </data>
@@ -297,7 +300,7 @@ Stattdessen werden die Standardwerte verwendet.</value>
     <value>Verteilung Plot</value>
   </data>
   <data name="strLblArrayPoints" xml:space="preserve">
-    <value>Array-Mindest Datenpunkte</value>
+    <value>Array-Minimum Datenpunkte</value>
   </data>
   <data name="strLblBaudRate" xml:space="preserve">
     <value>Baudrate</value>
@@ -401,6 +404,21 @@ Stattdessen werden die Standardwerte verwendet.</value>
   <data name="strMenuMainViewToolbar" xml:space="preserve">
     <value>Toolbar anzeigen</value>
   </data>
+  <data name="strMsgBoxErrorDeviceClosedTitle" xml:space="preserve">
+    <value>Gerätefehler</value>
+  </data>
+  <data name="strMsgBoxErrorDrivers" xml:space="preserve">
+    <value>FTD2XX.DLL konnte nicht geladen werden. Sind die FTDI-Treiber installiert?</value>
+  </data>
+  <data name="strMsgBoxErrorDriversTitle" xml:space="preserve">
+    <value>Fehler beim Laden von Treibern</value>
+  </data>
+  <data name="strMsgBoxErrorLoading" xml:space="preserve">
+    <value>Es wird versucht, FTD2XX.DLL zu laden von:</value>
+  </data>
+  <data name="strMsgBoxErrorLoadingTitle" xml:space="preserve">
+    <value>Fehler beim Laden der DLL</value>
+  </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>Beim Öffnen der Datendatei ist ein unerwarteter Fehler aufgetreten.
 Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Softwareentwickler.
@@ -414,6 +432,14 @@ Bitte versuchen Sie es später noch einmal oder kontaktieren Sie den Softwareent
   </data>
   <data name="strMsgBoxErrorOpenDeviceTitle" xml:space="preserve">
     <value>Fehler</value>
+  </data>
+  <data name="strMsgBoxErrorOpening" xml:space="preserve">
+    <value>Das Gerät konnte nicht geöffnet werden.
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpeningTitle" xml:space="preserve">
+    <value>Fehler beim Öffnen des Geräts</value>
   </data>
   <data name="strMsgBoxErrorSaveData" xml:space="preserve">
     <value>Beim Speichern von Daten auf der Festplatte ist ein unerwarteter Fehler aufgetreten.
@@ -432,6 +458,14 @@ Stattdessen werden die Standardwerte verwendet.</value>
   </data>
   <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
     <value>Fehler</value>
+  </data>
+  <data name="strMsgBoxErrorTimeouts" xml:space="preserve">
+    <value>Timeouts konnten nicht gesetzt werden.
+Error:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorTimeoutsTitle" xml:space="preserve">
+    <value>Timeout Fehler</value>
   </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>Sind Sie sicher, dass Sie das Programm
@@ -467,7 +501,7 @@ ihre Standardwerte zurücksetzen?</value>
     <value>Stop</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>ErgoLux Daten (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*</value>
+    <value>ErgoLux Daten (*.elux)|*.elux|SignalAnalysis Dateien (*.sig)|*.sig|Text Dateien (*.txt)|*.txt|Alle Dateien (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Beleuchtungsstärkedaten öffnen</value>
@@ -613,7 +647,7 @@ ihre Standardwerte zurücksetzen?</value>
     <value>Öffnen</value>
   </data>
   <data name="strToolStripSave" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>Speichern</value>
   </data>
   <data name="strToolStripSettings" xml:space="preserve">
     <value>Einstellungen</value>
