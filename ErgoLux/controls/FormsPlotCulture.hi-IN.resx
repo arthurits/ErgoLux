@@ -117,25 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strFileDlgFileName" xml:space="preserve">
+    <value>ग्राफ़.png</value>
+  </data>
+  <data name="strFileDlgFilter" xml:space="preserve">
+    <value>PNG फाइलें (*.png)|*.png;*.png|JPG फाइलें (*.jpg, *.jpeg)|*.jpg;*.jpeg|BMP फाइलें (*.bmp)|*.bmp;*.bmp|सभी फाइलें (*.*)|*.*</value>
+  </data>
   <data name="strMenuCopy" xml:space="preserve">
-    <value>Copia l'immagine</value>
+    <value>नकल छवि</value>
   </data>
   <data name="strMenuCrossHair" xml:space="preserve">
-    <value>Mostra mirino</value>
+    <value>क्रॉसहेयर दिखाएं</value>
   </data>
   <data name="strMenuDetach" xml:space="preserve">
-    <value>Stacca leggenda</value>
+    <value>किंवदंती को अलग करें</value>
   </data>
   <data name="strMenuHelp" xml:space="preserve">
-    <value>Aiuto</value>
+    <value>बचाओ</value>
   </data>
   <data name="strMenuOpen" xml:space="preserve">
-    <value>Apri in una nuova finestra</value>
+    <value>नई विंडो में खोलें</value>
   </data>
   <data name="strMenuSave" xml:space="preserve">
-    <value>Salva l'immagine come...</value>
+    <value>इमेज को इस तरह सेव कीजिए...</value>
   </data>
   <data name="strMenuZoom" xml:space="preserve">
-    <value>Zoom per adattare i dati</value>
+    <value>डेटा फिट करने के लिए ज़ूम करें</value>
   </data>
 </root>

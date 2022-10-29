@@ -112,30 +112,36 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strFileDlgFileName" xml:space="preserve">
+    <value>رسم بياني.png</value>
+  </data>
+  <data name="strFileDlgFilter" xml:space="preserve">
+    <value>ملفات PNG (*.png)|*.png;*.png|ملفات JPG (*.jpg, *.jpeg)|*.jpg;*.jpeg|ملفات BMP (*.bmp)|*.bmp;*.bmp|كل الملفات (*.*)|*.*</value>
+  </data>
   <data name="strMenuCopy" xml:space="preserve">
-    <value>Copiar imagen</value>
+    <value>انسخ الصورة</value>
   </data>
   <data name="strMenuCrossHair" xml:space="preserve">
-    <value>Mostrar punto de mira</value>
+    <value>عرض علامة التقاطع</value>
   </data>
   <data name="strMenuDetach" xml:space="preserve">
-    <value>Separar la leyenda</value>
+    <value>افصل الأسطورة</value>
   </data>
   <data name="strMenuHelp" xml:space="preserve">
-    <value>Ayuda</value>
+    <value>يساعد</value>
   </data>
   <data name="strMenuOpen" xml:space="preserve">
-    <value>Abrir en una nueva ventana</value>
+    <value>افتح في نافذة جديدة</value>
   </data>
   <data name="strMenuSave" xml:space="preserve">
-    <value>Guardar imagen como...</value>
+    <value>حفظ الصورة حسب...</value>
   </data>
   <data name="strMenuZoom" xml:space="preserve">
-    <value>Ajustar datos a la ventana</value>
+    <value>تكبير لملاءمة البيانات</value>
   </data>
 </root>

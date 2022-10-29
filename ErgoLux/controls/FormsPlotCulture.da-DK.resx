@@ -117,25 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strFileDlgFileName" xml:space="preserve">
+    <value>Kurve.png</value>
+  </data>
+  <data name="strFileDlgFilter" xml:space="preserve">
+    <value>PNG Files (*.png)|*.png;*.png|JPG Files (*.jpg, *.jpeg)|*.jpg;*.jpeg|BMP Files (*.bmp)|*.bmp;*.bmp|All files (*.*)|*.*</value>
+  </data>
   <data name="strMenuCopy" xml:space="preserve">
-    <value>Copier l'image</value>
+    <value>Kopiér billede</value>
   </data>
   <data name="strMenuCrossHair" xml:space="preserve">
-    <value>Afficher le réticule</value>
+    <value>Vis trådkors</value>
   </data>
   <data name="strMenuDetach" xml:space="preserve">
-    <value>Détacher la légende</value>
+    <value>Adskil legenden</value>
   </data>
   <data name="strMenuHelp" xml:space="preserve">
-    <value>Aider</value>
+    <value>Hjælp</value>
   </data>
   <data name="strMenuOpen" xml:space="preserve">
-    <value>Ouvrir dans une nouvelle fenêtre</value>
+    <value>Åbn i nyt vindue</value>
   </data>
   <data name="strMenuSave" xml:space="preserve">
-    <value>Enregistrer l'image sous...</value>
+    <value>Gem billede som...</value>
   </data>
   <data name="strMenuZoom" xml:space="preserve">
-    <value>Zoom pour ajuster les données</value>
+    <value>Zoom for at passe til data</value>
   </data>
 </root>
