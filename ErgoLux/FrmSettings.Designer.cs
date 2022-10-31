@@ -54,6 +54,10 @@ namespace ErgoLux
             this.lblDevices = new System.Windows.Forms.Label();
             this.viewDevices = new System.Windows.Forms.ListView();
             this.tabPlots = new System.Windows.Forms.TabPage();
+            this.lblChkShowRatio = new System.Windows.Forms.Label();
+            this.lblChkShowDistribution = new System.Windows.Forms.Label();
+            this.lblChkShowAverage = new System.Windows.Forms.Label();
+            this.lblChkShowRaw = new System.Windows.Forms.Label();
             this.chkShowDistribution = new System.Windows.Forms.CheckBox();
             this.grpPlot = new System.Windows.Forms.GroupBox();
             this.radRadar = new System.Windows.Forms.RadioButton();
@@ -101,7 +105,7 @@ namespace ErgoLux
             0});
             this.updSensors.Name = "updSensors";
             this.updSensors.Size = new System.Drawing.Size(52, 25);
-            this.updSensors.TabIndex = 4;
+            this.updSensors.TabIndex = 9;
             this.updSensors.Value = new decimal(new int[] {
             1,
             0,
@@ -125,7 +129,7 @@ namespace ErgoLux
             this.btnAccept.Location = new System.Drawing.Point(402, 354);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(90, 30);
-            this.btnAccept.TabIndex = 17;
+            this.btnAccept.TabIndex = 3;
             this.btnAccept.Text = "&Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.Accept_Click);
@@ -137,7 +141,7 @@ namespace ErgoLux
             this.btnCancel.Location = new System.Drawing.Point(302, 354);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(90, 30);
-            this.btnCancel.TabIndex = 18;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.Cancel_Click);
@@ -152,7 +156,7 @@ namespace ErgoLux
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.SelectedIndex = 0;
             this.tabSettings.Size = new System.Drawing.Size(480, 333);
-            this.tabSettings.TabIndex = 22;
+            this.tabSettings.TabIndex = 0;
             // 
             // tabDevice
             // 
@@ -192,7 +196,7 @@ namespace ErgoLux
             this.lblFrequency.Location = new System.Drawing.Point(258, 156);
             this.lblFrequency.Name = "lblFrequency";
             this.lblFrequency.Size = new System.Drawing.Size(67, 19);
-            this.lblFrequency.TabIndex = 37;
+            this.lblFrequency.TabIndex = 10;
             this.lblFrequency.Text = "Freq. (Hz)";
             // 
             // txtHz
@@ -201,7 +205,7 @@ namespace ErgoLux
             this.txtHz.Location = new System.Drawing.Point(369, 153);
             this.txtHz.Name = "txtHz";
             this.txtHz.Size = new System.Drawing.Size(32, 25);
-            this.txtHz.TabIndex = 36;
+            this.txtHz.TabIndex = 11;
             // 
             // lblOff
             // 
@@ -210,7 +214,7 @@ namespace ErgoLux
             this.lblOff.Location = new System.Drawing.Point(378, 264);
             this.lblOff.Name = "lblOff";
             this.lblOff.Size = new System.Drawing.Size(28, 19);
-            this.lblOff.TabIndex = 35;
+            this.lblOff.TabIndex = 18;
             this.lblOff.Text = "Off";
             // 
             // lblOn
@@ -220,7 +224,7 @@ namespace ErgoLux
             this.lblOn.Location = new System.Drawing.Point(295, 264);
             this.lblOn.Name = "lblOn";
             this.lblOn.Size = new System.Drawing.Size(28, 19);
-            this.lblOn.TabIndex = 34;
+            this.lblOn.TabIndex = 16;
             this.lblOn.Text = "On";
             // 
             // txtOff
@@ -229,7 +233,7 @@ namespace ErgoLux
             this.txtOff.Location = new System.Drawing.Point(409, 261);
             this.txtOff.Name = "txtOff";
             this.txtOff.Size = new System.Drawing.Size(40, 25);
-            this.txtOff.TabIndex = 33;
+            this.txtOff.TabIndex = 19;
             // 
             // txtOn
             // 
@@ -237,7 +241,7 @@ namespace ErgoLux
             this.txtOn.Location = new System.Drawing.Point(330, 261);
             this.txtOn.Name = "txtOn";
             this.txtOn.Size = new System.Drawing.Size(40, 25);
-            this.txtOn.TabIndex = 32;
+            this.txtOn.TabIndex = 17;
             // 
             // lblParity
             // 
@@ -246,7 +250,7 @@ namespace ErgoLux
             this.lblParity.Location = new System.Drawing.Point(23, 228);
             this.lblParity.Name = "lblParity";
             this.lblParity.Size = new System.Drawing.Size(44, 19);
-            this.lblParity.TabIndex = 31;
+            this.lblParity.TabIndex = 6;
             this.lblParity.Text = "Parity";
             // 
             // lblFlowControl
@@ -256,7 +260,7 @@ namespace ErgoLux
             this.lblFlowControl.Location = new System.Drawing.Point(258, 228);
             this.lblFlowControl.Name = "lblFlowControl";
             this.lblFlowControl.Size = new System.Drawing.Size(84, 19);
-            this.lblFlowControl.TabIndex = 30;
+            this.lblFlowControl.TabIndex = 14;
             this.lblFlowControl.Text = "Flow control";
             // 
             // cboFlowControl
@@ -266,7 +270,7 @@ namespace ErgoLux
             this.cboFlowControl.Location = new System.Drawing.Point(369, 225);
             this.cboFlowControl.Name = "cboFlowControl";
             this.cboFlowControl.Size = new System.Drawing.Size(80, 25);
-            this.cboFlowControl.TabIndex = 29;
+            this.cboFlowControl.TabIndex = 15;
             this.cboFlowControl.SelectedIndexChanged += new System.EventHandler(this.cboFlowControl_SelectedIndexChanged);
             // 
             // cboParity
@@ -276,7 +280,7 @@ namespace ErgoLux
             this.cboParity.Location = new System.Drawing.Point(133, 225);
             this.cboParity.Name = "cboParity";
             this.cboParity.Size = new System.Drawing.Size(80, 25);
-            this.cboParity.TabIndex = 28;
+            this.cboParity.TabIndex = 7;
             // 
             // lblBaudRate
             // 
@@ -285,7 +289,7 @@ namespace ErgoLux
             this.lblBaudRate.Location = new System.Drawing.Point(23, 156);
             this.lblBaudRate.Name = "lblBaudRate";
             this.lblBaudRate.Size = new System.Drawing.Size(68, 19);
-            this.lblBaudRate.TabIndex = 27;
+            this.lblBaudRate.TabIndex = 2;
             this.lblBaudRate.Text = "Baud rate";
             // 
             // lblStopBits
@@ -295,7 +299,7 @@ namespace ErgoLux
             this.lblStopBits.Location = new System.Drawing.Point(258, 192);
             this.lblStopBits.Name = "lblStopBits";
             this.lblStopBits.Size = new System.Drawing.Size(63, 19);
-            this.lblStopBits.TabIndex = 26;
+            this.lblStopBits.TabIndex = 12;
             this.lblStopBits.Text = "Stop bits";
             // 
             // lblDataBits
@@ -305,7 +309,7 @@ namespace ErgoLux
             this.lblDataBits.Location = new System.Drawing.Point(23, 192);
             this.lblDataBits.Name = "lblDataBits";
             this.lblDataBits.Size = new System.Drawing.Size(64, 19);
-            this.lblDataBits.TabIndex = 25;
+            this.lblDataBits.TabIndex = 4;
             this.lblDataBits.Text = "Data bits";
             // 
             // txtBaudRate
@@ -315,7 +319,7 @@ namespace ErgoLux
             this.txtBaudRate.Name = "txtBaudRate";
             this.txtBaudRate.ShortcutsEnabled = false;
             this.txtBaudRate.Size = new System.Drawing.Size(80, 25);
-            this.txtBaudRate.TabIndex = 24;
+            this.txtBaudRate.TabIndex = 3;
             // 
             // cboStopBits
             // 
@@ -324,7 +328,7 @@ namespace ErgoLux
             this.cboStopBits.Location = new System.Drawing.Point(369, 189);
             this.cboStopBits.Name = "cboStopBits";
             this.cboStopBits.Size = new System.Drawing.Size(80, 25);
-            this.cboStopBits.TabIndex = 23;
+            this.cboStopBits.TabIndex = 13;
             // 
             // cboDataBits
             // 
@@ -333,7 +337,7 @@ namespace ErgoLux
             this.cboDataBits.Location = new System.Drawing.Point(133, 189);
             this.cboDataBits.Name = "cboDataBits";
             this.cboDataBits.Size = new System.Drawing.Size(80, 25);
-            this.cboDataBits.TabIndex = 22;
+            this.cboDataBits.TabIndex = 5;
             // 
             // lblDevices
             // 
@@ -343,7 +347,7 @@ namespace ErgoLux
             this.lblDevices.Location = new System.Drawing.Point(10, 10);
             this.lblDevices.Name = "lblDevices";
             this.lblDevices.Size = new System.Drawing.Size(100, 19);
-            this.lblDevices.TabIndex = 21;
+            this.lblDevices.TabIndex = 0;
             this.lblDevices.Text = "FTDI device list";
             // 
             // viewDevices
@@ -355,12 +359,16 @@ namespace ErgoLux
             this.viewDevices.Name = "viewDevices";
             this.viewDevices.ShowGroups = false;
             this.viewDevices.Size = new System.Drawing.Size(449, 107);
-            this.viewDevices.TabIndex = 20;
+            this.viewDevices.TabIndex = 1;
             this.viewDevices.UseCompatibleStateImageBehavior = false;
             this.viewDevices.View = System.Windows.Forms.View.Details;
             // 
             // tabPlots
             // 
+            this.tabPlots.Controls.Add(this.lblChkShowRatio);
+            this.tabPlots.Controls.Add(this.lblChkShowDistribution);
+            this.tabPlots.Controls.Add(this.lblChkShowAverage);
+            this.tabPlots.Controls.Add(this.lblChkShowRaw);
             this.tabPlots.Controls.Add(this.chkShowDistribution);
             this.tabPlots.Controls.Add(this.grpPlot);
             this.tabPlots.Controls.Add(this.txtPlotWindow);
@@ -378,15 +386,58 @@ namespace ErgoLux
             this.tabPlots.Text = "Plots";
             this.tabPlots.UseVisualStyleBackColor = true;
             // 
+            // lblChkShowRatio
+            // 
+            this.lblChkShowRatio.AutoSize = true;
+            this.lblChkShowRatio.Location = new System.Drawing.Point(236, 66);
+            this.lblChkShowRatio.MaximumSize = new System.Drawing.Size(180, 0);
+            this.lblChkShowRatio.Name = "lblChkShowRatio";
+            this.lblChkShowRatio.Size = new System.Drawing.Size(71, 19);
+            this.lblChkShowRatio.TabIndex = 7;
+            this.lblChkShowRatio.Text = "Plot ratios";
+            this.lblChkShowRatio.Click += new System.EventHandler(this.Label_Click);
+            // 
+            // lblChkShowDistribution
+            // 
+            this.lblChkShowDistribution.AutoSize = true;
+            this.lblChkShowDistribution.Location = new System.Drawing.Point(236, 26);
+            this.lblChkShowDistribution.MaximumSize = new System.Drawing.Size(180, 0);
+            this.lblChkShowDistribution.Name = "lblChkShowDistribution";
+            this.lblChkShowDistribution.Size = new System.Drawing.Size(107, 19);
+            this.lblChkShowDistribution.TabIndex = 3;
+            this.lblChkShowDistribution.Text = "Plot distribution";
+            this.lblChkShowDistribution.Click += new System.EventHandler(this.Label_Click);
+            // 
+            // lblChkShowAverage
+            // 
+            this.lblChkShowAverage.AutoSize = true;
+            this.lblChkShowAverage.Location = new System.Drawing.Point(43, 66);
+            this.lblChkShowAverage.MaximumSize = new System.Drawing.Size(155, 0);
+            this.lblChkShowAverage.Name = "lblChkShowAverage";
+            this.lblChkShowAverage.Size = new System.Drawing.Size(85, 19);
+            this.lblChkShowAverage.TabIndex = 5;
+            this.lblChkShowAverage.Text = "Plot average";
+            this.lblChkShowAverage.Click += new System.EventHandler(this.Label_Click);
+            // 
+            // lblChkShowRaw
+            // 
+            this.lblChkShowRaw.AutoSize = true;
+            this.lblChkShowRaw.Location = new System.Drawing.Point(43, 26);
+            this.lblChkShowRaw.MaximumSize = new System.Drawing.Size(155, 0);
+            this.lblChkShowRaw.Name = "lblChkShowRaw";
+            this.lblChkShowRaw.Size = new System.Drawing.Size(90, 19);
+            this.lblChkShowRaw.TabIndex = 1;
+            this.lblChkShowRaw.Text = "Plot raw data";
+            this.lblChkShowRaw.Click += new System.EventHandler(this.Label_Click);
+            // 
             // chkShowDistribution
             // 
             this.chkShowDistribution.AutoSize = true;
             this.chkShowDistribution.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowDistribution.Location = new System.Drawing.Point(215, 29);
+            this.chkShowDistribution.Location = new System.Drawing.Point(220, 30);
             this.chkShowDistribution.Name = "chkShowDistribution";
-            this.chkShowDistribution.Size = new System.Drawing.Size(126, 23);
+            this.chkShowDistribution.Size = new System.Drawing.Size(15, 14);
             this.chkShowDistribution.TabIndex = 2;
-            this.chkShowDistribution.Text = "Plot distribution";
             this.chkShowDistribution.UseVisualStyleBackColor = true;
             this.chkShowDistribution.CheckedChanged += new System.EventHandler(this.chkShowDistribution_CheckedChanged);
             // 
@@ -397,17 +448,17 @@ namespace ErgoLux
             this.grpPlot.Location = new System.Drawing.Point(81, 104);
             this.grpPlot.Name = "grpPlot";
             this.grpPlot.Size = new System.Drawing.Size(187, 98);
-            this.grpPlot.TabIndex = 9;
+            this.grpPlot.TabIndex = 8;
             this.grpPlot.TabStop = false;
             this.grpPlot.Text = "Plot distribution";
             // 
             // radRadar
             // 
             this.radRadar.AutoSize = true;
-            this.radRadar.Location = new System.Drawing.Point(14, 24);
+            this.radRadar.Location = new System.Drawing.Point(14, 28);
             this.radRadar.Name = "radRadar";
             this.radRadar.Size = new System.Drawing.Size(62, 23);
-            this.radRadar.TabIndex = 10;
+            this.radRadar.TabIndex = 0;
             this.radRadar.TabStop = true;
             this.radRadar.Text = "Radar";
             this.radRadar.UseVisualStyleBackColor = true;
@@ -415,10 +466,10 @@ namespace ErgoLux
             // radRadial
             // 
             this.radRadial.AutoSize = true;
-            this.radRadial.Location = new System.Drawing.Point(14, 53);
+            this.radRadial.Location = new System.Drawing.Point(14, 60);
             this.radRadial.Name = "radRadial";
             this.radRadial.Size = new System.Drawing.Size(105, 23);
-            this.radRadial.TabIndex = 11;
+            this.radRadial.TabIndex = 1;
             this.radRadial.TabStop = true;
             this.radRadial.Text = "Radial gauge";
             this.radRadial.UseVisualStyleBackColor = true;
@@ -429,7 +480,7 @@ namespace ErgoLux
             this.txtPlotWindow.Location = new System.Drawing.Point(229, 251);
             this.txtPlotWindow.Name = "txtPlotWindow";
             this.txtPlotWindow.Size = new System.Drawing.Size(85, 25);
-            this.txtPlotWindow.TabIndex = 7;
+            this.txtPlotWindow.TabIndex = 12;
             // 
             // txtArrayPoints
             // 
@@ -437,7 +488,7 @@ namespace ErgoLux
             this.txtArrayPoints.Location = new System.Drawing.Point(229, 220);
             this.txtArrayPoints.Name = "txtArrayPoints";
             this.txtArrayPoints.Size = new System.Drawing.Size(85, 25);
-            this.txtArrayPoints.TabIndex = 6;
+            this.txtArrayPoints.TabIndex = 10;
             // 
             // lblPlotWindow
             // 
@@ -446,7 +497,7 @@ namespace ErgoLux
             this.lblPlotWindow.Location = new System.Drawing.Point(31, 254);
             this.lblPlotWindow.Name = "lblPlotWindow";
             this.lblPlotWindow.Size = new System.Drawing.Size(145, 19);
-            this.lblPlotWindow.TabIndex = 5;
+            this.lblPlotWindow.TabIndex = 11;
             this.lblPlotWindow.Text = "Plot window (seconds)";
             // 
             // lblArrayPoints
@@ -456,40 +507,37 @@ namespace ErgoLux
             this.lblArrayPoints.Location = new System.Drawing.Point(31, 223);
             this.lblArrayPoints.Name = "lblArrayPoints";
             this.lblArrayPoints.Size = new System.Drawing.Size(146, 19);
-            this.lblArrayPoints.TabIndex = 4;
+            this.lblArrayPoints.TabIndex = 9;
             this.lblArrayPoints.Text = "Array minimum points";
             // 
             // chkShowRatio
             // 
             this.chkShowRatio.AutoSize = true;
             this.chkShowRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowRatio.Location = new System.Drawing.Point(215, 66);
+            this.chkShowRatio.Location = new System.Drawing.Point(220, 70);
             this.chkShowRatio.Name = "chkShowRatio";
-            this.chkShowRatio.Size = new System.Drawing.Size(90, 23);
-            this.chkShowRatio.TabIndex = 3;
-            this.chkShowRatio.Text = "Plot ratios";
+            this.chkShowRatio.Size = new System.Drawing.Size(15, 14);
+            this.chkShowRatio.TabIndex = 6;
             this.chkShowRatio.UseVisualStyleBackColor = true;
             // 
             // chkShowAverage
             // 
             this.chkShowAverage.AutoSize = true;
             this.chkShowAverage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowAverage.Location = new System.Drawing.Point(27, 66);
+            this.chkShowAverage.Location = new System.Drawing.Point(27, 70);
             this.chkShowAverage.Name = "chkShowAverage";
-            this.chkShowAverage.Size = new System.Drawing.Size(104, 23);
-            this.chkShowAverage.TabIndex = 2;
-            this.chkShowAverage.Text = "Plot average";
+            this.chkShowAverage.Size = new System.Drawing.Size(15, 14);
+            this.chkShowAverage.TabIndex = 4;
             this.chkShowAverage.UseVisualStyleBackColor = true;
             // 
             // chkShowRaw
             // 
             this.chkShowRaw.AutoSize = true;
             this.chkShowRaw.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowRaw.Location = new System.Drawing.Point(27, 29);
+            this.chkShowRaw.Location = new System.Drawing.Point(27, 30);
             this.chkShowRaw.Name = "chkShowRaw";
-            this.chkShowRaw.Size = new System.Drawing.Size(109, 23);
+            this.chkShowRaw.Size = new System.Drawing.Size(15, 14);
             this.chkShowRaw.TabIndex = 0;
-            this.chkShowRaw.Text = "Plot raw data";
             this.chkShowRaw.UseVisualStyleBackColor = true;
             // 
             // tabGUI
@@ -514,7 +562,7 @@ namespace ErgoLux
             this.lblDlgPath.MaximumSize = new System.Drawing.Size(350, 0);
             this.lblDlgPath.Name = "lblDlgPath";
             this.lblDlgPath.Size = new System.Drawing.Size(292, 19);
-            this.lblDlgPath.TabIndex = 4;
+            this.lblDlgPath.TabIndex = 2;
             this.lblDlgPath.Text = "Remember previous path in open/save dialogs";
             // 
             // txtDataFormat
@@ -522,7 +570,7 @@ namespace ErgoLux
             this.txtDataFormat.Location = new System.Drawing.Point(259, 254);
             this.txtDataFormat.Name = "txtDataFormat";
             this.txtDataFormat.Size = new System.Drawing.Size(100, 25);
-            this.txtDataFormat.TabIndex = 3;
+            this.txtDataFormat.TabIndex = 4;
             // 
             // lblDataFormat
             // 
@@ -531,7 +579,7 @@ namespace ErgoLux
             this.lblDataFormat.MaximumSize = new System.Drawing.Size(230, 0);
             this.lblDataFormat.Name = "lblDataFormat";
             this.lblDataFormat.Size = new System.Drawing.Size(177, 19);
-            this.lblDataFormat.TabIndex = 2;
+            this.lblDataFormat.TabIndex = 3;
             this.lblDataFormat.Text = "Numeric data-format string";
             // 
             // chkDlgPath
@@ -607,7 +655,7 @@ namespace ErgoLux
             this.btnReset.Location = new System.Drawing.Point(12, 355);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(90, 30);
-            this.btnReset.TabIndex = 23;
+            this.btnReset.TabIndex = 1;
             this.btnReset.Text = "&Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.Reset_Click);
@@ -694,5 +742,9 @@ namespace ErgoLux
         private ComboBox cboAllCultures;
         private RadioButton radUserCulture;
         private Label lblDlgPath;
+        private Label lblChkShowRatio;
+        private Label lblChkShowDistribution;
+        private Label lblChkShowAverage;
+        private Label lblChkShowRaw;
     }
 }

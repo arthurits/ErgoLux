@@ -629,7 +629,7 @@ ihre Standardwerte zurücksetzen?</value>
     <value>Benutzeroberfläche</value>
   </data>
   <data name="strTabPlots" xml:space="preserve">
-    <value>Plotten</value>
+    <value>Schaubild</value>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
     <value>Über</value>

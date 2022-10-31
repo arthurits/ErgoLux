@@ -658,7 +658,7 @@ dimension has been stopped.</value>
     <value>User interface</value>
   </data>
   <data name="strTabPlots" xml:space="preserve">
-    <value>Plotting</value>
+    <value>Plots</value>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
     <value>About</value>

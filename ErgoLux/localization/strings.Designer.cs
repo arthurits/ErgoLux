@@ -1621,7 +1621,7 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plotting.
+        ///   Looks up a localized string similar to Plots.
         /// </summary>
         internal static string strTabPlots {
             get {

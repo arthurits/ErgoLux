@@ -231,6 +231,25 @@ public partial class FrmSettings : Form
         DialogResult = DialogResult.Cancel;
     }
 
+    private void Label_Click(object sender, EventArgs e)
+    {
+        switch ((sender as Label)?.Name)
+        {
+            case "lblChkShowRaw":
+                chkShowRaw.Checked = true;
+                break;
+            case "lblChkShowDistribution":
+                chkShowDistribution.Checked = true;
+                break;
+            case "lblChkShowAverage":
+                chkShowAverage.Checked = true;
+                break;
+            case "lblChkShowRatio":
+                chkShowRatio.Checked = true;
+                break;
+        }
+    }
+
     private void CurrentCulture_CheckedChanged(object sender, EventArgs e)
     {
         if (radCurrentCulture.Checked)
@@ -377,10 +396,10 @@ public partial class FrmSettings : Form
         this.viewDevices.Columns[6].Text = StringResources.GridDescription;
 
         // Tab Plots
-        this.chkShowRaw.Text = StringResources.ChkPlotRaw;
-        this.chkShowDistribution.Text = StringResources.ChkPlotDistribution;
-        this.chkShowAverage.Text = StringResources.ChkPlotAverage;
-        this.chkShowRatio.Text=StringResources.ChkPlotRatios;
+        this.lblChkShowRaw.Text = StringResources.ChkPlotRaw;
+        this.lblChkShowDistribution.Text = StringResources.ChkPlotDistribution;
+        this.lblChkShowAverage.Text = StringResources.ChkPlotAverage;
+        this.lblChkShowRatio.Text=StringResources.ChkPlotRatios;
         this.grpPlot.Text = StringResources.GrpPlot;
         this.radRadar.Text = StringResources.RadRadar;
         this.radRadial.Text = StringResources.RadRadialGauge;
@@ -421,6 +440,11 @@ public partial class FrmSettings : Form
         this.lblOn.Left = this.txtOn.Left - this.lblOn.Width - 3;
 
         // Tab plots
+        this.lblChkShowRaw.Top = this.chkShowRaw.Top + (this.chkShowRaw.Height - this.lblChkShowRaw.Height) / 2;
+        this.lblChkShowDistribution.Top = this.chkShowDistribution.Top + (this.chkShowDistribution.Height - this.lblChkShowDistribution.Height) / 2;
+        this.lblChkShowAverage.Top = this.chkShowAverage.Top + (this.chkShowAverage.Height - this.lblChkShowAverage.Height) / 2;
+        this.lblChkShowRatio.Top = this.chkShowRatio.Top + (this.chkShowRatio.Height - this.lblChkShowRatio.Height) / 2;
+
         int width = Math.Max(this.lblArrayPoints.Width, this.lblPlotWindow.Width);
         this.txtArrayPoints.Left = this.lblArrayPoints.Left + width;
         this.txtPlotWindow.Left = this.lblPlotWindow.Left + width;
@@ -431,5 +455,6 @@ public partial class FrmSettings : Form
         this.txtDataFormat.Left = this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }
+
 
 }
