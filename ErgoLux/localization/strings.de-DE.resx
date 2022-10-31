@@ -626,10 +626,10 @@ ihre Standardwerte zurücksetzen?</value>
     <value>T-10A Sensor</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
-    <value>User Interface</value>
+    <value>Benutzeroberfläche</value>
   </data>
   <data name="strTabPlots" xml:space="preserve">
-    <value>Plotting</value>
+    <value>Plotten</value>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
     <value>Über</value>
