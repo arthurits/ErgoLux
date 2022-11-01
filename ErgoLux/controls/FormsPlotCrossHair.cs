@@ -22,18 +22,18 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
 
     public bool ShowCrossHair
     {
-        get => crossHairMenuItem.Checked;
+        get => this.crossHairMenuItem.Checked;
         set
         {
             if (value)
             {
-                ShowCrossHairLines(true, true);
-                crossHairMenuItem.Checked = value;
+                this.ShowCrossHairLines(true, true);
+                this.crossHairMenuItem.Checked = value;
             }
             else
             {
-                DeleteCrossHairLines();
-                crossHairMenuItem.Checked = value;
+                this.DeleteCrossHairLines();
+                this.crossHairMenuItem.Checked = value;
             }
         }
     }
@@ -49,31 +49,31 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
     {
         set
         {
-            if (VerticalLine is not null)
+            if (this.VerticalLine is not null)
             {
-                VerticalLine.Color = value;
-                VerticalLine.PositionLabelBackground = System.Drawing.Color.FromArgb(200, value);
+                this.VerticalLine.Color = value;
+                this.VerticalLine.PositionLabelBackground = System.Drawing.Color.FromArgb(200, value);
             }
-            if (HorizontalLine is not null)
+            if (this.HorizontalLine is not null)
             {
-                HorizontalLine.Color = value;
-                HorizontalLine.PositionLabelBackground = System.Drawing.Color.FromArgb(200, value);
+                this.HorizontalLine.Color = value;
+                this.HorizontalLine.PositionLabelBackground = System.Drawing.Color.FromArgb(200, value);
             }
         }
-        get => VerticalLine?.Color ?? System.Drawing.Color.Red;
+        get => this.VerticalLine?.Color ?? System.Drawing.Color.Red;
     }
 
     public FormsPlotCrossHair()
         : base()
     {
-        DoubleClick += OnDoubleClick;
-        StringsRM = new("ScottPlot.FormsPlotCrossHair", typeof(FormsPlotCrossHair).Assembly);
+        DoubleClick += this.OnDoubleClick;
+        this.StringsRM = new("ScottPlot.FormsPlotCrossHair", typeof(FormsPlotCrossHair).Assembly);
     }
 
     public FormsPlotCrossHair(System.Globalization.CultureInfo? culture = null)
         : this()
     {
-        CultureUI = culture ?? System.Globalization.CultureInfo.CurrentCulture;
+        this.CultureUI = culture ?? System.Globalization.CultureInfo.CurrentCulture;
         //this.Refresh();
     }
 
@@ -81,11 +81,11 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
     {
         base.InitilizeContextMenu();
 
-        int item = ContextMenu.Items.Add(new ToolStripSeparator());
+        int item = this.ContextMenu.Items.Add(new ToolStripSeparator());
 
-        item = ContextMenu.Items.Add(new ToolStripMenuItem("Show crosshair", null, new EventHandler(RightClickMenu_CrossHair)));
-        crossHairMenuItem = (ToolStripMenuItem)ContextMenu.Items[item];
-        crossHairMenuItem.Name = "CrossHair";
+        item = this.ContextMenu.Items.Add(new ToolStripMenuItem("Show crosshair", null, new EventHandler(this.RightClickMenu_CrossHair)));
+        this.crossHairMenuItem = (ToolStripMenuItem)this.ContextMenu.Items[item];
+        this.crossHairMenuItem.Name = "CrossHair";
     }
 
     /// <summary>
@@ -94,44 +94,44 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
     /// </summary>
     private void CreateCrossHairLines()
     {
-        VerticalLine = Plot.AddVerticalLine(0.0, style: ScottPlot.LineStyle.Dash);
-        VerticalLine.IsVisible = false;
-        VerticalLine.PositionLabel = true;
-        VerticalLine.DragEnabled = true;
-        VerticalLine.Dragged += new System.EventHandler(OnDraggedVertical);
+        this.VerticalLine = this.Plot.AddVerticalLine(0.0, style: ScottPlot.LineStyle.Dash);
+        this.VerticalLine.IsVisible = false;
+        this.VerticalLine.PositionLabel = true;
+        this.VerticalLine.DragEnabled = true;
+        this.VerticalLine.Dragged += new System.EventHandler(this.OnDraggedVertical);
 
-        HorizontalLine = Plot.AddHorizontalLine(0.0, color: System.Drawing.Color.Red, width: 1, style: ScottPlot.LineStyle.Dash);
-        HorizontalLine.IsVisible = false;
-        HorizontalLine.PositionLabel = true;
-        HorizontalLine.DragEnabled = true;
-        HorizontalLine.Dragged += new System.EventHandler(OnDraggedHorizontal);
+        this.HorizontalLine = this.Plot.AddHorizontalLine(0.0, color: System.Drawing.Color.Red, width: 1, style: ScottPlot.LineStyle.Dash);
+        this.HorizontalLine.IsVisible = false;
+        this.HorizontalLine.PositionLabel = true;
+        this.HorizontalLine.DragEnabled = true;
+        this.HorizontalLine.Dragged += new System.EventHandler(this.OnDraggedHorizontal);
 
-        CrossHairColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.Red);
+        this.CrossHairColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.Red);
     }
 
     private void ShowCrossHairLines(bool showVertical = false, bool showHorizontal = false)
     {
         if (!showVertical && !showHorizontal) return;
 
-        if (Plot.GetPlottables().Where(x => x is Plottable.VLine || x is Plottable.HLine).Any()) return;
+        if (this.Plot.GetPlottables().Where(x => x is Plottable.VLine || x is Plottable.HLine).Any()) return;
 
         // There should be at last one plottable added, otherwise
-        if (Plot.GetPlottables().Length >= 1)
-            CreateCrossHairLines();
+        if (this.Plot.GetPlottables().Length >= 1)
+            this.CreateCrossHairLines();
 
-        if (showVertical && VerticalLine is not null)
+        if (showVertical && this.VerticalLine is not null)
         {
-            VerticalLine.IsVisible = true;
-            var axis = Plot.GetPlottables()[0].GetAxisLimits();
-            VerticalLine.X = axis.XCenter;
+            this.VerticalLine.IsVisible = true;
+            var axis = this.Plot.GetPlottables()[0].GetAxisLimits();
+            this.VerticalLine.X = axis.XCenter;
             //SnapLinesToPoint(ToX: true);
         }
 
-        if (showHorizontal && HorizontalLine is not null)
+        if (showHorizontal && this.HorizontalLine is not null)
         {
-            HorizontalLine.IsVisible = true;
-            var axis = Plot.GetPlottables()[0].GetAxisLimits();
-            HorizontalLine.Y = axis.YCenter;
+            this.HorizontalLine.IsVisible = true;
+            var axis = this.Plot.GetPlottables()[0].GetAxisLimits();
+            this.HorizontalLine.Y = axis.YCenter;
             //SnapLinesToPoint(ToY: true);
         }
     }
@@ -142,18 +142,18 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
     /// </summary>
     private void DeleteCrossHairLines()
     {
-        if (VerticalLine is not null)
+        if (this.VerticalLine is not null)
         {
-            VerticalLine.Dragged -= new System.EventHandler(OnDraggedVertical);
-            VerticalLine = null;
-            Plot.Clear(typeof(Plottable.VLine));
+            this.VerticalLine.Dragged -= new System.EventHandler(this.OnDraggedVertical);
+            this.VerticalLine = null;
+            this.Plot.Clear(typeof(Plottable.VLine));
         }
 
-        if (HorizontalLine is not null)
+        if (this.HorizontalLine is not null)
         {
-            HorizontalLine.Dragged -= new System.EventHandler(OnDraggedHorizontal);
-            HorizontalLine = null;
-            Plot.Clear(typeof(Plottable.HLine));
+            this.HorizontalLine.Dragged -= new System.EventHandler(this.OnDraggedHorizontal);
+            this.HorizontalLine = null;
+            this.Plot.Clear(typeof(Plottable.HLine));
         }
     }
 
@@ -169,19 +169,19 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
         double? pointY = null;
         int? pointIndex = null;
 
-        var plot = Plot.GetPlottables().First();
-        var plotType = (Plot.GetPlottables().First()).GetType();
+        var plot = this.Plot.GetPlottables().First();
+        var plotType = (this.Plot.GetPlottables().First()).GetType();
         System.Reflection.MethodInfo? plotMethod = null;
         if (ToX)
             plotMethod = plotType.GetMethod("GetPointNearestX");
         else if (ToY)
             plotMethod = plotType.GetMethod("GetPointNearestY");
 
-        if (plotMethod is null || VerticalLine is null || HorizontalLine is null) return (null, null, null);
+        if (plotMethod is null || this.VerticalLine is null || this.HorizontalLine is null) return (null, null, null);
 
-        if (VerticalLine.IsVisible || HorizontalLine.IsVisible)
+        if (this.VerticalLine.IsVisible || this.HorizontalLine.IsVisible)
         {
-            (double mouseCoordX, double mouseCoordY) = GetMouseCoordinates();
+            (double mouseCoordX, double mouseCoordY) = this.GetMouseCoordinates();
             var param = new object[1];
             if (ToX)
                 param[0] = mouseCoordX;
@@ -192,8 +192,8 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
             if (result is not null)
             {
                 (pointX, pointY, pointIndex) = ((double, double, int))result;
-                VerticalLine.X = pointX.Value;
-                HorizontalLine.Y = pointY.Value;
+                this.VerticalLine.X = pointX.Value;
+                this.HorizontalLine.Y = pointY.Value;
             }
         }
         return (pointX, pointY, pointIndex);
@@ -201,18 +201,18 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
 
     private void OnDoubleClick(object? sender, EventArgs e)
     {
-        ShowCrossHair = !ShowCrossHair;
+        this.ShowCrossHair = !this.ShowCrossHair;
     }
 
     private void OnDraggedVertical(object? sender, EventArgs e)
     {
         // If we are reading from the sensor, then exit
-        if (VerticalLine is null || !VerticalLine.IsVisible || !SnapToPoint) return;
+        if (this.VerticalLine is null || !this.VerticalLine.IsVisible || !this.SnapToPoint) return;
 
-        var (pointX, pointY, pointIndex) = SnapLinesToPoint(ToX: true);
+        var (pointX, pointY, pointIndex) = this.SnapLinesToPoint(ToX: true);
 
         // Raise the custom event for the subscribers
-        OnVLineDragged(new LineDragEventArgs(pointX, pointY, pointIndex));
+        this.OnVLineDragged(new LineDragEventArgs(pointX, pointY, pointIndex));
         //EventHandler<VLineDragEventArgs> handler = VLineDragged;
         //handler?.Invoke(this, new VLineDragEventArgs(pointX, pointY, pointIndex));
 
@@ -221,12 +221,12 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
     private void OnDraggedHorizontal(object? sender, EventArgs e)
     {
         // If we are reading from the sensor, then exit
-        if (HorizontalLine is null || !HorizontalLine.IsVisible || !SnapToPoint) return;
+        if (this.HorizontalLine is null || !this.HorizontalLine.IsVisible || !this.SnapToPoint) return;
 
-        var (pointX, pointY, pointIndex) = SnapLinesToPoint(ToY: true);
+        var (pointX, pointY, pointIndex) = this.SnapLinesToPoint(ToY: true);
 
         // Raise the custom event for the subscribers
-        OnHLineDragged(new LineDragEventArgs(pointX, pointY, pointIndex));
+        this.OnHLineDragged(new LineDragEventArgs(pointX, pointY, pointIndex));
         //EventHandler<VLineDragEventArgs> handler = VLineDragged;
         //handler?.Invoke(this, new VLineDragEventArgs(pointX, pointY, pointIndex));
 
@@ -239,7 +239,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
     public Plottable.IPlottable[] GetDataCurves()
     {
         //System.Collections.ObjectModel.ObservableCollection<ScottPlot.Plottable.IPlottable> plots = new();
-        var dataPlots = Plot.GetPlottables().Where(x => x is not Plottable.VLine && x is not Plottable.HLine);
+        var dataPlots = this.Plot.GetPlottables().Where(x => x is not Plottable.VLine && x is not Plottable.HLine);
 
         //foreach (var plot in this.Plot.GetPlottables())
         //{
@@ -289,11 +289,11 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
     /// </summary>
     public void Clear()
     {
-        Plottable.IPlottable[] plottables = Plot.GetPlottables();
+        Plottable.IPlottable[] plottables = this.Plot.GetPlottables();
         for (int i = plottables.Length - 1; i >= 0; i--)
         {
             //if (plottables[i] is not Plottable.VLine && plottables[i] is not Plottable.HLine)
-            Plot.RemoveAt(i);
+            this.Plot.RemoveAt(i);
         }
     }
 
@@ -304,7 +304,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
     protected override void CustomRightClickEvent(object? sender, EventArgs e)
     {
         //detachLegendMenuItem.Visible = Plot.Legend(null).Count > 0;
-        crossHairMenuItem.Enabled = Plot.GetPlottables().Length > 0;
+        this.crossHairMenuItem.Enabled = this.Plot.GetPlottables().Length > 0;
         //customMenu.Show(System.Windows.Forms.Cursor.Position);
         base.CustomRightClickEvent(sender, e);
     }
@@ -313,8 +313,8 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlotCulture
     {
         if (sender is not null)
         {
-            ShowCrossHair = !ShowCrossHair;
-            Refresh();
+            this.ShowCrossHair = !this.ShowCrossHair;
+            this.Refresh();
         }
     }
 
@@ -324,9 +324,9 @@ public class LineDragEventArgs : EventArgs
 {
     public LineDragEventArgs(double? X, double? Y, int? Index)
     {
-        PointX = X ?? default;
-        PointY = Y ?? default;
-        PointIndex = Index ?? default;
+        this.PointX = X ?? default;
+        this.PointY = Y ?? default;
+        this.PointIndex = Index ?? default;
     }
 
     public double PointX { get; set; }

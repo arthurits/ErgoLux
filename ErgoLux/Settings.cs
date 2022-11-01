@@ -14,8 +14,8 @@ partial class FrmMain
         bool result = false;
         try
         {
-            var jsonString = File.ReadAllText(_settings.SettingsFileName);
-            _settings = JsonSerializer.Deserialize<ClassSettings>(jsonString) ?? _settings;
+            var jsonString = File.ReadAllText(this._settings.SettingsFileName);
+            this._settings = JsonSerializer.Deserialize<ClassSettings>(jsonString) ?? this._settings;
             result = true;
         }
         catch (FileNotFoundException)
@@ -40,17 +40,17 @@ partial class FrmMain
     /// </summary>
     private void SaveProgramSettingsJSON()
     {
-        _settings.WindowLeft = DesktopLocation.X;
-        _settings.WindowTop = DesktopLocation.Y;
-        _settings.WindowWidth = ClientSize.Width;
-        _settings.WindowHeight = ClientSize.Height;
+        this._settings.WindowLeft = this.DesktopLocation.X;
+        this._settings.WindowTop = this.DesktopLocation.Y;
+        this._settings.WindowWidth = this.ClientSize.Width;
+        this._settings.WindowHeight = this.ClientSize.Height;
 
         var options = new JsonSerializerOptions
         {
             WriteIndented = true
         };
-        var jsonString = JsonSerializer.Serialize(_settings, options);
-        File.WriteAllText(_settings.SettingsFileName, jsonString);
+        var jsonString = JsonSerializer.Serialize(this._settings, options);
+        File.WriteAllText(this._settings.SettingsFileName, jsonString);
     }
 
     /// <summary>
@@ -61,9 +61,9 @@ partial class FrmMain
     {
         if (WindowPosition)
         {
-            StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            DesktopLocation = new Point(_settings.WindowLeft, _settings.WindowTop);
-            ClientSize = new Size(_settings.WindowWidth, _settings.WindowHeight);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.DesktopLocation = new Point(this._settings.WindowLeft, this._settings.WindowTop);
+            this.ClientSize = new Size(this._settings.WindowWidth, this._settings.WindowHeight);
         }
     }
 }

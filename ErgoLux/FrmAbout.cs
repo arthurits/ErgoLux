@@ -102,20 +102,20 @@ namespace ErgoLux
 
         public FrmAbout()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             // this.Text = String.Format("About {0}", AssemblyTitle);
-            labelProductName.Text = AssemblyProduct;
-            labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            labelCopyright.Text = AssemblyCopyright;
-            labelCompanyName.Text = AssemblyCompany;
-            textBoxDescription.Text = AssemblyDescription;
+            this.labelProductName.Text = this.AssemblyProduct;
+            this.labelVersion.Text = String.Format("Version {0}", this.AssemblyVersion);
+            this.labelCopyright.Text = this.AssemblyCopyright;
+            this.labelCompanyName.Text = this.AssemblyCompany;
+            this.textBoxDescription.Text = this.AssemblyDescription;
 
             // Set form icons and images
             //this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.IconAbout);
             //if (System.IO.File.Exists(@"images\about.ico")) this.Icon = new Icon(@"images\about.ico");
 
             //Bitmap image = new Icon(@"images\logo.ico", 256, 256).ToBitmap();
-            logoPictureBox.Image = GraphicsResources.Load<Image>(GraphicsResources.AppLogo256);
+            this.logoPictureBox.Image = GraphicsResources.Load<Image>(GraphicsResources.AppLogo256);
         }
 
         //[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
@@ -132,7 +132,7 @@ namespace ErgoLux
             // https://stackoverflow.com/questions/27646476/how-to-fire-form-click-event-even-when-clicking-on-user-controls-in-c-sharp
             if (m.Msg == WM_PARENTNOTIFY && m.WParam.ToInt32() == WM_LBUTTONDOWN)
             {
-                Close();
+                this.Close();
 
                 //// get the clicked position
                 //var x = (int)(m.LParam.ToInt32() & 0xFFFF);
@@ -148,7 +148,7 @@ namespace ErgoLux
             }
             else if (m.Msg == WM_KEYUP && ((m.WParam.ToInt32() == VK_ESCAPE) | (m.WParam.ToInt32() == VK_RETURN)))
             {
-                Close();
+                this.Close();
             }
 
             base.WndProc(ref m);

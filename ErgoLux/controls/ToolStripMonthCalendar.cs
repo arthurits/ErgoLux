@@ -13,7 +13,7 @@ public class ToolStripMonthCalendar : System.Windows.Forms.ToolStripControlHost
     {
         get
         {
-            return Control as MonthCalendar;
+            return this.Control as MonthCalendar;
         }
     }
 
@@ -22,15 +22,15 @@ public class ToolStripMonthCalendar : System.Windows.Forms.ToolStripControlHost
     {
         get
         {
-            return MonthCalendarControl.FirstDayOfWeek;
+            return this.MonthCalendarControl.FirstDayOfWeek;
         }
-        set { MonthCalendarControl.FirstDayOfWeek = value; }
+        set { this.MonthCalendarControl.FirstDayOfWeek = value; }
     }
 
     // Expose the AddBoldedDate method.
     public void AddBoldedDate(DateTime dateToBold)
     {
-        MonthCalendarControl.AddBoldedDate(dateToBold);
+        this.MonthCalendarControl.AddBoldedDate(dateToBold);
     }
 
     // Subscribe and unsubscribe the control events you wish to expose.
@@ -44,7 +44,7 @@ public class ToolStripMonthCalendar : System.Windows.Forms.ToolStripControlHost
 
         // Add the event.
         monthCalendarControl.DateChanged +=
-            new DateRangeEventHandler(OnDateChanged);
+            new DateRangeEventHandler(this.OnDateChanged);
     }
 
     protected override void OnUnsubscribeControlEvents(Control c)
@@ -57,7 +57,7 @@ public class ToolStripMonthCalendar : System.Windows.Forms.ToolStripControlHost
 
         // Remove the event.
         monthCalendarControl.DateChanged -=
-            new DateRangeEventHandler(OnDateChanged);
+            new DateRangeEventHandler(this.OnDateChanged);
     }
 
     // Declare the DateChanged event.

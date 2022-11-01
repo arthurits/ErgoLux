@@ -26,31 +26,31 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         // Load settings. This has to go before custom initialization, since some routines depend on these values
-        _settings = new();
-        bool result = LoadProgramSettingsJSON();
+        this._settings = new();
+        bool result = this.LoadProgramSettingsJSON();
         if (result)
-            ApplySettingsJSON(_settings.WindowPosition);
+            this.ApplySettingsJSON(this._settings.WindowPosition);
         else
-            ApplySettingsJSON();
+            this.ApplySettingsJSON();
 
         // Set form icon
-        Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
+        this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
 
         // Initialize components and GUI
-        InitializeComponent();
-        InitializeToolStrip();
-        InitializeStatusStrip();
-        InitializeToolStripPanel();
-        InitializeMenuStrip();
-        InitializePlots();
+        this.InitializeComponent();
+        this.InitializeToolStrip();
+        this.InitializeStatusStrip();
+        this.InitializeToolStripPanel();
+        this.InitializeMenuStrip();
+        this.InitializePlots();
 
         // Language GUI
-        UpdateUI_Language();
+        this.UpdateUI_Language();
 
         // Initialize the internal timer
-        m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
-        m_timer.Elapsed += OnTimedEvent;
-        m_timer.Enabled = false;
+        this.m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
+        this.m_timer.Elapsed += this.OnTimedEvent;
+        this.m_timer.Enabled = false;
     }
 
     private void FrmMain_Shown(object sender, EventArgs e)
@@ -77,16 +77,16 @@ public partial class FrmMain : Form
         }
 
         // Stop the time if it's still running
-        if (m_timer.Enabled) m_timer.Stop();
+        if (this.m_timer.Enabled) this.m_timer.Stop();
 
-        m_timer.Dispose();
+        this.m_timer.Dispose();
 
         // Close the device if it's still open
-        if (myFtdiDevice != null && myFtdiDevice.IsOpen)
-            myFtdiDevice.Close();
+        if (this.myFtdiDevice != null && this.myFtdiDevice.IsOpen)
+            this.myFtdiDevice.Close();
 
         // Save settings data
-        SaveProgramSettingsJSON();
+        this.SaveProgramSettingsJSON();
     }
 
     /// <summary>
@@ -96,8 +96,8 @@ public partial class FrmMain : Form
     {
         //if (!myFtdiDevice.Write(ClassT10.Command_54)) return;
 
-        myFtdiDevice.DataReceived += OnDataReceived;
-        myFtdiDevice.Write(ClassT10.Command_55_Set);
+        this.myFtdiDevice.DataReceived += this.OnDataReceived;
+        this.myFtdiDevice.Write(ClassT10.Command_55_Set);
         //myFtdiDevice.Write(ClassT10.ReceptorsSingle[5]);
         //int i = _settings.T10_NumberOfSensors - 1;
         //while (i >= 0)
@@ -111,7 +111,7 @@ public partial class FrmMain : Form
     private void OnTimedEvent(object? sender, EventArgs e)
     {
 
-        bool result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
+        bool result = this.myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
 
         //result = myFtdiDevice.Write(ClassT10.Command_55_Set);
         //result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
@@ -131,13 +131,13 @@ public partial class FrmMain : Form
             //System.Diagnostics.Debug.Print("Data: {0} — TimeStamp: {1}",
             //                            result.ToString(),
             //                            DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture));
-            if (result.Sensor < _settings.T10_NumberOfSensors - 1)
+            if (result.Sensor < this._settings.T10_NumberOfSensors - 1)
             {
-                myFtdiDevice.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
+                this.myFtdiDevice.Write(ClassT10.ReceptorsSingle[result.Sensor + 1]);
             }
             else
             {
-                myFtdiDevice.Write(ClassT10.Command_55_Release);
+                this.myFtdiDevice.Write(ClassT10.Command_55_Release);
             }
         }
         else if (e.StrDataReceived.Length == ClassT10.ShortBytesLength)
@@ -146,7 +146,7 @@ public partial class FrmMain : Form
         }
 
         // Needed, otherwise we get an error from cross-threading access
-        Invoke(() => Plots_Update(result.Sensor, result.Iluminance));
+        this.Invoke(() => this.Plots_Update(result.Sensor, result.Iluminance));
     }
 
     /// <summary>
@@ -179,22 +179,22 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_MeasuringTime()
     {
-        TimeSpan nTime = _timeEnd - _timeStart;
+        TimeSpan nTime = this._timeEnd - this._timeStart;
 
         if (nTime == TimeSpan.Zero)
         {
-            statusStripLabelXtras.Text = string.Empty;
-            statusStripLabelXtras.ToolTipText = string.Empty;
+            this.statusStripLabelXtras.Text = string.Empty;
+            this.statusStripLabelXtras.ToolTipText = string.Empty;
         }
         else
         {
-            statusStripLabelXtras.Text = $"{nTime.Days} {StringResources.FileHeader19}, " +
+            this.statusStripLabelXtras.Text = $"{nTime.Days} {StringResources.FileHeader19}, " +
                 $"{nTime.Hours} {StringResources.FileHeader20}, " +
                 $"{nTime.Minutes} {StringResources.FileHeader21}, " +
                 $"{nTime.Seconds} {StringResources.FileHeader22} " +
                 $"{StringResources.FileHeader23} " +
                 $"{nTime.Milliseconds} {StringResources.FileHeader24}";
-            statusStripLabelXtras.ToolTipText = statusStripLabelXtras.Text;
+            this.statusStripLabelXtras.ToolTipText = this.statusStripLabelXtras.Text;
         }
     }
 
@@ -203,18 +203,18 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_Series()
     {
-        if (_seriesLabels.Length < _settings.ArrayFixedColumns) return;
+        if (this._seriesLabels.Length < this._settings.ArrayFixedColumns) return;
 
-        for (int i = 0; i < _seriesLabels.Length - _settings.ArrayFixedColumns; i++)
+        for (int i = 0; i < this._seriesLabels.Length - this._settings.ArrayFixedColumns; i++)
         {
-            _seriesLabels[i] = $"{StringResources.FileHeader08}{i:#0}";
+            this._seriesLabels[i] = $"{StringResources.FileHeader08}{i:#0}";
         }
-        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 0] = StringResources.FileHeader09;
-        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 1] = StringResources.FileHeader10;
-        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 2] = StringResources.FileHeader11;
-        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 3] = StringResources.FileHeader12;
-        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 4] = StringResources.FileHeader13;
-        _seriesLabels[_seriesLabels.Length - _settings.ArrayFixedColumns + 5] = StringResources.FileHeader14;
+        this._seriesLabels[this._seriesLabels.Length - this._settings.ArrayFixedColumns + 0] = StringResources.FileHeader09;
+        this._seriesLabels[this._seriesLabels.Length - this._settings.ArrayFixedColumns + 1] = StringResources.FileHeader10;
+        this._seriesLabels[this._seriesLabels.Length - this._settings.ArrayFixedColumns + 2] = StringResources.FileHeader11;
+        this._seriesLabels[this._seriesLabels.Length - this._settings.ArrayFixedColumns + 3] = StringResources.FileHeader12;
+        this._seriesLabels[this._seriesLabels.Length - this._settings.ArrayFixedColumns + 4] = StringResources.FileHeader13;
+        this._seriesLabels[this._seriesLabels.Length - this._settings.ArrayFixedColumns + 5] = StringResources.FileHeader14;
     }
 
     /// <summary>
@@ -222,131 +222,131 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_Language(int DataLength = default)
     {
-        SuspendLayout();
+        this.SuspendLayout();
 
-        StringResources.Culture = _settings.AppCulture;
+        StringResources.Culture = this._settings.AppCulture;
 
         // Update the form's tittle
-        SetFormTitle(this, String.Empty);
+        this.SetFormTitle(this, String.Empty);
 
-        UpdateUI_MeasuringTime();
+        this.UpdateUI_MeasuringTime();
 
         // Update ToolStrip
-        toolStripMain_Exit.Text = StringResources.ToolStripExit;
-        toolStripMain_Exit.ToolTipText = StringResources.ToolTipExit;
-        toolStripMain_Open.Text = StringResources.ToolStripOpen;
-        toolStripMain_Open.ToolTipText = StringResources.ToolTipOpen;
-        toolStripMain_Save.Text = StringResources.ToolStripSave;
-        toolStripMain_Save.ToolTipText = StringResources.ToolTipSave;
-        toolStripMain_Connect.Text = StringResources.ToolStripConnect;
-        toolStripMain_Connect.ToolTipText = StringResources.ToolTipConnect;
-        toolStripMain_Disconnect.Text = StringResources.ToolStripDisconnect;
-        toolStripMain_Disconnect.ToolTipText = StringResources.ToolTipDisconnect;
-        toolStripMain_Settings.Text = StringResources.ToolStripSettings;
-        toolStripMain_Settings.ToolTipText = StringResources.ToolTipSettings;
-        toolStripMain_About.Text = StringResources.ToolStripAbout;
-        toolStripMain_About.ToolTipText = StringResources.ToolTipAbout;
+        this.toolStripMain_Exit.Text = StringResources.ToolStripExit;
+        this.toolStripMain_Exit.ToolTipText = StringResources.ToolTipExit;
+        this.toolStripMain_Open.Text = StringResources.ToolStripOpen;
+        this.toolStripMain_Open.ToolTipText = StringResources.ToolTipOpen;
+        this.toolStripMain_Save.Text = StringResources.ToolStripSave;
+        this.toolStripMain_Save.ToolTipText = StringResources.ToolTipSave;
+        this.toolStripMain_Connect.Text = StringResources.ToolStripConnect;
+        this.toolStripMain_Connect.ToolTipText = StringResources.ToolTipConnect;
+        this.toolStripMain_Disconnect.Text = StringResources.ToolStripDisconnect;
+        this.toolStripMain_Disconnect.ToolTipText = StringResources.ToolTipDisconnect;
+        this.toolStripMain_Settings.Text = StringResources.ToolStripSettings;
+        this.toolStripMain_Settings.ToolTipText = StringResources.ToolTipSettings;
+        this.toolStripMain_About.Text = StringResources.ToolStripAbout;
+        this.toolStripMain_About.ToolTipText = StringResources.ToolTipAbout;
 
         // Update StatusStrip
-        statusStripLabelRaw.ToolTipText = StringResources.StatusTipRaw;
-        statusStripLabelRadar.ToolTipText = StringResources.StatusTipDistribution;
-        statusStripLabelMax.ToolTipText = StringResources.StatusTipMax;
-        statusStripLabelRatio.ToolTipText = StringResources.StatusTipRatio;
-        statusStripLabelCross.ToolTipText = StringResources.StatusTipCrossHair;
+        this.statusStripLabelRaw.ToolTipText = StringResources.StatusTipRaw;
+        this.statusStripLabelRadar.ToolTipText = StringResources.StatusTipDistribution;
+        this.statusStripLabelMax.ToolTipText = StringResources.StatusTipMax;
+        this.statusStripLabelRatio.ToolTipText = StringResources.StatusTipRatio;
+        this.statusStripLabelCross.ToolTipText = StringResources.StatusTipCrossHair;
 
-        statusStripLabelID.Text = StringResources.StatusID;
-        statusStripLabelID.ToolTipText = StringResources.StatusTipID;
-        statusStripLabelType.Text = StringResources.StatusType;
-        statusStripLabelType.ToolTipText = StringResources.StatusTipType;
-        statusStripLabelLocation.Text = StringResources.StatusLocation;
-        statusStripLabelLocation.ToolTipText = StringResources.StatusTipLocation;
+        this.statusStripLabelID.Text = StringResources.StatusID;
+        this.statusStripLabelID.ToolTipText = StringResources.StatusTipID;
+        this.statusStripLabelType.Text = StringResources.StatusType;
+        this.statusStripLabelType.ToolTipText = StringResources.StatusTipType;
+        this.statusStripLabelLocation.Text = StringResources.StatusLocation;
+        this.statusStripLabelLocation.ToolTipText = StringResources.StatusTipLocation;
 
-        statusStripIconOpen.Text = StringResources.StatusOpen;
-        statusStripIconOpen.ToolTipText = StringResources.StatusTipOpen;
-        statusStripIconExchange.Text = StringResources.StatusExchange;
-        statusStripIconExchange.ToolTipText = StringResources.StatusTipExchange;
+        this.statusStripIconOpen.Text = StringResources.StatusOpen;
+        this.statusStripIconOpen.ToolTipText = StringResources.StatusTipOpen;
+        this.statusStripIconExchange.Text = StringResources.StatusExchange;
+        this.statusStripIconExchange.ToolTipText = StringResources.StatusTipExchange;
 
-        statusStripLabelUILanguage.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
-        statusStripLabelUILanguage.ToolTipText = StringResources.ToolTipUILanguage + ":" + Environment.NewLine + _settings.AppCulture.NativeName;
+        this.statusStripLabelUILanguage.Text = this._settings.AppCulture.Name == String.Empty ? "Invariant" : this._settings.AppCulture.Name;
+        this.statusStripLabelUILanguage.ToolTipText = StringResources.ToolTipUILanguage + ":" + Environment.NewLine + this._settings.AppCulture.NativeName;
 
         // Update menu
-        mnuMainFrm_File.Text = StringResources.MenuMainFile;
-        mnuMainFrm_File_Open.Text = StringResources.MenuMainFileOpen;
-        mnuMainFrm_File_Save.Text = StringResources.MenuMainFileSave;
-        mnuMainFrm_File_Exit.Text = StringResources.MenuMainFileExit;
-        mnuMainFrm_View.Text = StringResources.MenuMainView;
-        mnuMainFrm_View_Menu.Text = StringResources.MenuMainViewMenu;
-        mnuMainFrm_View_Toolbar.Text = StringResources.MenuMainViewToolbar;
-        mnuMainFrm_View_Raw.Text = StringResources.MenuMainViewRaw;
-        mnuMainFrm_View_Distribution.Text = StringResources.MenuMainViewDistribution;
-        mnuMainFrm_View_Average.Text = StringResources.MenuMainViewAverage;
-        mnuMainFrm_View_Ratio.Text = StringResources.MenuMainViewRatio;
-        mnuMainFrm_Tools.Text = StringResources.MenuMainTools;
-        mnuMainFrm_Tools_Connect.Text = StringResources.MenuMainToolsConnect;
-        mnuMainFrm_Tools_Disconnect.Text = StringResources.MenuMainToolsDisconnect;
-        mnuMainFrm_Tools_Settings.Text = StringResources.MenuMainToolsSettings;
-        mnuMainFrm_Help.Text = StringResources.MenuMainHelpText;
-        mnuMainFrm_Help_About.Text = StringResources.MenuMainHelpAbout;
+        this.mnuMainFrm_File.Text = StringResources.MenuMainFile;
+        this.mnuMainFrm_File_Open.Text = StringResources.MenuMainFileOpen;
+        this.mnuMainFrm_File_Save.Text = StringResources.MenuMainFileSave;
+        this.mnuMainFrm_File_Exit.Text = StringResources.MenuMainFileExit;
+        this.mnuMainFrm_View.Text = StringResources.MenuMainView;
+        this.mnuMainFrm_View_Menu.Text = StringResources.MenuMainViewMenu;
+        this.mnuMainFrm_View_Toolbar.Text = StringResources.MenuMainViewToolbar;
+        this.mnuMainFrm_View_Raw.Text = StringResources.MenuMainViewRaw;
+        this.mnuMainFrm_View_Distribution.Text = StringResources.MenuMainViewDistribution;
+        this.mnuMainFrm_View_Average.Text = StringResources.MenuMainViewAverage;
+        this.mnuMainFrm_View_Ratio.Text = StringResources.MenuMainViewRatio;
+        this.mnuMainFrm_Tools.Text = StringResources.MenuMainTools;
+        this.mnuMainFrm_Tools_Connect.Text = StringResources.MenuMainToolsConnect;
+        this.mnuMainFrm_Tools_Disconnect.Text = StringResources.MenuMainToolsDisconnect;
+        this.mnuMainFrm_Tools_Settings.Text = StringResources.MenuMainToolsSettings;
+        this.mnuMainFrm_Help.Text = StringResources.MenuMainHelpText;
+        this.mnuMainFrm_Help_About.Text = StringResources.MenuMainHelpAbout;
 
         // Update plots
-        plotData.CultureUI = _settings.AppCulture;
-        plotData.Plot.Title(StringResources.PlotRawTitle);
-        plotData.Plot.YLabel(StringResources.PlotRawYLabel);
-        plotData.Plot.XLabel(StringResources.PlotRawXLabel);
+        this.plotData.CultureUI = this._settings.AppCulture;
+        this.plotData.Plot.Title(StringResources.PlotRawTitle);
+        this.plotData.Plot.YLabel(StringResources.PlotRawYLabel);
+        this.plotData.Plot.XLabel(StringResources.PlotRawXLabel);
 
-        plotDistribution.CultureUI = _settings.AppCulture;
-        plotDistribution.Plot.Title(StringResources.PlotDistributionTitle);
+        this.plotDistribution.CultureUI = this._settings.AppCulture;
+        this.plotDistribution.Plot.Title(StringResources.PlotDistributionTitle);
 
-        plotStats.CultureUI = _settings.AppCulture;
-        plotStats.Plot.Title(StringResources.PlotAverageTitle);
-        plotStats.Plot.YLabel(StringResources.PlotAverageYLabel);
-        plotStats.Plot.XLabel(StringResources.PlotAverageXLabel);
+        this.plotStats.CultureUI = this._settings.AppCulture;
+        this.plotStats.Plot.Title(StringResources.PlotAverageTitle);
+        this.plotStats.Plot.YLabel(StringResources.PlotAverageYLabel);
+        this.plotStats.Plot.XLabel(StringResources.PlotAverageXLabel);
 
-        plotRatio.CultureUI = _settings.AppCulture;
-        plotRatio.Plot.Title(StringResources.PlotRatiosTitle);
-        plotRatio.Plot.YLabel(StringResources.PlotRatiosYLabel);
-        plotRatio.Plot.XLabel(StringResources.PlotRatiosXLabel);
+        this.plotRatio.CultureUI = this._settings.AppCulture;
+        this.plotRatio.Plot.Title(StringResources.PlotRatiosTitle);
+        this.plotRatio.Plot.YLabel(StringResources.PlotRatiosYLabel);
+        this.plotRatio.Plot.XLabel(StringResources.PlotRatiosXLabel);
 
-        Plots_Refresh();
+        this.Plots_Refresh();
 
         // Update plots' legends
-        UpdateUI_Series();
-        if (DataLength > _settings.ArrayFixedColumns)
+        this.UpdateUI_Series();
+        if (DataLength > this._settings.ArrayFixedColumns)
         {
             // Since the crosshair might be activated, it's necessary to filter by typeof
-            var signalPlot = plotData.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
+            var signalPlot = this.plotData.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
             int count = signalPlot.Length;
             for (int i = 0; i < count; i++)
             {
                 //((ScottPlot.Plottable.SignalPlot)plotData.Plot.GetPlottables()[i]).Label = _seriesLabels[i];
-                signalPlot[i].Label = _seriesLabels[i];
+                signalPlot[i].Label = this._seriesLabels[i];
             }
 
-            if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadarPlot))
-                ((RadarPlot)plotDistribution.Plot.GetPlottables()[0]).CategoryLabels = _seriesLabels[0.._settings.T10_NumberOfSensors];
-            else if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadialGaugePlot))
-                ((RadialGaugePlot)plotDistribution.Plot.GetPlottables()[0]).Labels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+            if (this.plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadarPlot))
+                ((RadarPlot)this.plotDistribution.Plot.GetPlottables()[0]).CategoryLabels = this._seriesLabels[0..this._settings.T10_NumberOfSensors];
+            else if (this.plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadialGaugePlot))
+                ((RadialGaugePlot)this.plotDistribution.Plot.GetPlottables()[0]).Labels = this._seriesLabels[0..this._settings.T10_NumberOfSensors];
 
-            signalPlot = plotStats.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
+            signalPlot = this.plotStats.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
             if (signalPlot.Length == 3)
             {
-                signalPlot[0].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 0];
-                signalPlot[1].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 1];
-                signalPlot[2].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 2];
+                signalPlot[0].Label = this._seriesLabels[this._plotData.Length - this._settings.ArrayFixedColumns + 0];
+                signalPlot[1].Label = this._seriesLabels[this._plotData.Length - this._settings.ArrayFixedColumns + 1];
+                signalPlot[2].Label = this._seriesLabels[this._plotData.Length - this._settings.ArrayFixedColumns + 2];
             }
 
-            signalPlot = plotRatio.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
+            signalPlot = this.plotRatio.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
             if (signalPlot.Length == 3)
             {
-                signalPlot[0].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 3];
-                signalPlot[1].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 4];
-                signalPlot[2].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
+                signalPlot[0].Label = this._seriesLabels[this._plotData.Length - this._settings.ArrayFixedColumns + 3];
+                signalPlot[1].Label = this._seriesLabels[this._plotData.Length - this._settings.ArrayFixedColumns + 4];
+                signalPlot[2].Label = this._seriesLabels[this._plotData.Length - this._settings.ArrayFixedColumns + 5];
             }
 
-            Plots_ShowLegends();
+            this.Plots_ShowLegends();
         }
 
-        ResumeLayout();
+        this.ResumeLayout();
     }
 
 }

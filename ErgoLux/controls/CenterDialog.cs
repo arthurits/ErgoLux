@@ -16,26 +16,26 @@ public class CenterWinDialog : IDisposable
 
     public CenterWinDialog(Form owner)
     {
-        mOwner = owner;
+        this.mOwner = owner;
         //clientRect = Screen.FromControl(mOwner).WorkingArea;
 
         owner.Invoke((MethodInvoker)delegate
         {
-            clientRect = Screen.FromControl(owner).WorkingArea;
+            this.clientRect = Screen.FromControl(owner).WorkingArea;
         });
 
         if (owner.WindowState != FormWindowState.Minimized)
-            owner.BeginInvoke(new MethodInvoker(FindDialog));
+            owner.BeginInvoke(new MethodInvoker(this.FindDialog));
     }
 
     private void FindDialog()
     {
         // Enumerate windows to find the message box
-        if (mTries < 0) return;
-        EnumThreadWndProc callback = new(CheckWindow);
+        if (this.mTries < 0) return;
+        EnumThreadWndProc callback = new(this.CheckWindow);
         if (EnumThreadWindows(GetCurrentThreadId(), callback, IntPtr.Zero))
         {
-            if (++mTries < 10) mOwner.BeginInvoke(new MethodInvoker(FindDialog));
+            if (++this.mTries < 10) this.mOwner.BeginInvoke(new MethodInvoker(this.FindDialog));
         }
     }
     private bool CheckWindow(IntPtr hWnd, IntPtr lp)
@@ -47,24 +47,24 @@ public class CenterWinDialog : IDisposable
         if (sb.ToString() != "#32770") return true;
 
         // Got it
-        System.Drawing.Rectangle frmRect = new(mOwner.Location, mOwner.Size);
+        System.Drawing.Rectangle frmRect = new(this.mOwner.Location, this.mOwner.Size);
         GetWindowRect(hWnd, out RECT dlgRect);
 
         int x = frmRect.Left + (frmRect.Width - dlgRect.Right + dlgRect.Left) / 2;
         int y = frmRect.Top + (frmRect.Height - dlgRect.Bottom + dlgRect.Top) / 2;
 
-        clientRect.Width -= (dlgRect.Right - dlgRect.Left);
-        clientRect.Height -= (dlgRect.Bottom - dlgRect.Top);
-        clientRect.X = x < clientRect.X ? clientRect.X : (x > clientRect.Right ? clientRect.Right : x);
-        clientRect.Y = y < clientRect.Y ? clientRect.Y : (y > clientRect.Bottom ? clientRect.Bottom : y);
+        this.clientRect.Width -= (dlgRect.Right - dlgRect.Left);
+        this.clientRect.Height -= (dlgRect.Bottom - dlgRect.Top);
+        this.clientRect.X = x < this.clientRect.X ? this.clientRect.X : (x > this.clientRect.Right ? this.clientRect.Right : x);
+        this.clientRect.Y = y < this.clientRect.Y ? this.clientRect.Y : (y > this.clientRect.Bottom ? this.clientRect.Bottom : y);
 
-        MoveWindow(hWnd, clientRect.X, clientRect.Y, dlgRect.Right - dlgRect.Left, dlgRect.Bottom - dlgRect.Top, true);
+        MoveWindow(hWnd, this.clientRect.X, this.clientRect.Y, dlgRect.Right - dlgRect.Left, dlgRect.Bottom - dlgRect.Top, true);
 
         return false;
     }
     public void Dispose()
     {
-        mTries = -1;
+        this.mTries = -1;
         GC.SuppressFinalize(this);
     }
 

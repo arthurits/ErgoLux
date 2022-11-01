@@ -9,8 +9,8 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     /// </summary>
     public System.Globalization.CultureInfo CultureUI
     {
-        get { return _cultureUI; }
-        set { _cultureUI = value; ContextMenuUILanguage(); }
+        get { return this._cultureUI; }
+        set { this._cultureUI = value; this.ContextMenuUILanguage(); }
     }
 
     /// <summary>
@@ -23,11 +23,11 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     public FormsPlotCulture()
         : base()
     {
-        InitilizeContextMenu();
+        this.InitilizeContextMenu();
         // Unsubscribe from the default right-click menu event
-        RightClicked -= DefaultRightClickEvent;
+        RightClicked -= this.DefaultRightClickEvent;
         // Add a custom right-click action
-        RightClicked += CustomRightClickEvent;
+        RightClicked += this.CustomRightClickEvent;
     }
 
     /// <summary>
@@ -36,10 +36,10 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     protected virtual void ContextMenuUILanguage()
     {
         string strResource;
-        foreach (ToolStripItem menuItem in ContextMenu.Items)
+        foreach (ToolStripItem menuItem in this.ContextMenu.Items)
         {
             strResource = $"strMenu{menuItem.Name}";
-            menuItem.Text = StringsRM.GetString(strResource, CultureUI);
+            menuItem.Text = this.StringsRM.GetString(strResource, this.CultureUI);
         }
 
         //ContextMenu.Items["Copy"].Text = StringsRM.GetString("strMenuCopy", CultureUI) ?? "Copy image";
@@ -59,34 +59,34 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
         int item;
         System.Windows.Forms.ToolStripMenuItem menuItem;
 
-        item = ContextMenu.Items.Add(new ToolStripMenuItem("Copy image", null, new EventHandler(RightClickMenu_Copy)));
-        menuItem = (ToolStripMenuItem)ContextMenu.Items[item];
+        item = this.ContextMenu.Items.Add(new ToolStripMenuItem("Copy image", null, new EventHandler(this.RightClickMenu_Copy)));
+        menuItem = (ToolStripMenuItem)this.ContextMenu.Items[item];
         menuItem.Name = "Copy";
 
-        item = ContextMenu.Items.Add(new ToolStripMenuItem("Save image as...", null, new EventHandler(RightClickMenu_SaveImage)));
-        menuItem = (ToolStripMenuItem)ContextMenu.Items[item];
+        item = this.ContextMenu.Items.Add(new ToolStripMenuItem("Save image as...", null, new EventHandler(this.RightClickMenu_SaveImage)));
+        menuItem = (ToolStripMenuItem)this.ContextMenu.Items[item];
         menuItem.Name = "Save";
 
-        item = ContextMenu.Items.Add(new ToolStripSeparator());
+        item = this.ContextMenu.Items.Add(new ToolStripSeparator());
 
-        item = ContextMenu.Items.Add(new ToolStripMenuItem("Zoom to fit data", null, new EventHandler(RightClickMenu_AutoAxis)));
-        menuItem = (ToolStripMenuItem)ContextMenu.Items[item];
+        item = this.ContextMenu.Items.Add(new ToolStripMenuItem("Zoom to fit data", null, new EventHandler(this.RightClickMenu_AutoAxis)));
+        menuItem = (ToolStripMenuItem)this.ContextMenu.Items[item];
         menuItem.Name = "Zoom";
 
-        item = ContextMenu.Items.Add(new ToolStripSeparator());
+        item = this.ContextMenu.Items.Add(new ToolStripSeparator());
 
-        item = ContextMenu.Items.Add(new ToolStripMenuItem("Help", null, new EventHandler(RightClickMenu_Help)));
-        menuItem = (ToolStripMenuItem)ContextMenu.Items[item];
+        item = this.ContextMenu.Items.Add(new ToolStripMenuItem("Help", null, new EventHandler(this.RightClickMenu_Help)));
+        menuItem = (ToolStripMenuItem)this.ContextMenu.Items[item];
         menuItem.Name = "Help";
 
-        item = ContextMenu.Items.Add(new ToolStripSeparator());
+        item = this.ContextMenu.Items.Add(new ToolStripSeparator());
 
-        item = ContextMenu.Items.Add(new ToolStripMenuItem("Open in new window", null, new EventHandler(RightClickMenu_OpenInNewWindow)));
-        menuItem = (ToolStripMenuItem)ContextMenu.Items[item];
+        item = this.ContextMenu.Items.Add(new ToolStripMenuItem("Open in new window", null, new EventHandler(this.RightClickMenu_OpenInNewWindow)));
+        menuItem = (ToolStripMenuItem)this.ContextMenu.Items[item];
         menuItem.Name = "Open";
 
-        item = ContextMenu.Items.Add(new ToolStripMenuItem("Detach legend", null, new EventHandler(RightClickMenu_DetachLegend)));
-        menuItem = (ToolStripMenuItem)ContextMenu.Items[item];
+        item = this.ContextMenu.Items.Add(new ToolStripMenuItem("Detach legend", null, new EventHandler(this.RightClickMenu_DetachLegend)));
+        menuItem = (ToolStripMenuItem)this.ContextMenu.Items[item];
         menuItem.Name = "Detach";
     }
 
@@ -95,26 +95,26 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     /// </summary>
     protected virtual void CustomRightClickEvent(object? sender, EventArgs e)
     {
-        ContextMenu.Items["Detach"].Visible = Plot.Legend(null).Count > 0;
-        ContextMenu.Show(System.Windows.Forms.Cursor.Position);
+        this.ContextMenu.Items["Detach"].Visible = this.Plot.Legend(null).Count > 0;
+        this.ContextMenu.Show(System.Windows.Forms.Cursor.Position);
     }
-    protected virtual void RightClickMenu_Copy(object? sender, EventArgs e) => Clipboard.SetImage(Plot.Render());
+    protected virtual void RightClickMenu_Copy(object? sender, EventArgs e) => Clipboard.SetImage(this.Plot.Render());
     protected virtual void RightClickMenu_Help(object? sender, EventArgs e) => new FormHelp().Show();
-    protected virtual void RightClickMenu_AutoAxis(object? sender, EventArgs e) { Plot.AxisAuto(); Refresh(); }
-    protected virtual void RightClickMenu_OpenInNewWindow(object? sender, EventArgs e) => new FormsPlotViewer(Plot).Show();
+    protected virtual void RightClickMenu_AutoAxis(object? sender, EventArgs e) { this.Plot.AxisAuto(); this.Refresh(); }
+    protected virtual void RightClickMenu_OpenInNewWindow(object? sender, EventArgs e) => new FormsPlotViewer(this.Plot).Show();
     protected virtual void RightClickMenu_DetachLegend(object? sender, EventArgs e) => new FormsPlotLegendViewer(this);
     protected virtual void RightClickMenu_SaveImage(object? sender, EventArgs e)
     {
         SaveFileDialog fileDialog = new()
         {
-            FileName = StringsRM.GetString("strFileDlgFileName", CultureUI) ?? "Plot.png",
-            Filter = StringsRM.GetString("strFileDlgFilter", CultureUI) ?? "PNG Files (*.png)|*.png;*.png" +
+            FileName = this.StringsRM.GetString("strFileDlgFileName", this.CultureUI) ?? "Plot.png",
+            Filter = this.StringsRM.GetString("strFileDlgFilter", this.CultureUI) ?? "PNG Files (*.png)|*.png;*.png" +
                      "|JPG Files (*.jpg, *.jpeg)|*.jpg;*.jpeg" +
                      "|BMP Files (*.bmp)|*.bmp;*.bmp" +
                      "|All files (*.*)|*.*"
         };
 
         if (fileDialog.ShowDialog() == DialogResult.OK)
-            Plot.SaveFig(fileDialog.FileName);
+            this.Plot.SaveFig(fileDialog.FileName);
     }
 }

@@ -16,8 +16,8 @@ public class CustomRenderer<T> : System.Windows.Forms.ToolStripProfessionalRende
     /// </summary>
     public CustomRenderer()
     {
-        _border = System.Drawing.Brushes.SteelBlue;
-        _checkedBackground = System.Drawing.Brushes.LightSkyBlue;
+        this._border = System.Drawing.Brushes.SteelBlue;
+        this._checkedBackground = System.Drawing.Brushes.LightSkyBlue;
     }
 
     /// <summary>
@@ -27,8 +27,8 @@ public class CustomRenderer<T> : System.Windows.Forms.ToolStripProfessionalRende
     /// <param name="checkedBackground">Brush for the checked background</param>
     public CustomRenderer(System.Drawing.Brush border, System.Drawing.Brush checkedBackground)
     {
-        _border = border;
-        _checkedBackground = checkedBackground;
+        this._border = border;
+        this._checkedBackground = checkedBackground;
     }
 
     /// <summary>
@@ -36,8 +36,8 @@ public class CustomRenderer<T> : System.Windows.Forms.ToolStripProfessionalRende
     /// </summary>
     public System.Drawing.Brush BorderColor
     {
-        get { return _border; }
-        set { _border = value; }
+        get { return this._border; }
+        set { this._border = value; }
     }
 
     /// <summary>
@@ -45,8 +45,8 @@ public class CustomRenderer<T> : System.Windows.Forms.ToolStripProfessionalRende
     /// </summary>
     public System.Drawing.Brush CheckedColor
     {
-        get { return _checkedBackground; }
-        set { _checkedBackground = value; }
+        get { return this._checkedBackground; }
+        set { this._checkedBackground = value; }
     }
 
     protected override void OnRenderButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs e)
@@ -64,13 +64,13 @@ public class CustomRenderer<T> : System.Windows.Forms.ToolStripProfessionalRende
                 int buttonHeight = e.Item.Size.Height;
                 int buttonWidth = e.Item.Size.Width;
                 System.Drawing.Rectangle rectButtonFill = new(System.Drawing.Point.Empty, new System.Drawing.Size(buttonWidth, buttonHeight));
-                e.Graphics.FillRectangle(_border, rectButtonFill);
+                e.Graphics.FillRectangle(this._border, rectButtonFill);
 
                 // fill the entire button offset by 1,1 and height/width subtracted by 2 used as the fill color
                 int backgroundHeight = e.Item.Size.Height - 2;
                 int backgroundWidth = e.Item.Size.Width - 2;
                 System.Drawing.Rectangle rectBackground = new(1, 1, backgroundWidth, backgroundHeight);
-                e.Graphics.FillRectangle(_checkedBackground, rectBackground);
+                e.Graphics.FillRectangle(this._checkedBackground, rectBackground);
             }
             // if this button is not checked, use the normal render event
             else

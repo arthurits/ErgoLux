@@ -46,31 +46,31 @@ namespace FTD2XX_NET
         public FTDI()
         {
             // If FTD2XX.DLL is NOT loaded already, load it
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
             {
                 // Load our FTD2XX.DLL library
-                hFTD2XXDLL = LoadLibrary(@"FTD2XX.DLL");
-                if (hFTD2XXDLL == IntPtr.Zero)
+                this.hFTD2XXDLL = LoadLibrary(@"FTD2XX.DLL");
+                if (this.hFTD2XXDLL == IntPtr.Zero)
                 {
                     // Failed to load our FTD2XX.DLL library from System32 or the application directory
                     // Try the same directory that this FTD2XX_NET DLL is in
-                    Console.WriteLine("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location));
+                    Console.WriteLine("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(this.GetType().Assembly.Location));
 #if DEBUG
-                    MessageBox.Show("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location),
+                    MessageBox.Show("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(this.GetType().Assembly.Location),
                         "Error",
                         System.Windows.Forms.MessageBoxButtons.OK,
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
-                    hFTD2XXDLL = LoadLibrary(@Path.GetDirectoryName(GetType().Assembly.Location) + "\\FTD2XX.DLL");
+                    this.hFTD2XXDLL = LoadLibrary(@Path.GetDirectoryName(this.GetType().Assembly.Location) + "\\FTD2XX.DLL");
                     //if (hFTD2XXDLL == IntPtr.Zero)
                     //    hFTD2XXDLL = LoadLibrary(@Path.GetDirectoryName(GetType().Assembly.Location) + "\\FTD2XX_NET.DLL");
                 }
             }
 
             // If we have succesfully loaded the library, get the function pointers set up
-            if (hFTD2XXDLL != IntPtr.Zero)
+            if (this.hFTD2XXDLL != IntPtr.Zero)
             {
-                FindFunctionPointers();
+                this.FindFunctionPointers();
             }
             else
             {
@@ -94,17 +94,17 @@ namespace FTD2XX_NET
             if (path == "")
                 return;
 
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
             {
                 // Load our nonstandard.DLL library
-                hFTD2XXDLL = LoadLibrary(path);
-                if (hFTD2XXDLL == IntPtr.Zero)
+                this.hFTD2XXDLL = LoadLibrary(path);
+                if (this.hFTD2XXDLL == IntPtr.Zero)
                 {
                     // Failed to load our PathToDll library
                     // Give up :(
-                    Console.WriteLine("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location));
+                    Console.WriteLine("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(this.GetType().Assembly.Location));
 #if DEBUG
-                    MessageBox.Show("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(GetType().Assembly.Location),
+                    MessageBox.Show("Attempting to load FTD2XX.DLL from:\n" + Path.GetDirectoryName(this.GetType().Assembly.Location),
                         "Error",
                         System.Windows.Forms.MessageBoxButtons.OK,
                         System.Windows.Forms.MessageBoxIcon.Error);
@@ -113,9 +113,9 @@ namespace FTD2XX_NET
             }
 
             // If we have succesfully loaded the library, get the function pointers set up
-            if (hFTD2XXDLL != IntPtr.Zero)
+            if (this.hFTD2XXDLL != IntPtr.Zero)
             {
-                FindFunctionPointers();
+                this.FindFunctionPointers();
             }
             else
             {
@@ -129,59 +129,59 @@ namespace FTD2XX_NET
         private void FindFunctionPointers()
         {
             // Set up our function pointers for use through our exported methods
-            pFT_CreateDeviceInfoList = GetProcAddress(hFTD2XXDLL, "FT_CreateDeviceInfoList");
-            pFT_GetDeviceInfoDetail = GetProcAddress(hFTD2XXDLL, "FT_GetDeviceInfoDetail");
-            pFT_Open = GetProcAddress(hFTD2XXDLL, "FT_Open");
-            pFT_OpenEx = GetProcAddress(hFTD2XXDLL, "FT_OpenEx");
-            pFT_Close = GetProcAddress(hFTD2XXDLL, "FT_Close");
-            pFT_Read = GetProcAddress(hFTD2XXDLL, "FT_Read");
-            pFT_Write = GetProcAddress(hFTD2XXDLL, "FT_Write");
-            pFT_GetQueueStatus = GetProcAddress(hFTD2XXDLL, "FT_GetQueueStatus");
-            pFT_GetModemStatus = GetProcAddress(hFTD2XXDLL, "FT_GetModemStatus");
-            pFT_GetStatus = GetProcAddress(hFTD2XXDLL, "FT_GetStatus");
-            pFT_SetBaudRate = GetProcAddress(hFTD2XXDLL, "FT_SetBaudRate");
-            pFT_SetDataCharacteristics = GetProcAddress(hFTD2XXDLL, "FT_SetDataCharacteristics");
-            pFT_SetFlowControl = GetProcAddress(hFTD2XXDLL, "FT_SetFlowControl");
-            pFT_SetDtr = GetProcAddress(hFTD2XXDLL, "FT_SetDtr");
-            pFT_ClrDtr = GetProcAddress(hFTD2XXDLL, "FT_ClrDtr");
-            pFT_SetRts = GetProcAddress(hFTD2XXDLL, "FT_SetRts");
-            pFT_ClrRts = GetProcAddress(hFTD2XXDLL, "FT_ClrRts");
-            pFT_ResetDevice = GetProcAddress(hFTD2XXDLL, "FT_ResetDevice");
-            pFT_ResetPort = GetProcAddress(hFTD2XXDLL, "FT_ResetPort");
-            pFT_CyclePort = GetProcAddress(hFTD2XXDLL, "FT_CyclePort");
-            pFT_Rescan = GetProcAddress(hFTD2XXDLL, "FT_Rescan");
-            pFT_Reload = GetProcAddress(hFTD2XXDLL, "FT_Reload");
-            pFT_Purge = GetProcAddress(hFTD2XXDLL, "FT_Purge");
-            pFT_SetTimeouts = GetProcAddress(hFTD2XXDLL, "FT_SetTimeouts");
-            pFT_SetBreakOn = GetProcAddress(hFTD2XXDLL, "FT_SetBreakOn");
-            pFT_SetBreakOff = GetProcAddress(hFTD2XXDLL, "FT_SetBreakOff");
-            pFT_GetDeviceInfo = GetProcAddress(hFTD2XXDLL, "FT_GetDeviceInfo");
-            pFT_SetResetPipeRetryCount = GetProcAddress(hFTD2XXDLL, "FT_SetResetPipeRetryCount");
-            pFT_StopInTask = GetProcAddress(hFTD2XXDLL, "FT_StopInTask");
-            pFT_RestartInTask = GetProcAddress(hFTD2XXDLL, "FT_RestartInTask");
-            pFT_GetDriverVersion = GetProcAddress(hFTD2XXDLL, "FT_GetDriverVersion");
-            pFT_GetLibraryVersion = GetProcAddress(hFTD2XXDLL, "FT_GetLibraryVersion");
-            pFT_SetDeadmanTimeout = GetProcAddress(hFTD2XXDLL, "FT_SetDeadmanTimeout");
-            pFT_SetChars = GetProcAddress(hFTD2XXDLL, "FT_SetChars");
-            pFT_SetEventNotification = GetProcAddress(hFTD2XXDLL, "FT_SetEventNotification");
-            pFT_GetComPortNumber = GetProcAddress(hFTD2XXDLL, "FT_GetComPortNumber");
-            pFT_SetLatencyTimer = GetProcAddress(hFTD2XXDLL, "FT_SetLatencyTimer");
-            pFT_GetLatencyTimer = GetProcAddress(hFTD2XXDLL, "FT_GetLatencyTimer");
-            pFT_SetBitMode = GetProcAddress(hFTD2XXDLL, "FT_SetBitMode");
-            pFT_GetBitMode = GetProcAddress(hFTD2XXDLL, "FT_GetBitMode");
-            pFT_SetUSBParameters = GetProcAddress(hFTD2XXDLL, "FT_SetUSBParameters");
-            pFT_ReadEE = GetProcAddress(hFTD2XXDLL, "FT_ReadEE");
-            pFT_WriteEE = GetProcAddress(hFTD2XXDLL, "FT_WriteEE");
-            pFT_EraseEE = GetProcAddress(hFTD2XXDLL, "FT_EraseEE");
-            pFT_EE_UASize = GetProcAddress(hFTD2XXDLL, "FT_EE_UASize");
-            pFT_EE_UARead = GetProcAddress(hFTD2XXDLL, "FT_EE_UARead");
-            pFT_EE_UAWrite = GetProcAddress(hFTD2XXDLL, "FT_EE_UAWrite");
-            pFT_EE_Read = GetProcAddress(hFTD2XXDLL, "FT_EE_Read");
-            pFT_EE_Program = GetProcAddress(hFTD2XXDLL, "FT_EE_Program");
-            pFT_EEPROM_Read = GetProcAddress(hFTD2XXDLL, "FT_EEPROM_Read");
-            pFT_EEPROM_Program = GetProcAddress(hFTD2XXDLL, "FT_EEPROM_Program");
-            pFT_VendorCmdGet = GetProcAddress(hFTD2XXDLL, "FT_VendorCmdGet");
-            pFT_VendorCmdSet = GetProcAddress(hFTD2XXDLL, "FT_VendorCmdSet");
+            this.pFT_CreateDeviceInfoList = GetProcAddress(this.hFTD2XXDLL, "FT_CreateDeviceInfoList");
+            this.pFT_GetDeviceInfoDetail = GetProcAddress(this.hFTD2XXDLL, "FT_GetDeviceInfoDetail");
+            this.pFT_Open = GetProcAddress(this.hFTD2XXDLL, "FT_Open");
+            this.pFT_OpenEx = GetProcAddress(this.hFTD2XXDLL, "FT_OpenEx");
+            this.pFT_Close = GetProcAddress(this.hFTD2XXDLL, "FT_Close");
+            this.pFT_Read = GetProcAddress(this.hFTD2XXDLL, "FT_Read");
+            this.pFT_Write = GetProcAddress(this.hFTD2XXDLL, "FT_Write");
+            this.pFT_GetQueueStatus = GetProcAddress(this.hFTD2XXDLL, "FT_GetQueueStatus");
+            this.pFT_GetModemStatus = GetProcAddress(this.hFTD2XXDLL, "FT_GetModemStatus");
+            this.pFT_GetStatus = GetProcAddress(this.hFTD2XXDLL, "FT_GetStatus");
+            this.pFT_SetBaudRate = GetProcAddress(this.hFTD2XXDLL, "FT_SetBaudRate");
+            this.pFT_SetDataCharacteristics = GetProcAddress(this.hFTD2XXDLL, "FT_SetDataCharacteristics");
+            this.pFT_SetFlowControl = GetProcAddress(this.hFTD2XXDLL, "FT_SetFlowControl");
+            this.pFT_SetDtr = GetProcAddress(this.hFTD2XXDLL, "FT_SetDtr");
+            this.pFT_ClrDtr = GetProcAddress(this.hFTD2XXDLL, "FT_ClrDtr");
+            this.pFT_SetRts = GetProcAddress(this.hFTD2XXDLL, "FT_SetRts");
+            this.pFT_ClrRts = GetProcAddress(this.hFTD2XXDLL, "FT_ClrRts");
+            this.pFT_ResetDevice = GetProcAddress(this.hFTD2XXDLL, "FT_ResetDevice");
+            this.pFT_ResetPort = GetProcAddress(this.hFTD2XXDLL, "FT_ResetPort");
+            this.pFT_CyclePort = GetProcAddress(this.hFTD2XXDLL, "FT_CyclePort");
+            this.pFT_Rescan = GetProcAddress(this.hFTD2XXDLL, "FT_Rescan");
+            this.pFT_Reload = GetProcAddress(this.hFTD2XXDLL, "FT_Reload");
+            this.pFT_Purge = GetProcAddress(this.hFTD2XXDLL, "FT_Purge");
+            this.pFT_SetTimeouts = GetProcAddress(this.hFTD2XXDLL, "FT_SetTimeouts");
+            this.pFT_SetBreakOn = GetProcAddress(this.hFTD2XXDLL, "FT_SetBreakOn");
+            this.pFT_SetBreakOff = GetProcAddress(this.hFTD2XXDLL, "FT_SetBreakOff");
+            this.pFT_GetDeviceInfo = GetProcAddress(this.hFTD2XXDLL, "FT_GetDeviceInfo");
+            this.pFT_SetResetPipeRetryCount = GetProcAddress(this.hFTD2XXDLL, "FT_SetResetPipeRetryCount");
+            this.pFT_StopInTask = GetProcAddress(this.hFTD2XXDLL, "FT_StopInTask");
+            this.pFT_RestartInTask = GetProcAddress(this.hFTD2XXDLL, "FT_RestartInTask");
+            this.pFT_GetDriverVersion = GetProcAddress(this.hFTD2XXDLL, "FT_GetDriverVersion");
+            this.pFT_GetLibraryVersion = GetProcAddress(this.hFTD2XXDLL, "FT_GetLibraryVersion");
+            this.pFT_SetDeadmanTimeout = GetProcAddress(this.hFTD2XXDLL, "FT_SetDeadmanTimeout");
+            this.pFT_SetChars = GetProcAddress(this.hFTD2XXDLL, "FT_SetChars");
+            this.pFT_SetEventNotification = GetProcAddress(this.hFTD2XXDLL, "FT_SetEventNotification");
+            this.pFT_GetComPortNumber = GetProcAddress(this.hFTD2XXDLL, "FT_GetComPortNumber");
+            this.pFT_SetLatencyTimer = GetProcAddress(this.hFTD2XXDLL, "FT_SetLatencyTimer");
+            this.pFT_GetLatencyTimer = GetProcAddress(this.hFTD2XXDLL, "FT_GetLatencyTimer");
+            this.pFT_SetBitMode = GetProcAddress(this.hFTD2XXDLL, "FT_SetBitMode");
+            this.pFT_GetBitMode = GetProcAddress(this.hFTD2XXDLL, "FT_GetBitMode");
+            this.pFT_SetUSBParameters = GetProcAddress(this.hFTD2XXDLL, "FT_SetUSBParameters");
+            this.pFT_ReadEE = GetProcAddress(this.hFTD2XXDLL, "FT_ReadEE");
+            this.pFT_WriteEE = GetProcAddress(this.hFTD2XXDLL, "FT_WriteEE");
+            this.pFT_EraseEE = GetProcAddress(this.hFTD2XXDLL, "FT_EraseEE");
+            this.pFT_EE_UASize = GetProcAddress(this.hFTD2XXDLL, "FT_EE_UASize");
+            this.pFT_EE_UARead = GetProcAddress(this.hFTD2XXDLL, "FT_EE_UARead");
+            this.pFT_EE_UAWrite = GetProcAddress(this.hFTD2XXDLL, "FT_EE_UAWrite");
+            this.pFT_EE_Read = GetProcAddress(this.hFTD2XXDLL, "FT_EE_Read");
+            this.pFT_EE_Program = GetProcAddress(this.hFTD2XXDLL, "FT_EE_Program");
+            this.pFT_EEPROM_Read = GetProcAddress(this.hFTD2XXDLL, "FT_EEPROM_Read");
+            this.pFT_EEPROM_Program = GetProcAddress(this.hFTD2XXDLL, "FT_EEPROM_Program");
+            this.pFT_VendorCmdGet = GetProcAddress(this.hFTD2XXDLL, "FT_VendorCmdGet");
+            this.pFT_VendorCmdSet = GetProcAddress(this.hFTD2XXDLL, "FT_VendorCmdSet");
         }
 
         /// <summary>
@@ -190,8 +190,8 @@ namespace FTD2XX_NET
         ~FTDI()
         {
             // FreeLibrary here - we should only do this if we are completely finished
-            FreeLibrary(hFTD2XXDLL);
-            hFTD2XXDLL = IntPtr.Zero;
+            FreeLibrary(this.hFTD2XXDLL);
+            this.hFTD2XXDLL = IntPtr.Zero;
         }
         #endregion
 
@@ -2102,13 +2102,13 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_CreateDeviceInfoList != IntPtr.Zero)
+            if (this.pFT_CreateDeviceInfoList != IntPtr.Zero)
             {
-                tFT_CreateDeviceInfoList FT_CreateDeviceInfoList = (tFT_CreateDeviceInfoList)Marshal.GetDelegateForFunctionPointer(pFT_CreateDeviceInfoList, typeof(tFT_CreateDeviceInfoList));
+                tFT_CreateDeviceInfoList FT_CreateDeviceInfoList = (tFT_CreateDeviceInfoList)Marshal.GetDelegateForFunctionPointer(this.pFT_CreateDeviceInfoList, typeof(tFT_CreateDeviceInfoList));
 
                 // Call FT_CreateDeviceInfoList
                 ftStatus = FT_CreateDeviceInfoList(ref devcount);
@@ -2146,16 +2146,16 @@ namespace FTD2XX_NET
             Int32 nullIndex = 0;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_CreateDeviceInfoList != IntPtr.Zero) & (pFT_GetDeviceInfoDetail != IntPtr.Zero))
+            if ((this.pFT_CreateDeviceInfoList != IntPtr.Zero) & (this.pFT_GetDeviceInfoDetail != IntPtr.Zero))
             {
                 UInt32 devcount = 0;
 
-                tFT_CreateDeviceInfoList FT_CreateDeviceInfoList = (tFT_CreateDeviceInfoList)Marshal.GetDelegateForFunctionPointer(pFT_CreateDeviceInfoList, typeof(tFT_CreateDeviceInfoList));
-                tFT_GetDeviceInfoDetail FT_GetDeviceInfoDetail = (tFT_GetDeviceInfoDetail)Marshal.GetDelegateForFunctionPointer(pFT_GetDeviceInfoDetail, typeof(tFT_GetDeviceInfoDetail));
+                tFT_CreateDeviceInfoList FT_CreateDeviceInfoList = (tFT_CreateDeviceInfoList)Marshal.GetDelegateForFunctionPointer(this.pFT_CreateDeviceInfoList, typeof(tFT_CreateDeviceInfoList));
+                tFT_GetDeviceInfoDetail FT_GetDeviceInfoDetail = (tFT_GetDeviceInfoDetail)Marshal.GetDelegateForFunctionPointer(this.pFT_GetDeviceInfoDetail, typeof(tFT_GetDeviceInfoDetail));
 
                 // Call FT_CreateDeviceInfoList
                 ftStatus = FT_CreateDeviceInfoList(ref devcount);
@@ -2173,7 +2173,7 @@ namespace FTD2XX_NET
                         // Buffer not big enough
                         ftErrorCondition = FT_ERROR.FT_BUFFER_SIZE;
                         // Throw exception
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     // Instantiate the array elements as FT_DEVICE_INFO_NODE
@@ -2197,7 +2197,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_CreateDeviceInfoList == IntPtr.Zero)
+                if (this.pFT_CreateDeviceInfoList == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_CreateDeviceInfoList.");
 #if DEBUG
@@ -2207,7 +2207,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_GetDeviceInfoDetail == IntPtr.Zero)
+                if (this.pFT_GetDeviceInfoDetail == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfoListDetail.");
 #if DEBUG
@@ -2239,44 +2239,44 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_Open != IntPtr.Zero) & (pFT_SetDataCharacteristics != IntPtr.Zero) & (pFT_SetFlowControl != IntPtr.Zero) & (pFT_SetBaudRate != IntPtr.Zero))
+            if ((this.pFT_Open != IntPtr.Zero) & (this.pFT_SetDataCharacteristics != IntPtr.Zero) & (this.pFT_SetFlowControl != IntPtr.Zero) & (this.pFT_SetBaudRate != IntPtr.Zero))
             {
-                tFT_Open FT_Open = (tFT_Open)Marshal.GetDelegateForFunctionPointer(pFT_Open, typeof(tFT_Open));
-                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
-                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(pFT_SetFlowControl, typeof(tFT_SetFlowControl));
-                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(pFT_SetBaudRate, typeof(tFT_SetBaudRate));
+                tFT_Open FT_Open = (tFT_Open)Marshal.GetDelegateForFunctionPointer(this.pFT_Open, typeof(tFT_Open));
+                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(this.pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
+                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(this.pFT_SetFlowControl, typeof(tFT_SetFlowControl));
+                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(this.pFT_SetBaudRate, typeof(tFT_SetBaudRate));
 
                 // Call FT_Open
-                ftStatus = FT_Open(index, ref ftHandle);
+                ftStatus = FT_Open(index, ref this.ftHandle);
 
                 // Appears that the handle value can be non-NULL on a fail, so set it explicitly
                 if (ftStatus != FT_STATUS.FT_OK)
-                    ftHandle = IntPtr.Zero;
+                    this.ftHandle = IntPtr.Zero;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Initialise port data characteristics
                     byte WordLength = FT_DATA_BITS.FT_BITS_8;
                     byte StopBits = FT_STOP_BITS.FT_STOP_BITS_1;
                     byte Parity = FT_PARITY.FT_PARITY_NONE;
-                    ftStatus = FT_SetDataCharacteristics(ftHandle, WordLength, StopBits, Parity);
+                    ftStatus = FT_SetDataCharacteristics(this.ftHandle, WordLength, StopBits, Parity);
                     // Initialise to no flow control
                     UInt16 FlowControl = FT_FLOW_CONTROL.FT_FLOW_NONE;
                     byte Xon = 0x11;
                     byte Xoff = 0x13;
-                    ftStatus = FT_SetFlowControl(ftHandle, FlowControl, Xon, Xoff);
+                    ftStatus = FT_SetFlowControl(this.ftHandle, FlowControl, Xon, Xoff);
                     // Initialise Baud rate
                     UInt32 BaudRate = 9600;
-                    ftStatus = FT_SetBaudRate(ftHandle, BaudRate);
+                    ftStatus = FT_SetBaudRate(this.ftHandle, BaudRate);
                 }
             }
             else
             {
-                if (pFT_Open == IntPtr.Zero)
+                if (this.pFT_Open == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Open.");
 #if DEBUG
@@ -2286,7 +2286,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetDataCharacteristics == IntPtr.Zero)
+                if (this.pFT_SetDataCharacteristics == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
@@ -2296,7 +2296,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetFlowControl == IntPtr.Zero)
+                if (this.pFT_SetFlowControl == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
@@ -2306,7 +2306,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetBaudRate == IntPtr.Zero)
+                if (this.pFT_SetBaudRate == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
@@ -2337,44 +2337,44 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_OpenEx != IntPtr.Zero) & (pFT_SetDataCharacteristics != IntPtr.Zero) & (pFT_SetFlowControl != IntPtr.Zero) & (pFT_SetBaudRate != IntPtr.Zero))
+            if ((this.pFT_OpenEx != IntPtr.Zero) & (this.pFT_SetDataCharacteristics != IntPtr.Zero) & (this.pFT_SetFlowControl != IntPtr.Zero) & (this.pFT_SetBaudRate != IntPtr.Zero))
             {
-                tFT_OpenEx FT_OpenEx = (tFT_OpenEx)Marshal.GetDelegateForFunctionPointer(pFT_OpenEx, typeof(tFT_OpenEx));
-                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
-                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(pFT_SetFlowControl, typeof(tFT_SetFlowControl));
-                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(pFT_SetBaudRate, typeof(tFT_SetBaudRate));
+                tFT_OpenEx FT_OpenEx = (tFT_OpenEx)Marshal.GetDelegateForFunctionPointer(this.pFT_OpenEx, typeof(tFT_OpenEx));
+                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(this.pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
+                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(this.pFT_SetFlowControl, typeof(tFT_SetFlowControl));
+                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(this.pFT_SetBaudRate, typeof(tFT_SetBaudRate));
 
                 // Call FT_OpenEx
-                ftStatus = FT_OpenEx(serialnumber, FT_OPEN_BY_SERIAL_NUMBER, ref ftHandle);
+                ftStatus = FT_OpenEx(serialnumber, FT_OPEN_BY_SERIAL_NUMBER, ref this.ftHandle);
 
                 // Appears that the handle value can be non-NULL on a fail, so set it explicitly
                 if (ftStatus != FT_STATUS.FT_OK)
-                    ftHandle = IntPtr.Zero;
+                    this.ftHandle = IntPtr.Zero;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Initialise port data characteristics
                     byte WordLength = FT_DATA_BITS.FT_BITS_8;
                     byte StopBits = FT_STOP_BITS.FT_STOP_BITS_1;
                     byte Parity = FT_PARITY.FT_PARITY_NONE;
-                    ftStatus = FT_SetDataCharacteristics(ftHandle, WordLength, StopBits, Parity);
+                    ftStatus = FT_SetDataCharacteristics(this.ftHandle, WordLength, StopBits, Parity);
                     // Initialise to no flow control
                     UInt16 FlowControl = FT_FLOW_CONTROL.FT_FLOW_NONE;
                     byte Xon = 0x11;
                     byte Xoff = 0x13;
-                    ftStatus = FT_SetFlowControl(ftHandle, FlowControl, Xon, Xoff);
+                    ftStatus = FT_SetFlowControl(this.ftHandle, FlowControl, Xon, Xoff);
                     // Initialise Baud rate
                     UInt32 BaudRate = 9600;
-                    ftStatus = FT_SetBaudRate(ftHandle, BaudRate);
+                    ftStatus = FT_SetBaudRate(this.ftHandle, BaudRate);
                 }
             }
             else
             {
-                if (pFT_OpenEx == IntPtr.Zero)
+                if (this.pFT_OpenEx == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_OpenEx.");
 #if DEBUG
@@ -2384,7 +2384,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetDataCharacteristics == IntPtr.Zero)
+                if (this.pFT_SetDataCharacteristics == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
@@ -2394,7 +2394,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetFlowControl == IntPtr.Zero)
+                if (this.pFT_SetFlowControl == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
@@ -2404,7 +2404,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetBaudRate == IntPtr.Zero)
+                if (this.pFT_SetBaudRate == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
@@ -2435,44 +2435,44 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_OpenEx != IntPtr.Zero) & (pFT_SetDataCharacteristics != IntPtr.Zero) & (pFT_SetFlowControl != IntPtr.Zero) & (pFT_SetBaudRate != IntPtr.Zero))
+            if ((this.pFT_OpenEx != IntPtr.Zero) & (this.pFT_SetDataCharacteristics != IntPtr.Zero) & (this.pFT_SetFlowControl != IntPtr.Zero) & (this.pFT_SetBaudRate != IntPtr.Zero))
             {
-                tFT_OpenEx FT_OpenEx = (tFT_OpenEx)Marshal.GetDelegateForFunctionPointer(pFT_OpenEx, typeof(tFT_OpenEx));
-                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
-                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(pFT_SetFlowControl, typeof(tFT_SetFlowControl));
-                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(pFT_SetBaudRate, typeof(tFT_SetBaudRate));
+                tFT_OpenEx FT_OpenEx = (tFT_OpenEx)Marshal.GetDelegateForFunctionPointer(this.pFT_OpenEx, typeof(tFT_OpenEx));
+                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(this.pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
+                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(this.pFT_SetFlowControl, typeof(tFT_SetFlowControl));
+                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(this.pFT_SetBaudRate, typeof(tFT_SetBaudRate));
 
                 // Call FT_OpenEx
-                ftStatus = FT_OpenEx(description, FT_OPEN_BY_DESCRIPTION, ref ftHandle);
+                ftStatus = FT_OpenEx(description, FT_OPEN_BY_DESCRIPTION, ref this.ftHandle);
 
                 // Appears that the handle value can be non-NULL on a fail, so set it explicitly
                 if (ftStatus != FT_STATUS.FT_OK)
-                    ftHandle = IntPtr.Zero;
+                    this.ftHandle = IntPtr.Zero;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Initialise port data characteristics
                     byte WordLength = FT_DATA_BITS.FT_BITS_8;
                     byte StopBits = FT_STOP_BITS.FT_STOP_BITS_1;
                     byte Parity = FT_PARITY.FT_PARITY_NONE;
-                    ftStatus = FT_SetDataCharacteristics(ftHandle, WordLength, StopBits, Parity);
+                    ftStatus = FT_SetDataCharacteristics(this.ftHandle, WordLength, StopBits, Parity);
                     // Initialise to no flow control
                     UInt16 FlowControl = FT_FLOW_CONTROL.FT_FLOW_NONE;
                     byte Xon = 0x11;
                     byte Xoff = 0x13;
-                    ftStatus = FT_SetFlowControl(ftHandle, FlowControl, Xon, Xoff);
+                    ftStatus = FT_SetFlowControl(this.ftHandle, FlowControl, Xon, Xoff);
                     // Initialise Baud rate
                     UInt32 BaudRate = 9600;
-                    ftStatus = FT_SetBaudRate(ftHandle, BaudRate);
+                    ftStatus = FT_SetBaudRate(this.ftHandle, BaudRate);
                 }
             }
             else
             {
-                if (pFT_OpenEx == IntPtr.Zero)
+                if (this.pFT_OpenEx == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_OpenEx.");
 #if DEBUG
@@ -2482,7 +2482,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetDataCharacteristics == IntPtr.Zero)
+                if (this.pFT_SetDataCharacteristics == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
@@ -2492,7 +2492,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetFlowControl == IntPtr.Zero)
+                if (this.pFT_SetFlowControl == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
@@ -2502,7 +2502,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetBaudRate == IntPtr.Zero)
+                if (this.pFT_SetBaudRate == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
@@ -2533,44 +2533,44 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_OpenEx != IntPtr.Zero) & (pFT_SetDataCharacteristics != IntPtr.Zero) & (pFT_SetFlowControl != IntPtr.Zero) & (pFT_SetBaudRate != IntPtr.Zero))
+            if ((this.pFT_OpenEx != IntPtr.Zero) & (this.pFT_SetDataCharacteristics != IntPtr.Zero) & (this.pFT_SetFlowControl != IntPtr.Zero) & (this.pFT_SetBaudRate != IntPtr.Zero))
             {
-                tFT_OpenExLoc FT_OpenEx = (tFT_OpenExLoc)Marshal.GetDelegateForFunctionPointer(pFT_OpenEx, typeof(tFT_OpenExLoc));
-                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
-                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(pFT_SetFlowControl, typeof(tFT_SetFlowControl));
-                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(pFT_SetBaudRate, typeof(tFT_SetBaudRate));
+                tFT_OpenExLoc FT_OpenEx = (tFT_OpenExLoc)Marshal.GetDelegateForFunctionPointer(this.pFT_OpenEx, typeof(tFT_OpenExLoc));
+                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(this.pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
+                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(this.pFT_SetFlowControl, typeof(tFT_SetFlowControl));
+                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(this.pFT_SetBaudRate, typeof(tFT_SetBaudRate));
 
                 // Call FT_OpenEx
-                ftStatus = FT_OpenEx(location, FT_OPEN_BY_LOCATION, ref ftHandle);
+                ftStatus = FT_OpenEx(location, FT_OPEN_BY_LOCATION, ref this.ftHandle);
 
                 // Appears that the handle value can be non-NULL on a fail, so set it explicitly
                 if (ftStatus != FT_STATUS.FT_OK)
-                    ftHandle = IntPtr.Zero;
+                    this.ftHandle = IntPtr.Zero;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Initialise port data characteristics
                     byte WordLength = FT_DATA_BITS.FT_BITS_8;
                     byte StopBits = FT_STOP_BITS.FT_STOP_BITS_1;
                     byte Parity = FT_PARITY.FT_PARITY_NONE;
-                    ftStatus = FT_SetDataCharacteristics(ftHandle, WordLength, StopBits, Parity);
+                    ftStatus = FT_SetDataCharacteristics(this.ftHandle, WordLength, StopBits, Parity);
                     // Initialise to no flow control
                     UInt16 FlowControl = FT_FLOW_CONTROL.FT_FLOW_NONE;
                     byte Xon = 0x11;
                     byte Xoff = 0x13;
-                    ftStatus = FT_SetFlowControl(ftHandle, FlowControl, Xon, Xoff);
+                    ftStatus = FT_SetFlowControl(this.ftHandle, FlowControl, Xon, Xoff);
                     // Initialise Baud rate
                     UInt32 BaudRate = 9600;
-                    ftStatus = FT_SetBaudRate(ftHandle, BaudRate);
+                    ftStatus = FT_SetBaudRate(this.ftHandle, BaudRate);
                 }
             }
             else
             {
-                if (pFT_OpenEx == IntPtr.Zero)
+                if (this.pFT_OpenEx == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_OpenEx.");
 #if DEBUG
@@ -2580,7 +2580,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetDataCharacteristics == IntPtr.Zero)
+                if (this.pFT_SetDataCharacteristics == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
@@ -2590,7 +2590,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetFlowControl == IntPtr.Zero)
+                if (this.pFT_SetFlowControl == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
@@ -2600,7 +2600,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetBaudRate == IntPtr.Zero)
+                if (this.pFT_SetBaudRate == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
@@ -2629,25 +2629,25 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Close != IntPtr.Zero)
+            if (this.pFT_Close != IntPtr.Zero)
             {
-                tFT_Close FT_Close = (tFT_Close)Marshal.GetDelegateForFunctionPointer(pFT_Close, typeof(tFT_Close));
+                tFT_Close FT_Close = (tFT_Close)Marshal.GetDelegateForFunctionPointer(this.pFT_Close, typeof(tFT_Close));
 
                 // Call FT_Close
-                ftStatus = FT_Close(ftHandle);
+                ftStatus = FT_Close(this.ftHandle);
 
                 if (ftStatus == FT_STATUS.FT_OK)
                 {
-                    ftHandle = IntPtr.Zero;
+                    this.ftHandle = IntPtr.Zero;
                 }
             }
             else
             {
-                if (pFT_Close == IntPtr.Zero)
+                if (this.pFT_Close == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Close.");
 #if DEBUG
@@ -2679,14 +2679,14 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Read != IntPtr.Zero)
+            if (this.pFT_Read != IntPtr.Zero)
             {
 
-                tFT_Read FT_Read = (tFT_Read)Marshal.GetDelegateForFunctionPointer(pFT_Read, typeof(tFT_Read));
+                tFT_Read FT_Read = (tFT_Read)Marshal.GetDelegateForFunctionPointer(this.pFT_Read, typeof(tFT_Read));
 
                 // If the buffer is not big enough to receive the amount of data requested, adjust the number of bytes to read
                 if (dataBuffer.Length < numBytesToRead)
@@ -2694,15 +2694,15 @@ namespace FTD2XX_NET
                     numBytesToRead = (uint)dataBuffer.Length;
                 }
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_Read
-                    ftStatus = FT_Read(ftHandle, dataBuffer, numBytesToRead, ref numBytesRead);
+                    ftStatus = FT_Read(this.ftHandle, dataBuffer, numBytesToRead, ref numBytesRead);
                 }
             }
             else
             {
-                if (pFT_Read == IntPtr.Zero)
+                if (this.pFT_Read == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Read.");
 #if DEBUG
@@ -2733,20 +2733,20 @@ namespace FTD2XX_NET
             dataBuffer = string.Empty;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Read != IntPtr.Zero)
+            if (this.pFT_Read != IntPtr.Zero)
             {
-                tFT_Read FT_Read = (tFT_Read)Marshal.GetDelegateForFunctionPointer(pFT_Read, typeof(tFT_Read));
+                tFT_Read FT_Read = (tFT_Read)Marshal.GetDelegateForFunctionPointer(this.pFT_Read, typeof(tFT_Read));
 
                 byte[] byteDataBuffer = new byte[numBytesToRead];
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_Read
-                    ftStatus = FT_Read(ftHandle, byteDataBuffer, numBytesToRead, ref numBytesRead);
+                    ftStatus = FT_Read(this.ftHandle, byteDataBuffer, numBytesToRead, ref numBytesRead);
 
                     // Convert ASCII byte array back to Unicode string for passing back
                     dataBuffer = Encoding.ASCII.GetString(byteDataBuffer);
@@ -2756,7 +2756,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_Read == IntPtr.Zero)
+                if (this.pFT_Read == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Read.");
 #if DEBUG
@@ -2787,23 +2787,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Write != IntPtr.Zero)
+            if (this.pFT_Write != IntPtr.Zero)
             {
-                tFT_Write FT_Write = (tFT_Write)Marshal.GetDelegateForFunctionPointer(pFT_Write, typeof(tFT_Write));
+                tFT_Write FT_Write = (tFT_Write)Marshal.GetDelegateForFunctionPointer(this.pFT_Write, typeof(tFT_Write));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_Write
-                    ftStatus = FT_Write(ftHandle, dataBuffer, (UInt32)numBytesToWrite, ref numBytesWritten);
+                    ftStatus = FT_Write(this.ftHandle, dataBuffer, (UInt32)numBytesToWrite, ref numBytesWritten);
                 }
             }
             else
             {
-                if (pFT_Write == IntPtr.Zero)
+                if (this.pFT_Write == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Write.");
 #if DEBUG
@@ -2831,23 +2831,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Write != IntPtr.Zero)
+            if (this.pFT_Write != IntPtr.Zero)
             {
-                tFT_Write FT_Write = (tFT_Write)Marshal.GetDelegateForFunctionPointer(pFT_Write, typeof(tFT_Write));
+                tFT_Write FT_Write = (tFT_Write)Marshal.GetDelegateForFunctionPointer(this.pFT_Write, typeof(tFT_Write));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_Write
-                    ftStatus = FT_Write(ftHandle, dataBuffer, numBytesToWrite, ref numBytesWritten);
+                    ftStatus = FT_Write(this.ftHandle, dataBuffer, numBytesToWrite, ref numBytesWritten);
                 }
             }
             else
             {
-                if (pFT_Write == IntPtr.Zero)
+                if (this.pFT_Write == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Write.");
 #if DEBUG
@@ -2875,26 +2875,26 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Write != IntPtr.Zero)
+            if (this.pFT_Write != IntPtr.Zero)
             {
-                tFT_Write FT_Write = (tFT_Write)Marshal.GetDelegateForFunctionPointer(pFT_Write, typeof(tFT_Write));
+                tFT_Write FT_Write = (tFT_Write)Marshal.GetDelegateForFunctionPointer(this.pFT_Write, typeof(tFT_Write));
 
                 // Convert Unicode string to ASCII byte array
                 byte[] byteDataBuffer = Encoding.ASCII.GetBytes(dataBuffer);
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_Write
-                    ftStatus = FT_Write(ftHandle, byteDataBuffer, (UInt32)numBytesToWrite, ref numBytesWritten);
+                    ftStatus = FT_Write(this.ftHandle, byteDataBuffer, (UInt32)numBytesToWrite, ref numBytesWritten);
                 }
             }
             else
             {
-                if (pFT_Write == IntPtr.Zero)
+                if (this.pFT_Write == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Write.");
 #if DEBUG
@@ -2922,26 +2922,26 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Write != IntPtr.Zero)
+            if (this.pFT_Write != IntPtr.Zero)
             {
-                tFT_Write FT_Write = (tFT_Write)Marshal.GetDelegateForFunctionPointer(pFT_Write, typeof(tFT_Write));
+                tFT_Write FT_Write = (tFT_Write)Marshal.GetDelegateForFunctionPointer(this.pFT_Write, typeof(tFT_Write));
 
                 // Convert Unicode string to ASCII byte array
                 byte[] byteDataBuffer = Encoding.ASCII.GetBytes(dataBuffer);
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_Write
-                    ftStatus = FT_Write(ftHandle, byteDataBuffer, numBytesToWrite, ref numBytesWritten);
+                    ftStatus = FT_Write(this.ftHandle, byteDataBuffer, numBytesToWrite, ref numBytesWritten);
                 }
             }
             else
             {
-                if (pFT_Write == IntPtr.Zero)
+                if (this.pFT_Write == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Write.");
 #if DEBUG
@@ -2969,23 +2969,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_ResetDevice != IntPtr.Zero)
+            if (this.pFT_ResetDevice != IntPtr.Zero)
             {
-                tFT_ResetDevice FT_ResetDevice = (tFT_ResetDevice)Marshal.GetDelegateForFunctionPointer(pFT_ResetDevice, typeof(tFT_ResetDevice));
+                tFT_ResetDevice FT_ResetDevice = (tFT_ResetDevice)Marshal.GetDelegateForFunctionPointer(this.pFT_ResetDevice, typeof(tFT_ResetDevice));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_ResetDevice
-                    ftStatus = FT_ResetDevice(ftHandle);
+                    ftStatus = FT_ResetDevice(this.ftHandle);
                 }
             }
             else
             {
-                if (pFT_ResetDevice == IntPtr.Zero)
+                if (this.pFT_ResetDevice == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_ResetDevice.");
 #if DEBUG
@@ -3014,23 +3014,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Purge != IntPtr.Zero)
+            if (this.pFT_Purge != IntPtr.Zero)
             {
-                tFT_Purge FT_Purge = (tFT_Purge)Marshal.GetDelegateForFunctionPointer(pFT_Purge, typeof(tFT_Purge));
+                tFT_Purge FT_Purge = (tFT_Purge)Marshal.GetDelegateForFunctionPointer(this.pFT_Purge, typeof(tFT_Purge));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_Purge
-                    ftStatus = FT_Purge(ftHandle, purgemask);
+                    ftStatus = FT_Purge(this.ftHandle, purgemask);
                 }
             }
             else
             {
-                if (pFT_Purge == IntPtr.Zero)
+                if (this.pFT_Purge == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Purge.");
 #if DEBUG
@@ -3061,23 +3061,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetEventNotification != IntPtr.Zero)
+            if (this.pFT_SetEventNotification != IntPtr.Zero)
             {
-                tFT_SetEventNotification FT_SetEventNotification = (tFT_SetEventNotification)Marshal.GetDelegateForFunctionPointer(pFT_SetEventNotification, typeof(tFT_SetEventNotification));
+                tFT_SetEventNotification FT_SetEventNotification = (tFT_SetEventNotification)Marshal.GetDelegateForFunctionPointer(this.pFT_SetEventNotification, typeof(tFT_SetEventNotification));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_SetSetEventNotification
-                    ftStatus = FT_SetEventNotification(ftHandle, eventmask, eventhandle.SafeWaitHandle);
+                    ftStatus = FT_SetEventNotification(this.ftHandle, eventmask, eventhandle.SafeWaitHandle);
                 }
             }
             else
             {
-                if (pFT_SetEventNotification == IntPtr.Zero)
+                if (this.pFT_SetEventNotification == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetEventNotification.");
 #if DEBUG
@@ -3105,23 +3105,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_StopInTask != IntPtr.Zero)
+            if (this.pFT_StopInTask != IntPtr.Zero)
             {
-                tFT_StopInTask FT_StopInTask = (tFT_StopInTask)Marshal.GetDelegateForFunctionPointer(pFT_StopInTask, typeof(tFT_StopInTask));
+                tFT_StopInTask FT_StopInTask = (tFT_StopInTask)Marshal.GetDelegateForFunctionPointer(this.pFT_StopInTask, typeof(tFT_StopInTask));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_StopInTask
-                    ftStatus = FT_StopInTask(ftHandle);
+                    ftStatus = FT_StopInTask(this.ftHandle);
                 }
             }
             else
             {
-                if (pFT_StopInTask == IntPtr.Zero)
+                if (this.pFT_StopInTask == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_StopInTask.");
 #if DEBUG
@@ -3149,23 +3149,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_RestartInTask != IntPtr.Zero)
+            if (this.pFT_RestartInTask != IntPtr.Zero)
             {
-                tFT_RestartInTask FT_RestartInTask = (tFT_RestartInTask)Marshal.GetDelegateForFunctionPointer(pFT_RestartInTask, typeof(tFT_RestartInTask));
+                tFT_RestartInTask FT_RestartInTask = (tFT_RestartInTask)Marshal.GetDelegateForFunctionPointer(this.pFT_RestartInTask, typeof(tFT_RestartInTask));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_RestartInTask
-                    ftStatus = FT_RestartInTask(ftHandle);
+                    ftStatus = FT_RestartInTask(this.ftHandle);
                 }
             }
             else
             {
-                if (pFT_RestartInTask == IntPtr.Zero)
+                if (this.pFT_RestartInTask == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_RestartInTask.");
 #if DEBUG
@@ -3193,23 +3193,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_ResetPort != IntPtr.Zero)
+            if (this.pFT_ResetPort != IntPtr.Zero)
             {
-                tFT_ResetPort FT_ResetPort = (tFT_ResetPort)Marshal.GetDelegateForFunctionPointer(pFT_ResetPort, typeof(tFT_ResetPort));
+                tFT_ResetPort FT_ResetPort = (tFT_ResetPort)Marshal.GetDelegateForFunctionPointer(this.pFT_ResetPort, typeof(tFT_ResetPort));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_ResetPort
-                    ftStatus = FT_ResetPort(ftHandle);
+                    ftStatus = FT_ResetPort(this.ftHandle);
                 }
             }
             else
             {
-                if (pFT_ResetPort == IntPtr.Zero)
+                if (this.pFT_ResetPort == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_ResetPort.");
 #if DEBUG
@@ -3238,33 +3238,33 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_CyclePort != IntPtr.Zero) & (pFT_Close != IntPtr.Zero))
+            if ((this.pFT_CyclePort != IntPtr.Zero) & (this.pFT_Close != IntPtr.Zero))
             {
-                tFT_CyclePort FT_CyclePort = (tFT_CyclePort)Marshal.GetDelegateForFunctionPointer(pFT_CyclePort, typeof(tFT_CyclePort));
-                tFT_Close FT_Close = (tFT_Close)Marshal.GetDelegateForFunctionPointer(pFT_Close, typeof(tFT_Close));
+                tFT_CyclePort FT_CyclePort = (tFT_CyclePort)Marshal.GetDelegateForFunctionPointer(this.pFT_CyclePort, typeof(tFT_CyclePort));
+                tFT_Close FT_Close = (tFT_Close)Marshal.GetDelegateForFunctionPointer(this.pFT_Close, typeof(tFT_Close));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_CyclePort
-                    ftStatus = FT_CyclePort(ftHandle);
+                    ftStatus = FT_CyclePort(this.ftHandle);
                     if (ftStatus == FT_STATUS.FT_OK)
                     {
                         // If successful, call FT_Close
-                        ftStatus = FT_Close(ftHandle);
+                        ftStatus = FT_Close(this.ftHandle);
                         if (ftStatus == FT_STATUS.FT_OK)
                         {
-                            ftHandle = IntPtr.Zero;
+                            this.ftHandle = IntPtr.Zero;
                         }
                     }
                 }
             }
             else
             {
-                if (pFT_CyclePort == IntPtr.Zero)
+                if (this.pFT_CyclePort == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_CyclePort.");
 #if DEBUG
@@ -3274,7 +3274,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_Close == IntPtr.Zero)
+                if (this.pFT_Close == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Close.");
 #if DEBUG
@@ -3302,20 +3302,20 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Rescan != IntPtr.Zero)
+            if (this.pFT_Rescan != IntPtr.Zero)
             {
-                tFT_Rescan FT_Rescan = (tFT_Rescan)Marshal.GetDelegateForFunctionPointer(pFT_Rescan, typeof(tFT_Rescan));
+                tFT_Rescan FT_Rescan = (tFT_Rescan)Marshal.GetDelegateForFunctionPointer(this.pFT_Rescan, typeof(tFT_Rescan));
 
                 // Call FT_Rescan
                 ftStatus = FT_Rescan();
             }
             else
             {
-                if (pFT_Rescan == IntPtr.Zero)
+                if (this.pFT_Rescan == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Rescan.");
 #if DEBUG
@@ -3346,20 +3346,20 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_Reload != IntPtr.Zero)
+            if (this.pFT_Reload != IntPtr.Zero)
             {
-                tFT_Reload FT_Reload = (tFT_Reload)Marshal.GetDelegateForFunctionPointer(pFT_Reload, typeof(tFT_Reload));
+                tFT_Reload FT_Reload = (tFT_Reload)Marshal.GetDelegateForFunctionPointer(this.pFT_Reload, typeof(tFT_Reload));
 
                 // Call FT_Reload
                 ftStatus = FT_Reload(VendorID, ProductID);
             }
             else
             {
-                if (pFT_Reload == IntPtr.Zero)
+                if (this.pFT_Reload == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_Reload.");
 #if DEBUG
@@ -3398,31 +3398,31 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetBitMode != IntPtr.Zero)
+            if (this.pFT_SetBitMode != IntPtr.Zero)
             {
-                tFT_SetBitMode FT_SetBitMode = (tFT_SetBitMode)Marshal.GetDelegateForFunctionPointer(pFT_SetBitMode, typeof(tFT_SetBitMode));
+                tFT_SetBitMode FT_SetBitMode = (tFT_SetBitMode)Marshal.GetDelegateForFunctionPointer(this.pFT_SetBitMode, typeof(tFT_SetBitMode));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
 
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Set Bit Mode does not apply to FT8U232AM, FT8U245AM or FT8U100AX devices
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType == FT_DEVICE.FT_DEVICE_AM)
                     {
                         // Throw an exception
                         ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
                     else if (DeviceType == FT_DEVICE.FT_DEVICE_100AX)
                     {
                         // Throw an exception
                         ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
                     else if ((DeviceType == FT_DEVICE.FT_DEVICE_BM) && (BitMode != FT_BIT_MODES.FT_BIT_MODE_RESET))
                     {
@@ -3430,7 +3430,7 @@ namespace FTD2XX_NET
                         {
                             // Throw an exception
                             ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                            ErrorHandler(ftStatus, ftErrorCondition);
+                            this.ErrorHandler(ftStatus, ftErrorCondition);
                         }
                     }
                     else if ((DeviceType == FT_DEVICE.FT_DEVICE_2232) && (BitMode != FT_BIT_MODES.FT_BIT_MODE_RESET))
@@ -3439,14 +3439,14 @@ namespace FTD2XX_NET
                         {
                             // Throw an exception
                             ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                            ErrorHandler(ftStatus, ftErrorCondition);
+                            this.ErrorHandler(ftStatus, ftErrorCondition);
                         }
-                        if ((BitMode == FT_BIT_MODES.FT_BIT_MODE_MPSSE) & (InterfaceIdentifier != "A"))
+                        if ((BitMode == FT_BIT_MODES.FT_BIT_MODE_MPSSE) & (this.InterfaceIdentifier != "A"))
                         {
                             // MPSSE mode is only available on channel A
                             // Throw an exception
                             ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                            ErrorHandler(ftStatus, ftErrorCondition);
+                            this.ErrorHandler(ftStatus, ftErrorCondition);
                         }
                     }
                     else if ((DeviceType == FT_DEVICE.FT_DEVICE_232R) && (BitMode != FT_BIT_MODES.FT_BIT_MODE_RESET))
@@ -3455,7 +3455,7 @@ namespace FTD2XX_NET
                         {
                             // Throw an exception
                             ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                            ErrorHandler(ftStatus, ftErrorCondition);
+                            this.ErrorHandler(ftStatus, ftErrorCondition);
                         }
                     }
                     else if ((DeviceType == FT_DEVICE.FT_DEVICE_2232H) && (BitMode != FT_BIT_MODES.FT_BIT_MODE_RESET))
@@ -3464,14 +3464,14 @@ namespace FTD2XX_NET
                         {
                             // Throw an exception
                             ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                            ErrorHandler(ftStatus, ftErrorCondition);
+                            this.ErrorHandler(ftStatus, ftErrorCondition);
                         }
-                        if (((BitMode == FT_BIT_MODES.FT_BIT_MODE_MCU_HOST) | (BitMode == FT_BIT_MODES.FT_BIT_MODE_SYNC_FIFO)) & (InterfaceIdentifier != "A"))
+                        if (((BitMode == FT_BIT_MODES.FT_BIT_MODE_MCU_HOST) | (BitMode == FT_BIT_MODES.FT_BIT_MODE_SYNC_FIFO)) & (this.InterfaceIdentifier != "A"))
                         {
                             // MCU Host Emulation and Single channel synchronous 245 FIFO mode is only available on channel A
                             // Throw an exception
                             ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                            ErrorHandler(ftStatus, ftErrorCondition);
+                            this.ErrorHandler(ftStatus, ftErrorCondition);
                         }
                     }
                     else if ((DeviceType == FT_DEVICE.FT_DEVICE_4232H) && (BitMode != FT_BIT_MODES.FT_BIT_MODE_RESET))
@@ -3480,14 +3480,14 @@ namespace FTD2XX_NET
                         {
                             // Throw an exception
                             ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                            ErrorHandler(ftStatus, ftErrorCondition);
+                            this.ErrorHandler(ftStatus, ftErrorCondition);
                         }
-                        if ((BitMode == FT_BIT_MODES.FT_BIT_MODE_MPSSE) & ((InterfaceIdentifier != "A") & (InterfaceIdentifier != "B")))
+                        if ((BitMode == FT_BIT_MODES.FT_BIT_MODE_MPSSE) & ((this.InterfaceIdentifier != "A") & (this.InterfaceIdentifier != "B")))
                         {
                             // MPSSE mode is only available on channel A and B
                             // Throw an exception
                             ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                            ErrorHandler(ftStatus, ftErrorCondition);
+                            this.ErrorHandler(ftStatus, ftErrorCondition);
                         }
                     }
                     else if ((DeviceType == FT_DEVICE.FT_DEVICE_232H) && (BitMode != FT_BIT_MODES.FT_BIT_MODE_RESET))
@@ -3497,19 +3497,19 @@ namespace FTD2XX_NET
                         {
                             // Throw an exception
                             ftErrorCondition = FT_ERROR.FT_INVALID_BITMODE;
-                            ErrorHandler(ftStatus, ftErrorCondition);
+                            this.ErrorHandler(ftStatus, ftErrorCondition);
                         }
                     }
 
                     // Requested bit mode is supported
                     // Note FT_BIT_MODES.FT_BIT_MODE_RESET falls through to here - no bits set so cannot check for AND
                     // Call FT_SetBitMode
-                    ftStatus = FT_SetBitMode(ftHandle, Mask, BitMode);
+                    ftStatus = FT_SetBitMode(this.ftHandle, Mask, BitMode);
                 }
             }
             else
             {
-                if (pFT_SetBitMode == IntPtr.Zero)
+                if (this.pFT_SetBitMode == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBitMode.");
 #if DEBUG
@@ -3538,23 +3538,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetBitMode != IntPtr.Zero)
+            if (this.pFT_GetBitMode != IntPtr.Zero)
             {
-                tFT_GetBitMode FT_GetBitMode = (tFT_GetBitMode)Marshal.GetDelegateForFunctionPointer(pFT_GetBitMode, typeof(tFT_GetBitMode));
+                tFT_GetBitMode FT_GetBitMode = (tFT_GetBitMode)Marshal.GetDelegateForFunctionPointer(this.pFT_GetBitMode, typeof(tFT_GetBitMode));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetBitMode
-                    ftStatus = FT_GetBitMode(ftHandle, ref BitMode);
+                    ftStatus = FT_GetBitMode(this.ftHandle, ref BitMode);
                 }
             }
             else
             {
-                if (pFT_GetBitMode == IntPtr.Zero)
+                if (this.pFT_GetBitMode == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetBitMode.");
 #if DEBUG
@@ -3584,23 +3584,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_ReadEE != IntPtr.Zero)
+            if (this.pFT_ReadEE != IntPtr.Zero)
             {
-                tFT_ReadEE FT_ReadEE = (tFT_ReadEE)Marshal.GetDelegateForFunctionPointer(pFT_ReadEE, typeof(tFT_ReadEE));
+                tFT_ReadEE FT_ReadEE = (tFT_ReadEE)Marshal.GetDelegateForFunctionPointer(this.pFT_ReadEE, typeof(tFT_ReadEE));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_ReadEE
-                    ftStatus = FT_ReadEE(ftHandle, Address, ref EEValue);
+                    ftStatus = FT_ReadEE(this.ftHandle, Address, ref EEValue);
                 }
             }
             else
             {
-                if (pFT_ReadEE == IntPtr.Zero)
+                if (this.pFT_ReadEE == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_ReadEE.");
 #if DEBUG
@@ -3630,23 +3630,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_WriteEE != IntPtr.Zero)
+            if (this.pFT_WriteEE != IntPtr.Zero)
             {
-                tFT_WriteEE FT_WriteEE = (tFT_WriteEE)Marshal.GetDelegateForFunctionPointer(pFT_WriteEE, typeof(tFT_WriteEE));
+                tFT_WriteEE FT_WriteEE = (tFT_WriteEE)Marshal.GetDelegateForFunctionPointer(this.pFT_WriteEE, typeof(tFT_WriteEE));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_WriteEE
-                    ftStatus = FT_WriteEE(ftHandle, Address, EEValue);
+                    ftStatus = FT_WriteEE(this.ftHandle, Address, EEValue);
                 }
             }
             else
             {
-                if (pFT_WriteEE == IntPtr.Zero)
+                if (this.pFT_WriteEE == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_WriteEE.");
 #if DEBUG
@@ -3676,33 +3676,33 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EraseEE != IntPtr.Zero)
+            if (this.pFT_EraseEE != IntPtr.Zero)
             {
-                tFT_EraseEE FT_EraseEE = (tFT_EraseEE)Marshal.GetDelegateForFunctionPointer(pFT_EraseEE, typeof(tFT_EraseEE));
+                tFT_EraseEE FT_EraseEE = (tFT_EraseEE)Marshal.GetDelegateForFunctionPointer(this.pFT_EraseEE, typeof(tFT_EraseEE));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is not an FT232R or FT245R that we are trying to erase
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType == FT_DEVICE.FT_DEVICE_232R)
                     {
                         // If it is a device with an internal EEPROM, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     // Call FT_EraseEE
-                    ftStatus = FT_EraseEE(ftHandle);
+                    ftStatus = FT_EraseEE(this.ftHandle);
                 }
             }
             else
             {
-                if (pFT_EraseEE == IntPtr.Zero)
+                if (this.pFT_EraseEE == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EraseEE.");
 #if DEBUG
@@ -3733,24 +3733,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Read != IntPtr.Zero)
+            if (this.pFT_EE_Read != IntPtr.Zero)
             {
-                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(pFT_EE_Read, typeof(tFT_EE_Read));
+                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Read, typeof(tFT_EE_Read));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT232B or FT245B that we are trying to read
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_BM)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     FT_PROGRAM_DATA eedata = new FT_PROGRAM_DATA();
@@ -3767,7 +3767,7 @@ namespace FTD2XX_NET
                     eedata.SerialNumber = Marshal.AllocHGlobal(16);
 
                     // Call FT_EE_Read
-                    ftStatus = FT_EE_Read(ftHandle, eedata);
+                    ftStatus = FT_EE_Read(this.ftHandle, eedata);
 
                     // Retrieve string values
                     ee232b.Manufacturer = Marshal.PtrToStringAnsi(eedata.Manufacturer);
@@ -3797,7 +3797,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Read == IntPtr.Zero)
+                if (this.pFT_EE_Read == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
@@ -3828,24 +3828,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Read != IntPtr.Zero)
+            if (this.pFT_EE_Read != IntPtr.Zero)
             {
-                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(pFT_EE_Read, typeof(tFT_EE_Read));
+                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Read, typeof(tFT_EE_Read));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT2232 that we are trying to read
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_2232)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     FT_PROGRAM_DATA eedata = new FT_PROGRAM_DATA();
@@ -3862,7 +3862,7 @@ namespace FTD2XX_NET
                     eedata.SerialNumber = Marshal.AllocHGlobal(16);
 
                     // Call FT_EE_Read
-                    ftStatus = FT_EE_Read(ftHandle, eedata);
+                    ftStatus = FT_EE_Read(this.ftHandle, eedata);
 
                     // Retrieve string values
                     ee2232.Manufacturer = Marshal.PtrToStringAnsi(eedata.Manufacturer);
@@ -3902,7 +3902,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Read == IntPtr.Zero)
+                if (this.pFT_EE_Read == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
@@ -3933,24 +3933,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Read != IntPtr.Zero)
+            if (this.pFT_EE_Read != IntPtr.Zero)
             {
-                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(pFT_EE_Read, typeof(tFT_EE_Read));
+                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Read, typeof(tFT_EE_Read));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT232R or FT245R that we are trying to read
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_232R)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     FT_PROGRAM_DATA eedata = new FT_PROGRAM_DATA();
@@ -3967,7 +3967,7 @@ namespace FTD2XX_NET
                     eedata.SerialNumber = Marshal.AllocHGlobal(16);
 
                     // Call FT_EE_Read
-                    ftStatus = FT_EE_Read(ftHandle, eedata);
+                    ftStatus = FT_EE_Read(this.ftHandle, eedata);
 
                     // Retrieve string values
                     ee232r.Manufacturer = Marshal.PtrToStringAnsi(eedata.Manufacturer);
@@ -4012,7 +4012,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Read == IntPtr.Zero)
+                if (this.pFT_EE_Read == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
@@ -4043,24 +4043,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Read != IntPtr.Zero)
+            if (this.pFT_EE_Read != IntPtr.Zero)
             {
-                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(pFT_EE_Read, typeof(tFT_EE_Read));
+                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Read, typeof(tFT_EE_Read));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT2232H that we are trying to read
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_2232H)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     FT_PROGRAM_DATA eedata = new FT_PROGRAM_DATA();
@@ -4077,7 +4077,7 @@ namespace FTD2XX_NET
                     eedata.SerialNumber = Marshal.AllocHGlobal(16);
 
                     // Call FT_EE_Read
-                    ftStatus = FT_EE_Read(ftHandle, eedata);
+                    ftStatus = FT_EE_Read(this.ftHandle, eedata);
 
                     // Retrieve string values
                     ee2232h.Manufacturer = Marshal.PtrToStringAnsi(eedata.Manufacturer);
@@ -4126,7 +4126,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Read == IntPtr.Zero)
+                if (this.pFT_EE_Read == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
@@ -4157,24 +4157,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Read != IntPtr.Zero)
+            if (this.pFT_EE_Read != IntPtr.Zero)
             {
-                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(pFT_EE_Read, typeof(tFT_EE_Read));
+                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Read, typeof(tFT_EE_Read));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT4232H that we are trying to read
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_4232H)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     FT_PROGRAM_DATA eedata = new FT_PROGRAM_DATA();
@@ -4191,7 +4191,7 @@ namespace FTD2XX_NET
                     eedata.SerialNumber = Marshal.AllocHGlobal(16);
 
                     // Call FT_EE_Read
-                    ftStatus = FT_EE_Read(ftHandle, eedata);
+                    ftStatus = FT_EE_Read(this.ftHandle, eedata);
 
                     // Retrieve string values
                     ee4232h.Manufacturer = Marshal.PtrToStringAnsi(eedata.Manufacturer);
@@ -4239,7 +4239,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Read == IntPtr.Zero)
+                if (this.pFT_EE_Read == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
@@ -4270,24 +4270,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Read != IntPtr.Zero)
+            if (this.pFT_EE_Read != IntPtr.Zero)
             {
-                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(pFT_EE_Read, typeof(tFT_EE_Read));
+                tFT_EE_Read FT_EE_Read = (tFT_EE_Read)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Read, typeof(tFT_EE_Read));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT232H that we are trying to read
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_232H)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     FT_PROGRAM_DATA eedata = new FT_PROGRAM_DATA();
@@ -4304,7 +4304,7 @@ namespace FTD2XX_NET
                     eedata.SerialNumber = Marshal.AllocHGlobal(16);
 
                     // Call FT_EE_Read
-                    ftStatus = FT_EE_Read(ftHandle, eedata);
+                    ftStatus = FT_EE_Read(this.ftHandle, eedata);
 
                     // Retrieve string values
                     ee232h.Manufacturer = Marshal.PtrToStringAnsi(eedata.Manufacturer);
@@ -4357,7 +4357,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Read == IntPtr.Zero)
+                if (this.pFT_EE_Read == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
@@ -4388,24 +4388,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EEPROM_Read != IntPtr.Zero)
+            if (this.pFT_EEPROM_Read != IntPtr.Zero)
             {
-                tFT_EEPROM_Read FT_EEPROM_Read = (tFT_EEPROM_Read)Marshal.GetDelegateForFunctionPointer(pFT_EEPROM_Read, typeof(tFT_EEPROM_Read));
+                tFT_EEPROM_Read FT_EEPROM_Read = (tFT_EEPROM_Read)Marshal.GetDelegateForFunctionPointer(this.pFT_EEPROM_Read, typeof(tFT_EEPROM_Read));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT232H that we are trying to read
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_X_SERIES)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     FT_XSERIES_DATA eeData = new FT_XSERIES_DATA();
@@ -4427,7 +4427,7 @@ namespace FTD2XX_NET
                     Marshal.StructureToPtr(eeData, eeDataMarshal, false);
 
                     // Call FT_EEPROM_Read
-                    ftStatus = FT_EEPROM_Read(ftHandle, eeDataMarshal, (uint)size, manufacturer, manufacturerID, description, serialNumber);
+                    ftStatus = FT_EEPROM_Read(this.ftHandle, eeDataMarshal, (uint)size, manufacturer, manufacturerID, description, serialNumber);
 
                     if (ftStatus == FT_STATUS.FT_OK)
                     {
@@ -4496,7 +4496,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Read == IntPtr.Zero)
+                if (this.pFT_EE_Read == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Read.");
 #if DEBUG
@@ -4528,24 +4528,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Program != IntPtr.Zero)
+            if (this.pFT_EE_Program != IntPtr.Zero)
             {
-                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(pFT_EE_Program, typeof(tFT_EE_Program));
+                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Program, typeof(tFT_EE_Program));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT232B or FT245B that we are trying to write
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_BM)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     // Check for VID and PID of 0x0000
@@ -4600,7 +4600,7 @@ namespace FTD2XX_NET
                     eedata.USBVersion = ee232b.USBVersion;
 
                     // Call FT_EE_Program
-                    ftStatus = FT_EE_Program(ftHandle, eedata);
+                    ftStatus = FT_EE_Program(this.ftHandle, eedata);
 
                     // Free unmanaged buffers
                     Marshal.FreeHGlobal(eedata.Manufacturer);
@@ -4611,7 +4611,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Program == IntPtr.Zero)
+                if (this.pFT_EE_Program == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
@@ -4644,24 +4644,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Program != IntPtr.Zero)
+            if (this.pFT_EE_Program != IntPtr.Zero)
             {
-                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(pFT_EE_Program, typeof(tFT_EE_Program));
+                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Program, typeof(tFT_EE_Program));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT2232 that we are trying to write
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_2232)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     // Check for VID and PID of 0x0000
@@ -4726,7 +4726,7 @@ namespace FTD2XX_NET
                     eedata.BIsVCP = Convert.ToByte(ee2232.BIsVCP);
 
                     // Call FT_EE_Program
-                    ftStatus = FT_EE_Program(ftHandle, eedata);
+                    ftStatus = FT_EE_Program(this.ftHandle, eedata);
 
                     // Free unmanaged buffers
                     Marshal.FreeHGlobal(eedata.Manufacturer);
@@ -4737,7 +4737,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Program == IntPtr.Zero)
+                if (this.pFT_EE_Program == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
@@ -4770,24 +4770,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Program != IntPtr.Zero)
+            if (this.pFT_EE_Program != IntPtr.Zero)
             {
-                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(pFT_EE_Program, typeof(tFT_EE_Program));
+                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Program, typeof(tFT_EE_Program));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT232R or FT245R that we are trying to write
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_232R)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     // Check for VID and PID of 0x0000
@@ -4860,7 +4860,7 @@ namespace FTD2XX_NET
                     eedata.RIsD2XX = Convert.ToByte(ee232r.RIsD2XX);
 
                     // Call FT_EE_Program
-                    ftStatus = FT_EE_Program(ftHandle, eedata);
+                    ftStatus = FT_EE_Program(this.ftHandle, eedata);
 
                     // Free unmanaged buffers
                     Marshal.FreeHGlobal(eedata.Manufacturer);
@@ -4871,7 +4871,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Program == IntPtr.Zero)
+                if (this.pFT_EE_Program == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
@@ -4904,24 +4904,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Program != IntPtr.Zero)
+            if (this.pFT_EE_Program != IntPtr.Zero)
             {
-                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(pFT_EE_Program, typeof(tFT_EE_Program));
+                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Program, typeof(tFT_EE_Program));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT2232H that we are trying to write
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_2232H)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     // Check for VID and PID of 0x0000
@@ -4994,7 +4994,7 @@ namespace FTD2XX_NET
                     eedata.PowerSaveEnable = Convert.ToByte(ee2232h.PowerSaveEnable);
 
                     // Call FT_EE_Program
-                    ftStatus = FT_EE_Program(ftHandle, eedata);
+                    ftStatus = FT_EE_Program(this.ftHandle, eedata);
 
                     // Free unmanaged buffers
                     Marshal.FreeHGlobal(eedata.Manufacturer);
@@ -5005,7 +5005,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Program == IntPtr.Zero)
+                if (this.pFT_EE_Program == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
@@ -5038,24 +5038,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Program != IntPtr.Zero)
+            if (this.pFT_EE_Program != IntPtr.Zero)
             {
-                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(pFT_EE_Program, typeof(tFT_EE_Program));
+                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Program, typeof(tFT_EE_Program));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT4232H that we are trying to write
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_4232H)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     // Check for VID and PID of 0x0000
@@ -5127,7 +5127,7 @@ namespace FTD2XX_NET
                     eedata.DIsVCP8 = Convert.ToByte(ee4232h.DIsVCP);
 
                     // Call FT_EE_Program
-                    ftStatus = FT_EE_Program(ftHandle, eedata);
+                    ftStatus = FT_EE_Program(this.ftHandle, eedata);
 
                     // Free unmanaged buffers
                     Marshal.FreeHGlobal(eedata.Manufacturer);
@@ -5138,7 +5138,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Program == IntPtr.Zero)
+                if (this.pFT_EE_Program == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
@@ -5171,24 +5171,24 @@ namespace FTD2XX_NET
             FT_ERROR ftErrorCondition = FT_ERROR.FT_NO_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_Program != IntPtr.Zero)
+            if (this.pFT_EE_Program != IntPtr.Zero)
             {
-                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(pFT_EE_Program, typeof(tFT_EE_Program));
+                tFT_EE_Program FT_EE_Program = (tFT_EE_Program)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_Program, typeof(tFT_EE_Program));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT232H that we are trying to write
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_232H)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     // Check for VID and PID of 0x0000
@@ -5265,7 +5265,7 @@ namespace FTD2XX_NET
                     eedata.PowerSaveEnableH = Convert.ToByte(ee232h.PowerSaveEnable);
 
                     // Call FT_EE_Program
-                    ftStatus = FT_EE_Program(ftHandle, eedata);
+                    ftStatus = FT_EE_Program(this.ftHandle, eedata);
 
                     // Free unmanaged buffers
                     Marshal.FreeHGlobal(eedata.Manufacturer);
@@ -5276,7 +5276,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_EE_Program == IntPtr.Zero)
+                if (this.pFT_EE_Program == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_Program.");
 #if DEBUG
@@ -5311,24 +5311,24 @@ namespace FTD2XX_NET
             byte[] manufacturer, manufacturerID, description, serialNumber;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EEPROM_Program != IntPtr.Zero)
+            if (this.pFT_EEPROM_Program != IntPtr.Zero)
             {
-                tFT_EEPROM_Program FT_EEPROM_Program = (tFT_EEPROM_Program)Marshal.GetDelegateForFunctionPointer(pFT_EEPROM_Program, typeof(tFT_EEPROM_Program));
+                tFT_EEPROM_Program FT_EEPROM_Program = (tFT_EEPROM_Program)Marshal.GetDelegateForFunctionPointer(this.pFT_EEPROM_Program, typeof(tFT_EEPROM_Program));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Check that it is an FT232H that we are trying to write
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if (DeviceType != FT_DEVICE.FT_DEVICE_X_SERIES)
                     {
                         // If it is not, throw an exception
                         ftErrorCondition = FT_ERROR.FT_INCORRECT_DEVICE;
-                        ErrorHandler(ftStatus, ftErrorCondition);
+                        this.ErrorHandler(ftStatus, ftErrorCondition);
                     }
 
                     // Check for VID and PID of 0x0000
@@ -5424,7 +5424,7 @@ namespace FTD2XX_NET
                     IntPtr eeDataMarshal = Marshal.AllocHGlobal(size);
                     Marshal.StructureToPtr(eeData, eeDataMarshal, false);
 
-                    ftStatus = FT_EEPROM_Program(ftHandle, eeDataMarshal, (uint)size, manufacturer, manufacturerID, description, serialNumber);
+                    ftStatus = FT_EEPROM_Program(this.ftHandle, eeDataMarshal, (uint)size, manufacturer, manufacturerID, description, serialNumber);
                 }
             }
 
@@ -5447,33 +5447,33 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_EE_UASize != IntPtr.Zero) & (pFT_EE_UARead != IntPtr.Zero))
+            if ((this.pFT_EE_UASize != IntPtr.Zero) & (this.pFT_EE_UARead != IntPtr.Zero))
             {
-                tFT_EE_UASize FT_EE_UASize = (tFT_EE_UASize)Marshal.GetDelegateForFunctionPointer(pFT_EE_UASize, typeof(tFT_EE_UASize));
-                tFT_EE_UARead FT_EE_UARead = (tFT_EE_UARead)Marshal.GetDelegateForFunctionPointer(pFT_EE_UARead, typeof(tFT_EE_UARead));
+                tFT_EE_UASize FT_EE_UASize = (tFT_EE_UASize)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_UASize, typeof(tFT_EE_UASize));
+                tFT_EE_UARead FT_EE_UARead = (tFT_EE_UARead)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_UARead, typeof(tFT_EE_UARead));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     UInt32 UASize = 0;
                     // Get size of user area to allocate an array of the correct size.
                     // The application must also get the UA size for its copy
-                    ftStatus = FT_EE_UASize(ftHandle, ref UASize);
+                    ftStatus = FT_EE_UASize(this.ftHandle, ref UASize);
 
                     // Make sure we have enough storage for the whole user area
                     if (UserAreaDataBuffer.Length >= UASize)
                     {
                         // Call FT_EE_UARead
-                        ftStatus = FT_EE_UARead(ftHandle, UserAreaDataBuffer, UserAreaDataBuffer.Length, ref numBytesRead);
+                        ftStatus = FT_EE_UARead(this.ftHandle, UserAreaDataBuffer, UserAreaDataBuffer.Length, ref numBytesRead);
                     }
                 }
             }
             else
             {
-                if (pFT_EE_UASize == IntPtr.Zero)
+                if (this.pFT_EE_UASize == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_UASize.");
 #if DEBUG
@@ -5483,7 +5483,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_EE_UARead == IntPtr.Zero)
+                if (this.pFT_EE_UARead == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_UARead.");
 #if DEBUG
@@ -5512,33 +5512,33 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_EE_UASize != IntPtr.Zero) & (pFT_EE_UAWrite != IntPtr.Zero))
+            if ((this.pFT_EE_UASize != IntPtr.Zero) & (this.pFT_EE_UAWrite != IntPtr.Zero))
             {
-                tFT_EE_UASize FT_EE_UASize = (tFT_EE_UASize)Marshal.GetDelegateForFunctionPointer(pFT_EE_UASize, typeof(tFT_EE_UASize));
-                tFT_EE_UAWrite FT_EE_UAWrite = (tFT_EE_UAWrite)Marshal.GetDelegateForFunctionPointer(pFT_EE_UAWrite, typeof(tFT_EE_UAWrite));
+                tFT_EE_UASize FT_EE_UASize = (tFT_EE_UASize)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_UASize, typeof(tFT_EE_UASize));
+                tFT_EE_UAWrite FT_EE_UAWrite = (tFT_EE_UAWrite)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_UAWrite, typeof(tFT_EE_UAWrite));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     UInt32 UASize = 0;
                     // Get size of user area to allocate an array of the correct size.
                     // The application must also get the UA size for its copy
-                    ftStatus = FT_EE_UASize(ftHandle, ref UASize);
+                    ftStatus = FT_EE_UASize(this.ftHandle, ref UASize);
 
                     // Make sure we have enough storage for all the data in the EEPROM
                     if (UserAreaDataBuffer.Length <= UASize)
                     {
                         // Call FT_EE_UAWrite
-                        ftStatus = FT_EE_UAWrite(ftHandle, UserAreaDataBuffer, UserAreaDataBuffer.Length);
+                        ftStatus = FT_EE_UAWrite(this.ftHandle, UserAreaDataBuffer, UserAreaDataBuffer.Length);
                     }
                 }
             }
             else
             {
-                if (pFT_EE_UASize == IntPtr.Zero)
+                if (this.pFT_EE_UASize == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_UASize.");
 #if DEBUG
@@ -5548,7 +5548,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_EE_UAWrite == IntPtr.Zero)
+                if (this.pFT_EE_UAWrite == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_UAWrite.");
 #if DEBUG
@@ -5577,13 +5577,13 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetDeviceInfo != IntPtr.Zero)
+            if (this.pFT_GetDeviceInfo != IntPtr.Zero)
             {
-                tFT_GetDeviceInfo FT_GetDeviceInfo = (tFT_GetDeviceInfo)Marshal.GetDelegateForFunctionPointer(pFT_GetDeviceInfo, typeof(tFT_GetDeviceInfo));
+                tFT_GetDeviceInfo FT_GetDeviceInfo = (tFT_GetDeviceInfo)Marshal.GetDelegateForFunctionPointer(this.pFT_GetDeviceInfo, typeof(tFT_GetDeviceInfo));
 
                 UInt32 DeviceID = 0;
                 byte[] sernum = new byte[16];
@@ -5591,15 +5591,15 @@ namespace FTD2XX_NET
 
                 DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetDeviceInfo
-                    ftStatus = FT_GetDeviceInfo(ftHandle, ref DeviceType, ref DeviceID, sernum, desc, IntPtr.Zero);
+                    ftStatus = FT_GetDeviceInfo(this.ftHandle, ref DeviceType, ref DeviceID, sernum, desc, IntPtr.Zero);
                 }
             }
             else
             {
-                if (pFT_GetDeviceInfo == IntPtr.Zero)
+                if (this.pFT_GetDeviceInfo == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfo.");
 #if DEBUG
@@ -5628,27 +5628,27 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetDeviceInfo != IntPtr.Zero)
+            if (this.pFT_GetDeviceInfo != IntPtr.Zero)
             {
-                tFT_GetDeviceInfo FT_GetDeviceInfo = (tFT_GetDeviceInfo)Marshal.GetDelegateForFunctionPointer(pFT_GetDeviceInfo, typeof(tFT_GetDeviceInfo));
+                tFT_GetDeviceInfo FT_GetDeviceInfo = (tFT_GetDeviceInfo)Marshal.GetDelegateForFunctionPointer(this.pFT_GetDeviceInfo, typeof(tFT_GetDeviceInfo));
 
                 FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                 byte[] sernum = new byte[16];
                 byte[] desc = new byte[64];
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetDeviceInfo
-                    ftStatus = FT_GetDeviceInfo(ftHandle, ref DeviceType, ref DeviceID, sernum, desc, IntPtr.Zero);
+                    ftStatus = FT_GetDeviceInfo(this.ftHandle, ref DeviceType, ref DeviceID, sernum, desc, IntPtr.Zero);
                 }
             }
             else
             {
-                if (pFT_GetDeviceInfo == IntPtr.Zero)
+                if (this.pFT_GetDeviceInfo == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfo.");
 #if DEBUG
@@ -5679,31 +5679,31 @@ namespace FTD2XX_NET
             Description = String.Empty;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
 
             // Check for our required function pointers being set up
-            if (pFT_GetDeviceInfo != IntPtr.Zero)
+            if (this.pFT_GetDeviceInfo != IntPtr.Zero)
             {
-                tFT_GetDeviceInfo FT_GetDeviceInfo = (tFT_GetDeviceInfo)Marshal.GetDelegateForFunctionPointer(pFT_GetDeviceInfo, typeof(tFT_GetDeviceInfo));
+                tFT_GetDeviceInfo FT_GetDeviceInfo = (tFT_GetDeviceInfo)Marshal.GetDelegateForFunctionPointer(this.pFT_GetDeviceInfo, typeof(tFT_GetDeviceInfo));
 
                 UInt32 DeviceID = 0;
                 FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                 byte[] sernum = new byte[16];
                 byte[] desc = new byte[64];
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetDeviceInfo
-                    ftStatus = FT_GetDeviceInfo(ftHandle, ref DeviceType, ref DeviceID, sernum, desc, IntPtr.Zero);
+                    ftStatus = FT_GetDeviceInfo(this.ftHandle, ref DeviceType, ref DeviceID, sernum, desc, IntPtr.Zero);
                     Description = Encoding.ASCII.GetString(desc);
                     Description = Description.Substring(0, Description.IndexOf("\0"));
                 }
             }
             else
             {
-                if (pFT_GetDeviceInfo == IntPtr.Zero)
+                if (this.pFT_GetDeviceInfo == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfo.");
 #if DEBUG
@@ -5734,31 +5734,31 @@ namespace FTD2XX_NET
             SerialNumber = String.Empty;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
 
             // Check for our required function pointers being set up
-            if (pFT_GetDeviceInfo != IntPtr.Zero)
+            if (this.pFT_GetDeviceInfo != IntPtr.Zero)
             {
-                tFT_GetDeviceInfo FT_GetDeviceInfo = (tFT_GetDeviceInfo)Marshal.GetDelegateForFunctionPointer(pFT_GetDeviceInfo, typeof(tFT_GetDeviceInfo));
+                tFT_GetDeviceInfo FT_GetDeviceInfo = (tFT_GetDeviceInfo)Marshal.GetDelegateForFunctionPointer(this.pFT_GetDeviceInfo, typeof(tFT_GetDeviceInfo));
 
                 UInt32 DeviceID = 0;
                 FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                 byte[] sernum = new byte[16];
                 byte[] desc = new byte[64];
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetDeviceInfo
-                    ftStatus = FT_GetDeviceInfo(ftHandle, ref DeviceType, ref DeviceID, sernum, desc, IntPtr.Zero);
+                    ftStatus = FT_GetDeviceInfo(this.ftHandle, ref DeviceType, ref DeviceID, sernum, desc, IntPtr.Zero);
                     SerialNumber = Encoding.ASCII.GetString(sernum);
                     SerialNumber = SerialNumber.Substring(0, SerialNumber.IndexOf("\0"));
                 }
             }
             else
             {
-                if (pFT_GetDeviceInfo == IntPtr.Zero)
+                if (this.pFT_GetDeviceInfo == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetDeviceInfo.");
 #if DEBUG
@@ -5787,23 +5787,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetQueueStatus != IntPtr.Zero)
+            if (this.pFT_GetQueueStatus != IntPtr.Zero)
             {
-                tFT_GetQueueStatus FT_GetQueueStatus = (tFT_GetQueueStatus)Marshal.GetDelegateForFunctionPointer(pFT_GetQueueStatus, typeof(tFT_GetQueueStatus));
+                tFT_GetQueueStatus FT_GetQueueStatus = (tFT_GetQueueStatus)Marshal.GetDelegateForFunctionPointer(this.pFT_GetQueueStatus, typeof(tFT_GetQueueStatus));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetQueueStatus
-                    ftStatus = FT_GetQueueStatus(ftHandle, ref RxQueue);
+                    ftStatus = FT_GetQueueStatus(this.ftHandle, ref RxQueue);
                 }
             }
             else
             {
-                if (pFT_GetQueueStatus == IntPtr.Zero)
+                if (this.pFT_GetQueueStatus == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetQueueStatus.");
 #if DEBUG
@@ -5832,26 +5832,26 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetStatus != IntPtr.Zero)
+            if (this.pFT_GetStatus != IntPtr.Zero)
             {
-                tFT_GetStatus FT_GetStatus = (tFT_GetStatus)Marshal.GetDelegateForFunctionPointer(pFT_GetStatus, typeof(tFT_GetStatus));
+                tFT_GetStatus FT_GetStatus = (tFT_GetStatus)Marshal.GetDelegateForFunctionPointer(this.pFT_GetStatus, typeof(tFT_GetStatus));
 
                 UInt32 RxQueue = 0;
                 UInt32 EventStatus = 0;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetStatus
-                    ftStatus = FT_GetStatus(ftHandle, ref RxQueue, ref TxQueue, ref EventStatus);
+                    ftStatus = FT_GetStatus(this.ftHandle, ref RxQueue, ref TxQueue, ref EventStatus);
                 }
             }
             else
             {
-                if (pFT_GetStatus == IntPtr.Zero)
+                if (this.pFT_GetStatus == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetStatus.");
 #if DEBUG
@@ -5880,26 +5880,26 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetStatus != IntPtr.Zero)
+            if (this.pFT_GetStatus != IntPtr.Zero)
             {
-                tFT_GetStatus FT_GetStatus = (tFT_GetStatus)Marshal.GetDelegateForFunctionPointer(pFT_GetStatus, typeof(tFT_GetStatus));
+                tFT_GetStatus FT_GetStatus = (tFT_GetStatus)Marshal.GetDelegateForFunctionPointer(this.pFT_GetStatus, typeof(tFT_GetStatus));
 
                 UInt32 RxQueue = 0;
                 UInt32 TxQueue = 0;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetStatus
-                    ftStatus = FT_GetStatus(ftHandle, ref RxQueue, ref TxQueue, ref EventType);
+                    ftStatus = FT_GetStatus(this.ftHandle, ref RxQueue, ref TxQueue, ref EventType);
                 }
             }
             else
             {
-                if (pFT_GetStatus == IntPtr.Zero)
+                if (this.pFT_GetStatus == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetStatus.");
 #if DEBUG
@@ -5928,27 +5928,27 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetModemStatus != IntPtr.Zero)
+            if (this.pFT_GetModemStatus != IntPtr.Zero)
             {
-                tFT_GetModemStatus FT_GetModemStatus = (tFT_GetModemStatus)Marshal.GetDelegateForFunctionPointer(pFT_GetModemStatus, typeof(tFT_GetModemStatus));
+                tFT_GetModemStatus FT_GetModemStatus = (tFT_GetModemStatus)Marshal.GetDelegateForFunctionPointer(this.pFT_GetModemStatus, typeof(tFT_GetModemStatus));
 
                 UInt32 ModemLineStatus = 0;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetModemStatus
-                    ftStatus = FT_GetModemStatus(ftHandle, ref ModemLineStatus);
+                    ftStatus = FT_GetModemStatus(this.ftHandle, ref ModemLineStatus);
 
                 }
                 ModemStatus = Convert.ToByte(ModemLineStatus & 0x000000FF);
             }
             else
             {
-                if (pFT_GetModemStatus == IntPtr.Zero)
+                if (this.pFT_GetModemStatus == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetModemStatus.");
 #if DEBUG
@@ -5977,26 +5977,26 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetModemStatus != IntPtr.Zero)
+            if (this.pFT_GetModemStatus != IntPtr.Zero)
             {
-                tFT_GetModemStatus FT_GetModemStatus = (tFT_GetModemStatus)Marshal.GetDelegateForFunctionPointer(pFT_GetModemStatus, typeof(tFT_GetModemStatus));
+                tFT_GetModemStatus FT_GetModemStatus = (tFT_GetModemStatus)Marshal.GetDelegateForFunctionPointer(this.pFT_GetModemStatus, typeof(tFT_GetModemStatus));
 
                 UInt32 ModemLineStatus = 0;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetModemStatus
-                    ftStatus = FT_GetModemStatus(ftHandle, ref ModemLineStatus);
+                    ftStatus = FT_GetModemStatus(this.ftHandle, ref ModemLineStatus);
                 }
                 LineStatus = Convert.ToByte((ModemLineStatus >> 8) & 0x000000FF);
             }
             else
             {
-                if (pFT_GetModemStatus == IntPtr.Zero)
+                if (this.pFT_GetModemStatus == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetModemStatus.");
 #if DEBUG
@@ -6025,23 +6025,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetBaudRate != IntPtr.Zero)
+            if (this.pFT_SetBaudRate != IntPtr.Zero)
             {
-                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(pFT_SetBaudRate, typeof(tFT_SetBaudRate));
+                tFT_SetBaudRate FT_SetBaudRate = (tFT_SetBaudRate)Marshal.GetDelegateForFunctionPointer(this.pFT_SetBaudRate, typeof(tFT_SetBaudRate));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_SetBaudRate
-                    ftStatus = FT_SetBaudRate(ftHandle, BaudRate);
+                    ftStatus = FT_SetBaudRate(this.ftHandle, BaudRate);
                 }
             }
             else
             {
-                if (pFT_SetBaudRate == IntPtr.Zero)
+                if (this.pFT_SetBaudRate == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBaudRate.");
 #if DEBUG
@@ -6072,23 +6072,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetDataCharacteristics != IntPtr.Zero)
+            if (this.pFT_SetDataCharacteristics != IntPtr.Zero)
             {
-                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
+                tFT_SetDataCharacteristics FT_SetDataCharacteristics = (tFT_SetDataCharacteristics)Marshal.GetDelegateForFunctionPointer(this.pFT_SetDataCharacteristics, typeof(tFT_SetDataCharacteristics));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_SetDataCharacteristics
-                    ftStatus = FT_SetDataCharacteristics(ftHandle, DataBits, StopBits, Parity);
+                    ftStatus = FT_SetDataCharacteristics(this.ftHandle, DataBits, StopBits, Parity);
                 }
             }
             else
             {
-                if (pFT_SetDataCharacteristics == IntPtr.Zero)
+                if (this.pFT_SetDataCharacteristics == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDataCharacteristics.");
 #if DEBUG
@@ -6119,23 +6119,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetFlowControl != IntPtr.Zero)
+            if (this.pFT_SetFlowControl != IntPtr.Zero)
             {
-                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(pFT_SetFlowControl, typeof(tFT_SetFlowControl));
+                tFT_SetFlowControl FT_SetFlowControl = (tFT_SetFlowControl)Marshal.GetDelegateForFunctionPointer(this.pFT_SetFlowControl, typeof(tFT_SetFlowControl));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_SetFlowControl
-                    ftStatus = FT_SetFlowControl(ftHandle, FlowControl, Xon, Xoff);
+                    ftStatus = FT_SetFlowControl(this.ftHandle, FlowControl, Xon, Xoff);
                 }
             }
             else
             {
-                if (pFT_SetFlowControl == IntPtr.Zero)
+                if (this.pFT_SetFlowControl == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetFlowControl.");
 #if DEBUG
@@ -6164,32 +6164,32 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_SetRts != IntPtr.Zero) & (pFT_ClrRts != IntPtr.Zero))
+            if ((this.pFT_SetRts != IntPtr.Zero) & (this.pFT_ClrRts != IntPtr.Zero))
             {
-                tFT_SetRts FT_SetRts = (tFT_SetRts)Marshal.GetDelegateForFunctionPointer(pFT_SetRts, typeof(tFT_SetRts));
-                tFT_ClrRts FT_ClrRts = (tFT_ClrRts)Marshal.GetDelegateForFunctionPointer(pFT_ClrRts, typeof(tFT_ClrRts));
+                tFT_SetRts FT_SetRts = (tFT_SetRts)Marshal.GetDelegateForFunctionPointer(this.pFT_SetRts, typeof(tFT_SetRts));
+                tFT_ClrRts FT_ClrRts = (tFT_ClrRts)Marshal.GetDelegateForFunctionPointer(this.pFT_ClrRts, typeof(tFT_ClrRts));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     if (Enable)
                     {
                         // Call FT_SetRts
-                        ftStatus = FT_SetRts(ftHandle);
+                        ftStatus = FT_SetRts(this.ftHandle);
                     }
                     else
                     {
                         // Call FT_ClrRts
-                        ftStatus = FT_ClrRts(ftHandle);
+                        ftStatus = FT_ClrRts(this.ftHandle);
                     }
                 }
             }
             else
             {
-                if (pFT_SetRts == IntPtr.Zero)
+                if (this.pFT_SetRts == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetRts.");
 #if DEBUG
@@ -6199,7 +6199,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_ClrRts == IntPtr.Zero)
+                if (this.pFT_ClrRts == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_ClrRts.");
 #if DEBUG
@@ -6228,32 +6228,32 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_SetDtr != IntPtr.Zero) & (pFT_ClrDtr != IntPtr.Zero))
+            if ((this.pFT_SetDtr != IntPtr.Zero) & (this.pFT_ClrDtr != IntPtr.Zero))
             {
-                tFT_SetDtr FT_SetDtr = (tFT_SetDtr)Marshal.GetDelegateForFunctionPointer(pFT_SetDtr, typeof(tFT_SetDtr));
-                tFT_ClrDtr FT_ClrDtr = (tFT_ClrDtr)Marshal.GetDelegateForFunctionPointer(pFT_ClrDtr, typeof(tFT_ClrDtr));
+                tFT_SetDtr FT_SetDtr = (tFT_SetDtr)Marshal.GetDelegateForFunctionPointer(this.pFT_SetDtr, typeof(tFT_SetDtr));
+                tFT_ClrDtr FT_ClrDtr = (tFT_ClrDtr)Marshal.GetDelegateForFunctionPointer(this.pFT_ClrDtr, typeof(tFT_ClrDtr));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     if (Enable)
                     {
                         // Call FT_SetDtr
-                        ftStatus = FT_SetDtr(ftHandle);
+                        ftStatus = FT_SetDtr(this.ftHandle);
                     }
                     else
                     {
                         // Call FT_ClrDtr
-                        ftStatus = FT_ClrDtr(ftHandle);
+                        ftStatus = FT_ClrDtr(this.ftHandle);
                     }
                 }
             }
             else
             {
-                if (pFT_SetDtr == IntPtr.Zero)
+                if (this.pFT_SetDtr == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDtr.");
 #if DEBUG
@@ -6263,7 +6263,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_ClrDtr == IntPtr.Zero)
+                if (this.pFT_ClrDtr == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_ClrDtr.");
 #if DEBUG
@@ -6293,23 +6293,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetTimeouts != IntPtr.Zero)
+            if (this.pFT_SetTimeouts != IntPtr.Zero)
             {
-                tFT_SetTimeouts FT_SetTimeouts = (tFT_SetTimeouts)Marshal.GetDelegateForFunctionPointer(pFT_SetTimeouts, typeof(tFT_SetTimeouts));
+                tFT_SetTimeouts FT_SetTimeouts = (tFT_SetTimeouts)Marshal.GetDelegateForFunctionPointer(this.pFT_SetTimeouts, typeof(tFT_SetTimeouts));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_SetTimeouts
-                    ftStatus = FT_SetTimeouts(ftHandle, ReadTimeout, WriteTimeout);
+                    ftStatus = FT_SetTimeouts(this.ftHandle, ReadTimeout, WriteTimeout);
                 }
             }
             else
             {
-                if (pFT_SetTimeouts == IntPtr.Zero)
+                if (this.pFT_SetTimeouts == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetTimeouts.");
 #if DEBUG
@@ -6338,32 +6338,32 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if ((pFT_SetBreakOn != IntPtr.Zero) & (pFT_SetBreakOff != IntPtr.Zero))
+            if ((this.pFT_SetBreakOn != IntPtr.Zero) & (this.pFT_SetBreakOff != IntPtr.Zero))
             {
-                tFT_SetBreakOn FT_SetBreakOn = (tFT_SetBreakOn)Marshal.GetDelegateForFunctionPointer(pFT_SetBreakOn, typeof(tFT_SetBreakOn));
-                tFT_SetBreakOff FT_SetBreakOff = (tFT_SetBreakOff)Marshal.GetDelegateForFunctionPointer(pFT_SetBreakOff, typeof(tFT_SetBreakOff));
+                tFT_SetBreakOn FT_SetBreakOn = (tFT_SetBreakOn)Marshal.GetDelegateForFunctionPointer(this.pFT_SetBreakOn, typeof(tFT_SetBreakOn));
+                tFT_SetBreakOff FT_SetBreakOff = (tFT_SetBreakOff)Marshal.GetDelegateForFunctionPointer(this.pFT_SetBreakOff, typeof(tFT_SetBreakOff));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     if (Enable)
                     {
                         // Call FT_SetBreakOn
-                        ftStatus = FT_SetBreakOn(ftHandle);
+                        ftStatus = FT_SetBreakOn(this.ftHandle);
                     }
                     else
                     {
                         // Call FT_SetBreakOff
-                        ftStatus = FT_SetBreakOff(ftHandle);
+                        ftStatus = FT_SetBreakOff(this.ftHandle);
                     }
                 }
             }
             else
             {
-                if (pFT_SetBreakOn == IntPtr.Zero)
+                if (this.pFT_SetBreakOn == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBreakOn.");
 #if DEBUG
@@ -6373,7 +6373,7 @@ namespace FTD2XX_NET
                         System.Windows.Forms.MessageBoxIcon.Error);
 #endif
                 }
-                if (pFT_SetBreakOff == IntPtr.Zero)
+                if (this.pFT_SetBreakOff == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetBreakOff.");
 #if DEBUG
@@ -6403,23 +6403,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetResetPipeRetryCount != IntPtr.Zero)
+            if (this.pFT_SetResetPipeRetryCount != IntPtr.Zero)
             {
-                tFT_SetResetPipeRetryCount FT_SetResetPipeRetryCount = (tFT_SetResetPipeRetryCount)Marshal.GetDelegateForFunctionPointer(pFT_SetResetPipeRetryCount, typeof(tFT_SetResetPipeRetryCount));
+                tFT_SetResetPipeRetryCount FT_SetResetPipeRetryCount = (tFT_SetResetPipeRetryCount)Marshal.GetDelegateForFunctionPointer(this.pFT_SetResetPipeRetryCount, typeof(tFT_SetResetPipeRetryCount));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_SetResetPipeRetryCount
-                    ftStatus = FT_SetResetPipeRetryCount(ftHandle, ResetPipeRetryCount);
+                    ftStatus = FT_SetResetPipeRetryCount(this.ftHandle, ResetPipeRetryCount);
                 }
             }
             else
             {
-                if (pFT_SetResetPipeRetryCount == IntPtr.Zero)
+                if (this.pFT_SetResetPipeRetryCount == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetResetPipeRetryCount.");
 #if DEBUG
@@ -6448,23 +6448,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetDriverVersion != IntPtr.Zero)
+            if (this.pFT_GetDriverVersion != IntPtr.Zero)
             {
-                tFT_GetDriverVersion FT_GetDriverVersion = (tFT_GetDriverVersion)Marshal.GetDelegateForFunctionPointer(pFT_GetDriverVersion, typeof(tFT_GetDriverVersion));
+                tFT_GetDriverVersion FT_GetDriverVersion = (tFT_GetDriverVersion)Marshal.GetDelegateForFunctionPointer(this.pFT_GetDriverVersion, typeof(tFT_GetDriverVersion));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetDriverVersion
-                    ftStatus = FT_GetDriverVersion(ftHandle, ref DriverVersion);
+                    ftStatus = FT_GetDriverVersion(this.ftHandle, ref DriverVersion);
                 }
             }
             else
             {
-                if (pFT_GetDriverVersion == IntPtr.Zero)
+                if (this.pFT_GetDriverVersion == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetDriverVersion.");
 #if DEBUG
@@ -6493,20 +6493,20 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetLibraryVersion != IntPtr.Zero)
+            if (this.pFT_GetLibraryVersion != IntPtr.Zero)
             {
-                tFT_GetLibraryVersion FT_GetLibraryVersion = (tFT_GetLibraryVersion)Marshal.GetDelegateForFunctionPointer(pFT_GetLibraryVersion, typeof(tFT_GetLibraryVersion));
+                tFT_GetLibraryVersion FT_GetLibraryVersion = (tFT_GetLibraryVersion)Marshal.GetDelegateForFunctionPointer(this.pFT_GetLibraryVersion, typeof(tFT_GetLibraryVersion));
 
                 // Call FT_GetLibraryVersion
                 ftStatus = FT_GetLibraryVersion(ref LibraryVersion);
             }
             else
             {
-                if (pFT_GetLibraryVersion == IntPtr.Zero)
+                if (this.pFT_GetLibraryVersion == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetLibraryVersion.");
 #if DEBUG
@@ -6535,23 +6535,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetDeadmanTimeout != IntPtr.Zero)
+            if (this.pFT_SetDeadmanTimeout != IntPtr.Zero)
             {
-                tFT_SetDeadmanTimeout FT_SetDeadmanTimeout = (tFT_SetDeadmanTimeout)Marshal.GetDelegateForFunctionPointer(pFT_SetDeadmanTimeout, typeof(tFT_SetDeadmanTimeout));
+                tFT_SetDeadmanTimeout FT_SetDeadmanTimeout = (tFT_SetDeadmanTimeout)Marshal.GetDelegateForFunctionPointer(this.pFT_SetDeadmanTimeout, typeof(tFT_SetDeadmanTimeout));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_SetDeadmanTimeout
-                    ftStatus = FT_SetDeadmanTimeout(ftHandle, DeadmanTimeout);
+                    ftStatus = FT_SetDeadmanTimeout(this.ftHandle, DeadmanTimeout);
                 }
             }
             else
             {
-                if (pFT_SetDeadmanTimeout == IntPtr.Zero)
+                if (this.pFT_SetDeadmanTimeout == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetDeadmanTimeout.");
 #if DEBUG
@@ -6582,19 +6582,19 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetLatencyTimer != IntPtr.Zero)
+            if (this.pFT_SetLatencyTimer != IntPtr.Zero)
             {
-                tFT_SetLatencyTimer FT_SetLatencyTimer = (tFT_SetLatencyTimer)Marshal.GetDelegateForFunctionPointer(pFT_SetLatencyTimer, typeof(tFT_SetLatencyTimer));
+                tFT_SetLatencyTimer FT_SetLatencyTimer = (tFT_SetLatencyTimer)Marshal.GetDelegateForFunctionPointer(this.pFT_SetLatencyTimer, typeof(tFT_SetLatencyTimer));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     FT_DEVICE DeviceType = FT_DEVICE.FT_DEVICE_UNKNOWN;
                     // Set Bit Mode does not apply to FT8U232AM, FT8U245AM or FT8U100AX devices
-                    GetDeviceType(ref DeviceType);
+                    this.GetDeviceType(ref DeviceType);
                     if ((DeviceType == FT_DEVICE.FT_DEVICE_BM) || (DeviceType == FT_DEVICE.FT_DEVICE_2232))
                     {
                         // Do not allow latency of 1ms or 0ms for older devices
@@ -6604,12 +6604,12 @@ namespace FTD2XX_NET
                     }
 
                     // Call FT_SetLatencyTimer
-                    ftStatus = FT_SetLatencyTimer(ftHandle, Latency);
+                    ftStatus = FT_SetLatencyTimer(this.ftHandle, Latency);
                 }
             }
             else
             {
-                if (pFT_SetLatencyTimer == IntPtr.Zero)
+                if (this.pFT_SetLatencyTimer == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetLatencyTimer.");
 #if DEBUG
@@ -6638,23 +6638,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetLatencyTimer != IntPtr.Zero)
+            if (this.pFT_GetLatencyTimer != IntPtr.Zero)
             {
-                tFT_GetLatencyTimer FT_GetLatencyTimer = (tFT_GetLatencyTimer)Marshal.GetDelegateForFunctionPointer(pFT_GetLatencyTimer, typeof(tFT_GetLatencyTimer));
+                tFT_GetLatencyTimer FT_GetLatencyTimer = (tFT_GetLatencyTimer)Marshal.GetDelegateForFunctionPointer(this.pFT_GetLatencyTimer, typeof(tFT_GetLatencyTimer));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetLatencyTimer
-                    ftStatus = FT_GetLatencyTimer(ftHandle, ref Latency);
+                    ftStatus = FT_GetLatencyTimer(this.ftHandle, ref Latency);
                 }
             }
             else
             {
-                if (pFT_GetLatencyTimer == IntPtr.Zero)
+                if (this.pFT_GetLatencyTimer == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetLatencyTimer.");
 #if DEBUG
@@ -6685,25 +6685,25 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetUSBParameters != IntPtr.Zero)
+            if (this.pFT_SetUSBParameters != IntPtr.Zero)
             {
-                tFT_SetUSBParameters FT_SetUSBParameters = (tFT_SetUSBParameters)Marshal.GetDelegateForFunctionPointer(pFT_SetUSBParameters, typeof(tFT_SetUSBParameters));
+                tFT_SetUSBParameters FT_SetUSBParameters = (tFT_SetUSBParameters)Marshal.GetDelegateForFunctionPointer(this.pFT_SetUSBParameters, typeof(tFT_SetUSBParameters));
 
                 UInt32 OutTransferSize = InTransferSize;
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_SetUSBParameters
-                    ftStatus = FT_SetUSBParameters(ftHandle, InTransferSize, OutTransferSize);
+                    ftStatus = FT_SetUSBParameters(this.ftHandle, InTransferSize, OutTransferSize);
                 }
             }
             else
             {
-                if (pFT_SetUSBParameters == IntPtr.Zero)
+                if (this.pFT_SetUSBParameters == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetUSBParameters.");
 #if DEBUG
@@ -6735,23 +6735,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_SetChars != IntPtr.Zero)
+            if (this.pFT_SetChars != IntPtr.Zero)
             {
-                tFT_SetChars FT_SetChars = (tFT_SetChars)Marshal.GetDelegateForFunctionPointer(pFT_SetChars, typeof(tFT_SetChars));
+                tFT_SetChars FT_SetChars = (tFT_SetChars)Marshal.GetDelegateForFunctionPointer(this.pFT_SetChars, typeof(tFT_SetChars));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_SetChars
-                    ftStatus = FT_SetChars(ftHandle, EventChar, Convert.ToByte(EventCharEnable), ErrorChar, Convert.ToByte(ErrorCharEnable));
+                    ftStatus = FT_SetChars(this.ftHandle, EventChar, Convert.ToByte(EventCharEnable), ErrorChar, Convert.ToByte(ErrorCharEnable));
                 }
             }
             else
             {
-                if (pFT_SetChars == IntPtr.Zero)
+                if (this.pFT_SetChars == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_SetChars.");
 #if DEBUG
@@ -6780,22 +6780,22 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_EE_UASize != IntPtr.Zero)
+            if (this.pFT_EE_UASize != IntPtr.Zero)
             {
-                tFT_EE_UASize FT_EE_UASize = (tFT_EE_UASize)Marshal.GetDelegateForFunctionPointer(pFT_EE_UASize, typeof(tFT_EE_UASize));
+                tFT_EE_UASize FT_EE_UASize = (tFT_EE_UASize)Marshal.GetDelegateForFunctionPointer(this.pFT_EE_UASize, typeof(tFT_EE_UASize));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
-                    ftStatus = FT_EE_UASize(ftHandle, ref UASize);
+                    ftStatus = FT_EE_UASize(this.ftHandle, ref UASize);
                 }
             }
             else
             {
-                if (pFT_EE_UASize == IntPtr.Zero)
+                if (this.pFT_EE_UASize == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_EE_UASize.");
 #if DEBUG
@@ -6827,19 +6827,19 @@ namespace FTD2XX_NET
             ComPortName = string.Empty;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_GetComPortNumber != IntPtr.Zero)
+            if (this.pFT_GetComPortNumber != IntPtr.Zero)
             {
-                tFT_GetComPortNumber FT_GetComPortNumber = (tFT_GetComPortNumber)Marshal.GetDelegateForFunctionPointer(pFT_GetComPortNumber, typeof(tFT_GetComPortNumber));
+                tFT_GetComPortNumber FT_GetComPortNumber = (tFT_GetComPortNumber)Marshal.GetDelegateForFunctionPointer(this.pFT_GetComPortNumber, typeof(tFT_GetComPortNumber));
 
                 Int32 ComPortNumber = -1;
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_GetComPortNumber
-                    ftStatus = FT_GetComPortNumber(ftHandle, ref ComPortNumber);
+                    ftStatus = FT_GetComPortNumber(this.ftHandle, ref ComPortNumber);
                 }
 
                 if (ComPortNumber == -1)
@@ -6856,7 +6856,7 @@ namespace FTD2XX_NET
             }
             else
             {
-                if (pFT_GetComPortNumber == IntPtr.Zero)
+                if (this.pFT_GetComPortNumber == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_GetComPortNumber.");
 #if DEBUG
@@ -6885,23 +6885,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_VendorCmdGet != IntPtr.Zero)
+            if (this.pFT_VendorCmdGet != IntPtr.Zero)
             {
-                tFT_VendorCmdGet FT_VendorCmdGet = (tFT_VendorCmdGet)Marshal.GetDelegateForFunctionPointer(pFT_VendorCmdGet, typeof(tFT_VendorCmdGet));
+                tFT_VendorCmdGet FT_VendorCmdGet = (tFT_VendorCmdGet)Marshal.GetDelegateForFunctionPointer(this.pFT_VendorCmdGet, typeof(tFT_VendorCmdGet));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_VendorCmdGet
-                    ftStatus = FT_VendorCmdGet(ftHandle, request, buf, len);
+                    ftStatus = FT_VendorCmdGet(this.ftHandle, request, buf, len);
                 }
             }
             else
             {
-                if (pFT_VendorCmdGet == IntPtr.Zero)
+                if (this.pFT_VendorCmdGet == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_VendorCmdGet.");
 #if DEBUG
@@ -6929,23 +6929,23 @@ namespace FTD2XX_NET
             FT_STATUS ftStatus = FT_STATUS.FT_OTHER_ERROR;
 
             // If the DLL hasn't been loaded, just return here
-            if (hFTD2XXDLL == IntPtr.Zero)
+            if (this.hFTD2XXDLL == IntPtr.Zero)
                 return ftStatus;
 
             // Check for our required function pointers being set up
-            if (pFT_VendorCmdSet != IntPtr.Zero)
+            if (this.pFT_VendorCmdSet != IntPtr.Zero)
             {
-                tFT_VendorCmdSet FT_VendorCmdSet = (tFT_VendorCmdSet)Marshal.GetDelegateForFunctionPointer(pFT_VendorCmdSet, typeof(tFT_VendorCmdSet));
+                tFT_VendorCmdSet FT_VendorCmdSet = (tFT_VendorCmdSet)Marshal.GetDelegateForFunctionPointer(this.pFT_VendorCmdSet, typeof(tFT_VendorCmdSet));
 
-                if (ftHandle != IntPtr.Zero)
+                if (this.ftHandle != IntPtr.Zero)
                 {
                     // Call FT_VendorCmdSet
-                    ftStatus = FT_VendorCmdSet(ftHandle, request, buf, len);
+                    ftStatus = FT_VendorCmdSet(this.ftHandle, request, buf, len);
                 }
             }
             else
             {
-                if (pFT_VendorCmdSet == IntPtr.Zero)
+                if (this.pFT_VendorCmdSet == IntPtr.Zero)
                 {
                     Console.WriteLine("Failed to load function FT_VendorCmdSet.");
 #if DEBUG
@@ -6972,7 +6972,7 @@ namespace FTD2XX_NET
         {
             get
             {
-                if (ftHandle == IntPtr.Zero)
+                if (this.ftHandle == IntPtr.Zero)
                     return false;
                 else
                     return true;
@@ -6992,14 +6992,14 @@ namespace FTD2XX_NET
             {
                 string Identifier;
                 Identifier = String.Empty;
-                if (IsOpen)
+                if (this.IsOpen)
                 {
                     FT_DEVICE deviceType = FT_DEVICE.FT_DEVICE_BM;
-                    GetDeviceType(ref deviceType);
+                    this.GetDeviceType(ref deviceType);
                     if ((deviceType == FT_DEVICE.FT_DEVICE_2232) | (deviceType == FT_DEVICE.FT_DEVICE_2232H) | (deviceType == FT_DEVICE.FT_DEVICE_4232H))
                     {
                         string Description;
-                        GetDescription(out Description);
+                        this.GetDescription(out Description);
                         Identifier = Description.Substring((Description.Length - 1));
                         return Identifier;
                     }

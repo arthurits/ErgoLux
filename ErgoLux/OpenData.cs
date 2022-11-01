@@ -33,8 +33,8 @@ partial class FrmMain
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader02", fileCulture) ?? "Start time"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.GetMillisecondsFormat(fileCulture));
-            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeStart))
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", this._settings.GetMillisecondsFormat(fileCulture));
+            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out this._timeStart))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
 
             strLine = sr.ReadLine();    // End time
@@ -42,7 +42,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader03", fileCulture) ?? "End time"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
-            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeEnd))
+            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out this._timeEnd))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
 
             strLine = sr.ReadLine();    // Total measuring time
@@ -60,7 +60,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
             if (nSensors == 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
-            _settings.T10_NumberOfSensors = nSensors;
+            this._settings.T10_NumberOfSensors = nSensors;
 
             strLine = sr.ReadLine();    // Number of data points
             if (strLine is null)
@@ -71,7 +71,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
             if (nPoints == 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
-            _settings.Plot_ArrayPoints = nPoints;
+            this._settings.Plot_ArrayPoints = nPoints;
 
             strLine = sr.ReadLine();    // Sampling frequency
             if (strLine is null)
@@ -82,7 +82,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader07));
             if (nFreq <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader07));
-            _settings.T10_Frequency = nFreq;
+            this._settings.T10_Frequency = nFreq;
 
             strLine = sr.ReadLine();    // Empty line
             if (strLine is null)
@@ -93,14 +93,14 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Column header names
             if (strLine is null)
                 throw new FormatException(StringResources.FileHeader18);
-            _seriesLabels = strLine.Split('\t');
-            if (_seriesLabels == Array.Empty<string>())
+            this._seriesLabels = strLine.Split('\t');
+            if (this._seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader18);
 
             //UpdateUI_Series();
 
             // Initialize data arrays
-            InitializeArrays();
+            this.InitializeArrays();
 
             // Read data into _plotData
             string[] data;
@@ -110,7 +110,7 @@ partial class FrmMain
                 data = strLine.Split("\t");
                 for (row = 0; row < data.Length; row++)
                 {
-                    if (!double.TryParse(data[row], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out _plotData[row][col]))
+                    if (!double.TryParse(data[row], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out this._plotData[row][col]))
                         throw new ArithmeticException(data[row].ToString(fileCulture));
                 }
                 col++;
@@ -172,7 +172,7 @@ partial class FrmMain
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool OpenTextData(string FileName)
     {
-        return OpenELuxData(FileName);
+        return this.OpenELuxData(FileName);
     }
 
     /// <summary>
@@ -195,35 +195,35 @@ partial class FrmMain
             if (!strLine.Contains($"{StringResources.FileHeader01} (", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
 
-            _timeStart = br.ReadDateTime();
-            _timeEnd = br.ReadDateTime();
+            this._timeStart = br.ReadDateTime();
+            this._timeEnd = br.ReadDateTime();
             int dummy = br.ReadInt32();     // days
             dummy = br.ReadInt32();         // hours
             dummy = br.ReadInt32();         // minutes
             dummy = br.ReadInt32();         // seconds
             dummy = br.ReadInt32();         // milliseconds
-            _settings.T10_NumberOfSensors = br.ReadInt32();
-            _settings.Plot_ArrayPoints = br.ReadInt32();
-            _nPoints = _settings.Plot_ArrayPoints;
-            _settings.T10_Frequency = br.ReadDouble();
+            this._settings.T10_NumberOfSensors = br.ReadInt32();
+            this._settings.Plot_ArrayPoints = br.ReadInt32();
+            this._nPoints = this._settings.Plot_ArrayPoints;
+            this._settings.T10_Frequency = br.ReadDouble();
             strLine = br.ReadString();      // column header names
             if (strLine is null)
                 throw new FormatException(StringResources.FileHeader18);
-            _seriesLabels = strLine.Split('\t');
-            if (_seriesLabels == Array.Empty<string>())
+            this._seriesLabels = strLine.Split('\t');
+            if (this._seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader18);
 
-            UpdateUI_Series();
+            this.UpdateUI_Series();
 
             // Initialize data arrays
-            InitializeArrays();
+            this.InitializeArrays();
 
             // Read data into _plotData https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
             byte[] bytesLine;
-            for (int i = 0; i < _plotData.Length; i++)
+            for (int i = 0; i < this._plotData.Length; i++)
             {
-                bytesLine = br.ReadBytes(_plotData[i].Length * sizeof(double));
-                Buffer.BlockCopy(bytesLine, 0, _plotData[i], 0, bytesLine.Length);
+                bytesLine = br.ReadBytes(this._plotData[i].Length * sizeof(double));
+                Buffer.BlockCopy(bytesLine, 0, this._plotData[i], 0, bytesLine.Length);
             }
 
         }

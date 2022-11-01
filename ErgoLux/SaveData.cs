@@ -15,14 +15,14 @@ partial class FrmMain
 
             // Append millisecond pattern to current culture's full date time pattern
             //string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
-            string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
-            TimeSpan nTime = _timeEnd - _timeStart;
+            string fullPattern = this._settings.AppCulture.DateTimeFormat.FullDateTimePattern;
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", this._settings.MillisecondsFormat);
+            TimeSpan nTime = this._timeEnd - this._timeStart;
 
             // Save the header text into the file
-            sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            sw.WriteLine($"{StringResources.FileHeader02}: {_timeStart.ToString(fullPattern, _settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader03}: {_timeEnd.ToString(fullPattern, _settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader01} ({this._settings.AppCultureName})");
+            sw.WriteLine($"{StringResources.FileHeader02}: {this._timeStart.ToString(fullPattern, this._settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader03}: {this._timeEnd.ToString(fullPattern, this._settings.AppCulture)}");
             //sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _sett.AppCulture) ?? "Total measuring time")}: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} millisecons");
             sw.WriteLine($"{StringResources.FileHeader04}: " +
                 $"{nTime.Days} {StringResources.FileHeader19}, " +
@@ -31,12 +31,12 @@ partial class FrmMain
                 $"{nTime.Seconds} {StringResources.FileHeader22} " +
                 $"{StringResources.FileHeader23} " +
                 $"{nTime.Milliseconds} {StringResources.FileHeader24}");
-            sw.WriteLine($"{StringResources.FileHeader05}: {_settings.T10_NumberOfSensors}");
-            sw.WriteLine($"{StringResources.FileHeader06}: {_nPoints}");
-            sw.WriteLine($"{StringResources.FileHeader07}: {_settings.T10_Frequency.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader05}: {this._settings.T10_NumberOfSensors}");
+            sw.WriteLine($"{StringResources.FileHeader06}: {this._nPoints}");
+            sw.WriteLine($"{StringResources.FileHeader07}: {this._settings.T10_Frequency.ToString(this._settings.AppCulture)}");
             sw.WriteLine();
             string content = string.Empty;
-            for (int i = 0; i < _settings.T10_NumberOfSensors; i++)
+            for (int i = 0; i < this._settings.T10_NumberOfSensors; i++)
                 content += $"{StringResources.FileHeader08}{i:00}\t";
             content += $"{StringResources.FileHeader09}\t" +
                     $"{StringResources.FileHeader10}\t" +
@@ -47,12 +47,12 @@ partial class FrmMain
             sw.WriteLine(content);
 
             // Save the numerical values
-            for (int j = 0; j < _nPoints; j++)
+            for (int j = 0; j < this._nPoints; j++)
             {
                 content = string.Empty;
-                for (int i = 0; i < _plotData.Length; i++)
+                for (int i = 0; i < this._plotData.Length; i++)
                 {
-                    content += _plotData[i][j].ToString(_settings.DataFormat, _settings.AppCulture) + "\t";
+                    content += this._plotData[i][j].ToString(this._settings.DataFormat, this._settings.AppCulture) + "\t";
                 }
                 //trying to write data to csv
                 sw.WriteLine(content.TrimEnd('\t'));
@@ -86,7 +86,7 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the text file</param>
     private void SaveTextData(string FileName)
     {
-        SaveELuxData(FileName);
+        this.SaveELuxData(FileName);
     }
 
     /// <summary>
@@ -103,22 +103,22 @@ partial class FrmMain
             // Append millisecond pattern to current culture's full date time pattern
             //string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
             //fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _sett.MillisecondsFormat);
-            TimeSpan nTime = _timeEnd - _timeStart;
+            TimeSpan nTime = this._timeEnd - this._timeStart;
 
             // Save the header text into the file
-            bw.Write($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            bw.Write(_timeStart);
-            bw.Write(_timeEnd);
+            bw.Write($"{StringResources.FileHeader01} ({this._settings.AppCultureName})");
+            bw.Write(this._timeStart);
+            bw.Write(this._timeEnd);
             bw.Write(nTime.Days);
             bw.Write(nTime.Hours);
             bw.Write(nTime.Minutes);
             bw.Write(nTime.Seconds);
             bw.Write(nTime.Milliseconds);
-            bw.Write(_settings.T10_NumberOfSensors);
-            bw.Write(_nPoints);
-            bw.Write(_settings.T10_Frequency);
+            bw.Write(this._settings.T10_NumberOfSensors);
+            bw.Write(this._nPoints);
+            bw.Write(this._settings.T10_Frequency);
             string content = string.Empty;
-            for (int i = 0; i < _settings.T10_NumberOfSensors; i++)
+            for (int i = 0; i < this._settings.T10_NumberOfSensors; i++)
                 content += $"{StringResources.FileHeader08}{i:00}\t";
             content += $"{StringResources.FileHeader09}\t" +
                     $"{StringResources.FileHeader10}\t" +
@@ -130,11 +130,11 @@ partial class FrmMain
 
             // https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
             byte[] bytesLine;
-            for (int i = 0; i < _plotData.Length; i++)
+            for (int i = 0; i < this._plotData.Length; i++)
             {
                 // bw.Write(_plotData[i].SelectMany(value => BitConverter.GetBytes(value)).ToArray()); // Requires LINQ
-                bytesLine = new byte[_plotData[i].Length * sizeof(double)];
-                Buffer.BlockCopy(_plotData[i], 0, bytesLine, 0, bytesLine.Length);
+                bytesLine = new byte[this._plotData[i].Length * sizeof(double)];
+                Buffer.BlockCopy(this._plotData[i], 0, bytesLine, 0, bytesLine.Length);
                 bw.Write(bytesLine);
             }
 
@@ -166,7 +166,7 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the elux file</param>
     private void SaveDefaultData(string FileName)
     {
-        SaveELuxData(FileName);
+        this.SaveELuxData(FileName);
     }
 
 }

@@ -10,27 +10,27 @@ public partial class FrmLanguage : Form
 
     public FrmLanguage()
     {
-        InitializeComponent();
-        FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmLanguage).Assembly);
+        this.InitializeComponent();
+        this.FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmLanguage).Assembly);
     }
 
     public FrmLanguage(ClassSettings settings)
     : this()
     {
-        Settings = settings;
-        _culture = settings.AppCulture;
-        UpdateControls(settings.AppCultureName);
+        this.Settings = settings;
+        this._culture = settings.AppCulture;
+        this.UpdateControls(settings.AppCultureName);
     }
 
     private void Accept_Click(object sender, EventArgs e)
     {
-        if (Settings is not null) Settings.AppCulture = _culture;
-        DialogResult = DialogResult.OK;
+        if (this.Settings is not null) this.Settings.AppCulture = this._culture;
+        this.DialogResult = DialogResult.OK;
     }
 
     private void Cancel_Click(object sender, EventArgs e)
     {
-        DialogResult = DialogResult.Cancel;
+        this.DialogResult = DialogResult.Cancel;
     }
 
     private void LabelCulture_Click(object sender, EventArgs e)
@@ -38,43 +38,43 @@ public partial class FrmLanguage : Form
         switch ((sender as Label)?.Name)
         {
             case "lblCurrentCulture":
-                radCurrentCulture.Checked = true;
+                this.radCurrentCulture.Checked = true;
                 break;
             case "lblInvariantCulture":
-                radInvariantCulture.Checked = true;
+                this.radInvariantCulture.Checked = true;
                 break;
             case "lblUserCulture":
             default:
-                radUserCulture.Checked = true;
+                this.radUserCulture.Checked = true;
                 break;
         }
     }
 
     private void CurrentCulture_CheckedChanged(object sender, EventArgs e)
     {
-        if (radCurrentCulture.Checked)
+        if (this.radCurrentCulture.Checked)
         {
-            _culture = System.Globalization.CultureInfo.CurrentCulture;
-            UpdateUI_Language();
+            this._culture = System.Globalization.CultureInfo.CurrentCulture;
+            this.UpdateUI_Language();
         }
     }
 
     private void InvariantCulture_CheckedChanged(object sender, EventArgs e)
     {
-        if (radInvariantCulture.Checked)
+        if (this.radInvariantCulture.Checked)
         {
-            _culture = System.Globalization.CultureInfo.InvariantCulture;
-            UpdateUI_Language();
+            this._culture = System.Globalization.CultureInfo.InvariantCulture;
+            this.UpdateUI_Language();
         }
     }
 
     private void UserCulture_CheckedChanged(object sender, EventArgs e)
     {
-        cboAllCultures.Enabled = radUserCulture.Checked;
-        if (cboAllCultures.Enabled)
+        this.cboAllCultures.Enabled = this.radUserCulture.Checked;
+        if (this.cboAllCultures.Enabled)
         {
-            _culture = new((string)cboAllCultures.SelectedValue ?? String.Empty);
-            UpdateUI_Language();
+            this._culture = new((string)this.cboAllCultures.SelectedValue ?? String.Empty);
+            this.UpdateUI_Language();
         }
     }
 
@@ -83,8 +83,8 @@ public partial class FrmLanguage : Form
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
-            _culture = new((string)cbo.SelectedValue);
-            UpdateUI_Language();
+            this._culture = new((string)cbo.SelectedValue);
+            this.UpdateUI_Language();
         }
     }
 
@@ -93,19 +93,19 @@ public partial class FrmLanguage : Form
     /// </summary>
     private void UpdateControls(string cultureName = "")
     {
-        cboAllCultures.Enabled = false;
+        this.cboAllCultures.Enabled = false;
         if (cultureName == string.Empty)
         {
-            radInvariantCulture.Checked = true;
+            this.radInvariantCulture.Checked = true;
         }
         else if (cultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
         {
-            radCurrentCulture.Checked = true;
+            this.radCurrentCulture.Checked = true;
         }
         else
         {
-            cboAllCultures.SelectedValue = cultureName;
-            radUserCulture.Checked = true;
+            this.cboAllCultures.SelectedValue = cultureName;
+            this.radUserCulture.Checked = true;
         }
     }
 
@@ -115,12 +115,12 @@ public partial class FrmLanguage : Form
     /// <param name="type">A type from which the resource manager derives all information for finding .resources files</param>
     private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
     {
-        string cultureName = _culture.Name;
+        string cultureName = this._culture.Name;
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
-        cboAllCultures.DisplayMember = "DisplayName";
-        cboAllCultures.ValueMember = "Name";
-        cboAllCultures.DataSource = cultures.ToArray();
-        cboAllCultures.SelectedValue = cultureName;
+        this.cboAllCultures.DisplayMember = "DisplayName";
+        this.cboAllCultures.ValueMember = "Name";
+        this.cboAllCultures.DataSource = cultures.ToArray();
+        this.cboAllCultures.SelectedValue = cultureName;
     }
 
     /// <summary>
@@ -129,7 +129,7 @@ public partial class FrmLanguage : Form
     /// <param name="culture">Culture used to display the UI</param>
     private void UpdateUI_Language()
     {
-        UpdateUI_Language(_culture);
+        this.UpdateUI_Language(this._culture);
     }
 
     /// <summary>
@@ -140,17 +140,17 @@ public partial class FrmLanguage : Form
     {
         StringResources.Culture = culture;
 
-        Text = StringResources.FrmLanguage;
-        lblCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
-        lblInvariantCulture.Text = StringResources.RadInvariantCulture;
-        lblUserCulture.Text = StringResources.RadUserCulture;
-        btnCancel.Text = StringResources.BtnCancel;
-        btnAccept.Text = StringResources.BtnAccept;
+        this.Text = StringResources.FrmLanguage;
+        this.lblCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+        this.lblInvariantCulture.Text = StringResources.RadInvariantCulture;
+        this.lblUserCulture.Text = StringResources.RadUserCulture;
+        this.btnCancel.Text = StringResources.BtnCancel;
+        this.btnAccept.Text = StringResources.BtnAccept;
 
         // Reposition controls to compensate for the culture text length in labels
-        lblCurrentCulture.Top = radCurrentCulture.Top + (radCurrentCulture.Height - lblCurrentCulture.Height) / 2;
-        lblInvariantCulture.Top = radInvariantCulture.Top + (radInvariantCulture.Height - lblInvariantCulture.Height) / 2;
-        lblUserCulture.Top = radUserCulture.Top + (radUserCulture.Height - lblUserCulture.Height) / 2;
+        this.lblCurrentCulture.Top = this.radCurrentCulture.Top + (this.radCurrentCulture.Height - this.lblCurrentCulture.Height) / 2;
+        this.lblInvariantCulture.Top = this.radInvariantCulture.Top + (this.radInvariantCulture.Height - this.lblInvariantCulture.Height) / 2;
+        this.lblUserCulture.Top = this.radUserCulture.Top + (this.radUserCulture.Height - this.lblUserCulture.Height) / 2;
     }
 
 }

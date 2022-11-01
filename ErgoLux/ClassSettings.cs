@@ -123,8 +123,8 @@ public class ClassSettings
     [JsonPropertyName("Culture name")]
     public string AppCultureName
     {
-        get { return AppCulture.Name; }
-        set { AppCulture = new System.Globalization.CultureInfo(value); }
+        get { return this.AppCulture.Name; }
+        set { this.AppCulture = new System.Globalization.CultureInfo(value); }
     }
 
     /// <summary>
@@ -134,7 +134,7 @@ public class ClassSettings
     public string MillisecondsFormat
     {
         //get { return $"$1{AppCulture.NumberFormat.NumberDecimalSeparator}fff"; }
-        get { return GetMillisecondsFormat(AppCulture); }
+        get { return this.GetMillisecondsFormat(this.AppCulture); }
     }
 
     /// <summary>
@@ -175,9 +175,9 @@ public class ClassSettings
 
     ~ClassSettings()
     {
-        if (Icon_Open is not null) Icon_Open.Dispose();
-        if (Icon_Close is not null) Icon_Close.Dispose();
-        if (Icon_Data is not null) Icon_Data.Dispose();
+        if (this.Icon_Open is not null) this.Icon_Open.Dispose();
+        if (this.Icon_Close is not null) this.Icon_Close.Dispose();
+        if (this.Icon_Data is not null) this.Icon_Data.Dispose();
     }
 
     /// <summary>
@@ -185,9 +185,9 @@ public class ClassSettings
     /// </summary>
     public void LoadGraphicResources()
     {
-        Icon_Open = GraphicsResources.LoadIcon(GraphicsResources.IconOpenConnection, 16);
-        Icon_Close = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
-        Icon_Data = GraphicsResources.LoadIcon(GraphicsResources.IconExchangeConnection, 16);
+        this.Icon_Open = GraphicsResources.LoadIcon(GraphicsResources.IconOpenConnection, 16);
+        this.Icon_Close = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
+        this.Icon_Data = GraphicsResources.LoadIcon(GraphicsResources.IconExchangeConnection, 16);
     }
 
     public string GetMillisecondsFormat(System.Globalization.CultureInfo culture)

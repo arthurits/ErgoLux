@@ -16,16 +16,16 @@ public class FTDISample : FTDI
     public FTDISample()
         : base()
     {
-        receivedDataEvent = new AutoResetEvent(false);
-        FTDI.FT_STATUS ftStatus = base.SetEventNotification(FTDI.FT_EVENTS.FT_EVENT_RXCHAR, receivedDataEvent);
+        this.receivedDataEvent = new AutoResetEvent(false);
+        FTDI.FT_STATUS ftStatus = base.SetEventNotification(FTDI.FT_EVENTS.FT_EVENT_RXCHAR, this.receivedDataEvent);
 
         // Try to replace with Task approach
         // See this: https://blog.lextudio.com/how-to-replace-backgroundworker-with-async-await-and-tasks-80d7c8ed89dc
-        dataReceivedHandler = new BackgroundWorker();
-        dataReceivedHandler.DoWork += ReadData_KonicaT10;
-        if (!dataReceivedHandler.IsBusy)
+        this.dataReceivedHandler = new BackgroundWorker();
+        this.dataReceivedHandler.DoWork += this.ReadData_KonicaT10;
+        if (!this.dataReceivedHandler.IsBusy)
         {
-            dataReceivedHandler.RunWorkerAsync();
+            this.dataReceivedHandler.RunWorkerAsync();
         }
     }
 
@@ -108,7 +108,7 @@ public class FTDISample : FTDI
             ftStatus = base.OpenBySerialNumber(serialNumber);
 
         // Set the T-10A device paramters
-        ftStatus = SetKonicaT10((uint)baud, (byte)dataBits, (byte)stopBits, (byte)parity, (ushort)flowControl, (byte)xOn, (byte)xOff, readTimeOut, writeTimeOut);
+        ftStatus = this.SetKonicaT10((uint)baud, (byte)dataBits, (byte)stopBits, (byte)parity, (ushort)flowControl, (byte)xOn, (byte)xOff, readTimeOut, writeTimeOut);
 
         if (ftStatus != FTDI.FT_STATUS.FT_OK)
         {
@@ -220,7 +220,7 @@ public class FTDISample : FTDI
         {
             //System.Diagnostics.Debug.WriteLine("ReadData event");
             // wait until event is fired
-            receivedDataEvent.WaitOne();
+            this.receivedDataEvent.WaitOne();
 
             // try to recieve data now
             status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
@@ -237,8 +237,8 @@ public class FTDISample : FTDI
                 status = base.Read(readData, nrOfBytesAvailable, ref numBytesRead);
 
                 // invoke your own event handler for data received...
-                OnDataReceived(new DataReceivedEventArgs(readData, numBytesRead, nrOfBytesAvailable));
-                _receivedBuffer = true;
+                this.OnDataReceived(new DataReceivedEventArgs(readData, numBytesRead, nrOfBytesAvailable));
+                this._receivedBuffer = true;
             }
         }
     }
@@ -255,7 +255,7 @@ public class FTDISample : FTDI
         UInt32 numBytesRead = 0;
         string strReadData = string.Empty;
 
-        receivedDataEvent.WaitOne();
+        this.receivedDataEvent.WaitOne();
 
         while (true)
         {
@@ -274,9 +274,9 @@ public class FTDISample : FTDI
                 if (readData[^1] == 10)
                 {
                     // invoke your own event handler for data received...
-                    OnDataReceived(new DataReceivedEventArgs(Encoding.ASCII.GetBytes(strReadData), numBytesRead, nrOfBytesAvailable));
+                    this.OnDataReceived(new DataReceivedEventArgs(Encoding.ASCII.GetBytes(strReadData), numBytesRead, nrOfBytesAvailable));
                     strReadData = string.Empty;
-                    receivedDataEvent.WaitOne();
+                    this.receivedDataEvent.WaitOne();
                 }
             }
         }
@@ -305,7 +305,7 @@ public class FTDISample : FTDI
                         " written " + numBytesWritten);
             return false;
         }
-        receivedDataEvent.Set();
+        this.receivedDataEvent.Set();
         return true;
     }
 
@@ -316,7 +316,7 @@ public class FTDISample : FTDI
     {
         for (int i = 0; i < list.Length; i++)
         {
-            if (!Write(list[i])) return false;
+            if (!this.Write(list[i])) return false;
         }
         return true;
     }
@@ -327,7 +327,7 @@ public class FTDISample : FTDI
     /// </summary>
     public void ClearBuffer()
     {
-        receivedDataEvent.Set();
+        this.receivedDataEvent.Set();
     }
 
 
@@ -336,9 +336,9 @@ public class FTDISample : FTDI
     /// </summary>
     public void GetReceiveBuffer()
     {
-        _receivedBuffer = false;
-        while (!_receivedBuffer)
-            receivedDataEvent.Set();
+        this._receivedBuffer = false;
+        while (!this._receivedBuffer)
+            this.receivedDataEvent.Set();
         return;
     }
 }
@@ -350,7 +350,7 @@ public class DataReceivedEventArgs : EventArgs
 {
     public DataReceivedEventArgs(byte[] data, uint bytesRead, uint bytesAvailable)
     {
-        DataReceived = data;
+        this.DataReceived = data;
 
         //string str = string.Empty;
         //foreach (byte i in data)
@@ -361,11 +361,11 @@ public class DataReceivedEventArgs : EventArgs
         //byte[] buffer = System.Text.Encoding.UTF8.GetBytes(convert);
 
         // From byte array to string
-        StrDataReceived = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
+        this.StrDataReceived = System.Text.Encoding.UTF8.GetString(data, 0, data.Length);
 
-        BytesRead = bytesRead;
+        this.BytesRead = bytesRead;
 
-        BytesAvailable = bytesAvailable;
+        this.BytesAvailable = bytesAvailable;
     }
 
     /// <summary>

@@ -21,7 +21,7 @@ class ToolStripStatusLabelEx : System.Windows.Forms.ToolStripStatusLabel
     /// </summary>
     public ToolStripStatusLabelEx()
     {
-        BackColor = System.Drawing.Color.Transparent;
+        this.BackColor = System.Drawing.Color.Transparent;
     }
 
     /// <summary>
@@ -34,20 +34,20 @@ class ToolStripStatusLabelEx : System.Windows.Forms.ToolStripStatusLabel
     public ToolStripStatusLabelEx(System.Drawing.Brush border, System.Drawing.Brush checkedBackground, System.Drawing.Color foreColorChecked, System.Drawing.Color foreColorUnchecked)
         : this()
     {
-        CheckedBorder = border;
-        CheckedBackground = checkedBackground;
-        ForeColorChecked = foreColorChecked;
-        ForeColorUnchecked = foreColorUnchecked;
+        this.CheckedBorder = border;
+        this.CheckedBackground = checkedBackground;
+        this.ForeColorChecked = foreColorChecked;
+        this.ForeColorUnchecked = foreColorUnchecked;
     }
 
     public bool Checked
     {
-        get => _checked;
+        get => this._checked;
         set
         {
-            _checked = value;
-            Invalidate();       // Force repainting of the client area
-            OnCheckedChanged(new EventArgs());
+            this._checked = value;
+            this.Invalidate();       // Force repainting of the client area
+            this.OnCheckedChanged(new EventArgs());
         }
     }
 
@@ -64,24 +64,24 @@ class ToolStripStatusLabelEx : System.Windows.Forms.ToolStripStatusLabel
     protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
     {
         // Only render if the state is checked
-        if (_checked)
+        if (this._checked)
         {
             // fill the entire button with a color (will be used as a border)
-            System.Drawing.Rectangle rectButtonFill = new System.Drawing.Rectangle(System.Drawing.Point.Empty, new System.Drawing.Size(ContentRectangle.Size.Width, ContentRectangle.Size.Height));
-            e.Graphics.FillRectangle(CheckedBorder, rectButtonFill);
+            System.Drawing.Rectangle rectButtonFill = new System.Drawing.Rectangle(System.Drawing.Point.Empty, new System.Drawing.Size(this.ContentRectangle.Size.Width, this.ContentRectangle.Size.Height));
+            e.Graphics.FillRectangle(this.CheckedBorder, rectButtonFill);
 
             // fill the entire button offset by 1,1 and height/width subtracted by 2 used as the fill color
-            int backgroundHeight = ContentRectangle.Size.Height - 2;
-            int backgroundWidth = ContentRectangle.Size.Width - 2;   // Check the label's borders to set up this substraction
+            int backgroundHeight = this.ContentRectangle.Size.Height - 2;
+            int backgroundWidth = this.ContentRectangle.Size.Width - 2;   // Check the label's borders to set up this substraction
             System.Drawing.Rectangle rectBackground = new System.Drawing.Rectangle(1, 1, backgroundWidth, backgroundHeight);
-            e.Graphics.FillRectangle(CheckedBackground, rectBackground);
+            e.Graphics.FillRectangle(this.CheckedBackground, rectBackground);
 
             // Set the fore color
-            ForeColor = ForeColorChecked;
+            this.ForeColor = this.ForeColorChecked;
         }
         else
         {
-            ForeColor = ForeColorUnchecked;
+            this.ForeColor = this.ForeColorUnchecked;
         }
 
         base.OnPaint(e);
