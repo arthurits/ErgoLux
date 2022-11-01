@@ -34,7 +34,7 @@ public class FTDISample : FTDI
         if (base.IsOpen)
             base.Close();
     }
-    
+
     /// <summary>
     /// Event firing
     /// </summary>
@@ -220,7 +220,7 @@ public class FTDISample : FTDI
         {
             //System.Diagnostics.Debug.WriteLine("ReadData event");
             // wait until event is fired
-            this.receivedDataEvent.WaitOne();
+            receivedDataEvent.WaitOne();
 
             // try to recieve data now
             status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
@@ -235,7 +235,7 @@ public class FTDISample : FTDI
                 UInt32 numBytesRead = 0;
                 //status = mFTDI.Read(readData, nrOfBytesAvailable, ref numBytesRead);
                 status = base.Read(readData, nrOfBytesAvailable, ref numBytesRead);
-                
+
                 // invoke your own event handler for data received...
                 OnDataReceived(new DataReceivedEventArgs(readData, numBytesRead, nrOfBytesAvailable));
                 _receivedBuffer = true;
@@ -254,9 +254,9 @@ public class FTDISample : FTDI
         UInt32 nrOfBytesAvailable = 0;
         UInt32 numBytesRead = 0;
         string strReadData = string.Empty;
-        
-        this.receivedDataEvent.WaitOne();
-        
+
+        receivedDataEvent.WaitOne();
+
         while (true)
         {
             status = base.GetRxBytesAvailable(ref nrOfBytesAvailable);
@@ -276,7 +276,7 @@ public class FTDISample : FTDI
                     // invoke your own event handler for data received...
                     OnDataReceived(new DataReceivedEventArgs(Encoding.ASCII.GetBytes(strReadData), numBytesRead, nrOfBytesAvailable));
                     strReadData = string.Empty;
-                    this.receivedDataEvent.WaitOne();
+                    receivedDataEvent.WaitOne();
                 }
             }
         }
@@ -305,14 +305,14 @@ public class FTDISample : FTDI
                         " written " + numBytesWritten);
             return false;
         }
-        this.receivedDataEvent.Set();
+        receivedDataEvent.Set();
         return true;
     }
 
     /// <summary>
     /// For testing purposes.
     /// </summary>
-    public bool Write (params string[] list)
+    public bool Write(params string[] list)
     {
         for (int i = 0; i < list.Length; i++)
         {
@@ -327,7 +327,7 @@ public class FTDISample : FTDI
     /// </summary>
     public void ClearBuffer()
     {
-        this.receivedDataEvent.Set();
+        receivedDataEvent.Set();
     }
 
 
@@ -338,7 +338,7 @@ public class FTDISample : FTDI
     {
         _receivedBuffer = false;
         while (!_receivedBuffer)
-            this.receivedDataEvent.Set();
+            receivedDataEvent.Set();
         return;
     }
 }

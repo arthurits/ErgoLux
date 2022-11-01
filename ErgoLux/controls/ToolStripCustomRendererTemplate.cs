@@ -74,11 +74,14 @@ public class CustomRenderer<T> : System.Windows.Forms.ToolStripProfessionalRende
             }
             // if this button is not checked, use the normal render event
             else
+            {
                 base.OnRenderButtonBackground(e);
+            }
         }
         // if this object is not a ToolStripButton, use the normal render event
         else
+        {
             base.OnRenderButtonBackground(e);
+        }
     }
 }
-

@@ -3,7 +3,7 @@ using System;
 namespace ErgoLux
 {
     // Optional approach to to handle a class as an Enum https://stackoverflow.com/questions/630803/associating-enums-with-strings-in-c-sharp
-    
+
     /// <summary>
     /// Low-level parameters and commands for T-10A,as well as functions to encode and decode information to and from T-10A
     /// </summary>
@@ -13,12 +13,12 @@ namespace ErgoLux
         /// Start of text constant (1 byte)
         /// </summary>
         private static readonly string strSTX;
-        
+
         /// <summary>
         /// End of text constant (1 byte)
         /// </summary>
         private static readonly string strETX;
-        
+
         /// <summary>
         /// Delimier constant (2 bytes)
         /// </summary>
@@ -88,11 +88,11 @@ namespace ErgoLux
             ReceptorsSingle = new string[MaximumSensors];
             ReceptorsIntegrated = new string[MaximumSensors];
             Command_28 = new string[MaximumSensors];
-            for (int i=0; i< MaximumSensors; i++)
+            for (int i = 0; i < MaximumSensors; i++)
             {
                 ReceptorsSingle[i] = EncodeCommand(i.ToString("00") + "100200");
                 ReceptorsIntegrated[i] = EncodeCommand(i.ToString("00") + "110200");
-                Command_28 [i] = EncodeCommand(i.ToString("00") + "28    ");
+                Command_28[i] = EncodeCommand(i.ToString("00") + "28    ");
             }
 
             // Commands initialization
@@ -156,9 +156,9 @@ namespace ErgoLux
             string strTemp3 = strTemp.Substring(12, 6);
 
             var Sensor = Convert.ToInt32(strCommand.Substring(1, 2));
-            
+
             var nIluminance = Convert.ToDouble(Convert.ToInt32(strTemp1.Substring(1, 4))) * Math.Pow(10.0, Convert.ToInt32(strTemp1.Substring(5, 1)) - 4);
-            
+
             var nIncrement = 0.0;
             if (strTemp2.Trim().Length != 0)
             {

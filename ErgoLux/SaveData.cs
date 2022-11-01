@@ -84,7 +84,7 @@ partial class FrmMain
     /// Saves data into a text-formatted file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the text file</param>
-    private void SaveTextData (string FileName)
+    private void SaveTextData(string FileName)
     {
         SaveELuxData(FileName);
     }
@@ -93,7 +93,7 @@ partial class FrmMain
     /// Saves data into a binary-formatted file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the binary file</param>
-    private void SaveBinaryData (string FileName)
+    private void SaveBinaryData(string FileName)
     {
         try
         {

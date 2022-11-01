@@ -1,5 +1,5 @@
-﻿using ScottPlot;
-using System.Globalization;
+﻿using System.Globalization;
+using ScottPlot;
 
 namespace ErgoLux;
 
@@ -95,14 +95,18 @@ public partial class FrmLanguage : Form
     {
         cboAllCultures.Enabled = false;
         if (cultureName == string.Empty)
+        {
             radInvariantCulture.Checked = true;
+        }
         else if (cultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
+        {
             radCurrentCulture.Checked = true;
+        }
         else
         {
             cboAllCultures.SelectedValue = cultureName;
             radUserCulture.Checked = true;
-        }   
+        }
     }
 
     /// <summary>
@@ -136,17 +140,17 @@ public partial class FrmLanguage : Form
     {
         StringResources.Culture = culture;
 
-        this.Text = StringResources.FrmLanguage;
-        this.lblCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
-        this.lblInvariantCulture.Text = StringResources.RadInvariantCulture;
-        this.lblUserCulture.Text = StringResources.RadUserCulture;
-        this.btnCancel.Text = StringResources.BtnCancel;
-        this.btnAccept.Text = StringResources.BtnAccept;
+        Text = StringResources.FrmLanguage;
+        lblCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+        lblInvariantCulture.Text = StringResources.RadInvariantCulture;
+        lblUserCulture.Text = StringResources.RadUserCulture;
+        btnCancel.Text = StringResources.BtnCancel;
+        btnAccept.Text = StringResources.BtnAccept;
 
         // Reposition controls to compensate for the culture text length in labels
-        this.lblCurrentCulture.Top = this.radCurrentCulture.Top + (this.radCurrentCulture.Height - this.lblCurrentCulture.Height) / 2;
-        this.lblInvariantCulture.Top = this.radInvariantCulture.Top + (this.radInvariantCulture.Height - this.lblInvariantCulture.Height) / 2;
-        this.lblUserCulture.Top = this.radUserCulture.Top + (this.radUserCulture.Height - this.lblUserCulture.Height) / 2;
+        lblCurrentCulture.Top = radCurrentCulture.Top + (radCurrentCulture.Height - lblCurrentCulture.Height) / 2;
+        lblInvariantCulture.Top = radInvariantCulture.Top + (radInvariantCulture.Height - lblInvariantCulture.Height) / 2;
+        lblUserCulture.Top = radUserCulture.Top + (radUserCulture.Height - lblUserCulture.Height) / 2;
     }
 
 }

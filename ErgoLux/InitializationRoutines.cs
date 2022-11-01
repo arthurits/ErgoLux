@@ -23,18 +23,18 @@ partial class FrmMain
     {
         toolStripMain.Renderer = new CustomRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
-        this.toolStripMain_Exit.Image = GraphicsResources.LoadIcon(GraphicsResources.IconExit, 48);
-        this.toolStripMain_Connect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconConnect, 48);
-        this.toolStripMain_Disconnect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconDisconnect, 48);
-        this.toolStripMain_Save.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSave, 48);
-        this.toolStripMain_Open.Image = GraphicsResources.LoadIcon(GraphicsResources.IconOpen, 48);
-        this.toolStripMain_Settings.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSettings, 48);
-        this.toolStripMain_About.Image = GraphicsResources.LoadIcon(GraphicsResources.IconAbout, 48);
+        toolStripMain_Exit.Image = GraphicsResources.LoadIcon(GraphicsResources.IconExit, 48);
+        toolStripMain_Connect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconConnect, 48);
+        toolStripMain_Disconnect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconDisconnect, 48);
+        toolStripMain_Save.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSave, 48);
+        toolStripMain_Open.Image = GraphicsResources.LoadIcon(GraphicsResources.IconOpen, 48);
+        toolStripMain_Settings.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSettings, 48);
+        toolStripMain_About.Image = GraphicsResources.LoadIcon(GraphicsResources.IconAbout, 48);
 
-        this.toolStripMain_Disconnect.Enabled = false;
-        this.toolStripMain_Connect.Enabled = false;
-        this.toolStripMain_Open.Enabled = true; // maybe set as default in the WinForms designer
-        this.toolStripMain_Save.Enabled = true;
+        toolStripMain_Disconnect.Enabled = false;
+        toolStripMain_Connect.Enabled = false;
+        toolStripMain_Open.Enabled = true; // maybe set as default in the WinForms designer
+        toolStripMain_Save.Enabled = true;
     }
 
     /// <summary>
@@ -42,29 +42,29 @@ partial class FrmMain
     /// </summary>
     private void InitializeMenuStrip()
     {
-        this.mnuMainFrm_File_Open.Image = GraphicsResources.LoadIcon(GraphicsResources.IconOpen, 16);
-        this.mnuMainFrm_File_Save.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSave, 16);
-        this.mnuMainFrm_File_Exit.Image = GraphicsResources.LoadIcon(GraphicsResources.IconExit, 16);
+        mnuMainFrm_File_Open.Image = GraphicsResources.LoadIcon(GraphicsResources.IconOpen, 16);
+        mnuMainFrm_File_Save.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSave, 16);
+        mnuMainFrm_File_Exit.Image = GraphicsResources.LoadIcon(GraphicsResources.IconExit, 16);
 
-        this.mnuMainFrm_Tools_Connect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconConnect, 16);
-        this.mnuMainFrm_Tools_Disconnect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconDisconnect, 16);
-        this.mnuMainFrm_Tools_Settings.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSettings, 16);
+        mnuMainFrm_Tools_Connect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconConnect, 16);
+        mnuMainFrm_Tools_Disconnect.Image = GraphicsResources.LoadIcon(GraphicsResources.IconDisconnect, 16);
+        mnuMainFrm_Tools_Settings.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSettings, 16);
 
-        this.mnuMainFrm_Help_About.Image = GraphicsResources.LoadIcon(GraphicsResources.IconAbout, 16);
+        mnuMainFrm_Help_About.Image = GraphicsResources.LoadIcon(GraphicsResources.IconAbout, 16);
 
         // Initialize the menu checked items
-        this.mnuMainFrm_View_Menu.Checked = true;
-        this.mnuMainFrm_View_Toolbar.Checked = true;
-        this.mnuMainFrm_View_Raw.Checked = _settings.Plot_ShowRawData;
-        this.mnuMainFrm_View_Distribution.Checked = _settings.Plot_ShowDistribution;
-        this.mnuMainFrm_View_Average.Checked = _settings.Plot_ShowAverage;
-        this.mnuMainFrm_View_Ratio.Checked = _settings.Plot_ShowRatios;
+        mnuMainFrm_View_Menu.Checked = true;
+        mnuMainFrm_View_Toolbar.Checked = true;
+        mnuMainFrm_View_Raw.Checked = _settings.Plot_ShowRawData;
+        mnuMainFrm_View_Distribution.Checked = _settings.Plot_ShowDistribution;
+        mnuMainFrm_View_Average.Checked = _settings.Plot_ShowAverage;
+        mnuMainFrm_View_Ratio.Checked = _settings.Plot_ShowRatios;
 
         // Initialize enable status
-        this.mnuMainFrm_Tools_Connect.Enabled = false;
-        this.mnuMainFrm_Tools_Disconnect.Enabled = false;
-        this.toolStripMain_Disconnect.Enabled = false;
-        this.toolStripMain_Connect.Enabled = false;
+        mnuMainFrm_Tools_Connect.Enabled = false;
+        mnuMainFrm_Tools_Disconnect.Enabled = false;
+        toolStripMain_Disconnect.Enabled = false;
+        toolStripMain_Connect.Enabled = false;
     }
 
     /// <summary>

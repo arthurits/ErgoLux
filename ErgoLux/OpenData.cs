@@ -121,28 +121,34 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
+            {
                 MessageBox.Show(string.Format(StringResources.ReadDataErrorCulture, ex.Message),
                     StringResources.ReadDataErrorCultureTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
         }
         catch (FormatException ex)
         {
             result = false;
             using (new CenterWinDialog(this))
+            {
                 MessageBox.Show(string.Format(StringResources.ReadDataError, ex.Message),
                     StringResources.ReadDataErrorTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
         }
         catch (ArithmeticException ex)
         {
             result = false;
             using (new CenterWinDialog(this))
+            {
                 MessageBox.Show(string.Format(StringResources.ReadDataErrorNumber, ex.Message),
                     StringResources.ReadDataErrorNumberTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
         }
         catch (Exception ex)
         {
@@ -225,10 +231,12 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
+            {
                 MessageBox.Show(string.Format(StringResources.ReadDataErrorCulture, ex.Message),
                     StringResources.ReadDataErrorCultureTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
         }
         catch (Exception ex)
         {

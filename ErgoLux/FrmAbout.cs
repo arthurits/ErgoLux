@@ -97,25 +97,25 @@ namespace ErgoLux
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        
+
         #endregion
 
         public FrmAbout()
         {
             InitializeComponent();
             // this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            labelProductName.Text = AssemblyProduct;
+            labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
+            labelCopyright.Text = AssemblyCopyright;
+            labelCompanyName.Text = AssemblyCompany;
+            textBoxDescription.Text = AssemblyDescription;
 
             // Set form icons and images
             //this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.IconAbout);
             //if (System.IO.File.Exists(@"images\about.ico")) this.Icon = new Icon(@"images\about.ico");
 
             //Bitmap image = new Icon(@"images\logo.ico", 256, 256).ToBitmap();
-            this.logoPictureBox.Image = GraphicsResources.Load<Image>(GraphicsResources.AppLogo256);
+            logoPictureBox.Image = GraphicsResources.Load<Image>(GraphicsResources.AppLogo256);
         }
 
         //[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
@@ -132,8 +132,8 @@ namespace ErgoLux
             // https://stackoverflow.com/questions/27646476/how-to-fire-form-click-event-even-when-clicking-on-user-controls-in-c-sharp
             if (m.Msg == WM_PARENTNOTIFY && m.WParam.ToInt32() == WM_LBUTTONDOWN)
             {
-                this.Close();
-                
+                Close();
+
                 //// get the clicked position
                 //var x = (int)(m.LParam.ToInt32() & 0xFFFF);
                 //var y = (int)(m.LParam.ToInt32() >> 16);
@@ -143,11 +143,13 @@ namespace ErgoLux
 
                 //// call onClick (which fires Click event)
                 //OnClick(EventArgs.Empty)
-                
+
                 // do something else...
             }
             else if (m.Msg == WM_KEYUP && ((m.WParam.ToInt32() == VK_ESCAPE) | (m.WParam.ToInt32() == VK_RETURN)))
-                this.Close();
+            {
+                Close();
+            }
 
             base.WndProc(ref m);
         }

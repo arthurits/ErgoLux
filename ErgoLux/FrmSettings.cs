@@ -1,5 +1,5 @@
-﻿using FTD2XX_NET;
-using System.Globalization;
+﻿using System.Globalization;
+using FTD2XX_NET;
 
 namespace ErgoLux;
 
@@ -320,9 +320,13 @@ public partial class FrmSettings : Form
 
         cboAllCultures.Enabled = false;
         if (_culture.Name == string.Empty)
+        {
             radInvariantCulture.Checked = true;
+        }
         else if (_culture.Name == System.Globalization.CultureInfo.CurrentCulture.Name)
+        {
             radCurrentCulture.Checked = true;
+        }
         else
         {
             cboAllCultures.SelectedValue = _culture.Name;
@@ -365,95 +369,95 @@ public partial class FrmSettings : Form
         StringResources.Culture = culture;
 
         // Form
-        this.Text = StringResources.FrmSettings;
+        Text = StringResources.FrmSettings;
 
-        this.tabDevice.Text = StringResources.TabDevice;
-        this.tabPlots.Text = StringResources.TabPlots;
-        this.tabGUI.Text = StringResources.TabGUI;
-        
-        this.btnReset.Text = StringResources.BtnReset;
-        this.btnCancel.Text = StringResources.BtnCancel;
-        this.btnAccept.Text = StringResources.BtnAccept;
+        tabDevice.Text = StringResources.TabDevice;
+        tabPlots.Text = StringResources.TabPlots;
+        tabGUI.Text = StringResources.TabGUI;
+
+        btnReset.Text = StringResources.BtnReset;
+        btnCancel.Text = StringResources.BtnCancel;
+        btnAccept.Text = StringResources.BtnAccept;
 
         // Tab T-10A
-        this.lblDevices.Text = StringResources.LblDeviceList;
-        this.lblBaudRate.Text = StringResources.LblBaudRate;
-        this.lblDataBits.Text = StringResources.LblDataBits;
-        this.lblParity.Text = StringResources.LblParity;
-        this.lblSensors.Text = StringResources.LblSensors;
-        this.lblFrequency.Text = StringResources.LblFrequency;
-        this.lblStopBits.Text = StringResources.LblStopBits;
-        this.lblFlowControl.Text = StringResources.LblFlow;
-        this.lblOn.Text = StringResources.LblOn;
-        this.lblOff.Text = StringResources.LblOff;
+        lblDevices.Text = StringResources.LblDeviceList;
+        lblBaudRate.Text = StringResources.LblBaudRate;
+        lblDataBits.Text = StringResources.LblDataBits;
+        lblParity.Text = StringResources.LblParity;
+        lblSensors.Text = StringResources.LblSensors;
+        lblFrequency.Text = StringResources.LblFrequency;
+        lblStopBits.Text = StringResources.LblStopBits;
+        lblFlowControl.Text = StringResources.LblFlow;
+        lblOn.Text = StringResources.LblOn;
+        lblOff.Text = StringResources.LblOff;
 
-        this.viewDevices.Columns[0].Text = StringResources.GridDevice;
-        this.viewDevices.Columns[1].Text = StringResources.GridFlags;
-        this.viewDevices.Columns[2].Text = StringResources.GridType;
-        this.viewDevices.Columns[3].Text = StringResources.GridID;
-        this.viewDevices.Columns[4].Text = StringResources.GridLocation;
-        this.viewDevices.Columns[5].Text = StringResources.GridSerial;
-        this.viewDevices.Columns[6].Text = StringResources.GridDescription;
+        viewDevices.Columns[0].Text = StringResources.GridDevice;
+        viewDevices.Columns[1].Text = StringResources.GridFlags;
+        viewDevices.Columns[2].Text = StringResources.GridType;
+        viewDevices.Columns[3].Text = StringResources.GridID;
+        viewDevices.Columns[4].Text = StringResources.GridLocation;
+        viewDevices.Columns[5].Text = StringResources.GridSerial;
+        viewDevices.Columns[6].Text = StringResources.GridDescription;
 
         // Tab Plots
-        this.lblChkShowRaw.Text = StringResources.ChkPlotRaw;
-        this.lblChkShowDistribution.Text = StringResources.ChkPlotDistribution;
-        this.lblChkShowAverage.Text = StringResources.ChkPlotAverage;
-        this.lblChkShowRatio.Text=StringResources.ChkPlotRatios;
-        this.grpPlot.Text = StringResources.GrpPlot;
-        this.radRadar.Text = StringResources.RadRadar;
-        this.radRadial.Text = StringResources.RadRadialGauge;
-        this.lblArrayPoints.Text = StringResources.LblArrayPoints;
-        this.lblPlotWindow.Text = StringResources.LblPlotWindow;
+        lblChkShowRaw.Text = StringResources.ChkPlotRaw;
+        lblChkShowDistribution.Text = StringResources.ChkPlotDistribution;
+        lblChkShowAverage.Text = StringResources.ChkPlotAverage;
+        lblChkShowRatio.Text = StringResources.ChkPlotRatios;
+        grpPlot.Text = StringResources.GrpPlot;
+        radRadar.Text = StringResources.RadRadar;
+        radRadial.Text = StringResources.RadRadialGauge;
+        lblArrayPoints.Text = StringResources.LblArrayPoints;
+        lblPlotWindow.Text = StringResources.LblPlotWindow;
 
         // Tab Interface
-        this.grpCulture.Text = StringResources.GrpCulture;
-        this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
-        this.radInvariantCulture.Text = StringResources.RadInvariantCulture;
-        this.radUserCulture.Text = StringResources.RadUserCulture;
+        grpCulture.Text = StringResources.GrpCulture;
+        radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+        radInvariantCulture.Text = StringResources.RadInvariantCulture;
+        radUserCulture.Text = StringResources.RadUserCulture;
         //this.chkDlgPath.Text = StringResources.ChkDlgPath;
-        this.lblDlgPath.Text = StringResources.ChkDlgPath;
-        this.lblDataFormat.Text = StringResources.LblDataFormat;
+        lblDlgPath.Text = StringResources.ChkDlgPath;
+        lblDataFormat.Text = StringResources.LblDataFormat;
 
         // Reposition controls to compensate for the culture text length in labels
         // Tab T-10A
-        int nBaud = this.lblBaudRate.Left + this.lblBaudRate.Width + this.txtBaudRate.Width;
-        int nData = this.lblDataBits.Left + this.lblDataBits.Width + this.cboDataBits.Width;
-        int nParity = this.lblParity.Left + this.lblParity.Width + this.cboParity.Width;
-        int nSensors = this.lblSensors.Left + this.lblSensors.Width + this.updSensors.Width;
+        int nBaud = lblBaudRate.Left + lblBaudRate.Width + txtBaudRate.Width;
+        int nData = lblDataBits.Left + lblDataBits.Width + cboDataBits.Width;
+        int nParity = lblParity.Left + lblParity.Width + cboParity.Width;
+        int nSensors = lblSensors.Left + lblSensors.Width + updSensors.Width;
         int nMaxRight = Math.Max(Math.Max(nBaud, nData), Math.Max(nParity, nSensors)) + 3;
-        this.txtBaudRate.Left = nMaxRight - this.txtBaudRate.Width;
-        this.cboDataBits.Left = nMaxRight - this.cboDataBits.Width;
-        this.cboParity.Left = nMaxRight - this.cboParity.Width;
-        this.updSensors.Left = nMaxRight - this.updSensors.Width;
+        txtBaudRate.Left = nMaxRight - txtBaudRate.Width;
+        cboDataBits.Left = nMaxRight - cboDataBits.Width;
+        cboParity.Left = nMaxRight - cboParity.Width;
+        updSensors.Left = nMaxRight - updSensors.Width;
 
-        int nFreq = this.txtHz.Left - this.lblFrequency.Width;
-        int nStop = this.cboStopBits.Left - this.lblStopBits.Width;
-        int nFlow = this.cboFlowControl.Left - this.lblFlowControl.Width;
+        int nFreq = txtHz.Left - lblFrequency.Width;
+        int nStop = cboStopBits.Left - lblStopBits.Width;
+        int nFlow = cboFlowControl.Left - lblFlowControl.Width;
         int minLeft = Math.Min(Math.Min(nFreq, nStop), nFlow) - 3;
-        this.lblFrequency.Left = minLeft;
-        this.lblStopBits.Left = minLeft;
-        this.lblFlowControl.Left = minLeft;
+        lblFrequency.Left = minLeft;
+        lblStopBits.Left = minLeft;
+        lblFlowControl.Left = minLeft;
 
-        this.lblOff.Left = this.txtOff.Left - this.lblOff.Width - 3;
-        this.txtOn.Left = this.lblOff.Left - this.txtOn.Width - 7;
-        this.lblOn.Left = this.txtOn.Left - this.lblOn.Width - 3;
+        lblOff.Left = txtOff.Left - lblOff.Width - 3;
+        txtOn.Left = lblOff.Left - txtOn.Width - 7;
+        lblOn.Left = txtOn.Left - lblOn.Width - 3;
 
         // Tab plots
-        this.lblChkShowRaw.Top = this.chkShowRaw.Top + (this.chkShowRaw.Height - this.lblChkShowRaw.Height) / 2;
-        this.lblChkShowDistribution.Top = this.chkShowDistribution.Top + (this.chkShowDistribution.Height - this.lblChkShowDistribution.Height) / 2;
-        this.lblChkShowAverage.Top = this.chkShowAverage.Top + (this.chkShowAverage.Height - this.lblChkShowAverage.Height) / 2;
-        this.lblChkShowRatio.Top = this.chkShowRatio.Top + (this.chkShowRatio.Height - this.lblChkShowRatio.Height) / 2;
+        lblChkShowRaw.Top = chkShowRaw.Top + (chkShowRaw.Height - lblChkShowRaw.Height) / 2;
+        lblChkShowDistribution.Top = chkShowDistribution.Top + (chkShowDistribution.Height - lblChkShowDistribution.Height) / 2;
+        lblChkShowAverage.Top = chkShowAverage.Top + (chkShowAverage.Height - lblChkShowAverage.Height) / 2;
+        lblChkShowRatio.Top = chkShowRatio.Top + (chkShowRatio.Height - lblChkShowRatio.Height) / 2;
 
-        int width = Math.Max(this.lblArrayPoints.Width, this.lblPlotWindow.Width);
-        this.txtArrayPoints.Left = this.lblArrayPoints.Left + width;
-        this.txtPlotWindow.Left = this.lblPlotWindow.Left + width;
+        int width = Math.Max(lblArrayPoints.Width, lblPlotWindow.Width);
+        txtArrayPoints.Left = lblArrayPoints.Left + width;
+        txtPlotWindow.Left = lblPlotWindow.Left + width;
 
         // Tab Interface
-        this.chkDlgPath.Top = 1 + this.lblDlgPath.Top + (lblDlgPath.Height - chkDlgPath.Height) / 2;
+        chkDlgPath.Top = 1 + lblDlgPath.Top + (lblDlgPath.Height - chkDlgPath.Height) / 2;
 
-        this.txtDataFormat.Left = this.lblDataFormat.Left + this.lblDataFormat.Width;
-        this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
+        txtDataFormat.Left = lblDataFormat.Left + lblDataFormat.Width;
+        lblDataFormat.Top = txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }
 
 

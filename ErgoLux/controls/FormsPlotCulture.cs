@@ -25,9 +25,9 @@ public class FormsPlotCulture : ScottPlot.FormsPlot
     {
         InitilizeContextMenu();
         // Unsubscribe from the default right-click menu event
-        this.RightClicked -= DefaultRightClickEvent;
+        RightClicked -= DefaultRightClickEvent;
         // Add a custom right-click action
-        this.RightClicked += CustomRightClickEvent;
+        RightClicked += CustomRightClickEvent;
     }
 
     /// <summary>

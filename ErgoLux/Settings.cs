@@ -61,9 +61,9 @@ partial class FrmMain
     {
         if (WindowPosition)
         {
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.DesktopLocation = new Point(_settings.WindowLeft, _settings.WindowTop);
-            this.ClientSize = new Size(_settings.WindowWidth, _settings.WindowHeight);
+            StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            DesktopLocation = new Point(_settings.WindowLeft, _settings.WindowTop);
+            ClientSize = new Size(_settings.WindowWidth, _settings.WindowHeight);
         }
     }
 }

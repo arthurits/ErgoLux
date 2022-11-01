@@ -1,5 +1,5 @@
-﻿using FTD2XX_NET;
-using System.Globalization;
+﻿using System.Globalization;
+using FTD2XX_NET;
 
 namespace ErgoLux;
 
@@ -7,12 +7,12 @@ partial class FrmMain
 {
     private void Exit_Click(object sender, EventArgs e)
     {
-        this.Close();
+        Close();
     }
 
     private void Save_CheckedChanged(object sender, EventArgs e)
     {
-        this.mnuMainFrm_File_Save.Enabled = toolStripMain_Save.Checked;
+        mnuMainFrm_File_Save.Enabled = toolStripMain_Save.Checked;
     }
 
     private void Save_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ partial class FrmMain
         };
 
         using (new CenterWinDialog(this))
-            result = SaveDlg.ShowDialog(this.Parent);
+            result = SaveDlg.ShowDialog(Parent);
 
         var cursor = Cursor.Current;
         // If the file name is not an empty string, call the corresponding routine to save the data into a file.  
@@ -131,7 +131,7 @@ partial class FrmMain
         if (readOK)
         {
             SetFormTitle(this, OpenDlg.FileName);
-            
+
             // Show data into plots
             Plots_FetchData();
 
@@ -168,7 +168,7 @@ partial class FrmMain
             toolStripMain_Save.Enabled = false;
             toolStripMain_Settings.Enabled = false;
             toolStripMain_About.Enabled = false;
-            this.statusStripIconExchange.Image = _settings.Icon_Data;
+            statusStripIconExchange.Image = _settings.Icon_Data;
             SetFormTitle(this);
             _reading = true;
 
@@ -188,7 +188,7 @@ partial class FrmMain
             toolStripMain_Save.Enabled = true;
             toolStripMain_Settings.Enabled = true;
             toolStripMain_About.Enabled = true;
-            this.statusStripIconExchange.Image = null;
+            statusStripIconExchange.Image = null;
             _reading = false;
         }
     }
@@ -252,7 +252,7 @@ partial class FrmMain
                 (_isRadar == _settings.Plot_DistIsRadar) &&
                 (_arrayPoints == _settings.Plot_ArrayPoints);
             ModifyPlots = !ModifyPlots;
-            
+
             ModifyArrays = (_numberOfSensors == _settings.T10_NumberOfSensors) && (_arrayPoints == _settings.Plot_ArrayPoints);
             ModifyArrays = !ModifyArrays;
 
@@ -275,16 +275,16 @@ partial class FrmMain
                     xOff: _settings.T10_CharOff,
                     readTimeOut: 0,
                     writeTimeOut: 0);
-                
+
                 if (result == FTDI.FT_STATUS.FT_OK)
                 {
-                    this.toolStripMain_Connect.Enabled = true;
+                    toolStripMain_Connect.Enabled = true;
 
                     // Update the status strip with information
-                    this.statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
-                    this.statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
-                    this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID.ToString("0:X")}";
-                    this.statusStripIconOpen.Image = _settings.Icon_Open;
+                    statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
+                    statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
+                    statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID.ToString("0:X")}";
+                    statusStripIconOpen.Image = _settings.Icon_Open;
 
                     // Check the number of sensors
                     //CheckSensors();
@@ -303,8 +303,8 @@ partial class FrmMain
                 }
                 else
                 {
-                    this.toolStripMain_Connect.Enabled = false;
-                    this.statusStripIconOpen.Image = _settings.Icon_Close;
+                    toolStripMain_Connect.Enabled = false;
+                    statusStripIconOpen.Image = _settings.Icon_Close;
 
                     using (new CenterWinDialog(this))
                     {
@@ -378,7 +378,7 @@ partial class FrmMain
             //        this.statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
             //        this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID.ToString("0:X")}";
             //        this.statusStripIconOpen.Image = _settings.Icon_Open;
-                    
+
             //        InitializeStatusStripLabelsStatus();
             //        InitializeArrays();     // Initialize the arrays containing the data
             //        //Plots_FetchData();    // Needs verification in substitution of the next 3 calls
@@ -479,49 +479,49 @@ partial class FrmMain
 
     private void mnuMainFrm_View_Menu_Click(object sender, EventArgs e)
     {
-        bool status = !this.mnuMainFrm_View_Menu.Checked;
-        this.mnuMainFrm_View_Menu.Checked = status;
-        this.mnuMainFrm.Visible = status;
+        bool status = !mnuMainFrm_View_Menu.Checked;
+        mnuMainFrm_View_Menu.Checked = status;
+        mnuMainFrm.Visible = status;
     }
     private void mnuMainFrm_View_Toolbar_Click(object sender, EventArgs e)
     {
-        bool status = !this.mnuMainFrm_View_Toolbar.Checked;
-        this.mnuMainFrm_View_Toolbar.Checked = status;
-        this.toolStripMain.Visible = status;
+        bool status = !mnuMainFrm_View_Toolbar.Checked;
+        mnuMainFrm_View_Toolbar.Checked = status;
+        toolStripMain.Visible = status;
     }
     private void mnuMainFrm_View_Raw_Click(object sender, EventArgs e)
     {
-        bool status = !this.mnuMainFrm_View_Raw.Checked;
-        this.mnuMainFrm_View_Raw.Checked = status;
-        this.statusStripLabelRaw.Checked = status;
+        bool status = !mnuMainFrm_View_Raw.Checked;
+        mnuMainFrm_View_Raw.Checked = status;
+        statusStripLabelRaw.Checked = status;
         _settings.Plot_ShowRawData = status;
     }
     private void mnuMainFrm_View_Radial_Click(object sender, EventArgs e)
     {
-        bool status = !this.mnuMainFrm_View_Distribution.Checked;
-        this.mnuMainFrm_View_Distribution.Checked = status;
-        this.statusStripLabelRadar.Checked = status;
+        bool status = !mnuMainFrm_View_Distribution.Checked;
+        mnuMainFrm_View_Distribution.Checked = status;
+        statusStripLabelRadar.Checked = status;
         _settings.Plot_ShowDistribution = status;
     }
     private void mnuMainFrm_View_Average_Click(object sender, EventArgs e)
     {
-        bool status = !this.mnuMainFrm_View_Average.Checked;
-        this.mnuMainFrm_View_Average.Checked = status;
-        this.statusStripLabelMax.Checked = status;
+        bool status = !mnuMainFrm_View_Average.Checked;
+        mnuMainFrm_View_Average.Checked = status;
+        statusStripLabelMax.Checked = status;
         _settings.Plot_ShowAverage = status;
     }
     private void mnuMainFrm_View_Ratio_Click(object sender, EventArgs e)
     {
-        bool status = !this.mnuMainFrm_View_Ratio.Checked;
-        this.mnuMainFrm_View_Ratio.Checked = status;
-        this.statusStripLabelRatio.Checked = status;
+        bool status = !mnuMainFrm_View_Ratio.Checked;
+        mnuMainFrm_View_Ratio.Checked = status;
+        statusStripLabelRatio.Checked = status;
         _settings.Plot_ShowRatios = status;
     }
     private void mnuMainFrm_Tools_Connect_Click(object sender, EventArgs e)
     {
-        bool status = !this.toolStripMain_Connect.Checked;
-        this.mnuMainFrm_Tools_Connect.Checked = status;
-        this.toolStripMain_Connect.Checked = status;
+        bool status = !toolStripMain_Connect.Checked;
+        mnuMainFrm_Tools_Connect.Checked = status;
+        toolStripMain_Connect.Checked = status;
     }
 
 }

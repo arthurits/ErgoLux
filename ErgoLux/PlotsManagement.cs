@@ -100,15 +100,15 @@ partial class FrmMain
         int points = resetPlotPoints ? _settings.Plot_ArrayPoints : _nPoints;
 
         Plots_Clear();  // This sets _nPoints = 0, so we need to reset it now
-        
+
         _nPoints = points;
 
         Plots_DataBinding();    // Bind the arrays to the plots
         Plots_ShowLegends();    // Show the legends in the picture boxes
-        
+
         if (showAllData)
             Plots_ShowFull();   // Show all data (fit data)
-        
+
         Plots_Refresh();
     }
 
@@ -168,7 +168,7 @@ partial class FrmMain
         Size szLegend = new();
 
         // Combine legends from Plot1 and Plot2 and draw a black border around each legend
-        legendA = showLegA ? plotData.Plot.RenderLegend() : new(1,1);
+        legendA = showLegA ? plotData.Plot.RenderLegend() : new(1, 1);
         legendB = showLegB ? plotDistribution.Plot.RenderLegend() : new(1, 1);
         szLegend.Width = Math.Max(showLegA ? legendA.Width : 0, showLegB ? legendB.Width : 0);
         szLegend.Width += 2;    // black border drawing
@@ -236,7 +236,7 @@ partial class FrmMain
             {
                 Array.Resize<double>(ref _plotData[i], _settings.Plot_ArrayPoints);
             }
-            
+
             // https://github.com/ScottPlot/ScottPlot/discussions/1042
             // https://swharden.com/scottplot/faq/version-4.1/
             // Update array reference in the plots. The Update() method doesn't allow a bigger array, so we need to modify Ys property
@@ -421,7 +421,7 @@ partial class FrmMain
             if (plotData.ShowCrossHair)
             {
                 if (plotData.VerticalLine is not null) plotData.VerticalLine.X = e.PointX;
-                if (plotData.HorizontalLine is not null) plotData.HorizontalLine.Y = _plotData[_settings.T10_NumberOfSensors-1][e.PointIndex];
+                if (plotData.HorizontalLine is not null) plotData.HorizontalLine.Y = _plotData[_settings.T10_NumberOfSensors - 1][e.PointIndex];
                 plotData.Refresh(skipIfCurrentlyRendering: true);
             }
             if (plotRatio.ShowCrossHair)

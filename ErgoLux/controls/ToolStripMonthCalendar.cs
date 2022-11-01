@@ -7,7 +7,7 @@ using System.Windows.Forms;
 public class ToolStripMonthCalendar : System.Windows.Forms.ToolStripControlHost
 {
     // Call the base constructor passing in a MonthCalendar instance.
-    public ToolStripMonthCalendar() : base (new MonthCalendar()) { }
+    public ToolStripMonthCalendar() : base(new MonthCalendar()) { }
 
     public MonthCalendar MonthCalendarControl
     {
@@ -40,7 +40,7 @@ public class ToolStripMonthCalendar : System.Windows.Forms.ToolStripControlHost
         base.OnSubscribeControlEvents(c);
 
         // Cast the control to a MonthCalendar control.
-        MonthCalendar monthCalendarControl = (MonthCalendar) c;
+        MonthCalendar monthCalendarControl = (MonthCalendar)c;
 
         // Add the event.
         monthCalendarControl.DateChanged +=
@@ -53,7 +53,7 @@ public class ToolStripMonthCalendar : System.Windows.Forms.ToolStripControlHost
         base.OnUnsubscribeControlEvents(c);
 
         // Cast the control to a MonthCalendar control.
-        MonthCalendar monthCalendarControl = (MonthCalendar) c;
+        MonthCalendar monthCalendarControl = (MonthCalendar)c;
 
         // Remove the event.
         monthCalendarControl.DateChanged -=

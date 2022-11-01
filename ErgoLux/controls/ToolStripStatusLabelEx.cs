@@ -32,7 +32,7 @@ class ToolStripStatusLabelEx : System.Windows.Forms.ToolStripStatusLabel
     /// <param name="foreColorChecked">Color font for the checked status</param>
     /// <param name="foreColorUnchecked">Color font for the unchecked status</param>
     public ToolStripStatusLabelEx(System.Drawing.Brush border, System.Drawing.Brush checkedBackground, System.Drawing.Color foreColorChecked, System.Drawing.Color foreColorUnchecked)
-        :this()
+        : this()
     {
         CheckedBorder = border;
         CheckedBackground = checkedBackground;
@@ -58,11 +58,11 @@ class ToolStripStatusLabelEx : System.Windows.Forms.ToolStripStatusLabel
     }
 
     /// <summary>
-		/// Paint function
-		/// </summary>
-		/// <param name="e"></param>
-		protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
-		{
+    /// Paint function
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
+    {
         // Only render if the state is checked
         if (_checked)
         {
@@ -80,10 +80,12 @@ class ToolStripStatusLabelEx : System.Windows.Forms.ToolStripStatusLabel
             ForeColor = ForeColorChecked;
         }
         else
+        {
             ForeColor = ForeColorUnchecked;
-        
-        base.OnPaint(e);    
-		}
+        }
+
+        base.OnPaint(e);
+    }
 
     /// <summary>
     /// Implement hover rendering? Or use a CustomRender?
@@ -99,5 +101,5 @@ class ToolStripStatusLabelEx : System.Windows.Forms.ToolStripStatusLabel
         //_checked = !_checked;
         base.OnClick(e);
     }
-    
+
 }

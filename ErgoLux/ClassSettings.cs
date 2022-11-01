@@ -66,7 +66,7 @@ public class ClassSettings
     /// <value><see langword="True" /> if the plot gets updated, <see langword="false" /> otherwise</value>
     [JsonPropertyName("Show illuminance plot")]
     public bool Plot_ShowRawData { get; set; } = true;
-    
+
     [JsonPropertyName("Show distribution plot")]
     public bool Plot_ShowDistribution { get; set; } = true;
 

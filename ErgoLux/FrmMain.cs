@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
-using System.Linq;
 using System.IO.Ports;
-using ScottPlot.Plottable;
+using System.Linq;
 using System.Xml.Linq;
+using ScottPlot.Plottable;
 
 namespace ErgoLux;
 
@@ -34,7 +34,7 @@ public partial class FrmMain : Form
             ApplySettingsJSON();
 
         // Set form icon
-        this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
+        Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
 
         // Initialize components and GUI
         InitializeComponent();
@@ -110,7 +110,7 @@ public partial class FrmMain : Form
 
     private void OnTimedEvent(object? sender, EventArgs e)
     {
-        
+
         bool result = myFtdiDevice.Write(ClassT10.ReceptorsSingle[0]);
 
         //result = myFtdiDevice.Write(ClassT10.Command_55_Set);
@@ -124,7 +124,7 @@ public partial class FrmMain : Form
     {
         (int Sensor, double Iluminance, double Increment, double Percent) result = (0, 0, 0, 0);
         //string str = System.Text.Encoding.UTF8.GetString(e.DataReceived, 0, e.DataReceived.Length);
-        
+
         if (e.StrDataReceived.Length == ClassT10.LongBytesLength)
         {
             result = ClassT10.DecodeCommand(e.StrDataReceived);
@@ -146,7 +146,7 @@ public partial class FrmMain : Form
         }
 
         // Needed, otherwise we get an error from cross-threading access
-        Invoke(()=>Plots_Update(result.Sensor, result.Iluminance));
+        Invoke(() => Plots_Update(result.Sensor, result.Iluminance));
     }
 
     /// <summary>
@@ -222,7 +222,7 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_Language(int DataLength = default)
     {
-        this.SuspendLayout();
+        SuspendLayout();
 
         StringResources.Culture = _settings.AppCulture;
 
@@ -267,7 +267,7 @@ public partial class FrmMain : Form
         statusStripIconExchange.ToolTipText = StringResources.StatusTipExchange;
 
         statusStripLabelUILanguage.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
-        statusStripLabelUILanguage.ToolTipText = StringResources.ToolTipUILanguage + ":"+ Environment.NewLine + _settings.AppCulture.NativeName;
+        statusStripLabelUILanguage.ToolTipText = StringResources.ToolTipUILanguage + ":" + Environment.NewLine + _settings.AppCulture.NativeName;
 
         // Update menu
         mnuMainFrm_File.Text = StringResources.MenuMainFile;
@@ -346,7 +346,7 @@ public partial class FrmMain : Form
             Plots_ShowLegends();
         }
 
-        this.ResumeLayout();
+        ResumeLayout();
     }
 
 }
