@@ -23,10 +23,10 @@ dotnet_sort_system_directives_first = true
 file_header_template = unset
 
 # this. and Me. preferences
-dotnet_style_qualification_for_event = false:error
-dotnet_style_qualification_for_field = false:error
-dotnet_style_qualification_for_method = false:error
-dotnet_style_qualification_for_property = false:error
+dotnet_style_qualification_for_event = true:error
+dotnet_style_qualification_for_field = true:error
+dotnet_style_qualification_for_method = true:error
+dotnet_style_qualification_for_property = true:error
 
 # Language keywords vs BCL types preferences
 dotnet_style_predefined_type_for_locals_parameters_members = true:silent
@@ -203,6 +203,7 @@ dotnet_naming_style.begins_with_i.word_separator =
 dotnet_naming_style.begins_with_i.capitalization = pascal_case
 csharp_using_directive_placement = outside_namespace:silent
 csharp_style_namespace_declarations = file_scoped:silent
+
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4
