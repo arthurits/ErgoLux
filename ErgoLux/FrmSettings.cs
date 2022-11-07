@@ -171,14 +171,16 @@ public partial class FrmSettings : Form
         ModifyArrays = ((int)updSensors.Value == Settings.T10_NumberOfSensors) && (Convert.ToInt32(txtArrayPoints.Text) == Settings.Plot_ArrayPoints);
         ModifyArrays = !ModifyArrays;
 
-        ModifyDevice = (Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16) == Settings.T10_LocationID) &&
-                        (Convert.ToInt32(txtBaudRate.Text) == Settings.T10_BaudRate) &&
+        ModifyDevice = (Convert.ToInt32(txtBaudRate.Text) == Settings.T10_BaudRate) &&
                         (Convert.ToInt32(cboDataBits.SelectedValue) == Settings.T10_DataBits) &&
                         (Convert.ToInt32(cboStopBits.SelectedValue) == Settings.T10_StopBits) &&
                         (Convert.ToInt32(cboParity.SelectedValue) == Settings.T10_Parity) &&
                         (Convert.ToInt32(cboFlowControl.SelectedValue) == Settings.T10_FlowControl) &&
                         (Convert.ToInt32(txtOn.Text) == Settings.T10_CharOn) &&
                         (Convert.ToInt32(txtOff.Text) == Settings.T10_CharOff);
+        if (viewDevices.SelectedIndices.Count > 0)
+            ModifyDevice = ModifyDevice && (Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16) == Settings.T10_LocationID);
+
         ModifyDevice = !ModifyDevice;
     }
 
@@ -212,7 +214,7 @@ public partial class FrmSettings : Form
         if (!Validation.IsValidRange<int>(txtArrayPoints.Text, 1, Int32.MaxValue, true, this)) { txtArrayPoints.Focus(); txtArrayPoints.SelectAll(); return; }
         if (!Validation.IsValidRange<int>(txtPlotWindow.Text, 20, Int32.MaxValue, true, this)) { txtPlotWindow.Focus(); txtPlotWindow.SelectAll(); return; }
 
-        SetModificationFields();
+        //SetModificationFields();
 
         // Save to class settings
         Settings.T10_NumberOfSensors = (int)updSensors.Value;
@@ -250,7 +252,8 @@ public partial class FrmSettings : Form
         DialogResult result;
         using (new CenterWinDialog(this))
         {
-            result = MessageBox.Show(StringResources.MsgBoxReset,
+            result = MessageBox.Show(this,
+                StringResources.MsgBoxReset,
                 StringResources.MsgBoxResetTitle,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
