@@ -8,10 +8,78 @@ public partial class FrmSettings : Form
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private readonly ClassSettings? Settings;
 
+    public bool ModifyPlots { get; private set; } = false;
+    public bool ModifyArrays { get; private set; } = false;
+    public bool ModifyDevice { get; private set; } = false;
+
     public FrmSettings()
     {
         InitializeComponent();
 
+        InitializaControls();
+        PopulateFTDIDevices();
+        FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
+    }
+
+    public FrmSettings(ClassSettings settings)
+        : this()
+    {
+        Settings = settings;
+        _culture = settings.AppCulture;
+        UpdateControls(settings);
+    }
+
+    /// <summary>
+    /// Populates ListView control with data from the FTDI devices connected
+    /// </summary>
+    private void PopulateFTDIDevices()
+    {
+        // FTDI connection code
+        UInt32 ftdiDeviceCount = 0;
+        FTDI.FT_STATUS ftStatus = FTDI.FT_STATUS.FT_OK;
+
+        // Create new instance of the FTDI device class
+        FTDISample myFtdiDevice = new FTDISample();
+
+        // Determine the number of FTDI devices connected to the machine
+        ftStatus = myFtdiDevice.GetNumberOfDevices(ref ftdiDeviceCount);
+
+        // Allocate storage for device info list
+        FTDI.FT_DEVICE_INFO_NODE[] ftdiDeviceList = new FTDI.FT_DEVICE_INFO_NODE[ftdiDeviceCount];
+
+        // Populate our device list
+        ftStatus = myFtdiDevice.GetDeviceList(ftdiDeviceList);
+        if (ftStatus != FTDI.FT_STATUS.FT_OK) return;
+
+        // Populate the control
+        ListViewItem item;
+        for (UInt32 i = 0; i < ftdiDeviceCount; i++)
+        {
+            item = new ListViewItem(
+                new string[]
+                {
+                            i.ToString(),
+                            String.Format("{0:X}", ftdiDeviceList[i].Flags),
+                            ftdiDeviceList[i].Type.ToString(),
+                            String.Format("{0:X}", ftdiDeviceList[i].ID),
+                            String.Format("{0:X}", ftdiDeviceList[i].LocId),
+                            ftdiDeviceList[i].SerialNumber.ToString(),
+                            ftdiDeviceList[i].Description.ToString()
+                });
+            if (i++ % 2 == 1)
+            {
+                item.BackColor = System.Drawing.Color.FromArgb(240, 240, 240);
+                item.UseItemStyleForSubItems = true;
+            }
+            viewDevices.Items.Add(item);
+        }
+    }
+
+    /// <summary>
+    /// Initializes and populates with data combobox DataBits, Stop, Parity, and FlowControl
+    /// </summary>
+    private void InitializaControls()
+    {
         // Initializa ListView
         viewDevices.View = View.Details;
         viewDevices.GridLines = true;
@@ -25,8 +93,6 @@ public partial class FrmSettings : Form
         viewDevices.Columns.Add("Location ID", 70);
         viewDevices.Columns.Add("Serial number", 100);
         viewDevices.Columns.Add("Description", 100);
-
-        PopulateDevices();
 
         // Populate cboDataBits
         Dictionary<string, int> cboList = new Dictionary<string, int>();
@@ -71,62 +137,6 @@ public partial class FrmSettings : Form
 
         // Set control's default input-values
         //SetDefaultValues();
-
-        FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
-    }
-
-    public FrmSettings(ClassSettings settings)
-        : this()
-    {
-        Settings = settings;
-        _culture = settings.AppCulture;
-        UpdateControls(settings);
-    }
-
-    /// <summary>
-    /// Populates ListView control with data from the FTDI devices connected
-    /// </summary>
-    private void PopulateDevices()
-    {
-        // FTDI connection code
-        UInt32 ftdiDeviceCount = 0;
-        FTDI.FT_STATUS ftStatus = FTDI.FT_STATUS.FT_OK;
-
-        // Create new instance of the FTDI device class
-        FTDISample myFtdiDevice = new FTDISample();
-
-        // Determine the number of FTDI devices connected to the machine
-        ftStatus = myFtdiDevice.GetNumberOfDevices(ref ftdiDeviceCount);
-
-        // Allocate storage for device info list
-        FTDI.FT_DEVICE_INFO_NODE[] ftdiDeviceList = new FTDI.FT_DEVICE_INFO_NODE[ftdiDeviceCount];
-
-        // Populate our device list
-        ftStatus = myFtdiDevice.GetDeviceList(ftdiDeviceList);
-        if (ftStatus != FTDI.FT_STATUS.FT_OK) return;
-
-        // Populate the control
-        ListViewItem item;
-        for (UInt32 i = 0; i < ftdiDeviceCount; i++)
-        {
-            item = new ListViewItem(
-                new string[]
-                {
-                            i.ToString(),
-                            String.Format("{0:X}", ftdiDeviceList[i].Flags),
-                            ftdiDeviceList[i].Type.ToString(),
-                            String.Format("{0:X}", ftdiDeviceList[i].ID),
-                            String.Format("{0:X}", ftdiDeviceList[i].LocId),
-                            ftdiDeviceList[i].SerialNumber.ToString(),
-                            ftdiDeviceList[i].Description.ToString()
-                });
-            if (i++ % 2 == 1)
-            {
-                item.BackColor = System.Drawing.Color.FromArgb(240, 240, 240);
-                item.UseItemStyleForSubItems = true;
-            }
-            viewDevices.Items.Add(item);
-        }
     }
 
     private void cboFlowControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -146,6 +156,30 @@ public partial class FrmSettings : Form
     private void chkShowDistribution_CheckedChanged(object sender, EventArgs e)
     {
         grpPlot.Enabled = chkShowDistribution.Checked;
+    }
+
+    private void SetModificationFields()
+    {
+        // Compute modification fields
+        ModifyPlots = ((int)updSensors.Value == Settings.T10_NumberOfSensors) &&
+                (Convert.ToDouble(txtHz.Text) == Settings.T10_Frequency) &&
+                (Convert.ToInt32(txtPlotWindow.Text) == Settings.Plot_WindowPoints) &&
+                (radRadar.Checked == Settings.Plot_DistIsRadar) &&
+                (Convert.ToInt32(txtArrayPoints.Text) == Settings.Plot_ArrayPoints);
+        ModifyPlots = !ModifyPlots;
+
+        ModifyArrays = ((int)updSensors.Value == Settings.T10_NumberOfSensors) && (Convert.ToInt32(txtArrayPoints.Text) == Settings.Plot_ArrayPoints);
+        ModifyArrays = !ModifyArrays;
+
+        ModifyDevice = (Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16) == Settings.T10_LocationID) &&
+                        (Convert.ToInt32(txtBaudRate.Text) == Settings.T10_BaudRate) &&
+                        (Convert.ToInt32(cboDataBits.SelectedValue) == Settings.T10_DataBits) &&
+                        (Convert.ToInt32(cboStopBits.SelectedValue) == Settings.T10_StopBits) &&
+                        (Convert.ToInt32(cboParity.SelectedValue) == Settings.T10_Parity) &&
+                        (Convert.ToInt32(cboFlowControl.SelectedValue) == Settings.T10_FlowControl) &&
+                        (Convert.ToInt32(txtOn.Text) == Settings.T10_CharOn) &&
+                        (Convert.ToInt32(txtOff.Text) == Settings.T10_CharOff);
+        ModifyDevice = !ModifyDevice;
     }
 
     private void Accept_Click(object sender, EventArgs e)
@@ -178,6 +212,8 @@ public partial class FrmSettings : Form
         if (!Validation.IsValidRange<int>(txtArrayPoints.Text, 1, Int32.MaxValue, true, this)) { txtArrayPoints.Focus(); txtArrayPoints.SelectAll(); return; }
         if (!Validation.IsValidRange<int>(txtPlotWindow.Text, 20, Int32.MaxValue, true, this)) { txtPlotWindow.Focus(); txtPlotWindow.SelectAll(); return; }
 
+        SetModificationFields();
+
         // Save to class settings
         Settings.T10_NumberOfSensors = (int)updSensors.Value;
         Settings.T10_BaudRate = Convert.ToInt32(txtBaudRate.Text);
@@ -204,6 +240,7 @@ public partial class FrmSettings : Form
         Settings.AppCulture = _culture;
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;
+
 
         DialogResult = DialogResult.OK;
     }
@@ -415,7 +452,15 @@ public partial class FrmSettings : Form
         this.lblDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDataFormat.Text = StringResources.LblDataFormat;
 
-        // Reposition controls to compensate for the culture text length in labels
+        // Relocate controls
+        RelocateControls();
+    }
+
+    /// <summary>
+    /// Relocate controls to compensate for the culture text length in labels
+    /// </summary>
+    private void RelocateControls()
+    {
         // Tab T-10A
         int nBaud = this.lblBaudRate.Left + this.lblBaudRate.Width + this.txtBaudRate.Width;
         int nData = this.lblDataBits.Left + this.lblDataBits.Width + this.cboDataBits.Width;
@@ -455,6 +500,5 @@ public partial class FrmSettings : Form
         this.txtDataFormat.Left = this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }
-
 
 }
