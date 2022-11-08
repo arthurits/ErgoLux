@@ -169,6 +169,13 @@ public class ClassSettings
     [JsonPropertyName("User open path")]
     public string UserOpenPath { get; set; } = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty, "examples");
 
+    /// <summary>
+    /// Default class constructor. This is needed in <see cref="FrmMain.LoadProgramSettingsJSON"/> in order to avoid <see cref="System.Text.Json.JsonSerializer.Deserialize"/> throwing exception <see cref="System.InvalidOperationException"/>
+    /// </summary>
+    public ClassSettings()
+    {
+    }
+
     public ClassSettings(ClassSettings? oldSettings = null)
     {
         if (oldSettings is not null)
