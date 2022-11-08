@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ScottPlot.WinForms" Version="4.1.58" />
+    <PackageReference Include="ScottPlot.WinForms" Version="4.1.59" />
   </ItemGroup>
 
   <ItemGroup>
