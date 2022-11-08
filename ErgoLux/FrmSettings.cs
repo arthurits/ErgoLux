@@ -158,29 +158,30 @@ public partial class FrmSettings : Form
         grpPlot.Enabled = chkShowDistribution.Checked;
     }
 
-    private void SetModificationFields()
+    private void SetModificationFields(ClassSettings oldSettings)
     {
+        if (Settings is null) return;
+
         // Compute modification fields
-        ModifyPlots = ((int)updSensors.Value == Settings.T10_NumberOfSensors) &&
-                (Convert.ToDouble(txtHz.Text) == Settings.T10_Frequency) &&
-                (Convert.ToInt32(txtPlotWindow.Text) == Settings.Plot_WindowPoints) &&
-                (radRadar.Checked == Settings.Plot_DistIsRadar) &&
-                (Convert.ToInt32(txtArrayPoints.Text) == Settings.Plot_ArrayPoints);
+        ModifyPlots = (Settings.T10_NumberOfSensors == oldSettings.T10_NumberOfSensors) &&
+                (Settings.T10_Frequency == oldSettings.T10_Frequency) &&
+                (Settings.Plot_WindowPoints == oldSettings.Plot_WindowPoints) &&
+                (Settings.Plot_DistIsRadar == oldSettings.Plot_DistIsRadar) &&
+                (Settings.Plot_ArrayPoints == oldSettings.Plot_ArrayPoints);
         ModifyPlots = !ModifyPlots;
 
-        ModifyArrays = ((int)updSensors.Value == Settings.T10_NumberOfSensors) && (Convert.ToInt32(txtArrayPoints.Text) == Settings.Plot_ArrayPoints);
+        ModifyArrays = (Settings.T10_NumberOfSensors == oldSettings.T10_NumberOfSensors) &&
+                        (Settings.Plot_ArrayPoints == oldSettings.Plot_ArrayPoints);
         ModifyArrays = !ModifyArrays;
 
-        ModifyDevice = (Convert.ToInt32(txtBaudRate.Text) == Settings.T10_BaudRate) &&
-                        (Convert.ToInt32(cboDataBits.SelectedValue) == Settings.T10_DataBits) &&
-                        (Convert.ToInt32(cboStopBits.SelectedValue) == Settings.T10_StopBits) &&
-                        (Convert.ToInt32(cboParity.SelectedValue) == Settings.T10_Parity) &&
-                        (Convert.ToInt32(cboFlowControl.SelectedValue) == Settings.T10_FlowControl) &&
-                        (Convert.ToInt32(txtOn.Text) == Settings.T10_CharOn) &&
-                        (Convert.ToInt32(txtOff.Text) == Settings.T10_CharOff);
-        if (viewDevices.SelectedIndices.Count > 0)
-            ModifyDevice = ModifyDevice && (Convert.ToInt32(viewDevices.SelectedItems[0].SubItems[4].Text, 16) == Settings.T10_LocationID);
-
+        ModifyDevice = (Settings.T10_LocationID == oldSettings.T10_LocationID) &&
+                        (Settings.T10_BaudRate == oldSettings.T10_BaudRate) &&
+                        (Settings.T10_DataBits == oldSettings.T10_DataBits) &&
+                        (Settings.T10_StopBits == oldSettings.T10_StopBits) &&
+                        (Settings.T10_Parity == oldSettings.T10_Parity) &&
+                        (Settings.T10_FlowControl == oldSettings.T10_FlowControl) &&
+                        (Settings.T10_CharOn == oldSettings.T10_CharOn) &&
+                        (Settings.T10_CharOff == oldSettings.T10_CharOff);
         ModifyDevice = !ModifyDevice;
     }
 
@@ -188,6 +189,8 @@ public partial class FrmSettings : Form
     {
         DialogResult = DialogResult.None;
         if (Settings is null) return;
+
+        ClassSettings oldSettings = new(Settings);
 
         // Check that a device has been selected from the list
         if (viewDevices.SelectedIndices.Count > 0)
@@ -213,8 +216,6 @@ public partial class FrmSettings : Form
         if (!Validation.IsValidRange<double>(txtHz.Text, 0, 1000, true, this)) { txtHz.Focus(); txtHz.SelectAll(); return; }
         if (!Validation.IsValidRange<int>(txtArrayPoints.Text, 1, Int32.MaxValue, true, this)) { txtArrayPoints.Focus(); txtArrayPoints.SelectAll(); return; }
         if (!Validation.IsValidRange<int>(txtPlotWindow.Text, 20, Int32.MaxValue, true, this)) { txtPlotWindow.Focus(); txtPlotWindow.SelectAll(); return; }
-
-        //SetModificationFields();
 
         // Save to class settings
         Settings.T10_NumberOfSensors = (int)updSensors.Value;
@@ -243,6 +244,25 @@ public partial class FrmSettings : Form
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;
 
+        //SetModificationFields(oldSettings);
+        // Compute modification fields
+        ModifyPlots = (Settings.T10_NumberOfSensors != oldSettings.T10_NumberOfSensors) ||
+                (Settings.T10_Frequency != oldSettings.T10_Frequency) ||
+                (Settings.Plot_WindowPoints != oldSettings.Plot_WindowPoints) ||
+                (Settings.Plot_DistIsRadar != oldSettings.Plot_DistIsRadar) ||
+                (Settings.Plot_ArrayPoints != oldSettings.Plot_ArrayPoints);
+
+        ModifyArrays = (Settings.T10_NumberOfSensors != oldSettings.T10_NumberOfSensors) ||
+                        (Settings.Plot_ArrayPoints != oldSettings.Plot_ArrayPoints);
+
+        ModifyDevice = (Settings.T10_LocationID != oldSettings.T10_LocationID) ||
+                        (Settings.T10_BaudRate != oldSettings.T10_BaudRate) ||
+                        (Settings.T10_DataBits != oldSettings.T10_DataBits) ||
+                        (Settings.T10_StopBits != oldSettings.T10_StopBits) ||
+                        (Settings.T10_Parity != oldSettings.T10_Parity) ||
+                        (Settings.T10_FlowControl != oldSettings.T10_FlowControl) ||
+                        (Settings.T10_CharOn != oldSettings.T10_CharOn) ||
+                        (Settings.T10_CharOff != oldSettings.T10_CharOff);
 
         DialogResult = DialogResult.OK;
     }
