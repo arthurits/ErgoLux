@@ -169,8 +169,51 @@ public class ClassSettings
     [JsonPropertyName("User open path")]
     public string UserOpenPath { get; set; } = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty, "examples");
 
-    public ClassSettings()
+    public ClassSettings(ClassSettings? oldSettings = null)
     {
+        if (oldSettings is not null)
+        {
+            AppCulture = oldSettings.AppCulture;
+            //AppCultureName = oldSettings.AppCultureName;
+            AppPath = oldSettings.AppPath;
+            ArrayFixedColumns = oldSettings.ArrayFixedColumns;
+            DataFormat = oldSettings.DataFormat;
+            DefaultSavePath = oldSettings.DefaultSavePath;
+            DefaultOpenPath = oldSettings.DefaultOpenPath;
+            Icon_Close = oldSettings.Icon_Close;
+            Icon_Data = oldSettings.Icon_Data;
+            Icon_Open = oldSettings.Icon_Open;
+            //MillisecondsFormat = oldSettings.MillisecondsFormat;
+            Plot_ArrayPoints = oldSettings.Plot_ArrayPoints;
+            Plot_DistIsRadar = oldSettings.Plot_DistIsRadar;
+            Plot_ShowAverage = oldSettings.Plot_ShowAverage;
+            Plot_ShowDistribution = oldSettings.Plot_ShowDistribution;
+            Plot_ShowRatios = oldSettings.Plot_ShowRatios;
+            Plot_ShowRawData = oldSettings.Plot_ShowRawData;
+            Plot_WindowPoints = oldSettings.Plot_WindowPoints;
+            PxBetweenLegends = oldSettings.PxBetweenLegends;
+            RememberFileDialogPath = oldSettings.RememberFileDialogPath;
+            SettingsFileName = oldSettings.SettingsFileName;
+            T10_BaudRate = oldSettings.T10_BaudRate;
+            T10_CharOff = oldSettings.T10_CharOff;
+            T10_CharOn = oldSettings.T10_CharOn;
+            T10_DataBits = oldSettings.T10_DataBits;
+            T10_DeviceType = oldSettings.T10_DeviceType;
+            T10_DevideID = oldSettings.T10_DevideID;
+            T10_FlowControl = oldSettings.T10_FlowControl;
+            T10_Frequency = oldSettings.T10_Frequency;
+            T10_LocationID = oldSettings.T10_LocationID;
+            T10_NumberOfSensors = oldSettings.T10_NumberOfSensors;
+            T10_Parity = oldSettings.T10_Parity;
+            T10_StopBits = oldSettings.T10_StopBits;
+            UserOpenPath = oldSettings.UserOpenPath;
+            UserSavePath = oldSettings.UserSavePath;
+            WindowHeight = oldSettings.WindowHeight;
+            WindowLeft = oldSettings.WindowLeft;
+            WindowPosition = oldSettings.WindowPosition;
+            WindowTop = oldSettings.WindowTop;
+            WindowWidth = oldSettings.WindowWidth;
+        }
     }
 
     ~ClassSettings()
