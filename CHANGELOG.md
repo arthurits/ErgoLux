@@ -12,7 +12,7 @@
   * Japanese (jp-JP). _Thanks @theadityaagnihotri_.
   * Dutch (nl-BE). _Thanks @cvc04_.
   * Lithuanian (lt-LT). _Thanks @mantasio_.
-* [ScottPlott] (https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.59.
+* [ScottPlott](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.59.
 * Corrections related to reading files, plotting, UI controls, settings preferences management, `StringResources`, and `GraphicResources`.
 
 ## ErgoLux 1.0.1
