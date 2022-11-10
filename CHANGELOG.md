@@ -17,9 +17,9 @@
 
 ## ErgoLux 1.0.1
 SplashScreen update:
-* Reduced file size
-* Using MASM x64 version
-* No dependency on VC runtime, it only uses direct WinAPI calls
+* Reduced file size.
+* Using MASM x64 version.
+* No dependency on VC runtime, it only uses direct WinAPI calls.
 
 ## ErgoLux 1.0
 Initial release.
