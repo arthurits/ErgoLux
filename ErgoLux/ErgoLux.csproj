@@ -9,13 +9,18 @@
     <Authors>Arthurits</Authors>
     <Company>Arthurits Ltd.</Company>
     <Copyright>Copyright © 2022</Copyright>
-    <Description>Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A</Description>
+    <Description>Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A.
+
+No commercial use allowed whatsoever. Contact the author for any inquires.
+
+If you find this software useful, please consider supporting it!</Description>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <PackageProjectUrl>https://github.com/arthurits/ErgoLux</PackageProjectUrl>
     <RepositoryUrl>https://github.com/arthurits/ErgoLux</RepositoryUrl>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Version>1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
