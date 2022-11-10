@@ -91,10 +91,10 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Fetchs data into the plots
+    /// Fetchs data into the plots. This calls <see cref="Plots_Clear"/>, <see cref="Plots_DataBinding"/>, <see cref="Plots_ShowLegends"/>, <see cref="Plots_ShowFull"/>, and <see cref="Plots_Refresh"/>.
     /// </summary>
     /// <param name="resetPlotPoints"><see langword="True"/> if <see cref="_nPoints"/> is set equal to <see cref="_settings.Plot_ArrayPoints"/>, <see langword="False">false</see> otherwise </param>
-    /// <param name="showAllData">True to fit data into the plots, false otherwise</param>
+    /// <param name="showAllData">True to fit data into the plots and call <see cref="Plots_ShowFull"/>, false otherwise</param>
     private void Plots_FetchData(bool resetPlotPoints = true, bool showAllData = true)
     {
         int points = resetPlotPoints ? _settings.Plot_ArrayPoints : _nPoints;
