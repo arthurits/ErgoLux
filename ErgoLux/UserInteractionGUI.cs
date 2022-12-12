@@ -248,8 +248,7 @@ partial class FrmMain
                 (_settings.Plot_DistIsRadar != _oldSettings.Plot_DistIsRadar) ||
                 (_settings.Plot_ArrayPoints != _oldSettings.Plot_ArrayPoints);
 
-            InitializeArrays = (_plotData.Length > 0) && (_plotRadar.Length > 0) && (_plotRadialGauge.Length > 0) && (_seriesLabels.Length > 0);
-            InitializeArrays = !InitializeArrays;
+            InitializeArrays = (_plotData.Length == 0) || (_plotRadar.Length == 0) || (_plotRadialGauge.Length == 0) || (_seriesLabels.Length == 0);
 
 
             if (_settings.T10_LocationID > 0 && _oldSettings.T10_LocationID != _settings.T10_LocationID)
