@@ -170,6 +170,7 @@ partial class FrmMain
             toolStripMain_Save.Enabled = false;
             toolStripMain_Settings.Enabled = false;
             toolStripMain_About.Enabled = false;
+            //this.statusStripIconExchange.Image = GraphicsResources.LoadIcon(GraphicsResources.IconExchangeConnection, 16);
             this.statusStripIconExchange.Image = _settings.Icon_Data;
             SetFormTitle(this);
             _reading = true;
@@ -276,6 +277,7 @@ partial class FrmMain
                     this.statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
                     this.statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
                     this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID:0:X}";
+                    //this.statusStripIconOpen.Image = GraphicsResources.LoadIcon(GraphicsResources.IconOpenConnection, 16);
                     this.statusStripIconOpen.Image = _settings.Icon_Open;
 
                     // Check the number of sensors
@@ -293,7 +295,7 @@ partial class FrmMain
                 else
                 {
                     this.toolStripMain_Connect.Enabled = false;
-                    this.statusStripIconOpen.Image = _settings.Icon_Close;
+                    this.statusStripIconOpen.Image = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
 
                     using (new CenterWinDialog(this))
                     {

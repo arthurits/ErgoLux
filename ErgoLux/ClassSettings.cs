@@ -88,17 +88,17 @@ public class ClassSettings
     /// Icon indicating the T-10 is opened and ready to be sent commands
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap? Icon_Open { get; set; }
+    public System.Drawing.Bitmap? Icon_Open { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconOpenConnection, 16);
     /// <summary>
     /// Icon indicating the T-10 is closed
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap? Icon_Close { get; set; }
+    public System.Drawing.Bitmap? Icon_Close { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
     /// <summary>
     /// Icon indicating the T-10 receiving and sending data
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap? Icon_Data { get; set; }
+    public System.Drawing.Bitmap? Icon_Data { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconExchangeConnection, 16);
 
     /// <summary>
     /// Absolute path of the executable
@@ -187,9 +187,9 @@ public class ClassSettings
             DataFormat = oldSettings.DataFormat;
             DefaultSavePath = oldSettings.DefaultSavePath;
             DefaultOpenPath = oldSettings.DefaultOpenPath;
-            Icon_Close = oldSettings.Icon_Close;
-            Icon_Data = oldSettings.Icon_Data;
-            Icon_Open = oldSettings.Icon_Open;
+            //Icon_Close = oldSettings.Icon_Close;
+            //Icon_Data = oldSettings.Icon_Data;
+            //Icon_Open = oldSettings.Icon_Open;
             //MillisecondsFormat = oldSettings.MillisecondsFormat;
             Plot_ArrayPoints = oldSettings.Plot_ArrayPoints;
             Plot_DistIsRadar = oldSettings.Plot_DistIsRadar;
