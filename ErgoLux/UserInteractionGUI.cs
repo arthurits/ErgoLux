@@ -226,6 +226,9 @@ partial class FrmMain
 
         if (frm.DialogResult == DialogResult.OK)
         {
+            if (myFtdiDevice is null)
+                _oldSettings.T10_LocationID = 0;
+
             // Determine which elements need to be modified
             ModifyArrays = (_settings.T10_NumberOfSensors != _oldSettings.T10_NumberOfSensors) ||
                             (_settings.Plot_ArrayPoints != _oldSettings.Plot_ArrayPoints);
