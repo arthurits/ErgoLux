@@ -88,17 +88,17 @@ public class ClassSettings
     /// Icon indicating the T-10 is opened and ready to be sent commands
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap? Icon_Open { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconOpenConnection, 16);
+    public System.Drawing.Bitmap? Icon_Open { get; set; }
     /// <summary>
     /// Icon indicating the T-10 is closed
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap? Icon_Close { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
+    public System.Drawing.Bitmap? Icon_Close { get; set; }
     /// <summary>
     /// Icon indicating the T-10 receiving and sending data
     /// </summary>
     [JsonIgnore]
-    public System.Drawing.Bitmap? Icon_Data { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconExchangeConnection, 16);
+    public System.Drawing.Bitmap? Icon_Data { get; set; }
 
     /// <summary>
     /// Absolute path of the executable

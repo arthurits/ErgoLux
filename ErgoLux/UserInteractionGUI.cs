@@ -275,7 +275,7 @@ partial class FrmMain
                     // Update the status strip with information
                     this.statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
                     this.statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
-                    this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID.ToString("0:X")}";
+                    this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID:0:X}";
                     this.statusStripIconOpen.Image = _settings.Icon_Open;
 
                     // Check the number of sensors
@@ -307,12 +307,15 @@ partial class FrmMain
             }
             else
             {
-                if (_oldSettings.T10_BaudRate != _settings.T10_BaudRate)
-                    myFtdiDevice.SetBaudRate((uint)_settings.T10_BaudRate);
-                if (_oldSettings.T10_DataBits != _settings.T10_DataBits || _oldSettings.T10_StopBits != _settings.T10_StopBits || _oldSettings.T10_Parity != _settings.T10_Parity)
-                    myFtdiDevice.SetDataCharacteristics((byte)_settings.T10_DataBits, (byte)_settings.T10_StopBits, (byte)_settings.T10_Parity);
-                if (_oldSettings.T10_FlowControl != _settings.T10_FlowControl || _oldSettings.T10_CharOn != _settings.T10_CharOn || _oldSettings.T10_CharOff != _settings.T10_CharOff)
-                    myFtdiDevice.SetFlowControl((ushort)_settings.T10_FlowControl, (byte)_settings.T10_CharOn, (byte)_settings.T10_CharOff);
+                if (myFtdiDevice is not null)
+                {
+                    if (_oldSettings.T10_BaudRate != _settings.T10_BaudRate)
+                        myFtdiDevice.SetBaudRate((uint)_settings.T10_BaudRate);
+                    if (_oldSettings.T10_DataBits != _settings.T10_DataBits || _oldSettings.T10_StopBits != _settings.T10_StopBits || _oldSettings.T10_Parity != _settings.T10_Parity)
+                        myFtdiDevice.SetDataCharacteristics((byte)_settings.T10_DataBits, (byte)_settings.T10_StopBits, (byte)_settings.T10_Parity);
+                    if (_oldSettings.T10_FlowControl != _settings.T10_FlowControl || _oldSettings.T10_CharOn != _settings.T10_CharOn || _oldSettings.T10_CharOff != _settings.T10_CharOff)
+                        myFtdiDevice.SetFlowControl((ushort)_settings.T10_FlowControl, (byte)_settings.T10_CharOn, (byte)_settings.T10_CharOff);
+                }
             }
 
             if (ModifyArrays)
