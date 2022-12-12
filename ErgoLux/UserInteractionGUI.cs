@@ -289,7 +289,7 @@ partial class FrmMain
                         ModifyArrays = false;
                     }
 
-                    Plots_FetchData(false, false);
+                    Plots_FetchData(resetPlotPoints: false, showAllData: false);
                     ModifyPlots = false;
                 }
                 else
@@ -326,7 +326,7 @@ partial class FrmMain
             if (ModifyPlots)
             {
                 if (_plotData.Length > 0 && _plotRadar.Length > 0 && _plotRadialGauge.Length > 0)
-                    Plots_FetchData(false, true);
+                    Plots_FetchData(resetPlotPoints: false, showAllData: true);
             }
 
             if (_cultureName != _settings.AppCultureName)

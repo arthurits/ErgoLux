@@ -39,7 +39,7 @@ partial class FrmMain
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
-        plotData.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0);
+        plotData.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
         // Binding for Distribution plot
         if (_settings.Plot_DistIsRadar)
@@ -77,7 +77,7 @@ partial class FrmMain
             plot.MinRenderIndex = 0;
             plot.MaxRenderIndex = 0;
         }
-        plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0);
+        plotStats.Plot.SetAxisLimits(xMin: 0, xMax: _settings.Plot_WindowPoints, yMin: 0, yMax: 1000);
 
         // Binding for Plot Ratio
         for (int i = _settings.T10_NumberOfSensors + 3; i < _settings.T10_NumberOfSensors + _settings.ArrayFixedColumns; i++)
@@ -98,9 +98,7 @@ partial class FrmMain
     private void Plots_FetchData(bool resetPlotPoints = true, bool showAllData = true)
     {
         int points = resetPlotPoints ? _settings.Plot_ArrayPoints : _nPoints;
-
         Plots_Clear();  // This sets _nPoints = 0, so we need to reset it now
-        
         _nPoints = points;
 
         Plots_DataBinding();    // Bind the arrays to the plots
