@@ -146,7 +146,7 @@ public class ClassSettings
     /// <summary>
     /// True if open/save dialogs should remember the user's previous path
     /// </summary>
-    [JsonPropertyName("Remember path in FileDlg?")]
+    [JsonPropertyName("Remember path in file dialog")]
     public bool RememberFileDialogPath { get; set; } = true;
     /// <summary>
     /// Default path for saving files to disk
