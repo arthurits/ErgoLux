@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>False</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
@@ -17,10 +17,9 @@ If you find this software useful, please consider supporting it!</Description>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <PackageProjectUrl>https://github.com/arthurits/ErgoLux</PackageProjectUrl>
     <RepositoryUrl>https://github.com/arthurits/ErgoLux</RepositoryUrl>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>1.1</Version>
+    <Version>1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
