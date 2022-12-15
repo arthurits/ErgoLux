@@ -1,5 +1,10 @@
 # ErgoLux changelog
 
+## ErgoLux 1.2
+* Target .NET 7.
+* Correct a bug preventing the device's connection.
+* Correct some invalid references to memory-stored icon bitmaps.
+
 ## ErgoLux 1.1
 * Multilanguage support:
   * Czech (cs-CZ). _Thanks @lyallemma_.
