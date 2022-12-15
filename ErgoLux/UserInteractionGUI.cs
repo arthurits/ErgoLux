@@ -295,7 +295,8 @@ partial class FrmMain
                 else
                 {
                     this.toolStripMain_Connect.Enabled = false;
-                    this.statusStripIconOpen.Image = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
+                    //this.statusStripIconOpen.Image = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
+                    this.statusStripIconOpen.Image = _settings.Icon_Open;
 
                     using (new CenterWinDialog(this))
                     {

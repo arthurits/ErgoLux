@@ -15,6 +15,8 @@ partial class FrmMain
         plotStats.ShowCrossHair = false;
         plotRatio.ShowCrossHair = false;
 
+        statusStripLabelCross.Checked = false;
+
         plotData.Plot.Clear();
         plotDistribution.Plot.Clear();
         plotStats.Plot.Clear();

@@ -74,7 +74,6 @@ partial class FrmMain
     {
         statusStrip.Renderer = new CustomRenderer<ToolStripStatusLabelEx>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
-        //statusStripIconOpen.Image = GraphicsResources.LoadIcon(GraphicsResources.IconCloseConnection, 16);
         statusStripIconOpen.Image = _settings.Icon_Close;
         statusStripLabelCross.Checked = false;
 

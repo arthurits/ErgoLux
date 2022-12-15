@@ -85,7 +85,7 @@ public class ClassSettings
     public int PxBetweenLegends { get; set; } = 10;
 
     /// <summary>
-    /// Icon indicating the T-10 is opened and ready to be sent commands
+    /// Icon indicating the T-10 is opened and ready to receive commands
     /// </summary>
     [JsonIgnore]
     public System.Drawing.Bitmap? Icon_Open { get; set; } = GraphicsResources.LoadIcon(GraphicsResources.IconOpenConnection, 16);
