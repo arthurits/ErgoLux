@@ -1,4 +1,49 @@
-﻿//using System.IO.Ports.SerialPort;
+﻿using System.Text.RegularExpressions;
+
+namespace ErgoLux;
+
+// Custom struct with our desired values
+public struct SerialPort
+{
+    public string name;
+    public string vid;
+    public string pid;
+    public string description;
+}
+
+public class SerialPorts
+{
+    private const string vidPattern = @"VID_([0-9A-F]{4})";
+    private const string pidPattern = @"PID_([0-9A-F]{4})";
+
+    private static List<ComPort> GetSerialPorts()
+    {
+        using var searcher = new System.Management.ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort");
+        var ports = searcher.Get().Cast<System.Management.ManagementBaseObject>().ToList();
+        return ports.Select(p =>
+        {
+            ComPort c = new()
+            {
+                name = p.GetPropertyValue("DeviceID").ToString() ?? string.Empty,
+                vid = p.GetPropertyValue("PNPDeviceID").ToString() ?? string.Empty,
+                description = p.GetPropertyValue("Caption").ToString() ?? string.Empty
+            };
+
+            Match mVID = Regex.Match(c.vid, vidPattern, RegexOptions.IgnoreCase);
+            Match mPID = Regex.Match(c.vid, pidPattern, RegexOptions.IgnoreCase);
+
+            if (mVID.Success)
+                c.vid = mVID.Groups[1].Value;
+            if (mPID.Success)
+                c.pid = mPID.Groups[1].Value;
+
+            return c;
+
+        }).ToList();
+    }
+}
+
+//using System.IO.Ports.SerialPort;
 
 //Alternative and easier connection method using System.IO.Ports.SerialPort (.NET Platform Extensions 5) instead of FTD2.dll and ClassFTDI
 //The only disadvantage is that we need to know the port name the deviced is connected into.

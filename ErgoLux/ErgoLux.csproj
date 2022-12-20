@@ -36,6 +36,7 @@ If you find this software useful, please consider supporting it!</Description>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
     <PackageReference Include="ScottPlot.WinForms" Version="4.1.59" />
   </ItemGroup>
 
