@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.IO.Ports;
+using System.Text.RegularExpressions;
 
 namespace ErgoLux;
 
@@ -16,13 +17,13 @@ public class SerialPorts
     private const string vidPattern = @"VID_([0-9A-F]{4})";
     private const string pidPattern = @"PID_([0-9A-F]{4})";
 
-    private static List<ComPort> GetSerialPorts()
+    public static List<SerialPort> GetSerialPorts()
     {
         using var searcher = new System.Management.ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort");
         var ports = searcher.Get().Cast<System.Management.ManagementBaseObject>().ToList();
         return ports.Select(p =>
         {
-            ComPort c = new()
+            SerialPort c = new()
             {
                 name = p.GetPropertyValue("DeviceID").ToString() ?? string.Empty,
                 vid = p.GetPropertyValue("PNPDeviceID").ToString() ?? string.Empty,
