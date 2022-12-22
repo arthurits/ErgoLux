@@ -7,9 +7,16 @@ namespace ErgoLux;
 public struct SerialPort
 {
     public string name;
+    public string id;
     public string vid;
     public string pid;
     public string description;
+    public string caption;
+    public string status;
+    public UInt16 statusInfo;
+    public string providerType;
+    public UInt16 flags;
+    public UInt16 availability;
 }
 
 public class SerialPorts
@@ -25,9 +32,16 @@ public class SerialPorts
         {
             SerialPort c = new()
             {
-                name = p.GetPropertyValue("DeviceID").ToString() ?? string.Empty,
+                name = p.GetPropertyValue("Name").ToString() ?? string.Empty,
+                id = p.GetPropertyValue("DeviceID").ToString() ?? string.Empty,
                 vid = p.GetPropertyValue("PNPDeviceID").ToString() ?? string.Empty,
-                description = p.GetPropertyValue("Caption").ToString() ?? string.Empty
+                description = p.GetPropertyValue("Description").ToString() ?? string.Empty,
+                caption = p.GetPropertyValue("Caption").ToString() ?? string.Empty,
+                providerType = p.GetPropertyValue("ProviderType").ToString() ?? string.Empty,
+                statusInfo = ushort.Parse(p.GetPropertyValue("StatusInfo").ToString() ?? "5"),
+                status = p.GetPropertyValue("Status").ToString() ?? string.Empty,
+                flags = ushort.Parse(p.GetPropertyValue("ConfigManagerErrorCode").ToString() ?? "0"),
+                availability = ushort.Parse(p.GetPropertyValue("Availability").ToString() ?? "0")
             };
 
             Match mVID = Regex.Match(c.vid, vidPattern, RegexOptions.IgnoreCase);
@@ -40,7 +54,7 @@ public class SerialPorts
 
             return c;
 
-        }).ToList();
+        }).Where(p => !p.description.Contains("Intel(R) Active Management Technology - SOL")).ToList();
     }
 }
 

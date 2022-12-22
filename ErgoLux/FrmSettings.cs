@@ -29,6 +29,35 @@ public partial class FrmSettings : Form
         UpdateControls(settings);
     }
 
+    private void PopulateSerialPortDevices()
+    {
+        List<SerialPort> ports = SerialPorts.GetSerialPorts();
+
+        // Populate the control
+        ListViewItem item;
+        for (int i = 0; i < ports.Count; i++)
+        {
+            item = new ListViewItem(
+                new string[]
+                {
+                            i.ToString(),
+                            String.Format("{0:X}", ports[i].flags),
+                            ports[i].providerType,
+                            String.Format("{0:X}", ports[i].flags),
+                            String.Format("{0:X}", ftdiDeviceList[i].LocId),
+                            ftdiDeviceList[i].SerialNumber.ToString(),
+                            ftdiDeviceList[i].Description.ToString()
+                });
+            if (i++ % 2 == 1)
+            {
+                item.BackColor = System.Drawing.Color.FromArgb(240, 240, 240);
+                item.UseItemStyleForSubItems = true;
+            }
+            viewDevices.Items.Add(item);
+        }
+
+    }
+
     /// <summary>
     /// Populates ListView control with data from the FTDI devices connected
     /// </summary>
