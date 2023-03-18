@@ -204,8 +204,8 @@ public static class StringResources
     // Form about
     public static string AboutProductName => StringRM.GetString("strAboutProductName", Culture) ?? "Product name: {0}";
     public static string AboutVersion => StringRM.GetString("strAboutVersion", Culture) ?? "Version {0}";
-    public static string AboutCopyright => StringRM.GetString("strAboutCopyright", Culture) ?? "Copyright © 2021-2022";
-    public static string AboutCompanyName => StringRM.GetString("strAboutCompanyName", Culture) ?? "Developed by Arthurits Ltd";
+    public static string AboutCopyright => StringRM.GetString("strAboutCopyright", Culture) ?? "Copyright {0}";
+    public static string AboutCompanyName => StringRM.GetString("strAboutCompanyName", Culture) ?? "Developed by {0}";
     public static string AboutDescription => StringRM.GetString("strAboutDescription", Culture) ?? "Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A." +
         Environment.NewLine + Environment.NewLine + "No commercial use allowed whatsoever.Contact the author for any inquires." +
         Environment.NewLine + Environment.NewLine + "If you find this software useful, please consider supporting it!";
