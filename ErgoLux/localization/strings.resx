@@ -714,7 +714,7 @@ dimension has been stopped.</value>
     <comment>To be shown in About window</comment>
   </data>
   <data name="strAboutCopyright" xml:space="preserve">
-    <value>Copyright © 2021-2022</value>
+    <value>Copyright {0}</value>
     <comment>To be shown in About window</comment>
   </data>
   <data name="strAboutCompanyName" xml:space="preserve">

@@ -70,7 +70,7 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copyright © 2021-2022.
+        ///   Looks up a localized string similar to Copyright {0}.
         /// </summary>
         internal static string strAboutCopyright {
             get {

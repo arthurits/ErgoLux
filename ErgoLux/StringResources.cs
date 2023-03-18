@@ -1,3 +1,5 @@
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 namespace ErgoLux;
 
 public static class StringResources
@@ -139,7 +141,6 @@ public static class StringResources
     public static string MsgBoxSaveData => StringRM.GetString("strMsgBoxSaveData", Culture) ?? "Data has been successfully saved to disk.";
     public static string MsgBoxSaveDataTitle => StringRM.GetString("strMsgBoxSaveDataTitle", Culture) ?? "Data saving";
     public static string MsgBoxTaskCancel => StringRM.GetString("strMsgBoxTaskCancel", Culture) ?? "Computation of the Hausdorff-Besicovitch fractal" + Environment.NewLine + "dimension has been stopped.";
-    //public static string MsgBoxTaskCancel => StringRM.GetString("strMsgBoxTaskCancel", Culture) ?? $"Computation of the Hausdorff-Besicovitch fractal{Environment.NewLine}dimension has been stopped.";
     public static string MsgBoxTaskCancelTitle => StringRM.GetString("strMsgBoxTaskCancelTitle", Culture) ?? "Stop";
     public static string OpenDlgFilter => StringRM.GetString("strOpenDlgFilter", Culture) ?? "ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*";
     public static string OpenDlgTitle => StringRM.GetString("strOpenDlgTitle", Culture) ?? "Open illuminance data";
@@ -200,4 +201,12 @@ public static class StringResources
     public static string ToolTipSettings => StringRM.GetString("strToolTipSettings", Culture) ?? "Settings for plots, data, and UI";
     public static string ToolTipUILanguage => StringRM.GetString("strToolTipUILanguage", Culture) ?? "User interface language";
 
+    // Form about
+    public static string AboutProductName => StringRM.GetString("strAboutProductName", Culture) ?? "Product name: {0}";
+    public static string AboutVersion => StringRM.GetString("strAboutVersion", Culture) ?? "Version {0}";
+    public static string AboutCopyright => StringRM.GetString("strAboutCopyright", Culture) ?? "Copyright © 2021-2022";
+    public static string AboutCompanyName => StringRM.GetString("strAboutCompanyName", Culture) ?? "Developed by Arthurits Ltd";
+    public static string AboutDescription => StringRM.GetString("strAboutDescription", Culture) ?? "Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A." +
+        Environment.NewLine + Environment.NewLine + "No commercial use allowed whatsoever.Contact the author for any inquires." +
+        Environment.NewLine + Environment.NewLine + "If you find this software useful, please consider supporting it!";
 }

@@ -83,18 +83,18 @@ partial class FrmAbout : Form
             return ((AssemblyCompanyAttribute)attributes[0]).Company;
         }
     }
-    
+
     #endregion
 
     public FrmAbout()
     {
         InitializeComponent();
         // this.Text = String.Format("About {0}", AssemblyTitle);
-        this.labelProductName.Text = AssemblyProduct;
-        this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-        this.labelCopyright.Text = AssemblyCopyright;
-        this.labelCompanyName.Text = AssemblyCompany;
-        this.textBoxDescription.Text = AssemblyDescription;
+        this.labelProductName.Text = String.Format(StringResources.AboutProductName, AssemblyProduct);
+        this.labelVersion.Text = String.Format(StringResources.AboutVersion, AssemblyVersion);
+        this.labelCopyright.Text = String.Format(StringResources.AboutCopyright, AssemblyCopyright);
+        this.labelCompanyName.Text = String.Format(StringResources.AboutCompanyName, AssemblyCompany);
+        this.textBoxDescription.Text = String.Format(StringResources.AboutDescription, AssemblyDescription);
 
         // Set form icons and images
         //this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.IconAbout);
@@ -119,7 +119,7 @@ partial class FrmAbout : Form
         if (m.Msg == WM_PARENTNOTIFY && m.WParam.ToInt32() == WM_LBUTTONDOWN)
         {
             this.Close();
-            
+
             //// get the clicked position
             //var x = (int)(m.LParam.ToInt32() & 0xFFFF);
             //var y = (int)(m.LParam.ToInt32() >> 16);
@@ -129,7 +129,7 @@ partial class FrmAbout : Form
 
             //// call onClick (which fires Click event)
             //OnClick(EventArgs.Empty)
-            
+
             // do something else...
         }
         else if (m.Msg == WM_KEYUP && ((m.WParam.ToInt32() == VK_ESCAPE) | (m.WParam.ToInt32() == VK_RETURN)))
