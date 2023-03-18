@@ -707,19 +707,19 @@ dimension has been stopped.</value>
   </data>
   <data name="strAboutProductName" xml:space="preserve">
     <value>Product name: {0}</value>
-    <comment>To be shown in About window</comment>
+    <comment>To be displayed in About window</comment>
   </data>
   <data name="strAboutVersion" xml:space="preserve">
     <value>Version {0}</value>
-    <comment>To be shown in About window</comment>
+    <comment>To be displayed in About window</comment>
   </data>
   <data name="strAboutCopyright" xml:space="preserve">
     <value>Copyright {0}</value>
-    <comment>To be shown in About window</comment>
+    <comment>To be displayed in About window</comment>
   </data>
   <data name="strAboutCompanyName" xml:space="preserve">
     <value>Developed by {0}</value>
-    <comment>To be shown in About window</comment>
+    <comment>To be displayed in About window</comment>
   </data>
   <data name="strAboutDescription" xml:space="preserve">
     <value>Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A.
@@ -727,7 +727,7 @@ dimension has been stopped.</value>
 No commercial use allowed whatsoever. Contact the author for any inquires.
 
 If you find this software useful, please consider supporting it!</value>
-    <comment>To be shown in About window</comment>
+    <comment>To be displayed in About window</comment>
   </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
