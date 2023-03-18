@@ -705,4 +705,7 @@ Fout:
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Toon crosshair modus van plot</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

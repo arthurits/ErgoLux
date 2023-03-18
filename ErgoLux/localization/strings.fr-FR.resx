@@ -639,4 +639,7 @@ a été arrêté.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Langue de l'interace utilisateur</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

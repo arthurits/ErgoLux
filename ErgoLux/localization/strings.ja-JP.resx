@@ -705,4 +705,7 @@ Error:
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>ユーザー インターフェイス言語</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

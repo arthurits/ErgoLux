@@ -725,4 +725,7 @@ Si la presente esta aplicación le resulta útil y práctica, por favor consider
   <data name="strAboutCompanyName" xml:space="preserve">
     <value>Desarrollado por {0}</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

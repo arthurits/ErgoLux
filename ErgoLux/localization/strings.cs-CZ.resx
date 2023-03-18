@@ -566,4 +566,7 @@ dimenze byla zastavena.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Jazyk uživatelského rozhraní</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

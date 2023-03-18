@@ -724,4 +724,7 @@ If you find this software useful, please consider supporting it!</value>
   <data name="strAboutCompanyName" xml:space="preserve">
     <value>Developed by {0}</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

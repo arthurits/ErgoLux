@@ -564,4 +564,7 @@ er blevet stoppet.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Brugergrænsefladesprog</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>
