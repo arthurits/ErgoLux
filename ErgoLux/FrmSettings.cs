@@ -360,10 +360,11 @@ public partial class FrmSettings : Form
     private void UserCulture_CheckedChanged(object sender, EventArgs e)
     {
         cboAllCultures.Enabled = radUserCulture.Checked;
-        if (cboAllCultures.Enabled)
+        if (cboAllCultures.Enabled && cboAllCultures.SelectedValue is not null)
         {
             _culture = new((string)cboAllCultures.SelectedValue);
-            UpdateUI_Language();
+            if (_culture.Name != string.Empty)
+                UpdateUI_Language();
         }
     }
 
@@ -372,7 +373,7 @@ public partial class FrmSettings : Form
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
-            _culture = new((string)cbo.SelectedValue ?? String.Empty);
+            _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
         }
     }

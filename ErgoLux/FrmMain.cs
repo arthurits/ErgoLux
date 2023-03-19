@@ -322,10 +322,13 @@ public partial class FrmMain : Form
                 signalPlot[i].Label = _seriesLabels[i];
             }
 
-            if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadarPlot))
-                ((RadarPlot)plotDistribution.Plot.GetPlottables()[0]).CategoryLabels = _seriesLabels[0.._settings.T10_NumberOfSensors];
-            else if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadialGaugePlot))
-                ((RadialGaugePlot)plotDistribution.Plot.GetPlottables()[0]).Labels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+            if (_seriesLabels.Length > 0)
+            {
+                if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadarPlot))
+                    ((RadarPlot)plotDistribution.Plot.GetPlottables()[0]).CategoryLabels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+                else if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadialGaugePlot))
+                    ((RadialGaugePlot)plotDistribution.Plot.GetPlottables()[0]).Labels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+            }
 
             signalPlot = plotStats.Plot.GetPlottables().Where(x => x.GetType() == typeof(SignalPlot)).Cast<SignalPlot>().ToArray();
             if (signalPlot.Length == 3)
@@ -343,7 +346,9 @@ public partial class FrmMain : Form
                 signalPlot[2].Label = _seriesLabels[_plotData.Length - _settings.ArrayFixedColumns + 5];
             }
 
-            Plots_ShowLegends();
+            // Update legends only if there is data plotted, otherwise, plots are empty and no legends should be visible
+            if (_plotData.Length > 0)
+                Plots_ShowLegends();
         }
 
         this.ResumeLayout();
