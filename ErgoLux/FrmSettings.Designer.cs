@@ -29,669 +29,656 @@ namespace ErgoLux
         /// </summary>
         private void InitializeComponent()
         {
-            this.updSensors = new System.Windows.Forms.NumericUpDown();
-            this.lblSensors = new System.Windows.Forms.Label();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.tabSettings = new System.Windows.Forms.TabControl();
-            this.tabDevice = new System.Windows.Forms.TabPage();
-            this.lblFrequency = new System.Windows.Forms.Label();
-            this.txtHz = new System.Windows.Forms.TextBox();
-            this.lblOff = new System.Windows.Forms.Label();
-            this.lblOn = new System.Windows.Forms.Label();
-            this.txtOff = new System.Windows.Forms.TextBox();
-            this.txtOn = new System.Windows.Forms.TextBox();
-            this.lblParity = new System.Windows.Forms.Label();
-            this.lblFlowControl = new System.Windows.Forms.Label();
-            this.cboFlowControl = new System.Windows.Forms.ComboBox();
-            this.cboParity = new System.Windows.Forms.ComboBox();
-            this.lblBaudRate = new System.Windows.Forms.Label();
-            this.lblStopBits = new System.Windows.Forms.Label();
-            this.lblDataBits = new System.Windows.Forms.Label();
-            this.txtBaudRate = new System.Windows.Forms.TextBox();
-            this.cboStopBits = new System.Windows.Forms.ComboBox();
-            this.cboDataBits = new System.Windows.Forms.ComboBox();
-            this.lblDevices = new System.Windows.Forms.Label();
-            this.viewDevices = new System.Windows.Forms.ListView();
-            this.tabPlots = new System.Windows.Forms.TabPage();
-            this.lblChkShowRatio = new System.Windows.Forms.Label();
-            this.lblChkShowDistribution = new System.Windows.Forms.Label();
-            this.lblChkShowAverage = new System.Windows.Forms.Label();
-            this.lblChkShowRaw = new System.Windows.Forms.Label();
-            this.chkShowDistribution = new System.Windows.Forms.CheckBox();
-            this.grpPlot = new System.Windows.Forms.GroupBox();
-            this.radRadar = new System.Windows.Forms.RadioButton();
-            this.radRadial = new System.Windows.Forms.RadioButton();
-            this.txtPlotWindow = new System.Windows.Forms.TextBox();
-            this.txtArrayPoints = new System.Windows.Forms.TextBox();
-            this.lblPlotWindow = new System.Windows.Forms.Label();
-            this.lblArrayPoints = new System.Windows.Forms.Label();
-            this.chkShowRatio = new System.Windows.Forms.CheckBox();
-            this.chkShowAverage = new System.Windows.Forms.CheckBox();
-            this.chkShowRaw = new System.Windows.Forms.CheckBox();
-            this.tabGUI = new System.Windows.Forms.TabPage();
-            this.lblDlgPath = new System.Windows.Forms.Label();
-            this.txtDataFormat = new System.Windows.Forms.TextBox();
-            this.lblDataFormat = new System.Windows.Forms.Label();
-            this.chkDlgPath = new System.Windows.Forms.CheckBox();
-            this.grpCulture = new System.Windows.Forms.GroupBox();
-            this.cboAllCultures = new System.Windows.Forms.ComboBox();
-            this.radUserCulture = new System.Windows.Forms.RadioButton();
-            this.radInvariantCulture = new System.Windows.Forms.RadioButton();
-            this.radCurrentCulture = new System.Windows.Forms.RadioButton();
-            this.btnReset = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.updSensors)).BeginInit();
-            this.tabSettings.SuspendLayout();
-            this.tabDevice.SuspendLayout();
-            this.tabPlots.SuspendLayout();
-            this.grpPlot.SuspendLayout();
-            this.tabGUI.SuspendLayout();
-            this.grpCulture.SuspendLayout();
-            this.SuspendLayout();
+            updSensors = new NumericUpDown();
+            lblSensors = new Label();
+            btnAccept = new Button();
+            btnCancel = new Button();
+            tabSettings = new TabControl();
+            tabDevice = new TabPage();
+            lblFrequency = new Label();
+            txtHz = new TextBox();
+            lblOff = new Label();
+            lblOn = new Label();
+            txtOff = new TextBox();
+            txtOn = new TextBox();
+            lblParity = new Label();
+            lblFlowControl = new Label();
+            cboFlowControl = new ComboBox();
+            cboParity = new ComboBox();
+            lblBaudRate = new Label();
+            lblStopBits = new Label();
+            lblDataBits = new Label();
+            txtBaudRate = new TextBox();
+            cboStopBits = new ComboBox();
+            cboDataBits = new ComboBox();
+            lblDevices = new Label();
+            viewDevices = new ListView();
+            tabPlots = new TabPage();
+            lblChkShowRatio = new Label();
+            lblChkShowDistribution = new Label();
+            lblChkShowAverage = new Label();
+            lblChkShowRaw = new Label();
+            chkShowDistribution = new CheckBox();
+            grpPlot = new GroupBox();
+            radRadar = new RadioButton();
+            radRadial = new RadioButton();
+            txtPlotWindow = new TextBox();
+            txtArrayPoints = new TextBox();
+            lblPlotWindow = new Label();
+            lblArrayPoints = new Label();
+            chkShowRatio = new CheckBox();
+            chkShowAverage = new CheckBox();
+            chkShowRaw = new CheckBox();
+            tabGUI = new TabPage();
+            lblDlgPath = new Label();
+            txtDataFormat = new TextBox();
+            lblDataFormat = new Label();
+            chkDlgPath = new CheckBox();
+            grpCulture = new GroupBox();
+            cboAllCultures = new ComboBox();
+            radUserCulture = new RadioButton();
+            radInvariantCulture = new RadioButton();
+            radCurrentCulture = new RadioButton();
+            btnReset = new Button();
+            ((System.ComponentModel.ISupportInitialize)updSensors).BeginInit();
+            tabSettings.SuspendLayout();
+            tabDevice.SuspendLayout();
+            tabPlots.SuspendLayout();
+            grpPlot.SuspendLayout();
+            tabGUI.SuspendLayout();
+            grpCulture.SuspendLayout();
+            SuspendLayout();
             // 
             // updSensors
             // 
-            this.updSensors.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.updSensors.Location = new System.Drawing.Point(161, 262);
-            this.updSensors.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.updSensors.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.updSensors.Name = "updSensors";
-            this.updSensors.Size = new System.Drawing.Size(52, 25);
-            this.updSensors.TabIndex = 9;
-            this.updSensors.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            updSensors.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            updSensors.Location = new Point(161, 262);
+            updSensors.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
+            updSensors.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            updSensors.Name = "updSensors";
+            updSensors.Size = new Size(52, 25);
+            updSensors.TabIndex = 9;
+            updSensors.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // lblSensors
             // 
-            this.lblSensors.AutoSize = true;
-            this.lblSensors.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSensors.Location = new System.Drawing.Point(23, 264);
-            this.lblSensors.Name = "lblSensors";
-            this.lblSensors.Size = new System.Drawing.Size(125, 19);
-            this.lblSensors.TabIndex = 8;
-            this.lblSensors.Text = "Number of sensors";
+            lblSensors.AutoSize = true;
+            lblSensors.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSensors.Location = new Point(23, 264);
+            lblSensors.Name = "lblSensors";
+            lblSensors.Size = new Size(125, 19);
+            lblSensors.TabIndex = 8;
+            lblSensors.Text = "Number of sensors";
             // 
             // btnAccept
             // 
-            this.btnAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnAccept.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAccept.Location = new System.Drawing.Point(402, 354);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(90, 30);
-            this.btnAccept.TabIndex = 3;
-            this.btnAccept.Text = "&Accept";
-            this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.Accept_Click);
+            btnAccept.DialogResult = DialogResult.OK;
+            btnAccept.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAccept.Location = new Point(402, 354);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new Size(90, 30);
+            btnAccept.TabIndex = 3;
+            btnAccept.Text = "&Accept";
+            btnAccept.UseVisualStyleBackColor = true;
+            btnAccept.Click += Accept_Click;
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCancel.Location = new System.Drawing.Point(302, 354);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(90, 30);
-            this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.Cancel_Click);
+            btnCancel.DialogResult = DialogResult.Cancel;
+            btnCancel.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCancel.Location = new Point(302, 354);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(90, 30);
+            btnCancel.TabIndex = 2;
+            btnCancel.Text = "&Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += Cancel_Click;
             // 
             // tabSettings
             // 
-            this.tabSettings.Controls.Add(this.tabDevice);
-            this.tabSettings.Controls.Add(this.tabPlots);
-            this.tabSettings.Controls.Add(this.tabGUI);
-            this.tabSettings.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabSettings.Location = new System.Drawing.Point(12, 12);
-            this.tabSettings.Name = "tabSettings";
-            this.tabSettings.SelectedIndex = 0;
-            this.tabSettings.Size = new System.Drawing.Size(480, 333);
-            this.tabSettings.TabIndex = 0;
+            tabSettings.Controls.Add(tabDevice);
+            tabSettings.Controls.Add(tabPlots);
+            tabSettings.Controls.Add(tabGUI);
+            tabSettings.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            tabSettings.Location = new Point(12, 12);
+            tabSettings.Name = "tabSettings";
+            tabSettings.SelectedIndex = 0;
+            tabSettings.Size = new Size(480, 333);
+            tabSettings.TabIndex = 0;
             // 
             // tabDevice
             // 
-            this.tabDevice.Controls.Add(this.lblFrequency);
-            this.tabDevice.Controls.Add(this.txtHz);
-            this.tabDevice.Controls.Add(this.lblSensors);
-            this.tabDevice.Controls.Add(this.updSensors);
-            this.tabDevice.Controls.Add(this.lblOff);
-            this.tabDevice.Controls.Add(this.lblOn);
-            this.tabDevice.Controls.Add(this.txtOff);
-            this.tabDevice.Controls.Add(this.txtOn);
-            this.tabDevice.Controls.Add(this.lblParity);
-            this.tabDevice.Controls.Add(this.lblFlowControl);
-            this.tabDevice.Controls.Add(this.cboFlowControl);
-            this.tabDevice.Controls.Add(this.cboParity);
-            this.tabDevice.Controls.Add(this.lblBaudRate);
-            this.tabDevice.Controls.Add(this.lblStopBits);
-            this.tabDevice.Controls.Add(this.lblDataBits);
-            this.tabDevice.Controls.Add(this.txtBaudRate);
-            this.tabDevice.Controls.Add(this.cboStopBits);
-            this.tabDevice.Controls.Add(this.cboDataBits);
-            this.tabDevice.Controls.Add(this.lblDevices);
-            this.tabDevice.Controls.Add(this.viewDevices);
-            this.tabDevice.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tabDevice.Location = new System.Drawing.Point(4, 26);
-            this.tabDevice.Name = "tabDevice";
-            this.tabDevice.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDevice.Size = new System.Drawing.Size(472, 303);
-            this.tabDevice.TabIndex = 0;
-            this.tabDevice.Text = "T-10A";
-            this.tabDevice.UseVisualStyleBackColor = true;
+            tabDevice.Controls.Add(lblFrequency);
+            tabDevice.Controls.Add(txtHz);
+            tabDevice.Controls.Add(lblSensors);
+            tabDevice.Controls.Add(updSensors);
+            tabDevice.Controls.Add(lblOff);
+            tabDevice.Controls.Add(lblOn);
+            tabDevice.Controls.Add(txtOff);
+            tabDevice.Controls.Add(txtOn);
+            tabDevice.Controls.Add(lblParity);
+            tabDevice.Controls.Add(lblFlowControl);
+            tabDevice.Controls.Add(cboFlowControl);
+            tabDevice.Controls.Add(cboParity);
+            tabDevice.Controls.Add(lblBaudRate);
+            tabDevice.Controls.Add(lblStopBits);
+            tabDevice.Controls.Add(lblDataBits);
+            tabDevice.Controls.Add(txtBaudRate);
+            tabDevice.Controls.Add(cboStopBits);
+            tabDevice.Controls.Add(cboDataBits);
+            tabDevice.Controls.Add(lblDevices);
+            tabDevice.Controls.Add(viewDevices);
+            tabDevice.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            tabDevice.Location = new Point(4, 26);
+            tabDevice.Name = "tabDevice";
+            tabDevice.Padding = new Padding(3);
+            tabDevice.Size = new Size(472, 303);
+            tabDevice.TabIndex = 0;
+            tabDevice.Text = "T-10A";
+            tabDevice.UseVisualStyleBackColor = true;
             // 
             // lblFrequency
             // 
-            this.lblFrequency.AutoSize = true;
-            this.lblFrequency.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblFrequency.Location = new System.Drawing.Point(258, 156);
-            this.lblFrequency.Name = "lblFrequency";
-            this.lblFrequency.Size = new System.Drawing.Size(67, 19);
-            this.lblFrequency.TabIndex = 10;
-            this.lblFrequency.Text = "Freq. (Hz)";
+            lblFrequency.AutoSize = true;
+            lblFrequency.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblFrequency.Location = new Point(258, 156);
+            lblFrequency.Name = "lblFrequency";
+            lblFrequency.Size = new Size(67, 19);
+            lblFrequency.TabIndex = 10;
+            lblFrequency.Text = "Freq. (Hz)";
             // 
             // txtHz
             // 
-            this.txtHz.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtHz.Location = new System.Drawing.Point(369, 153);
-            this.txtHz.Name = "txtHz";
-            this.txtHz.Size = new System.Drawing.Size(32, 25);
-            this.txtHz.TabIndex = 11;
+            txtHz.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            txtHz.Location = new Point(369, 153);
+            txtHz.Name = "txtHz";
+            txtHz.Size = new Size(32, 25);
+            txtHz.TabIndex = 11;
             // 
             // lblOff
             // 
-            this.lblOff.AutoSize = true;
-            this.lblOff.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblOff.Location = new System.Drawing.Point(378, 264);
-            this.lblOff.Name = "lblOff";
-            this.lblOff.Size = new System.Drawing.Size(28, 19);
-            this.lblOff.TabIndex = 18;
-            this.lblOff.Text = "Off";
+            lblOff.AutoSize = true;
+            lblOff.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblOff.Location = new Point(378, 264);
+            lblOff.Name = "lblOff";
+            lblOff.Size = new Size(28, 19);
+            lblOff.TabIndex = 18;
+            lblOff.Text = "Off";
             // 
             // lblOn
             // 
-            this.lblOn.AutoSize = true;
-            this.lblOn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblOn.Location = new System.Drawing.Point(295, 264);
-            this.lblOn.Name = "lblOn";
-            this.lblOn.Size = new System.Drawing.Size(28, 19);
-            this.lblOn.TabIndex = 16;
-            this.lblOn.Text = "On";
+            lblOn.AutoSize = true;
+            lblOn.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblOn.Location = new Point(295, 264);
+            lblOn.Name = "lblOn";
+            lblOn.Size = new Size(28, 19);
+            lblOn.TabIndex = 16;
+            lblOn.Text = "On";
             // 
             // txtOff
             // 
-            this.txtOff.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtOff.Location = new System.Drawing.Point(409, 261);
-            this.txtOff.Name = "txtOff";
-            this.txtOff.Size = new System.Drawing.Size(40, 25);
-            this.txtOff.TabIndex = 19;
+            txtOff.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            txtOff.Location = new Point(409, 261);
+            txtOff.Name = "txtOff";
+            txtOff.Size = new Size(40, 25);
+            txtOff.TabIndex = 19;
             // 
             // txtOn
             // 
-            this.txtOn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtOn.Location = new System.Drawing.Point(330, 261);
-            this.txtOn.Name = "txtOn";
-            this.txtOn.Size = new System.Drawing.Size(40, 25);
-            this.txtOn.TabIndex = 17;
+            txtOn.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            txtOn.Location = new Point(330, 261);
+            txtOn.Name = "txtOn";
+            txtOn.Size = new Size(40, 25);
+            txtOn.TabIndex = 17;
             // 
             // lblParity
             // 
-            this.lblParity.AutoSize = true;
-            this.lblParity.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblParity.Location = new System.Drawing.Point(23, 228);
-            this.lblParity.Name = "lblParity";
-            this.lblParity.Size = new System.Drawing.Size(44, 19);
-            this.lblParity.TabIndex = 6;
-            this.lblParity.Text = "Parity";
+            lblParity.AutoSize = true;
+            lblParity.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblParity.Location = new Point(23, 228);
+            lblParity.Name = "lblParity";
+            lblParity.Size = new Size(44, 19);
+            lblParity.TabIndex = 6;
+            lblParity.Text = "Parity";
             // 
             // lblFlowControl
             // 
-            this.lblFlowControl.AutoSize = true;
-            this.lblFlowControl.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblFlowControl.Location = new System.Drawing.Point(258, 228);
-            this.lblFlowControl.Name = "lblFlowControl";
-            this.lblFlowControl.Size = new System.Drawing.Size(84, 19);
-            this.lblFlowControl.TabIndex = 14;
-            this.lblFlowControl.Text = "Flow control";
+            lblFlowControl.AutoSize = true;
+            lblFlowControl.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblFlowControl.Location = new Point(258, 228);
+            lblFlowControl.Name = "lblFlowControl";
+            lblFlowControl.Size = new Size(84, 19);
+            lblFlowControl.TabIndex = 14;
+            lblFlowControl.Text = "Flow control";
             // 
             // cboFlowControl
             // 
-            this.cboFlowControl.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cboFlowControl.FormattingEnabled = true;
-            this.cboFlowControl.Location = new System.Drawing.Point(369, 225);
-            this.cboFlowControl.Name = "cboFlowControl";
-            this.cboFlowControl.Size = new System.Drawing.Size(80, 25);
-            this.cboFlowControl.TabIndex = 15;
-            this.cboFlowControl.SelectedIndexChanged += new System.EventHandler(this.cboFlowControl_SelectedIndexChanged);
+            cboFlowControl.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            cboFlowControl.FormattingEnabled = true;
+            cboFlowControl.Location = new Point(369, 225);
+            cboFlowControl.Name = "cboFlowControl";
+            cboFlowControl.Size = new Size(80, 25);
+            cboFlowControl.TabIndex = 15;
+            cboFlowControl.SelectedIndexChanged += cboFlowControl_SelectedIndexChanged;
             // 
             // cboParity
             // 
-            this.cboParity.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cboParity.FormattingEnabled = true;
-            this.cboParity.Location = new System.Drawing.Point(133, 225);
-            this.cboParity.Name = "cboParity";
-            this.cboParity.Size = new System.Drawing.Size(80, 25);
-            this.cboParity.TabIndex = 7;
+            cboParity.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            cboParity.FormattingEnabled = true;
+            cboParity.Location = new Point(133, 225);
+            cboParity.Name = "cboParity";
+            cboParity.Size = new Size(80, 25);
+            cboParity.TabIndex = 7;
             // 
             // lblBaudRate
             // 
-            this.lblBaudRate.AutoSize = true;
-            this.lblBaudRate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblBaudRate.Location = new System.Drawing.Point(23, 156);
-            this.lblBaudRate.Name = "lblBaudRate";
-            this.lblBaudRate.Size = new System.Drawing.Size(68, 19);
-            this.lblBaudRate.TabIndex = 2;
-            this.lblBaudRate.Text = "Baud rate";
+            lblBaudRate.AutoSize = true;
+            lblBaudRate.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblBaudRate.Location = new Point(23, 156);
+            lblBaudRate.Name = "lblBaudRate";
+            lblBaudRate.Size = new Size(68, 19);
+            lblBaudRate.TabIndex = 2;
+            lblBaudRate.Text = "Baud rate";
             // 
             // lblStopBits
             // 
-            this.lblStopBits.AutoSize = true;
-            this.lblStopBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblStopBits.Location = new System.Drawing.Point(258, 192);
-            this.lblStopBits.Name = "lblStopBits";
-            this.lblStopBits.Size = new System.Drawing.Size(63, 19);
-            this.lblStopBits.TabIndex = 12;
-            this.lblStopBits.Text = "Stop bits";
+            lblStopBits.AutoSize = true;
+            lblStopBits.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblStopBits.Location = new Point(258, 192);
+            lblStopBits.Name = "lblStopBits";
+            lblStopBits.Size = new Size(63, 19);
+            lblStopBits.TabIndex = 12;
+            lblStopBits.Text = "Stop bits";
             // 
             // lblDataBits
             // 
-            this.lblDataBits.AutoSize = true;
-            this.lblDataBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblDataBits.Location = new System.Drawing.Point(23, 192);
-            this.lblDataBits.Name = "lblDataBits";
-            this.lblDataBits.Size = new System.Drawing.Size(64, 19);
-            this.lblDataBits.TabIndex = 4;
-            this.lblDataBits.Text = "Data bits";
+            lblDataBits.AutoSize = true;
+            lblDataBits.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDataBits.Location = new Point(23, 192);
+            lblDataBits.Name = "lblDataBits";
+            lblDataBits.Size = new Size(64, 19);
+            lblDataBits.TabIndex = 4;
+            lblDataBits.Text = "Data bits";
             // 
             // txtBaudRate
             // 
-            this.txtBaudRate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtBaudRate.Location = new System.Drawing.Point(133, 153);
-            this.txtBaudRate.Name = "txtBaudRate";
-            this.txtBaudRate.ShortcutsEnabled = false;
-            this.txtBaudRate.Size = new System.Drawing.Size(80, 25);
-            this.txtBaudRate.TabIndex = 3;
+            txtBaudRate.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            txtBaudRate.Location = new Point(133, 153);
+            txtBaudRate.Name = "txtBaudRate";
+            txtBaudRate.ShortcutsEnabled = false;
+            txtBaudRate.Size = new Size(80, 25);
+            txtBaudRate.TabIndex = 3;
             // 
             // cboStopBits
             // 
-            this.cboStopBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cboStopBits.FormattingEnabled = true;
-            this.cboStopBits.Location = new System.Drawing.Point(369, 189);
-            this.cboStopBits.Name = "cboStopBits";
-            this.cboStopBits.Size = new System.Drawing.Size(80, 25);
-            this.cboStopBits.TabIndex = 13;
+            cboStopBits.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            cboStopBits.FormattingEnabled = true;
+            cboStopBits.Location = new Point(369, 189);
+            cboStopBits.Name = "cboStopBits";
+            cboStopBits.Size = new Size(80, 25);
+            cboStopBits.TabIndex = 13;
             // 
             // cboDataBits
             // 
-            this.cboDataBits.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cboDataBits.FormattingEnabled = true;
-            this.cboDataBits.Location = new System.Drawing.Point(133, 189);
-            this.cboDataBits.Name = "cboDataBits";
-            this.cboDataBits.Size = new System.Drawing.Size(80, 25);
-            this.cboDataBits.TabIndex = 5;
+            cboDataBits.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            cboDataBits.FormattingEnabled = true;
+            cboDataBits.Location = new Point(133, 189);
+            cboDataBits.Name = "cboDataBits";
+            cboDataBits.Size = new Size(80, 25);
+            cboDataBits.TabIndex = 5;
             // 
             // lblDevices
             // 
-            this.lblDevices.AutoSize = true;
-            this.lblDevices.BackColor = System.Drawing.Color.Transparent;
-            this.lblDevices.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblDevices.Location = new System.Drawing.Point(10, 10);
-            this.lblDevices.Name = "lblDevices";
-            this.lblDevices.Size = new System.Drawing.Size(100, 19);
-            this.lblDevices.TabIndex = 0;
-            this.lblDevices.Text = "FTDI device list";
+            lblDevices.AutoSize = true;
+            lblDevices.BackColor = Color.Transparent;
+            lblDevices.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDevices.Location = new Point(10, 10);
+            lblDevices.Name = "lblDevices";
+            lblDevices.Size = new Size(100, 19);
+            lblDevices.TabIndex = 0;
+            lblDevices.Text = "FTDI device list";
             // 
             // viewDevices
             // 
-            this.viewDevices.FullRowSelect = true;
-            this.viewDevices.GridLines = true;
-            this.viewDevices.Location = new System.Drawing.Point(10, 29);
-            this.viewDevices.MultiSelect = false;
-            this.viewDevices.Name = "viewDevices";
-            this.viewDevices.ShowGroups = false;
-            this.viewDevices.Size = new System.Drawing.Size(449, 107);
-            this.viewDevices.TabIndex = 1;
-            this.viewDevices.UseCompatibleStateImageBehavior = false;
-            this.viewDevices.View = System.Windows.Forms.View.Details;
+            viewDevices.FullRowSelect = true;
+            viewDevices.GridLines = true;
+            viewDevices.Location = new Point(10, 29);
+            viewDevices.MultiSelect = false;
+            viewDevices.Name = "viewDevices";
+            viewDevices.ShowGroups = false;
+            viewDevices.Size = new Size(449, 107);
+            viewDevices.TabIndex = 1;
+            viewDevices.UseCompatibleStateImageBehavior = false;
+            viewDevices.View = View.Details;
             // 
             // tabPlots
             // 
-            this.tabPlots.Controls.Add(this.lblChkShowRatio);
-            this.tabPlots.Controls.Add(this.lblChkShowDistribution);
-            this.tabPlots.Controls.Add(this.lblChkShowAverage);
-            this.tabPlots.Controls.Add(this.lblChkShowRaw);
-            this.tabPlots.Controls.Add(this.chkShowDistribution);
-            this.tabPlots.Controls.Add(this.grpPlot);
-            this.tabPlots.Controls.Add(this.txtPlotWindow);
-            this.tabPlots.Controls.Add(this.txtArrayPoints);
-            this.tabPlots.Controls.Add(this.lblPlotWindow);
-            this.tabPlots.Controls.Add(this.lblArrayPoints);
-            this.tabPlots.Controls.Add(this.chkShowRatio);
-            this.tabPlots.Controls.Add(this.chkShowAverage);
-            this.tabPlots.Controls.Add(this.chkShowRaw);
-            this.tabPlots.Location = new System.Drawing.Point(4, 26);
-            this.tabPlots.Name = "tabPlots";
-            this.tabPlots.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlots.Size = new System.Drawing.Size(472, 303);
-            this.tabPlots.TabIndex = 1;
-            this.tabPlots.Text = "Plots";
-            this.tabPlots.UseVisualStyleBackColor = true;
+            tabPlots.Controls.Add(lblChkShowRatio);
+            tabPlots.Controls.Add(lblChkShowDistribution);
+            tabPlots.Controls.Add(lblChkShowAverage);
+            tabPlots.Controls.Add(lblChkShowRaw);
+            tabPlots.Controls.Add(chkShowDistribution);
+            tabPlots.Controls.Add(grpPlot);
+            tabPlots.Controls.Add(txtPlotWindow);
+            tabPlots.Controls.Add(txtArrayPoints);
+            tabPlots.Controls.Add(lblPlotWindow);
+            tabPlots.Controls.Add(lblArrayPoints);
+            tabPlots.Controls.Add(chkShowRatio);
+            tabPlots.Controls.Add(chkShowAverage);
+            tabPlots.Controls.Add(chkShowRaw);
+            tabPlots.Location = new Point(4, 26);
+            tabPlots.Name = "tabPlots";
+            tabPlots.Padding = new Padding(3);
+            tabPlots.Size = new Size(472, 303);
+            tabPlots.TabIndex = 1;
+            tabPlots.Text = "Plots";
+            tabPlots.UseVisualStyleBackColor = true;
             // 
             // lblChkShowRatio
             // 
-            this.lblChkShowRatio.AutoSize = true;
-            this.lblChkShowRatio.Location = new System.Drawing.Point(236, 66);
-            this.lblChkShowRatio.MaximumSize = new System.Drawing.Size(180, 0);
-            this.lblChkShowRatio.Name = "lblChkShowRatio";
-            this.lblChkShowRatio.Size = new System.Drawing.Size(71, 19);
-            this.lblChkShowRatio.TabIndex = 7;
-            this.lblChkShowRatio.Text = "Plot ratios";
-            this.lblChkShowRatio.Click += new System.EventHandler(this.Label_Click);
+            lblChkShowRatio.AutoSize = true;
+            lblChkShowRatio.Location = new Point(236, 66);
+            lblChkShowRatio.MaximumSize = new Size(180, 0);
+            lblChkShowRatio.Name = "lblChkShowRatio";
+            lblChkShowRatio.Size = new Size(71, 19);
+            lblChkShowRatio.TabIndex = 7;
+            lblChkShowRatio.Text = "Plot ratios";
+            lblChkShowRatio.Click += Label_Click;
             // 
             // lblChkShowDistribution
             // 
-            this.lblChkShowDistribution.AutoSize = true;
-            this.lblChkShowDistribution.Location = new System.Drawing.Point(236, 26);
-            this.lblChkShowDistribution.MaximumSize = new System.Drawing.Size(180, 0);
-            this.lblChkShowDistribution.Name = "lblChkShowDistribution";
-            this.lblChkShowDistribution.Size = new System.Drawing.Size(107, 19);
-            this.lblChkShowDistribution.TabIndex = 3;
-            this.lblChkShowDistribution.Text = "Plot distribution";
-            this.lblChkShowDistribution.Click += new System.EventHandler(this.Label_Click);
+            lblChkShowDistribution.AutoSize = true;
+            lblChkShowDistribution.Location = new Point(236, 26);
+            lblChkShowDistribution.MaximumSize = new Size(180, 0);
+            lblChkShowDistribution.Name = "lblChkShowDistribution";
+            lblChkShowDistribution.Size = new Size(107, 19);
+            lblChkShowDistribution.TabIndex = 3;
+            lblChkShowDistribution.Text = "Plot distribution";
+            lblChkShowDistribution.Click += Label_Click;
             // 
             // lblChkShowAverage
             // 
-            this.lblChkShowAverage.AutoSize = true;
-            this.lblChkShowAverage.Location = new System.Drawing.Point(43, 66);
-            this.lblChkShowAverage.MaximumSize = new System.Drawing.Size(155, 0);
-            this.lblChkShowAverage.Name = "lblChkShowAverage";
-            this.lblChkShowAverage.Size = new System.Drawing.Size(85, 19);
-            this.lblChkShowAverage.TabIndex = 5;
-            this.lblChkShowAverage.Text = "Plot average";
-            this.lblChkShowAverage.Click += new System.EventHandler(this.Label_Click);
+            lblChkShowAverage.AutoSize = true;
+            lblChkShowAverage.Location = new Point(43, 66);
+            lblChkShowAverage.MaximumSize = new Size(155, 0);
+            lblChkShowAverage.Name = "lblChkShowAverage";
+            lblChkShowAverage.Size = new Size(85, 19);
+            lblChkShowAverage.TabIndex = 5;
+            lblChkShowAverage.Text = "Plot average";
+            lblChkShowAverage.Click += Label_Click;
             // 
             // lblChkShowRaw
             // 
-            this.lblChkShowRaw.AutoSize = true;
-            this.lblChkShowRaw.Location = new System.Drawing.Point(43, 26);
-            this.lblChkShowRaw.MaximumSize = new System.Drawing.Size(155, 0);
-            this.lblChkShowRaw.Name = "lblChkShowRaw";
-            this.lblChkShowRaw.Size = new System.Drawing.Size(90, 19);
-            this.lblChkShowRaw.TabIndex = 1;
-            this.lblChkShowRaw.Text = "Plot raw data";
-            this.lblChkShowRaw.Click += new System.EventHandler(this.Label_Click);
+            lblChkShowRaw.AutoSize = true;
+            lblChkShowRaw.Location = new Point(43, 26);
+            lblChkShowRaw.MaximumSize = new Size(155, 0);
+            lblChkShowRaw.Name = "lblChkShowRaw";
+            lblChkShowRaw.Size = new Size(90, 19);
+            lblChkShowRaw.TabIndex = 1;
+            lblChkShowRaw.Text = "Plot raw data";
+            lblChkShowRaw.Click += Label_Click;
             // 
             // chkShowDistribution
             // 
-            this.chkShowDistribution.AutoSize = true;
-            this.chkShowDistribution.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowDistribution.Location = new System.Drawing.Point(220, 30);
-            this.chkShowDistribution.Name = "chkShowDistribution";
-            this.chkShowDistribution.Size = new System.Drawing.Size(15, 14);
-            this.chkShowDistribution.TabIndex = 2;
-            this.chkShowDistribution.UseVisualStyleBackColor = true;
-            this.chkShowDistribution.CheckedChanged += new System.EventHandler(this.chkShowDistribution_CheckedChanged);
+            chkShowDistribution.AutoSize = true;
+            chkShowDistribution.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            chkShowDistribution.Location = new Point(220, 30);
+            chkShowDistribution.Name = "chkShowDistribution";
+            chkShowDistribution.Size = new Size(15, 14);
+            chkShowDistribution.TabIndex = 2;
+            chkShowDistribution.UseVisualStyleBackColor = true;
+            chkShowDistribution.CheckedChanged += chkShowDistribution_CheckedChanged;
             // 
             // grpPlot
             // 
-            this.grpPlot.Controls.Add(this.radRadar);
-            this.grpPlot.Controls.Add(this.radRadial);
-            this.grpPlot.Location = new System.Drawing.Point(81, 104);
-            this.grpPlot.Name = "grpPlot";
-            this.grpPlot.Size = new System.Drawing.Size(187, 98);
-            this.grpPlot.TabIndex = 8;
-            this.grpPlot.TabStop = false;
-            this.grpPlot.Text = "Plot distribution";
+            grpPlot.Controls.Add(radRadar);
+            grpPlot.Controls.Add(radRadial);
+            grpPlot.Location = new Point(81, 104);
+            grpPlot.Name = "grpPlot";
+            grpPlot.Size = new Size(187, 98);
+            grpPlot.TabIndex = 8;
+            grpPlot.TabStop = false;
+            grpPlot.Text = "Plot distribution";
             // 
             // radRadar
             // 
-            this.radRadar.AutoSize = true;
-            this.radRadar.Location = new System.Drawing.Point(14, 28);
-            this.radRadar.Name = "radRadar";
-            this.radRadar.Size = new System.Drawing.Size(62, 23);
-            this.radRadar.TabIndex = 0;
-            this.radRadar.TabStop = true;
-            this.radRadar.Text = "Radar";
-            this.radRadar.UseVisualStyleBackColor = true;
+            radRadar.AutoSize = true;
+            radRadar.Location = new Point(14, 28);
+            radRadar.Name = "radRadar";
+            radRadar.Size = new Size(62, 23);
+            radRadar.TabIndex = 0;
+            radRadar.TabStop = true;
+            radRadar.Text = "Radar";
+            radRadar.UseVisualStyleBackColor = true;
             // 
             // radRadial
             // 
-            this.radRadial.AutoSize = true;
-            this.radRadial.Location = new System.Drawing.Point(14, 60);
-            this.radRadial.Name = "radRadial";
-            this.radRadial.Size = new System.Drawing.Size(105, 23);
-            this.radRadial.TabIndex = 1;
-            this.radRadial.TabStop = true;
-            this.radRadial.Text = "Radial gauge";
-            this.radRadial.UseVisualStyleBackColor = true;
+            radRadial.AutoSize = true;
+            radRadial.Location = new Point(14, 60);
+            radRadial.Name = "radRadial";
+            radRadial.Size = new Size(105, 23);
+            radRadial.TabIndex = 1;
+            radRadial.TabStop = true;
+            radRadial.Text = "Radial gauge";
+            radRadial.UseVisualStyleBackColor = true;
             // 
             // txtPlotWindow
             // 
-            this.txtPlotWindow.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtPlotWindow.Location = new System.Drawing.Point(229, 251);
-            this.txtPlotWindow.Name = "txtPlotWindow";
-            this.txtPlotWindow.Size = new System.Drawing.Size(85, 25);
-            this.txtPlotWindow.TabIndex = 12;
+            txtPlotWindow.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            txtPlotWindow.Location = new Point(229, 251);
+            txtPlotWindow.Name = "txtPlotWindow";
+            txtPlotWindow.Size = new Size(85, 25);
+            txtPlotWindow.TabIndex = 12;
             // 
             // txtArrayPoints
             // 
-            this.txtArrayPoints.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtArrayPoints.Location = new System.Drawing.Point(229, 220);
-            this.txtArrayPoints.Name = "txtArrayPoints";
-            this.txtArrayPoints.Size = new System.Drawing.Size(85, 25);
-            this.txtArrayPoints.TabIndex = 10;
+            txtArrayPoints.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            txtArrayPoints.Location = new Point(229, 220);
+            txtArrayPoints.Name = "txtArrayPoints";
+            txtArrayPoints.Size = new Size(85, 25);
+            txtArrayPoints.TabIndex = 10;
             // 
             // lblPlotWindow
             // 
-            this.lblPlotWindow.AutoSize = true;
-            this.lblPlotWindow.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPlotWindow.Location = new System.Drawing.Point(31, 254);
-            this.lblPlotWindow.Name = "lblPlotWindow";
-            this.lblPlotWindow.Size = new System.Drawing.Size(145, 19);
-            this.lblPlotWindow.TabIndex = 11;
-            this.lblPlotWindow.Text = "Plot window (seconds)";
+            lblPlotWindow.AutoSize = true;
+            lblPlotWindow.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblPlotWindow.Location = new Point(31, 254);
+            lblPlotWindow.Name = "lblPlotWindow";
+            lblPlotWindow.Size = new Size(145, 19);
+            lblPlotWindow.TabIndex = 11;
+            lblPlotWindow.Text = "Plot window (seconds)";
             // 
             // lblArrayPoints
             // 
-            this.lblArrayPoints.AutoSize = true;
-            this.lblArrayPoints.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblArrayPoints.Location = new System.Drawing.Point(31, 223);
-            this.lblArrayPoints.Name = "lblArrayPoints";
-            this.lblArrayPoints.Size = new System.Drawing.Size(146, 19);
-            this.lblArrayPoints.TabIndex = 9;
-            this.lblArrayPoints.Text = "Array minimum points";
+            lblArrayPoints.AutoSize = true;
+            lblArrayPoints.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblArrayPoints.Location = new Point(31, 223);
+            lblArrayPoints.Name = "lblArrayPoints";
+            lblArrayPoints.Size = new Size(146, 19);
+            lblArrayPoints.TabIndex = 9;
+            lblArrayPoints.Text = "Array minimum points";
             // 
             // chkShowRatio
             // 
-            this.chkShowRatio.AutoSize = true;
-            this.chkShowRatio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowRatio.Location = new System.Drawing.Point(220, 70);
-            this.chkShowRatio.Name = "chkShowRatio";
-            this.chkShowRatio.Size = new System.Drawing.Size(15, 14);
-            this.chkShowRatio.TabIndex = 6;
-            this.chkShowRatio.UseVisualStyleBackColor = true;
+            chkShowRatio.AutoSize = true;
+            chkShowRatio.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            chkShowRatio.Location = new Point(220, 70);
+            chkShowRatio.Name = "chkShowRatio";
+            chkShowRatio.Size = new Size(15, 14);
+            chkShowRatio.TabIndex = 6;
+            chkShowRatio.UseVisualStyleBackColor = true;
             // 
             // chkShowAverage
             // 
-            this.chkShowAverage.AutoSize = true;
-            this.chkShowAverage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowAverage.Location = new System.Drawing.Point(27, 70);
-            this.chkShowAverage.Name = "chkShowAverage";
-            this.chkShowAverage.Size = new System.Drawing.Size(15, 14);
-            this.chkShowAverage.TabIndex = 4;
-            this.chkShowAverage.UseVisualStyleBackColor = true;
+            chkShowAverage.AutoSize = true;
+            chkShowAverage.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            chkShowAverage.Location = new Point(27, 70);
+            chkShowAverage.Name = "chkShowAverage";
+            chkShowAverage.Size = new Size(15, 14);
+            chkShowAverage.TabIndex = 4;
+            chkShowAverage.UseVisualStyleBackColor = true;
             // 
             // chkShowRaw
             // 
-            this.chkShowRaw.AutoSize = true;
-            this.chkShowRaw.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chkShowRaw.Location = new System.Drawing.Point(27, 30);
-            this.chkShowRaw.Name = "chkShowRaw";
-            this.chkShowRaw.Size = new System.Drawing.Size(15, 14);
-            this.chkShowRaw.TabIndex = 0;
-            this.chkShowRaw.UseVisualStyleBackColor = true;
+            chkShowRaw.AutoSize = true;
+            chkShowRaw.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            chkShowRaw.Location = new Point(27, 30);
+            chkShowRaw.Name = "chkShowRaw";
+            chkShowRaw.Size = new Size(15, 14);
+            chkShowRaw.TabIndex = 0;
+            chkShowRaw.UseVisualStyleBackColor = true;
             // 
             // tabGUI
             // 
-            this.tabGUI.Controls.Add(this.lblDlgPath);
-            this.tabGUI.Controls.Add(this.txtDataFormat);
-            this.tabGUI.Controls.Add(this.lblDataFormat);
-            this.tabGUI.Controls.Add(this.chkDlgPath);
-            this.tabGUI.Controls.Add(this.grpCulture);
-            this.tabGUI.Location = new System.Drawing.Point(4, 26);
-            this.tabGUI.Name = "tabGUI";
-            this.tabGUI.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGUI.Size = new System.Drawing.Size(472, 303);
-            this.tabGUI.TabIndex = 2;
-            this.tabGUI.Text = "Interface";
-            this.tabGUI.UseVisualStyleBackColor = true;
+            tabGUI.Controls.Add(lblDlgPath);
+            tabGUI.Controls.Add(txtDataFormat);
+            tabGUI.Controls.Add(lblDataFormat);
+            tabGUI.Controls.Add(chkDlgPath);
+            tabGUI.Controls.Add(grpCulture);
+            tabGUI.Location = new Point(4, 26);
+            tabGUI.Name = "tabGUI";
+            tabGUI.Padding = new Padding(3);
+            tabGUI.Size = new Size(472, 303);
+            tabGUI.TabIndex = 2;
+            tabGUI.Text = "Interface";
+            tabGUI.UseVisualStyleBackColor = true;
             // 
             // lblDlgPath
             // 
-            this.lblDlgPath.AutoSize = true;
-            this.lblDlgPath.Location = new System.Drawing.Point(45, 210);
-            this.lblDlgPath.MaximumSize = new System.Drawing.Size(350, 0);
-            this.lblDlgPath.Name = "lblDlgPath";
-            this.lblDlgPath.Size = new System.Drawing.Size(292, 19);
-            this.lblDlgPath.TabIndex = 2;
-            this.lblDlgPath.Text = "Remember previous path in open/save dialogs";
+            lblDlgPath.AutoSize = true;
+            lblDlgPath.Location = new Point(45, 210);
+            lblDlgPath.MaximumSize = new Size(350, 0);
+            lblDlgPath.Name = "lblDlgPath";
+            lblDlgPath.Size = new Size(292, 19);
+            lblDlgPath.TabIndex = 2;
+            lblDlgPath.Text = "Remember previous path in open/save dialogs";
             // 
             // txtDataFormat
             // 
-            this.txtDataFormat.Location = new System.Drawing.Point(259, 254);
-            this.txtDataFormat.Name = "txtDataFormat";
-            this.txtDataFormat.Size = new System.Drawing.Size(100, 25);
-            this.txtDataFormat.TabIndex = 4;
+            txtDataFormat.Location = new Point(259, 254);
+            txtDataFormat.Name = "txtDataFormat";
+            txtDataFormat.Size = new Size(100, 25);
+            txtDataFormat.TabIndex = 4;
             // 
             // lblDataFormat
             // 
-            this.lblDataFormat.AutoSize = true;
-            this.lblDataFormat.Location = new System.Drawing.Point(26, 257);
-            this.lblDataFormat.MaximumSize = new System.Drawing.Size(230, 0);
-            this.lblDataFormat.Name = "lblDataFormat";
-            this.lblDataFormat.Size = new System.Drawing.Size(177, 19);
-            this.lblDataFormat.TabIndex = 3;
-            this.lblDataFormat.Text = "Numeric data-format string";
+            lblDataFormat.AutoSize = true;
+            lblDataFormat.Location = new Point(26, 257);
+            lblDataFormat.MaximumSize = new Size(230, 0);
+            lblDataFormat.Name = "lblDataFormat";
+            lblDataFormat.Size = new Size(177, 19);
+            lblDataFormat.TabIndex = 3;
+            lblDataFormat.Text = "Numeric data-format string";
             // 
             // chkDlgPath
             // 
-            this.chkDlgPath.AutoSize = true;
-            this.chkDlgPath.Location = new System.Drawing.Point(29, 213);
-            this.chkDlgPath.Name = "chkDlgPath";
-            this.chkDlgPath.Size = new System.Drawing.Size(15, 14);
-            this.chkDlgPath.TabIndex = 1;
-            this.chkDlgPath.UseVisualStyleBackColor = true;
+            chkDlgPath.AutoSize = true;
+            chkDlgPath.Location = new Point(29, 213);
+            chkDlgPath.Name = "chkDlgPath";
+            chkDlgPath.Size = new Size(15, 14);
+            chkDlgPath.TabIndex = 1;
+            chkDlgPath.UseVisualStyleBackColor = true;
             // 
             // grpCulture
             // 
-            this.grpCulture.Controls.Add(this.cboAllCultures);
-            this.grpCulture.Controls.Add(this.radUserCulture);
-            this.grpCulture.Controls.Add(this.radInvariantCulture);
-            this.grpCulture.Controls.Add(this.radCurrentCulture);
-            this.grpCulture.Location = new System.Drawing.Point(29, 24);
-            this.grpCulture.Name = "grpCulture";
-            this.grpCulture.Size = new System.Drawing.Size(364, 171);
-            this.grpCulture.TabIndex = 0;
-            this.grpCulture.TabStop = false;
-            this.grpCulture.Text = "Culture settings";
+            grpCulture.Controls.Add(cboAllCultures);
+            grpCulture.Controls.Add(radUserCulture);
+            grpCulture.Controls.Add(radInvariantCulture);
+            grpCulture.Controls.Add(radCurrentCulture);
+            grpCulture.Location = new Point(29, 24);
+            grpCulture.Name = "grpCulture";
+            grpCulture.Size = new Size(364, 171);
+            grpCulture.TabIndex = 0;
+            grpCulture.TabStop = false;
+            grpCulture.Text = "Culture settings";
             // 
             // cboAllCultures
             // 
-            this.cboAllCultures.FormattingEnabled = true;
-            this.cboAllCultures.Location = new System.Drawing.Point(71, 135);
-            this.cboAllCultures.Name = "cboAllCultures";
-            this.cboAllCultures.Size = new System.Drawing.Size(190, 25);
-            this.cboAllCultures.TabIndex = 3;
-            this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.AllCultures_SelectedValueChanged);
+            cboAllCultures.FormattingEnabled = true;
+            cboAllCultures.Location = new Point(71, 135);
+            cboAllCultures.Name = "cboAllCultures";
+            cboAllCultures.Size = new Size(190, 25);
+            cboAllCultures.TabIndex = 3;
+            cboAllCultures.SelectionChangeCommitted += AllCultures_SelectionChangeCommitted;
             // 
             // radUserCulture
             // 
-            this.radUserCulture.AutoSize = true;
-            this.radUserCulture.Location = new System.Drawing.Point(27, 102);
-            this.radUserCulture.Name = "radUserCulture";
-            this.radUserCulture.Size = new System.Drawing.Size(101, 23);
-            this.radUserCulture.TabIndex = 2;
-            this.radUserCulture.TabStop = true;
-            this.radUserCulture.Text = "User culture";
-            this.radUserCulture.UseVisualStyleBackColor = true;
-            this.radUserCulture.CheckedChanged += new System.EventHandler(this.UserCulture_CheckedChanged);
+            radUserCulture.AutoSize = true;
+            radUserCulture.Location = new Point(27, 102);
+            radUserCulture.Name = "radUserCulture";
+            radUserCulture.Size = new Size(101, 23);
+            radUserCulture.TabIndex = 2;
+            radUserCulture.TabStop = true;
+            radUserCulture.Text = "User culture";
+            radUserCulture.UseVisualStyleBackColor = true;
+            radUserCulture.CheckedChanged += UserCulture_CheckedChanged;
             // 
             // radInvariantCulture
             // 
-            this.radInvariantCulture.AutoSize = true;
-            this.radInvariantCulture.Location = new System.Drawing.Point(27, 66);
-            this.radInvariantCulture.Name = "radInvariantCulture";
-            this.radInvariantCulture.Size = new System.Drawing.Size(127, 23);
-            this.radInvariantCulture.TabIndex = 1;
-            this.radInvariantCulture.TabStop = true;
-            this.radInvariantCulture.Text = "Invariant culture";
-            this.radInvariantCulture.UseVisualStyleBackColor = true;
-            this.radInvariantCulture.CheckedChanged += new System.EventHandler(this.InvariantCulture_CheckedChanged);
+            radInvariantCulture.AutoSize = true;
+            radInvariantCulture.Location = new Point(27, 66);
+            radInvariantCulture.Name = "radInvariantCulture";
+            radInvariantCulture.Size = new Size(127, 23);
+            radInvariantCulture.TabIndex = 1;
+            radInvariantCulture.TabStop = true;
+            radInvariantCulture.Text = "Invariant culture";
+            radInvariantCulture.UseVisualStyleBackColor = true;
+            radInvariantCulture.CheckedChanged += InvariantCulture_CheckedChanged;
             // 
             // radCurrentCulture
             // 
-            this.radCurrentCulture.AutoSize = true;
-            this.radCurrentCulture.Location = new System.Drawing.Point(27, 30);
-            this.radCurrentCulture.Name = "radCurrentCulture";
-            this.radCurrentCulture.Size = new System.Drawing.Size(120, 23);
-            this.radCurrentCulture.TabIndex = 0;
-            this.radCurrentCulture.TabStop = true;
-            this.radCurrentCulture.Text = "Current culture";
-            this.radCurrentCulture.UseVisualStyleBackColor = true;
-            this.radCurrentCulture.CheckedChanged += new System.EventHandler(this.CurrentCulture_CheckedChanged);
+            radCurrentCulture.AutoSize = true;
+            radCurrentCulture.Location = new Point(27, 30);
+            radCurrentCulture.Name = "radCurrentCulture";
+            radCurrentCulture.Size = new Size(120, 23);
+            radCurrentCulture.TabIndex = 0;
+            radCurrentCulture.TabStop = true;
+            radCurrentCulture.Text = "Current culture";
+            radCurrentCulture.UseVisualStyleBackColor = true;
+            radCurrentCulture.CheckedChanged += CurrentCulture_CheckedChanged;
             // 
             // btnReset
             // 
-            this.btnReset.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnReset.Location = new System.Drawing.Point(12, 355);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(90, 30);
-            this.btnReset.TabIndex = 1;
-            this.btnReset.Text = "&Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.Reset_Click);
+            btnReset.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnReset.Location = new Point(12, 355);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(90, 30);
+            btnReset.TabIndex = 1;
+            btnReset.Text = "&Reset";
+            btnReset.UseVisualStyleBackColor = true;
+            btnReset.Click += Reset_Click;
             // 
             // FrmSettings
             // 
-            this.AcceptButton = this.btnAccept;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(504, 396);
-            this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnAccept);
-            this.Controls.Add(this.tabSettings);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FrmSettings";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "T-10 illuminance meter settings";
-            ((System.ComponentModel.ISupportInitialize)(this.updSensors)).EndInit();
-            this.tabSettings.ResumeLayout(false);
-            this.tabDevice.ResumeLayout(false);
-            this.tabDevice.PerformLayout();
-            this.tabPlots.ResumeLayout(false);
-            this.tabPlots.PerformLayout();
-            this.grpPlot.ResumeLayout(false);
-            this.grpPlot.PerformLayout();
-            this.tabGUI.ResumeLayout(false);
-            this.tabGUI.PerformLayout();
-            this.grpCulture.ResumeLayout(false);
-            this.grpCulture.PerformLayout();
-            this.ResumeLayout(false);
-
+            AcceptButton = btnAccept;
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnCancel;
+            ClientSize = new Size(504, 396);
+            Controls.Add(btnReset);
+            Controls.Add(btnCancel);
+            Controls.Add(btnAccept);
+            Controls.Add(tabSettings);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "FrmSettings";
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "T-10 illuminance meter settings";
+            ((System.ComponentModel.ISupportInitialize)updSensors).EndInit();
+            tabSettings.ResumeLayout(false);
+            tabDevice.ResumeLayout(false);
+            tabDevice.PerformLayout();
+            tabPlots.ResumeLayout(false);
+            tabPlots.PerformLayout();
+            grpPlot.ResumeLayout(false);
+            grpPlot.PerformLayout();
+            tabGUI.ResumeLayout(false);
+            tabGUI.PerformLayout();
+            grpCulture.ResumeLayout(false);
+            grpCulture.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
