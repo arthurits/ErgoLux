@@ -81,7 +81,7 @@ namespace ErgoLux.localization {
         /// <summary>
         ///   Looks up a localized string similar to Ergonomics measurement software tool for Konica Minolta&apos;s illuminance-meter T-10A.
         ///
-        ///No commercial use allowed whatsoever. Contact the author for any inquires.
+        ///No commercial use allowed whatsoever. Contact the author for any inquiries.
         ///
         ///If you find this software useful, please consider supporting it!.
         /// </summary>
