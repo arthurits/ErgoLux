@@ -569,4 +569,23 @@ dimenze byla zastavena.</value>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Vyvinuto {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Autorská práva {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Jméno výrobku: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Verze {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Softwarový nástroj pro měření ergonomie pro měřič osvětlení Konica Minolta T-10A.
+
+Není povoleno žádné komerční využití. V případě jakýchkoli dotazů kontaktujte autora.
+
+Pokud považujete tento software za užitečný, zvažte jeho podporu!</value>
+  </data>
 </root>
