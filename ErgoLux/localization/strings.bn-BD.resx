@@ -570,4 +570,23 @@
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>নির্মাণে {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>কপিরাইট {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>পণ্যের নাম: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>সংস্করণ {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>কোনিকা মিনোল্টার ইলুমিন্যান্স-মিটার T-10A-এর জন্য এরগনোমিক্স পরিমাপ সফ্টওয়্যার টুল।
+
+কোনো বাণিজ্যিক ব্যবহারের অনুমতি নেই. কোন অনুসন্ধানের জন্য লেখকের সাথে যোগাযোগ করুন.
+
+আপনি যদি এই সফ্টওয়্যারটিকে দরকারী মনে করেন, তাহলে অনুগ্রহ করে এটিকে সমর্থন করার কথা বিবেচনা করুন!</value>
+  </data>
 </root>
