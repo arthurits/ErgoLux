@@ -708,4 +708,23 @@ Fout:
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Ontwikkeld door {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Auteursrechten {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Productnaam: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Versie {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Ergonomie-meetsoftware voor Konica Minolta's verlichtingssterktemeter T-10A.
+
+Geen enkel commercieel gebruik toegestaan. Neem voor vragen contact op met de auteur.
+
+Als u deze software nuttig vindt, overweeg dan om deze te ondersteunen!</value>
+  </data>
 </root>
