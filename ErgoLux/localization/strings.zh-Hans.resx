@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strBtnAccept" xml:space="preserve">
+    <value>确定(&amp;A)</value>
+  </data>
+  <data name="strBtnCancel" xml:space="preserve">
+    <value>取消(&amp;C)</value>
+  </data>
+  <data name="strBtnData" xml:space="preserve">
+    <value>选择数据</value>
+  </data>
+  <data name="strBtnExport" xml:space="preserve">
+    <value>导出(&amp;E)</value>
+  </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>重置(&amp;R)</value>
+  </data>
+  <data name="strBtnSettings" xml:space="preserve">
+    <value>设置(&amp;S)</value>
+  </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>显示图表十字线</value>
+  </data>
+  <data name="strChkCumulative" xml:space="preserve">
+    <value>累积分形维数</value>
+  </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>记忆上次打开/保存对话框的路径</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>熵（近似和样本）</value>
+  </data>
+  <data name="strChkPower" xml:space="preserve">
+    <value>功率（dB）</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>您想将所有字段重置为默认值吗？</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>重置设置？</value>
+  </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>加载设置文件出错。
+
+{0}
+
+将使用默认值。</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>ErgoLux 数据</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>开始时间</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>结束时间</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>总测量时间</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>数据点数</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>传感器数量</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>采样频率</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>传感器 #</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>最大值</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>平均值</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>最小值</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>最小值/平均值</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>最小值/最大值</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>平均值/最大值</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>均值</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>照度</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>缺少一个空行。</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>缺少列标题（序列名称）。</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>分</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>和</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>毫秒</value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>节“{0}”格式不正确。</value>
+  </data>
+  <data name="strFormTitle" xml:space="preserve">
+    <value>ErgoLux</value>
+  </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>区域设置</value>
+  </data>
+  <data name="strFrmSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="strFrmTitle" xml:space="preserve">
+    <value>Signal analysis</value>
+  </data>
+  <data name="strFrmTitleUnion" xml:space="preserve">
+    <value> - </value>
+  </data>
+  <data name="strGridDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="strGridDevice" xml:space="preserve">
+    <value>设备位置</value>
+  </data>
+  <data name="strGridID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="strGridLocation" xml:space="preserve">
+    <value>位置 ID</value>
+  </data>
+  <data name="strGridType" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="strGrpAxis" xml:space="preserve">
+    <value>横坐标</value>
+  </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>用户界面及数据格式</value>
+  </data>
+  <data name="strLblBaudRate" xml:space="preserve">
+    <value>波特率</value>
+  </data>
+  <data name="strLblData" xml:space="preserve">
+    <value>数据文件路径</value>
+  </data>
+  <data name="strLblDataBits" xml:space="preserve">
+    <value>数据位数</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>数值数据格式化字符串</value>
+  </data>
+  <data name="strLblDeviceList" xml:space="preserve">
+    <value>FTDI 设备列表</value>
+  </data>
+  <data name="strLblSensors" xml:space="preserve">
+    <value>传感器数量</value>
+  </data>
+  <data name="strLblWindow" xml:space="preserve">
+    <value>窗</value>
+  </data>
+  <data name="strMenuMainFile" xml:space="preserve">
+    <value>文件(&amp;F)</value>
+  </data>
+  <data name="strMenuMainFileExit" xml:space="preserve">
+    <value>退出(&amp;E)...</value>
+  </data>
+  <data name="strMenuMainFileOpen" xml:space="preserve">
+    <value>打开(&amp;O)...</value>
+  </data>
+  <data name="strMenuMainFileSave" xml:space="preserve">
+    <value>保存(&amp;S)...</value>
+  </data>
+  <data name="strMenuMainHelpAbout" xml:space="preserve">
+    <value>关于(&amp;A)...</value>
+  </data>
+  <data name="strMenuMainHelpText" xml:space="preserve">
+    <value>帮助(&amp;H)</value>
+  </data>
+  <data name="strMenuMainTools" xml:space="preserve">
+    <value>工具(&amp;T)</value>
+  </data>
+  <data name="strMenuMainToolsConnect" xml:space="preserve">
+    <value>连接(&amp;C)</value>
+  </data>
+  <data name="strMenuMainToolsDisconnect" xml:space="preserve">
+    <value>断开(&amp;D)</value>
+  </data>
+  <data name="strMenuMainToolsSettings" xml:space="preserve">
+    <value>设置(&amp;S)...</value>
+  </data>
+  <data name="strMenuMainView" xml:space="preserve">
+    <value>视图(&amp;V)</value>
+  </data>
+  <data name="strMenuMainViewMenu" xml:space="preserve">
+    <value>显示菜单</value>
+  </data>
+  <data name="strMenuMainViewToolbar" xml:space="preserve">
+    <value>显示工具栏</value>
+  </data>
+  <data name="strMenuMainViewRaw" xml:space="preserve">
+    <value>原始数据</value>
+  </data>
+  <data name="strLblStart" xml:space="preserve">
+    <value>数组索引起始</value>
+  </data>
+  <data name="strLblEnd" xml:space="preserve">
+    <value>数组索引结束</value>
+  </data>
+  <data name="strMsbBoxErrorBits" xml:space="preserve">
+    <value>设置数据特征（数据位、停止位和奇偶校验）失败。
+错误：
+{0}</value>
+  </data>
+  <data name="strLblParity" xml:space="preserve">
+    <value>奇偶校验</value>
+  </data>
+  <data name="strLblSeries" xml:space="preserve">
+    <value>选择序列</value>
+  </data>
+  <data name="strLblStopBits" xml:space="preserve">
+    <value>停止位</value>
+  </data>
+  <data name="strMsgBoxErrorBaudRate" xml:space="preserve">
+    <value>设置波特率失败。
+错误：
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorBaudRateTitle" xml:space="preserve">
+    <value>波特率错误</value>
+  </data>
+  <data name="strMsgBoxErrorBitsTitle" xml:space="preserve">
+    <value>位错误</value>
+  </data>
+  <data name="strMsgBoxErrorDeviceClosed" xml:space="preserve">
+    <value>设备已关闭。请前往“设置”打开设备。</value>
+  </data>
+  <data name="strMsgBoxErrorDeviceClosedTitle" xml:space="preserve">
+    <value>设备错误</value>
+  </data>
+  <data name="strMsgBoxErrorDrivers" xml:space="preserve">
+    <value>无法加载 FTD2XX.DLL。是否安装了 FTDI 驱动程序？</value>
+  </data>
+  <data name="strMsgBoxErrorDriversTitle" xml:space="preserve">
+    <value>加载驱动程序时出错</value>
+  </data>
+  <data name="strMsgBoxErrorLoading" xml:space="preserve">
+    <value>正在尝试从以下位置加载 FTD2XX.DLL：</value>
+  </data>
+  <data name="strMsgBoxErrorLoadingTitle" xml:space="preserve">
+    <value>加载 DLL 时出错</value>
+  </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>打开数据文件时发生意外错误。
+请稍后重试或联系软件工程师。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>打开数据时出错</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDeviceTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDevice" xml:space="preserve">
+    <value>无法打开设备</value>
+  </data>
+  <data name="strMsgBoxErrorOpening" xml:space="preserve">
+    <value>无法打开设备。
+错误：
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpeningTitle" xml:space="preserve">
+    <value>打开设备时出错</value>
+  </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>将数据保存到磁盘时发生意外错误。
+请稍后重试或联系软件工程师。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>保存数据时出错</value>
+  </data>
+  <data name="strMsgBoxErrorSettings" xml:space="preserve">
+    <value>加载设置文件时出错。
+
+{0}
+
+将使用默认值。</value>
+  </data>
+  <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="strChkPlotAverage" xml:space="preserve">
+    <value>绘制均值</value>
+  </data>
+  <data name="strChkPlotDistribution" xml:space="preserve">
+    <value>绘制分布</value>
+  </data>
+  <data name="strChkPlotRatios" xml:space="preserve">
+    <value>绘制比率</value>
+  </data>
+  <data name="strChkPlotRaw" xml:space="preserve">
+    <value>绘制原始数据</value>
+  </data>
+  <data name="strGridSerial" xml:space="preserve">
+    <value>序列号</value>
+  </data>
+  <data name="strGrpPlot" xml:space="preserve">
+    <value>绘制分布</value>
+  </data>
+  <data name="strLblArrayPoints" xml:space="preserve">
+    <value>数组最少点数</value>
+  </data>
+  <data name="strLblFrequency" xml:space="preserve">
+    <value>频率（Hz）</value>
+  </data>
+  <data name="strLblOff" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="strLblOn" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="strLblPlotWindow" xml:space="preserve">
+    <value>绘图窗口（秒数）</value>
+  </data>
+  <data name="strMenuMainViewAverage" xml:space="preserve">
+    <value>均值</value>
+  </data>
+  <data name="strMenuMainViewRatio" xml:space="preserve">
+    <value>比率</value>
+  </data>
+  <data name="strMsgBoxErrorTimeouts" xml:space="preserve">
+    <value>超时设置失败。
+错误信息：
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorTimeoutsTitle" xml:space="preserve">
+    <value>超时设置失败</value>
+  </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>您确定要退出程序吗？</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>退出？</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>没有可供保存的数据。</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>无数据</value>
+  </data>
+  <data name="strMsgBoxReset" xml:space="preserve">
+    <value>您想将所有字段重置为默认值吗？</value>
+  </data>
+  <data name="strMsgBoxResetTitle" xml:space="preserve">
+    <value>重置？</value>
+  </data>
+  <data name="strMsgBoxSaveData" xml:space="preserve">
+    <value>数据已成功保存到磁盘。</value>
+  </data>
+  <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
+    <value>保存数据</value>
+  </data>
+  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+    <value>计算 Hausdorff-Besicovitch 分形维数已经停止。</value>
+  </data>
+  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="strOpenDlgFilter" xml:space="preserve">
+    <value>ErgoLux 文件 (*.elux)|*.elux|SignalAnalysis 文件 (*.sig)|*.sig|文本文件 (*.txt)|*.txt|所有文件 (*.*)|*.*</value>
+  </data>
+  <data name="strPlotAverageTitle" xml:space="preserve">
+    <value>最大值、平均值、最小值</value>
+  </data>
+  <data name="strPlotAverageXLabel" xml:space="preserve">
+    <value>时间（秒）</value>
+  </data>
+  <data name="strPlotRatiosXLabel" xml:space="preserve">
+    <value>时间（秒）</value>
+  </data>
+  <data name="strPlotRatiosYLabel" xml:space="preserve">
+    <value>比率</value>
+  </data>
+  <data name="strPlotRawXLabel" xml:space="preserve">
+    <value>时间（秒）</value>
+  </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>当前区域格式</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>区域无关格式</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>区域设置</value>
+  </data>
+  <data name="strReadDataError" xml:space="preserve">
+    <value>无法从文件中读取数据。
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>区域标识符字符串名称无效。
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>区域名称错误</value>
+  </data>
+  <data name="strReadDataErrorNumber" xml:space="preserve">
+    <value>无效的数值：{0}</value>
+  </data>
+  <data name="strReadDataErrorNumberTitle" xml:space="preserve">
+    <value>解析数据出错</value>
+  </data>
+  <data name="strReadDataErrorTitle" xml:space="preserve">
+    <value>打开数据出错</value>
+  </data>
+  <data name="strStatusExchange" xml:space="preserve">
+    <value>接收数据</value>
+  </data>
+  <data name="strStatusID" xml:space="preserve">
+    <value>设备 ID</value>
+  </data>
+  <data name="strStatusTipID" xml:space="preserve">
+    <value>设备 ID</value>
+  </data>
+  <data name="strStatusTipMax" xml:space="preserve">
+    <value>绘制最大值、平均值、最小值</value>
+  </data>
+  <data name="strStatusTipRaw" xml:space="preserve">
+    <value>绘制原始数据</value>
+  </data>
+  <data name="strStatusTipType" xml:space="preserve">
+    <value>设备类型</value>
+  </data>
+  <data name="strStatusType" xml:space="preserve">
+    <value>设备类型</value>
+  </data>
+  <data name="strTabDevice" xml:space="preserve">
+    <value>T-10A 传感器</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>用户界面</value>
+  </data>
+  <data name="strToolStripAbout" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="strToolStripConnect" xml:space="preserve">
+    <value>连接</value>
+  </data>
+  <data name="strToolStripExit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="strToolStripOpen" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="strToolStripSave" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="strToolStripSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="strToolTipAbout" xml:space="preserve">
+    <value>关于本软件</value>
+  </data>
+  <data name="strToolTipSave" xml:space="preserve">
+    <value>保存数据</value>
+  </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>用户界面</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>：</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>产品名称：{0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>版本 {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>版权所有 {0}</value>
+  </data>
+  <data name="strPlotRawTitle" xml:space="preserve">
+    <value>照度</value>
+  </data>
+  <data name="strPlotRawYLabel" xml:space="preserve">
+    <value>勒克斯</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>开发者 {0}</value>
+  </data>
+  <data name="strToolTipOpen" xml:space="preserve">
+    <value>从磁盘上打开数据文件</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>柯尼卡美能达 T-10A 照度计人体工程学测量工具。
+
+严禁任何商业用途。如有任何疑问，请联系作者。
+
+如果您觉得这个软件有用，请考虑支持它！</value>
+  </data>
+  <data name="strToolTipConnect" xml:space="preserve">
+    <value>开始接收来自 T-10A 设备的数据</value>
+  </data>
+  <data name="strToolTipDisconnect" xml:space="preserve">
+    <value>停止并断开 T-10A 设备</value>
+  </data>
+  <data name="strToolTipExit" xml:space="preserve">
+    <value>退出应用程序</value>
+  </data>
+  <data name="strPlotAverageYLabel" xml:space="preserve">
+    <value>勒克斯</value>
+  </data>
+  <data name="strPlotDistributionTitle" xml:space="preserve">
+    <value>照度分布</value>
+  </data>
+  <data name="strOpenDlgTitle" xml:space="preserve">
+    <value>打开照度数据</value>
+  </data>
+  <data name="strLblFlow" xml:space="preserve">
+    <value>流控制</value>
+  </data>
+  <data name="strMsgBoxErrorFlowControlTitle" xml:space="preserve">
+    <value>流控制错误</value>
+  </data>
+  <data name="strMsgBoxErrorFlowControl" xml:space="preserve">
+    <value>流控制设置失败。
+错误：
+{0}</value>
+  </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>显示图表十字线模式</value>
+  </data>
+  <data name="strSaveDlgTitle" xml:space="preserve">
+    <value>保存照度数据</value>
+  </data>
+  <data name="strTabPlots" xml:space="preserve">
+    <value>绘图</value>
+  </data>
+  <data name="strToolStripDisconnect" xml:space="preserve">
+    <value>断开</value>
+  </data>
+  <data name="strStatusTipLocation" xml:space="preserve">
+    <value>T-10A 位置 ID</value>
+  </data>
+  <data name="strStatusOpen" xml:space="preserve">
+    <value>已断开</value>
+  </data>
+  <data name="strStatusLocation" xml:space="preserve">
+    <value>位置 ID</value>
+  </data>
+  <data name="strStatusTipDistribution" xml:space="preserve">
+    <value>绘制分布</value>
+  </data>
+  <data name="strRadRadar" xml:space="preserve">
+    <value>雷达图</value>
+  </data>
+  <data name="strRadRadialGauge" xml:space="preserve">
+    <value>径向仪表图</value>
+  </data>
+  <data name="strSaveDlgFilter" xml:space="preserve">
+    <value>ErgoLux 文件 (*.elux)|*.elux|文本文件 (*.txt)|*.txt|二进制文件 (*.bin)|*.bin|所有文件 (*.*)|*.*</value>
+  </data>
+  <data name="strPlotRatiosTitle" xml:space="preserve">
+    <value>照度比率</value>
+  </data>
+  <data name="strStatusTipRatio" xml:space="preserve">
+    <value>绘制比率</value>
+  </data>
+  <data name="strMenuMainViewDistribution" xml:space="preserve">
+    <value>径向分布</value>
+  </data>
+  <data name="strToolTipSettings" xml:space="preserve">
+    <value>绘图、数据和用户界面设置</value>
+  </data>
+  <data name="strStatusTipOpen" xml:space="preserve">
+    <value>连接状态</value>
+  </data>
+  <data name="strStatusTipExchange" xml:space="preserve">
+    <value>交换状态</value>
+  </data>
+  <data name="strGridFlags" xml:space="preserve">
+    <value>标志</value>
+  </data>
+</root>
