@@ -679,4 +679,23 @@ ihre Standardwerte zurücksetzen?</value>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Ergonomie-Messsoftware-Tool für das Beleuchtungsstärkemessgerät T-10A von Konica Minolta.
+
+Jegliche kommerzielle Nutzung ist nicht gestattet. Wenden Sie sich bei Fragen an den Autor.
+
+Wenn Sie diese Software nützlich finden, erwägen Sie bitte, sie zu unterstützen!</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Entwickelt von {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Urheberrechte {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produktname: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
 </root>
