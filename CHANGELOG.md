@@ -1,5 +1,10 @@
 # ErgoLux changelog
 
+## ErgoLux 1.3
+* Add Simplified Chinese (zh-Hans) translation. _Thanks @myd7349_.
+* [ScottPlott](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.61.
+* Minor bug fixes.
+* 
 ## ErgoLux 1.2
 * Target .NET 7.
 * Correct a bug preventing the device's connection.
