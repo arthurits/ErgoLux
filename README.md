@@ -9,7 +9,7 @@ Sponsor this project!
 
 Download latest release: [![GitHub release (latest by date)](https://img.shields.io/github/v/release/arthurits/ErgoLux?include_prereleases)](https://github.com/arthurits/ErgoLux/releases)
 
-![Screenshot](/ErgoLux/images/screenshot06.png?raw=true "ErgoLux GUI")
+![Screenshot](/ErgoLux/images/screenshot07.png?raw=true "ErgoLux GUI")
 
 ## External dependencies
 This project uses controls and routines from the following Gits:
