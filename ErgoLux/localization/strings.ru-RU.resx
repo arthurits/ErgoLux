@@ -158,15 +158,15 @@
     <comment/>
   </data>
   <data name="strChkPlotAverage" xml:space="preserve">
-    <value>Среднее значение участка</value>
+    <value>график среднего значения</value>
     <comment/>
   </data>
   <data name="strChkPlotDistribution" xml:space="preserve">
-    <value>Распределение участков</value>
+    <value>График распределения</value>
     <comment/>
   </data>
   <data name="strChkPlotRatios" xml:space="preserve">
-    <value>Соотношения участков</value>
+    <value>График соотношений</value>
     <comment/>
   </data>
   <data name="strChkPlotRaw" xml:space="preserve">
@@ -402,7 +402,7 @@
     <comment/>
   </data>
   <data name="strLblPlotWindow" xml:space="preserve">
-    <value>Окно участка (секунды)</value>
+    <value>График участка (секунды)</value>
     <comment/>
   </data>
   <data name="strLblSensors" xml:space="preserve">
@@ -642,7 +642,7 @@
     <comment/>
   </data>
   <data name="strPlotAverageYLabel" xml:space="preserve">
-    <value>Lux</value>
+    <value>Люкс</value>
     <comment/>
   </data>
   <data name="strPlotDistributionTitle" xml:space="preserve">
@@ -670,7 +670,7 @@
     <comment/>
   </data>
   <data name="strPlotRawYLabel" xml:space="preserve">
-    <value>Lux</value>
+    <value>Люкс</value>
     <comment/>
   </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
@@ -746,7 +746,7 @@
     <comment/>
   </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
-    <value>Распределение участков</value>
+    <value>График распределения</value>
     <comment/>
   </data>
   <data name="strStatusTipExchange" xml:space="preserve">
@@ -762,7 +762,7 @@
     <comment/>
   </data>
   <data name="strStatusTipMax" xml:space="preserve">
-    <value>Построение максимального, среднего и минимального значений</value>
+    <value>График максимального, среднего и минимального значений</value>
     <comment/>
   </data>
   <data name="strStatusTipOpen" xml:space="preserve">
@@ -770,11 +770,11 @@
     <comment/>
   </data>
   <data name="strStatusTipRatio" xml:space="preserve">
-    <value>Соотношения между участками</value>
+    <value>График соотношений</value>
     <comment/>
   </data>
   <data name="strStatusTipRaw" xml:space="preserve">
-    <value>Построение исходных данных</value>
+    <value>График исходных данных</value>
     <comment/>
   </data>
   <data name="strStatusTipType" xml:space="preserve">
@@ -794,7 +794,7 @@
     <comment/>
   </data>
   <data name="strTabPlots" xml:space="preserve">
-    <value>Участки</value>
+    <value>Графики </value>
     <comment/>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
