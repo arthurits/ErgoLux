@@ -126,19 +126,19 @@ public partial class FrmLanguage : Form
     private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
     {
         string cultureName = _culture.Name;
-        string _cultureUI = CultureInfo.CurrentUICulture.Name;
+        //string _cultureUI = CultureInfo.CurrentUICulture.Name;
 
         // Retrieve the culture list using the culture currently selected. The UI culture needs to be temporarily changed
         CultureInfo.CurrentUICulture = new CultureInfo(cultureName);
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
-
+        
         cboAllCultures.DisplayMember = "DisplayName";
         cboAllCultures.ValueMember = "Name";
         cboAllCultures.DataSource = cultures.ToArray();
         cboAllCultures.SelectedValue = cultureName;
 
         // Reset the UI culture to its previous value
-        CultureInfo.CurrentUICulture = new(_cultureUI);
+        //CultureInfo.CurrentUICulture = new(_cultureUI);
     }
 
     /// <summary>
