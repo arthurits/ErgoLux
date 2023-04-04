@@ -266,19 +266,19 @@
     <comment/>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>дней</value>
+    <value>дн.</value>
     <comment/>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>часов</value>
+    <value>ч.</value>
     <comment/>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>минут</value>
+    <value>мин.</value>
     <comment/>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>секунд</value>
+    <value>сек.</value>
     <comment/>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
@@ -286,7 +286,7 @@
     <comment/>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>миллисекунд</value>
+    <value>мc.</value>
     <comment/>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
@@ -402,7 +402,7 @@
     <comment/>
   </data>
   <data name="strLblPlotWindow" xml:space="preserve">
-    <value>Диапазон графика (в секундах)</value>
+    <value>Пределы графика (в секундах)</value>
     <comment/>
   </data>
   <data name="strLblSensors" xml:space="preserve">
