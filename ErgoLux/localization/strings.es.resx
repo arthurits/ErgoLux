@@ -234,22 +234,22 @@ Se utilizarán los valores por defecto.</value>
     <value>No se ha encontrado el nombre de las series de datos.</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>días</value>
+    <value>días, día, días</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>horas</value>
+    <value>horas, hora, horas</value>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>minutos</value>
+    <value>minutos, minuto, minutos</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>segundos</value>
+    <value>segundos, segundo, segundos</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
     <value>y</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>milisegundos</value>
+    <value>milisegundos, milisegundo, milisegundos</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>La sección '{0}' tiene formato incorrecto.</value>

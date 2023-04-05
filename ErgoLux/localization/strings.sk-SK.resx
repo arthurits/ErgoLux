@@ -221,22 +221,22 @@ Namiesto toho sa použijú predvolené hodnoty.</value>
     <value>Chýbajúce hlavičky stĺpcov (názvy sérií).</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>dni</value>
+    <value>dní, deň, dni, dni, dni, dní</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>hodiny</value>
+    <value>hodín, hodina, hodiny, hodiny, hodiny, hodín</value>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>minúty</value>
+    <value>minút, minúta, minúty, minúty, minúty, minút</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>sekundy</value>
+    <value>sekúnd, sekunda, sekundy, sekundy, sekundy, sekúnd</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
     <value>a</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>milisekundy</value>
+    <value>milisekúnd, milisekunda, milisekundy, milisekundy, milisekundy, milisekúnd</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sekcia '{0}' má nesprávny formát.</value>

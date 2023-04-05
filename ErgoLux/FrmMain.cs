@@ -188,14 +188,31 @@ public partial class FrmMain : Form
         }
         else
         {
-            statusStripLabelXtras.Text = $"{nTime.Days} {StringResources.FileHeader19}, " +
-                $"{nTime.Hours} {StringResources.FileHeader20}, " +
-                $"{nTime.Minutes} {StringResources.FileHeader21}, " +
-                $"{nTime.Seconds} {StringResources.FileHeader22} " +
+            statusStripLabelXtras.Text = $"{nTime.Days} {GetTimeString(StringResources.FileHeader19, nTime.Days)}, " +
+                $"{nTime.Hours} {GetTimeString(StringResources.FileHeader20, nTime.Hours)}, " +
+                $"{nTime.Minutes} {GetTimeString(StringResources.FileHeader21, nTime.Minutes)}, " +
+                $"{nTime.Seconds} {GetTimeString(StringResources.FileHeader22, nTime.Seconds)} " +
                 $"{StringResources.FileHeader23} " +
-                $"{nTime.Milliseconds} {StringResources.FileHeader24}";
+                $"{nTime.Milliseconds} {GetTimeString(StringResources.FileHeader24, nTime.Milliseconds)}";
             statusStripLabelXtras.ToolTipText = statusStripLabelXtras.Text;
         }
+    }
+
+    /// <summary>
+    /// Gets the given time-related string
+    /// </summary>
+    /// <param name="strValues">String with several values</param>
+    /// <param name="time"></param>
+    /// <param name="strSplit"></param>
+    /// <returns>Corresponding string</returns>
+    private string GetTimeString(string strValues, int time, string strSplit = ", ")
+    {
+        string[] arrValues = strValues.Split(strSplit);
+        int uBound = arrValues.GetUpperBound(0);
+        if (time >= uBound)
+            return arrValues[uBound];
+        else
+            return arrValues[time % uBound];
     }
 
     /// <summary>

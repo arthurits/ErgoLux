@@ -266,19 +266,19 @@
     <comment />
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>дн.</value>
+    <value>дней, день, дня, дня, дня, дней</value>
     <comment />
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>ч.</value>
+    <value>часов, час, часа, часа, часа, часов</value>
     <comment />
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>мин.</value>
+    <value>минут, минута, минуты, минуты, минуты, минут</value>
     <comment />
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>сек.</value>
+    <value>секунд, секунда, секунды, секунды, секунды, секунд</value>
     <comment />
   </data>
   <data name="strFileHeader23" xml:space="preserve">
@@ -286,7 +286,7 @@
     <comment />
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>мc.</value>
+    <value>миллисекунд, миллисекунда, миллисекунды, миллисекунды, миллисекунды, миллисекунд</value>
     <comment />
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">

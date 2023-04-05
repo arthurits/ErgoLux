@@ -448,7 +448,7 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to days.
+        ///   Looks up a localized string similar to days, day, days.
         /// </summary>
         internal static string strFileHeader19 {
             get {
@@ -457,7 +457,7 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to hours.
+        ///   Looks up a localized string similar to hours, hour, hours.
         /// </summary>
         internal static string strFileHeader20 {
             get {
@@ -466,7 +466,7 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to minutes.
+        ///   Looks up a localized string similar to minutes, minute, minutes.
         /// </summary>
         internal static string strFileHeader21 {
             get {
@@ -475,7 +475,7 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to seconds.
+        ///   Looks up a localized string similar to seconds, second, seconds.
         /// </summary>
         internal static string strFileHeader22 {
             get {
@@ -493,7 +493,7 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to milliseconds.
+        ///   Looks up a localized string similar to milliseconds, millisecond, milliseconds.
         /// </summary>
         internal static string strFileHeader24 {
             get {

@@ -221,22 +221,22 @@ Standardværdier vil blive benyttet i stedet.</value>
     <value>Manglende kolonneoverskrifter (serienavne).</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>dage</value>
+    <value>dage, dag, dage</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>timer</value>
+    <value>timer, time, timer</value>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>minutter</value>
+    <value>minutter, minut, minutter</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>sekunder</value>
+    <value>sekunder, sekund, sekunder</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
     <value>og</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>millisekunder</value>
+    <value>millisekunder, millisekund, millisekunder</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sektion '{0}' er fejlformateret.</value>
