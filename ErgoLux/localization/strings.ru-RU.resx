@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -119,766 +119,790 @@
   </resheader>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Принять</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strBtnCancel" xml:space="preserve">
-    <value>&amp;Отмена </value>
-    <comment/>
+    <value>&amp;Отмена</value>
+    <comment />
   </data>
   <data name="strBtnData" xml:space="preserve">
     <value>Выберите данные</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strBtnExport" xml:space="preserve">
     <value>&amp;Экспортировать</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strBtnReset" xml:space="preserve">
     <value>&amp;Сброс</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Настройки</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Показать пересечение графиков</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strChkCumulative" xml:space="preserve">
     <value>Кумулятивный фрактальный размер</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strChkDlgPath" xml:space="preserve">
     <value>Запомнить предыдущий путь диалога открытия/сохранения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strChkEntropy" xml:space="preserve">
     <value>Энтропия (приблизительная &amp;&amp; образец)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strChkPlotAverage" xml:space="preserve">
     <value>График среднего значения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strChkPlotDistribution" xml:space="preserve">
     <value>График распределения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strChkPlotRatios" xml:space="preserve">
     <value>График соотношений</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strChkPlotRaw" xml:space="preserve">
     <value>График исходных данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Мощность (dB)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Вы хотите вернуть все поля к исходным значениям ?</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>Сбросить настройки?</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Ошибка загрузки файла настроек.{0} Вместо этого будут использованы значения по умолчанию.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strErrorDeserializeTitle" xml:space="preserve">
     <value>Ошибка</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader01" xml:space="preserve">
     <value>Данные ErgoLux</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader02" xml:space="preserve">
     <value>Время старта</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader03" xml:space="preserve">
     <value>End time</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader04" xml:space="preserve">
     <value>Общее время измерения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader05" xml:space="preserve">
     <value>Количество датчиков</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader06" xml:space="preserve">
     <value>Количество точек данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader07" xml:space="preserve">
     <value>Частота выборки</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader08" xml:space="preserve">
     <value>Датчик #</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader09" xml:space="preserve">
     <value>Максимум</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader10" xml:space="preserve">
     <value>Среднее</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader11" xml:space="preserve">
     <value>Минимум</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader12" xml:space="preserve">
     <value>Мин/Среднее</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader13" xml:space="preserve">
     <value>Мин/Макс</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader14" xml:space="preserve">
     <value>Среднее/Макс</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader15" xml:space="preserve">
     <value>Среднее</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader16" xml:space="preserve">
     <value>Освещение</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader17" xml:space="preserve">
     <value>Пропущена пустая строка.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader18" xml:space="preserve">
     <value>Отсутствуют заголовки колонн (названия серий).</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader19" xml:space="preserve">
     <value>дн.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader20" xml:space="preserve">
     <value>ч.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader21" xml:space="preserve">
     <value>мин.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader22" xml:space="preserve">
     <value>сек.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeader23" xml:space="preserve">
-    <value>and</value>
-    <comment/>
+    <value>и</value>
+    <comment />
   </data>
   <data name="strFileHeader24" xml:space="preserve">
     <value>мc.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Раздел '{0}' неверно заполнен.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFormTitle" xml:space="preserve">
     <value>ErgoLux</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFrmLanguage" xml:space="preserve">
     <value>Выберите язык</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFrmSettings" xml:space="preserve">
     <value>Настройки</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFrmTitle" xml:space="preserve">
     <value>Анализ сигнала</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGridDescription" xml:space="preserve">
     <value>Описание</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGridDevice" xml:space="preserve">
     <value>Местоположение устройства</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGridFlags" xml:space="preserve">
     <value>Флажки</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGridID" xml:space="preserve">
     <value>Идентификатор (ID)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGridLocation" xml:space="preserve">
     <value>Идентификатор местоположения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGridSerial" xml:space="preserve">
     <value>Серийный номер</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGridType" xml:space="preserve">
     <value>Тип</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Ось абсциссы</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Пользовательский интерфейс и формат данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strGrpPlot" xml:space="preserve">
     <value>Распределение участков</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblArrayPoints" xml:space="preserve">
     <value>Минимальные точки массива</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblBaudRate" xml:space="preserve">
     <value>Скорость передачи данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>Путь к файлу данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblDataBits" xml:space="preserve">
     <value>Биты данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblDataFormat" xml:space="preserve">
     <value>Строка форматирования числовых данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblDeviceList" xml:space="preserve">
     <value>Список устройств FTDI</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblEnd" xml:space="preserve">
     <value>Индекс массива конец</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblFlow" xml:space="preserve">
     <value>Контроль потока</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblFrequency" xml:space="preserve">
     <value>Частота (Гц)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblOff" xml:space="preserve">
     <value>Выкл</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblOn" xml:space="preserve">
     <value>Вкл</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblParity" xml:space="preserve">
     <value>Четность</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblPlotWindow" xml:space="preserve">
     <value>Пределы графика (в секундах)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblSensors" xml:space="preserve">
     <value>Количество датчиков</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Выберите серию</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblStart" xml:space="preserve">
     <value>Начало индекса массива</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblStopBits" xml:space="preserve">
     <value>Стоп-биты</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strLblWindow" xml:space="preserve">
     <value>Окно</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainFile" xml:space="preserve">
     <value>&amp;Файл</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainFileExit" xml:space="preserve">
     <value>&amp;Выход...</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainFileOpen" xml:space="preserve">
     <value>&amp;Открыть...</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainFileSave" xml:space="preserve">
     <value>&amp;Сохранить...</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainHelpAbout" xml:space="preserve">
     <value>&amp;Об...</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainHelpText" xml:space="preserve">
     <value>&amp;Помощь</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainTools" xml:space="preserve">
     <value>&amp;Инструменты</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainToolsConnect" xml:space="preserve">
     <value>&amp;Соединиться</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainToolsDisconnect" xml:space="preserve">
     <value>&amp;Отсоединить</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainToolsSettings" xml:space="preserve">
     <value>&amp;Настройки...</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainView" xml:space="preserve">
     <value>&amp;Вид</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainViewAverage" xml:space="preserve">
     <value>Средние показатели</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainViewDistribution" xml:space="preserve">
     <value>Лучевое распределение</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainViewMenu" xml:space="preserve">
     <value>Показать меню</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainViewRatio" xml:space="preserve">
     <value>Соотношения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainViewRaw" xml:space="preserve">
     <value>Исходные данные</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMenuMainViewToolbar" xml:space="preserve">
     <value>Показать панель инструментов</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsbBoxErrorBits" xml:space="preserve">
-    <value>Не удалось установить характеристики данных (биты данных, стоповые биты и четность).Error:{0}</value>
-    <comment/>
+    <value>Не удалось установить характеристики данных (биты данных, стоповые биты и четность).
+Error:
+{0}</value>
+    <comment />
   </data>
   <data name="strMsgBoxErrorBaudRate" xml:space="preserve">
-    <value>Не удалось установить скорость передачи данных.Error:{0}</value>
-    <comment/>
+    <value>Не удалось установить скорость передачи данных.
+Error:
+{0}</value>
+    <comment />
   </data>
   <data name="strMsgBoxErrorBaudRateTitle" xml:space="preserve">
     <value>Ошибка скорости передачи данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorBitsTitle" xml:space="preserve">
     <value>Ошибка битов</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorDeviceClosed" xml:space="preserve">
     <value>Устройство закрыто. Пожалуйста, перейдите в "Настройки", чтобы открыть устройство.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorDeviceClosedTitle" xml:space="preserve">
     <value>Ошибка устройства</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorDrivers" xml:space="preserve">
     <value>Не удалось загрузить FTD2XX.DLL. У вас установлены драйверы FTDI?</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorDriversTitle" xml:space="preserve">
     <value>Ошибка при загрузке драйверов</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorFlowControl" xml:space="preserve">
-    <value>Не удалось установить управление потоком.Error:{0}</value>
-    <comment/>
+    <value>Не удалось установить управление потоком.
+Error:
+{0}</value>
+    <comment />
   </data>
   <data name="strMsgBoxErrorFlowControlTitle" xml:space="preserve">
     <value>Ошибка управления потоком</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorLoading" xml:space="preserve">
     <value>Попытка загрузить FTD2XX.DLL из:</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorLoadingTitle" xml:space="preserve">
     <value>Ошибка при загрузке DLL</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
-    <value>Произошла непредвиденная ошибка при открытии файла данных. Пожалуйста, повторите попытку позже или свяжитесь с разработчиком программного обеспечения.{0}</value>
-    <comment/>
+    <value>Произошла непредвиденная ошибка при открытии файла данных.
+Пожалуйста, повторите попытку позже или свяжитесь с разработчиком программного обеспечения.
+{0}</value>
+    <comment />
   </data>
   <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
     <value>Ошибка при открытии данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorOpenDevice" xml:space="preserve">
     <value>Не удалось открыть устройство</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorOpenDeviceTitle" xml:space="preserve">
     <value>Ошибка</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorOpening" xml:space="preserve">
-    <value>Не удалось открыть устройство.Error:{0}</value>
-    <comment/>
+    <value>Не удалось открыть устройство.
+Error:
+{0}</value>
+    <comment />
   </data>
   <data name="strMsgBoxErrorOpeningTitle" xml:space="preserve">
     <value>Ошибка открытия устройства</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorSaveData" xml:space="preserve">
-    <value>При сохранении данных на диск произошла непредвиденная ошибка. Пожалуйста, повторите попытку позже или обратитесь к разработчику программного обеспечения.{0}</value>
-    <comment/>
+    <value>При сохранении данных на диск произошла непредвиденная ошибка.
+Пожалуйста, повторите попытку позже или обратитесь к разработчику программного обеспечения.
+{0}</value>
+    <comment />
   </data>
   <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
     <value>Ошибка при сохранении данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorSettings" xml:space="preserve">
-    <value>Ошибка загрузки файла настроек.{0} Вместо этого будут использованы значения по умолчанию.</value>
-    <comment/>
+    <value>Ошибка загрузки файла настроек.
+
+{0}
+
+Вместо этого будут использованы значения по умолчанию.</value>
+    <comment />
   </data>
   <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
     <value>Ошибка</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxErrorTimeouts" xml:space="preserve">
-    <value>Не удалось установить тайм-ауты.Error:{0}</value>
-    <comment/>
+    <value>Не удалось установить тайм-ауты.
+Error:
+{0}</value>
+    <comment />
   </data>
   <data name="strMsgBoxErrorTimeoutsTitle" xml:space="preserve">
     <value>Ошибка тайм-аута</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>Вы уверены, что хотите выйти из приложения?</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxExitTitle" xml:space="preserve">
     <value>Выйти?</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxNoData" xml:space="preserve">
     <value>Нет данных, которые можно было бы сохранить.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxNoDataTitle" xml:space="preserve">
     <value>Нет данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxReset" xml:space="preserve">
     <value>Вы хотите вернуть все поля к значениям по умолчанию?</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxResetTitle" xml:space="preserve">
     <value>Сбросить?</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxSaveData" xml:space="preserve">
     <value>Данные успешно сохранены на диск.</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
     <value>Сохранение данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
     <value>Остановить</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>"ErgoLux файл (*.elux)|*.elux|Текстовый файл (*.txt)|*.txt|Бинарный файл (*.bin)|*.bin|Все файлы (*.*)|*.*"</value>
-    <comment/>
+    <value>ErgoLux файл (*.elux)|*.elux|Текстовый файл (*.txt)|*.txt|Бинарный файл (*.bin)|*.bin|Все файлы (*.*)|*.*</value>
+    <comment />
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Открытые данные освещенности</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotAverageTitle" xml:space="preserve">
     <value>Макс, среднее, мин</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotAverageXLabel" xml:space="preserve">
     <value>Время (секунды)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotAverageYLabel" xml:space="preserve">
     <value>Люкс</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotDistributionTitle" xml:space="preserve">
     <value>Распределение освещенности</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotRatiosTitle" xml:space="preserve">
     <value>Коэффициенты освещенности</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotRatiosXLabel" xml:space="preserve">
     <value>Время (секунды)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotRatiosYLabel" xml:space="preserve">
     <value>Соотношение</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotRawTitle" xml:space="preserve">
     <value>Освещенность</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotRawXLabel" xml:space="preserve">
     <value>Время (секунды)</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strPlotRawYLabel" xml:space="preserve">
     <value>Люкс</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Форматирование текущей культуры</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Форматирование инвариантной культуры</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strRadRadar" xml:space="preserve">
     <value>Радар</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strRadRadialGauge" xml:space="preserve">
     <value>Радиальный манометр</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Выберите культуру</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strReadDataError" xml:space="preserve">
-    <value>Не удается считать данные из файла.{0}</value>
-    <comment/>
+    <value>Не удается считать данные из файла.
+{0}</value>
+    <comment />
   </data>
   <data name="strReadDataErrorCulture" xml:space="preserve">
-    <value>Строковое имя идентификатора культуры недействительно.{0}</value>
-    <comment/>
+    <value>Строковое имя идентификатора культуры недействительно.
+{0}</value>
+    <comment />
   </data>
   <data name="strReadDataErrorCultureTitle" xml:space="preserve">
     <value>Ошибка в названии культуры</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strReadDataErrorNumber" xml:space="preserve">
     <value>Недопустимое числовое значение: {0}</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strReadDataErrorNumberTitle" xml:space="preserve">
     <value>Ошибка при обработке данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Ошибка при открытии данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
     <value>ErgoLux файл (*.elux)|*.elux|Текстовый файл (*.txt)|*.txt|Бинарный файл (*.bin)|*.bin|Все файлы (*.*)|*.*</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strSaveDlgTitle" xml:space="preserve">
     <value>Сохранить данные об освещении</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusExchange" xml:space="preserve">
     <value>Получение данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusID" xml:space="preserve">
     <value>ID устройства</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusLocation" xml:space="preserve">
     <value>ID местоположения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusOpen" xml:space="preserve">
     <value>Отключено</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Показать режим перекрестия графика</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipDistribution" xml:space="preserve">
     <value>График распределения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipExchange" xml:space="preserve">
     <value>Состояние обмена</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipID" xml:space="preserve">
     <value>ID устройства</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipLocation" xml:space="preserve">
     <value>ID местоположения T-10A</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipMax" xml:space="preserve">
     <value>График максимального, среднего и минимального значений</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipOpen" xml:space="preserve">
     <value>Статус подключения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipRatio" xml:space="preserve">
     <value>График соотношений</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipRaw" xml:space="preserve">
     <value>График исходных данных</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusTipType" xml:space="preserve">
     <value>Тип устройства</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strStatusType" xml:space="preserve">
     <value>Тип устройства</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strTabDevice" xml:space="preserve">
     <value>Датчик T-10A</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Пользовательский интерфейс</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strTabPlots" xml:space="preserve">
-    <value>Графики </value>
-    <comment/>
+    <value>Графики</value>
+    <comment />
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
     <value>О нас</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolStripConnect" xml:space="preserve">
     <value>Подключить</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolStripDisconnect" xml:space="preserve">
     <value>Отключить</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolStripExit" xml:space="preserve">
     <value>Выйти</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolStripOpen" xml:space="preserve">
     <value>Открыть</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolStripSave" xml:space="preserve">
     <value>Сохранить</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolStripSettings" xml:space="preserve">
     <value>Настройки</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolTipAbout" xml:space="preserve">
     <value>О данном программном обеспечении</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolTipConnect" xml:space="preserve">
     <value>Начать прием данных от устройства T-10A</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolTipDisconnect" xml:space="preserve">
     <value>Остановить и отключить устройство T-10A</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolTipExit" xml:space="preserve">
     <value>Выйти из приложения</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolTipOpen" xml:space="preserve">
     <value>Открыть файл данных с диска</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolTipSave" xml:space="preserve">
     <value>Сохранить данные</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolTipSettings" xml:space="preserve">
     <value>Настройки для графиков, данных и пользовательского интерфейса</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Язык пользовательского интерфейса</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strAboutProductName" xml:space="preserve">
     <value>Название продукта: {0}</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strAboutVersion" xml:space="preserve">
     <value>Версия {0}</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strAboutCopyright" xml:space="preserve">
     <value>Авторские права {0}</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strAboutCompanyName" xml:space="preserve">
     <value>Разработано {0}</value>
-    <comment/>
+    <comment />
   </data>
   <data name="strAboutDescription" xml:space="preserve">
-    <value>Программное обеспечение для измерения эргономики для измерителя освещенности T-10A от Konica Minolta.Коммерческое использование запрещено. Если вы считаете это программное обеспечение полезным, пожалуйста, поддержите его!</value>
-    <comment/>
+    <value>Программное обеспечение для измерения эргономики для измерителя освещенности T-10A от Konica Minolta.
+
+Коммерческое использование запрещено.
+
+Если вы считаете это программное обеспечение полезным, пожалуйста, поддержите его!</value>
+    <comment />
   </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
-    <comment/>
+    <comment />
   </data>
 </root>
