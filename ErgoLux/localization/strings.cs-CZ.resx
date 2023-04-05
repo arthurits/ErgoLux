@@ -462,7 +462,7 @@ dimenze byla zastavena.</value>
     <value>Chyba při otevírání dat</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
-    <value>Soubor ErgoLux (*.elux)|*.elux|Textový soubor (*.txt)|*.txt|Binární soubor (*.bin)|*.bin|Všechny soubory (*.*)|*.* </value>
+    <value>Soubor ErgoLux (*.elux)|*.elux|Textový soubor (*.txt)|*.txt|Binární soubor (*.bin)|*.bin|Všechny soubory (*.*)|*.*</value>
   </data>
   <data name="strSaveDlgTitle" xml:space="preserve">
     <value>Uložit údaje o osvětlení</value>
