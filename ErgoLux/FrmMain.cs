@@ -199,13 +199,14 @@ public partial class FrmMain : Form
     }
 
     /// <summary>
-    /// Gets the given time-related string
+    /// Extracts the given substring from a string with multiple values delimited by <paramref name="strSplit"/>
     /// </summary>
-    /// <param name="strValues">String with several values</param>
-    /// <param name="time"></param>
-    /// <param name="strSplit"></param>
-    /// <returns>Corresponding string</returns>
-    private string GetTimeString(string strValues, int time, string strSplit = ", ")
+    /// <param name="strValues">String with multiples values</param>
+    /// <param name="time">Index from wich the substring will be returned.
+    /// If this is bigger that the number of values in <paramref name="strValues"/>, then the last one is returned</param>
+    /// <param name="strSplit">String used as delimiter</param>
+    /// <returns>Substring at (array)position determined by <paramref name="time"/></returns>
+    private string GetTimeString(string strValues, int time = 0, string strSplit = ", ")
     {
         string[] arrValues = strValues.Split(strSplit);
         int uBound = arrValues.GetUpperBound(0);
