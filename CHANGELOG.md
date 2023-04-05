@@ -2,12 +2,13 @@
 
 ## ErgoLux 1.4
 * Add Russian (ru-RU) translation. _Thanks @shmudivel_.
-* [ScottPlott](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.62.
+* Update time-related (days, hours, minutes, seconds, and miliseconds) grammar issues for all cultures/languages
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.62.
 * Minor bug fixes.
 
 ## ErgoLux 1.3
 * Add Simplified Chinese (zh-Hans) translation. _Thanks @myd7349_.
-* [ScottPlott](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.61.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.61.
 * Minor bug fixes.
 
 ## ErgoLux 1.2
@@ -27,7 +28,7 @@
   * Japanese (jp-JP). _Thanks @theadityaagnihotri_.
   * Dutch (nl-BE). _Thanks @cvc04_.
   * Lithuanian (lt-LT). _Thanks @mantasio_.
-* [ScottPlott](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.59.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.59.
 * Corrections related to reading files, plotting, UI controls, settings preferences management, `StringResources`, and `GraphicResources`.
 
 ## ErgoLux 1.0.1
