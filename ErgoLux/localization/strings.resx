@@ -530,7 +530,7 @@ dimension has been stopped.</value>
     <value>Stop</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>"ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*"</value>
+    <value>ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Open illuminance data</value>

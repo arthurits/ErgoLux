@@ -395,7 +395,7 @@ er blevet stoppet.</value>
     <value>Stop</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>"ErgoLux-fil (*.elux)|*.elux|Tekstfil (*.txt)|*.txt|Binær fil (*.bin)|*.bin|Alle filer (*.*)|*.*"</value>
+    <value>ErgoLux-fil (*.elux)|*.elux|Tekstfil (*.txt)|*.txt|Binær fil (*.bin)|*.bin|Alle filer (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Åbn belysningsstyrkedata</value>

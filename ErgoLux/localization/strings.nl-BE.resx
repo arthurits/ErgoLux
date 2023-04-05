@@ -121,7 +121,7 @@
     <value> - </value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>"ErgoLux-bestand (*.elux)|*.elux|Tekstbestand (*.txt)|*.txt|Binair bestand (*.bin)|*.bin|Alle bestanden (*.*)|*.*"</value>
+    <value>ErgoLux-bestand (*.elux)|*.elux|Tekstbestand (*.txt)|*.txt|Binair bestand (*.bin)|*.bin|Alle bestanden (*.*)|*.*</value>
   </data>
   <data name="strMenuMainHelpAbout" xml:space="preserve">
     <value>&amp;Over...</value>

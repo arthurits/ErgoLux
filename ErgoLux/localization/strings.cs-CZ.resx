@@ -397,7 +397,7 @@ dimenze byla zastavena.</value>
     <value>Zastavit</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>Soubory ErgoLux (*.elux)|*.elux|Soubory analýzy signálu (*.sig)|*.sig|Textové soubory (*.txt)|*.txt|Všechny soubory (*.*)|*. *</value>
+    <value>Soubory ErgoLux (*.elux)|*.elux|Soubory analýzy signálu (*.sig)|*.sig|Textové soubory (*.txt)|*.txt|Všechny soubory (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Otevřená data o osvětlení</value>

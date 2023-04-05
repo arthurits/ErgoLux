@@ -1299,7 +1299,7 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*&quot;.
+        ///   Looks up a localized string similar to ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*.
         /// </summary>
         internal static string strOpenDlgFilter {
             get {
