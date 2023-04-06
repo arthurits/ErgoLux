@@ -905,4 +905,8 @@ Error:
     <value>: </value>
     <comment />
   </data>
+  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+    <value>Вычисление фрактальной размерности
+Хаусдорфа-Безиковича было остановлено.</value>
+  </data>
 </root>
