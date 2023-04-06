@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Vyvinuto {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Autorská práva {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Softwarový nástroj pro měření ergonomie pro měřič osvětlení Konica Minolta T-10A.
+
+Není povoleno žádné komerční využití. V případě jakýchkoli dotazů kontaktujte autora.
+
+Pokud považujete tento software za užitečný, zvažte jeho podporu!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Jméno výrobku: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Verze {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Přijmout</value>
   </data>
@@ -237,6 +256,9 @@ Namísto toho se použijí výchozí hodnoty.</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
     <value>milisekund, milisekunda, milisekundy, milisekundy, milisekundy, milisekund</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sekce '{0}' má nesprávný formát.</value>
@@ -565,27 +587,5 @@ dimenze byla zastavena.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Jazyk uživatelského rozhraní</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Vyvinuto {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Autorská práva {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Jméno výrobku: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Verze {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Softwarový nástroj pro měření ergonomie pro měřič osvětlení Konica Minolta T-10A.
-
-Není povoleno žádné komerční využití. V případě jakýchkoli dotazů kontaktujte autora.
-
-Pokud považujete tento software za užitečný, zvažte jeho podporu!</value>
   </data>
 </root>

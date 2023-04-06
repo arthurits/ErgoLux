@@ -251,6 +251,9 @@
   <data name="strFileHeader24" xml:space="preserve">
     <value>ミリ秒</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>セクション '{0}' の形式が正しくありません。</value>
   </data>
@@ -704,8 +707,5 @@ Error:
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>ユーザー インターフェイス言語</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
   </data>
 </root>

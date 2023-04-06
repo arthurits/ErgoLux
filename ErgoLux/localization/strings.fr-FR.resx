@@ -250,6 +250,9 @@ Les valeurs par défaut seront utilisées à la place.</value>
   <data name="strFileHeader24" xml:space="preserve">
     <value>millisecondes, milliseconde, millisecondes</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>La section '{0}' est mal formaté.</value>
   </data>
@@ -638,8 +641,5 @@ a été arrêté.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Langue de l'interace utilisateur</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
   </data>
 </root>

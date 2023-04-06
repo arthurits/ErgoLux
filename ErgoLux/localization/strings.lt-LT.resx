@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Sukūrė {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Autorių teisės {0} m</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Ergonomikos matavimo programinės įrangos įrankis, skirtas Konica Minolta apšvietimo matuokliui T-10A.
+
+Joks komercinis naudojimas neleidžiamas. Dėl bet kokių klausimų kreipkitės į autorių.
+
+Jei ši programinė įranga jums naudinga, apsvarstykite galimybę ją palaikyti!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produkto pavadinimas: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>{0} versija</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Sutikti</value>
   </data>
@@ -250,6 +269,9 @@ Vietoj jų bus naudojamos numatytos reikšmės.</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
     <value>milisekundžių, milisekundė, milisekundės</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sekcija '{0}' netinkamai suformatuota.</value>
@@ -703,27 +725,5 @@ skaičiavimas buvo sustabdytas.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Vartotojo sąsajos kalba</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>{0} versija</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Produkto pavadinimas: {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Autorių teisės {0} m</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Sukūrė {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Ergonomikos matavimo programinės įrangos įrankis, skirtas Konica Minolta apšvietimo matuokliui T-10A.
-
-Joks komercinis naudojimas neleidžiamas. Dėl bet kokių klausimų kreipkitės į autorių.
-
-Jei ši programinė įranga jums naudinga, apsvarstykite galimybę ją palaikyti!</value>
   </data>
 </root>

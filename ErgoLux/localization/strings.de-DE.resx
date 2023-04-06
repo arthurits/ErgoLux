@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Entwickelt von {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Urheberrechte {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Ergonomie-Messsoftware-Tool für das Beleuchtungsstärkemessgerät T-10A von Konica Minolta.
+
+Jegliche kommerzielle Nutzung ist nicht gestattet. Wenden Sie sich bei Fragen an den Autor.
+
+Wenn Sie diese Software nützlich finden, erwägen Sie bitte, sie zu unterstützen!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produktname: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Akzeptieren</value>
   </data>
@@ -250,6 +269,9 @@ Stattdessen werden die Standardwerte verwendet.</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
     <value>Millisekunden, Millisekunde, Millisekunden</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sektion '{0}' ist falsch formatiert.</value>
@@ -675,27 +697,5 @@ ihre Standardwerte zurücksetzen?</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>User Interface Sprache</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Ergonomie-Messsoftware-Tool für das Beleuchtungsstärkemessgerät T-10A von Konica Minolta.
-
-Jegliche kommerzielle Nutzung ist nicht gestattet. Wenden Sie sich bei Fragen an den Autor.
-
-Wenn Sie diese Software nützlich finden, erwägen Sie bitte, sie zu unterstützen!</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Entwickelt von {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Urheberrechte {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Produktname: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Version {0}</value>
   </data>
 </root>

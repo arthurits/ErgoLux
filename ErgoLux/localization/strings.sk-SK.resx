@@ -238,6 +238,9 @@ Namiesto toho sa použijú predvolené hodnoty.</value>
   <data name="strFileHeader24" xml:space="preserve">
     <value>milisekúnd, milisekunda, milisekundy, milisekundy, milisekundy, milisekúnd</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sekcia '{0}' má nesprávny formát.</value>
   </data>
@@ -565,8 +568,5 @@ dimenzia bola zastavená.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Jazyk používateľského rozhrania</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
   </data>
 </root>

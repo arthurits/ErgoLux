@@ -117,6 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Разработано {0}</value>
+    <comment />
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Авторские права {0}</value>
+    <comment />
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Программное обеспечение для измерения эргономики для измерителя освещенности T-10A от Konica Minolta.
+
+Коммерческое использование запрещено.
+
+Если вы считаете это программное обеспечение полезным, пожалуйста, поддержите его!</value>
+    <comment />
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Название продукта: {0}</value>
+    <comment />
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Версия {0}</value>
+    <comment />
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Принять</value>
     <comment />
@@ -287,6 +311,10 @@
   </data>
   <data name="strFileHeader24" xml:space="preserve">
     <value>миллисекунд, миллисекунда, миллисекунды, миллисекунды, миллисекунды, миллисекунд</value>
+    <comment />
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
     <comment />
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
@@ -639,6 +667,10 @@ Error:
     <value>Сохранение данных</value>
     <comment />
   </data>
+  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+    <value>Вычисление фрактальной размерности
+Хаусдорфа-Безиковича было остановлено.</value>
+  </data>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
     <value>Остановить</value>
     <comment />
@@ -876,37 +908,5 @@ Error:
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Язык пользовательского интерфейса</value>
     <comment />
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Название продукта: {0}</value>
-    <comment />
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Версия {0}</value>
-    <comment />
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Авторские права {0}</value>
-    <comment />
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Разработано {0}</value>
-    <comment />
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Программное обеспечение для измерения эргономики для измерителя освещенности T-10A от Konica Minolta.
-
-Коммерческое использование запрещено.
-
-Если вы считаете это программное обеспечение полезным, пожалуйста, поддержите его!</value>
-    <comment />
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-    <comment />
-  </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
-    <value>Вычисление фрактальной размерности
-Хаусдорфа-Безиковича было остановлено.</value>
   </data>
 </root>
