@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Vyvinuto {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Autorská práva {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Softwarový nástroj pro měření ergonomie pro měřič osvětlení Konica Minolta T-10A.
+
+Není povoleno žádné komerční využití. V případě jakýchkoli dotazů kontaktujte autora.
+
+Pokud považujete tento software za užitečný, zvažte jeho podporu!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Jméno výrobku: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Verze {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Přijmout</value>
   </data>
@@ -221,22 +240,25 @@ Namísto toho se použijí výchozí hodnoty.</value>
     <value>Chybějící hlavičky sloupců (názvy sérií).</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>dny</value>
+    <value>dní, den, dny, dny, dny, dní</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>hodiny</value>
+    <value>hodin, hodina, hodiny, hodiny, hodiny, hodin</value>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>minuty</value>
+    <value>minut, minuta, minuty, minuty, minuty, minut</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>sekundy</value>
+    <value>sekund, sekunda, sekundy, sekundy, sekundy, sekund</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
     <value>a</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>milisekundy</value>
+    <value>milisekund, milisekunda, milisekundy, milisekundy, milisekundy, milisekund</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sekce '{0}' má nesprávný formát.</value>
@@ -397,7 +419,7 @@ dimenze byla zastavena.</value>
     <value>Zastavit</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>Soubory ErgoLux (*.elux)|*.elux|Soubory analýzy signálu (*.sig)|*.sig|Textové soubory (*.txt)|*.txt|Všechny soubory (*.*)|*. *</value>
+    <value>Soubory ErgoLux (*.elux)|*.elux|Soubory analýzy signálu (*.sig)|*.sig|Textové soubory (*.txt)|*.txt|Všechny soubory (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Otevřená data o osvětlení</value>
@@ -462,7 +484,7 @@ dimenze byla zastavena.</value>
     <value>Chyba při otevírání dat</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
-    <value>Soubor ErgoLux (*.elux)|*.elux|Textový soubor (*.txt)|*.txt|Binární soubor (*.bin)|*.bin|Všechny soubory (*.*)|*.* </value>
+    <value>Soubor ErgoLux (*.elux)|*.elux|Textový soubor (*.txt)|*.txt|Binární soubor (*.bin)|*.bin|Všechny soubory (*.*)|*.*</value>
   </data>
   <data name="strSaveDlgTitle" xml:space="preserve">
     <value>Uložit údaje o osvětlení</value>
@@ -565,27 +587,5 @@ dimenze byla zastavena.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Jazyk uživatelského rozhraní</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Vyvinuto {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Autorská práva {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Jméno výrobku: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Verze {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Softwarový nástroj pro měření ergonomie pro měřič osvětlení Konica Minolta T-10A.
-
-Není povoleno žádné komerční využití. V případě jakýchkoli dotazů kontaktujte autora.
-
-Pokud považujete tento software za užitečný, zvažte jeho podporu!</value>
   </data>
 </root>

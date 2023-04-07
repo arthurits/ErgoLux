@@ -25,12 +25,12 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader03}: {_timeEnd.ToString(fullPattern, _settings.AppCulture)}");
             //sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _sett.AppCulture) ?? "Total measuring time")}: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} millisecons");
             sw.WriteLine($"{StringResources.FileHeader04}: " +
-                $"{nTime.Days} {StringResources.FileHeader19}, " +
-                $"{nTime.Hours} {StringResources.FileHeader20}, " +
-                $"{nTime.Minutes} {StringResources.FileHeader21}, " +
-                $"{nTime.Seconds} {StringResources.FileHeader22} " +
+                $"{nTime.Days} {GetSubstring(StringResources.FileHeader19, nTime.Days)}, " +
+                $"{nTime.Hours} {GetSubstring(StringResources.FileHeader20, nTime.Hours)}, " +
+                $"{nTime.Minutes} {GetSubstring(StringResources.FileHeader21, nTime.Minutes)}, " +
+                $"{nTime.Seconds} {GetSubstring(StringResources.FileHeader22, nTime.Seconds)} " +
                 $"{StringResources.FileHeader23} " +
-                $"{nTime.Milliseconds} {StringResources.FileHeader24}");
+                $"{nTime.Milliseconds} {GetSubstring(StringResources.FileHeader24, nTime.Milliseconds)}");
             sw.WriteLine($"{StringResources.FileHeader05}: {_settings.T10_NumberOfSensors}");
             sw.WriteLine($"{StringResources.FileHeader06}: {_nPoints}");
             sw.WriteLine($"{StringResources.FileHeader07}: {_settings.T10_Frequency.ToString(_settings.AppCulture)}");

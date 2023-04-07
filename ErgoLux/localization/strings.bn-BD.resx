@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>নির্মাণে {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>কপিরাইট {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>কোনিকা মিনোল্টার ইলুমিন্যান্স-মিটার T-10A-এর জন্য এরগনোমিক্স পরিমাপ সফ্টওয়্যার টুল।
+
+কোনো বাণিজ্যিক ব্যবহারের অনুমতি নেই. কোন অনুসন্ধানের জন্য লেখকের সাথে যোগাযোগ করুন.
+
+আপনি যদি এই সফ্টওয়্যারটিকে দরকারী মনে করেন, তাহলে অনুগ্রহ করে এটিকে সমর্থন করার কথা বিবেচনা করুন!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>পণ্যের নাম: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>সংস্করণ {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;গ্রহণ করুন</value>
   </data>
@@ -238,6 +257,9 @@
   </data>
   <data name="strFileHeader24" xml:space="preserve">
     <value>মিলিসেকেন্ড</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>বিভাগ '{0}' ভুল ফর্ম্যাট করা হয়েছে.</value>
@@ -566,27 +588,5 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>ইউজার ইন্টারফেস ভাষা</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>নির্মাণে {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>কপিরাইট {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>পণ্যের নাম: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>সংস্করণ {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>কোনিকা মিনোল্টার ইলুমিন্যান্স-মিটার T-10A-এর জন্য এরগনোমিক্স পরিমাপ সফ্টওয়্যার টুল।
-
-কোনো বাণিজ্যিক ব্যবহারের অনুমতি নেই. কোন অনুসন্ধানের জন্য লেখকের সাথে যোগাযোগ করুন.
-
-আপনি যদি এই সফ্টওয়্যারটিকে দরকারী মনে করেন, তাহলে অনুগ্রহ করে এটিকে সমর্থন করার কথা বিবেচনা করুন!</value>
   </data>
 </root>

@@ -188,14 +188,34 @@ public partial class FrmMain : Form
         }
         else
         {
-            statusStripLabelXtras.Text = $"{nTime.Days} {StringResources.FileHeader19}, " +
-                $"{nTime.Hours} {StringResources.FileHeader20}, " +
-                $"{nTime.Minutes} {StringResources.FileHeader21}, " +
-                $"{nTime.Seconds} {StringResources.FileHeader22} " +
+            statusStripLabelXtras.Text = $"{nTime.Days} {GetSubstring(StringResources.FileHeader19, nTime.Days)}, " +
+                $"{nTime.Hours} {GetSubstring(StringResources.FileHeader20, nTime.Hours)}, " +
+                $"{nTime.Minutes} {GetSubstring(StringResources.FileHeader21, nTime.Minutes)}, " +
+                $"{nTime.Seconds} {GetSubstring(StringResources.FileHeader22, nTime.Seconds)} " +
                 $"{StringResources.FileHeader23} " +
-                $"{nTime.Milliseconds} {StringResources.FileHeader24}";
+                $"{nTime.Milliseconds} {GetSubstring(StringResources.FileHeader24, nTime.Milliseconds)}";
             statusStripLabelXtras.ToolTipText = statusStripLabelXtras.Text;
         }
+    }
+
+    /// <summary>
+    /// Extracts the given substring from a string with multiple values delimited by <paramref name="strSplit"/>
+    /// </summary>
+    /// <param name="strValues">String with multiples values delimited by <paramref name="strSplit"/></param>
+    /// <param name="index">Index pointing the substring to be returned.
+    /// If this is bigger that the number of values in <paramref name="strValues"/>, then the last one is returned.</param>
+    /// <param name="strSplit">String used as delimiter in <paramref name="strValues"/>.</param>
+    /// <returns>Substring at (array)position determined by <paramref name="index"/>.</returns>
+    private string GetSubstring(string strValues, int index = 0, string strSplit = ", ")
+    {
+        string[] arrValues = strValues.Split(strSplit);
+        int uBound = arrValues.GetUpperBound(0);
+        if (index >= uBound)
+            return arrValues[uBound];
+        else if (index <= 0)
+            return arrValues[0];
+        else
+            return arrValues[index];
     }
 
     /// <summary>

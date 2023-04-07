@@ -117,6 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Developed by {0}</value>
+    <comment>To be displayed in About window</comment>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Copyright {0}</value>
+    <comment>To be displayed in About window</comment>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A.
+
+No commercial use allowed whatsoever. Contact the author for any inquiries.
+
+If you find this software useful, please consider supporting it!</value>
+    <comment>To be displayed in About window</comment>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Product name: {0}</value>
+    <comment>To be displayed in About window</comment>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+    <comment>To be displayed in About window</comment>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Accept</value>
   </data>
@@ -234,22 +258,25 @@ Default values will be used instead.</value>
     <value>Missing column headers (series names).</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>days</value>
+    <value>days, day, days</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>hours</value>
+    <value>hours, hour, hours</value>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>minutes</value>
+    <value>minutes, minute, minutes</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>seconds</value>
+    <value>seconds, second, seconds</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
     <value>and</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>milliseconds</value>
+    <value>milliseconds, millisecond, milliseconds</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Section '{0}' is mis-formatted.</value>
@@ -530,7 +557,7 @@ dimension has been stopped.</value>
     <value>Stop</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>"ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*"</value>
+    <value>ErgoLux file (*.elux)|*.elux|Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Open illuminance data</value>
@@ -704,32 +731,5 @@ dimension has been stopped.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>User interface language</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Product name: {0}</value>
-    <comment>To be displayed in About window</comment>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Version {0}</value>
-    <comment>To be displayed in About window</comment>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Copyright {0}</value>
-    <comment>To be displayed in About window</comment>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Developed by {0}</value>
-    <comment>To be displayed in About window</comment>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A.
-
-No commercial use allowed whatsoever. Contact the author for any inquiries.
-
-If you find this software useful, please consider supporting it!</value>
-    <comment>To be displayed in About window</comment>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
   </data>
 </root>

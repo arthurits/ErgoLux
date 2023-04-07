@@ -233,22 +233,25 @@ Les valeurs par défaut seront utilisées à la place.</value>
     <value>En-têtes de colonne manquantes (noms de séries).</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>jours</value>
+    <value>jours, jour, jours</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>heures</value>
+    <value>heures, heure, heures</value>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>minutes</value>
+    <value>minutes, minute, minutes</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>secondes</value>
+    <value>secondes, seconde, secondes</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
     <value>et</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>millisecondes</value>
+    <value>millisecondes, milliseconde, millisecondes</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>La section '{0}' est mal formaté.</value>
@@ -638,8 +641,5 @@ a été arrêté.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Langue de l'interace utilisateur</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
   </data>
 </root>

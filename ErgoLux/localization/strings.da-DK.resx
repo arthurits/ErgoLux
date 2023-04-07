@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Udviklet af {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Ophavsret {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Softwareværktøj til ergonomimåling til Konica Minoltas lysstyrkemåler T-10A.
+
+Ingen kommerciel brug tilladt overhovedet. Kontakt forfatteren for eventuelle spørgsmål.
+
+Hvis du finder denne software nyttig, så overvej at støtte den!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produktnavn: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Godkend</value>
   </data>
@@ -221,22 +240,25 @@ Standardværdier vil blive benyttet i stedet.</value>
     <value>Manglende kolonneoverskrifter (serienavne).</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>dage</value>
+    <value>dage, dag, dage</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>timer</value>
+    <value>timer, time, timer</value>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
-    <value>minutter</value>
+    <value>minutter, minut, minutter</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>sekunder</value>
+    <value>sekunder, sekund, sekunder</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
     <value>og</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>millisekunder</value>
+    <value>millisekunder, millisekund, millisekunder</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sektion '{0}' er fejlformateret.</value>
@@ -378,11 +400,11 @@ Standardværdier vil blive benyttet i stedet.</value>
   <data name="strMsgBoxReset" xml:space="preserve">
     <value>Vil du nulstille alle felter til deres standardværdier?</value>
   </data>
-  <data name="strMsgBoxSaveData" xml:space="preserve">
-    <value>Data er blevet gemt til disken.</value>
-  </data>
   <data name="strMsgBoxResetTitle" xml:space="preserve">
     <value>Nulstil?</value>
+  </data>
+  <data name="strMsgBoxSaveData" xml:space="preserve">
+    <value>Data er blevet gemt til disken.</value>
   </data>
   <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
     <value>Data gemmes</value>
@@ -395,7 +417,7 @@ er blevet stoppet.</value>
     <value>Stop</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>"ErgoLux-fil (*.elux)|*.elux|Tekstfil (*.txt)|*.txt|Binær fil (*.bin)|*.bin|Alle filer (*.*)|*.*"</value>
+    <value>ErgoLux-fil (*.elux)|*.elux|Tekstfil (*.txt)|*.txt|Binær fil (*.bin)|*.bin|Alle filer (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Åbn belysningsstyrkedata</value>
@@ -563,27 +585,5 @@ er blevet stoppet.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Brugergrænsefladesprog</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Udviklet af {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Ophavsret {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Produktnavn: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Version {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Softwareværktøj til ergonomimåling til Konica Minoltas lysstyrkemåler T-10A.
-
-Ingen kommerciel brug tilladt overhovedet. Kontakt forfatteren for eventuelle spørgsmål.
-
-Hvis du finder denne software nyttig, så overvej at støtte den!</value>
   </data>
 </root>

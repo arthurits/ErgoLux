@@ -51,12 +51,12 @@ public static class StringResources
     public static string FileHeader16 => StringRM.GetString("strFileHeader16", Culture) ?? "Illuminance";
     public static string FileHeader17 => StringRM.GetString("strFileHeader17", Culture) ?? "Missing an empty line.";
     public static string FileHeader18 => StringRM.GetString("strFileHeader18", Culture) ?? "Missing column headers (series names).";
-    public static string FileHeader19 => StringRM.GetString("strFileHeader19", Culture) ?? "days";
-    public static string FileHeader20 => StringRM.GetString("strFileHeader20", Culture) ?? "hours";
-    public static string FileHeader21 => StringRM.GetString("strFileHeader21", Culture) ?? "minutes";
-    public static string FileHeader22 => StringRM.GetString("strFileHeader22", Culture) ?? "seconds";
+    public static string FileHeader19 => StringRM.GetString("strFileHeader19", Culture) ?? "days, day, days";
+    public static string FileHeader20 => StringRM.GetString("strFileHeader20", Culture) ?? "hours, hour, hours";
+    public static string FileHeader21 => StringRM.GetString("strFileHeader21", Culture) ?? "minutes, minute, minutes";
+    public static string FileHeader22 => StringRM.GetString("strFileHeader22", Culture) ?? "seconds, second, seconds";
     public static string FileHeader23 => StringRM.GetString("strFileHeader23", Culture) ?? "and";
-    public static string FileHeader24 => StringRM.GetString("strFileHeader24", Culture) ?? "milliseconds";
+    public static string FileHeader24 => StringRM.GetString("strFileHeader24", Culture) ?? "milliseconds, millisecond, milliseconds";
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
     public static string FormTitle => StringRM.GetString("strFormTitle", Culture) ?? "ErgoLux";
     public static string FrmLanguage => StringRM.GetString("strFrmLanguage", Culture) ?? "Select culture";
