@@ -2,7 +2,7 @@
 
 ## ErgoLux 1.4
 * Add Russian (ru-RU) translation. _Thanks @shmudivel_.
-* Update time-related (days, hours, minutes, seconds, and miliseconds) grammar issues for all cultures/languages
+* Update time-related (days, hours, minutes, seconds, and milliseconds) grammar issues for all cultures/languages
 * [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.62.
 * Minor bug fixes.
 
