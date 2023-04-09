@@ -92,7 +92,7 @@ namespace ErgoLux
             // updSensors
             // 
             updSensors.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            updSensors.Location = new Point(161, 262);
+            updSensors.Location = new Point(163, 262);
             updSensors.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             updSensors.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             updSensors.Name = "updSensors";
@@ -265,9 +265,9 @@ namespace ErgoLux
             // 
             cboParity.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             cboParity.FormattingEnabled = true;
-            cboParity.Location = new Point(133, 225);
+            cboParity.Location = new Point(150, 225);
             cboParity.Name = "cboParity";
-            cboParity.Size = new Size(80, 25);
+            cboParity.Size = new Size(65, 25);
             cboParity.TabIndex = 7;
             // 
             // lblBaudRate
@@ -275,6 +275,7 @@ namespace ErgoLux
             lblBaudRate.AutoSize = true;
             lblBaudRate.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             lblBaudRate.Location = new Point(23, 156);
+            lblBaudRate.MaximumSize = new Size(140, 0);
             lblBaudRate.Name = "lblBaudRate";
             lblBaudRate.Size = new Size(68, 19);
             lblBaudRate.TabIndex = 2;
@@ -303,10 +304,10 @@ namespace ErgoLux
             // txtBaudRate
             // 
             txtBaudRate.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            txtBaudRate.Location = new Point(133, 153);
+            txtBaudRate.Location = new Point(150, 153);
             txtBaudRate.Name = "txtBaudRate";
             txtBaudRate.ShortcutsEnabled = false;
-            txtBaudRate.Size = new Size(80, 25);
+            txtBaudRate.Size = new Size(65, 25);
             txtBaudRate.TabIndex = 3;
             // 
             // cboStopBits
@@ -322,9 +323,9 @@ namespace ErgoLux
             // 
             cboDataBits.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             cboDataBits.FormattingEnabled = true;
-            cboDataBits.Location = new Point(133, 189);
+            cboDataBits.Location = new Point(150, 189);
             cboDataBits.Name = "cboDataBits";
-            cboDataBits.Size = new Size(80, 25);
+            cboDataBits.Size = new Size(65, 25);
             cboDataBits.TabIndex = 5;
             // 
             // lblDevices

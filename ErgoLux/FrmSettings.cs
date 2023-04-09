@@ -541,6 +541,7 @@ public partial class FrmSettings : Form
         int nParity = this.lblParity.Left + this.lblParity.Width + this.cboParity.Width;
         int nSensors = this.lblSensors.Left + this.lblSensors.Width + this.updSensors.Width;
         int nMaxRight = Math.Max(Math.Max(nBaud, nData), Math.Max(nParity, nSensors)) + 3;
+        this.lblBaudRate.Top = this.txtBaudRate.Top + (txtBaudRate.Height - lblBaudRate.Height) / 2;
         this.txtBaudRate.Left = nMaxRight - this.txtBaudRate.Width;
         this.cboDataBits.Left = nMaxRight - this.cboDataBits.Width;
         this.cboParity.Left = nMaxRight - this.cboParity.Width;
