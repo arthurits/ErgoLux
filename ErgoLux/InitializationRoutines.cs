@@ -109,8 +109,8 @@ partial class FrmMain
         // Customize styling
         plotData.Plot.Palette = ScottPlot.Palette.Category10;
         plotData.Plot.Title(StringResources.PlotRawTitle);
-        plotData.Plot.YLabel(StringResources.PlotRawYLabel);
-        plotData.Plot.XLabel(StringResources.PlotRawXLabel);
+        plotData.Plot.LeftAxis.Label(StringResources.PlotRawYLabel);
+        plotData.Plot.BottomAxis.Label(StringResources.PlotRawXLabel);
         plotData.Plot.Grid(enable: false);
         plotData.SnapToPoint = true;
 
@@ -125,8 +125,8 @@ partial class FrmMain
 
         plotStats.Plot.Palette = ScottPlot.Palette.Nord;
         plotStats.Plot.Title(StringResources.PlotAverageTitle);
-        plotStats.Plot.YLabel(StringResources.PlotAverageYLabel);
-        plotStats.Plot.XLabel(StringResources.PlotAverageXLabel);
+        plotStats.Plot.LeftAxis.Label(StringResources.PlotAverageYLabel);
+        plotStats.Plot.BottomAxis.Label(StringResources.PlotAverageXLabel);
         plotStats.Plot.Grid(enable: false);
         plotStats.SnapToPoint = true;
 
@@ -136,8 +136,8 @@ partial class FrmMain
 
         plotRatio.Plot.Palette = ScottPlot.Palette.OneHalf;
         plotRatio.Plot.Title(StringResources.PlotRatiosTitle);
-        plotRatio.Plot.YLabel(StringResources.PlotRatiosYLabel);
-        plotRatio.Plot.XLabel(StringResources.PlotRatiosXLabel);
+        plotRatio.Plot.LeftAxis.Label(StringResources.PlotRatiosYLabel);
+        plotRatio.Plot.BottomAxis.Label(StringResources.PlotRatiosXLabel);
         plotRatio.Plot.Grid(enable: false);
         plotRatio.SnapToPoint = true;
 

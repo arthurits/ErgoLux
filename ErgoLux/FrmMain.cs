@@ -312,21 +312,21 @@ public partial class FrmMain : Form
         // Update plots
         plotData.CultureUI = _settings.AppCulture;
         plotData.Plot.Title(StringResources.PlotRawTitle);
-        plotData.Plot.YLabel(StringResources.PlotRawYLabel);
-        plotData.Plot.XLabel(StringResources.PlotRawXLabel);
+        plotData.Plot.LeftAxis.Label(StringResources.PlotRawYLabel);
+        plotData.Plot.BottomAxis.Label(StringResources.PlotRawXLabel);
 
         plotDistribution.CultureUI = _settings.AppCulture;
         plotDistribution.Plot.Title(StringResources.PlotDistributionTitle);
 
         plotStats.CultureUI = _settings.AppCulture;
         plotStats.Plot.Title(StringResources.PlotAverageTitle);
-        plotStats.Plot.YLabel(StringResources.PlotAverageYLabel);
-        plotStats.Plot.XLabel(StringResources.PlotAverageXLabel);
+        plotStats.Plot.LeftAxis.Label(StringResources.PlotAverageYLabel);
+        plotStats.Plot.BottomAxis.Label(StringResources.PlotAverageXLabel);
 
         plotRatio.CultureUI = _settings.AppCulture;
         plotRatio.Plot.Title(StringResources.PlotRatiosTitle);
-        plotRatio.Plot.YLabel(StringResources.PlotRatiosYLabel);
-        plotRatio.Plot.XLabel(StringResources.PlotRatiosXLabel);
+        plotRatio.Plot.LeftAxis.Label(StringResources.PlotRatiosYLabel);
+        plotRatio.Plot.BottomAxis.Label(StringResources.PlotRatiosXLabel);
 
         Plots_Refresh();
 

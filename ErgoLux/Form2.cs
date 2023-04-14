@@ -50,8 +50,8 @@ public partial class Form2 : Form
         formsPlot1.Plot.Add(vlines);
 
         formsPlot1.Plot.Title("Crosshair Demo");
-        formsPlot1.Plot.XLabel("Horizontal Axis");
-        formsPlot1.Plot.YLabel("Vertical Axis");
+        formsPlot1.Plot.BottomAxis.Label("Horizontal Axis");
+        formsPlot1.Plot.LeftAxis.Label("Vertical Axis");
         formsPlot1.Refresh();
     }
 
