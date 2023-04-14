@@ -73,6 +73,7 @@ public partial class FrmMain : Form
             {
                 // Cancel
                 e.Cancel = true;
+                return;
             }
         }
 
