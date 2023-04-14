@@ -207,6 +207,6 @@ public static class StringResources
     public static string AboutCopyright => StringRM.GetString("strAboutCopyright", Culture) ?? "Copyright {0}";
     public static string AboutCompanyName => StringRM.GetString("strAboutCompanyName", Culture) ?? "Developed by {0}";
     public static string AboutDescription => StringRM.GetString("strAboutDescription", Culture) ?? "Ergonomics measurement software tool for Konica Minolta's illuminance-meter T-10A." +
-        Environment.NewLine + Environment.NewLine + "No commercial use allowed whatsoever.Contact the author for any inquires." +
+        Environment.NewLine + Environment.NewLine + "No commercial use allowed whatsoever. Contact the author for any inquires." +
         Environment.NewLine + Environment.NewLine + "If you find this software useful, please consider supporting it!";
 }
