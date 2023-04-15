@@ -7,6 +7,7 @@ public partial class FrmSettings : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private readonly ClassSettings? Settings;
+    private readonly string _baseName = "ErgoLux.localization.strings";
 
     public bool ModifyPlots { get; private set; } = false;
     public bool ModifyArrays { get; private set; } = false;
@@ -18,7 +19,7 @@ public partial class FrmSettings : Form
 
         InitializaControls();
         PopulateFTDIDevices();
-        FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmMain).Assembly);
+        FillDefinedCultures(_baseName, typeof(FrmMain).Assembly);
     }
 
     public FrmSettings(ClassSettings settings)
@@ -347,7 +348,7 @@ public partial class FrmSettings : Form
             UpdateUI_Language();
 
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -360,7 +361,7 @@ public partial class FrmSettings : Form
             UpdateUI_Language();
 
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -375,7 +376,7 @@ public partial class FrmSettings : Form
                 UpdateUI_Language();
 
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -387,7 +388,7 @@ public partial class FrmSettings : Form
         {
             _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
-            FillDefinedCultures("ErgoLux.localization.strings", typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
         }
     }
 
