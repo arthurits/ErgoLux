@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Tarafından geliştirilmiştir {0}</value>
+    <comment>Hakkında penceresinde görüntülenecek</comment>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Telif hakkı {0}</value>
+    <comment>Hakkında penceresinde görüntülenecek</comment>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Konica minolta'nın T-10A model aydınlık ölçer aracı için ergonomi ölçüm yazılımı.
+Hiçbir şekilde ticari kullanıma izin verilmez. Sorularınız için yazarla iletişime geçin.
+
+Bu yazılımı yararlı bulursanız lütfen onu destekleyiniz!</value>
+    <comment>Hakkında penceresinde görüntülenecek</comment>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Ürün Adı: {0}</value>
+    <comment>Hakkında penceresinde görüntülenecek</comment>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+    <comment>Hakkında penceresinde görüntülenecek</comment>
+  </data>
+  <data name="strBtnAccept" xml:space="preserve">
+    <value>&amp;Kabul</value>
+  </data>
+  <data name="strBtnCancel" xml:space="preserve">
+    <value>&amp;İptal</value>
+  </data>
+  <data name="strBtnData" xml:space="preserve">
+    <value>Veri Seç</value>
+  </data>
+  <data name="strBtnExport" xml:space="preserve">
+    <value>&amp;Dışa aktar</value>
+  </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>&amp;Yenile</value>
+  </data>
+  <data name="strBtnSettings" xml:space="preserve">
+    <value>&amp;Ayarlar</value>
+  </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>Grafiklerin artı işaretini göster</value>
+  </data>
+  <data name="strChkCumulative" xml:space="preserve">
+    <value>Kümülatif fraktal boyutu</value>
+  </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>Önceki yolu aç / kaydet iletişim kutusuna dön</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>Entropi(tahmini&& örnek)</value>
+  </data>
+  <data name="strChkPlotAverage" xml:space="preserve">
+    <value>Grafik ortalaması</value>
+  </data>
+  <data name="strChkPlotDistribution" xml:space="preserve">
+    <value>Grafik dağılımı</value>
+  </data>
+  <data name="strChkPlotRatios" xml:space="preserve">
+    <value>Grafik oranları</value>
+  </data>
+  <data name="strChkPlotRaw" xml:space="preserve">
+    <value>Tüm verileri çiz</value>
+  </data>
+  <data name="strChkPower" xml:space="preserve">
+    <value>Güç (dB)</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>Tüm alanları varsayılan değerlerine sıfırlamak ister misiniz?</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>Yenileme ayarlanıyor ?</value>
+  </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>Ayarlar dosyası yüklenirken hata oluştu.
+{0}
+
+Bunun yerine varsayılan değerler kullanılacaktır..</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>ErgoLux verisi</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>Başlangıç zamanı</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>Bitiş zamanı</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>Toplam ölçüm süresi</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>Sensör Sayısı</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>Veri puan sayısıs</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>Örnekleme frekansı</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>Sensör #</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>En büyük</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>ortalama</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>En küçük</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>En küçük /Ortalama</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>En küçük / En büyük</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>Ortalama/ En büyük</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>Ortalama</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>Aydınlık</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>Eksik alanlar var</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>Eksik sütun başlıkları (seri adları ).</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>günler, gün, günler</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>saatler, saat, saatler</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>dakikalar, dakika, dakikalar</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>saniyeler, saniye, saniye</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>ve</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>mili saniyeler, mili saniye, mili saniyeler</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>'{0}'  bölümü yanlış biçimlendirilmiştir.</value>
+  </data>
+  <data name="strFormTitle" xml:space="preserve">
+    <value>ErgoLux</value>
+  </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>Kültür seç</value>
+  </data>
+  <data name="strFrmSettings" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="strFrmTitle" xml:space="preserve">
+    <value>Sinyal analizi</value>
+  </data>
+  <data name="strFrmTitleUnion" xml:space="preserve">
+    <value> - </value>
+  </data>
+  <data name="strGridDescription" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="strGridDevice" xml:space="preserve">
+    <value>Araç lokasyonu</value>
+  </data>
+  <data name="strGridFlags" xml:space="preserve">
+    <value>Bayraklar</value>
+  </data>
+  <data name="strGridID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="strGridLocation" xml:space="preserve">
+    <value>Lokasyon ID</value>
+  </data>
+  <data name="strGridSerial" xml:space="preserve">
+    <value>Seri Numarası</value>
+  </data>
+  <data name="strGridType" xml:space="preserve">
+    <value>Tür</value>
+  </data>
+  <data name="strGrpAxis" xml:space="preserve">
+    <value>Apsis ekseni</value>
+  </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>UI ve veri formatı</value>
+  </data>
+  <data name="strGrpPlot" xml:space="preserve">
+    <value>Grafik dağılımı</value>
+  </data>
+  <data name="strLblArrayPoints" xml:space="preserve">
+    <value>Dizinin en düşük puanı</value>
+  </data>
+  <data name="strLblBaudRate" xml:space="preserve">
+    <value>Baud oranı</value>
+  </data>
+  <data name="strLblData" xml:space="preserve">
+    <value>Veri-dosya yolu</value>
+  </data>
+  <data name="strLblDataBits" xml:space="preserve">
+    <value>bits verisi</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>Sayısal veri biçimlendirme dizesi</value>
+  </data>
+  <data name="strLblDeviceList" xml:space="preserve">
+    <value>FTDI veri listesi</value>
+  </data>
+  <data name="strLblEnd" xml:space="preserve">
+    <value>Dizi bitiş indeksi</value>
+  </data>
+  <data name="strLblFlow" xml:space="preserve">
+    <value>Akış kontrol</value>
+  </data>
+  <data name="strLblFrequency" xml:space="preserve">
+    <value>Frekans (Hz)</value>
+  </data>
+  <data name="strLblOff" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="strLblOn" xml:space="preserve">
+    <value>Aç</value>
+  </data>
+  <data name="strLblParity" xml:space="preserve">
+    <value>Eşlik</value>
+  </data>
+  <data name="strLblPlotWindow" xml:space="preserve">
+    <value>Çizim penceresi (saniye)</value>
+  </data>
+  <data name="strLblSensors" xml:space="preserve">
+    <value>Sensör sayısı</value>
+  </data>
+  <data name="strLblSeries" xml:space="preserve">
+    <value>Seri seç</value>
+  </data>
+  <data name="strLblStart" xml:space="preserve">
+    <value>dizi başlangıç indeksi</value>
+  </data>
+  <data name="strLblStopBits" xml:space="preserve">
+    <value>Bitiş biti</value>
+  </data>
+  <data name="strLblWindow" xml:space="preserve">
+    <value>Pencere</value>
+  </data>
+  <data name="strMenuMainFile" xml:space="preserve">
+    <value>&amp;Dosya</value>
+  </data>
+  <data name="strMenuMainFileExit" xml:space="preserve">
+    <value>&amp;Çıkış...</value>
+  </data>
+  <data name="strMenuMainFileOpen" xml:space="preserve">
+    <value>&amp;Aç...</value>
+  </data>
+  <data name="strMenuMainFileSave" xml:space="preserve">
+    <value>&amp;Kaydet...</value>
+  </data>
+  <data name="strMenuMainHelpAbout" xml:space="preserve">
+    <value>&amp;Hakkında...</value>
+  </data>
+  <data name="strMenuMainHelpText" xml:space="preserve">
+    <value>&amp;Yardım</value>
+  </data>
+  <data name="strMenuMainTools" xml:space="preserve">
+    <value>&amp;Araçlar</value>
+  </data>
+  <data name="strMenuMainToolsConnect" xml:space="preserve">
+    <value>&amp;Bağlan</value>
+  </data>
+  <data name="strMenuMainToolsDisconnect" xml:space="preserve">
+    <value>&amp;Bağlantı kes</value>
+  </data>
+  <data name="strMenuMainToolsSettings" xml:space="preserve">
+    <value>&amp;Ayarlar...</value>
+  </data>
+  <data name="strMenuMainView" xml:space="preserve">
+    <value>&amp;Görünüş</value>
+  </data>
+  <data name="strMenuMainViewAverage" xml:space="preserve">
+    <value>Ortalama</value>
+  </data>
+  <data name="strMenuMainViewDistribution" xml:space="preserve">
+    <value>Radyal dağılım</value>
+  </data>
+  <data name="strMenuMainViewMenu" xml:space="preserve">
+    <value>Menüyü göster</value>
+  </data>
+  <data name="strMenuMainViewRatio" xml:space="preserve">
+    <value>Oranlar</value>
+  </data>
+  <data name="strMenuMainViewRaw" xml:space="preserve">
+    <value>Veriyi göster</value>
+  </data>
+  <data name="strMenuMainViewToolbar" xml:space="preserve">
+    <value>Araçları göster</value>
+  </data>
+  <data name="strMsbBoxErrorBits" xml:space="preserve">
+    <value>Veri özellikleri ayarlanamadı
+(veri bitleri, durdurma bitleri ve eşlik).
+Hata:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorBaudRate" xml:space="preserve">
+    <value>Baud hızı ayarlanamadı.
+Hata:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorBaudRateTitle" xml:space="preserve">
+    <value>Baud hızı hatası</value>
+  </data>
+  <data name="strMsgBoxErrorBitsTitle" xml:space="preserve">
+    <value>Bits hatası</value>
+  </data>
+  <data name="strMsgBoxErrorDeviceClosed" xml:space="preserve">
+    <value>Cihaz kapalı. Cihazı açmak için lütfen 'Ayarlar'a gidin..</value>
+  </data>
+  <data name="strMsgBoxErrorDeviceClosedTitle" xml:space="preserve">
+    <value>Cihaz hatası</value>
+  </data>
+  <data name="strMsgBoxErrorDrivers" xml:space="preserve">
+    <value>FTD2XX.DLL yüklenemedi . FTDI sürücüleri yüklü mü??</value>
+  </data>
+  <data name="strMsgBoxErrorDriversTitle" xml:space="preserve">
+    <value>Sürücüler yüklenirken hata oluştu</value>
+  </data>
+  <data name="strMsgBoxErrorFlowControl" xml:space="preserve">
+    <value>Akış denetimi ayarlanamadı.
+Hata:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFlowControlTitle" xml:space="preserve">
+    <value>Akış kontrol hatası</value>
+  </data>
+  <data name="strMsgBoxErrorLoading" xml:space="preserve">
+    <value> FTD2XX yüklenmeye çalışılıyor.DLL kimden:</value>
+  </data>
+  <data name="strMsgBoxErrorLoadingTitle" xml:space="preserve">
+    <value>DLL yüklenirken hata oluştu</value>
+  </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>Veri dosyası açılırken beklenmeyen bir hata oluştu.
+Lütfen daha sonra tekrar deneyin veya yazılım mühendisiyle iletişime geçin.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>Veri açılırken hata oluştu</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDevice" xml:space="preserve">
+    <value>Cihaz açılamad</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDeviceTitle" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="strMsgBoxErrorOpening" xml:space="preserve">
+    <value>Aygıt açılamadı.
+Hata:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpeningTitle" xml:space="preserve">
+    <value>Cihaz açılırken hata oluştu.</value>
+  </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>Verileri diske kaydederken beklenmeyen bir hata oluştu.
+Lütfen daha sonra tekrar deneyin veya yazılım mühendisiyle iletişime geçin.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>Veri kaydetilirken hata oluştu</value>
+  </data>
+  <data name="strMsgBoxErrorSettings" xml:space="preserve">
+    <value>Ayarlar yüklenirken hata oluştu
+
+{0}
+
+
+Bunun yerine varsayılan değerler kullanılacaktır..</value>
+  </data>
+  <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="strMsgBoxErrorTimeouts" xml:space="preserve">
+    <value>Zaman aşımları ayarlanamadı.
+Hata:
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorTimeoutsTitle" xml:space="preserve">
+    <value>Zaman aşımı hatası</value>
+  </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>Uygulamadan çıkmak istediğinize emin misiniz?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>Çıkış?</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>Kaydedilebilecek veri yok..</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>Veri yok</value>
+  </data>
+  <data name="strMsgBoxReset" xml:space="preserve">
+    <value>Tüm alanları varsayılan değerlerine sıfırlamak ister misiniz?</value>
+  </data>
+  <data name="strMsgBoxResetTitle" xml:space="preserve">
+    <value>Yenile?</value>
+  </data>
+  <data name="strMsgBoxSaveData" xml:space="preserve">
+    <value>Veri başarıyla diske kaydedildi..</value>
+  </data>
+  <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
+    <value>veri kaydediliyor</value>
+  </data>
+  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+    <value>Hausdorff-Besicovitch fraktalının hesaplanması durduruldu.</value>
+  </data>
+  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+    <value>Dur</value>
+  </data>
+  <data name="strOpenDlgFilter" xml:space="preserve">
+    <value>"ErgoLux dosyası (*.elux)/*.elux/ Metin dosyası (*.txt)/*.txt / İkili dosya (*.bin)|*.bin / Tüm dosyalar (*.*)|*.*"</value>
+  </data>
+  <data name="strOpenDlgTitle" xml:space="preserve">
+    <value>Aydınlık verilerini aç</value>
+  </data>
+  <data name="strPlotAverageTitle" xml:space="preserve">
+    <value>En büyük, ortalama, en küçük</value>
+  </data>
+  <data name="strPlotAverageXLabel" xml:space="preserve">
+    <value>Zaman (Saniye)</value>
+  </data>
+  <data name="strPlotAverageYLabel" xml:space="preserve">
+    <value>Lux</value>
+  </data>
+  <data name="strPlotDistributionTitle" xml:space="preserve">
+    <value>Aydınlık dağılımı</value>
+  </data>
+  <data name="strPlotRatiosTitle" xml:space="preserve">
+    <value>Aydınlık oranları</value>
+  </data>
+  <data name="strPlotRatiosXLabel" xml:space="preserve">
+    <value>Zaman (Saniyeler)</value>
+  </data>
+  <data name="strPlotRatiosYLabel" xml:space="preserve">
+    <value>Oran</value>
+  </data>
+  <data name="strPlotRawTitle" xml:space="preserve">
+    <value>Aydınlık</value>
+  </data>
+  <data name="strPlotRawXLabel" xml:space="preserve">
+    <value>Zaman (Saniye)</value>
+  </data>
+  <data name="strPlotRawYLabel" xml:space="preserve">
+    <value>Lux</value>
+  </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>Geçerli kültür biçimlendirmesi</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>Değişmez kültür biçimlendirme</value>
+  </data>
+  <data name="strRadRadar" xml:space="preserve">
+    <value>Radar</value>
+  </data>
+  <data name="strRadRadialGauge" xml:space="preserve">
+    <value>Radyal ölçer</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>Kültür seç</value>
+  </data>
+  <data name="strReadDataError" xml:space="preserve">
+    <value>Dosyadan veri okunamıyor.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>Kültür tanımlayıcı dize adı geçerli değil.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>Kültür adı hatası</value>
+  </data>
+  <data name="strReadDataErrorNumber" xml:space="preserve">
+    <value>Geçersiz sayısal değer: {0} {0}</value>
+  </data>
+  <data name="strReadDataErrorNumberTitle" xml:space="preserve">
+    <value>Veri ayrıştırma hatası</value>
+  </data>
+  <data name="strReadDataErrorTitle" xml:space="preserve">
+    <value>Veri açılırken hata oluştu</value>
+  </data>
+  <data name="strSaveDlgFilter" xml:space="preserve">
+    <value>"ErgoLux dosyası (*.elux)/*.elux/ Metin dosyası (*.txt)/*.txt / İkili dosya (*.bin)|*.bin / Tüm dosyalar (*.*)|*.*"</value>
+  </data>
+  <data name="strSaveDlgTitle" xml:space="preserve">
+    <value>Kaydedilen aydınlık verisi</value>
+  </data>
+  <data name="strStatusExchange" xml:space="preserve">
+    <value>Veri alma</value>
+  </data>
+  <data name="strStatusID" xml:space="preserve">
+    <value>Araç ID</value>
+  </data>
+  <data name="strStatusLocation" xml:space="preserve">
+    <value>Lokasyon ID</value>
+  </data>
+  <data name="strStatusOpen" xml:space="preserve">
+    <value>Bağlantı kesildi</value>
+  </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>Çizimin artı modunu göster</value>
+  </data>
+  <data name="strStatusTipDistribution" xml:space="preserve">
+    <value>Grafik dağılımı</value>
+  </data>
+  <data name="strStatusTipExchange" xml:space="preserve">
+    <value>Değişim durumu</value>
+  </data>
+  <data name="strStatusTipID" xml:space="preserve">
+    <value>Araç ID</value>
+  </data>
+  <data name="strStatusTipLocation" xml:space="preserve">
+    <value>T-10A Lokasyon ID</value>
+  </data>
+  <data name="strStatusTipMax" xml:space="preserve">
+    <value>En büyük,ortalama,en küçük Çizim</value>
+  </data>
+  <data name="strStatusTipOpen" xml:space="preserve">
+    <value>Bağlantı durumu</value>
+  </data>
+  <data name="strStatusTipRatio" xml:space="preserve">
+    <value>Grafik oranları</value>
+  </data>
+  <data name="strStatusTipRaw" xml:space="preserve">
+    <value>Plot raw data</value>
+  </data>
+  <data name="strStatusTipType" xml:space="preserve">
+    <value>Device type</value>
+  </data>
+  <data name="strStatusType" xml:space="preserve">
+    <value>Araç türü</value>
+  </data>
+  <data name="strTabDevice" xml:space="preserve">
+    <value>T-10A sensörü</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>Kullanıcı arayüzü</value>
+  </data>
+  <data name="strTabPlots" xml:space="preserve">
+    <value>Grafikler</value>
+  </data>
+  <data name="strToolStripAbout" xml:space="preserve">
+    <value>Hakkında</value>
+  </data>
+  <data name="strToolStripConnect" xml:space="preserve">
+    <value>Bağlan</value>
+  </data>
+  <data name="strToolStripDisconnect" xml:space="preserve">
+    <value>Bağlantı kes</value>
+  </data>
+  <data name="strToolStripExit" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="strToolStripOpen" xml:space="preserve">
+    <value>Aç</value>
+  </data>
+  <data name="strToolStripSave" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="strToolStripSettings" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="strToolTipAbout" xml:space="preserve">
+    <value>Bu yazılım hakkında</value>
+  </data>
+  <data name="strToolTipConnect" xml:space="preserve">
+    <value>T-10A cihazından veri almaya başlayın</value>
+  </data>
+  <data name="strToolTipDisconnect" xml:space="preserve">
+    <value>T-10A cihazını durdur ve bağlantıyı kes</value>
+  </data>
+  <data name="strToolTipExit" xml:space="preserve">
+    <value>Uygulamadan çık</value>
+  </data>
+  <data name="strToolTipOpen" xml:space="preserve">
+    <value>Veri dosyasını diskten aç</value>
+  </data>
+  <data name="strToolTipSave" xml:space="preserve">
+    <value>Veri kaydet</value>
+  </data>
+  <data name="strToolTipSettings" xml:space="preserve">
+    <value>Grafik, veri ve UI için ayarlar</value>
+  </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>Kullanıcı dil arayüzü </value>
+  </data>
+</root>
