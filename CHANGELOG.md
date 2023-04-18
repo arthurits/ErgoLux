@@ -1,5 +1,12 @@
 # ErgoLux changelog
 
+## ErgoLux 1.5
+* Add Turkish (tr-TR) translation. _Thanks barisceliker1_.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.63.
+* Improve controls placement in Settings for all available languages.
+* Fix code when closing the application.
+* Refactor references to the resource file.
+
 ## ErgoLux 1.4
 * Add Russian (ru-RU) translation. _Thanks @shmudivel_.
 * Update time-related (days, hours, minutes, seconds, and milliseconds) grammar issues for all cultures/languages
