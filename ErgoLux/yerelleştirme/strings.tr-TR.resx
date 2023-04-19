@@ -332,7 +332,7 @@ Bunun yerine varsayılan değerler kullanılacaktır..</value>
     <value>Veri-dosya yolu</value>
   </data>
   <data name="strLblDataBits" xml:space="preserve">
-    <value>bits verisi</value>
+    <value>Bits verisi</value>
   </data>
   <data name="strLblDataFormat" xml:space="preserve">
     <value>Sayısal veri biçimlendirme dizesi</value>
