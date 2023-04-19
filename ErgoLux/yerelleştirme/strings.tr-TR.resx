@@ -541,7 +541,7 @@ Hata:
     <value>Veri başarıyla diske kaydedildi..</value>
   </data>
   <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
-    <value>veri kaydediliyor</value>
+    <value>Veri kaydediliyor</value>
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>Hausdorff-Besicovitch fraktalının hesaplanması durduruldu.</value>
