@@ -165,7 +165,7 @@ Bu yazılımı yararlı bulursanız lütfen onu destekleyiniz!</value>
     <value>Kümülatif fraktal boyutu</value>
   </data>
   <data name="strChkDlgPath" xml:space="preserve">
-    <value>Önceki yolu aç / kaydet iletişim kutusuna dön</value>
+    <value>Önceki yolu aç/kaydet iletişim kutusuna dön</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
     <value>Entropi(tahmini &amp;&amp; örnek)</value>
