@@ -612,7 +612,7 @@ Hata:
     <value>Kültür adı hatası</value>
   </data>
   <data name="strReadDataErrorNumber" xml:space="preserve">
-    <value>Geçersiz sayısal değer: {0} {0}</value>
+    <value>Geçersiz sayısal değer: {0}</value>
   </data>
   <data name="strReadDataErrorNumberTitle" xml:space="preserve">
     <value>Veri ayrıştırma hatası</value>
