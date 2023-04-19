@@ -466,7 +466,7 @@ Hata:
     <value>Akış kontrol hatası</value>
   </data>
   <data name="strMsgBoxErrorLoading" xml:space="preserve">
-    <value> FTD2XX yüklenmeye çalışılıyor.DLL kimden:</value>
+    <value>FTD2XX yüklenmeye çalışılıyor.DLL kimden:</value>
   </data>
   <data name="strMsgBoxErrorLoadingTitle" xml:space="preserve">
     <value>DLL yüklenirken hata oluştu</value>
