@@ -550,7 +550,7 @@ Hata:
     <value>Dur</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>"ErgoLux dosyası (*.elux)/*.elux/ Metin dosyası (*.txt)/*.txt / İkili dosya (*.bin)|*.bin / Tüm dosyalar (*.*)|*.*"</value>
+    <value>"ErgoLux dosyası (*.elux)|*.elux|Metin dosyası (*.txt)|*.txt|İkili dosya (*.bin)|*.bin|Tüm dosyalar (*.*)|*.*"</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Aydınlık verilerini aç</value>
@@ -621,7 +621,7 @@ Hata:
     <value>Veri açılırken hata oluştu</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
-    <value>"ErgoLux dosyası (*.elux)/*.elux/ Metin dosyası (*.txt)/*.txt / İkili dosya (*.bin)|*.bin / Tüm dosyalar (*.*)|*.*"</value>
+    <value>"ErgoLux dosyası (*.elux)|*.elux|Metin dosyası (*.txt)|*.txt|İkili dosya (*.bin)|*.bin |Tüm dosyalar (*.*)|*.*"</value>
   </data>
   <data name="strSaveDlgTitle" xml:space="preserve">
     <value>Kaydedilen aydınlık verisi</value>
