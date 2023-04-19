@@ -369,7 +369,7 @@ Bunun yerine varsayılan değerler kullanılacaktır..</value>
     <value>Seri seç</value>
   </data>
   <data name="strLblStart" xml:space="preserve">
-    <value>dizi başlangıç indeksi</value>
+    <value>Dizi başlangıç indeksi</value>
   </data>
   <data name="strLblStopBits" xml:space="preserve">
     <value>Bitiş biti</value>
