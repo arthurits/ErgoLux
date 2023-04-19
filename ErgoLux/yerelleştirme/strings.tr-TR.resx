@@ -137,7 +137,7 @@ Bu yazılımı yararlı bulursanız lütfen onu destekleyiniz!</value>
     <comment>Hakkında penceresinde görüntülenecek</comment>
   </data>
   <data name="strAboutVersion" xml:space="preserve">
-    <value>Version {0}</value>
+    <value>Sürüm {0}</value>
     <comment>Hakkında penceresinde görüntülenecek</comment>
   </data>
   <data name="strBtnAccept" xml:space="preserve">
@@ -255,7 +255,7 @@ Bunun yerine varsayılan değerler kullanılacaktır..</value>
     <value>Eksik sütun başlıkları (seri adları ).</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>günler, gün, günler</value>
+    <value>[0] günler, [1] gün, [2] günler...</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
     <value>saatler, saat, saatler</value>
@@ -270,7 +270,7 @@ Bunun yerine varsayılan değerler kullanılacaktır..</value>
     <value>ve</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>mili saniyeler, mili saniye, mili saniyeler</value>
+    <value>[0]milisaniyeler, [1]milisaniye, [0]milisaniyeler</value>
   </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
@@ -663,10 +663,10 @@ Hata:
     <value>Grafik oranları</value>
   </data>
   <data name="strStatusTipRaw" xml:space="preserve">
-    <value>Plot raw data</value>
+    <value>Bütün satırları çiz</value>
   </data>
   <data name="strStatusTipType" xml:space="preserve">
-    <value>Device type</value>
+    <value>Cihaz türü</value>
   </data>
   <data name="strStatusType" xml:space="preserve">
     <value>Araç türü</value>
