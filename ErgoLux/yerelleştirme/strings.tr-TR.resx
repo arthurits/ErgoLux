@@ -275,7 +275,7 @@ Bunun yerine varsayılan değerler kullanılacaktır..</value>
     <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
-    <value>'{0}'  bölümü yanlış biçimlendirilmiştir.</value>
+    <value>'{0}' bölümü yanlış biçimlendirilmiştir.</value>
   </data>
   <data name="strFormTitle" xml:space="preserve">
     <value>ErgoLux</value>
