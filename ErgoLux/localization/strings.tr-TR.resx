@@ -29,7 +29,7 @@
                 
     There are any number of "resheader" rows that contain simple 
     name/value pairs.
-   
+    
     Each data row contains a name, and value. The row also contains a 
     type or mimetype. Type corresponds to a .NET class that support 
     text/value conversion through the TypeConverter architecture. 
@@ -53,6 +53,7 @@
     value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
+
     mimetype: application/x-microsoft.net.object.bytearray.base64
     value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
@@ -118,11 +119,9 @@
   </resheader>
   <data name="strAboutCompanyName" xml:space="preserve">
     <value>Tarafından geliştirilmiştir {0}</value>
-    <comment>Hakkında penceresinde görüntülenecek</comment>
   </data>
   <data name="strAboutCopyright" xml:space="preserve">
     <value>Telif hakkı {0}</value>
-    <comment>Hakkında penceresinde görüntülenecek</comment>
   </data>
   <data name="strAboutDescription" xml:space="preserve">
     <value>Konica minolta'nın T-10A model aydınlık ölçer aracı için ergonomi ölçüm yazılımı.
@@ -130,15 +129,12 @@
 Hiçbir şekilde ticari kullanıma izin verilmez. Sorularınız için yazarla iletişime geçin.
 
 Bu yazılımı yararlı bulursanız lütfen onu destekleyiniz!</value>
-    <comment>Hakkında penceresinde görüntülenecek</comment>
   </data>
   <data name="strAboutProductName" xml:space="preserve">
     <value>Ürün Adı: {0}</value>
-    <comment>Hakkında penceresinde görüntülenecek</comment>
   </data>
   <data name="strAboutVersion" xml:space="preserve">
     <value>Sürüm {0}</value>
-    <comment>Hakkında penceresinde görüntülenecek</comment>
   </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Kabul</value>
@@ -186,16 +182,18 @@ Bu yazılımı yararlı bulursanız lütfen onu destekleyiniz!</value>
     <value>Güç (dB)</value>
   </data>
   <data name="strDlgReset" xml:space="preserve">
-    <value>Tüm alanları varsayılan değerlerine sıfırlamak ister misiniz?</value>
+    <value>Tüm alanları varsayılan değerlerine
+sıfırlamak ister misiniz?</value>
   </data>
   <data name="strDlgResetTitle" xml:space="preserve">
-    <value>Yenileme ayarlanıyor ?</value>
+    <value>Yenileme ayarlanıyor?</value>
   </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Ayarlar dosyası yüklenirken hata oluştu.
+
 {0}
 
-Bunun yerine varsayılan değerler kullanılacaktır..</value>
+Bunun yerine varsayılan değerler kullanılacaktır.</value>
   </data>
   <data name="strErrorDeserializeTitle" xml:space="preserve">
     <value>Hata</value>
@@ -234,13 +232,13 @@ Bunun yerine varsayılan değerler kullanılacaktır..</value>
     <value>En küçük</value>
   </data>
   <data name="strFileHeader12" xml:space="preserve">
-    <value>En küçük /Ortalama</value>
+    <value>En küçük/Ortalama</value>
   </data>
   <data name="strFileHeader13" xml:space="preserve">
-    <value>En küçük / En büyük</value>
+    <value>En küçük/En büyük</value>
   </data>
   <data name="strFileHeader14" xml:space="preserve">
-    <value>Ortalama/ En büyük</value>
+    <value>Ortalama/En büyük</value>
   </data>
   <data name="strFileHeader15" xml:space="preserve">
     <value>Ortalama</value>
@@ -249,13 +247,13 @@ Bunun yerine varsayılan değerler kullanılacaktır..</value>
     <value>Aydınlık</value>
   </data>
   <data name="strFileHeader17" xml:space="preserve">
-    <value>Eksik alanlar var</value>
+    <value>Eksik alanlar var.</value>
   </data>
   <data name="strFileHeader18" xml:space="preserve">
-    <value>Eksik sütun başlıkları (seri adları ).</value>
+    <value>Eksik sütun başlıkları (seri adları).</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>[0] günler, [1] gün, [2] günler...</value>
+    <value>günler, gün, günler</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
     <value>saatler, saat, saatler</value>
@@ -270,7 +268,7 @@ Bunun yerine varsayılan değerler kullanılacaktır..</value>
     <value>ve</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>[0]milisaniyeler, [1]milisaniye, [0]milisaniyeler</value>
+    <value>milisaniyeler, milisaniye, milisaniyeler</value>
   </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
@@ -446,13 +444,13 @@ Hata:
     <value>Bits hatası</value>
   </data>
   <data name="strMsgBoxErrorDeviceClosed" xml:space="preserve">
-    <value>Cihaz kapalı. Cihazı açmak için lütfen 'Ayarlar'a gidin..</value>
+    <value>Cihaz kapalı. Cihazı açmak için lütfen 'Ayarlar' a gidin.</value>
   </data>
   <data name="strMsgBoxErrorDeviceClosedTitle" xml:space="preserve">
     <value>Cihaz hatası</value>
   </data>
   <data name="strMsgBoxErrorDrivers" xml:space="preserve">
-    <value>FTD2XX.DLL yüklenemedi . FTDI sürücüleri yüklü mü??</value>
+    <value>FTD2XX.DLL yüklenemedi . FTDI sürücüleri yüklü mü?</value>
   </data>
   <data name="strMsgBoxErrorDriversTitle" xml:space="preserve">
     <value>Sürücüler yüklenirken hata oluştu</value>
@@ -491,7 +489,7 @@ Hata:
 {0}</value>
   </data>
   <data name="strMsgBoxErrorOpeningTitle" xml:space="preserve">
-    <value>Cihaz açılırken hata oluştu.</value>
+    <value>Cihaz açılırken hata oluştu</value>
   </data>
   <data name="strMsgBoxErrorSaveData" xml:space="preserve">
     <value>Verileri diske kaydederken beklenmeyen bir hata oluştu.
@@ -526,7 +524,7 @@ Hata:
     <value>Çıkış?</value>
   </data>
   <data name="strMsgBoxNoData" xml:space="preserve">
-    <value>Kaydedilebilecek veri yok..</value>
+    <value>Kaydedilebilecek veri yok.</value>
   </data>
   <data name="strMsgBoxNoDataTitle" xml:space="preserve">
     <value>Veri yok</value>
@@ -538,7 +536,7 @@ Hata:
     <value>Yenile?</value>
   </data>
   <data name="strMsgBoxSaveData" xml:space="preserve">
-    <value>Veri başarıyla diske kaydedildi..</value>
+    <value>Veri başarıyla diske kaydedildi.</value>
   </data>
   <data name="strMsgBoxSaveDataTitle" xml:space="preserve">
     <value>Veri kaydediliyor</value>
@@ -550,7 +548,7 @@ Hata:
     <value>Dur</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>"ErgoLux dosyası (*.elux)|*.elux|Metin dosyası (*.txt)|*.txt|İkili dosya (*.bin)|*.bin|Tüm dosyalar (*.*)|*.*"</value>
+    <value>ErgoLux dosyası (*.elux)|*.elux|Metin dosyası (*.txt)|*.txt|İkili dosya (*.bin)|*.bin|Tüm dosyalar (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Aydınlık verilerini aç</value>
@@ -559,7 +557,7 @@ Hata:
     <value>En büyük, ortalama, en küçük</value>
   </data>
   <data name="strPlotAverageXLabel" xml:space="preserve">
-    <value>Zaman (Saniye)</value>
+    <value>Zaman (saniye)</value>
   </data>
   <data name="strPlotAverageYLabel" xml:space="preserve">
     <value>Lux</value>
@@ -571,7 +569,7 @@ Hata:
     <value>Aydınlık oranları</value>
   </data>
   <data name="strPlotRatiosXLabel" xml:space="preserve">
-    <value>Zaman (Saniyeler)</value>
+    <value>Zaman (saniye)</value>
   </data>
   <data name="strPlotRatiosYLabel" xml:space="preserve">
     <value>Oran</value>
@@ -580,7 +578,7 @@ Hata:
     <value>Aydınlık</value>
   </data>
   <data name="strPlotRawXLabel" xml:space="preserve">
-    <value>Zaman (Saniye)</value>
+    <value>Zaman (saniye)</value>
   </data>
   <data name="strPlotRawYLabel" xml:space="preserve">
     <value>Lux</value>
@@ -621,7 +619,7 @@ Hata:
     <value>Veri açılırken hata oluştu</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
-    <value>"ErgoLux dosyası (*.elux)|*.elux|Metin dosyası (*.txt)|*.txt|İkili dosya (*.bin)|*.bin |Tüm dosyalar (*.*)|*.*"</value>
+    <value>ErgoLux dosyası (*.elux)|*.elux|Metin dosyası (*.txt)|*.txt|İkili dosya (*.bin)|*.bin |Tüm dosyalar (*.*)|*.*</value>
   </data>
   <data name="strSaveDlgTitle" xml:space="preserve">
     <value>Kaydedilen aydınlık verisi</value>
@@ -651,7 +649,7 @@ Hata:
     <value>Araç ID</value>
   </data>
   <data name="strStatusTipLocation" xml:space="preserve">
-    <value>T-10A Lokasyon ID</value>
+    <value>T-10A lokasyon ID</value>
   </data>
   <data name="strStatusTipMax" xml:space="preserve">
     <value>En büyük,ortalama,en küçük Çizim</value>
@@ -723,6 +721,6 @@ Hata:
     <value>Grafik, veri ve UI için ayarlar</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
-    <value>Kullanıcı dil arayüzü </value>
+    <value>Kullanıcı dil arayüzü</value>
   </data>
 </root>
