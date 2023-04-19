@@ -167,7 +167,7 @@ Bu yazılımı yararlı bulursanız lütfen onu destekleyiniz!</value>
     <value>Önceki yolu aç / kaydet iletişim kutusuna dön</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>Entropi(tahmini&& örnek)</value>
+    <value>Entropi(tahmini &amp;&amp; örnek)</value>
   </data>
   <data name="strChkPlotAverage" xml:space="preserve">
     <value>Grafik ortalaması</value>
