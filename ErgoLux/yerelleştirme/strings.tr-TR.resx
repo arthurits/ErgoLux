@@ -506,8 +506,7 @@ Lütfen daha sonra tekrar deneyin veya yazılım mühendisiyle iletişime geçin
 
 {0}
 
-
-Bunun yerine varsayılan değerler kullanılacaktır..</value>
+Bunun yerine varsayılan değerler kullanılacaktır.</value>
   </data>
   <data name="strMsgBoxErrorSettingsTitle" xml:space="preserve">
     <value>Hata</value>
