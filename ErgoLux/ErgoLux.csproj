@@ -19,7 +19,7 @@ If you find this software useful, please consider supporting it!</Description>
     <RepositoryUrl>https://github.com/arthurits/ErgoLux</RepositoryUrl>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>1.4</Version>
+    <Version>1.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
