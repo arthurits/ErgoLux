@@ -1,5 +1,6 @@
 ﻿using FTD2XX_NET;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace ErgoLux;
 
@@ -318,6 +319,11 @@ public partial class FrmSettings : Form
 
     private void Cancel_Click(object sender, EventArgs e)
     {
+        if (Settings is not null)
+            StringResources.Culture = Settings.AppCulture;
+        else
+            StringResources.Culture = CultureInfo.InvariantCulture;
+
         DialogResult = DialogResult.Cancel;
     }
 
