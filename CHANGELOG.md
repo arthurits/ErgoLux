@@ -1,7 +1,7 @@
 # ErgoLux changelog
 
 ## ErgoLux 1.5
-* Add Turkish (tr-TR) translation. _Thanks barisceliker1_.
+* Add Turkish (tr-TR) translation. _Thanks @barisceliker1_.
 * [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.63.
 * Improve controls placement in Settings for all available languages.
 * Fix code when closing the application.
