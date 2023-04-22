@@ -548,7 +548,7 @@ namespace ErgoLux
             // 
             lblDlgPath.AutoSize = true;
             lblDlgPath.Location = new Point(45, 210);
-            lblDlgPath.MaximumSize = new Size(350, 0);
+            lblDlgPath.MaximumSize = new Size(395, 0);
             lblDlgPath.Name = "lblDlgPath";
             lblDlgPath.Size = new Size(292, 19);
             lblDlgPath.TabIndex = 2;
@@ -558,14 +558,14 @@ namespace ErgoLux
             // 
             txtDataFormat.Location = new Point(259, 254);
             txtDataFormat.Name = "txtDataFormat";
-            txtDataFormat.Size = new Size(100, 25);
+            txtDataFormat.Size = new Size(95, 25);
             txtDataFormat.TabIndex = 4;
             // 
             // lblDataFormat
             // 
             lblDataFormat.AutoSize = true;
             lblDataFormat.Location = new Point(26, 257);
-            lblDataFormat.MaximumSize = new Size(230, 0);
+            lblDataFormat.MaximumSize = new Size(310, 0);
             lblDataFormat.Name = "lblDataFormat";
             lblDataFormat.Size = new Size(177, 19);
             lblDataFormat.TabIndex = 3;
@@ -588,7 +588,7 @@ namespace ErgoLux
             grpCulture.Controls.Add(radCurrentCulture);
             grpCulture.Location = new Point(29, 24);
             grpCulture.Name = "grpCulture";
-            grpCulture.Size = new Size(364, 171);
+            grpCulture.Size = new Size(410, 171);
             grpCulture.TabIndex = 0;
             grpCulture.TabStop = false;
             grpCulture.Text = "Culture settings";
