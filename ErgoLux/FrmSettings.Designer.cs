@@ -97,7 +97,7 @@ namespace ErgoLux
             updSensors.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             updSensors.Name = "updSensors";
             updSensors.Size = new Size(52, 25);
-            updSensors.TabIndex = 9;
+            updSensors.TabIndex = 4;
             updSensors.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // lblSensors
@@ -193,7 +193,7 @@ namespace ErgoLux
             txtHz.Location = new Point(369, 153);
             txtHz.Name = "txtHz";
             txtHz.Size = new Size(32, 25);
-            txtHz.TabIndex = 11;
+            txtHz.TabIndex = 5;
             // 
             // lblOff
             // 
@@ -221,7 +221,7 @@ namespace ErgoLux
             txtOff.Location = new Point(409, 261);
             txtOff.Name = "txtOff";
             txtOff.Size = new Size(40, 25);
-            txtOff.TabIndex = 19;
+            txtOff.TabIndex = 9;
             // 
             // txtOn
             // 
@@ -229,7 +229,7 @@ namespace ErgoLux
             txtOn.Location = new Point(330, 261);
             txtOn.Name = "txtOn";
             txtOn.Size = new Size(40, 25);
-            txtOn.TabIndex = 17;
+            txtOn.TabIndex = 8;
             // 
             // lblParity
             // 
@@ -258,7 +258,7 @@ namespace ErgoLux
             cboFlowControl.Location = new Point(369, 225);
             cboFlowControl.Name = "cboFlowControl";
             cboFlowControl.Size = new Size(80, 25);
-            cboFlowControl.TabIndex = 15;
+            cboFlowControl.TabIndex = 7;
             cboFlowControl.SelectedIndexChanged += cboFlowControl_SelectedIndexChanged;
             // 
             // cboParity
@@ -268,7 +268,7 @@ namespace ErgoLux
             cboParity.Location = new Point(150, 225);
             cboParity.Name = "cboParity";
             cboParity.Size = new Size(65, 25);
-            cboParity.TabIndex = 7;
+            cboParity.TabIndex = 3;
             // 
             // lblBaudRate
             // 
@@ -308,7 +308,7 @@ namespace ErgoLux
             txtBaudRate.Name = "txtBaudRate";
             txtBaudRate.ShortcutsEnabled = false;
             txtBaudRate.Size = new Size(65, 25);
-            txtBaudRate.TabIndex = 3;
+            txtBaudRate.TabIndex = 1;
             // 
             // cboStopBits
             // 
@@ -317,7 +317,7 @@ namespace ErgoLux
             cboStopBits.Location = new Point(369, 189);
             cboStopBits.Name = "cboStopBits";
             cboStopBits.Size = new Size(80, 25);
-            cboStopBits.TabIndex = 13;
+            cboStopBits.TabIndex = 6;
             // 
             // cboDataBits
             // 
@@ -326,7 +326,7 @@ namespace ErgoLux
             cboDataBits.Location = new Point(150, 189);
             cboDataBits.Name = "cboDataBits";
             cboDataBits.Size = new Size(65, 25);
-            cboDataBits.TabIndex = 5;
+            cboDataBits.TabIndex = 2;
             // 
             // lblDevices
             // 
@@ -348,7 +348,7 @@ namespace ErgoLux
             viewDevices.Name = "viewDevices";
             viewDevices.ShowGroups = false;
             viewDevices.Size = new Size(449, 107);
-            viewDevices.TabIndex = 1;
+            viewDevices.TabIndex = 0;
             viewDevices.UseCompatibleStateImageBehavior = false;
             viewDevices.View = View.Details;
             // 
@@ -382,7 +382,7 @@ namespace ErgoLux
             lblChkShowRatio.MaximumSize = new Size(180, 0);
             lblChkShowRatio.Name = "lblChkShowRatio";
             lblChkShowRatio.Size = new Size(71, 19);
-            lblChkShowRatio.TabIndex = 7;
+            lblChkShowRatio.TabIndex = 3;
             lblChkShowRatio.Text = "Plot ratios";
             lblChkShowRatio.Click += Label_Click;
             // 
@@ -393,7 +393,7 @@ namespace ErgoLux
             lblChkShowDistribution.MaximumSize = new Size(180, 0);
             lblChkShowDistribution.Name = "lblChkShowDistribution";
             lblChkShowDistribution.Size = new Size(107, 19);
-            lblChkShowDistribution.TabIndex = 3;
+            lblChkShowDistribution.TabIndex = 1;
             lblChkShowDistribution.Text = "Plot distribution";
             lblChkShowDistribution.Click += Label_Click;
             // 
@@ -404,7 +404,7 @@ namespace ErgoLux
             lblChkShowAverage.MaximumSize = new Size(155, 0);
             lblChkShowAverage.Name = "lblChkShowAverage";
             lblChkShowAverage.Size = new Size(85, 19);
-            lblChkShowAverage.TabIndex = 5;
+            lblChkShowAverage.TabIndex = 2;
             lblChkShowAverage.Text = "Plot average";
             lblChkShowAverage.Click += Label_Click;
             // 
@@ -415,7 +415,7 @@ namespace ErgoLux
             lblChkShowRaw.MaximumSize = new Size(155, 0);
             lblChkShowRaw.Name = "lblChkShowRaw";
             lblChkShowRaw.Size = new Size(90, 19);
-            lblChkShowRaw.TabIndex = 1;
+            lblChkShowRaw.TabIndex = 0;
             lblChkShowRaw.Text = "Plot raw data";
             lblChkShowRaw.Click += Label_Click;
             // 
@@ -426,7 +426,7 @@ namespace ErgoLux
             chkShowDistribution.Location = new Point(220, 30);
             chkShowDistribution.Name = "chkShowDistribution";
             chkShowDistribution.Size = new Size(15, 14);
-            chkShowDistribution.TabIndex = 2;
+            chkShowDistribution.TabIndex = 1;
             chkShowDistribution.UseVisualStyleBackColor = true;
             chkShowDistribution.CheckedChanged += chkShowDistribution_CheckedChanged;
             // 
@@ -437,7 +437,7 @@ namespace ErgoLux
             grpPlot.Location = new Point(81, 104);
             grpPlot.Name = "grpPlot";
             grpPlot.Size = new Size(187, 98);
-            grpPlot.TabIndex = 8;
+            grpPlot.TabIndex = 4;
             grpPlot.TabStop = false;
             grpPlot.Text = "Plot distribution";
             // 
@@ -469,7 +469,7 @@ namespace ErgoLux
             txtPlotWindow.Location = new Point(229, 251);
             txtPlotWindow.Name = "txtPlotWindow";
             txtPlotWindow.Size = new Size(85, 25);
-            txtPlotWindow.TabIndex = 12;
+            txtPlotWindow.TabIndex = 6;
             // 
             // txtArrayPoints
             // 
@@ -477,7 +477,7 @@ namespace ErgoLux
             txtArrayPoints.Location = new Point(229, 220);
             txtArrayPoints.Name = "txtArrayPoints";
             txtArrayPoints.Size = new Size(85, 25);
-            txtArrayPoints.TabIndex = 10;
+            txtArrayPoints.TabIndex = 5;
             // 
             // lblPlotWindow
             // 
@@ -506,7 +506,7 @@ namespace ErgoLux
             chkShowRatio.Location = new Point(220, 70);
             chkShowRatio.Name = "chkShowRatio";
             chkShowRatio.Size = new Size(15, 14);
-            chkShowRatio.TabIndex = 6;
+            chkShowRatio.TabIndex = 3;
             chkShowRatio.UseVisualStyleBackColor = true;
             // 
             // chkShowAverage
@@ -516,7 +516,7 @@ namespace ErgoLux
             chkShowAverage.Location = new Point(27, 70);
             chkShowAverage.Name = "chkShowAverage";
             chkShowAverage.Size = new Size(15, 14);
-            chkShowAverage.TabIndex = 4;
+            chkShowAverage.TabIndex = 2;
             chkShowAverage.UseVisualStyleBackColor = true;
             // 
             // chkShowRaw
@@ -559,7 +559,7 @@ namespace ErgoLux
             txtDataFormat.Location = new Point(259, 254);
             txtDataFormat.Name = "txtDataFormat";
             txtDataFormat.Size = new Size(95, 25);
-            txtDataFormat.TabIndex = 4;
+            txtDataFormat.TabIndex = 3;
             // 
             // lblDataFormat
             // 
@@ -568,7 +568,7 @@ namespace ErgoLux
             lblDataFormat.MaximumSize = new Size(310, 0);
             lblDataFormat.Name = "lblDataFormat";
             lblDataFormat.Size = new Size(177, 19);
-            lblDataFormat.TabIndex = 3;
+            lblDataFormat.TabIndex = 2;
             lblDataFormat.Text = "Numeric data-format string";
             // 
             // chkDlgPath

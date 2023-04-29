@@ -75,7 +75,7 @@ public partial class FrmLanguage : Form
         {
             _culture = System.Globalization.CultureInfo.InvariantCulture;
             UpdateUI_Language();
-            
+
             int index = cboAllCultures.SelectedIndex;
             FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
             cboAllCultures.SelectedIndex = index;
@@ -137,7 +137,7 @@ public partial class FrmLanguage : Form
         // Retrieve the culture list using the culture currently selected. The UI culture needs to be temporarily changed
         CultureInfo.CurrentUICulture = new CultureInfo(cultureName);
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
-        
+
         cboAllCultures.DisplayMember = "DisplayName";
         cboAllCultures.ValueMember = "Name";
         cboAllCultures.DataSource = cultures.ToArray();

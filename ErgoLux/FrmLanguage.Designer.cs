@@ -114,7 +114,7 @@
             lblCurrentCulture.MaximumSize = new Size(275, 0);
             lblCurrentCulture.Name = "lblCurrentCulture";
             lblCurrentCulture.Size = new Size(102, 19);
-            lblCurrentCulture.TabIndex = 6;
+            lblCurrentCulture.TabIndex = 4;
             lblCurrentCulture.Text = "Current culture";
             lblCurrentCulture.Click += LabelCulture_Click;
             // 
@@ -125,7 +125,7 @@
             lblInvariantCulture.MaximumSize = new Size(275, 0);
             lblInvariantCulture.Name = "lblInvariantCulture";
             lblInvariantCulture.Size = new Size(109, 19);
-            lblInvariantCulture.TabIndex = 7;
+            lblInvariantCulture.TabIndex = 5;
             lblInvariantCulture.Text = "Invariant culture";
             lblInvariantCulture.Click += LabelCulture_Click;
             // 
@@ -136,7 +136,7 @@
             lblUserCulture.MaximumSize = new Size(275, 0);
             lblUserCulture.Name = "lblUserCulture";
             lblUserCulture.Size = new Size(90, 19);
-            lblUserCulture.TabIndex = 8;
+            lblUserCulture.TabIndex = 6;
             lblUserCulture.Text = "Select culture";
             lblUserCulture.Click += LabelCulture_Click;
             // 

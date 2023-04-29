@@ -116,7 +116,7 @@ namespace ErgoLux
             mnuMainFrm.Location = new Point(0, 0);
             mnuMainFrm.Name = "mnuMainFrm";
             mnuMainFrm.Size = new Size(934, 24);
-            mnuMainFrm.TabIndex = 5;
+            mnuMainFrm.TabIndex = 0;
             mnuMainFrm.Text = "menuStrip1";
             // 
             // mnuMainFrm_File
@@ -271,7 +271,7 @@ namespace ErgoLux
             statusStrip.RenderMode = ToolStripRenderMode.Professional;
             statusStrip.ShowItemToolTips = true;
             statusStrip.Size = new Size(934, 28);
-            statusStrip.TabIndex = 1;
+            statusStrip.TabIndex = 3;
             statusStrip.Text = "statusStrip1";
             // 
             // statusStripLabelType
@@ -443,7 +443,7 @@ namespace ErgoLux
             toolStripMain.Name = "toolStripMain";
             toolStripMain.RenderMode = ToolStripRenderMode.Professional;
             toolStripMain.Size = new Size(934, 72);
-            toolStripMain.TabIndex = 2;
+            toolStripMain.TabIndex = 1;
             toolStripMain.Text = "Main toolbar";
             // 
             // toolStripMain_Exit
@@ -545,7 +545,7 @@ namespace ErgoLux
             plotData.ShowCrossHair = false;
             plotData.ShowCrossHairHorizontal = false;
             plotData.ShowCrossHairVertical = false;
-            plotData.Size = new Size(387, 243);
+            plotData.Size = new Size(381, 243);
             plotData.SnapToPoint = false;
             plotData.TabIndex = 0;
             // 
@@ -554,10 +554,10 @@ namespace ErgoLux
             plotDistribution.BackColor = Color.Transparent;
             plotDistribution.CultureUI = new System.Globalization.CultureInfo("es-ES");
             plotDistribution.Dock = DockStyle.Fill;
-            plotDistribution.Location = new Point(537, 0);
+            plotDistribution.Location = new Point(531, 0);
             plotDistribution.Margin = new Padding(0);
             plotDistribution.Name = "plotDistribution";
-            plotDistribution.Size = new Size(388, 243);
+            plotDistribution.Size = new Size(382, 243);
             plotDistribution.TabIndex = 1;
             // 
             // layoutGlobal
@@ -581,12 +581,12 @@ namespace ErgoLux
             layoutGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             layoutGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             layoutGlobal.Size = new Size(913, 487);
-            layoutGlobal.TabIndex = 7;
+            layoutGlobal.TabIndex = 2;
             // 
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Location = new Point(387, 0);
+            pictureBox1.Location = new Point(381, 0);
             pictureBox1.Margin = new Padding(0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(150, 243);
@@ -606,9 +606,9 @@ namespace ErgoLux
             plotStats.ShowCrossHair = false;
             plotStats.ShowCrossHairHorizontal = false;
             plotStats.ShowCrossHairVertical = false;
-            plotStats.Size = new Size(379, 238);
+            plotStats.Size = new Size(373, 238);
             plotStats.SnapToPoint = false;
-            plotStats.TabIndex = 4;
+            plotStats.TabIndex = 2;
             // 
             // plotRatio
             // 
@@ -616,20 +616,20 @@ namespace ErgoLux
             plotRatio.CrossHairColor = Color.Red;
             plotRatio.CultureUI = new System.Globalization.CultureInfo("en-US");
             plotRatio.Dock = DockStyle.Fill;
-            plotRatio.Location = new Point(541, 246);
+            plotRatio.Location = new Point(535, 246);
             plotRatio.Margin = new Padding(4, 3, 4, 3);
             plotRatio.Name = "plotRatio";
             plotRatio.ShowCrossHair = false;
             plotRatio.ShowCrossHairHorizontal = false;
             plotRatio.ShowCrossHairVertical = false;
-            plotRatio.Size = new Size(380, 238);
+            plotRatio.Size = new Size(374, 238);
             plotRatio.SnapToPoint = false;
-            plotRatio.TabIndex = 5;
+            plotRatio.TabIndex = 3;
             // 
             // pictureBox2
             // 
             pictureBox2.Dock = DockStyle.Fill;
-            pictureBox2.Location = new Point(387, 243);
+            pictureBox2.Location = new Point(381, 243);
             pictureBox2.Margin = new Padding(0);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(150, 244);
