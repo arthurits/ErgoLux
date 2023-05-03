@@ -271,6 +271,7 @@ namespace ErgoLux
             statusStrip.RenderMode = ToolStripRenderMode.Professional;
             statusStrip.ShowItemToolTips = true;
             statusStrip.Size = new Size(934, 28);
+            statusStrip.SizingGrip = false;
             statusStrip.TabIndex = 3;
             statusStrip.Text = "statusStrip1";
             // 
@@ -333,7 +334,7 @@ namespace ErgoLux
             statusStripLabelXtras.BorderSides = ToolStripStatusLabelBorderSides.Right;
             statusStripLabelXtras.DisplayStyle = ToolStripItemDisplayStyle.Text;
             statusStripLabelXtras.Name = "statusStripLabelXtras";
-            statusStripLabelXtras.Size = new Size(134, 23);
+            statusStripLabelXtras.Size = new Size(103, 23);
             statusStripLabelXtras.Spring = true;
             statusStripLabelXtras.TextAlign = ContentAlignment.MiddleLeft;
             // 
