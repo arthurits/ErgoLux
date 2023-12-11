@@ -31,6 +31,7 @@ public static class StringResources
     public static string ChkPlotRatios => StringRM.GetString("strChkPlotRatios", Culture) ?? "Plot ratios";
     public static string ChkPlotRaw => StringRM.GetString("strChkPlotRaw", Culture) ?? "Plot raw data";
     public static string ChkPower => StringRM.GetString("strChkPower", Culture) ?? "Power (dB)";
+    public static string ChkWindowPos => StringRM.GetString("strChkWindowPos", Culture) ?? "Remember window position and size on startup";
     public static string ErrorDeserialize => StringRM.GetString("strErrorDeserialize", Culture) ?? "Error loading settings file." + Environment.NewLine + Environment.NewLine + "{0}" + Environment.NewLine + Environment.NewLine + "Default values will be used instead.";
     public static string ErrorDeserializeTitle => StringRM.GetString("strErrorDeserializeTitle", Culture) ?? "Error";
     public static string FileHeader01 => StringRM.GetString("strFileHeader01", Culture) ?? "ErgoLux data";
