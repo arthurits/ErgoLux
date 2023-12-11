@@ -272,6 +272,7 @@ public partial class FrmSettings : Form
         Settings.Plot_DistIsRadar = radRadar.Checked;
 
         Settings.AppCulture = _culture;
+        Settings.WindowPosition = chkWindowPos.Checked;
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;
 
@@ -439,6 +440,7 @@ public partial class FrmSettings : Form
             radUserCulture.Checked = true;
         }
 
+        chkWindowPos.Checked = settings.WindowPosition;
         chkDlgPath.Checked = settings.RememberFileDialogPath;
         txtDataFormat.Text = settings.DataFormat;
     }
@@ -529,6 +531,7 @@ public partial class FrmSettings : Form
         this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
         this.radInvariantCulture.Text = StringResources.RadInvariantCulture;
         this.radUserCulture.Text = StringResources.RadUserCulture;
+        this.chkWindowPos.Text = StringResources.ChkWindowPos;
         //this.chkDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDataFormat.Text = StringResources.LblDataFormat;
