@@ -245,6 +245,15 @@ namespace ErgoLux.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remember window position and size on startup.
+        /// </summary>
+        internal static string strChkWindowPos {
+            get {
+                return ResourceManager.GetString("strChkWindowPos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to reset all fields
         ///to their default values?.
         /// </summary>

@@ -272,6 +272,7 @@ public partial class FrmSettings : Form
         Settings.Plot_DistIsRadar = radRadar.Checked;
 
         Settings.AppCulture = _culture;
+        Settings.WindowPosition = chkWindowPos.Checked;
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;
 
@@ -439,6 +440,7 @@ public partial class FrmSettings : Form
             radUserCulture.Checked = true;
         }
 
+        chkWindowPos.Checked = settings.WindowPosition;
         chkDlgPath.Checked = settings.RememberFileDialogPath;
         txtDataFormat.Text = settings.DataFormat;
     }
@@ -529,6 +531,7 @@ public partial class FrmSettings : Form
         this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
         this.radInvariantCulture.Text = StringResources.RadInvariantCulture;
         this.radUserCulture.Text = StringResources.RadUserCulture;
+        this.chkWindowPos.Text = StringResources.ChkWindowPos;
         //this.chkDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDataFormat.Text = StringResources.LblDataFormat;
@@ -542,6 +545,8 @@ public partial class FrmSettings : Form
     /// </summary>
     private void RelocateControls()
     {
+        this.SuspendLayout();
+
         // Tab T-10A
         int nBaud = this.lblBaudRate.Left + this.lblBaudRate.Width + this.txtBaudRate.Width;
         int nData = this.lblDataBits.Left + this.lblDataBits.Width + this.cboDataBits.Width;
@@ -577,10 +582,13 @@ public partial class FrmSettings : Form
         this.txtPlotWindow.Left = this.lblPlotWindow.Left + width;
 
         // Tab Interface
+        this.cboAllCultures.Width = Math.Min(190, grpCulture.Width - 2 * this.radUserCulture.Left - 5 - this.radUserCulture.Width);
+        this.cboAllCultures.Left = 5 + this.radUserCulture.Left + this.radUserCulture.Width;
         this.chkDlgPath.Top = 1 + this.lblDlgPath.Top + (lblDlgPath.Height - chkDlgPath.Height) / 2;
-
         this.txtDataFormat.Left = 5 + this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
+
+        this.ResumeLayout(false);
     }
 
 }

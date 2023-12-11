@@ -70,6 +70,7 @@ namespace ErgoLux
             chkShowAverage = new CheckBox();
             chkShowRaw = new CheckBox();
             tabGUI = new TabPage();
+            chkWindowPos = new CheckBox();
             lblDlgPath = new Label();
             txtDataFormat = new TextBox();
             lblDataFormat = new Label();
@@ -531,6 +532,7 @@ namespace ErgoLux
             // 
             // tabGUI
             // 
+            tabGUI.Controls.Add(chkWindowPos);
             tabGUI.Controls.Add(lblDlgPath);
             tabGUI.Controls.Add(txtDataFormat);
             tabGUI.Controls.Add(lblDataFormat);
@@ -543,6 +545,17 @@ namespace ErgoLux
             tabGUI.TabIndex = 2;
             tabGUI.Text = "Interface";
             tabGUI.UseVisualStyleBackColor = true;
+            // 
+            // chkWindowPos
+            // 
+            chkWindowPos.AutoSize = true;
+            chkWindowPos.Location = new Point(29, 178);
+            chkWindowPos.MaximumSize = new Size(415, 0);
+            chkWindowPos.Name = "chkWindowPos";
+            chkWindowPos.Size = new Size(319, 23);
+            chkWindowPos.TabIndex = 4;
+            chkWindowPos.Text = "Remember window size and position on startup";
+            chkWindowPos.UseVisualStyleBackColor = true;
             // 
             // lblDlgPath
             // 
@@ -588,7 +601,7 @@ namespace ErgoLux
             grpCulture.Controls.Add(radCurrentCulture);
             grpCulture.Location = new Point(29, 24);
             grpCulture.Name = "grpCulture";
-            grpCulture.Size = new Size(410, 171);
+            grpCulture.Size = new Size(410, 144);
             grpCulture.TabIndex = 0;
             grpCulture.TabStop = false;
             grpCulture.Text = "Culture settings";
@@ -596,7 +609,7 @@ namespace ErgoLux
             // cboAllCultures
             // 
             cboAllCultures.FormattingEnabled = true;
-            cboAllCultures.Location = new Point(71, 135);
+            cboAllCultures.Location = new Point(150, 101);
             cboAllCultures.Name = "cboAllCultures";
             cboAllCultures.Size = new Size(190, 25);
             cboAllCultures.TabIndex = 3;
@@ -734,5 +747,6 @@ namespace ErgoLux
         private Label lblChkShowDistribution;
         private Label lblChkShowAverage;
         private Label lblChkShowRaw;
+        private CheckBox chkWindowPos;
     }
 }

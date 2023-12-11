@@ -186,6 +186,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>प्रताप(डेसिबेल)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>स्टार्टअपवर विंडोची स्थिती आणि आकार लक्षात ठेवा</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>तुम्हाला सर्व फील्ड रीसेट करायचे आहेत
 त्यांच्या डीफॉल्ट मूल्यांवर?</value>

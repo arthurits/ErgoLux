@@ -181,6 +181,9 @@ Ha hasznosnak találja ezt a programot, kérjük fontolja meg a támogatást!</v
   <data name="strChkPower" xml:space="preserve">
     <value>Teljesítmény (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Emlékezzen az ablak helyzetére és méretére indításkor</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Szeretnél minden mezőt visszaállítani
 az alapértelmezett értékeikre?</value>

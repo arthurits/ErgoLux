@@ -181,6 +181,9 @@ Wenn Sie diese Software nützlich finden, erwägen Sie bitte, sie zu unterstütz
   <data name="strChkPower" xml:space="preserve">
     <value>Strom (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Denken Sie beim Start an die Position und Größe des Fensters</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Möchten Sie alle Felder
 auf ihre Standardwerte zurücksetzen?</value>

@@ -181,6 +181,9 @@ Si la presente esta aplicación le resulta útil y práctica, por favor consider
   <data name="strChkPower" xml:space="preserve">
     <value>Espectro (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Recordar el tamaño y la ubicación al inicio</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>¿Está seguro de que desea restablecer todos
 los campos a sus valores por defecto?</value>

@@ -201,6 +201,9 @@
     <value>Мощность (dB)</value>
     <comment />
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Запоминать положение и размер окна при запуске</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Вы хотите вернуть все поля к исходным значениям ?</value>
     <comment />

@@ -162,6 +162,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>Puissance (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Mémoriser la position et la taille de la fenêtre au démarrage</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Voulez-vous réinitialiser tous les champs à leurs valeurs par défaut?</value>
   </data>
