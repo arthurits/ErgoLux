@@ -70,10 +70,10 @@ namespace ErgoLux
             chkShowAverage = new CheckBox();
             chkShowRaw = new CheckBox();
             tabGUI = new TabPage();
+            chkWindowPos = new CheckBox();
             lblDlgPath = new Label();
             txtDataFormat = new TextBox();
             lblDataFormat = new Label();
-            chkWindowPos = new CheckBox();
             chkDlgPath = new CheckBox();
             grpCulture = new GroupBox();
             cboAllCultures = new ComboBox();
@@ -549,7 +549,8 @@ namespace ErgoLux
             // chkWindowPos
             // 
             chkWindowPos.AutoSize = true;
-            chkWindowPos.Location = new Point(23, 154);
+            chkWindowPos.Location = new Point(29, 178);
+            chkWindowPos.MaximumSize = new Size(395, 0);
             chkWindowPos.Name = "chkWindowPos";
             chkWindowPos.Size = new Size(319, 23);
             chkWindowPos.TabIndex = 4;
@@ -600,7 +601,7 @@ namespace ErgoLux
             grpCulture.Controls.Add(radCurrentCulture);
             grpCulture.Location = new Point(29, 24);
             grpCulture.Name = "grpCulture";
-            grpCulture.Size = new Size(410, 171);
+            grpCulture.Size = new Size(410, 144);
             grpCulture.TabIndex = 0;
             grpCulture.TabStop = false;
             grpCulture.Text = "Culture settings";
@@ -608,7 +609,7 @@ namespace ErgoLux
             // cboAllCultures
             // 
             cboAllCultures.FormattingEnabled = true;
-            cboAllCultures.Location = new Point(71, 135);
+            cboAllCultures.Location = new Point(193, 102);
             cboAllCultures.Name = "cboAllCultures";
             cboAllCultures.Size = new Size(190, 25);
             cboAllCultures.TabIndex = 3;
