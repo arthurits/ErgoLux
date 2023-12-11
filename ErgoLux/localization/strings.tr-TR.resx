@@ -181,6 +181,9 @@ Bu yazılımı yararlı bulursanız lütfen onu destekleyiniz!</value>
   <data name="strChkPower" xml:space="preserve">
     <value>Güç (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Başlangıçta pencere konumunu ve boyutunu hatırla</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Tüm alanları varsayılan değerlerine
 sıfırlamak ister misiniz?</value>

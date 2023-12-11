@@ -150,6 +150,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>Výkon (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Zapamätajte si polohu a veľkosť okna pri spustení</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Chcete obnoviť všetky polia na ich predvolené hodnoty?</value>
   </data>

@@ -169,6 +169,9 @@ Pokud považujete tento software za užitečný, zvažte jeho podporu!</value>
   <data name="strChkPower" xml:space="preserve">
     <value>Výkon (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Pamatujte si polohu a velikost okna při spuštění</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Chcete obnovit všechna pole na jejich výchozí hodnoty?</value>
   </data>

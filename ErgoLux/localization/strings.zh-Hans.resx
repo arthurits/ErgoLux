@@ -181,6 +181,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>功率（dB）</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>启动时记住窗口位置和大小</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>您想将所有字段重置为默认值吗？</value>
   </data>

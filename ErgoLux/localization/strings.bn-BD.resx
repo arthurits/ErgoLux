@@ -169,6 +169,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>শক্তি (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>স্টার্টআপে উইন্ডোর অবস্থান এবং আকার মনে রাখবেন</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>আপনি কি সমস্ত ক্ষেত্রকে তাদের ডিফল্ট মানগুলিতে
 পুনরায় সেট করতে চান?</value>
