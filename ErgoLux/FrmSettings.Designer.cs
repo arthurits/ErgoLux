@@ -550,7 +550,7 @@ namespace ErgoLux
             // 
             chkWindowPos.AutoSize = true;
             chkWindowPos.Location = new Point(29, 178);
-            chkWindowPos.MaximumSize = new Size(395, 0);
+            chkWindowPos.MaximumSize = new Size(415, 0);
             chkWindowPos.Name = "chkWindowPos";
             chkWindowPos.Size = new Size(319, 23);
             chkWindowPos.TabIndex = 4;
@@ -609,7 +609,7 @@ namespace ErgoLux
             // cboAllCultures
             // 
             cboAllCultures.FormattingEnabled = true;
-            cboAllCultures.Location = new Point(193, 102);
+            cboAllCultures.Location = new Point(150, 101);
             cboAllCultures.Name = "cboAllCultures";
             cboAllCultures.Size = new Size(190, 25);
             cboAllCultures.TabIndex = 3;
