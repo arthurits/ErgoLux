@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace ErgoLux;
+﻿namespace ErgoLux;
 
 partial class FrmMain
 {

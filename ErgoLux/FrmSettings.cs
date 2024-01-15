@@ -1,6 +1,5 @@
 ﻿using FTD2XX_NET;
 using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace ErgoLux;
 
