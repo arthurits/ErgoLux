@@ -1,6 +1,4 @@
 ﻿using FTD2XX_NET;
-using ScottPlot;
-using System.Globalization;
 
 namespace ErgoLux;
 
