@@ -212,7 +212,7 @@ partial class FrmMain
     private void Settings_Click(object sender, EventArgs e)
     {
         FTDI.FT_STATUS result = FTDI.FT_STATUS.FT_DEVICE_NOT_OPENED;
-        ClassSettings _oldSettings = new(_settings);
+        AppSettings _oldSettings = new(_settings);
         bool ModifyArrays = false;
         bool ModifyDevice = false;
         bool ModifyPlots = false;

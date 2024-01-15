@@ -5,41 +5,38 @@ namespace ErgoLux;
 partial class FrmMain
 {
     /// <summary>
-    /// Loads all settings from file _settings.FileName into class instance _settings
+    /// Loads all settings from file _settings.FileName into instance <see cref="AppSettings">_settings</see>.
     /// Shows MessageBox error if unsuccessful
     /// </summary>
-    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool LoadProgramSettingsJSON()
+    private void LoadAppSettingsJSON()
     {
-        bool result = false;
         try
         {
             var jsonString = File.ReadAllText(_settings.SettingsFileName);
-            _settings = JsonSerializer.Deserialize<ClassSettings>(jsonString) ?? _settings;
-            //_settings.LoadGraphicResources();
-            result = true;
+            _settings = JsonSerializer.Deserialize<AppSettings>(jsonString) ?? _settings;
+            //SetWindowPos(_settings.WindowPosition);
         }
         catch (FileNotFoundException)
         {
+            _settingsFileExist = false;
         }
         catch (Exception ex)
         {
             using (new CenterWinDialog(this))
             {
                 MessageBox.Show(this,
-                    StringResources.MsgBoxErrorSettings,
+                    StringResources.MsgBoxErrorSettings + Environment.NewLine + Environment.NewLine + ex.Message,
                     StringResources.MsgBoxErrorSettingsTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
-        return result;
     }
 
     /// <summary>
-    /// Saves data from class instance _sett into _sett.FileName
+    /// Saves the current program settings from <see cref="AppSettings">_settings</see> into _settings.FileName.
     /// </summary>
-    private void SaveProgramSettingsJSON()
+    private void SaveAppSettingsJSON()
     {
         _settings.WindowLeft = DesktopLocation.X;
         _settings.WindowTop = DesktopLocation.Y;
@@ -55,16 +52,12 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Update UI with settings
+    /// Modifies window size and position to the values in <see cref="AppSettings">_settings</see>
     /// </summary>
-    /// <param name="WindowSettings"><see langword="True"/> if the window position and size should be applied. <see langword="False"/> if omitted</param>
-    private void ApplySettingsJSON(bool WindowPosition = false)
+    private void SetWindowPos()
     {
-        if (WindowPosition)
-        {
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.DesktopLocation = new Point(_settings.WindowLeft, _settings.WindowTop);
-            this.ClientSize = new Size(_settings.WindowWidth, _settings.WindowHeight);
-        }
+        this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+        this.DesktopLocation = new Point(_settings.WindowLeft, _settings.WindowTop);
+        this.ClientSize = new Size(_settings.WindowWidth, _settings.WindowHeight);
     }
 }

@@ -7,7 +7,7 @@ namespace ErgoLux;
 public partial class FrmSettings : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
-    private readonly ClassSettings? Settings;
+    private readonly AppSettings? Settings;
     private readonly string _baseName = "ErgoLux.localization.strings";
 
     public bool ModifyPlots { get; private set; } = false;
@@ -23,7 +23,7 @@ public partial class FrmSettings : Form
         FillDefinedCultures(_baseName, typeof(FrmMain).Assembly);
     }
 
-    public FrmSettings(ClassSettings settings)
+    public FrmSettings(AppSettings settings)
         : this()
     {
         Settings = settings;
@@ -189,7 +189,7 @@ public partial class FrmSettings : Form
         grpPlot.Enabled = chkShowDistribution.Checked;
     }
 
-    private void SetModificationFields(ClassSettings oldSettings)
+    private void SetModificationFields(AppSettings oldSettings)
     {
         if (Settings is null) return;
 
@@ -221,7 +221,7 @@ public partial class FrmSettings : Form
         DialogResult = DialogResult.None;
         if (Settings is null) return;
 
-        ClassSettings oldSettings = new(Settings);
+        AppSettings oldSettings = new(Settings);
 
         // Check that a device has been selected from the list
         if (viewDevices.SelectedIndices.Count > 0)
@@ -314,7 +314,7 @@ public partial class FrmSettings : Form
 
         if (result == DialogResult.Yes)
         {
-            UpdateControls(new ClassSettings());
+            UpdateControls(new AppSettings());
         }
     }
 
@@ -403,7 +403,7 @@ public partial class FrmSettings : Form
     /// Updates the form's controls with values from the settings class
     /// </summary>
     /// <param name="settings">Class containing the values to show on the form's controls</param>
-    private void UpdateControls(ClassSettings settings)
+    private void UpdateControls(AppSettings settings)
     {
         cboDataBits.SelectedValue = settings.T10_DataBits;
         cboStopBits.SelectedValue = settings.T10_StopBits;
