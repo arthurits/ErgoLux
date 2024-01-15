@@ -9,7 +9,8 @@ namespace ErgoLux;
 public partial class FrmMain : Form
 {
     private readonly System.Timers.Timer m_timer;
-    private ClassSettings _settings;
+    private ClassSettings _settings = new();
+    private bool _settingsFileExist = false;
     private FTDISample myFtdiDevice;
     private double[][] _plotData = Array.Empty<double[]>();
     private double _max = 0;
@@ -26,12 +27,7 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         // Load settings. This has to go before custom initialization, since some routines depend on these values
-        _settings = new();
-        bool result = LoadProgramSettingsJSON();
-        if (result)
-            ApplySettingsJSON(_settings.WindowPosition);
-        else
-            ApplySettingsJSON();
+        LoadProgramSettingsJSON();
 
         // Set form icon
         this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
@@ -46,6 +42,9 @@ public partial class FrmMain : Form
 
         // Language GUI
         UpdateUI_Language();
+
+        // Modify window size and position
+        if(_settings.WindowPosition && _settingsFileExist) SetWindowPos();
 
         // Initialize the internal timer
         m_timer = new System.Timers.Timer() { Interval = 500, AutoReset = true };
