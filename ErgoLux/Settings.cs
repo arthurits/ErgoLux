@@ -8,12 +8,12 @@ partial class FrmMain
     /// Loads all settings from file _settings.FileName into instance <see cref="AppSettings">_settings</see>.
     /// Shows MessageBox error if unsuccessful
     /// </summary>
-    private void LoadProgramSettingsJSON()
+    private void LoadAppSettingsJSON()
     {
         try
         {
             var jsonString = File.ReadAllText(_settings.SettingsFileName);
-            _settings = JsonSerializer.Deserialize<ClassSettings>(jsonString) ?? _settings;
+            _settings = JsonSerializer.Deserialize<AppSettings>(jsonString) ?? _settings;
             //SetWindowPos(_settings.WindowPosition);
         }
         catch (FileNotFoundException)
@@ -36,7 +36,7 @@ partial class FrmMain
     /// <summary>
     /// Saves the current program settings from <see cref="AppSettings">_settings</see> into _settings.FileName.
     /// </summary>
-    private void SaveProgramSettingsJSON()
+    private void SaveAppSettingsJSON()
     {
         _settings.WindowLeft = DesktopLocation.X;
         _settings.WindowTop = DesktopLocation.Y;

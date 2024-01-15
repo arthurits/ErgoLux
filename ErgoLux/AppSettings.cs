@@ -6,7 +6,7 @@ namespace ErgoLux;
 /// <summary>
 /// Keeps the settings for the T-10 device, plottting options and app window properties
 /// </summary>
-public class ClassSettings
+public class AppSettings
 {
     /// <summary>
     /// Stores the settings file name
@@ -170,13 +170,13 @@ public class ClassSettings
     public string UserOpenPath { get; set; } = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Environment.ProcessPath) ?? String.Empty, "examples");
 
     /// <summary>
-    /// Default class constructor. This is needed in <see cref="FrmMain.LoadProgramSettingsJSON"/> in order to avoid <see cref="System.Text.Json.JsonSerializer.Deserialize"/> throwing exception <see cref="System.InvalidOperationException"/>
+    /// Default class constructor. This is needed in <see cref="FrmMain.LoadAppSettingsJSON"/> in order to avoid <see cref="System.Text.Json.JsonSerializer.Deserialize"/> throwing exception <see cref="System.InvalidOperationException"/>
     /// </summary>
-    public ClassSettings()
+    public AppSettings()
     {
     }
 
-    public ClassSettings(ClassSettings? oldSettings = null)
+    public AppSettings(AppSettings? oldSettings = null)
     {
         if (oldSettings is not null)
         {
@@ -223,7 +223,7 @@ public class ClassSettings
         }
     }
 
-    ~ClassSettings()
+    ~AppSettings()
     {
         if (Icon_Open is not null) Icon_Open.Dispose();
         if (Icon_Close is not null) Icon_Close.Dispose();

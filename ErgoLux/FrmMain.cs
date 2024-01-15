@@ -9,7 +9,7 @@ namespace ErgoLux;
 public partial class FrmMain : Form
 {
     private readonly System.Timers.Timer m_timer;
-    private ClassSettings _settings = new();
+    private AppSettings _settings = new();
     private bool _settingsFileExist = false;
     private FTDISample myFtdiDevice;
     private double[][] _plotData = Array.Empty<double[]>();
@@ -27,7 +27,7 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         // Load settings. This has to go before custom initialization, since some routines depend on these values
-        LoadProgramSettingsJSON();
+        LoadAppSettingsJSON();
 
         // Set form icon
         this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
@@ -86,7 +86,7 @@ public partial class FrmMain : Form
             myFtdiDevice.Close();
 
         // Save settings data
-        SaveProgramSettingsJSON();
+        SaveAppSettingsJSON();
     }
 
     /// <summary>
@@ -219,7 +219,7 @@ public partial class FrmMain : Form
     }
 
     /// <summary>
-    /// Updates the plots' legends according to the culture in <see cref="ClassSettings.AppCulture"/> stored as '_settings.AppCulture'.
+    /// Updates the plots' legends according to the culture in <see cref="AppSettings.AppCulture"/> stored as '_settings.AppCulture'.
     /// </summary>
     private void UpdateUI_Series()
     {

@@ -81,7 +81,7 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Sets the labels checked status based on the values stored in <see cref="ClassSettings"/>.
+    /// Sets the labels checked status based on the values stored in <see cref="AppSettings"/>.
     /// </summary>
     private void InitializeStatusStripLabelsStatus()
     {
@@ -188,7 +188,7 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Initializes the data arrays using <see cref="ClassSettings.T10_NumberOfSensors"/> and <see cref="ClassSettings.ArrayFixedColumns"/>.
+    /// Initializes the data arrays using <see cref="AppSettings.T10_NumberOfSensors"/> and <see cref="AppSettings.ArrayFixedColumns"/>.
     /// </summary>
     private void InitializeArrays()
     {
