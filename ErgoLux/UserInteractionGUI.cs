@@ -265,15 +265,15 @@ partial class FrmMain
                     xOff: _settings.T10_CharOff,
                     readTimeOut: 0,
                     writeTimeOut: 0);
-                
+
                 if (result == FTDI.FT_STATUS.FT_OK)
                 {
                     this.toolStripMain_Connect.Enabled = true;
 
                     // Update the status strip with information
-                    this.statusStripLabelLocation.Text = StringResources.StatusLocation + $": {_settings.T10_LocationID:X}";
-                    this.statusStripLabelType.Text = StringResources.StatusType + $": {_settings.T10_DeviceType}";
-                    this.statusStripLabelID.Text = StringResources.StatusID + $": {_settings.T10_DevideID:0:X}";
+                    this.statusStripLabelLocation.Text = $"{StringResources.StatusLocation}: {_settings.T10_LocationID:X}";
+                    this.statusStripLabelType.Text = $"{StringResources.StatusType}: {_settings.T10_DeviceType}";
+                    this.statusStripLabelID.Text = $"{StringResources.StatusID}: {_settings.T10_DevideID:0:X}";
                     this.statusStripIconOpen.Image = _settings.Icon_Open;
 
                     // Check the number of sensors
