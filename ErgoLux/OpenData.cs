@@ -23,7 +23,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
-            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf('(') + 1)..^1]);
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader01", fileCulture) ?? "ErgoLux data"} (", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
 
@@ -34,7 +34,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.GetMillisecondsFormat(fileCulture));
-            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeStart))
+            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(':') + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeStart))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
 
             strLine = sr.ReadLine();    // End time
@@ -42,7 +42,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader03", fileCulture) ?? "End time"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
-            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeEnd))
+            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(':') + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out _timeEnd))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
 
             strLine = sr.ReadLine();    // Total measuring time
@@ -56,7 +56,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader05", fileCulture) ?? "Number of sensors"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
-            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSensors))
+            if (!int.TryParse(strLine[(strLine.IndexOf(':') + 1)..], out nSensors))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
             if (nSensors == 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
@@ -67,7 +67,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader06", fileCulture) ?? "Number of data points"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
-            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
+            if (!int.TryParse(strLine[(strLine.IndexOf(':') + 1)..], out nPoints))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
             if (nPoints == 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
@@ -78,7 +78,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader07));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader07", fileCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader07));
-            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nFreq))
+            if (!double.TryParse(strLine[(strLine.IndexOf(':') + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nFreq))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader07));
             if (nFreq <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader07));
