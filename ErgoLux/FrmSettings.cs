@@ -34,8 +34,8 @@ public partial class FrmSettings : Form
     {
         List<SerialPort> ports = SerialPorts.GetSerialPorts();
 
-        // Populate the control
-        ListViewItem item;
+        //// Populate the control
+        //ListViewItem item;
         //for (int i = 0; i < ports.Count; i++)
         //{
         //    item = new ListViewItem(
