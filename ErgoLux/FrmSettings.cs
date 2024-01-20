@@ -7,7 +7,7 @@ public partial class FrmSettings : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private readonly AppSettings? Settings;
-    private readonly string _baseName = "ErgoLux.localization.strings";
+    private readonly string _baseName = StringResources.StringRM.BaseName;
 
     public bool ModifyPlots { get; private set; } = false;
     public bool ModifyArrays { get; private set; } = false;
@@ -19,7 +19,7 @@ public partial class FrmSettings : Form
 
         InitializaControls();
         PopulateFTDIDevices();
-        FillDefinedCultures(_baseName, typeof(FrmMain).Assembly);
+        FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
     }
 
     public FrmSettings(AppSettings settings)
@@ -354,7 +354,7 @@ public partial class FrmSettings : Form
             UpdateUI_Language();
 
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -367,7 +367,7 @@ public partial class FrmSettings : Form
             UpdateUI_Language();
 
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -382,7 +382,7 @@ public partial class FrmSettings : Form
                 UpdateUI_Language();
 
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -394,7 +394,7 @@ public partial class FrmSettings : Form
         {
             _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
-            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
         }
     }
 
