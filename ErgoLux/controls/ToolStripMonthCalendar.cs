@@ -34,37 +34,31 @@ public class ToolStripMonthCalendar : System.Windows.Forms.ToolStripControlHost
     }
 
     // Subscribe and unsubscribe the control events you wish to expose.
-    protected override void OnSubscribeControlEvents(Control c)
+    protected override void OnSubscribeControlEvents(Control? c)
     {
         // Call the base so the base events are connected.
         base.OnSubscribeControlEvents(c);
 
-        // Cast the control to a MonthCalendar control.
-        MonthCalendar monthCalendarControl = (MonthCalendar) c;
-
         // Add the event.
-        monthCalendarControl.DateChanged +=
-            new DateRangeEventHandler(OnDateChanged);
+        if (c is MonthCalendar calendar)
+            calendar.DateChanged += new DateRangeEventHandler(OnDateChanged);
     }
 
-    protected override void OnUnsubscribeControlEvents(Control c)
+    protected override void OnUnsubscribeControlEvents(Control? c)
     {
         // Call the base method so the basic events are unsubscribed.
         base.OnUnsubscribeControlEvents(c);
 
-        // Cast the control to a MonthCalendar control.
-        MonthCalendar monthCalendarControl = (MonthCalendar) c;
-
         // Remove the event.
-        monthCalendarControl.DateChanged -=
-            new DateRangeEventHandler(OnDateChanged);
+        if (c is MonthCalendar calendar)
+            calendar.DateChanged -= new DateRangeEventHandler(OnDateChanged);
     }
 
     // Declare the DateChanged event.
     public event DateRangeEventHandler DateChanged;
 
     // Raise the DateChanged event.
-    private void OnDateChanged(object sender, DateRangeEventArgs e)
+    private void OnDateChanged(object? sender, DateRangeEventArgs e)
     {
         if (DateChanged != null)
         {
