@@ -13,6 +13,14 @@ Download latest release: [![GitHub release (latest by date)](https://img.shields
 
 ![Screenshot](/ErgoLux/images/screenshot08.png?raw=true "ErgoLux GUI")
 
+## Use and installation
+This download is a portable software. Please follow this instructions:
+* Dowload the zip file.
+* Unzip the contents to your desired folder.
+* Make sure that .NET 8 is installed in your PC. The `.NET 8 Desktop Runtime` can be downloaded from the [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0).
+* Execute (or create a direct link to) `ErgoLux.exe`.
+
+
 ## External dependencies
 This project uses controls and routines from the following Gits:
 * [ScottPlot](https://github.com/ScottPlot/ScottPlot)
