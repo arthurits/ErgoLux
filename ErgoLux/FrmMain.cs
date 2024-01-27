@@ -1,8 +1,4 @@
-﻿using System.Drawing;
-using System.Linq;
-using System.IO.Ports;
-using ScottPlot.Plottable;
-using System.Xml.Linq;
+﻿using ScottPlot.Plottable;
 
 namespace ErgoLux;
 
@@ -10,7 +6,7 @@ public partial class FrmMain : Form
 {
     private readonly System.Timers.Timer m_timer;
     private AppSettings _settings = new();
-    private bool _settingsFileExist = false;
+    private bool _settingsFileExist = true;
     private FTDISample myFtdiDevice;
     private double[][] _plotData = Array.Empty<double[]>();
     private double _max = 0;
@@ -82,7 +78,7 @@ public partial class FrmMain : Form
         m_timer.Dispose();
 
         // Close the device if it's still open
-        if (myFtdiDevice != null && myFtdiDevice.IsOpen)
+        if (myFtdiDevice is not null && myFtdiDevice.IsOpen)
             myFtdiDevice.Close();
 
         // Save settings data
