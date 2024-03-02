@@ -70,7 +70,7 @@ If you find this software useful, please consider supporting it!</Description>
 
   <ItemGroup>
     <None Update="ErgoLux launcher.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="examples\1 hour test.elux">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
