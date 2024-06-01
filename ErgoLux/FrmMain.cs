@@ -1,4 +1,5 @@
-﻿using ScottPlot.Plottable;
+﻿using ScottPlot;
+using ScottPlot.Plottable;
 
 namespace ErgoLux;
 
@@ -215,7 +216,7 @@ public partial class FrmMain : Form
     }
 
     /// <summary>
-    /// Updates the plots' legends according to the culture in <see cref="AppSettings.AppCulture"/> stored as '_settings.AppCulture'.
+    /// Updates the plots' legends strings stored in <see cref="_seriesLabels"/> according to the culture in <see cref="AppSettings.AppCulture"/> stored as '_settings.AppCulture'.
     /// </summary>
     private void UpdateUI_Series()
     {
@@ -341,7 +342,12 @@ public partial class FrmMain : Form
             if (_seriesLabels.Length > 0)
             {
                 if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadarPlot))
-                    ((RadarPlot)plotDistribution.Plot.GetPlottables()[0]).CategoryLabels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+                {
+                    var radarPlot = (RadarPlot)plotDistribution.Plot.GetPlottables()[0];
+                    radarPlot.CategoryLabels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+                    radarPlot.GroupLabels = new string[] { $"{StringResources.FileHeader15}",
+                                            $"{StringResources.FileHeader16}" };
+                }
                 else if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadialGaugePlot))
                     ((RadialGaugePlot)plotDistribution.Plot.GetPlottables()[0]).Labels = _seriesLabels[0.._settings.T10_NumberOfSensors];
             }
