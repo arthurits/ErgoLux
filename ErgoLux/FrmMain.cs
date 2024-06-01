@@ -1,4 +1,5 @@
-﻿using ScottPlot.Plottable;
+﻿using ScottPlot;
+using ScottPlot.Plottable;
 
 namespace ErgoLux;
 
@@ -341,7 +342,12 @@ public partial class FrmMain : Form
             if (_seriesLabels.Length > 0)
             {
                 if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadarPlot))
-                    ((RadarPlot)plotDistribution.Plot.GetPlottables()[0]).CategoryLabels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+                {
+                    var radarPlot = (RadarPlot)plotDistribution.Plot.GetPlottables()[0];
+                    radarPlot.CategoryLabels = _seriesLabels[0.._settings.T10_NumberOfSensors];
+                    radarPlot.GroupLabels = new string[] { $"{StringResources.FileHeader15}",
+                                            $"{StringResources.FileHeader16}" };
+                }
                 else if (plotDistribution.Plot.GetPlottables()[0].GetType() == typeof(RadialGaugePlot))
                     ((RadialGaugePlot)plotDistribution.Plot.GetPlottables()[0]).Labels = _seriesLabels[0.._settings.T10_NumberOfSensors];
             }
