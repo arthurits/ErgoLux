@@ -197,7 +197,7 @@ partial class FrmMain
             GraphicsA.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, (showLegA ? legendA.Height + _settings.PxBetweenLegends + 2 : 1));
         }
         pictureBox1.Image = bitmap;
-        if (bitmap.Width > pictureBox1.Width)
+        if (bitmap.Width > pictureBox1.Width || bitmap.Height > pictureBox1.Height)
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         else
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -220,7 +220,7 @@ partial class FrmMain
                                 legendB.Height + 2);
         GraphicsB.DrawImage(legendB, (bitmap.Width - legendB.Width - 2) / 2 + 1, legendA.Height + _settings.PxBetweenLegends + 2);
         pictureBox2.Image = bitmap;
-        if (bitmap.Width > pictureBox2.Width)
+        if (bitmap.Width > pictureBox2.Width || bitmap.Height > pictureBox2.Height)
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
         else
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
