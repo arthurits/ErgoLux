@@ -1,5 +1,10 @@
 # ErgoLux changelog
 
+## ErgoLux 1.7
+* Add window startup position and location setting.
+* Update radar plot legend when culture UI is modified.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.74.
+
 ## ErgoLux 1.6
 * Add Marathi (mr-In) translation. _Thanks @yashthipsay_.
 * Add Poruguese (pt-BR) translation. _Thanks @victorcmoura_.
