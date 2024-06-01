@@ -216,7 +216,7 @@ public partial class FrmMain : Form
     }
 
     /// <summary>
-    /// Updates the plots' legends according to the culture in <see cref="AppSettings.AppCulture"/> stored as '_settings.AppCulture'.
+    /// Updates the plots' legends strings stored in <see cref="_seriesLabels"/> according to the culture in <see cref="AppSettings.AppCulture"/> stored as '_settings.AppCulture'.
     /// </summary>
     private void UpdateUI_Series()
     {
